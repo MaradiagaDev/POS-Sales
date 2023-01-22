@@ -1,0 +1,912 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>NeoCobranza</RootNamespace>
+    <AssemblyName>Cobranza</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>D:\Instalador\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>7</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>C629FC58A395C92A11BB22FB0F9936A0A3EABD13</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>NeoCobranza_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>accounting_calculator_calculation_calculate_office_icon_191148.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>NeoCobranza_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1537.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1537.0\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1537.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1537.0\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1537.0\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Clases\Ataudes.cs" />
+    <Compile Include="Clases\Auditorias.cs" />
+    <Compile Include="Clases\Colector.cs" />
+    <Compile Include="Clases\Contrato.cs" />
+    <Compile Include="Clases\Imagen.cs" />
+    <Compile Include="Clases\NumerosLetras.cs" />
+    <Compile Include="Clases\ProformaContrato.cs" />
+    <Compile Include="Clases\ProformaVenta.cs" />
+    <Compile Include="Clases\Proveedor.cs" />
+    <Compile Include="Clases\RecibosOficialesCaja.cs" />
+    <Compile Include="Clases\Servicios.cs" />
+    <Compile Include="Clases\Usuario.cs" />
+    <Compile Include="Clases\VentasDirectas.cs" />
+    <Compile Include="DataController\CAuditoria.cs" />
+    <Compile Include="DataController\CBeneficiario.cs" />
+    <Compile Include="DataController\CBusquedaProformas.cs" />
+    <Compile Include="DataController\CCliente.cs" />
+    <Compile Include="DataController\CColector.cs" />
+    <Compile Include="DataController\CContrato.cs" />
+    <Compile Include="DataController\CCrearUsuario.cs" />
+    <Compile Include="DataController\CFoto.cs" />
+    <Compile Include="DataController\CGeneral.cs" />
+    <Compile Include="DataController\CProforma.cs" />
+    <Compile Include="DataController\CSeguridad.cs" />
+    <Compile Include="DataController\CServiciosCont.cs" />
+    <Compile Include="DataController\CServiciosVD.cs" />
+    <Compile Include="DataController\CTasaCambio.cs" />
+    <Compile Include="DataController\CVendedor.cs" />
+    <Compile Include="DataSetFinal.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetFinal.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetP.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetP.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetPrincipal.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetPrincipal.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetVD.cs">
+      <DependentUpon>DataSetVD.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetVD.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetVD.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Conexion.cs" />
+    <Compile Include="Data\PnlColectores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Data\PnlColectores.Designer.cs">
+      <DependentUpon>PnlColectores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data_Facturacion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Data_Facturacion.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Data_Inventario.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Data_Inventario.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Data_ReciboOficial.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Data_ReciboOficial.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Data_VentaProforma.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Data_VentaProforma.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Especiales\EspecialButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Especiales\LoginUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Especiales\LoginUserControl.Designer.cs">
+      <DependentUpon>LoginUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Especiales\MenuColorTable.cs" />
+    <Compile Include="Especiales\MenuRenderer.cs" />
+    <Compile Include="Especiales\RJDropDownMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NeoCobranzaDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NeoCobranzaDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\BuscarContrato.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\BuscarContrato.Designer.cs">
+      <DependentUpon>BuscarContrato.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\InformeReporteServiciosVD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\InformeReporteServiciosVD.Designer.cs">
+      <DependentUpon>InformeReporteServiciosVD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\InformeVD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\InformeVD.Designer.cs">
+      <DependentUpon>InformeVD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PanelCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PanelCliente.Designer.cs">
+      <DependentUpon>PanelCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PanelFinal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PanelFinal.Designer.cs">
+      <DependentUpon>PanelFinal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PanelModificarCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PanelModificarCliente.Designer.cs">
+      <DependentUpon>PanelModificarCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\Panel_Cliente_Contrato.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\Panel_Cliente_Contrato.Designer.cs">
+      <DependentUpon>Panel_Cliente_Contrato.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlActualizarProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlActualizarProveedor.Designer.cs">
+      <DependentUpon>PnlActualizarProveedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlAgregarProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlAgregarProveedor.Designer.cs">
+      <DependentUpon>PnlAgregarProveedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlBeneficiario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlBeneficiario.Designer.cs">
+      <DependentUpon>PnlBeneficiario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlBuscarProforma.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlBuscarProforma.Designer.cs">
+      <DependentUpon>PnlBuscarProforma.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlCatalogoClientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlCatalogoClientes.Designer.cs">
+      <DependentUpon>PnlCatalogoClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlCatalogoProveedores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlCatalogoProveedores.Designer.cs">
+      <DependentUpon>PnlCatalogoProveedores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlContrato.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlContrato.Designer.cs">
+      <DependentUpon>PnlContrato.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlInsertarAgencia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlInsertarAgencia.Designer.cs">
+      <DependentUpon>PnlInsertarAgencia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlModificacionesServiciosContrato.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlModificacionesServiciosContrato.Designer.cs">
+      <DependentUpon>PnlModificacionesServiciosContrato.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlPagoCheque.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlPagoCheque.Designer.cs">
+      <DependentUpon>PnlPagoCheque.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlPagoCuotas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlPagoCuotas.Designer.cs">
+      <DependentUpon>PnlPagoCuotas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlPagoEfectivo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlPagoEfectivo.Designer.cs">
+      <DependentUpon>PnlPagoEfectivo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlPagoMinuta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlPagoMinuta.Designer.cs">
+      <DependentUpon>PnlPagoMinuta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlPrincipal.Designer.cs">
+      <DependentUpon>PnlPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlProforma.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlProforma.Designer.cs">
+      <DependentUpon>PnlProforma.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlProformaContrato.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlProformaContrato.Designer.cs">
+      <DependentUpon>PnlProformaContrato.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlReporteProforma.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlReporteProforma.Designer.cs">
+      <DependentUpon>PnlReporteProforma.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlSeleccionarProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlSeleccionarProveedor.Designer.cs">
+      <DependentUpon>PnlSeleccionarProveedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlTasaCambio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlTasaCambio.Designer.cs">
+      <DependentUpon>PnlTasaCambio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlVendedores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlVendedores.Designer.cs">
+      <DependentUpon>PnlVendedores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_Auditorias\CreacionUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_Auditorias\CreacionUsuario.Designer.cs">
+      <DependentUpon>CreacionUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_Auditorias\PnlPrincipalAuditorias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_Auditorias\PnlPrincipalAuditorias.Designer.cs">
+      <DependentUpon>PnlPrincipalAuditorias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_Caja\Caja_Informe_Entrega\PnlRecibo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_Caja\Caja_Informe_Entrega\PnlRecibo.Designer.cs">
+      <DependentUpon>PnlRecibo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_Caja\Caja_Informe_Reporte\PnlGenerarInforme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_Caja\Caja_Informe_Reporte\PnlGenerarInforme.Designer.cs">
+      <DependentUpon>PnlGenerarInforme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_Caja\PnlHistorialRecibos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_Caja\PnlHistorialRecibos.Designer.cs">
+      <DependentUpon>PnlHistorialRecibos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_Caja\PnlReciboOficialCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_Caja\PnlReciboOficialCaja.Designer.cs">
+      <DependentUpon>PnlReciboOficialCaja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_Colectores\PnlColector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_Colectores\PnlColector.Designer.cs">
+      <DependentUpon>PnlColector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_ComprasComercial\PnlProductoNuevo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_ComprasComercial\PnlProductoNuevo.Designer.cs">
+      <DependentUpon>PnlProductoNuevo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_ComprasComercial\ProductoExistente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_ComprasComercial\ProductoExistente.Designer.cs">
+      <DependentUpon>ProductoExistente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_ComprasGenerales\PanelPagoCreditoG.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_ComprasGenerales\PanelPagoCreditoG.Designer.cs">
+      <DependentUpon>PanelPagoCreditoG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_ComprasGenerales\PnlPagoEfectivoG.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_ComprasGenerales\PnlPagoEfectivoG.Designer.cs">
+      <DependentUpon>PnlPagoEfectivoG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_Contrato\PnlActualizarBeneficiario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_Contrato\PnlActualizarBeneficiario.Designer.cs">
+      <DependentUpon>PnlActualizarBeneficiario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_Contrato\PnlActualizarPago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_Contrato\PnlActualizarPago.Designer.cs">
+      <DependentUpon>PnlActualizarPago.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_Contrato\PnlGeneralContrato.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_Contrato\PnlGeneralContrato.Designer.cs">
+      <DependentUpon>PnlGeneralContrato.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_Contrato\PnlInformeEconomico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_Contrato\PnlInformeEconomico.Designer.cs">
+      <DependentUpon>PnlInformeEconomico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_Contrato\PnlPagoGeneral.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_Contrato\PnlPagoGeneral.Designer.cs">
+      <DependentUpon>PnlPagoGeneral.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_Contrato\PnlReciboColector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_Contrato\PnlReciboColector.Designer.cs">
+      <DependentUpon>PnlReciboColector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_Contrato\PnlRetirado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_Contrato\PnlRetirado.Designer.cs">
+      <DependentUpon>PnlRetirado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_Venta\Informes\PnlFacturaInforme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_Venta\Informes\PnlFacturaInforme.Designer.cs">
+      <DependentUpon>PnlFacturaInforme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_Venta\Informes\Rpt_InformeGeneralCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_Venta\Informes\Rpt_InformeGeneralCaja.Designer.cs">
+      <DependentUpon>Rpt_InformeGeneralCaja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_Venta\PnlHistorialVenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_Venta\PnlHistorialVenta.Designer.cs">
+      <DependentUpon>PnlHistorialVenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_Venta\PnlVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_Venta\PnlVentas.Designer.cs">
+      <DependentUpon>PnlVentas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_Venta\PnlVentasFacturacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_Venta\PnlVentasFacturacion.Designer.cs">
+      <DependentUpon>PnlVentasFacturacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PnlInventario\PnlCompras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PnlInventario\PnlCompras.Designer.cs">
+      <DependentUpon>PnlCompras.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PnlInventario\Pnl_InformeInventario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PnlInventario\Pnl_InformeInventario.Designer.cs">
+      <DependentUpon>Pnl_InformeInventario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PnlOpc\PnlModificarServicios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PnlOpc\PnlModificarServicios.Designer.cs">
+      <DependentUpon>PnlModificarServicios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Poo\CuotaCalculos.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportesVentasDirectas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportesVentasDirectas.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ReporteVentasContratoData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteVentasContratoData.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="SqlServerTypes\Loader.cs" />
+    <EmbeddedResource Include="Data\PnlColectores.resx">
+      <DependentUpon>PnlColectores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Especiales\LoginUserControl.resx">
+      <DependentUpon>LoginUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Informes\InformeVD.rdlc" />
+    <EmbeddedResource Include="Informes\Informe_Inventario.rdlc" />
+    <EmbeddedResource Include="Informes\Informe_VentaProforma.rdlc" />
+    <EmbeddedResource Include="Informes\ReporteVentasContrato.rdlc" />
+    <EmbeddedResource Include="Informes\ReporteVentasDirectas.rdlc" />
+    <EmbeddedResource Include="Paneles\BuscarContrato.resx">
+      <DependentUpon>BuscarContrato.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\InformeReporteServiciosVD.resx">
+      <DependentUpon>InformeReporteServiciosVD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\InformeVD.resx">
+      <DependentUpon>InformeVD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PanelCliente.resx">
+      <DependentUpon>PanelCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PanelFinal.resx">
+      <DependentUpon>PanelFinal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PanelModificarCliente.resx">
+      <DependentUpon>PanelModificarCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\Panel_Cliente_Contrato.resx">
+      <DependentUpon>Panel_Cliente_Contrato.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlActualizarProveedor.resx">
+      <DependentUpon>PnlActualizarProveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlAgregarProveedor.resx">
+      <DependentUpon>PnlAgregarProveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlBeneficiario.resx">
+      <DependentUpon>PnlBeneficiario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlBuscarProforma.resx">
+      <DependentUpon>PnlBuscarProforma.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlCatalogoClientes.resx">
+      <DependentUpon>PnlCatalogoClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlCatalogoProveedores.resx">
+      <DependentUpon>PnlCatalogoProveedores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlContrato.resx">
+      <DependentUpon>PnlContrato.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlInsertarAgencia.resx">
+      <DependentUpon>PnlInsertarAgencia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlModificacionesServiciosContrato.resx">
+      <DependentUpon>PnlModificacionesServiciosContrato.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlPagoCheque.resx">
+      <DependentUpon>PnlPagoCheque.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlPagoCuotas.resx">
+      <DependentUpon>PnlPagoCuotas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlPagoEfectivo.resx">
+      <DependentUpon>PnlPagoEfectivo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlPagoMinuta.resx">
+      <DependentUpon>PnlPagoMinuta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlPrincipal.resx">
+      <DependentUpon>PnlPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlProforma.resx">
+      <DependentUpon>PnlProforma.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlProformaContrato.resx">
+      <DependentUpon>PnlProformaContrato.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlReporteProforma.resx">
+      <DependentUpon>PnlReporteProforma.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlSeleccionarProveedor.resx">
+      <DependentUpon>PnlSeleccionarProveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlTasaCambio.resx">
+      <DependentUpon>PnlTasaCambio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlVendedores.resx">
+      <DependentUpon>PnlVendedores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_Auditorias\CreacionUsuario.resx">
+      <DependentUpon>CreacionUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_Auditorias\PnlPrincipalAuditorias.resx">
+      <DependentUpon>PnlPrincipalAuditorias.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_Caja\Caja_Informe_Entrega\PnlRecibo.resx">
+      <DependentUpon>PnlRecibo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_Caja\Caja_Informe_Entrega\Rpt_ReciboOficial.rdlc" />
+    <EmbeddedResource Include="Paneles_Caja\Caja_Informe_Reporte\PnlGenerarInforme.resx">
+      <DependentUpon>PnlGenerarInforme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_Caja\Caja_Informe_Reporte\Reporte_Generar.rdlc" />
+    <EmbeddedResource Include="Paneles_Caja\PnlHistorialRecibos.resx">
+      <DependentUpon>PnlHistorialRecibos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_Caja\PnlReciboOficialCaja.resx">
+      <DependentUpon>PnlReciboOficialCaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_Colectores\PnlColector.resx">
+      <DependentUpon>PnlColector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_ComprasComercial\PnlProductoNuevo.resx">
+      <DependentUpon>PnlProductoNuevo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_ComprasComercial\ProductoExistente.resx">
+      <DependentUpon>ProductoExistente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_ComprasGenerales\PanelPagoCreditoG.resx">
+      <DependentUpon>PanelPagoCreditoG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_ComprasGenerales\PnlPagoEfectivoG.resx">
+      <DependentUpon>PnlPagoEfectivoG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_Contrato\InformeEconomicoContrato.rdlc" />
+    <EmbeddedResource Include="Paneles_Contrato\PnlActualizarBeneficiario.resx">
+      <DependentUpon>PnlActualizarBeneficiario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_Contrato\PnlActualizarPago.resx">
+      <DependentUpon>PnlActualizarPago.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_Contrato\PnlGeneralContrato.resx">
+      <DependentUpon>PnlGeneralContrato.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_Contrato\PnlInformeEconomico.resx">
+      <DependentUpon>PnlInformeEconomico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_Contrato\PnlPagoGeneral.resx">
+      <DependentUpon>PnlPagoGeneral.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_Contrato\PnlReciboColector.resx">
+      <DependentUpon>PnlReciboColector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_Contrato\PnlRetirado.resx">
+      <DependentUpon>PnlRetirado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_Contrato\ReciboColector.rdlc" />
+    <EmbeddedResource Include="Paneles_Venta\Informes\PnlFacturaInforme.resx">
+      <DependentUpon>PnlFacturaInforme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_Venta\Informes\Rep_InformeGeneralVentas.rdlc" />
+    <EmbeddedResource Include="Paneles_Venta\Informes\RptFactura.rdlc" />
+    <EmbeddedResource Include="Paneles_Venta\Informes\Rpt_InformeGeneralCaja.resx">
+      <DependentUpon>Rpt_InformeGeneralCaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_Venta\PnlHistorialVenta.resx">
+      <DependentUpon>PnlHistorialVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_Venta\PnlVentas.resx">
+      <DependentUpon>PnlVentas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_Venta\PnlVentasFacturacion.resx">
+      <DependentUpon>PnlVentasFacturacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PnlInventario\Informes\Rpt_Inventario.rdlc" />
+    <EmbeddedResource Include="PnlInventario\PnlCompras.resx">
+      <DependentUpon>PnlCompras.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PnlInventario\Pnl_InformeInventario.resx">
+      <DependentUpon>Pnl_InformeInventario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PnlOpc\PnlModificarServicios.resx">
+      <DependentUpon>PnlModificarServicios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="DataSetFinal.xsc">
+      <DependentUpon>DataSetFinal.xsd</DependentUpon>
+    </None>
+    <None Include="DataSetFinal.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetFinal.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSetFinal.xss">
+      <DependentUpon>DataSetFinal.xsd</DependentUpon>
+    </None>
+    <None Include="DataSetP.xsc">
+      <DependentUpon>DataSetP.xsd</DependentUpon>
+    </None>
+    <None Include="DataSetP.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetP.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSetP.xss">
+      <DependentUpon>DataSetP.xsd</DependentUpon>
+    </None>
+    <None Include="DataSetPrincipal.xsc">
+      <DependentUpon>DataSetPrincipal.xsd</DependentUpon>
+    </None>
+    <None Include="DataSetPrincipal.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetPrincipal.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSetPrincipal.xss">
+      <DependentUpon>DataSetPrincipal.xsd</DependentUpon>
+    </None>
+    <None Include="DataSetVD.xsc">
+      <DependentUpon>DataSetVD.xsd</DependentUpon>
+    </None>
+    <None Include="DataSetVD.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetVD.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSetVD.xss">
+      <DependentUpon>DataSetVD.xsd</DependentUpon>
+    </None>
+    <None Include="Data_Facturacion.xsc">
+      <DependentUpon>Data_Facturacion.xsd</DependentUpon>
+    </None>
+    <None Include="Data_Facturacion.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Data_Facturacion.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Data_Facturacion.xss">
+      <DependentUpon>Data_Facturacion.xsd</DependentUpon>
+    </None>
+    <None Include="Data_Inventario.xsc">
+      <DependentUpon>Data_Inventario.xsd</DependentUpon>
+    </None>
+    <None Include="Data_Inventario.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Data_Inventario.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Data_Inventario.xss">
+      <DependentUpon>Data_Inventario.xsd</DependentUpon>
+    </None>
+    <None Include="Data_ReciboOficial.xsc">
+      <DependentUpon>Data_ReciboOficial.xsd</DependentUpon>
+    </None>
+    <None Include="Data_ReciboOficial.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Data_ReciboOficial.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Data_ReciboOficial.xss">
+      <DependentUpon>Data_ReciboOficial.xsd</DependentUpon>
+    </None>
+    <None Include="Data_VentaProforma.xsc">
+      <DependentUpon>Data_VentaProforma.xsd</DependentUpon>
+    </None>
+    <None Include="Data_VentaProforma.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Data_VentaProforma.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Data_VentaProforma.xss">
+      <DependentUpon>Data_VentaProforma.xsd</DependentUpon>
+    </None>
+    <None Include="Neocobranza.pfx" />
+    <None Include="NeoCobranzaDataSet.xsc">
+      <DependentUpon>NeoCobranzaDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="NeoCobranzaDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>NeoCobranzaDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NeoCobranzaDataSet.xss">
+      <DependentUpon>NeoCobranzaDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="NeoCobranza_TemporaryKey.pfx" />
+    <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="accounting_calculator_calculation_calculate_office_icon_191148.ico" />
+    <Content Include="Images\BuscadorFocusGreen.png" />
+    <Content Include="Images\BuscadorNormal.png" />
+    <None Include="ReportesVentasDirectas.xsc">
+      <DependentUpon>ReportesVentasDirectas.xsd</DependentUpon>
+    </None>
+    <None Include="ReportesVentasDirectas.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReportesVentasDirectas.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="ReportesVentasDirectas.xss">
+      <DependentUpon>ReportesVentasDirectas.xsd</DependentUpon>
+    </None>
+    <None Include="ReporteVentasContratoData.xsc">
+      <DependentUpon>ReporteVentasContratoData.xsd</DependentUpon>
+    </None>
+    <None Include="ReporteVentasContratoData.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReporteVentasContratoData.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="ReporteVentasContratoData.xss">
+      <DependentUpon>ReporteVentasContratoData.xsd</DependentUpon>
+    </None>
+    <None Include="Resources\IMG-20221007-WA0007-removebg-preview-_1_.ico" />
+    <Content Include="Images\logo-funeraria-catolica-02.png" />
+    <Content Include="IMG-20221007-WA0007-removebg-preview-_1_.ico" />
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 y x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Vistas_Informes\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
