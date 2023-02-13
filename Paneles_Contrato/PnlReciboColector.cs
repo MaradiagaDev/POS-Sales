@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NeoCobranza.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,16 +14,27 @@ namespace NeoCobranza.Paneles_Contrato
     public partial class PnlReciboColector : Form
     {
         public int idContrato;
-        public PnlReciboColector(int id)
+
+        private Conexion conexion;
+        public PnlReciboColector(int id,Conexion conexion)
         {
             InitializeComponent();
             this.idContrato = id;
+            this.conexion = conexion;
         }
 
         private void PnlReciboColector_Load(object sender, EventArgs e)
         {
             try
+                
             {
+                //Conexion
+                this.reporteria_ReciboColector1TableAdapter.Connection = conexion.connect;
+                this.reporteria_ReciboColector2TableAdapter.Connection = conexion.connect;
+                this.reporteria_ReciboColector3TableAdapter.Connection = conexion.connect;
+                this.reporteria_ReciboColector5TableAdapter.Connection = conexion.connect;
+                this.reporteria_ReciboColector4TableAdapter.Connection = conexion.connect;
+
                 this.data_ReciboOficial.EnforceConstraints = false;
                 // TODO: esta línea de código carga datos en la tabla 'data_ReciboOficial.Reporteria_ReciboColector1' Puede moverla o quitarla según sea necesario.
                 this.reporteria_ReciboColector1TableAdapter.Fill(this.data_ReciboOficial.Reporteria_ReciboColector1, idContrato);

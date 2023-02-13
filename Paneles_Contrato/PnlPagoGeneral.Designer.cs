@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PnlPagoGeneral));
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.llbTitulo = new System.Windows.Forms.Label();
             this.dgvStock = new System.Windows.Forms.DataGridView();
             this.label11 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -47,37 +45,26 @@
             this.label8 = new System.Windows.Forms.Label();
             this.txtDolares = new System.Windows.Forms.TextBox();
             this.txtCordobas = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtCausa = new System.Windows.Forms.TextBox();
             this.especialButton1 = new NeoCobranza.Especiales.EspecialButton();
             this.especialButton2 = new NeoCobranza.Especiales.EspecialButton();
             this.btnGenerar = new NeoCobranza.Especiales.EspecialButton();
+            this.label41 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.txtFiltroId = new NeoCobranza.Controladores.LoginUserControl();
             this.txtFiltro = new NeoCobranza.Controladores.LoginUserControl();
-            this.panel4.SuspendLayout();
+            this.label48 = new System.Windows.Forms.Label();
+            this.llbTitulo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStock)).BeginInit();
             this.SuspendLayout();
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.SystemColors.MenuText;
-            this.panel4.Controls.Add(this.llbTitulo);
-            this.panel4.Location = new System.Drawing.Point(-9, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1158, 37);
-            this.panel4.TabIndex = 82;
-            // 
-            // llbTitulo
-            // 
-            this.llbTitulo.AutoSize = true;
-            this.llbTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.llbTitulo.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.llbTitulo.Location = new System.Drawing.Point(12, 6);
-            this.llbTitulo.Name = "llbTitulo";
-            this.llbTitulo.Size = new System.Drawing.Size(232, 24);
-            this.llbTitulo.TabIndex = 0;
-            this.llbTitulo.Text = "Pago general de cuotas";
             // 
             // dgvStock
             // 
             this.dgvStock.AllowUserToAddRows = false;
+            this.dgvStock.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvStock.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvStock.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvStock.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -89,10 +76,12 @@
             this.dgvStock.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvStock.Size = new System.Drawing.Size(686, 327);
             this.dgvStock.TabIndex = 94;
+            this.dgvStock.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStock_CellDoubleClick);
             this.dgvStock.SelectionChanged += new System.EventHandler(this.dgvStock_SelectionChanged);
             // 
             // label11
             // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
@@ -104,6 +93,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
@@ -115,6 +105,7 @@
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
@@ -126,6 +117,7 @@
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
@@ -137,6 +129,7 @@
             // 
             // txtRecibo
             // 
+            this.txtRecibo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtRecibo.AutoSize = true;
             this.txtRecibo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRecibo.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
@@ -148,6 +141,7 @@
             // 
             // txtCuotas
             // 
+            this.txtCuotas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCuotas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCuotas.Location = new System.Drawing.Point(905, 268);
             this.txtCuotas.Name = "txtCuotas";
@@ -157,6 +151,7 @@
             // 
             // label4
             // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.WindowFrame;
@@ -168,6 +163,7 @@
             // 
             // label5
             // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
@@ -179,8 +175,10 @@
             // 
             // txtObservaciones
             // 
+            this.txtObservaciones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtObservaciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtObservaciones.Location = new System.Drawing.Point(803, 349);
+            this.txtObservaciones.Location = new System.Drawing.Point(818, 349);
             this.txtObservaciones.Multiline = true;
             this.txtObservaciones.Name = "txtObservaciones";
             this.txtObservaciones.Size = new System.Drawing.Size(311, 105);
@@ -188,6 +186,7 @@
             // 
             // label6
             // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
@@ -199,6 +198,7 @@
             // 
             // label7
             // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
@@ -210,6 +210,7 @@
             // 
             // label9
             // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.SystemColors.WindowFrame;
@@ -221,6 +222,7 @@
             // 
             // label8
             // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.WindowFrame;
@@ -232,6 +234,7 @@
             // 
             // txtDolares
             // 
+            this.txtDolares.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDolares.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDolares.Location = new System.Drawing.Point(928, 187);
             this.txtDolares.Name = "txtDolares";
@@ -241,6 +244,7 @@
             // 
             // txtCordobas
             // 
+            this.txtCordobas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCordobas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCordobas.Location = new System.Drawing.Point(928, 148);
             this.txtCordobas.Name = "txtCordobas";
@@ -248,9 +252,31 @@
             this.txtCordobas.TabIndex = 184;
             this.txtCordobas.Text = "0";
             // 
+            // label10
+            // 
+            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.label10.Location = new System.Drawing.Point(440, 457);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(101, 16);
+            this.label10.TabIndex = 197;
+            this.label10.Text = "Causa de retiro:";
+            // 
+            // txtCausa
+            // 
+            this.txtCausa.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.txtCausa.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCausa.Location = new System.Drawing.Point(443, 476);
+            this.txtCausa.Multiline = true;
+            this.txtCausa.Name = "txtCausa";
+            this.txtCausa.Size = new System.Drawing.Size(283, 38);
+            this.txtCausa.TabIndex = 198;
+            // 
             // especialButton1
             // 
-            this.especialButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.especialButton1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.especialButton1.BackColor = System.Drawing.Color.ForestGreen;
             this.especialButton1.BackGroundColor = System.Drawing.Color.ForestGreen;
             this.especialButton1.BorderColor = System.Drawing.Color.Lime;
@@ -262,7 +288,7 @@
             this.especialButton1.ForeColor = System.Drawing.Color.White;
             this.especialButton1.Image = ((System.Drawing.Image)(resources.GetObject("especialButton1.Image")));
             this.especialButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.especialButton1.Location = new System.Drawing.Point(428, 499);
+            this.especialButton1.Location = new System.Drawing.Point(443, 520);
             this.especialButton1.Name = "especialButton1";
             this.especialButton1.Size = new System.Drawing.Size(283, 35);
             this.especialButton1.TabIndex = 196;
@@ -273,7 +299,7 @@
             // 
             // especialButton2
             // 
-            this.especialButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.especialButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.especialButton2.BackColor = System.Drawing.Color.ForestGreen;
             this.especialButton2.BackGroundColor = System.Drawing.Color.ForestGreen;
             this.especialButton2.BorderColor = System.Drawing.Color.Lime;
@@ -296,7 +322,7 @@
             // 
             // btnGenerar
             // 
-            this.btnGenerar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.btnGenerar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnGenerar.BackColor = System.Drawing.Color.ForestGreen;
             this.btnGenerar.BackGroundColor = System.Drawing.Color.ForestGreen;
             this.btnGenerar.BorderColor = System.Drawing.Color.Lime;
@@ -317,6 +343,50 @@
             this.btnGenerar.UseVisualStyleBackColor = false;
             this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
             // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label41.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.label41.Location = new System.Drawing.Point(268, 60);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(56, 24);
+            this.label41.TabIndex = 220;
+            this.label41.Text = "Filtro:";
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label42.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.label42.Location = new System.Drawing.Point(15, 61);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(35, 24);
+            this.label42.TabIndex = 219;
+            this.label42.Text = "Id: ";
+            // 
+            // txtFiltroId
+            // 
+            this.txtFiltroId.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.txtFiltroId.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.txtFiltroId.BorderRadius = 0;
+            this.txtFiltroId.BorderSize = 2;
+            this.txtFiltroId.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFiltroId.ForeColor = System.Drawing.Color.DimGray;
+            this.txtFiltroId.Location = new System.Drawing.Point(57, 52);
+            this.txtFiltroId.Margin = new System.Windows.Forms.Padding(4);
+            this.txtFiltroId.Multilinea = false;
+            this.txtFiltroId.Name = "txtFiltroId";
+            this.txtFiltroId.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this.txtFiltroId.PasswordChar = false;
+            this.txtFiltroId.PlaceHolderColor = System.Drawing.Color.DarkGray;
+            this.txtFiltroId.PlaceHolderText = "Buscar ..";
+            this.txtFiltroId.Size = new System.Drawing.Size(196, 39);
+            this.txtFiltroId.TabIndex = 218;
+            this.txtFiltroId.Texts = "";
+            this.txtFiltroId.UnderLineFlat = true;
+            this.txtFiltroId._TextChanged += new System.EventHandler(this.txtFiltroId__TextChanged);
+            // 
             // txtFiltro
             // 
             this.txtFiltro.BorderColor = System.Drawing.Color.MediumSlateBlue;
@@ -325,7 +395,7 @@
             this.txtFiltro.BorderSize = 2;
             this.txtFiltro.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFiltro.ForeColor = System.Drawing.Color.DimGray;
-            this.txtFiltro.Location = new System.Drawing.Point(25, 81);
+            this.txtFiltro.Location = new System.Drawing.Point(349, 52);
             this.txtFiltro.Margin = new System.Windows.Forms.Padding(4);
             this.txtFiltro.Multilinea = false;
             this.txtFiltro.Name = "txtFiltro";
@@ -333,10 +403,33 @@
             this.txtFiltro.PasswordChar = false;
             this.txtFiltro.PlaceHolderColor = System.Drawing.Color.DarkGray;
             this.txtFiltro.PlaceHolderText = "Buscar ..";
-            this.txtFiltro.Size = new System.Drawing.Size(686, 39);
-            this.txtFiltro.TabIndex = 95;
+            this.txtFiltro.Size = new System.Drawing.Size(419, 39);
+            this.txtFiltro.TabIndex = 217;
             this.txtFiltro.Texts = "";
             this.txtFiltro.UnderLineFlat = true;
+            this.txtFiltro._TextChanged += new System.EventHandler(this.txtFiltro__TextChanged);
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label48.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label48.Location = new System.Drawing.Point(14, 36);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(287, 16);
+            this.label48.TabIndex = 222;
+            this.label48.Text = "________________________________________";
+            // 
+            // llbTitulo
+            // 
+            this.llbTitulo.AutoSize = true;
+            this.llbTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.llbTitulo.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.llbTitulo.Location = new System.Drawing.Point(12, 9);
+            this.llbTitulo.Name = "llbTitulo";
+            this.llbTitulo.Size = new System.Drawing.Size(240, 25);
+            this.llbTitulo.TabIndex = 221;
+            this.llbTitulo.Text = "Pago general de cuotas";
             // 
             // PnlPagoGeneral
             // 
@@ -344,6 +437,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1141, 562);
+            this.Controls.Add(this.label48);
+            this.Controls.Add(this.llbTitulo);
+            this.Controls.Add(this.label41);
+            this.Controls.Add(this.label42);
+            this.Controls.Add(this.txtFiltroId);
+            this.Controls.Add(this.txtFiltro);
+            this.Controls.Add(this.txtCausa);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.especialButton1);
             this.Controls.Add(this.especialButton2);
             this.Controls.Add(this.btnGenerar);
@@ -362,15 +463,11 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.txtFiltro);
             this.Controls.Add(this.dgvStock);
-            this.Controls.Add(this.panel4);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "PnlPagoGeneral";
             this.Text = "PnlPagoGeneral";
             this.Load += new System.EventHandler(this.PnlPagoGeneral_Load);
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStock)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -378,11 +475,7 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panel4;
-        public System.Windows.Forms.Label llbTitulo;
         private System.Windows.Forms.DataGridView dgvStock;
-        private Controladores.LoginUserControl txtFiltro;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -401,5 +494,13 @@
         private System.Windows.Forms.TextBox txtDolares;
         private System.Windows.Forms.TextBox txtCordobas;
         private Especiales.EspecialButton especialButton1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtCausa;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Label label42;
+        private Controladores.LoginUserControl txtFiltroId;
+        private Controladores.LoginUserControl txtFiltro;
+        private System.Windows.Forms.Label label48;
+        public System.Windows.Forms.Label llbTitulo;
     }
 }

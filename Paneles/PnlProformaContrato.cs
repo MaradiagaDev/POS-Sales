@@ -310,8 +310,7 @@ namespace NeoCobranza.Paneles
 
         private void dgvBenficiarios_SizeChanged(object sender, EventArgs e)
         {
-            if(verificar())
-            Calculos();
+
         }
         private void Calculos()
         {
@@ -501,7 +500,7 @@ namespace NeoCobranza.Paneles
             int cantidadBeneficiarios = dgvBenficiarios.Rows.Count;
             
 
-
+            /*
             if (cantidadBeneficiarios == 1 && int.Parse(cmbCancelacion.Text) > 3)
             {
                 MessageBox.Show("Si solo hay un beneficiario el plazo maximo es para 3 años2", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -528,7 +527,7 @@ namespace NeoCobranza.Paneles
                 lblCuotas.Text = "x";
                 return;
             }
-
+            */
             //AGREGAR A LA BASE DE DATOS
 
             DialogResult Result;

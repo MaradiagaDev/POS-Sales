@@ -1,5 +1,6 @@
 ﻿using NeoCobranza.Data;
 using NeoCobranza.DataController;
+using NeoCobranza.Paneles_Contrato;
 using NeoCobranza.Paneles_Venta;
 using System;
 using System.Collections.Generic;
@@ -131,6 +132,30 @@ namespace NeoCobranza.Paneles
                 pnlProformaContrato.lblIdColector.Text = this.DgvVendedor.SelectedRows[0].Cells[0].Value.ToString();
 
 
+
+                this.Hide();
+
+
+            }
+            if(panel == "ActualizarContrato")
+            {
+                if (DgvVendedor.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("No has seleccionado ningun registro", "ERROR");
+                    return;
+                }
+
+                if (this.DgvVendedor.SelectedRows[0].Cells[1].Value == null)
+                {
+                    MessageBox.Show("No has seleccionado ningun registro", "ERROR");
+                    return;
+                }
+                PnlGeneralContrato pnlProformaContrato = Owner as PnlGeneralContrato;
+
+
+                // pnlContrato.dgvColector.Rows.Add(this.DgvColector.SelectedRows[0].Cells[0].Value +" "+ this.DgvColector.SelectedRows[0].Cells[1].Value + " "+this.DgvColector.SelectedRows[0].Cells[2].Value + " " + this.DgvColector.SelectedRows[0].Cells[3].Value, this.DgvColector.SelectedRows[0].Cells[4].Value);
+                pnlProformaContrato.LblNombreColector.Text = this.DgvVendedor.SelectedRows[0].Cells[1].Value.ToString();
+                pnlProformaContrato.txtIdColector.Text = this.DgvVendedor.SelectedRows[0].Cells[0].Value.ToString();
 
                 this.Hide();
 

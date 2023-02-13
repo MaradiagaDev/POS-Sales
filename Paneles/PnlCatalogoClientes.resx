@@ -121,7 +121,7 @@
   <data name="btnAgregar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAAbFJREFUOE+dkztLA0EURkdLS8FWEKws7SwEOxsVewttjPiIREFQEcbdIPg7jI8Q
+        DAAACwwBP0AiyAAAAbFJREFUOE+dkztLA0EURkdLS8FWEKws7SwEOxsVewttjPiIREFQEcbdIPg7jI8Q
         4gM1Ic7GSsRGBEsbGxFBQYMgSWYGrzd6m+ze3VU/OBDIfGceOyPCIiW0rnt2zPF0wVX6yVFau55+xN95
         V5kRGvb7pM+qXY4yN65nIAyc7HyjCB1UiY70oLOxMk4UQJk7WYJ2qvIBgBZc4SUrCEXnqM4HBw0FS9Hg
         WX/Kcr2XFMHgrFtcMQ7HM5ukCAbP6JYrxaJ0kRTB4Iz3bCmGxncgRTAoveBKsSidJUUwePfW2FIcZ/UJ
@@ -134,7 +134,7 @@
   <data name="btnActualizar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAARVJREFUSEvtlM9KAlEUh2djgfUgklirRN+uFyj7Q259DqFeQt26ch0oBYUW9n0x
+        DAAACwwBP0AiyAAAARVJREFUSEvtlM9KAlEUh2djgfUgklirRN+uFyj7Q259DqFeQt26ch0oBYUW9n0x
         Ay6cuXcUIWF+8DEzl/PnnnPnnqTSUagFDzCBjxTfe9CETd2kzyidQh9+YJ3DNzxCDQzuWpRO4BV0+IR7
         aMNZShdMvgRtpukzOsEzaDyDSxdydA3vkAWPSmBfLd2dFwVXWVtKJbgFDW1LkbYFl6BGoKE9z1NecAlq
         ARqe/30dQHM4aIKYFu2l7JC9vbEagD76BnUB/qZfcOVCQFaqvTRciNETuCMvWlESL9obaOtsipaj4gV0
@@ -151,6 +151,15 @@
         ARqe/30dQHM4aIKYFu2l7JC9vbEagD76BnUB/qZfcOVCQFaqvTRciNETuCMvWlESL9obaOtsipaj4gV0
         tBLnTQc8+Dq4a9uyAm2GoE8p6WAllm6QbTgIPSsH485ydNzBGJw72bg2sOdV6V8rSX4Bzetgm6rmsGcA
         AAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="pictureBox4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAACxIAAAsSAdLdfvwAAACJSURBVEhL7ZRBDoAgDATxJ/5Mf6M3n6xdzCYcCLRQjAcm
+        aSLG7hBsCJNfskpt76MJ9KC3yi51S11xpQPfoge9Kg4pSha8KHBKWTcU0Uiaw0lJ0h1OchK3cJJK3MMJ
+        JUPCAXdOQW26TKTHopkuE7kzd5OUfmi3RDMtzRJNODFLhl92w6/ryZeE8ACPgzmW2NVScwAAAABJRU5E
+        rkJggg==
 </value>
   </data>
 </root>

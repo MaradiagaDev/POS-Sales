@@ -71,13 +71,16 @@ namespace NeoCobranza.Paneles
 
                 PnlPrincipal pnlPrincipal = Owner as PnlPrincipal;
                 pnlProformaContrato.TopLevel = false;
+                pnlProformaContrato.Dock = DockStyle.Fill;
                 pnlPrincipal.PnlCentral.Controls.Add(pnlProformaContrato);
+            pnlPrincipal.PnlCentral.Tag = pnlProformaContrato;
 
-                
+
+
 
                 pnlProformaContrato.Show();
 
-                pnlProformaContrato.Titulo.Text = "Actualizacion de Proforma";
+             
 
                 this.Hide();
 

@@ -100,5 +100,10 @@ namespace NeoCobranza.Paneles
         {
             dgvCatalogoClientes.DataSource = proveedor.Mostra_Proveedores(txtFiltrar.Texts);
         }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

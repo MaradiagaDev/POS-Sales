@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NeoCobranza.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,13 +13,24 @@ namespace NeoCobranza.PnlInventario
 {
     public partial class Pnl_InformeInventario : Form
     {
-        public Pnl_InformeInventario()
+        private Conexion conexion;
+        public Pnl_InformeInventario(Conexion conexion)
         {
             InitializeComponent();
+            this.conexion = conexion;
         }
 
         private void Pnl_InformeInventario_Load(object sender, EventArgs e)
         {
+            //Conexion
+            this.reporteria_ReservadoModeloxUbicacionTableAdapter.Connection = conexion.connect;
+            this.reporteria_ReservadoxUbicacionTableAdapter.Connection = conexion.connect;
+            this.reporteria_DisponiblesxUbicacionTableAdapter.Connection = conexion.connect;
+            this.nuevo_listar_SinInventarioTableAdapter.Connection = conexion.connect;
+            this.reporte_Inventario_DisponiblesTableAdapter.Connection = conexion.connect;
+            this.reporte_InventarioTableAdapter.Connection = conexion.connect;
+
+
             // TODO: esta línea de código carga datos en la tabla 'data_Inventario.Reporteria_ReservadoModeloxUbicacion' Puede moverla o quitarla según sea necesario.
             this.reporteria_ReservadoModeloxUbicacionTableAdapter.Fill(this.data_Inventario.Reporteria_ReservadoModeloxUbicacion);
             // TODO: esta línea de código carga datos en la tabla 'data_Inventario.Reporteria_ReservadoxUbicacion' Puede moverla o quitarla según sea necesario.

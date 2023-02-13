@@ -48,10 +48,34 @@ namespace NeoCobranza.Paneles
 
             }
         }
+        //Constructor
 
-        private void txtFiltro__TextChanged(object sender, EventArgs e)
+        public PnlPagoCuotas(Conexion conexion, string txtid)
         {
-            dgvStock.DataSource = contrato.Contrato_ListarPrimerasCuotas(txtFiltro.Texts);
+            InitializeComponent();
+
+
+            this.conexion = conexion;
+            this.contrato = new Contrato(conexion);
+            this.colector = new Colector(conexion);
+
+            //estilo
+            dgvStock.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11);
+            dgvStock.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11);
+            //LLenado del dgv
+
+            dgvStock.DataSource = contrato.Contrato_ListarPrimerasCuotas_ID(int.Parse(txtid));
+
+            try
+            {
+                txtRecibo.Text = contrato.Contrato_ListarUltimaFactura(int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString())).Rows[0][0].ToString();
+                txtNombre.Text = colector.Colector_PorId(int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString())).Rows[0][0].ToString();
+                txtIdColector.Text = colector.Colector_PorId(int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString())).Rows[0][1].ToString();
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
         private void txtCordobas_KeyPress(object sender, KeyPressEventArgs e)
@@ -210,8 +234,11 @@ namespace NeoCobranza.Paneles
             cordoba = float.Parse(txtCordobas.Text) + (float.Parse(cTasa.MostrarTasa())*float.Parse(txtDolares.Text));
             dolar = float.Parse(txtDolares.Text) + ( float.Parse(txtCordobas.Text)/ float.Parse(cTasa.MostrarTasa()));
 
+            //Historial de contrato
+            contrato.Contrato_Insertar_Historial("Pago de apertura","Id: "+txtRecibo.Text+" Valor en dolares: "+dolar.ToString()+" NoCuotas: " + txtCuotas.Text, conexion.usuario, int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()));
+
             //Valores del controato
-            contrato.Contrato_Insertar_Valores(int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()),dolar,0);
+            contrato.Contrato_Insertar_Valores(txtRecibo.Text,dolar,0, int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()),"RECIBO", cTasa.MostrarTasa());
 
             //Verificar si cancela el contrato
             contrato.Contrato_Cancelado(int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()), dolar);
@@ -280,8 +307,64 @@ namespace NeoCobranza.Paneles
                 return;
             }
 
-            PnlReciboColector reciboColector = new PnlReciboColector(int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()));
+            PnlReciboColector reciboColector = new PnlReciboColector(int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()),conexion);
             reciboColector.Show();
+        }
+
+        private void dgvStock_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Verificacion de que haya una fila seleccionada
+
+            if (dgvStock.Rows.Count == 0)
+            {
+                MessageBox.Show("No hay fila seleccionada", "Error");
+                return;
+            }
+            try
+            {
+
+
+
+                PnlGeneralContrato pnlGeneral = new PnlGeneralContrato(conexion, dgvStock.SelectedRows[0].Cells[0].Value.ToString());
+
+                PnlPrincipal pnlPrincipal = Owner as PnlPrincipal;
+                pnlGeneral.TopLevel = false;
+                pnlGeneral.Dock = DockStyle.Fill;
+                pnlPrincipal.PnlCentral.Controls.Add(pnlGeneral);
+                pnlPrincipal.PnlCentral.Tag = pnlGeneral;
+
+
+                pnlGeneral.Show();
+
+            }
+            catch (Exception)
+            {
+
+            }
+            this.Close();
+
+
+
+        }
+
+        private void txtFiltro__TextChanged_1(object sender, EventArgs e)
+        {
+            dgvStock.DataSource = contrato.Contrato_ListarPrimerasCuotas(txtFiltro.Texts);
+        }
+
+        private void txtFiltroId__TextChanged(object sender, EventArgs e)
+        {
+            if (txtFiltroId.Texts == "")
+            {
+                return;
+            }
+            int prueba;
+            if(int.TryParse(txtFiltroId.Texts,out prueba)==false)
+            {
+                return;
+            }
+
+            dgvStock.DataSource = contrato.Contrato_ListarPrimerasCuotas_ID(int.Parse(txtFiltroId.Texts));
         }
     }
 }

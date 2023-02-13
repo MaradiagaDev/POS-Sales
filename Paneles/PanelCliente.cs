@@ -257,11 +257,30 @@ namespace NeoCobranza.Paneles
 
             if (mtxtTelefono.Text == "")
             {
+                float celular;
+                if(float.TryParse(mtxtCelular.Texts,out celular) == false)
+                {
+                    celular = 0;
+                }
+                else
+                {
+                    celular = float.Parse(mtxtCelular.Texts);
+                }
 
-                cCliente.AgregarCliente(lblPn.Texts, lblSN.Texts, lblPA.Texts, lblSA.Texts, 1, txtDireccion.Texts, 1, float.Parse(mtxtCelular.Texts), mtxtEmail.Text, "Soltero", lblProfesion.Texts, lblFecha.Text, "Femenino", mtxtCedula.Text, this.cmbDepartamento.Text, pais, txtObservacion.Texts);
+                cCliente.AgregarCliente(lblPn.Texts, lblSN.Texts, lblPA.Texts, lblSA.Texts, 1, txtDireccion.Texts, 1, celular, mtxtEmail.Text, "Soltero", lblProfesion.Texts, lblFecha.Text, "Femenino", mtxtCedula.Text, this.cmbDepartamento.Text, pais, txtObservacion.Texts);
             }
             else
             {
+                float celular;
+                if (float.TryParse(mtxtCelular.Texts, out celular) == false)
+                {
+                    celular = 0;
+                }
+                else
+                {
+                    celular = float.Parse(mtxtCelular.Texts);
+                } 
+
                 cCliente.AgregarCliente(lblPn.Texts, lblSN.Texts, lblPA.Texts, lblSA.Texts, 1, txtDireccion.Texts, float.Parse(mtxtTelefono.Text), float.Parse(mtxtCelular.Texts), mtxtEmail.Text, "Soltero", lblProfesion.Texts, lblFecha.Text, "Femenino", mtxtCedula.Text,this.cmbDepartamento.Text, pais, txtObservacion.Texts);
 
 

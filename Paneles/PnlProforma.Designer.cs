@@ -35,6 +35,7 @@
             this.DgvBusquedas = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.BtnEliminarServicio = new NeoCobranza.Especiales.EspecialButton();
             this.DgvServicios = new System.Windows.Forms.DataGridView();
             this.IdServicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Servicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -90,7 +91,6 @@
             this.btnCancelar = new NeoCobranza.Especiales.EspecialButton();
             this.BtnVendd = new NeoCobranza.Especiales.EspecialButton();
             this.BtnCliente = new NeoCobranza.Especiales.EspecialButton();
-            this.BtnEliminarServicio = new NeoCobranza.Especiales.EspecialButton();
             this.BtnSeleccionar = new NeoCobranza.Especiales.EspecialButton();
             this.txtfiltro = new NeoCobranza.Controladores.LoginUserControl();
             this.panel3.SuspendLayout();
@@ -171,6 +171,26 @@
             this.panel1.Size = new System.Drawing.Size(748, 303);
             this.panel1.TabIndex = 26;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // BtnEliminarServicio
+            // 
+            this.BtnEliminarServicio.BackColor = System.Drawing.Color.Crimson;
+            this.BtnEliminarServicio.BackGroundColor = System.Drawing.Color.Crimson;
+            this.BtnEliminarServicio.BorderColor = System.Drawing.Color.Beige;
+            this.BtnEliminarServicio.BorderRadius = 15;
+            this.BtnEliminarServicio.BorderSize = 2;
+            this.BtnEliminarServicio.FlatAppearance.BorderSize = 0;
+            this.BtnEliminarServicio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnEliminarServicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnEliminarServicio.ForeColor = System.Drawing.Color.White;
+            this.BtnEliminarServicio.Location = new System.Drawing.Point(647, 269);
+            this.BtnEliminarServicio.Name = "BtnEliminarServicio";
+            this.BtnEliminarServicio.Size = new System.Drawing.Size(84, 31);
+            this.BtnEliminarServicio.TabIndex = 36;
+            this.BtnEliminarServicio.Text = "Eliminar";
+            this.BtnEliminarServicio.TextGroundColor = System.Drawing.Color.White;
+            this.BtnEliminarServicio.UseVisualStyleBackColor = false;
+            this.BtnEliminarServicio.Click += new System.EventHandler(this.BtnEliminarServicio_Click);
             // 
             // DgvServicios
             // 
@@ -533,6 +553,7 @@
             "5",
             "10",
             "15",
+            "15.38",
             "20"});
             this.lblDescuentoN.Location = new System.Drawing.Point(139, 532);
             this.lblDescuentoN.Name = "lblDescuentoN";
@@ -794,26 +815,6 @@
             this.BtnCliente.TextGroundColor = System.Drawing.Color.White;
             this.BtnCliente.UseVisualStyleBackColor = false;
             this.BtnCliente.Click += new System.EventHandler(this.BtnCliente_Click);
-            // 
-            // BtnEliminarServicio
-            // 
-            this.BtnEliminarServicio.BackColor = System.Drawing.Color.Crimson;
-            this.BtnEliminarServicio.BackGroundColor = System.Drawing.Color.Crimson;
-            this.BtnEliminarServicio.BorderColor = System.Drawing.Color.Beige;
-            this.BtnEliminarServicio.BorderRadius = 15;
-            this.BtnEliminarServicio.BorderSize = 2;
-            this.BtnEliminarServicio.FlatAppearance.BorderSize = 0;
-            this.BtnEliminarServicio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnEliminarServicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnEliminarServicio.ForeColor = System.Drawing.Color.White;
-            this.BtnEliminarServicio.Location = new System.Drawing.Point(647, 269);
-            this.BtnEliminarServicio.Name = "BtnEliminarServicio";
-            this.BtnEliminarServicio.Size = new System.Drawing.Size(84, 31);
-            this.BtnEliminarServicio.TabIndex = 36;
-            this.BtnEliminarServicio.Text = "Eliminar";
-            this.BtnEliminarServicio.TextGroundColor = System.Drawing.Color.White;
-            this.BtnEliminarServicio.UseVisualStyleBackColor = false;
-            this.BtnEliminarServicio.Click += new System.EventHandler(this.BtnEliminarServicio_Click);
             // 
             // BtnSeleccionar
             // 

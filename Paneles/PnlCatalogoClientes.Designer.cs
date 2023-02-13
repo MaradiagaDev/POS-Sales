@@ -30,20 +30,23 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PnlCatalogoClientes));
             this.dgvCatalogoClientes = new System.Windows.Forms.DataGridView();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.label13 = new System.Windows.Forms.Label();
             this.txtFiltrar = new NeoCobranza.Controladores.LoginUserControl();
             this.btnAgregar = new NeoCobranza.Especiales.EspecialButton();
             this.btnActualizar = new NeoCobranza.Especiales.EspecialButton();
-            this.especialButton1 = new NeoCobranza.Especiales.EspecialButton();
             this.especialButton2 = new NeoCobranza.Especiales.EspecialButton();
+            this.label2 = new System.Windows.Forms.Label();
+            this.llbTitulo = new System.Windows.Forms.Label();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCatalogoClientes)).BeginInit();
-            this.panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvCatalogoClientes
             // 
             this.dgvCatalogoClientes.AllowUserToAddRows = false;
+            this.dgvCatalogoClientes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvCatalogoClientes.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvCatalogoClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCatalogoClientes.Location = new System.Drawing.Point(12, 96);
@@ -53,28 +56,10 @@
             this.dgvCatalogoClientes.Size = new System.Drawing.Size(1081, 386);
             this.dgvCatalogoClientes.TabIndex = 1;
             // 
-            // panel7
-            // 
-            this.panel7.BackColor = System.Drawing.SystemColors.MenuText;
-            this.panel7.Controls.Add(this.label13);
-            this.panel7.Location = new System.Drawing.Point(0, 1);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(1156, 31);
-            this.panel7.TabIndex = 65;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.label13.Location = new System.Drawing.Point(12, 8);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(176, 20);
-            this.label13.TabIndex = 0;
-            this.label13.Text = "Catalogo de Clientes";
-            // 
             // txtFiltrar
             // 
+            this.txtFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFiltrar.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.txtFiltrar.BorderFocusColor = System.Drawing.Color.HotPink;
             this.txtFiltrar.BorderRadius = 0;
@@ -97,6 +82,7 @@
             // 
             // btnAgregar
             // 
+            this.btnAgregar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnAgregar.BackColor = System.Drawing.Color.ForestGreen;
             this.btnAgregar.BackGroundColor = System.Drawing.Color.ForestGreen;
             this.btnAgregar.BorderColor = System.Drawing.Color.PaleVioletRed;
@@ -119,6 +105,7 @@
             // 
             // btnActualizar
             // 
+            this.btnActualizar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnActualizar.BackColor = System.Drawing.Color.ForestGreen;
             this.btnActualizar.BackGroundColor = System.Drawing.Color.ForestGreen;
             this.btnActualizar.BorderColor = System.Drawing.Color.PaleVioletRed;
@@ -139,28 +126,9 @@
             this.btnActualizar.UseVisualStyleBackColor = false;
             this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
-            // especialButton1
-            // 
-            this.especialButton1.BackColor = System.Drawing.Color.DarkCyan;
-            this.especialButton1.BackGroundColor = System.Drawing.Color.DarkCyan;
-            this.especialButton1.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.especialButton1.BorderRadius = 5;
-            this.especialButton1.BorderSize = 0;
-            this.especialButton1.FlatAppearance.BorderSize = 0;
-            this.especialButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.especialButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.especialButton1.ForeColor = System.Drawing.Color.White;
-            this.especialButton1.Location = new System.Drawing.Point(495, 500);
-            this.especialButton1.Name = "especialButton1";
-            this.especialButton1.Size = new System.Drawing.Size(139, 38);
-            this.especialButton1.TabIndex = 68;
-            this.especialButton1.Text = "Salir";
-            this.especialButton1.TextGroundColor = System.Drawing.Color.White;
-            this.especialButton1.UseVisualStyleBackColor = false;
-            this.especialButton1.Click += new System.EventHandler(this.especialButton1_Click);
-            // 
             // especialButton2
             // 
+            this.especialButton2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.especialButton2.BackColor = System.Drawing.Color.ForestGreen;
             this.especialButton2.BackGroundColor = System.Drawing.Color.ForestGreen;
             this.especialButton2.BorderColor = System.Drawing.Color.PaleVioletRed;
@@ -181,24 +149,58 @@
             this.especialButton2.UseVisualStyleBackColor = false;
             this.especialButton2.Click += new System.EventHandler(this.especialButton2_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label2.Location = new System.Drawing.Point(13, 32);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(287, 16);
+            this.label2.TabIndex = 99;
+            this.label2.Text = "________________________________________";
+            // 
+            // llbTitulo
+            // 
+            this.llbTitulo.AutoSize = true;
+            this.llbTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.llbTitulo.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.llbTitulo.Location = new System.Drawing.Point(11, 7);
+            this.llbTitulo.Name = "llbTitulo";
+            this.llbTitulo.Size = new System.Drawing.Size(208, 25);
+            this.llbTitulo.TabIndex = 98;
+            this.llbTitulo.Text = "Catalogo de clientes";
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
+            this.pictureBox4.Location = new System.Drawing.Point(1094, 7);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(24, 25);
+            this.pictureBox4.TabIndex = 100;
+            this.pictureBox4.TabStop = false;
+            this.pictureBox4.Click += new System.EventHandler(this.pictureBox4_Click);
+            // 
             // PnlCatalogoClientes
             // 
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(1141, 562);
+            this.Controls.Add(this.pictureBox4);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.llbTitulo);
             this.Controls.Add(this.especialButton2);
-            this.Controls.Add(this.especialButton1);
             this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.btnAgregar);
-            this.Controls.Add(this.panel7);
             this.Controls.Add(this.dgvCatalogoClientes);
             this.Controls.Add(this.txtFiltrar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "PnlCatalogoClientes";
             this.Load += new System.EventHandler(this.PnlCatalogoClientes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCatalogoClientes)).EndInit();
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -210,11 +212,11 @@
         private Controladores.LoginUserControl txtFiltro;
         private Controladores.LoginUserControl txtFiltrar;
         private System.Windows.Forms.DataGridView dgvCatalogoClientes;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Label label13;
         private Especiales.EspecialButton btnAgregar;
         private Especiales.EspecialButton btnActualizar;
-        private Especiales.EspecialButton especialButton1;
         private Especiales.EspecialButton especialButton2;
+        private System.Windows.Forms.Label label2;
+        public System.Windows.Forms.Label llbTitulo;
+        private System.Windows.Forms.PictureBox pictureBox4;
     }
 }

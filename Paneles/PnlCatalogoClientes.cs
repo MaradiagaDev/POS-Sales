@@ -11,6 +11,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace NeoCobranza.Paneles
 {
@@ -104,6 +105,11 @@ namespace NeoCobranza.Paneles
         private void especialButton2_Click(object sender, EventArgs e)
         {
             dgvCatalogoClientes.DataSource = cCliente.MostrarCliente(txtFiltrar.Texts);
+        }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

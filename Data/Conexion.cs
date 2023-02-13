@@ -19,9 +19,9 @@ namespace NeoCobranza.Data
             {
                 // mi servidor rolando DESKTOP-1F07ALD\SQLEXPRESS
                 //connect = new SqlConnection("Server=DESKTOP-1F07ALD\\SQLEXPRESS;Database=NeoCobranza;UID=" + user + ";PWD=" + password);
-                
-                //server Henoc
-                connect = new SqlConnection("Server=DESKTOP-1F07ALD\\SQLEXPRESS;Database=NeoCobranza;UID=" + user+";PWD="+password+ "; MultipleActiveResultSets=True");
+
+                //server HenocFCYASERVIDOR
+                connect = new SqlConnection("Server=192.168.1.165;Database=NeoCobranza;UID=" + user+";PWD="+password+ "; MultipleActiveResultSets=True");
                 connect.Open();
             }
             catch (Exception e)

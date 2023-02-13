@@ -44,5 +44,16 @@ namespace NeoCobranza.Properties {
                 return ((string)(this["NeoCobranzaConnectionString1"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.1.165;Initial Catalog=NeoCobranza;Persist Security Info=True;" +
+            "User ID=sa;Password=123456")]
+        public string NeoCobranzaConnectionString2 {
+            get {
+                return ((string)(this["NeoCobranzaConnectionString2"]));
+            }
+        }
     }
 }

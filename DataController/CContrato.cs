@@ -294,14 +294,15 @@ namespace NeoCobranza.DataController
             string cedula,
             int idContrato, 
             string idDepartamento,
-            int idAtaud
+            int idAtaud,
+            float monto
             )
         {
 
 
             SqlCommand cmd = new SqlCommand();
 
-            SqlParameter[] param = new SqlParameter[12];
+            SqlParameter[] param = new SqlParameter[13];
             //1
             param[0] = new SqlParameter("@Pnombre", SqlDbType.NVarChar);
             param[0].Value = pNombre;
@@ -339,6 +340,9 @@ namespace NeoCobranza.DataController
 
             param[11] = new SqlParameter("@IdAtaud", SqlDbType.Int);
             param[11].Value = idAtaud;
+
+            param[12] = new SqlParameter("@Monto", SqlDbType.Float);
+            param[12].Value = monto;
 
 
             try

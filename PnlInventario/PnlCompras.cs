@@ -574,7 +574,7 @@ namespace NeoCobranza.PnlInventario
         {
 
             
-            Pnl_InformeInventario pnl_InformeInventario = new Pnl_InformeInventario();
+            Pnl_InformeInventario pnl_InformeInventario = new Pnl_InformeInventario(conexion);
             pnl_InformeInventario.Show();
         }
 

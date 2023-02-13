@@ -260,6 +260,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "PnlActualizarPago";
             this.Text = "PnlActualizarPago";
+            this.Load += new System.EventHandler(this.PnlActualizarPago_Load);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.ResumeLayout(false);

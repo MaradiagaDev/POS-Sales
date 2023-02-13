@@ -727,7 +727,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=IIF(Fields!Usuario.Value =1,"Paquete de Salas Velatorias"&amp;Chr(10)&amp;""&amp;Chr(10)&amp;"Sala Velatoria A"&amp;Chr(10)&amp;""&amp;Chr(10)&amp;"- Bocadillos: 800 Unidades"&amp;Chr(10)&amp;"- Cafe Ilimitado" &amp;Chr(10)&amp;"- Te Ilimitado"&amp;Chr(10)&amp;"- Agua Ilimitada"&amp;Chr(10)&amp;"- Gaseosas: 20 Unidades de 1.5"&amp;Chr(10)&amp;"- 400 vasos de 10 Onzas"&amp;Chr(10)&amp;"- 400 vasos de 8 Onzas"&amp;Chr(10)&amp;"- 4 paquetes de servilletas"&amp;Chr(10)&amp;"- Cremora 1 vaso de 300 gr"&amp;Chr(10)&amp;"- 3 bolsas de hielo grande"&amp;Chr(10)&amp;"- Transporte funerario Vans","-")</Value>
+                    <Value>=IIF(Fields!Usuario.Value =1,"Paquete de Salas Velatorias"&amp;Chr(10)&amp;""&amp;Chr(10)&amp;"Sala Velatoria A"&amp;Chr(10)&amp;""&amp;Chr(10)&amp;"- Bocadillos: 800 Unidades"&amp;Chr(10)&amp;"- Cafe Ilimitado" &amp;Chr(10)&amp;"- Te Ilimitado"&amp;Chr(10)&amp;"- Agua Ilimitada"&amp;Chr(10)&amp;"- Gaseosas: 40 litros (Sabores variados)"&amp;Chr(10)&amp;"- 400 vasos de 10 Onzas"&amp;Chr(10)&amp;"- 400 vasos de 8 Onzas"&amp;Chr(10)&amp;"- 4 paquetes de servilletas"&amp;Chr(10)&amp;"- Cremora 1 vaso de 300 gr"&amp;Chr(10)&amp;"- 3 bolsas de hielo grande"&amp;Chr(10)&amp;"- Transporte funerario Vans","-")</Value>
                     <Style>
                       <FontSize>12pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -792,7 +792,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=IIF(Fields!Usuario.Value =2,"Paquete de Salas Velatorias"&amp;Chr(10)&amp;""&amp;Chr(10)&amp;"Sala Velatoria B"&amp;Chr(10)&amp;""&amp;Chr(10)&amp;"- Bocadillos: 500 Unidades"&amp;Chr(10)&amp;"- 2 frascos 400 gr de Cafe" &amp;Chr(10)&amp;"- Te 400 gr"&amp;Chr(10)&amp;"- Agua Ilimitada"&amp;Chr(10)&amp;"- Gaseosas: 20 Unidades de 1.5"&amp;Chr(10)&amp;"- Te Caliente: 2 Cajas"&amp;Chr(10)&amp;"- 1 vaso de Cremora 300 gr"&amp;Chr(10)&amp;"- Azucar 1 bolsa de 2.5 kg","-")</Value>
+                    <Value>=IIF(Fields!Usuario.Value =2,"Paquete de Salas Velatorias"&amp;Chr(10)&amp;""&amp;Chr(10)&amp;"Sala Velatoria B"&amp;Chr(10)&amp;""&amp;Chr(10)&amp;"- Bocadillos: 500 Unidades"&amp;Chr(10)&amp;"- 2 frascos 400 gr de Cafe" &amp;Chr(10)&amp;"- Te 400 gr"&amp;Chr(10)&amp;"- Agua Ilimitada"&amp;Chr(10)&amp;"- Gaseosas: 30 litros (Sabores variados)"&amp;Chr(10)&amp;"- Te Caliente: 2 Cajas"&amp;Chr(10)&amp;"- 1 vaso de Cremora 300 gr"&amp;Chr(10)&amp;"- Azucar 1 bolsa de 2.5 kg","-")</Value>
                     <Style>
                       <FontSize>12pt</FontSize>
                       <FontWeight>Bold</FontWeight>

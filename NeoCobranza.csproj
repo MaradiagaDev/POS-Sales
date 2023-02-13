@@ -212,6 +212,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>NeoCobranzaDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="NuevoServi_Contrato.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NuevoServi_Contrato.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Paneles\BuscarContrato.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -452,6 +457,12 @@
     <Compile Include="Paneles_Contrato\PnlActualizarPago.Designer.cs">
       <DependentUpon>PnlActualizarPago.cs</DependentUpon>
     </Compile>
+    <Compile Include="Paneles_Contrato\PnlFacturaContrato.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_Contrato\PnlFacturaContrato.Designer.cs">
+      <DependentUpon>PnlFacturaContrato.cs</DependentUpon>
+    </Compile>
     <Compile Include="Paneles_Contrato\PnlGeneralContrato.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -481,6 +492,12 @@
     </Compile>
     <Compile Include="Paneles_Contrato\PnlRetirado.Designer.cs">
       <DependentUpon>PnlRetirado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_Contrato\PnlRetiroServicios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_Contrato\PnlRetiroServicios.Designer.cs">
+      <DependentUpon>PnlRetiroServicios.cs</DependentUpon>
     </Compile>
     <Compile Include="Paneles_Venta\Informes\PnlFacturaInforme.cs">
       <SubType>Form</SubType>
@@ -681,6 +698,9 @@
     <EmbeddedResource Include="Paneles_Contrato\PnlActualizarPago.resx">
       <DependentUpon>PnlActualizarPago.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_Contrato\PnlFacturaContrato.resx">
+      <DependentUpon>PnlFacturaContrato.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Paneles_Contrato\PnlGeneralContrato.resx">
       <DependentUpon>PnlGeneralContrato.cs</DependentUpon>
     </EmbeddedResource>
@@ -695,6 +715,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles_Contrato\PnlRetirado.resx">
       <DependentUpon>PnlRetirado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_Contrato\PnlRetiroServicios.resx">
+      <DependentUpon>PnlRetiroServicios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles_Contrato\ReciboColector.rdlc" />
     <EmbeddedResource Include="Paneles_Venta\Informes\PnlFacturaInforme.resx">
@@ -835,6 +858,17 @@
       <DependentUpon>NeoCobranzaDataSet.xsd</DependentUpon>
     </None>
     <None Include="NeoCobranza_TemporaryKey.pfx" />
+    <None Include="NuevoServi_Contrato.xsc">
+      <DependentUpon>NuevoServi_Contrato.xsd</DependentUpon>
+    </None>
+    <None Include="NuevoServi_Contrato.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>NuevoServi_Contrato.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="NuevoServi_Contrato.xss">
+      <DependentUpon>NuevoServi_Contrato.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">

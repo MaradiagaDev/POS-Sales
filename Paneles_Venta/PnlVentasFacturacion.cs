@@ -138,7 +138,7 @@ namespace NeoCobranza.Paneles_Venta
 
         private void btnGenerar_Click(object sender, EventArgs e)
         {
-            Rpt_InformeGeneralCaja rpt_InformeGeneralCaja = new Rpt_InformeGeneralCaja(lblFechaInicio.Text,lblFechaFinal.Text);
+            Rpt_InformeGeneralCaja rpt_InformeGeneralCaja = new Rpt_InformeGeneralCaja(lblFechaInicio.Text,lblFechaFinal.Text,conexion);
             rpt_InformeGeneralCaja.Show();
         }
     }

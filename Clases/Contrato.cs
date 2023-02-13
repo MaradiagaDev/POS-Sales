@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
+using System.Web;
 
 namespace NeoCobranza.Clases
 {
@@ -128,6 +130,31 @@ namespace NeoCobranza.Clases
             return dtResultado;
         }
 
+        public DataTable Contrato_ListarPrimerasCuotas_ID(int filtro)
+        {
+            DataTable dtResultado = new DataTable("Listar");
+
+            //Procedimiento
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[1];
+
+            param[0] = new SqlParameter("@filtro", SqlDbType.Int);
+            param[0].Value = filtro;
+
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "Contrato_Filtrar_PrimeraCuota_Por_Id";
+            cmd.Connection = conexion.connect;
+            cmd.Parameters.AddRange(param);
+
+            SqlDataAdapter sqlData = new SqlDataAdapter(cmd);
+
+            sqlData.Fill(dtResultado);
+
+            return dtResultado;
+        }
+
         public DataTable Contrato_ListarContratosPagando(string filtro)
         {
             DataTable dtResultado = new DataTable("Listar");
@@ -152,6 +179,32 @@ namespace NeoCobranza.Clases
 
             return dtResultado;
         }
+
+        public DataTable Contrato_ListarContratosPagando_Id(int filtro)
+        {
+            DataTable dtResultado = new DataTable("Listar");
+
+            //Procedimiento
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[1];
+
+            param[0] = new SqlParameter("@filtro", SqlDbType.Int);
+            param[0].Value = filtro;
+
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "Contrato_Filtrar_Pagos_Id";
+            cmd.Connection = conexion.connect;
+            cmd.Parameters.AddRange(param);
+
+            SqlDataAdapter sqlData = new SqlDataAdapter(cmd);
+
+            sqlData.Fill(dtResultado);
+
+            return dtResultado;
+        }
+
         public DataTable Contrato_ProximaCuota(int id)
         {
             DataTable dtResultado = new DataTable("Listar");
@@ -456,6 +509,33 @@ namespace NeoCobranza.Clases
 
             return dtResultado;
         }
+
+        public DataTable Contrato_Listar_Retirados_ID(int filtro)
+        {
+            DataTable dtResultado = new DataTable("Listar");
+
+            //Procedimiento
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[1];
+
+            param[0] = new SqlParameter("@filtro", SqlDbType.Int);
+            param[0].Value = filtro;
+
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "Contrato_Filtrar_Retirados_ID";
+            cmd.Connection = conexion.connect;
+            cmd.Parameters.AddRange(param);
+
+            SqlDataAdapter sqlData = new SqlDataAdapter(cmd);
+
+            sqlData.Fill(dtResultado);
+
+            return dtResultado;
+        }
+
+
         public DataTable Mostrar_Todos_Nombres()
         {
 
@@ -738,6 +818,33 @@ namespace NeoCobranza.Clases
             return dtResultado;
         }
 
+        public DataTable Contrato_ServiciosInfo_Cantidad(int id,string nombre)
+        {
+            DataTable dtResultado = new DataTable("Listar");
+
+            //Procedimiento
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[2];
+
+            param[0] = new SqlParameter("@id", SqlDbType.Int);
+            param[0].Value = id;
+
+            param[1] = new SqlParameter("@nombre", SqlDbType.NVarChar);
+            param[1].Value = nombre;
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "contrato_OtrosServicios_Cantidad";
+            cmd.Connection = conexion.connect;
+            cmd.Parameters.AddRange(param);
+
+            SqlDataAdapter sqlData = new SqlDataAdapter(cmd);
+
+            sqlData.Fill(dtResultado);
+
+            return dtResultado;
+        }
+
         public DataTable Contrato_ApartadoServicio(int id,int idServicio)
         {
             DataTable dtResultado = new DataTable("Listar");
@@ -782,7 +889,7 @@ namespace NeoCobranza.Clases
 
 
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "Contrato_Informacion_Economica";
+            cmd.CommandText = "Contrato_Informacion_Economica_General";
             cmd.Connection = conexion.connect;
             cmd.Parameters.AddRange(param);
 
@@ -868,24 +975,35 @@ namespace NeoCobranza.Clases
         }
 
         //Valores del contrato
-        public void Contrato_Insertar_Valores(int id,
+        public void Contrato_Insertar_Valores(string idReff,
            float monto,
-           float debito
-          
+           float debito,
+           int idContrato,
+           string documento,
+           string tasa
            )
         {
             SqlCommand cmd = new SqlCommand();
 
-            SqlParameter[] param = new SqlParameter[3];
+            SqlParameter[] param = new SqlParameter[6];
             //1
-            param[0] = new SqlParameter("@id", SqlDbType.Int);
-            param[0].Value = id;
+            param[0] = new SqlParameter("@idReff", SqlDbType.NVarChar);
+            param[0].Value = idReff;
             //2
             param[1] = new SqlParameter("@montoD", SqlDbType.Float);
             param[1].Value = monto;
 
             param[2] = new SqlParameter("@debito", SqlDbType.Float);
             param[2].Value = debito;
+
+            param[3] = new SqlParameter("@idContrato", SqlDbType.Int);
+            param[3].Value = idContrato;
+
+            param[4] = new SqlParameter("@Documento", SqlDbType.NVarChar);
+            param[4].Value = documento;
+
+            param[5] = new SqlParameter("@Tasa", SqlDbType.NVarChar);
+            param[5].Value = tasa;
 
             try
             {
@@ -904,6 +1022,930 @@ namespace NeoCobranza.Clases
             }
         }
 
+        //Actualizar Valores
 
+        public void Contrato_Actualizar_Valores(int id,int idContrato,
+           float debito,
+           float credito,
+            float cordoba
+
+           )
+        {
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[5];
+            //1
+            param[0] = new SqlParameter("@id", SqlDbType.Int);
+            param[0].Value = id;
+            //2
+            param[1] = new SqlParameter("@idContrato", SqlDbType.Int);
+            param[1].Value = idContrato;
+
+            param[2] = new SqlParameter("@debito", SqlDbType.Float);
+            param[2].Value = debito;
+
+            param[3] = new SqlParameter("@Credito", SqlDbType.Float);
+            param[3].Value = credito;
+
+            param[4] = new SqlParameter("@Cordoba", SqlDbType.Float);
+            param[4].Value = cordoba;
+
+            try
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "Actualizar_ValoresContrato";
+                cmd.Connection = conexion.connect;
+                cmd.Parameters.AddRange(param);
+                cmd.ExecuteNonQuery();
+
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+
+
+        public void Contrato_Actualizar_Propietario(int id, int idContrato)
+        {
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[2];
+            //1
+            param[0] = new SqlParameter("@idCliente", SqlDbType.Int);
+            param[0].Value = id;
+            //2
+            param[1] = new SqlParameter("@idContrato", SqlDbType.Int);
+            param[1].Value = idContrato;
+
+         
+            try
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "Contrato_ActualizarPropietario";
+                cmd.Connection = conexion.connect;
+                cmd.Parameters.AddRange(param);
+                cmd.ExecuteNonQuery();
+
+                MessageBox.Show("Propietario Actualizado");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        public void Contrato_Actualizar_Colector(int id, int idContrato)
+        {
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[2];
+            //1
+            param[0] = new SqlParameter("@idColector", SqlDbType.Int);
+            param[0].Value = id;
+            //2
+            param[1] = new SqlParameter("@idContrato", SqlDbType.Int);
+            param[1].Value = idContrato;
+
+
+            try
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "Contrato_ActualizarColector";
+                cmd.Connection = conexion.connect;
+                cmd.Parameters.AddRange(param);
+                cmd.ExecuteNonQuery();
+
+                MessageBox.Show("Colector Actualizado");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        public void Contrato_Actualizar_Descripcion(string desc, int idContrato)
+        {
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[2];
+            //1
+            param[0] = new SqlParameter("@descripcion", SqlDbType.NVarChar);
+            param[0].Value = desc;
+            //2
+            param[1] = new SqlParameter("@idContrato", SqlDbType.Int);
+            param[1].Value = idContrato;
+
+
+            try
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "Contrato_Descripcion_Actuaizar";
+                cmd.Connection = conexion.connect;
+                cmd.Parameters.AddRange(param);
+                cmd.ExecuteNonQuery();
+
+                MessageBox.Show("Descripcion Actualizada");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        public void Contrato_Insertar_Historial(string Accion, string valor, string usuario,int idcontrato)
+        {
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[4];
+            //1
+            param[0] = new SqlParameter("@Accion", SqlDbType.NVarChar);
+            param[0].Value = Accion;
+            //2
+            param[1] = new SqlParameter("@Valor", SqlDbType.NVarChar);
+            param[1].Value = valor;
+
+            param[2] = new SqlParameter("@usuario", SqlDbType.NVarChar);
+            param[2].Value = usuario;
+
+            param[3] = new SqlParameter("@IdContrato", SqlDbType.Int);
+            param[3].Value = idcontrato;
+
+
+            try
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "Historia_Contrato_Insertar";
+                cmd.Connection = conexion.connect;
+                cmd.Parameters.AddRange(param);
+                cmd.ExecuteNonQuery();
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        public DataTable Contrato_Filtrar_Modificaciones(string filtro,int id)
+        {
+            DataTable dtResultado = new DataTable("Listar");
+
+            //Procedimiento
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[2];
+
+            param[0] = new SqlParameter("@filtro", SqlDbType.NVarChar);
+            param[0].Value = filtro;
+
+            param[1] = new SqlParameter("@idContrato", SqlDbType.NVarChar);
+            param[1].Value = id;
+
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "Historia_Contrato_Buscar";
+            cmd.Connection = conexion.connect;
+            cmd.Parameters.AddRange(param);
+
+            SqlDataAdapter sqlData = new SqlDataAdapter(cmd);
+
+            sqlData.Fill(dtResultado);
+
+            return dtResultado;
+        }
+
+
+        public DataTable Contrato_Filtrar_Modificaciones_Fecha(string fechaI,string fechaF, int id)
+        {
+            DataTable dtResultado = new DataTable("Listar");
+
+            //Procedimiento
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[3];
+
+            param[0] = new SqlParameter("@fechaInicial", SqlDbType.Date);
+            param[0].Value = fechaI;
+
+            param[1] = new SqlParameter("@fechaFinal", SqlDbType.Date);
+            param[1].Value = fechaF;
+
+            param[2] = new SqlParameter("@idContrato", SqlDbType.Int);
+            param[2].Value = id;
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "Historia_Contrato_BuscarFechas";
+            cmd.Connection = conexion.connect;
+            cmd.Parameters.AddRange(param);
+
+            SqlDataAdapter sqlData = new SqlDataAdapter(cmd);
+
+            sqlData.Fill(dtResultado);
+
+            return dtResultado;
+        }
+
+        public DataTable Contrato_Listar_Todos_PorID(int id)
+        {
+            DataTable dtResultado = new DataTable("Listar");
+
+            //Procedimiento
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[1];
+
+            param[0] = new SqlParameter("@id", SqlDbType.Int);
+            param[0].Value = id;
+
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "Contrato_Filtrar_Todos_PorId";
+            cmd.Connection = conexion.connect;
+            cmd.Parameters.AddRange(param);
+
+            SqlDataAdapter sqlData = new SqlDataAdapter(cmd);
+
+            sqlData.Fill(dtResultado);
+
+            return dtResultado;
+        }
+
+        public string Retiros_Valor_Contrato(int id)
+        {
+            DataTable dtResultado = new DataTable("Listar");
+
+            //Procedimiento
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[1];
+
+            param[0] = new SqlParameter("@id", SqlDbType.Int);
+            param[0].Value = id;
+
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "Retiros_Valores_Contrato";
+            cmd.Connection = conexion.connect;
+            cmd.Parameters.AddRange(param);
+
+            SqlDataAdapter sqlData = new SqlDataAdapter(cmd);
+
+            sqlData.Fill(dtResultado);
+
+            return dtResultado.Rows[0][0].ToString();
+        }
+        //Filtros para retiros donde no van los contratos retirados
+
+
+        public DataTable Retirados_Listar_Todos_PorID(int id)
+        {
+            DataTable dtResultado = new DataTable("Listar");
+
+            //Procedimiento
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[1];
+
+            param[0] = new SqlParameter("@id", SqlDbType.Int);
+            param[0].Value = id;
+
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "Retirados_Filtrar_Todos_PorId";
+            cmd.Connection = conexion.connect;
+            cmd.Parameters.AddRange(param);
+
+            SqlDataAdapter sqlData = new SqlDataAdapter(cmd);
+
+            try
+            {
+                sqlData.Fill(dtResultado);
+
+            }
+            catch (Exception)
+            {
+
+            }
+
+            return dtResultado;
+        }
+
+        public DataTable Retirados_Listar_Todos(string id)
+        {
+            DataTable dtResultado = new DataTable("Listar");
+
+            //Procedimiento
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[1];
+
+            param[0] = new SqlParameter("@filtro", SqlDbType.NVarChar);
+            param[0].Value = id;
+
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "Retirados_Filtrar_Todos";
+            cmd.Connection = conexion.connect;
+            cmd.Parameters.AddRange(param);
+
+            SqlDataAdapter sqlData = new SqlDataAdapter(cmd);
+
+            sqlData.Fill(dtResultado);
+
+            return dtResultado;
+        }
+
+        public DataTable Retirados_Listar_Estandares(float monto)
+        {
+            DataTable dtResultado = new DataTable("Listar");
+
+            //Procedimiento
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[1];
+
+            param[0] = new SqlParameter("@monto", SqlDbType.NVarChar);
+            param[0].Value = monto;
+
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "Retiros_Estandares";
+            cmd.Connection = conexion.connect;
+            cmd.Parameters.AddRange(param);
+
+            SqlDataAdapter sqlData = new SqlDataAdapter(cmd);
+
+            sqlData.Fill(dtResultado);
+
+            return dtResultado;
+        }
+
+        public DataTable Retirados_Listar_ataudes(string estandar)
+        {
+            DataTable dtResultado = new DataTable("Listar");
+
+            //Procedimiento
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[1];
+
+            param[0] = new SqlParameter("@nombre", SqlDbType.NVarChar);
+            param[0].Value = estandar;
+
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "Retiros_Ataudes_Disponibles";
+            cmd.Connection = conexion.connect;
+            cmd.Parameters.AddRange(param);
+
+            SqlDataAdapter sqlData = new SqlDataAdapter(cmd);
+
+            sqlData.Fill(dtResultado);
+
+            return dtResultado;
+        }
+
+
+        //CREA LA FACTURA
+        public void Retiro_RealizarFactura(int idContrato, int idTasa, string usuario)
+        {
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[3];
+            //1
+            param[0] = new SqlParameter("@IdContrato", SqlDbType.Int);
+            param[0].Value = idContrato;
+            //2
+            param[1] = new SqlParameter("@IdTasa", SqlDbType.Int);
+            param[1].Value = idTasa;
+
+            param[2] = new SqlParameter("@usuario", SqlDbType.NVarChar);
+            param[2].Value = usuario;
+
+            try
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "Retiro_CrearFactura";
+                cmd.Connection = conexion.connect;
+                cmd.Parameters.AddRange(param);
+                cmd.ExecuteNonQuery();
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        //OBTIENE EL ULTIMO ID DE LA FACTURA
+        public string Retiros_UltimoRetiroId()
+        {
+            DataTable dtResultado = new DataTable("Listar");
+
+            //Procedimiento
+            SqlCommand cmd = new SqlCommand();
+
+           
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "Retiros_UltimoRetiro";
+            cmd.Connection = conexion.connect;
+            
+
+            SqlDataAdapter sqlData = new SqlDataAdapter(cmd);
+
+            sqlData.Fill(dtResultado);
+
+            return dtResultado.Rows[0][0].ToString();
+        }
+        //INSERTA LOS DETALLES
+
+        public void Retiro_FacturaDetalles(int idRetiro,int idBeneficiario, int idReferencial, string tipo, float extra)
+        {
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[5];
+            //1
+            param[0] = new SqlParameter("@IdRetiro", SqlDbType.Int);
+            param[0].Value = idRetiro;
+            //2
+            param[1] = new SqlParameter("@IdBeneficiario", SqlDbType.Int);
+            param[1].Value = idBeneficiario;
+
+            param[2] = new SqlParameter("@IdReferencial", SqlDbType.Int);
+            param[2].Value = idReferencial;
+            //2
+            param[3] = new SqlParameter("@Tipo", SqlDbType.NVarChar);
+            param[3].Value = tipo;
+
+            param[4] = new SqlParameter("@Extra", SqlDbType.Float);
+            param[4].Value = extra;
+
+
+            try
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "Retiros_Detalles";
+                cmd.Connection = conexion.connect;
+                cmd.Parameters.AddRange(param);
+                cmd.ExecuteNonQuery();
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+        public void Retiro_CambioEstadoAtaud(int idAtaud)
+        {
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[1];
+            //1
+            param[0] = new SqlParameter("@idAtaud", SqlDbType.Int);
+            param[0].Value = idAtaud;
+
+
+            try
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "Retiro_ActualizarAtaud";
+                cmd.Connection = conexion.connect;
+                cmd.Parameters.AddRange(param);
+                cmd.ExecuteNonQuery();
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        //Modificar al beneficiario 
+        public void Retiro_Beneficiario(int idAtaud,string noSerie)
+        {
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[2];
+            //1
+            param[0] = new SqlParameter("@idBeneficiario", SqlDbType.Int);
+            param[0].Value = idAtaud;
+
+            param[1] = new SqlParameter("@NoSerie", SqlDbType.NVarChar);
+            param[1].Value = noSerie;
+            try
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "Retiro_ModificarBeneficiario";
+                cmd.Connection = conexion.connect;
+                cmd.Parameters.AddRange(param);
+                cmd.ExecuteNonQuery();
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        //Modificar tabla de servicios
+        public void Retiro_Servicios(int idServicio, int retirados)
+        {
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[2];
+            //1
+            param[0] = new SqlParameter("@idServicios", SqlDbType.Int);
+            param[0].Value = idServicio;
+
+            param[1] = new SqlParameter("@retirados", SqlDbType.Int);
+            param[1].Value = retirados;
+
+            try
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "Retiros_ModificarServicios";
+                cmd.Connection = conexion.connect;
+                cmd.Parameters.AddRange(param);
+                cmd.ExecuteNonQuery();
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+
+
+        //Verificar
+        public void Retiro_Vefiricar(int idContrato)
+        {
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[1];
+            //1
+            param[0] = new SqlParameter("@idContrao", SqlDbType.Int);
+            param[0].Value = idContrato;
+          
+
+            try
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "Retiros_Comprobacion";
+                cmd.Connection = conexion.connect;
+                cmd.Parameters.AddRange(param);
+                cmd.ExecuteNonQuery();
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        //NoSerie ataud
+        public string Retiros_NoSeriexIdAtaud(int idAtaud)
+        {
+            DataTable dtResultado = new DataTable("Listar");
+
+            //Procedimiento
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[1];
+            //1
+            param[0] = new SqlParameter("@IdAtaud", SqlDbType.Int);
+            param[0].Value = idAtaud;
+
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "Retiro_ObtenerNoSerie";
+            cmd.Connection = conexion.connect;
+            cmd.Parameters.AddRange(param);
+
+
+            SqlDataAdapter sqlData = new SqlDataAdapter(cmd);
+
+            sqlData.Fill(dtResultado);
+
+            return dtResultado.Rows[0][0].ToString();
+        }
+
+        // obtener total retirado
+
+        public string Retiros_Retirado_Contrato(int id)
+        {
+            DataTable dtResultado = new DataTable("Listar");
+
+            //Procedimiento
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[1];
+
+            param[0] = new SqlParameter("@id", SqlDbType.Int);
+            param[0].Value = id;
+
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "Retiros_Retirados_Contrato";
+            cmd.Connection = conexion.connect;
+            cmd.Parameters.AddRange(param);
+
+            SqlDataAdapter sqlData = new SqlDataAdapter(cmd);
+
+            sqlData.Fill(dtResultado);
+
+            return dtResultado.Rows[0][0].ToString();
+        }
+
+        //Parte de facturas
+        public DataTable Facturas_Listar(string filtro)
+        {
+            DataTable dtResultado = new DataTable("Listar");
+
+            //Procedimiento
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[1];
+
+            param[0] = new SqlParameter("@filtro", SqlDbType.NVarChar);
+            param[0].Value = filtro;
+
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "FacturasContratos_Filtrar";
+            cmd.Connection = conexion.connect;
+            cmd.Parameters.AddRange(param);
+
+            SqlDataAdapter sqlData = new SqlDataAdapter(cmd);
+
+            sqlData.Fill(dtResultado);
+
+            return dtResultado;
+        }
+
+
+        public DataTable Facturas_Listar_ID(int filtro)
+        {
+            DataTable dtResultado = new DataTable("Listar");
+
+            //Procedimiento
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[1];
+
+            param[0] = new SqlParameter("@filtro", SqlDbType.Int);
+            param[0].Value = filtro;
+
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "FacturasContratos_Filtrar_ID";
+            cmd.Connection = conexion.connect;
+            cmd.Parameters.AddRange(param);
+
+            SqlDataAdapter sqlData = new SqlDataAdapter(cmd);
+
+            sqlData.Fill(dtResultado);
+
+            return dtResultado;
+        }
+
+
+        public string Contrato_Estandar_PrecioxID(int id)
+        {
+            DataTable dtResultado = new DataTable("Listar");
+
+            //Procedimiento
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[1];
+
+            param[0] = new SqlParameter("@id", SqlDbType.Int);
+            param[0].Value = id;
+
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "Contrato_Precio_Id";
+            cmd.Connection = conexion.connect;
+            cmd.Parameters.AddRange(param);
+
+            SqlDataAdapter sqlData = new SqlDataAdapter(cmd);
+
+            sqlData.Fill(dtResultado);
+
+            return dtResultado.Rows[0][0].ToString();
+        }
+        //Revalorizacion
+
+
+        public DataTable Beneficiario_Mostrar_Activos(int id)
+        {
+            DataTable dtResultado = new DataTable("Listar");
+
+            //Procedimiento
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[1];
+
+            param[0] = new SqlParameter("@idContrato", SqlDbType.Int);
+            param[0].Value = id;
+
+
+
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "Contrato_Beneficiario_Activo";
+            cmd.Connection = conexion.connect;
+            cmd.Parameters.AddRange(param);
+
+            SqlDataAdapter sqlData = new SqlDataAdapter(cmd);
+
+            sqlData.Fill(dtResultado);
+
+            return dtResultado;
+        }
+
+        //TODO LO QUE TIENE QUE VER CON REVALORIZACION
+
+        //Revalorizar el beneficiario
+        public void Revalorizacion_Beneficiario(int idBeneficiario, float monto)
+        {
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[2];
+            //1
+            param[0] = new SqlParameter("@id", SqlDbType.Int);
+            param[0].Value = idBeneficiario;
+
+            param[1] = new SqlParameter("@monto", SqlDbType.Float);
+            param[1].Value = monto;
+
+            try
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "Contrato_Revalorizacion_Beneficiario";
+                cmd.Connection = conexion.connect;
+                cmd.Parameters.AddRange(param);
+                cmd.ExecuteNonQuery();
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        //Desactivar el beneficiario
+
+        public void Revalorizacion_Desactivar(int idBeneficiario)
+        {
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[1];
+            //1
+            param[0] = new SqlParameter("@id", SqlDbType.Int);
+            param[0].Value = idBeneficiario;
+
+          
+
+            try
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "Contrato_Revalorizacion_Desactivar";
+                cmd.Connection = conexion.connect;
+                cmd.Parameters.AddRange(param);
+                cmd.ExecuteNonQuery();
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        //Revalorizacion final del contrato
+
+        public void Revalorizacion_Contrato(int idBeneficiario)
+        {
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[1];
+            //1
+            param[0] = new SqlParameter("@idContrato", SqlDbType.Int);
+            param[0].Value = idBeneficiario;
+
+
+
+            try
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "Contrato_Revalorizacion";
+                cmd.Connection = conexion.connect;
+                cmd.Parameters.AddRange(param);
+                cmd.ExecuteNonQuery();
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+
+        //TODO LO QUE TIENE QUE VER CON TRASLADO DE SALDO
+
+        public string Contrato_Verificar_Traslado(int id)
+        {
+            DataTable dtResultado = new DataTable("Listar");
+
+            //Procedimiento
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[1];
+
+            param[0] = new SqlParameter("@idContrato", SqlDbType.Int);
+            param[0].Value = id;
+
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "Contrato_Traslado_Verificar";
+            cmd.Connection = conexion.connect;
+            cmd.Parameters.AddRange(param);
+
+            SqlDataAdapter sqlData = new SqlDataAdapter(cmd);
+
+            sqlData.Fill(dtResultado);
+
+            return dtResultado.Rows[0][0].ToString();
+        }
+
+        //Procedimiento almacenado que valida que sea un contra nuevo
+        public string Contrato_Verificar_Traslado_Final(int id)
+        {
+            DataTable dtResultado = new DataTable("Listar");
+
+            //Procedimiento
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[1];
+
+            param[0] = new SqlParameter("@idContrato", SqlDbType.Int);
+            param[0].Value = id;
+
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "Contrato_Traslado_Verificar_Final";
+            cmd.Connection = conexion.connect;
+            cmd.Parameters.AddRange(param);
+
+            SqlDataAdapter sqlData = new SqlDataAdapter(cmd);
+
+            sqlData.Fill(dtResultado);
+
+            return dtResultado.Rows[0][0].ToString();
+        }
+
+        //Pasar un contrato de retirado a activo
+        public string Contrato_Retirados_Anular(int id)
+        {
+            DataTable dtResultado = new DataTable("Listar");
+
+            //Procedimiento
+            SqlCommand cmd = new SqlCommand();
+
+            SqlParameter[] param = new SqlParameter[1];
+
+            param[0] = new SqlParameter("@idContrato", SqlDbType.Int);
+            param[0].Value = id;
+
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "Contrato_Anular_Retiro";
+            cmd.Connection = conexion.connect;
+            cmd.Parameters.AddRange(param);
+
+            SqlDataAdapter sqlData = new SqlDataAdapter(cmd);
+
+            sqlData.Fill(dtResultado);
+
+            return dtResultado.Rows[0][0].ToString();
+        }
     }
 }

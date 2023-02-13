@@ -18,7 +18,11 @@ namespace NeoCobranza.Paneles_Contrato
         private Conexion conexion;
         private int idPublico;
         private Contrato contrato;
-        public PnlActualizarBeneficiario(Conexion conexion, int id)
+
+        private string NombreValor;
+        private string NoCedulaValor;
+        private int idContratoP;
+        public PnlActualizarBeneficiario(Conexion conexion, int id,int idContrato)
         {
             InitializeComponent();
 
@@ -26,6 +30,8 @@ namespace NeoCobranza.Paneles_Contrato
             this.conexion = conexion;
             this.idPublico = id;
             this.contrato = new Contrato(conexion);
+            this.idContratoP = idContrato;
+             
 
             //LLenar datos
            txtPrimerNombre.Text = contrato.Contrato_Informacion_Beneficiario(id).Rows[0][6].ToString();
@@ -40,6 +46,8 @@ namespace NeoCobranza.Paneles_Contrato
 
             cmbDepartamento.Text = contrato.Contrato_Informacion_Beneficiario(id).Rows[0][11].ToString();
 
+            NombreValor = txtPrimerNombre.Text +" "+txtSegundoNombre.Text+" "+txtPrimerApellido.Text+" "+txtSegundoApellido.Text;
+            this.NoCedulaValor = lblCedula.Text;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -74,6 +82,8 @@ namespace NeoCobranza.Paneles_Contrato
             {
                 sexo = "Masculino";
             }
+
+            contrato.Contrato_Insertar_Historial("Actualizacion de beneficiario","Nombre anterior: "+NombreValor+" NoCedulaAnterior: "+NoCedulaValor+" Con id: "+idPublico.ToString(),conexion.usuario,idContratoP);
 
             contrato.AgregarBeneficiario(txtPrimerNombre.Text,txtSegundoNombre.Text,
                 txtPrimerApellido.Text,txtSegundoApellido.Text,lblFecha.Text,txtObservacion.Text,sexo,txtDireccion.Text,lblCedula.Text,

@@ -14,6 +14,8 @@ using System.Security.Policy;
 using NeoCobranza.Clases_de_Contrato;
 using NeoCobranza.Clases;
 using System.Threading;
+using NeoCobranza.Paneles_Contrato;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 
 namespace NeoCobranza.Paneles
 {
@@ -178,7 +180,8 @@ namespace NeoCobranza.Paneles
             //    return;
             //}
 
-
+            //PRUEBA DE ESTO
+           
 
             verificar();
 
@@ -200,7 +203,7 @@ namespace NeoCobranza.Paneles
                 float[] nominalesS = new float[ dgvServicios.Rows.Count];
                 for (int i = 0; i < dgvServicios.Rows.Count; i++)
                 {
-                    nominalesS[i] = float.Parse(dgvServicios.Rows[i].Cells[2].Value.ToString());
+                    nominalesS[i] = float.Parse(dgvServicios.Rows[i].Cells[2].Value.ToString())* int.Parse(dgvServicios.Rows[i].Cells[1].Value.ToString());
 
                 }
 
@@ -260,12 +263,49 @@ namespace NeoCobranza.Paneles
                 //Creacion de contrato
                 contrato.Contrato_Agregar(int.Parse(cmbCancelacion.Text), int.Parse(lblCuotas.Text),  float.Parse(final.ToString()), float.Parse(lblCuotaDolar.Text), txtObservaciones.Text, int.Parse(cContrato.MostrarIdFirma(cmbFirma.Text)), int.Parse(cTasa.MostrarIdTasa()), int.Parse(lblIdColector.Text), modalidad);
 
-
+                
 
 
                 for (int i = 0; i < dgvBenficiarios.Rows.Count ; i++)
                 {
-                   
+
+                    //Se obtiene el preio
+                    float monto = float.Parse(contrato.Contrato_Estandar_PrecioxID(int.Parse(cContrato.MostrarIdAtaud(dgvBenficiarios.Rows[i].Cells[11].Value.ToString()))));
+
+                    int year = int.Parse(cmbCancelacion.Text);
+
+                    //se calcula el interes
+                    if (year == 1)
+                    {
+                        monto = monto;
+                    }
+                    else if (year == 2)
+                    {
+                        monto = (float)(monto * 1.1);
+                    }
+                    else if (year == 3)
+                    {
+                        monto = (float)(monto * 1.2);
+                    }
+                    else if (year == 4)
+                    {
+                        monto = (float)(monto * 1.25);
+                    }
+                    else if (year == 5)
+                    {
+                        monto = (float)(monto * 1.3);
+                    }
+                    else if (year == 6)
+                    {
+                        monto = (float)(monto * 1.3);
+                    }
+                    else if (year == 7)
+                    {
+                        monto = (float)(monto * 1.3);
+                    }
+
+
+
                     cContrato.AgregarBeneficiario(
                       dgvBenficiarios.Rows[i].Cells[0].Value.ToString(),
                       dgvBenficiarios.Rows[i].Cells[1].Value.ToString(),
@@ -278,9 +318,9 @@ namespace NeoCobranza.Paneles
                       dgvBenficiarios.Rows[i].Cells[4].Value.ToString(),
                       int.Parse(cContrato.MostrarIdContrato()),
                       dgvBenficiarios.Rows[i].Cells[10].Value.ToString(),
-                      int.Parse(cContrato.MostrarIdAtaud(dgvBenficiarios.Rows[i].Cells[11].Value.ToString()))
-                      
-                      );
+                      int.Parse(cContrato.MostrarIdAtaud(dgvBenficiarios.Rows[i].Cells[11].Value.ToString())),
+                      monto
+                      ) ;
                    
                    
                    
@@ -288,10 +328,48 @@ namespace NeoCobranza.Paneles
                 //Agregar servicios
                 for (int i = 0; i < dgvServicios.Rows.Count; i++)
                 {
+                    //Monto por servicios
+                    //Se obtiene el preio
+                    float monto = float.Parse(dgvServicios.Rows[i].Cells[2].Value.ToString());
+
+                    int year = int.Parse(cmbCancelacion.Text);
+
+                    //se calcula el interes
+                    if (year == 1)
+                    {
+                        monto = monto;
+                    }
+                    else if (year == 2)
+                    {
+                        monto = (float)(monto * 1.1);
+                    }
+                    else if (year == 3)
+                    {
+                        monto = (float)(monto * 1.2);
+                    }
+                    else if (year == 4)
+                    {
+                        monto = (float)(monto * 1.25);
+                    }
+                    else if (year == 5)
+                    {
+                        monto = (float)(monto * 1.3);
+                    }
+                    else if (year == 6)
+                    {
+                        monto = (float)(monto * 1.3);
+                    }
+                    else if (year == 7)
+                    {
+                        monto = (float)(monto * 1.3);
+                    }
 
 
 
-                    contrato.Contrato_Servicios(int.Parse(cContrato.MostrarIdContrato()), int.Parse(dgvServicios.Rows[i].Cells[1].Value.ToString()), int.Parse(dgvServicios.Rows[i].Cells[2].Value.ToString()),"Activo" ,int.Parse(cContrato.MostrarIdAtaud(dgvServicios.Rows[i].Cells[0].Value.ToString()))
+
+
+
+                    contrato.Contrato_Servicios(int.Parse(cContrato.MostrarIdContrato()), int.Parse(dgvServicios.Rows[i].Cells[1].Value.ToString()), monto,"Activo" ,int.Parse(cContrato.MostrarIdAtaud(dgvServicios.Rows[i].Cells[0].Value.ToString()))
                     );
 
 
@@ -302,10 +380,29 @@ namespace NeoCobranza.Paneles
 
                 MessageBox.Show("Contrato creado con exito!");
 
-
-
+                contrato.Contrato_Insertar_Historial("Apertura de contrato",cContrato.MostrarIdContrato(),conexion.usuario, int.Parse(cContrato.MostrarIdContrato()));
+                
                 //Generar el pago de la ultima cuota
                 contrato.Contrato_PagoCuota(0,0,0,1, int.Parse(cContrato.MostrarIdContrato()),"");
+
+                //Abrir el otro panel
+                PnlPagoCuotas pnlGeneral = new PnlPagoCuotas(conexion, cContrato.MostrarIdContrato());
+
+                PnlPrincipal pnlPrincipal = Owner as PnlPrincipal;
+                pnlPrincipal.limpiar();
+                pnlPrincipal.AddOwnedForm(pnlGeneral);
+
+                pnlGeneral.TopLevel = false;
+                pnlGeneral.Dock = DockStyle.Fill;
+                pnlPrincipal.PnlCentral.Controls.Add(pnlGeneral);
+                pnlPrincipal.Tag = pnlGeneral;
+
+
+                pnlGeneral.Show();
+
+
+
+
 
                 this.Close();
 
@@ -432,6 +529,9 @@ namespace NeoCobranza.Paneles
 
         private void btnAgregarServicio_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("Los contratos mixtos aun no estan dispibles","Actualizaciones");
+            return;
+
             for (int i = 0; i < dgvServicios.Rows.Count; i++)
             {
                 if (dgvServicios.Rows[i].Cells[0].Value.ToString() == cmbServicios.Text)

@@ -18,18 +18,27 @@ namespace NeoCobranza.Paneles_Contrato
         private Conexion conexion;
         private Contrato contrato;
         private int idpublico;
-        public PnlActualizarPago(Conexion conexion,int idFactura,float montoDolar,int noCuotas,string observaciones)
+        private int idContrato;
+
+        private string DolaresValor;
+        private string noCuotasValor;
+        
+        public PnlActualizarPago(Conexion conexion,int idFactura,float montoDolar,int noCuotas,string observaciones, int idContrato)
         {
             InitializeComponent();
 
             this.contrato = new Contrato(conexion);
             this.conexion = conexion;
             this.idpublico = idFactura;
+            this.idContrato = idContrato;
 
             txtRecibo.Text = idFactura.ToString();
             txtDolares.Text = montoDolar.ToString();
             txtCuotas.Text = noCuotas.ToString();
             txtObservaciones.Text = observaciones.ToString();
+
+            DolaresValor = montoDolar.ToString();
+            noCuotasValor = noCuotas.ToString();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -95,11 +104,22 @@ namespace NeoCobranza.Paneles_Contrato
             cordoba = float.Parse(txtCordobas.Text) + (float.Parse(cTasa.MostrarTasa()) * float.Parse(txtDolares.Text));
             dolar = float.Parse(txtDolares.Text) + (float.Parse(txtCordobas.Text) / float.Parse(cTasa.MostrarTasa()));
 
+            contrato.Contrato_Insertar_Historial("Actualizacion de cuota","Id cuota: "+idpublico.ToString()+" Monto anterior : $ "+DolaresValor+" NoCuotas anterior: "+ noCuotasValor,conexion.usuario,idContrato);
+
             contrato.Contrato_Actualizar_Cuota_Existente(idpublico,cordoba,dolar,int.Parse(txtCuotas.Text),txtObservaciones.Text);
+
+            //Actualizar los valores
+            //Valores del controato
+            contrato.Contrato_Actualizar_Valores(idpublico,idContrato, 0,dolar,cordoba);
 
             MessageBox.Show("Cuota actualizada con exito","Correcto");
 
             this.Close();
+
+        }
+
+        private void PnlActualizarPago_Load(object sender, EventArgs e)
+        {
 
         }
     }

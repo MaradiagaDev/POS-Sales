@@ -1,6 +1,7 @@
 ﻿using NeoCobranza.Clases;
 using NeoCobranza.Data;
 using NeoCobranza.DataController;
+using NeoCobranza.Paneles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -138,8 +139,13 @@ namespace NeoCobranza.Paneles_Contrato
             cordoba = float.Parse(txtCordobas.Text) + (float.Parse(cTasa.MostrarTasa()) * float.Parse(txtDolares.Text));
             dolar = float.Parse(txtDolares.Text) + (float.Parse(txtCordobas.Text) / float.Parse(cTasa.MostrarTasa()));
 
+
+            //Historial del contrato
+
+            contrato.Contrato_Insertar_Historial("Pago de cuota"," Id: "+txtRecibo.Text+ " Valor Dolares: " + dolar.ToString()+" NoCuotas: "+txtCuotas.Text, conexion.usuario, int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()));
+
             //Valores del controato
-            contrato.Contrato_Insertar_Valores(int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()), dolar, 0);
+            contrato.Contrato_Insertar_Valores(txtRecibo.Text, dolar, 0, int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()),"RECIBO",cTasa.MostrarTasa());
 
             //Verificar si cancela el contrato
             contrato.Contrato_Cancelado(int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()), dolar);
@@ -183,7 +189,7 @@ namespace NeoCobranza.Paneles_Contrato
                 return;
             }
 
-            PnlReciboColector reciboColector = new PnlReciboColector(int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()));
+            PnlReciboColector reciboColector = new PnlReciboColector(int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()),conexion);
             reciboColector.Show();
         }
 
@@ -196,12 +202,64 @@ namespace NeoCobranza.Paneles_Contrato
                 MessageBox.Show("No ha seleccionado el contrato", "Error");
                 return;
             }
-
+            contrato.Contrato_Insertar_Historial("Retiro de contrato","Causa: " + txtCausa.Text, conexion.usuario, int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()));
             //Pasar a retirado los contratos
             contrato.Contrato_Retirar(int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()));
 
             //LLenado del data
             dgvStock.DataSource = contrato.Contrato_ListarContratosPagando(txtFiltro.Texts);
+            Ccolor();
+
+            txtCausa.Text = "";
+        }
+
+        private void dgvStock_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Verificacion de que haya una fila seleccionada
+
+            if (dgvStock.Rows.Count == 0)
+            {
+                MessageBox.Show("No hay fila seleccionada", "Error");
+                return;
+            }
+
+            PnlGeneralContrato pnlGeneral = new PnlGeneralContrato(conexion, dgvStock.SelectedRows[0].Cells[0].Value.ToString());
+
+            PnlPrincipal pnlPrincipal = Owner as PnlPrincipal;
+            pnlGeneral.TopLevel = false;
+            pnlGeneral.Dock = DockStyle.Fill;
+            pnlPrincipal.PnlCentral.Controls.Add(pnlGeneral);
+            pnlPrincipal.Tag = pnlGeneral;
+
+
+            pnlGeneral.Show();
+
+            this.Close();
+        }
+
+        private void txtFiltro__TextChanged(object sender, EventArgs e)
+        {
+
+            //LLenado del data
+            dgvStock.DataSource = contrato.Contrato_ListarContratosPagando(txtFiltro.Texts);
+            Ccolor();
+
+        }
+
+        private void txtFiltroId__TextChanged(object sender, EventArgs e)
+        {
+
+            if (txtFiltroId.Texts == "")
+            {
+                return;
+            }
+            int prueba;
+            if (int.TryParse(txtFiltroId.Texts, out prueba)==false)
+            {
+                return;
+            }
+
+            dgvStock.DataSource = contrato.Contrato_ListarContratosPagando_Id(int.Parse(txtFiltroId.Texts));
             Ccolor();
         }
     }

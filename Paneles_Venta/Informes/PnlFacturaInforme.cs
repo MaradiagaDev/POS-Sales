@@ -71,10 +71,12 @@ namespace NeoCobranza.Paneles_Venta.Informes
 
 
             }
-            
-               
 
-          
+
+
+            this.nuevo_ListarAtaudesPorVenta2TableAdapter.Connection = conexion.connect;
+            this.nuevo_ListarAServiciosPorVenta2TableAdapter.Connection = conexion.connect;
+            this.reporteria_VentasGeneral2TableAdapter.Connection = conexion.connect;
 
                 // TODO: esta línea de código carga datos en la tabla 'data_Facturacion.Nuevo_ListarAtaudesPorVenta2' Puede moverla o quitarla según sea necesario.
                 this.nuevo_ListarAtaudesPorVenta2TableAdapter.Fill(this.data_Facturacion.Nuevo_ListarAtaudesPorVenta2, id);

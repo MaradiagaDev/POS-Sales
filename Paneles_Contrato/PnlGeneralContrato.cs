@@ -1,6 +1,8 @@
 ﻿using NeoCobranza.Clases;
 using NeoCobranza.Data;
 using NeoCobranza.DataController;
+using NeoCobranza.Paneles;
+using NeoCobranza.Paneles_Colectores;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -42,8 +44,47 @@ namespace NeoCobranza.Paneles_Contrato
             dgvEconomica.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11);
             dgvEconomica.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11);
 
+             dgvModificaciones.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11);
+            dgvModificaciones.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11);
+
 
             dgvStock.DataSource = contrato.Contrato_Listar_Todos(txtFiltro.Texts);
+
+           
+        }
+
+        //Constructor para Doble click
+        public PnlGeneralContrato(Conexion conexion, string id)
+        {
+            InitializeComponent();
+
+            this.conexion = conexion;
+            this.contrato = new Contrato(conexion);
+            this.tasa = new CTasaCambio(conexion);
+
+
+            //estilo
+            dgvStock.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12);
+            dgvStock.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12);
+
+            dgvBeneficiarios.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12);
+            dgvBeneficiarios.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11);
+
+            dgvServicios.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12);
+            dgvServicios.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12);
+
+            dgvEconomica.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12);
+            dgvEconomica.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12);
+
+            dgvModificaciones.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12);
+            dgvModificaciones.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12);
+
+            dgvActivos.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12);
+            dgvActivos.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12);
+
+            dgvStock.DataSource = contrato.Contrato_Listar_Todos_PorID(int.Parse(id));
+
+
         }
 
         private void dgvStock_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -72,6 +113,7 @@ namespace NeoCobranza.Paneles_Contrato
 
             dgvBeneficiarios.DataSource = contrato.Contrato_Listar_Beneficiarios(int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()));
 
+            dgvModificaciones.DataSource = contrato.Contrato_Filtrar_Modificaciones(txtFiltroModificaciones.Texts, int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()));
 
             //INformacion de otros servicios
 
@@ -84,14 +126,41 @@ namespace NeoCobranza.Paneles_Contrato
             //LLenar la informacion economica
 
             txtTotalAcumulado.Text = Math.Round(float.Parse(contrato.Contrato_Reporteria_Totales(int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString())).Rows[0][0].ToString()),2).ToString();
-            if (contrato.Contrato_Reporteria_Totales(int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString())).Rows[0][1].ToString() != "")
+
+            //REVALORIZACION ------
+
+            try
             {
-                txtTotalRetirado.Text = Math.Round(float.Parse(contrato.Contrato_Reporteria_Totales(int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString())).Rows[0][1].ToString()),2).ToString();
+
+
+                lblSaldoActual.Text = contrato.Retiros_Valor_Contrato(int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()));
+            }
+            catch (Exception ex)
+            {
+                lblSaldoActual.Text = "0";
+            }
+
+
+
+
+
+
+            //Obtener los beneficiarios activos en la revalorizacion
+
+            dgvActivos.DataSource = contrato.Beneficiario_Mostrar_Activos(int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()));
+
+            float prueba;
+            if(float.TryParse(contrato.Retiros_Retirado_Contrato(int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString())),out prueba) == false)
+            {
+                return;
             }
             else
             {
-                txtTotalRetirado.Text = "0";
+                txtTotalRetirado.Text = Math.Round(float.Parse(contrato.Retiros_Retirado_Contrato(int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()))), 2).ToString();
+
             }
+
+                        
 
 
             //Saldo disponible
@@ -101,6 +170,7 @@ namespace NeoCobranza.Paneles_Contrato
             //Acumulado en cordobas
 
             txtAcumuladoCordoba.Text = Math.Round(float.Parse(txtTotalAcumulado.Text) * float.Parse(tasa.MostrarTasa()),2).ToString();
+
         }
 
         private void txtFiltro__TextChanged(object sender, EventArgs e)
@@ -113,6 +183,61 @@ namespace NeoCobranza.Paneles_Contrato
             if(dgvStock.SelectedRows.Count > 0)
             {
                 LLenarCampos();
+            }
+            else
+            {
+                //limpiar en caso de que no haya un contrato seleccionado
+                txtPropietario.Text = "x";
+                txtFechaA.Text = "x";
+                txtFechaC.Text = "x";
+                txtValorCuota.Text = "x";
+                txtValorNominal.Text = "x";
+                txtEstado.Text = "x";
+                txtModalidad.Text = "x";
+                txtAcum.Text = "x";
+                txtPagadas.Text = "x";
+                txtCuotasTotales.Text = "x";
+                txtSituacion.Text = "x";
+                txtDescripcion.Text = "";
+
+                //Panel de beneficiarios
+
+                dgvBeneficiarios.DataSource = contrato.Contrato_Listar_Beneficiarios(0);
+
+                txtEstadoB.Text = "x";
+                txtFallecimiento.Text = "x";
+                txtNombreServicio.Text = "x";
+                txtMontoNominalB.Text = "x";
+
+                //Panel de otros servicios
+
+                dgvServicios.DataSource = contrato.Contrato_ServiciosInfo(0);
+
+                TxtEstadoServicio.Text = "x";
+                txtNombreServiciosS.Text = "x";
+                txtMontoNominalServicio.Text = "x";
+                txtCantidadServicios.Text = "x";
+
+                //Panel informacion economica
+
+                dgvEconomica.DataSource = contrato.Contrato_ApartadoEconomico(0);
+
+                txtIdContrato.Text = "x";
+                txtAcumuladoCordoba.Text = "x";
+                txtTotalAcumulado.Text = "x";
+                txtSaldoDisponible.Text = "x";
+                txtTotalRetirado.Text = "x";
+
+                //Historial de modificaciones
+
+
+
+                dgvModificaciones.DataSource = contrato.Contrato_Filtrar_Modificaciones(txtFiltroModificaciones.Texts, 0);
+
+                dgvActivos.DataSource = contrato.Beneficiario_Mostrar_Activos(0);
+
+                dgvRetirados.Rows.Clear();
+
             }
         }
 
@@ -148,33 +273,8 @@ namespace NeoCobranza.Paneles_Contrato
 
                 float monto = float.Parse(contrato.Contrato_Listar_Beneficiarios_individual(int.Parse(dgvBeneficiarios.SelectedRows[0].Cells[0].Value.ToString())).Rows[0][2].ToString());
 
-                if(year == 1)
-                {
                     txtMontoNominalB.Text =(monto).ToString();
-                }else if(year ==2)
-                {
-                    txtMontoNominalB.Text = (monto*1.1).ToString();
-                }
-                else if (year == 3)
-                {
-                    txtMontoNominalB.Text = (monto * 1.2).ToString();
-                }
-                else if (year == 4)
-                {
-                    txtMontoNominalB.Text = (monto * 1.25).ToString();
-                }
-                else if (year == 5)
-                {
-                    txtMontoNominalB.Text = (monto * 1.3).ToString();
-                }
-                else if (year == 6)
-                {
-                    txtMontoNominalB.Text = (monto * 1.3).ToString();
-                }
-                else if (year == 7)
-                {
-                    txtMontoNominalB.Text = (monto * 1.3).ToString();
-                }
+               
 
             
             }
@@ -200,7 +300,7 @@ namespace NeoCobranza.Paneles_Contrato
             }
 
             //Panel
-            PnlActualizarBeneficiario actualizarBeneficiario = new PnlActualizarBeneficiario(conexion, int.Parse(dgvBeneficiarios.SelectedRows[0].Cells[0].Value.ToString()));
+            PnlActualizarBeneficiario actualizarBeneficiario = new PnlActualizarBeneficiario(conexion, int.Parse(dgvBeneficiarios.SelectedRows[0].Cells[0].Value.ToString()), int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()));
 
             AddOwnedForm(actualizarBeneficiario);
 
@@ -223,13 +323,13 @@ namespace NeoCobranza.Paneles_Contrato
 
             try
             {
-                if (dgvServicios.SelectedRows[0].Cells[1].Value.ToString() == "Activo")
+                if (dgvServicios.SelectedRows[0].Cells[4].Value.ToString() == dgvServicios.SelectedRows[0].Cells[5].Value.ToString())
                 {
-                    TxtEstadoServicio.Text = "Sin retirar";
+                    TxtEstadoServicio.Text = "Retirado";
                 }
                 else
                 {
-                    TxtEstadoServicio.Text = "Retirado";
+                    TxtEstadoServicio.Text = "Sin retirar";
                 }
 
                 txtNombreServiciosS.Text = dgvServicios.SelectedRows[0].Cells[3].Value.ToString();
@@ -237,34 +337,10 @@ namespace NeoCobranza.Paneles_Contrato
                 txtCantidadServicios.Text = contrato.Contrato_ApartadoServicio(int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()), int.Parse(dgvServicios.SelectedRows[0].Cells[0].Value.ToString())).Rows[0][5].ToString();
                 float monto = float.Parse(dgvServicios.SelectedRows[0].Cells[2].Value.ToString());
                 int year = int.Parse(contrato.Contrato_ApartadoServicio(int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()), int.Parse(dgvServicios.SelectedRows[0].Cells[0].Value.ToString())).Rows[0][4].ToString());
-                if (year == 1)
-                {
+               
+                
                     txtMontoNominalServicio.Text = (monto).ToString();
-                }
-                else if (year == 2)
-                {
-                    txtMontoNominalServicio.Text = (monto * 1.1).ToString();
-                }
-                else if (year == 3)
-                {
-                    txtMontoNominalServicio.Text = (monto * 1.2).ToString();
-                }
-                else if (year == 4)
-                {
-                    txtMontoNominalServicio.Text = (monto * 1.25).ToString();
-                }
-                else if (year == 5)
-                {
-                    txtMontoNominalServicio.Text = (monto * 1.3).ToString();
-                }
-                else if (year == 6)
-                {
-                    txtMontoNominalServicio.Text = (monto * 1.3).ToString();
-                }
-                else if (year == 7)
-                {
-                    txtMontoNominalServicio.Text = (monto * 1.3).ToString();
-                }
+                
             }
             catch (Exception ex)
 
@@ -275,6 +351,7 @@ namespace NeoCobranza.Paneles_Contrato
 
         private void BtnRefrescarGeneral_Click(object sender, EventArgs e)
         {
+            dgvStock.DataSource = contrato.Contrato_Listar_Todos(txtFiltro.Texts);
             LLenarCampos();
         }
 
@@ -290,7 +367,15 @@ namespace NeoCobranza.Paneles_Contrato
 
         private void BtnRecibo_Click(object sender, EventArgs e)
         {
-            PnlInformeEconomico informeEconomico = new PnlInformeEconomico(int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()));
+            if (dgvStock.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("No hay contrato seleccionado", "Error");
+                return;
+            }
+
+            contrato.Contrato_Insertar_Historial("Se genero el estado economico del contrato", "GENERACION DE ESTADO ECONOMICO", conexion.usuario, int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()));
+
+            PnlInformeEconomico informeEconomico = new PnlInformeEconomico(int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()),conexion);
             informeEconomico.Show();
         }
 
@@ -316,9 +401,256 @@ namespace NeoCobranza.Paneles_Contrato
                 int.Parse(dgvEconomica.SelectedRows[0].Cells[0].Value.ToString()),
                 float.Parse(dgvEconomica.SelectedRows[0].Cells[3].Value.ToString()),
                 int.Parse(dgvEconomica.SelectedRows[0].Cells[4].Value.ToString()),
-                dgvEconomica.SelectedRows[0].Cells[7].Value.ToString());
+                dgvEconomica.SelectedRows[0].Cells[7].Value.ToString(),
+                int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()));
 
             pnlActualizarPago.Show();
+
+        }
+
+        private void BtnCliente_Click(object sender, EventArgs e)
+        {
+            Panel_Cliente_Contrato panelCliente = new Panel_Cliente_Contrato(conexion, "ActualizarContrato");
+            AddOwnedForm(panelCliente);
+            panelCliente.Show();
+        }
+
+        private void btnColector_Click(object sender, EventArgs e)
+        {
+            //PnlVendedores
+            PnlColector pnlVendedores = new PnlColector(conexion, "ActualizarContrato");
+            AddOwnedForm(pnlVendedores);
+            pnlVendedores.Show();
+
+          
+
+        }
+
+        private void BtnActualizarPropietario_Click(object sender, EventArgs e)
+        {
+            if(lblNombreCliente.Text == ".")
+            {
+                MessageBox.Show("No ha seleccionado un cliente","Error");
+                return;
+            }
+            if (dgvStock.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("No ha seleccionado un contrato", "Error");
+                return;
+            }
+            contrato.Contrato_Insertar_Historial("Cambio de propietario","Propietario anterior: " + txtPropietario.Text, conexion.usuario, int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()));
+            contrato.Contrato_Actualizar_Propietario(int.Parse(lblIdCliente.Text), int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()));
+
+            lblNombreCliente.Text = ".";
+            lblIdCliente.Text = ".";
+            lblEstadoCliente.Text = "Sin Registrar";
+            lblEstadoCliente.ForeColor = Color.Red;
+
+        }
+
+        private void BtnActualizarColector_Click(object sender, EventArgs e)
+        {
+            if (LblNombreColector.Text == ".")
+            {
+                MessageBox.Show("No ha seleccionado un colector", "Error");
+                return;
+            }
+            if (dgvStock.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("No ha seleccionado un contrato", "Error");
+                return;
+            }
+
+            contrato.Contrato_Insertar_Historial("Actualizar colector","Colector anterior: " + dgvStock.SelectedRows[0].Cells[16].Value.ToString(), conexion.usuario, int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()));
+
+            contrato.Contrato_Actualizar_Colector(int.Parse(txtIdColector.Text), int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()));
+
+            LblNombreColector.Text = ".";
+            txtIdColector.Text = ".";
+        }
+
+        private void BtnActualizarDescripcion_Click(object sender, EventArgs e)
+        {
+            if (txtActualizarDescripcion.Text == "")
+            {
+                MessageBox.Show("La descripcion esta en blanco", "Error");
+                return;
+            }
+            if (dgvStock.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("No ha seleccionado un contrato", "Error");
+                return;
+            }
+
+            contrato.Contrato_Insertar_Historial("Actualizacion de descripcion", "Descripcion anterior: " + txtDescripcion.Text, conexion.usuario, int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()));
+
+            contrato.Contrato_Actualizar_Descripcion(txtActualizarDescripcion.Text, int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()));
+
+        }
+
+        private void txtFiltroModificaciones__TextChanged(object sender, EventArgs e)
+        {
+            dgvModificaciones.DataSource = contrato.Contrato_Filtrar_Modificaciones(txtFiltroModificaciones.Texts, int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()));
+        }
+
+        private void btnImprimir_Click(object sender, EventArgs e)
+        {
+            if (dgvStock.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("No hay contrato seleccionado","Error");
+                return;
+            }
+
+            contrato.Contrato_Insertar_Historial("Se genero el contrato","GENERACION DE CONTRATO", conexion.usuario, int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()));
+        }
+
+        private void especialButton1_Click(object sender, EventArgs e)
+        {
+            LLenarCampos();
+        }
+
+        private void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            dgvModificaciones.DataSource = contrato.Contrato_Filtrar_Modificaciones_Fecha(lblFecha.Text, lblFechaF.Text, int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()));
+
+        }
+
+        private void txtFiltroId__TextChanged(object sender, EventArgs e)
+        {
+            if (txtFiltroId.Texts == "")
+            {
+                return;
+            }
+            int opc;
+            if (int.TryParse(txtFiltroId.Texts, out opc) == false)
+            {
+                return;
+            }
+            dgvStock.DataSource = contrato.Contrato_Listar_Todos_PorID(int.Parse(txtFiltroId.Texts));
+        }
+
+        private void BtnSeleccionarRetirado_Click(object sender, EventArgs e)
+        {
+            //Verificar que el panel de activos tenga algo seleccionado
+
+            if (dgvActivos.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("No hay ningun beneficiario seleccionado","Error");
+                return;
+            }
+
+            //Verificar que el dato no sea agregado con anterioridad
+
+
+            for(int i=0; i<dgvRetirados.SelectedRows.Count; i++)
+            {
+                if (dgvActivos.SelectedRows[0].Cells[0].Value.ToString() == dgvRetirados.SelectedRows[0].Cells[0].Value.ToString())
+                {
+                    MessageBox.Show("El beneficiario ya ha sido agregado", "Error");
+                    return;
+                }
+            }
+            //agregar a la tabla
+
+            dgvRetirados.Rows.Add(dgvActivos.SelectedRows[0].Cells[0].Value.ToString(), dgvActivos.SelectedRows[0].Cells[1].Value.ToString());
+        }
+
+        private void dgvRetirados_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            if(lblSaldoActual.Text == "0")
+            {
+                return;
+            }
+            else
+            {
+        }
+
+                lblDividido.Text = (float.Parse(lblSaldoActual.Text) / dgvRetirados.Rows.Count).ToString();
+            }
+        private void BtnEliminarRev_Click(object sender, EventArgs e)
+        {
+            if(dgvRetirados.SelectedRows.Count == 0)
+            {
+                return;
+            }
+            else
+            {
+                dgvRetirados.Rows.Remove(dgvRetirados.CurrentRow);
+
+                if(dgvRetirados.Rows.Count == 0)
+                {
+                    lblDividido.Text = "0";
+                }
+                else
+                {
+                    lblDividido.Text = (float.Parse(lblSaldoActual.Text) / dgvRetirados.Rows.Count).ToString();
+                }
+               
+
+
+            }
+        }
+
+        private void especialButton4_Click(object sender, EventArgs e)
+        {
+            if(lblDividido.Text =="0" || lblDividido.Text == "x")
+            {
+                MessageBox.Show("El monto no es valido","Error");
+                return;
+            }
+            
+            else
+            {
+                //Variable de confirmacion 
+
+                bool estado= false;
+
+                //Iteracion de los beneficiarios actuales
+
+                for(int i = 0; i< dgvActivos.Rows.Count; i++)
+                {
+                    estado = false;
+
+                    //Iteracion de los beneficiarios a retirar
+
+                    for (int x = 0; x < dgvRetirados.Rows.Count;x++)
+                    {
+                        //Verificar que exista un beneficiario activo en los revalorizados
+                       
+
+                        if (dgvActivos.Rows[i].Cells[0].Value.ToString() == dgvRetirados.Rows[x].Cells[0].Value.ToString()) 
+                        {
+
+                            estado=true;
+
+
+                        }
+
+                    }
+
+                    //Confirmar si estaba en la lista
+
+                    if(estado == true)
+                    {
+                        
+
+                        contrato.Revalorizacion_Beneficiario(int.Parse(dgvActivos.Rows[i].Cells[0].Value.ToString()),float.Parse(lblDividido.Text));
+
+                    }
+                    else
+                    {
+
+                        contrato.Revalorizacion_Desactivar(int.Parse(dgvActivos.Rows[i].Cells[0].Value.ToString()));
+
+                    }
+                }
+
+                //Revalorizacion final
+
+                contrato.Revalorizacion_Contrato(int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()));
+
+                MessageBox.Show("Contrato revalorizado","Correcto");
+            }
 
         }
     }

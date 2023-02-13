@@ -1,6 +1,7 @@
 ﻿using NeoCobranza.Clases;
 using NeoCobranza.Data;
 using NeoCobranza.Paneles;
+using NeoCobranza.Paneles_Contrato;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -66,6 +67,31 @@ namespace NeoCobranza.Paneles_Colectores
                 PnlPagoCuotas pnlPagoCuotas = Owner as PnlPagoCuotas;
 
                 pnlPagoCuotas.txtNombre.Text = DgvColector.SelectedRows[0].Cells[1].Value.ToString();
+                pnlPagoCuotas.txtIdColector.Text = DgvColector.SelectedRows[0].Cells[0].Value.ToString();
+
+                this.Close();
+
+            }//ActualizarContrato
+
+            if (tipo == "ActualizarContrato")
+            {
+
+
+                if (DgvColector.SelectedRows[0].Cells[0].Value == null)
+                {
+                    MessageBox.Show("No has seleccionado ningun registro", "ERROR");
+                    return;
+                }
+                if (DgvColector.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("No has seleccionado ningun registro", "ERROR");
+                    return;
+                }
+                //Si todo salio bien
+
+                PnlGeneralContrato pnlPagoCuotas = Owner as PnlGeneralContrato;
+
+                pnlPagoCuotas.LblNombreColector.Text = DgvColector.SelectedRows[0].Cells[1].Value.ToString();
                 pnlPagoCuotas.txtIdColector.Text = DgvColector.SelectedRows[0].Cells[0].Value.ToString();
 
                 this.Close();

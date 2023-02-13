@@ -156,7 +156,7 @@ namespace NeoCobranza.Paneles_Caja
             
             //Realizar el recibo
 
-            PnlRecibo recibo = new PnlRecibo(int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()));
+            PnlRecibo recibo = new PnlRecibo(int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()),conexion);
             recibo.Show();
 
 
@@ -170,7 +170,7 @@ namespace NeoCobranza.Paneles_Caja
                 return;
             }
 
-            PnlGenerarInforme pnlInforme = new PnlGenerarInforme(lblFechaInicio.Text,lblFechaFinal.Text);
+            PnlGenerarInforme pnlInforme = new PnlGenerarInforme(lblFechaInicio.Text,lblFechaFinal.Text,conexion);
 
             pnlInforme.Show();
         }

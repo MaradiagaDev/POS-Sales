@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using NeoCobranza.Data;
 using NeoCobranza.DataController;
+using NeoCobranza.Paneles_Contrato;
 using NeoCobranza.Paneles_Venta;
 
 namespace NeoCobranza.Paneles
@@ -142,6 +143,32 @@ namespace NeoCobranza.Paneles
                 pnlProformaContrato.lblEstadoCliente.ForeColor = Color.Green;
                 pnlProformaContrato.lblIdCliente.Text = DgvCliente.SelectedRows[0].Cells["IdCliente"].Value.ToString();
                 this.Hide();
+
+
+            }if(panel == "ActualizarContrato")
+            {
+                if (DgvCliente.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("No has seleccionado ningun registro", "ERROR");
+                    return;
+                }
+                if (DgvCliente.SelectedRows[0].Cells["PNombre"].Value == null)
+                {
+                    MessageBox.Show("No has seleccionado ningun registro", "ERROR");
+                    return;
+                }
+
+                PnlGeneralContrato pnlProformaContrato = Owner as PnlGeneralContrato;
+                pnlProformaContrato.lblNombreCliente.Text = DgvCliente.SelectedRows[0].Cells["PNombre"].Value.ToString()
+                    + " " + DgvCliente.SelectedRows[0].Cells["SNombre"].Value.ToString() + " " +
+                    DgvCliente.SelectedRows[0].Cells["PApellido"].Value.ToString() + " " +
+                    DgvCliente.SelectedRows[0].Cells["SApellido"].Value.ToString();
+
+                pnlProformaContrato.lblEstadoCliente.Text = "Cliente Seleccionado";
+                pnlProformaContrato.lblEstadoCliente.ForeColor = Color.Green;
+                pnlProformaContrato.lblIdCliente.Text = DgvCliente.SelectedRows[0].Cells["IdCliente"].Value.ToString();
+                this.Hide();
+
 
 
             }
