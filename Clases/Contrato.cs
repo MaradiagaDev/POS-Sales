@@ -1373,7 +1373,7 @@ namespace NeoCobranza.Clases
             SqlParameter[] param = new SqlParameter[1];
 
             param[0] = new SqlParameter("@monto", SqlDbType.NVarChar);
-            param[0].Value = monto;
+            param[0].Value = monto.ToString();
 
 
             cmd.CommandType = CommandType.StoredProcedure;

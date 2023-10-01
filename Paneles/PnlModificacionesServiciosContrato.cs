@@ -219,8 +219,6 @@ namespace NeoCobranza.Paneles
         private void BtnSeleccionarImagen_Click(object sender, EventArgs e)
         {
 
-            
-
             Me.SizeMode = PictureBoxSizeMode.StretchImage;
 
             openFileDialog1.Filter = "Imagenes JPG|*.jpg|Imagenes bitmasps|*.bmp|Imagenes JPEG|*.jpeg";
@@ -229,12 +227,6 @@ namespace NeoCobranza.Paneles
                 Me.Image = Image.FromFile(openFileDialog1.FileName);
                 
             }
-
-            
-
-
-
-
         }
 
         private void BtnGuardarImagen_Click(object sender, EventArgs e)

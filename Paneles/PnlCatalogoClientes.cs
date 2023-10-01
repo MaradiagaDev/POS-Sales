@@ -52,7 +52,7 @@ namespace NeoCobranza.Paneles
             auditorias.Insertar(conexion.usuario, " Boton Creacion", dgvCatalogoClientes.Rows[0].Cells[0].Value.ToString(), "Clientes");
 
 
-            panelCliente.Show();
+            panelCliente.ShowDialog();
 
             //Actualizar datos
 

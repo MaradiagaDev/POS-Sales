@@ -1,6 +1,7 @@
 ﻿using NeoCobranza.Clases;
 using NeoCobranza.Data;
 using NeoCobranza.DataController;
+using NeoCobranza.Paneles_Contrato;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -90,13 +91,14 @@ namespace NeoCobranza.Paneles
                             proformaVenta.ProcediemientoReporte(idProforma).Rows[i][5].ToString(),
                             SubtotalDolar(double.Parse(proformaVenta.ProcediemientoReporte(idProforma).Rows[i][2].ToString()), int.Parse(proformaVenta.ProcediemientoReporte(idProforma).Rows[i][5].ToString())),
                             SubtotalDolar(double.Parse(proformaVenta.ProcediemientoReporte(idProforma).Rows[i][2].ToString()), int.Parse(proformaVenta.ProcediemientoReporte(idProforma).Rows[i][5].ToString())) * double.Parse(tasaCambio.MostrarTasa()),
-                            IvaDolar(double.Parse(proformaVenta.ProcediemientoReporte(idProforma).Rows[i][2].ToString()), int.Parse(proformaVenta.ProcediemientoReporte(idProforma).Rows[i][5].ToString()), double.Parse(proformaVenta.ProcediemientoReporte(idProforma).Rows[i][4].ToString()) / 100),
+                            IvaDolar(double.Parse(proformaVenta.ProcediemientoReporte(idProforma).Rows[i][2].ToString()), int.Parse(proformaVenta.ProcediemientoReporte(idProforma).Rows[i][5].ToString()), double.Parse(proformaVenta.ProcediemientoReporte(idProforma).Rows[i][3].ToString()) / 100),
                             double.Parse(tasaCambio.MostrarTasa()) * IvaDolar(double.Parse(proformaVenta.ProcediemientoReporte(idProforma).Rows[i][2].ToString()), int.Parse(proformaVenta.ProcediemientoReporte(idProforma).Rows[i][5].ToString()),
-                            double.Parse(proformaVenta.ProcediemientoReporte(idProforma).Rows[i][4].ToString()) / 100),
-                            proformaVenta.ProcediemientoReporte(idProforma).Rows[i][3].ToString(),
+                            double.Parse(proformaVenta.ProcediemientoReporte(idProforma).Rows[i][3].ToString()) / 100),
+                            proformaVenta.ProcediemientoReporte(idProforma).Rows[i][4].ToString(),
                             DescuentoCalculos(double.Parse(proformaVenta.ProcediemientoReporte(idProforma).Rows[i][2].ToString()), int.Parse(proformaVenta.ProcediemientoReporte(idProforma).Rows[i][5].ToString()), (double.Parse(proformaVenta.ProcediemientoReporte(idProforma).Rows[i][3].ToString()) / 100)));
                     txtCantidad.Text = "1";
                     lblDescuentoN.Text = "0";
+
                 }
 
                 //Realizacion de los calculos
@@ -174,12 +176,6 @@ namespace NeoCobranza.Paneles
             if (rbtnAtaud.Checked)
                 DgvBusquedas.DataSource = proformaVenta.Listar_Ataudes(txtfiltro.Texts);
             txtCantidad.Text = "1";
-
-            
-
-            
-
-
         }
 
         private void BtnSeleccionar_Click(object sender, EventArgs e)
@@ -261,19 +257,7 @@ namespace NeoCobranza.Paneles
                 Realizarcalculos();
           
             }
-
-
-
-
-
-
-
-
-
         }
-
-
-
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -342,7 +326,15 @@ namespace NeoCobranza.Paneles
 
             auditorias.Insertar(conexion.usuario,"Creacion", proformaVenta.Id_Ultima().ToString(),"Proforma Venta");
 
+            PnlBuscarProforma pnlGeneral = new PnlBuscarProforma(conexion);
 
+            PnlPrincipal pnlPrincipal = Owner as PnlPrincipal;
+            pnlGeneral.TopLevel = false;
+            pnlGeneral.Dock = DockStyle.Fill;
+            pnlPrincipal.PnlCentral.Controls.Add(pnlGeneral);
+            pnlPrincipal.PnlCentral.Tag = pnlGeneral;
+            pnlGeneral.btnActualizarProforma.Enabled = false;
+            pnlGeneral.Show();
             this.Close();
         }
 
@@ -429,9 +421,9 @@ namespace NeoCobranza.Paneles
         private double IvaDolar(double precio, int cantidad,double descuento)
         {
             double total = 0;
-
-            total = ((((precio/1.15))*(1-descuento))*(0.15))*cantidad;
-
+            
+            total = ((((precio/1.15)*(1-descuento))*cantidad)*(0.15));
+            
             return Math.Round(total,2);
         }
         private double SubtotalDolar(double precio, int cantidad)
@@ -445,7 +437,7 @@ namespace NeoCobranza.Paneles
         private double DescuentoCalculos(double precio, int cantidad, double descuento)
         {
 
-            double total = ((precio/1.15)*(descuento));
+            double total = (((precio*cantidad)/1.15)*(descuento));
 
             return Math.Round(total,2);
 
@@ -488,8 +480,20 @@ namespace NeoCobranza.Paneles
             MessageBox.Show("Proformas Actulizada con exito", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             auditorias.Insertar(conexion.usuario, "Actualizacion: Proforma de Ventas", idPublico.ToString(),"Proforma Venta");
 
-            this.Close();
+            PnlBuscarProforma pnlGeneral = new PnlBuscarProforma(conexion);
 
+            PnlPrincipal pnlPrincipal = Owner as PnlPrincipal;
+            pnlGeneral.TopLevel = false;
+            pnlGeneral.Dock = DockStyle.Fill;
+            //pnlPrincipal.PnlCentral.Controls.Add(pnlGeneral);
+            //pnlPrincipal.PnlCentral.Tag = pnlGeneral;
+
+
+            pnlGeneral.Show();
+
+
+
+            this.Close();
         }
 
         private void especialButton2_Click(object sender, EventArgs e)

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NeoCobranza.ModelsCobranza;
 
 namespace NeoCobranza.DataController
 {
@@ -21,82 +22,37 @@ namespace NeoCobranza.DataController
 
         public string MostrarTasa()
         {
-            DataTable dtResultado = new DataTable("Tasa");
-
-
-            SqlCommand sqlCommand = new SqlCommand();
-            sqlCommand.Connection = conexion.connect;
-
-            sqlCommand.CommandText = "Tasa";
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-
-            SqlDataAdapter sqlData = new SqlDataAdapter(sqlCommand);
-
-            sqlData.Fill(dtResultado);
-
-            try
+            using (NeoCobranzaContext db = new NeoCobranzaContext())
             {
-                return dtResultado.Rows[0]["Tasa"].ToString();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("No hay una tasa de cambio insertada","Error");
+                    TipoCambio tipo = db.TipoCambio.Where(t => t.FechaCambio.Equals(DateTime.Today)).FirstOrDefault();
 
-                return "";
+                    if (tipo == null)
+                    {
+                        MessageBox.Show("No se han insertado las tasas de cambio de este mes","Atención",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                        return "";
+                    }
+                    else
+                    {
+                        return tipo.Tasa.ToString().Substring(0,6);
+                    }
             }
-            
-           
         }
         public string MostrarIdTasa()
         {
-            DataTable dtResultado = new DataTable("Tasa");
-
-
-            SqlCommand sqlCommand = new SqlCommand();
-            sqlCommand.Connection = conexion.connect;
-
-            sqlCommand.CommandText = "Tasa";
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-
-            SqlDataAdapter sqlData = new SqlDataAdapter(sqlCommand);
-
-            sqlData.Fill(dtResultado);
-
-
-            return dtResultado.Rows[0]["IdTasaCambio"].ToString();
-        }
-
-
-        public void AgregarTasa(double tasa)
-        {
-            SqlCommand cmd = new SqlCommand();
-
-            SqlParameter[] param = new SqlParameter[1];
-            //1
-            param[0] = new SqlParameter("@Tasa", SqlDbType.Float);
-            param[0].Value = tasa;
-         
-           
-            try
+            using (NeoCobranzaContext db = new NeoCobranzaContext())
             {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "InsertarTasa";
-                cmd.Connection = conexion.connect;
-                cmd.Parameters.AddRange(param);
-                cmd.ExecuteNonQuery();
+                TipoCambio tipo = db.TipoCambio.Where(t => t.FechaCambio.Equals(DateTime.Today)).FirstOrDefault();
 
-              
-
-
-                MessageBox.Show("Tasa del sistema actualizada", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
+                if (tipo == null)
+                {
+                    MessageBox.Show("No se han insertado las tasas de cambio de este mes", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return "";
+                }
+                else
+                {
+                    return tipo.IdTasaCambio.ToString();
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("error", ex.ToString());
-            }
-
         }
-
     }
 }

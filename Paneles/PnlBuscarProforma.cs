@@ -70,9 +70,6 @@ namespace NeoCobranza.Paneles
             string nombreCliente= DgvBusquedas.SelectedRows[0].Cells["Nombres"].Value.ToString();
 
             PnlProforma pnlProforma = new PnlProforma(conexion, idProforma);
-
-
-           
             PnlPrincipal pnlPrincipal = Owner as PnlPrincipal;
             pnlProforma.TopLevel = false;
             pnlPrincipal.PnlCentral.Controls.Add(pnlProforma);
@@ -80,6 +77,8 @@ namespace NeoCobranza.Paneles
 
             pnlProforma.llbTitulo.Text = "Actualizacion de proforma";
             this.Hide();
+
+
 
         }
 

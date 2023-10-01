@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PnlVentas));
             this.panel3 = new System.Windows.Forms.Panel();
+            this.especialButton2 = new NeoCobranza.Especiales.EspecialButton();
             this.llbTitulo = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbCategoria = new System.Windows.Forms.ComboBox();
@@ -113,7 +114,6 @@
             this.label38 = new System.Windows.Forms.Label();
             this.btnEliminarFilaAtaud = new NeoCobranza.Especiales.EspecialButton();
             this.especialButton3 = new NeoCobranza.Especiales.EspecialButton();
-            this.especialButton2 = new NeoCobranza.Especiales.EspecialButton();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAtaudes)).BeginInit();
@@ -122,6 +122,8 @@
             // 
             // panel3
             // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.BackColor = System.Drawing.SystemColors.MenuText;
             this.panel3.Controls.Add(this.especialButton2);
             this.panel3.Controls.Add(this.llbTitulo);
@@ -129,6 +131,27 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1158, 37);
             this.panel3.TabIndex = 78;
+            // 
+            // especialButton2
+            // 
+            this.especialButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.especialButton2.BackColor = System.Drawing.SystemColors.Desktop;
+            this.especialButton2.BackGroundColor = System.Drawing.SystemColors.Desktop;
+            this.especialButton2.BorderColor = System.Drawing.Color.LavenderBlush;
+            this.especialButton2.BorderRadius = 40;
+            this.especialButton2.BorderSize = 2;
+            this.especialButton2.FlatAppearance.BorderSize = 0;
+            this.especialButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.especialButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.especialButton2.ForeColor = System.Drawing.Color.White;
+            this.especialButton2.Location = new System.Drawing.Point(1040, 0);
+            this.especialButton2.Name = "especialButton2";
+            this.especialButton2.Size = new System.Drawing.Size(106, 34);
+            this.especialButton2.TabIndex = 194;
+            this.especialButton2.Text = "Actualizar";
+            this.especialButton2.TextGroundColor = System.Drawing.Color.White;
+            this.especialButton2.UseVisualStyleBackColor = false;
+            this.especialButton2.Click += new System.EventHandler(this.especialButton2_Click);
             // 
             // llbTitulo
             // 
@@ -169,6 +192,8 @@
             // dgvStock
             // 
             this.dgvStock.AllowUserToAddRows = false;
+            this.dgvStock.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvStock.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvStock.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvStock.Location = new System.Drawing.Point(12, 164);
@@ -235,6 +260,7 @@
             // 
             // lblEstadoCliente
             // 
+            this.lblEstadoCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblEstadoCliente.AutoSize = true;
             this.lblEstadoCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEstadoCliente.ForeColor = System.Drawing.Color.Red;
@@ -246,6 +272,7 @@
             // 
             // label24
             // 
+            this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label24.ForeColor = System.Drawing.SystemColors.MenuHighlight;
@@ -257,6 +284,7 @@
             // 
             // lblIdCliente
             // 
+            this.lblIdCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblIdCliente.AutoSize = true;
             this.lblIdCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIdCliente.ForeColor = System.Drawing.Color.DarkCyan;
@@ -268,6 +296,7 @@
             // 
             // lblNombreCliente
             // 
+            this.lblNombreCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblNombreCliente.AutoSize = true;
             this.lblNombreCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNombreCliente.Location = new System.Drawing.Point(840, 90);
@@ -279,6 +308,7 @@
             // 
             // label21
             // 
+            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.ForeColor = System.Drawing.SystemColors.MenuHighlight;
@@ -290,6 +320,7 @@
             // 
             // label22
             // 
+            this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.ForeColor = System.Drawing.SystemColors.MenuHighlight;
@@ -301,6 +332,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.WindowFrame;
@@ -312,6 +344,7 @@
             // 
             // txtMonto
             // 
+            this.txtMonto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMonto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtMonto.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMonto.Location = new System.Drawing.Point(967, 295);
@@ -333,6 +366,7 @@
             // 
             // label6
             // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.WindowFrame;
@@ -345,6 +379,7 @@
             // 
             // label9
             // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.SystemColors.WindowFrame;
@@ -357,6 +392,7 @@
             // 
             // txtFactura
             // 
+            this.txtFactura.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFactura.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtFactura.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFactura.Location = new System.Drawing.Point(967, 239);
@@ -423,6 +459,8 @@
             // 
             // label13
             // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.SystemColors.WindowFrame;
@@ -489,7 +527,7 @@
             // 
             // BtnReservar
             // 
-            this.BtnReservar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.BtnReservar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.BtnReservar.BackColor = System.Drawing.Color.RoyalBlue;
             this.BtnReservar.BackGroundColor = System.Drawing.Color.RoyalBlue;
             this.BtnReservar.BorderColor = System.Drawing.Color.Lime;
@@ -512,6 +550,7 @@
             // 
             // BtnCliente
             // 
+            this.BtnCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnCliente.BackColor = System.Drawing.Color.DodgerBlue;
             this.BtnCliente.BackGroundColor = System.Drawing.Color.DodgerBlue;
             this.BtnCliente.BorderColor = System.Drawing.Color.Lime;
@@ -552,7 +591,7 @@
             // 
             // especialButton1
             // 
-            this.especialButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.especialButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.especialButton1.BackColor = System.Drawing.Color.RoyalBlue;
             this.especialButton1.BackGroundColor = System.Drawing.Color.RoyalBlue;
             this.especialButton1.BorderColor = System.Drawing.Color.Lime;
@@ -575,7 +614,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancelar.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.btnCancelar.BackGroundColor = System.Drawing.SystemColors.ControlDarkDark;
             this.btnCancelar.BorderColor = System.Drawing.Color.LavenderBlush;
@@ -596,7 +635,7 @@
             // 
             // BtnRealizarVenta
             // 
-            this.BtnRealizarVenta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.BtnRealizarVenta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.BtnRealizarVenta.BackColor = System.Drawing.Color.ForestGreen;
             this.BtnRealizarVenta.BackGroundColor = System.Drawing.Color.ForestGreen;
             this.BtnRealizarVenta.BorderColor = System.Drawing.Color.Lime;
@@ -663,6 +702,8 @@
             // 
             // lblTasa
             // 
+            this.lblTasa.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTasa.AutoSize = true;
             this.lblTasa.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTasa.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
@@ -674,6 +715,8 @@
             // 
             // labe
             // 
+            this.labe.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labe.AutoSize = true;
             this.labe.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labe.ForeColor = System.Drawing.SystemColors.WindowFrame;
@@ -685,6 +728,7 @@
             // 
             // label15
             // 
+            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.SystemColors.GrayText;
@@ -696,6 +740,7 @@
             // 
             // cmbServicios
             // 
+            this.cmbServicios.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cmbServicios.DisplayMember = "NombreEstandar";
             this.cmbServicios.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbServicios.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -709,6 +754,7 @@
             // 
             // txtCantidad
             // 
+            this.txtCantidad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtCantidad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCantidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCantidad.Location = new System.Drawing.Point(15, 491);
@@ -720,6 +766,7 @@
             // 
             // label17
             // 
+            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.SystemColors.WindowFrame;
@@ -731,6 +778,7 @@
             // 
             // label8
             // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.WindowFrame;
@@ -742,6 +790,7 @@
             // 
             // txtDescServicio
             // 
+            this.txtDescServicio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtDescServicio.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDescServicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDescServicio.Location = new System.Drawing.Point(130, 491);
@@ -753,7 +802,7 @@
             // 
             // btnSeleccionarAtaud
             // 
-            this.btnSeleccionarAtaud.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.btnSeleccionarAtaud.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnSeleccionarAtaud.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnSeleccionarAtaud.BackGroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnSeleccionarAtaud.BorderColor = System.Drawing.Color.LavenderBlush;
@@ -774,7 +823,7 @@
             // 
             // btnSeleccionarServicio
             // 
-            this.btnSeleccionarServicio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.btnSeleccionarServicio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSeleccionarServicio.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnSeleccionarServicio.BackGroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnSeleccionarServicio.BorderColor = System.Drawing.Color.LavenderBlush;
@@ -796,6 +845,7 @@
             // dgvAtaudes
             // 
             this.dgvAtaudes.AllowUserToAddRows = false;
+            this.dgvAtaudes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvAtaudes.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvAtaudes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAtaudes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -843,6 +893,7 @@
             // 
             // label19
             // 
+            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label19.ForeColor = System.Drawing.SystemColors.WindowFrame;
@@ -854,6 +905,7 @@
             // 
             // label20
             // 
+            this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.ForeColor = System.Drawing.SystemColors.WindowFrame;
@@ -866,6 +918,8 @@
             // dgvServicios
             // 
             this.dgvServicios.AllowUserToAddRows = false;
+            this.dgvServicios.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvServicios.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvServicios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvServicios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -913,6 +967,7 @@
             // 
             // label23
             // 
+            this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.ForeColor = System.Drawing.SystemColors.WindowFrame;
@@ -924,6 +979,8 @@
             // 
             // lblTotalTotalCordoba
             // 
+            this.lblTotalTotalCordoba.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalTotalCordoba.AutoSize = true;
             this.lblTotalTotalCordoba.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalTotalCordoba.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
@@ -935,6 +992,8 @@
             // 
             // label28
             // 
+            this.label28.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label28.ForeColor = System.Drawing.SystemColors.WindowFrame;
@@ -946,6 +1005,8 @@
             // 
             // lblTotalTotalDolar
             // 
+            this.lblTotalTotalDolar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalTotalDolar.AutoSize = true;
             this.lblTotalTotalDolar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalTotalDolar.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
@@ -957,6 +1018,8 @@
             // 
             // lblIvaTotal
             // 
+            this.lblIvaTotal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblIvaTotal.AutoSize = true;
             this.lblIvaTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIvaTotal.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
@@ -968,6 +1031,8 @@
             // 
             // lblDescuentoTotal
             // 
+            this.lblDescuentoTotal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDescuentoTotal.AutoSize = true;
             this.lblDescuentoTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDescuentoTotal.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
@@ -979,6 +1044,8 @@
             // 
             // lblNominalTotal
             // 
+            this.lblNominalTotal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblNominalTotal.AutoSize = true;
             this.lblNominalTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNominalTotal.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
@@ -990,6 +1057,8 @@
             // 
             // label33
             // 
+            this.label33.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label33.AutoSize = true;
             this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label33.ForeColor = System.Drawing.SystemColors.WindowFrame;
@@ -1001,6 +1070,8 @@
             // 
             // label34
             // 
+            this.label34.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label34.AutoSize = true;
             this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label34.ForeColor = System.Drawing.SystemColors.WindowFrame;
@@ -1012,6 +1083,8 @@
             // 
             // label35
             // 
+            this.label35.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label35.AutoSize = true;
             this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label35.ForeColor = System.Drawing.SystemColors.WindowFrame;
@@ -1023,6 +1096,8 @@
             // 
             // label36
             // 
+            this.label36.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label36.AutoSize = true;
             this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label36.ForeColor = System.Drawing.SystemColors.WindowFrame;
@@ -1034,6 +1109,8 @@
             // 
             // label25
             // 
+            this.label25.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label25.ForeColor = System.Drawing.SystemColors.WindowFrame;
@@ -1045,6 +1122,8 @@
             // 
             // label26
             // 
+            this.label26.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label26.AutoSize = true;
             this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label26.ForeColor = System.Drawing.SystemColors.WindowFrame;
@@ -1056,6 +1135,8 @@
             // 
             // label37
             // 
+            this.label37.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label37.AutoSize = true;
             this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label37.ForeColor = System.Drawing.SystemColors.WindowFrame;
@@ -1067,6 +1148,7 @@
             // 
             // txtDescripcion
             // 
+            this.txtDescripcion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDescripcion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDescripcion.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDescripcion.Location = new System.Drawing.Point(748, 229);
@@ -1077,6 +1159,7 @@
             // 
             // label38
             // 
+            this.label38.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label38.AutoSize = true;
             this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label38.ForeColor = System.Drawing.SystemColors.WindowFrame;
@@ -1088,7 +1171,7 @@
             // 
             // btnEliminarFilaAtaud
             // 
-            this.btnEliminarFilaAtaud.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.btnEliminarFilaAtaud.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEliminarFilaAtaud.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.btnEliminarFilaAtaud.BackGroundColor = System.Drawing.SystemColors.ControlDarkDark;
             this.btnEliminarFilaAtaud.BorderColor = System.Drawing.Color.LavenderBlush;
@@ -1109,7 +1192,7 @@
             // 
             // especialButton3
             // 
-            this.especialButton3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.especialButton3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.especialButton3.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.especialButton3.BackGroundColor = System.Drawing.SystemColors.ControlDarkDark;
             this.especialButton3.BorderColor = System.Drawing.Color.LavenderBlush;
@@ -1127,27 +1210,6 @@
             this.especialButton3.TextGroundColor = System.Drawing.Color.White;
             this.especialButton3.UseVisualStyleBackColor = false;
             this.especialButton3.Click += new System.EventHandler(this.especialButton3_Click);
-            // 
-            // especialButton2
-            // 
-            this.especialButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.especialButton2.BackColor = System.Drawing.SystemColors.Desktop;
-            this.especialButton2.BackGroundColor = System.Drawing.SystemColors.Desktop;
-            this.especialButton2.BorderColor = System.Drawing.Color.LavenderBlush;
-            this.especialButton2.BorderRadius = 40;
-            this.especialButton2.BorderSize = 2;
-            this.especialButton2.FlatAppearance.BorderSize = 0;
-            this.especialButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.especialButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.especialButton2.ForeColor = System.Drawing.Color.White;
-            this.especialButton2.Location = new System.Drawing.Point(1040, 0);
-            this.especialButton2.Name = "especialButton2";
-            this.especialButton2.Size = new System.Drawing.Size(106, 34);
-            this.especialButton2.TabIndex = 194;
-            this.especialButton2.Text = "Actualizar";
-            this.especialButton2.TextGroundColor = System.Drawing.Color.White;
-            this.especialButton2.UseVisualStyleBackColor = false;
-            this.especialButton2.Click += new System.EventHandler(this.especialButton2_Click);
             // 
             // PnlVentas
             // 

@@ -758,7 +758,7 @@
             this.auditoriasToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.auditoriasToolStripMenuItem.Name = "auditoriasToolStripMenuItem";
             this.auditoriasToolStripMenuItem.Size = new System.Drawing.Size(235, 24);
-            this.auditoriasToolStripMenuItem.Text = "Auditorias";
+            this.auditoriasToolStripMenuItem.Text = "Auditoria del Sistema";
             this.auditoriasToolStripMenuItem.Click += new System.EventHandler(this.auditoriasToolStripMenuItem_Click);
             // 
             // revisionDeSeguridadToolStripMenuItem
@@ -776,8 +776,8 @@
             this.crearUsuarioToolStripMenuItem.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.crearUsuarioToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.crearUsuarioToolStripMenuItem.Name = "crearUsuarioToolStripMenuItem";
-            this.crearUsuarioToolStripMenuItem.Size = new System.Drawing.Size(176, 24);
-            this.crearUsuarioToolStripMenuItem.Text = "Crear Usuario";
+            this.crearUsuarioToolStripMenuItem.Size = new System.Drawing.Size(225, 24);
+            this.crearUsuarioToolStripMenuItem.Text = "Gestión de Usuario";
             this.crearUsuarioToolStripMenuItem.Click += new System.EventHandler(this.crearUsuarioToolStripMenuItem_Click);
             // 
             // permisosToolStripMenuItem
@@ -785,8 +785,8 @@
             this.permisosToolStripMenuItem.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.permisosToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.permisosToolStripMenuItem.Name = "permisosToolStripMenuItem";
-            this.permisosToolStripMenuItem.Size = new System.Drawing.Size(176, 24);
-            this.permisosToolStripMenuItem.Text = "Permisos";
+            this.permisosToolStripMenuItem.Size = new System.Drawing.Size(225, 24);
+            this.permisosToolStripMenuItem.Text = "Gestión de Permisos";
             this.permisosToolStripMenuItem.Click += new System.EventHandler(this.permisosToolStripMenuItem_Click);
             // 
             // MenuInventario
@@ -891,61 +891,61 @@
         private System.Windows.Forms.Panel MenuVertical;
         private Especiales.EspecialButton especialButton1;
         private System.Windows.Forms.Panel panel2;
-        private Especiales.EspecialButton especialButton2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label LblUsuario;
         private System.Windows.Forms.Panel panel5;
         private Especiales.EspecialButton especialButton3;
         private Especiales.RJDropDownMenu DesplegableContrato;
-        private System.Windows.Forms.ToolStripMenuItem crearContratoToolStripMenuItem;
-        private Especiales.EspecialButton BtnVentasDirectas;
         private Especiales.RJDropDownMenu MenuVentasDirectas;
-        private System.Windows.Forms.ToolStripMenuItem BtnProforma;
-        private System.Windows.Forms.ToolStripMenuItem BtnCrearProforma;
-        private System.Windows.Forms.ToolStripMenuItem BtnbuscarProformaToolStripMenuItem;
-        private Especiales.EspecialButton BtnOpciones;
         private Especiales.RJDropDownMenu MenuOpc;
-        private System.Windows.Forms.ToolStripMenuItem configTipoDeCambioToolStripMenuItem;
         public System.Windows.Forms.Panel PnlCentral;
-        private Especiales.EspecialButton btnCatalogos;
         private Especiales.RJDropDownMenu MenuCatalogo;
-        private System.Windows.Forms.ToolStripMenuItem clientesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem proveedoresToolStripMenuItem;
-        private Especiales.EspecialButton btnSeguridad;
         private Especiales.RJDropDownMenu MenuSeguridad;
-        private System.Windows.Forms.ToolStripMenuItem auditoriasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem revisionDeSeguridadToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem crearUsuarioToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem permisosToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private Especiales.EspecialButton BtnInventario;
-        private System.Windows.Forms.ToolStripMenuItem buscarContratoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem crearProformaDeContratoToolStripMenuItem;
         private Especiales.RJDropDownMenu MenuInventario;
-        private System.Windows.Forms.ToolStripMenuItem inventarioDeServiciosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem otrasModificacionesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ventasDirectasDeAtaudesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem registroDeVentasToolStripMenuItem;
-        private Especiales.EspecialButton btnCaja;
         private Especiales.RJDropDownMenu MenuCaja;
-        private System.Windows.Forms.ToolStripMenuItem reciboOficialDeCajaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem realizacionDeFacturasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem historialDeRecibosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem gestionDeCuotasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pagoDePrimeraCuotaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pagoDeCuotasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem contratosRetiradosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem informacionGeneralToolStripMenuItem;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ToolStripMenuItem retiroDeServiciosToolStripMenuItem;
-        private Especiales.EspecialButton especialButton4;
-        private System.Windows.Forms.ToolStripMenuItem realizarFacturaPorRetiroToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.PictureBox pictureBox6;
+        public Especiales.EspecialButton especialButton2;
+        public Especiales.EspecialButton BtnVentasDirectas;
+        public Especiales.EspecialButton BtnOpciones;
+        public Especiales.EspecialButton btnCatalogos;
+        public Especiales.EspecialButton btnSeguridad;
+        public Especiales.EspecialButton BtnInventario;
+        public Especiales.EspecialButton btnCaja;
+        public Especiales.EspecialButton especialButton4;
+        public System.Windows.Forms.ToolStripMenuItem clientesToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem proveedoresToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem crearContratoToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem buscarContratoToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem crearProformaDeContratoToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem gestionDeCuotasToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem contratosRetiradosToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem informacionGeneralToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem retiroDeServiciosToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem realizarFacturaPorRetiroToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem BtnProforma;
+        public System.Windows.Forms.ToolStripMenuItem BtnCrearProforma;
+        public System.Windows.Forms.ToolStripMenuItem BtnbuscarProformaToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem ventasDirectasDeAtaudesToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem registroDeVentasToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem realizacionDeFacturasToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem inventarioDeServiciosToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem otrasModificacionesToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem reciboOficialDeCajaToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem historialDeRecibosToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem auditoriasToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem crearUsuarioToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem permisosToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem revisionDeSeguridadToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem configTipoDeCambioToolStripMenuItem;
     }
 }

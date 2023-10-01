@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using NeoCobranza.Data;
 using NeoCobranza.DataController;
+using NeoCobranza.ViewModels;
+
 namespace NeoCobranza.Paneles
 {
     public partial class PanelCliente : Form
@@ -19,6 +21,8 @@ namespace NeoCobranza.Paneles
         public bool isnumber;
         public string panel;
         public PnlCatalogoClientes pnlCatalogoClientes;
+        VMClientes vMClientes = new VMClientes();
+
         public PanelCliente(Conexion conexion,string panel)
         {
             InitializeComponent();
@@ -28,6 +32,12 @@ namespace NeoCobranza.Paneles
             
             this.panel = panel;
         }
+
+        private void PanelCliente_Load(object sender, EventArgs e)
+        {
+            vMClientes.InitModuloCrearCliente(this, "Crear");
+        }
+
         #region Actualizar Cliente desde el catalogo
         public PanelCliente(Conexion conexion,DataGridView dgvCatalogoClientes, string panel)
         {
@@ -78,14 +88,6 @@ namespace NeoCobranza.Paneles
             cmbDepartamento.Text = dgvCatalogoClientes.SelectedRows[0].Cells["NombreDepartamento"].Value.ToString();
         }
         #endregion
-        private void PanelCliente_Load(object sender, EventArgs e)
-        {
-        
-
-
-        }
-
-        
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -95,7 +97,6 @@ namespace NeoCobranza.Paneles
             
 
         }
-        
 
         private void especialButton1_Click(object sender, EventArgs e)
         {
@@ -106,64 +107,9 @@ namespace NeoCobranza.Paneles
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-             
-
-
-
-
-            if (lblPn.Texts == "" || lblPA.Texts == ""|| mtxtCedula.Text == "")
-            {
-                MessageBox.Show("Aun hay campos de textos vacios", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                lblPn.Focus();
-                
-                return;
-            }
-          
-            else
-            {
-                int pase;
-                
-
-               
-
-                if(rbtnCasado.Checked && rbtnMasculino.Checked)
-                {
-                    EjecutarCasadoMasculino();
-                   
-                }
-                
-            
-                if(rbtnCasado.Checked && rbtnFemenino.Checked)
-                {
-                        EjecutarCasadoFemenino();
-                   
-
-                }
-
-                if(rbtnSoltero.Checked && rbtnMasculino.Checked)
-                {
-                    EjecutarSolteroMasculino();
-                   
-                }
-
-                if(rbtnSoltero.Checked && rbtnFemenino.Checked)
-                {
-                    EjecutarSolteroFemenino();
-                   
-
-
-                }
-                if(rbtnCasado.Checked ==false &&rbtnSoltero.Checked ==false)
-                    MessageBox.Show("Seleccione su estado civil", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                if (rbtnMasculino.Checked == false && rbtnFemenino.Checked == false)
-                    MessageBox.Show("Seleccione su Sexo", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-            }
-             
-             
-            
-
+            vMClientes.Verificaciones(this, "Crear");
         }
+
         #region Validaciones RadioButtons
         private void EjecutarCasadoMasculino()
         {

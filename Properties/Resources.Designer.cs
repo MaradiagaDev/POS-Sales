@@ -59,15 +59,5 @@ namespace NeoCobranza.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
-        /// </summary>
-        internal static System.Drawing.Icon IMG_20221007_WA0007_removebg_preview__1_ {
-            get {
-                object obj = ResourceManager.GetObject("IMG_20221007_WA0007_removebg_preview__1_", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
     }
 }

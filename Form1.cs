@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NeoCobranza.Clases;
+using NeoCobranza.ControlActualizaciones;
 using NeoCobranza.Data;
+using NeoCobranza.ModelObjectCobranza;
+using NeoCobranza.ModelsCobranza;
 using NeoCobranza.Paneles;
 
 namespace NeoCobranza
@@ -22,14 +27,14 @@ namespace NeoCobranza
             InitializeComponent();
             
         }
-        private int cont=3;
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+           
         }
 
-        
-        private void btnLogin_Click(object sender, EventArgs e)
+
+            private void btnLogin_Click(object sender, EventArgs e)
         {
             
             if (txtUser.Texts == "" && txtPassword.Texts == "")
@@ -38,58 +43,73 @@ namespace NeoCobranza
 
                 return;
             }
-            else
+            
+            if (txtUser.Texts == "")
             {
-                if (txtUser.Texts == "")
+               MessageBox.Show("Digite el usuario", "Alerta");
+                return;
+            }
+                
+            if (txtPassword.Texts == "")
+            {
+              MessageBox.Show("Digite la contraseña", "Alerta");
+                return;
+            }
+                    
+            Conexion con = new Conexion("123456","sa");
+
+            Clases.Usuario usuario = new Clases.Usuario(con);
+
+            if (con.connect.State == ConnectionState.Open)
+            {
+                using (NeoCobranzaContext db = new NeoCobranzaContext())
                 {
-                    MessageBox.Show("Digite el usuario", "Alerta");
-                }
-                else
-                {
-                    if (txtPassword.Texts == "")
+                    ModelsCobranza.Usuario user = db.Usuario.Where(p => p.Pass.Trim() == txtPassword.Texts.Trim() &&  p.Nombre.Trim() == txtUser.Texts.Trim()).FirstOrDefault();
+                 
+                    //.Where(p => p.Pass == txtPassword.Texts).FirstOrDefault();
+
+                    
+
+                    if (user != null)
                     {
-                        MessageBox.Show("Digite la contraseña", "Alerta");
+
+                        if (user.Estado == "Inhabilitado")
+                        {
+                            MessageBox.Show("Su usuario ha sido bloqueado. Pongase en contacto con el administrador.", "Alerta");
+                            return;
+                        }
+                        AuditoriaModel.AgregarAuditoria(user.Nombre,"Inicio","Usuario","Acceso","Normal");
+
+                        VariablesEntorno.idUsuarioSesion = user.IdUsuarios;
+                        VariablesEntorno.RoleSesion = user.Rol;
+                        VariablesEntorno.UserNameSesion = user.Nombre;
+
+                        MessageBox.Show("Acceso realizado.", "Correcto");
+                        this.Hide();
+                        PnlPrincipal pnlPrincipal = new PnlPrincipal(txtUser.Texts, con);
+                        AddOwnedForm(pnlPrincipal);
+                        pnlPrincipal.Show();
+
+                        //Limpia
+                        txtPassword.clear();
+                        txtUser.clear();
                     }
                     else
                     {
-                        //
-                        Conexion con = new Conexion(txtPassword.Texts,txtUser.Texts);
-
-                        Usuario usuario = new Usuario(con);
-
-                        if (con.connect.State == ConnectionState.Open)
-                        {
-                            
-                            MessageBox.Show("Acceso al sistema", "Bienvenido");
-                            
-                            this.Hide();
-                            PnlPrincipal pnlPrincipal = new PnlPrincipal(txtUser.Texts,con);
-                            AddOwnedForm(pnlPrincipal);
-                            pnlPrincipal.Show();
-                            txtPassword.clear();
-                            txtUser.clear();
-                            
-                           
-                        }
-                        else
-                        {
-                            --cont;
-                            MessageBox.Show ("Error de usuario o contraseña", Convert.ToString(cont)+" Intentos restantes");
-                            if (cont == 0)
-                            {
-                                btnLogin.Enabled = false;
-                                Thread.Sleep(3000);
-                                MessageBox.Show("Limite");
-                                cont = 3;
-                            }
-                        }
-
-
-                        //
+                        MessageBox.Show("Error en las credenciales", "Alerta");
                     }
-
-                 }  
+                }
             }
+            else
+            {
+             MessageBox.Show ("Error de servidor","Error");     
+            }
+
+
+                   
+
+                   
+            
         }
 
         private void especialButton1_Click(object sender, EventArgs e)

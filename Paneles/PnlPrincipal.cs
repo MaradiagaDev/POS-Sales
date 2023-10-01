@@ -17,6 +17,8 @@ using NeoCobranza.Paneles_Venta;
 using NeoCobranza.PnlInventario;
 using NeoCobranza.PnlOpc;
 using System.Runtime.InteropServices;
+using NeoCobranza.ViewModels;
+
 namespace NeoCobranza.Paneles
 {
     public partial class PnlPrincipal : Form
@@ -25,6 +27,7 @@ namespace NeoCobranza.Paneles
         public PnlBuscarProforma pnlBuscarProforma;
         public BuscarContrato buscarContrato;
         public CSeguridad cSeguridad;
+        VMMenuPrincipal vMMenuPrincipal = new VMMenuPrincipal();
 
         //Variable de ancho para menu desplegable
         int ancho = 165;
@@ -47,12 +50,7 @@ namespace NeoCobranza.Paneles
 
         private void PnlPrincipal_Load(object sender, EventArgs e)
         {
-          
-            
-          
-            
-            
-            
+            vMMenuPrincipal.InitModuloPrincipal(this);
         }
 
         private void LblUsuario_Click(object sender, EventArgs e)
@@ -115,40 +113,29 @@ namespace NeoCobranza.Paneles
         {
             limpiar();
             PnlProforma pnlProforma = new PnlProforma(conexion);
+            this.AddOwnedForm(pnlProforma);
             pnlProforma.TopLevel = false;
+            pnlProforma.Dock = DockStyle.Fill;
             PnlCentral.Controls.Add(pnlProforma);
-
+            PnlCentral.Tag = pnlProforma;
 
             pnlProforma.Show();
         }
 
         private void BtnOpciones_Click(object sender, EventArgs e)
         {
-            if (cSeguridad.MostrarRol(LblUsuario.Text) == "SuperAdmin" || cSeguridad.MostrarRol(LblUsuario.Text) == "Gerente" || cSeguridad.MostrarRol(LblUsuario.Text) == "Informatico")
-            {
                 MenuOpc.Show(BtnOpciones, ancho, 0);
-
-            }
-            else
-            {
-                MessageBox.Show("Su usuario no tiene permiso para realizar esta accion", "Alerta construccion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-
-            }
         }
 
         private void configTipoDeCambioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           
-
             limpiar();
             PnlTasaCambio pnlTasaCambio = new PnlTasaCambio(conexion);
             pnlTasaCambio.TopLevel = false;
+            pnlTasaCambio.Dock = DockStyle.Fill; 
             PnlCentral.Controls.Add(pnlTasaCambio);
-
+            this.PnlCentral.Tag = pnlTasaCambio;
             pnlTasaCambio.Show();
-
-
         }
 
         private void BtnbuscarProformaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -158,9 +145,11 @@ namespace NeoCobranza.Paneles
             pnlBuscarProforma = new PnlBuscarProforma(conexion);
             AddOwnedForm(pnlBuscarProforma);
             pnlBuscarProforma.TopLevel = false;
+            pnlBuscarProforma.Dock = DockStyle.Fill;
             
 
             PnlCentral.Controls.Add(pnlBuscarProforma);
+            PnlCentral.Tag = pnlBuscarProforma;
             pnlBuscarProforma.Show();
         }
 
@@ -214,23 +203,7 @@ namespace NeoCobranza.Paneles
 
         private void btnSeguridad_Click(object sender, EventArgs e)
         {
-            if(cSeguridad.MostrarRol(LblUsuario.Text)=="SuperAdmin"|| cSeguridad.MostrarRol(LblUsuario.Text) == "Gerente"|| cSeguridad.MostrarRol(LblUsuario.Text) == "Informatico")
-            {
                 MenuSeguridad.Show(btnSeguridad, ancho, 0);
-
-            }
-            else
-            {
-                MessageBox.Show("Su usuario no tiene permiso para realizar esta accion", "Alerta construccion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-
-            }
-
-           
-
-
-
-
         }
 
         private void auditoriasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -238,7 +211,7 @@ namespace NeoCobranza.Paneles
             PnlPrincipalAuditorias pnlAuditorias = new PnlPrincipalAuditorias(conexion);
             limpiar();
             pnlAuditorias.TopLevel = false;
-
+            pnlAuditorias.Dock = DockStyle.Fill;
             PnlCentral.Controls.Add(pnlAuditorias);
 
             pnlAuditorias.Show();
@@ -249,7 +222,7 @@ namespace NeoCobranza.Paneles
             CreacionUsuario creacionU = new CreacionUsuario(conexion);
             limpiar();
             creacionU.TopLevel = false;
-
+            creacionU.Dock = DockStyle.Fill;
             PnlCentral.Controls.Add(creacionU);
 
             creacionU.Show();
@@ -321,7 +294,13 @@ namespace NeoCobranza.Paneles
 
         private void permisosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Panel aun en construccion. Espere por actualizaciones", "Alerta construccion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            limpiar();
+            GestionPermisos frm = new GestionPermisos();
+            AddOwnedForm(frm);
+            frm.TopLevel = false;
+            frm.Dock = DockStyle.Fill;
+            PnlCentral.Controls.Add(frm);
+            frm.Show();
             return;
         }
 
@@ -344,6 +323,7 @@ namespace NeoCobranza.Paneles
             limpiar();
             PnlModificacionesServiciosContrato pnlModificacionesServiciosContrato = new PnlModificacionesServiciosContrato(conexion);
             pnlModificacionesServiciosContrato.TopLevel = false;
+            pnlModificacionesServiciosContrato.Dock = DockStyle.Fill;
             PnlCentral.Controls.Add(pnlModificacionesServiciosContrato);
             pnlModificacionesServiciosContrato.Show();
         }
@@ -352,6 +332,8 @@ namespace NeoCobranza.Paneles
         {
             limpiar();
             PnlVentas directas = new PnlVentas(conexion);
+            directas.TopLevel = false;
+            directas.Dock = DockStyle.Fill;
             directas.TopLevel = false;
             PnlCentral.Controls.Add(directas);
             directas.Show();

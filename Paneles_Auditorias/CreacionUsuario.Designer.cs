@@ -28,180 +28,245 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreacionUsuario));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.BtnBuscar = new System.Windows.Forms.PictureBox();
+            this.DGVUser = new System.Windows.Forms.DataGridView();
+            this.IDUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.User = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrimerNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrimerApellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Rol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CmbFiltro = new System.Windows.Forms.ComboBox();
+            this.BtnCancelar = new NeoCobranza.Especiales.EspecialButton();
+            this.txtFiltroUsuario = new NeoCobranza.Controladores.LoginUserControl();
+            this.BtnCambiarEstado = new NeoCobranza.Especiales.EspecialButton();
             this.BtnCrearUsuario = new NeoCobranza.Especiales.EspecialButton();
-            this.txtContra = new NeoCobranza.Controladores.LoginUserControl();
-            this.txtUsuario = new NeoCobranza.Controladores.LoginUserControl();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtConfirmar = new NeoCobranza.Controladores.LoginUserControl();
-            this.cmbRol = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.panel3.SuspendLayout();
+            this.BtnActualizar = new NeoCobranza.Especiales.EspecialButton();
+            ((System.ComponentModel.ISupportInitialize)(this.BtnBuscar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVUser)).BeginInit();
             this.SuspendLayout();
             // 
-            // panel3
+            // BtnBuscar
             // 
-            this.panel3.BackColor = System.Drawing.SystemColors.MenuText;
-            this.panel3.Controls.Add(this.label3);
-            this.panel3.Location = new System.Drawing.Point(1, 1);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1158, 31);
-            this.panel3.TabIndex = 6;
+            this.BtnBuscar.BackColor = System.Drawing.Color.Transparent;
+            this.BtnBuscar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnBuscar.BackgroundImage")));
+            this.BtnBuscar.Location = new System.Drawing.Point(564, 18);
+            this.BtnBuscar.Name = "BtnBuscar";
+            this.BtnBuscar.Size = new System.Drawing.Size(34, 31);
+            this.BtnBuscar.TabIndex = 44;
+            this.BtnBuscar.TabStop = false;
+            this.BtnBuscar.Click += new System.EventHandler(this.BtnBuscar_Click);
             // 
-            // label3
+            // DGVUser
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.label3.Location = new System.Drawing.Point(12, 8);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(181, 20);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Creacion de Usuarios";
+            this.DGVUser.AllowUserToAddRows = false;
+            this.DGVUser.AllowUserToDeleteRows = false;
+            this.DGVUser.AllowUserToResizeRows = false;
+            this.DGVUser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DGVUser.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DGVUser.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.DGVUser.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DGVUser.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.DGVUser.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft JhengHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGVUser.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.DGVUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGVUser.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IDUser,
+            this.User,
+            this.PrimerNombre,
+            this.PrimerApellido,
+            this.Rol,
+            this.Estado});
+            this.DGVUser.EnableHeadersVisualStyles = false;
+            this.DGVUser.Location = new System.Drawing.Point(13, 138);
+            this.DGVUser.MultiSelect = false;
+            this.DGVUser.Name = "DGVUser";
+            this.DGVUser.ReadOnly = true;
+            this.DGVUser.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.DGVUser.RowHeadersVisible = false;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.DGVUser.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.DGVUser.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DGVUser.Size = new System.Drawing.Size(1132, 451);
+            this.DGVUser.TabIndex = 45;
             // 
-            // label7
+            // IDUser
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label7.Location = new System.Drawing.Point(447, 55);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(274, 18);
-            this.label7.TabIndex = 38;
-            this.label7.Text = "Digite el nuevo nombre del usuario:";
+            this.IDUser.HeaderText = "ID";
+            this.IDUser.Name = "IDUser";
+            this.IDUser.ReadOnly = true;
             // 
-            // label1
+            // User
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label1.Location = new System.Drawing.Point(447, 160);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(212, 18);
-            this.label1.TabIndex = 39;
-            this.label1.Text = "Digite la nueva contraseña:";
+            this.User.HeaderText = "Usuario";
+            this.User.Name = "User";
+            this.User.ReadOnly = true;
+            // 
+            // PrimerNombre
+            // 
+            this.PrimerNombre.HeaderText = "Primer Nombre";
+            this.PrimerNombre.Name = "PrimerNombre";
+            this.PrimerNombre.ReadOnly = true;
+            // 
+            // PrimerApellido
+            // 
+            this.PrimerApellido.HeaderText = "Primer Apellido";
+            this.PrimerApellido.Name = "PrimerApellido";
+            this.PrimerApellido.ReadOnly = true;
+            // 
+            // Rol
+            // 
+            this.Rol.DataPropertyName = "RolID";
+            this.Rol.HeaderText = "Rol";
+            this.Rol.Name = "Rol";
+            this.Rol.ReadOnly = true;
+            this.Rol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Rol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Estado
+            // 
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Name = "Estado";
+            this.Estado.ReadOnly = true;
+            // 
+            // CmbFiltro
+            // 
+            this.CmbFiltro.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CmbFiltro.DisplayMember = "ID";
+            this.CmbFiltro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbFiltro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CmbFiltro.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CmbFiltro.FormattingEnabled = true;
+            this.CmbFiltro.Items.AddRange(new object[] {
+            "ID",
+            "USUARIO",
+            "NOMBRE",
+            "APELLIDO"});
+            this.CmbFiltro.Location = new System.Drawing.Point(910, 18);
+            this.CmbFiltro.Name = "CmbFiltro";
+            this.CmbFiltro.Size = new System.Drawing.Size(222, 32);
+            this.CmbFiltro.TabIndex = 47;
+            // 
+            // BtnCancelar
+            // 
+            this.BtnCancelar.BackColor = System.Drawing.Color.Transparent;
+            this.BtnCancelar.BackGroundColor = System.Drawing.Color.Transparent;
+            this.BtnCancelar.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.BtnCancelar.BorderRadius = 40;
+            this.BtnCancelar.BorderSize = 0;
+            this.BtnCancelar.FlatAppearance.BorderSize = 0;
+            this.BtnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCancelar.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnCancelar.ForeColor = System.Drawing.Color.Black;
+            this.BtnCancelar.Location = new System.Drawing.Point(615, 13);
+            this.BtnCancelar.Name = "BtnCancelar";
+            this.BtnCancelar.Size = new System.Drawing.Size(150, 40);
+            this.BtnCancelar.TabIndex = 46;
+            this.BtnCancelar.Text = "Cancelar";
+            this.BtnCancelar.TextGroundColor = System.Drawing.Color.Black;
+            this.BtnCancelar.UseVisualStyleBackColor = false;
+            this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
+            // 
+            // txtFiltroUsuario
+            // 
+            this.txtFiltroUsuario.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.txtFiltroUsuario.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.txtFiltroUsuario.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.txtFiltroUsuario.BorderRadius = 15;
+            this.txtFiltroUsuario.BorderSize = 1;
+            this.txtFiltroUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFiltroUsuario.ForeColor = System.Drawing.Color.DimGray;
+            this.txtFiltroUsuario.Location = new System.Drawing.Point(13, 13);
+            this.txtFiltroUsuario.Margin = new System.Windows.Forms.Padding(4);
+            this.txtFiltroUsuario.Multilinea = false;
+            this.txtFiltroUsuario.Name = "txtFiltroUsuario";
+            this.txtFiltroUsuario.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this.txtFiltroUsuario.PasswordChar = false;
+            this.txtFiltroUsuario.PlaceHolderColor = System.Drawing.Color.DarkGray;
+            this.txtFiltroUsuario.PlaceHolderText = "Buscar...";
+            this.txtFiltroUsuario.Size = new System.Drawing.Size(595, 40);
+            this.txtFiltroUsuario.TabIndex = 7;
+            this.txtFiltroUsuario.Texts = "";
+            this.txtFiltroUsuario.UnderLineFlat = false;
+            // 
+            // BtnCambiarEstado
+            // 
+            this.BtnCambiarEstado.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnCambiarEstado.BackColor = System.Drawing.Color.Black;
+            this.BtnCambiarEstado.BackGroundColor = System.Drawing.Color.Black;
+            this.BtnCambiarEstado.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.BtnCambiarEstado.BorderRadius = 15;
+            this.BtnCambiarEstado.BorderSize = 0;
+            this.BtnCambiarEstado.FlatAppearance.BorderSize = 0;
+            this.BtnCambiarEstado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCambiarEstado.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnCambiarEstado.ForeColor = System.Drawing.Color.White;
+            this.BtnCambiarEstado.Location = new System.Drawing.Point(564, 75);
+            this.BtnCambiarEstado.Name = "BtnCambiarEstado";
+            this.BtnCambiarEstado.Size = new System.Drawing.Size(171, 40);
+            this.BtnCambiarEstado.TabIndex = 48;
+            this.BtnCambiarEstado.Text = "Cambiar Estado";
+            this.BtnCambiarEstado.TextGroundColor = System.Drawing.Color.White;
+            this.BtnCambiarEstado.UseVisualStyleBackColor = false;
+            this.BtnCambiarEstado.Click += new System.EventHandler(this.BtnCambiarEstado_Click);
             // 
             // BtnCrearUsuario
             // 
-            this.BtnCrearUsuario.BackColor = System.Drawing.Color.RoyalBlue;
-            this.BtnCrearUsuario.BackGroundColor = System.Drawing.Color.RoyalBlue;
+            this.BtnCrearUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnCrearUsuario.BackColor = System.Drawing.SystemColors.Highlight;
+            this.BtnCrearUsuario.BackGroundColor = System.Drawing.SystemColors.Highlight;
             this.BtnCrearUsuario.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.BtnCrearUsuario.BorderRadius = 40;
+            this.BtnCrearUsuario.BorderRadius = 15;
             this.BtnCrearUsuario.BorderSize = 0;
             this.BtnCrearUsuario.FlatAppearance.BorderSize = 0;
             this.BtnCrearUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCrearUsuario.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnCrearUsuario.ForeColor = System.Drawing.Color.White;
-            this.BtnCrearUsuario.Location = new System.Drawing.Point(450, 518);
+            this.BtnCrearUsuario.Location = new System.Drawing.Point(961, 75);
             this.BtnCrearUsuario.Name = "BtnCrearUsuario";
-            this.BtnCrearUsuario.Size = new System.Drawing.Size(241, 40);
-            this.BtnCrearUsuario.TabIndex = 9;
-            this.BtnCrearUsuario.Text = "CrearUsuario";
+            this.BtnCrearUsuario.Size = new System.Drawing.Size(171, 40);
+            this.BtnCrearUsuario.TabIndex = 49;
+            this.BtnCrearUsuario.Text = "Crear Usuario";
             this.BtnCrearUsuario.TextGroundColor = System.Drawing.Color.White;
             this.BtnCrearUsuario.UseVisualStyleBackColor = false;
-            this.BtnCrearUsuario.UseWaitCursor = true;
             this.BtnCrearUsuario.Click += new System.EventHandler(this.BtnCrearUsuario_Click);
             // 
-            // txtContra
+            // BtnActualizar
             // 
-            this.txtContra.BorderColor = System.Drawing.Color.MediumSlateBlue;
-            this.txtContra.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.txtContra.BorderRadius = 0;
-            this.txtContra.BorderSize = 2;
-            this.txtContra.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtContra.ForeColor = System.Drawing.Color.DimGray;
-            this.txtContra.Location = new System.Drawing.Point(450, 208);
-            this.txtContra.Margin = new System.Windows.Forms.Padding(4);
-            this.txtContra.Multilinea = false;
-            this.txtContra.Name = "txtContra";
-            this.txtContra.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.txtContra.PasswordChar = true;
-            this.txtContra.PlaceHolderColor = System.Drawing.Color.DarkGray;
-            this.txtContra.PlaceHolderText = "";
-            this.txtContra.Size = new System.Drawing.Size(250, 31);
-            this.txtContra.TabIndex = 8;
-            this.txtContra.Texts = "";
-            this.txtContra.UnderLineFlat = false;
-            // 
-            // txtUsuario
-            // 
-            this.txtUsuario.BorderColor = System.Drawing.Color.MediumSlateBlue;
-            this.txtUsuario.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.txtUsuario.BorderRadius = 0;
-            this.txtUsuario.BorderSize = 2;
-            this.txtUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUsuario.ForeColor = System.Drawing.Color.DimGray;
-            this.txtUsuario.Location = new System.Drawing.Point(450, 102);
-            this.txtUsuario.Margin = new System.Windows.Forms.Padding(4);
-            this.txtUsuario.Multilinea = false;
-            this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.txtUsuario.PasswordChar = false;
-            this.txtUsuario.PlaceHolderColor = System.Drawing.Color.DarkGray;
-            this.txtUsuario.PlaceHolderText = "";
-            this.txtUsuario.Size = new System.Drawing.Size(250, 31);
-            this.txtUsuario.TabIndex = 7;
-            this.txtUsuario.Texts = "";
-            this.txtUsuario.UnderLineFlat = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label2.Location = new System.Drawing.Point(447, 269);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(241, 18);
-            this.label2.TabIndex = 41;
-            this.label2.Text = "Confirme la nueva Contraseña:";
-            // 
-            // txtConfirmar
-            // 
-            this.txtConfirmar.BorderColor = System.Drawing.Color.MediumSlateBlue;
-            this.txtConfirmar.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.txtConfirmar.BorderRadius = 0;
-            this.txtConfirmar.BorderSize = 2;
-            this.txtConfirmar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtConfirmar.ForeColor = System.Drawing.Color.DimGray;
-            this.txtConfirmar.Location = new System.Drawing.Point(450, 307);
-            this.txtConfirmar.Margin = new System.Windows.Forms.Padding(4);
-            this.txtConfirmar.Multilinea = false;
-            this.txtConfirmar.Name = "txtConfirmar";
-            this.txtConfirmar.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.txtConfirmar.PasswordChar = true;
-            this.txtConfirmar.PlaceHolderColor = System.Drawing.Color.DarkGray;
-            this.txtConfirmar.PlaceHolderText = "";
-            this.txtConfirmar.Size = new System.Drawing.Size(250, 31);
-            this.txtConfirmar.TabIndex = 40;
-            this.txtConfirmar.Texts = "";
-            this.txtConfirmar.UnderLineFlat = false;
-            // 
-            // cmbRol
-            // 
-            this.cmbRol.FormattingEnabled = true;
-            this.cmbRol.Items.AddRange(new object[] {
-            "Vendedor",
-            "Gerente",
-            "Contador",
-            "Secretario",
-            "Informatico"});
-            this.cmbRol.Location = new System.Drawing.Point(450, 404);
-            this.cmbRol.Name = "cmbRol";
-            this.cmbRol.Size = new System.Drawing.Size(240, 21);
-            this.cmbRol.TabIndex = 42;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label4.Location = new System.Drawing.Point(447, 369);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(180, 18);
-            this.label4.TabIndex = 43;
-            this.label4.Text = "Rol del nuevo Usuario:";
+            this.BtnActualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnActualizar.BackColor = System.Drawing.Color.Gray;
+            this.BtnActualizar.BackGroundColor = System.Drawing.Color.Gray;
+            this.BtnActualizar.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.BtnActualizar.BorderRadius = 15;
+            this.BtnActualizar.BorderSize = 0;
+            this.BtnActualizar.FlatAppearance.BorderSize = 0;
+            this.BtnActualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnActualizar.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnActualizar.ForeColor = System.Drawing.Color.White;
+            this.BtnActualizar.Location = new System.Drawing.Point(758, 75);
+            this.BtnActualizar.Name = "BtnActualizar";
+            this.BtnActualizar.Size = new System.Drawing.Size(185, 40);
+            this.BtnActualizar.TabIndex = 50;
+            this.BtnActualizar.Text = "Actualizar Usuario";
+            this.BtnActualizar.TextGroundColor = System.Drawing.Color.White;
+            this.BtnActualizar.UseVisualStyleBackColor = false;
+            this.BtnActualizar.Click += new System.EventHandler(this.BtnActualizar_Click);
             // 
             // CreacionUsuario
             // 
@@ -209,38 +274,38 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.HighlightText;
             this.ClientSize = new System.Drawing.Size(1157, 601);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.cmbRol);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtConfirmar);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.label7);
+            this.Controls.Add(this.BtnActualizar);
             this.Controls.Add(this.BtnCrearUsuario);
-            this.Controls.Add(this.txtContra);
-            this.Controls.Add(this.txtUsuario);
-            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.BtnCambiarEstado);
+            this.Controls.Add(this.CmbFiltro);
+            this.Controls.Add(this.BtnCancelar);
+            this.Controls.Add(this.DGVUser);
+            this.Controls.Add(this.BtnBuscar);
+            this.Controls.Add(this.txtFiltroUsuario);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CreacionUsuario";
             this.Text = "CreacionUsuario";
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
+            this.Load += new System.EventHandler(this.CreacionUsuario_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.BtnBuscar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVUser)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label3;
-        private Controladores.LoginUserControl txtUsuario;
-        private Controladores.LoginUserControl txtContra;
+        private Controladores.LoginUserControl txtFiltroUsuario;
+        private System.Windows.Forms.PictureBox BtnBuscar;
+        private System.Windows.Forms.DataGridView DGVUser;
+        private Especiales.EspecialButton BtnCancelar;
+        public System.Windows.Forms.ComboBox CmbFiltro;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDUser;
+        private System.Windows.Forms.DataGridViewTextBoxColumn User;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PrimerNombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PrimerApellido;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Rol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
+        private Especiales.EspecialButton BtnCambiarEstado;
         private Especiales.EspecialButton BtnCrearUsuario;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private Controladores.LoginUserControl txtConfirmar;
-        private System.Windows.Forms.ComboBox cmbRol;
-        private System.Windows.Forms.Label label4;
+        private Especiales.EspecialButton BtnActualizar;
     }
 }

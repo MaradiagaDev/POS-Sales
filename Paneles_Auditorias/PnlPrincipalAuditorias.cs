@@ -1,6 +1,9 @@
-﻿using NeoCobranza.Clases;
+﻿using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
+using NeoCobranza.Clases;
 using NeoCobranza.Data;
 using NeoCobranza.DataController;
+using NeoCobranza.ModelObjectCobranza;
+using NeoCobranza.ModelsCobranza;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,77 +25,43 @@ namespace NeoCobranza.Paneles_Auditorias
         public PnlPrincipalAuditorias(Conexion conexion)
         {
             InitializeComponent();
-            this.conexion = conexion;
-            this.cAuditoria = new CAuditoria(conexion);
-
-            auditorias = new Auditorias(conexion);
-
-            //Estilo
-            dgvHistorial.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11);
-            dgvHistorial.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11);
-
-            dgvHistorial.DataSource = auditorias.Mostra_Filtroauditoria(txtFiltro.Texts);
+ 
         }
 
-        private void ComprobarParaCalculos()
+        private void PnlPrincipalAuditorias_Load(object sender, EventArgs e)
         {
-           
+            //Auditoria
+            AuditoriaModel.AgregarAuditoria(VariablesEntorno.UserNameSesion, "Seguridad", "Todos", "Acceso Auditoria", "Normal");
 
-
+            //Llenado de los usuarios
+            using (NeoCobranzaContext db = new NeoCobranzaContext()) 
+            {
+                List<ModelsCobranza.Usuario> ListaUsuarios = db.Usuario.ToList();
+                CmbUsuarios.DisplayMember = "Nombre";
+                CmbUsuarios.ValueMember = "Nombre";
+                CmbUsuarios.DataSource = ListaUsuarios;
+            }
+            //Mostrado de todos
+            MostrarRegistros();
+        }
+        private void MostrarRegistros()
+        {
+           DGVAuditoria.DataSource = AuditoriaModel.GetAll();
         }
 
-        private void BtnGenerarReporte_Click(object sender, EventArgs e)
+        private void BtnTodos_Click(object sender, EventArgs e)
         {
-            ComprobarParaCalculos();
-
-
-            //
-            
+            MostrarRegistros();
         }
 
-        private void cmbTablas_SelectedIndexChanged(object sender, EventArgs e)
+        private void BtnBuscarUser_Click(object sender, EventArgs e)
         {
-            ComprobarParaCalculos();
+            DGVAuditoria.DataSource = AuditoriaModel.GetFAll(DtInicio.Text,DtFinal.Text, CmbSector.Text,CmbUsuarios.Text,txtFiltroUsuario.Texts);
         }
 
-        private void BtnCrear_CheckedChanged(object sender, EventArgs e)
+        private void BtnCancelar_Click(object sender, EventArgs e)
         {
-            ComprobarParaCalculos();
-        }
-
-        private void btnActualizacion_CheckedChanged(object sender, EventArgs e)
-        {
-            ComprobarParaCalculos();
-        }
-
-        private void lblFecha_ValueChanged(object sender, EventArgs e)
-        {
-            ComprobarParaCalculos();
-        }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-            ComprobarParaCalculos();
-        }
-
-        private void txtFiltro__TextChanged(object sender, EventArgs e)
-        {
-            ComprobarParaCalculos();
-        }
-
-        private void cmbUsuarios_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ComprobarParaCalculos();
-        }
-
-        private void especialButton1_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void txtFiltro__TextChanged_1(object sender, EventArgs e)
-        {
-            dgvHistorial.DataSource = auditorias.Mostra_Filtroauditoria(txtFiltro.Texts.ToString());
+            MostrarRegistros();
         }
     }
 }

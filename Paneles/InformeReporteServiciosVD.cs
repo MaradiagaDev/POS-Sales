@@ -1,4 +1,6 @@
-﻿using NeoCobranza.Data;
+﻿using Microsoft.Reporting.WinForms;
+using NeoCobranza.Data;
+using NeoCobranza.ModelsCobranza;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,6 +32,7 @@ namespace NeoCobranza.Paneles
 
             // TODO: esta línea de código carga datos en la tabla 'data_VentaProforma.Caja_Tramites' Puede moverla o quitarla según sea necesario.
             this.caja_TramitesTableAdapter.Fill(this.data_VentaProforma.Caja_Tramites,id);
+            data_VentaProforma.EnforceConstraints = false;
             // TODO: esta línea de código carga datos en la tabla 'data_VentaProforma.REPORTERIA_VentasProformas' Puede moverla o quitarla según sea necesario.
             this.rEPORTERIA_VentasProformasTableAdapter.Fill(this.data_VentaProforma.REPORTERIA_VentasProformas,id);
 

@@ -1232,8 +1232,7 @@ namespace NeoCobranza.DataSetPTableAdapters {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
-        //
-        public global::System.Data.SqlClient.SqlConnection _connection;
+        private global::System.Data.SqlClient.SqlConnection _connection;
         
         private global::System.Data.SqlClient.SqlTransaction _transaction;
         

@@ -128,7 +128,7 @@
             // 
             // especialButton2
             // 
-            this.especialButton2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.especialButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.especialButton2.BackColor = System.Drawing.Color.ForestGreen;
             this.especialButton2.BackGroundColor = System.Drawing.Color.ForestGreen;
             this.especialButton2.BorderColor = System.Drawing.Color.PaleVioletRed;

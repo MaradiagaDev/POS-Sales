@@ -31,46 +31,40 @@
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.reporteVentasContratoData = new NeoCobranza.ReporteVentasContratoData();
+            this.datosContrato = new NeoCobranza.DatosContrato();
             this.reporteProformaContratoBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.reporteProformaContratoTableAdapter = new NeoCobranza.ReporteVentasContratoDataTableAdapters.ReporteProformaContratoTableAdapter();
-            this.reporteProformaContratoBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.reporteVentasContratoData)).BeginInit();
+            this.reporteProformaContratoTableAdapter = new NeoCobranza.DatosContratoTableAdapters.ReporteProformaContratoTableAdapter();
+            ((System.ComponentModel.ISupportInitialize)(this.datosContrato)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.reporteProformaContratoBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.reporteProformaContratoBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // reportViewer1
             // 
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportDataSource1.Name = "DataSet1";
-            reportDataSource1.Value = this.reporteProformaContratoBindingSource1;
+            reportDataSource1.Name = "Datos";
+            reportDataSource1.Value = this.reporteProformaContratoBindingSource;
             this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
-            this.reportViewer1.LocalReport.ReportEmbeddedResource = "NeoCobranza.Informes.ReporteVentasContrato.rdlc";
+            this.reportViewer1.LocalReport.ReportEmbeddedResource = "NeoCobranza.Informes.ProformaContrato.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(0, 0);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.BearerToken = null;
             this.reportViewer1.Size = new System.Drawing.Size(800, 450);
             this.reportViewer1.TabIndex = 0;
+            this.reportViewer1.Load += new System.EventHandler(this.reportViewer1_Load);
             // 
-            // reporteVentasContratoData
+            // datosContrato
             // 
-            this.reporteVentasContratoData.DataSetName = "ReporteVentasContratoData";
-            this.reporteVentasContratoData.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.datosContrato.DataSetName = "DatosContrato";
+            this.datosContrato.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // reporteProformaContratoBindingSource
             // 
             this.reporteProformaContratoBindingSource.DataMember = "ReporteProformaContrato";
-            this.reporteProformaContratoBindingSource.DataSource = this.reporteVentasContratoData;
+            this.reporteProformaContratoBindingSource.DataSource = this.datosContrato;
             // 
             // reporteProformaContratoTableAdapter
             // 
             this.reporteProformaContratoTableAdapter.ClearBeforeFill = true;
-            // 
-            // reporteProformaContratoBindingSource1
-            // 
-            this.reporteProformaContratoBindingSource1.DataMember = "ReporteProformaContrato";
-            this.reporteProformaContratoBindingSource1.DataSource = this.reporteVentasContratoData;
             // 
             // PanelFinal
             // 
@@ -81,9 +75,8 @@
             this.Name = "PanelFinal";
             this.Text = "PanelFinal";
             this.Load += new System.EventHandler(this.PanelFinal_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.reporteVentasContratoData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datosContrato)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.reporteProformaContratoBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.reporteProformaContratoBindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -91,9 +84,8 @@
         #endregion
 
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
-        private System.Windows.Forms.BindingSource reporteProformaContratoBindingSource1;
-        private ReporteVentasContratoData reporteVentasContratoData;
         private System.Windows.Forms.BindingSource reporteProformaContratoBindingSource;
-        private ReporteVentasContratoDataTableAdapters.ReporteProformaContratoTableAdapter reporteProformaContratoTableAdapter;
+        private DatosContrato datosContrato;
+        private DatosContratoTableAdapters.ReporteProformaContratoTableAdapter reporteProformaContratoTableAdapter;
     }
 }

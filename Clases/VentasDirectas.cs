@@ -954,7 +954,15 @@ namespace NeoCobranza.Clases
 
             sqlData.Fill(dtResultado);
 
-            return dtResultado.Rows[0][0].ToString();
+            try
+            {
+                return dtResultado.Rows[0][0].ToString();
+            }
+            catch (Exception)
+            {
+                return "";
+            }
+            
         }
     }
 }

@@ -502,6 +502,7 @@ namespace NeoCobranza.Paneles_Contrato
             }
 
             contrato.Contrato_Insertar_Historial("Se genero el contrato","GENERACION DE CONTRATO", conexion.usuario, int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()));
+
         }
 
         private void especialButton1_Click(object sender, EventArgs e)

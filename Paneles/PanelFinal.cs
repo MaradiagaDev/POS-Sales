@@ -26,19 +26,23 @@ namespace NeoCobranza.Paneles
             this.id = id;
             this.conexion = conexion;
             this.proformaContrato = new ProformaContrato(conexion);
-
-
-             
         }
 
         private void PanelFinal_Load(object sender, EventArgs e)
         {
-            reporteVentasContratoData.EnforceConstraints = false;
+            
+            datosContrato.EnforceConstraints = false;
             this.reporteProformaContratoTableAdapter.Connection = conexion.connect;
-          ReportParameter parametros = new ReportParameter("Descripcion", proformaContrato.Obtener_Descripcion(id));
-            this.reporteProformaContratoTableAdapter.Fill(reporteVentasContratoData.ReporteProformaContrato,id);
+            ReportParameter parametros = new ReportParameter("Descripcion", proformaContrato.Obtener_Descripcion(id));
+            this.reporteProformaContratoTableAdapter.Fill(datosContrato.ReporteProformaContrato,id);
             reportViewer1.LocalReport.SetParameters(parametros);
             this.reportViewer1.RefreshReport();
+            
+        }
+
+        private void reportViewer1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

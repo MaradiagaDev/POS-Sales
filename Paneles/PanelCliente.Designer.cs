@@ -60,19 +60,19 @@ namespace NeoCobranza.Paneles
             this.mtxtTelefono = new System.Windows.Forms.MaskedTextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.dataSetFinal1 = new NeoCobranza.DataSetFinal();
+            this.cmbPais = new System.Windows.Forms.ComboBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.mtxtCelular = new NeoCobranza.Controladores.LoginUserControl();
+            this.txtObservacion = new NeoCobranza.Controladores.LoginUserControl();
+            this.btnAgregar = new NeoCobranza.Especiales.EspecialButton();
+            this.btnCancelar = new NeoCobranza.Especiales.EspecialButton();
             this.txtDireccion = new NeoCobranza.Controladores.LoginUserControl();
             this.lblProfesion = new NeoCobranza.Controladores.LoginUserControl();
             this.lblSA = new NeoCobranza.Controladores.LoginUserControl();
             this.lblPA = new NeoCobranza.Controladores.LoginUserControl();
             this.lblSN = new NeoCobranza.Controladores.LoginUserControl();
             this.lblPn = new NeoCobranza.Controladores.LoginUserControl();
-            this.btnCancelar = new NeoCobranza.Especiales.EspecialButton();
-            this.btnAgregar = new NeoCobranza.Especiales.EspecialButton();
-            this.cmbPais = new System.Windows.Forms.ComboBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.txtObservacion = new NeoCobranza.Controladores.LoginUserControl();
-            this.label18 = new System.Windows.Forms.Label();
-            this.mtxtCelular = new NeoCobranza.Controladores.LoginUserControl();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -415,175 +415,6 @@ namespace NeoCobranza.Paneles
             this.dataSetFinal1.DataSetName = "DataSetFinal";
             this.dataSetFinal1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // txtDireccion
-            // 
-            this.txtDireccion.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.txtDireccion.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.txtDireccion.BorderRadius = 10;
-            this.txtDireccion.BorderSize = 2;
-            this.txtDireccion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDireccion.ForeColor = System.Drawing.Color.DimGray;
-            this.txtDireccion.Location = new System.Drawing.Point(454, 291);
-            this.txtDireccion.Margin = new System.Windows.Forms.Padding(4);
-            this.txtDireccion.Multilinea = true;
-            this.txtDireccion.Name = "txtDireccion";
-            this.txtDireccion.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.txtDireccion.PasswordChar = false;
-            this.txtDireccion.PlaceHolderColor = System.Drawing.Color.DarkGray;
-            this.txtDireccion.PlaceHolderText = "Direccion";
-            this.txtDireccion.Size = new System.Drawing.Size(497, 66);
-            this.txtDireccion.TabIndex = 39;
-            this.txtDireccion.Texts = "";
-            this.txtDireccion.UnderLineFlat = false;
-            // 
-            // lblProfesion
-            // 
-            this.lblProfesion.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.lblProfesion.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.lblProfesion.BorderRadius = 0;
-            this.lblProfesion.BorderSize = 2;
-            this.lblProfesion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProfesion.ForeColor = System.Drawing.Color.DimGray;
-            this.lblProfesion.Location = new System.Drawing.Point(217, 193);
-            this.lblProfesion.Margin = new System.Windows.Forms.Padding(4);
-            this.lblProfesion.Multilinea = false;
-            this.lblProfesion.Name = "lblProfesion";
-            this.lblProfesion.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.lblProfesion.PasswordChar = false;
-            this.lblProfesion.PlaceHolderColor = System.Drawing.Color.DarkGray;
-            this.lblProfesion.PlaceHolderText = "Profesion";
-            this.lblProfesion.Size = new System.Drawing.Size(182, 31);
-            this.lblProfesion.TabIndex = 31;
-            this.lblProfesion.Texts = "";
-            this.lblProfesion.UnderLineFlat = true;
-            // 
-            // lblSA
-            // 
-            this.lblSA.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.lblSA.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.lblSA.BorderRadius = 0;
-            this.lblSA.BorderSize = 2;
-            this.lblSA.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSA.ForeColor = System.Drawing.Color.DimGray;
-            this.lblSA.Location = new System.Drawing.Point(217, 132);
-            this.lblSA.Margin = new System.Windows.Forms.Padding(4);
-            this.lblSA.Multilinea = false;
-            this.lblSA.Name = "lblSA";
-            this.lblSA.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.lblSA.PasswordChar = false;
-            this.lblSA.PlaceHolderColor = System.Drawing.Color.DarkGray;
-            this.lblSA.PlaceHolderText = "Segundo Apellido";
-            this.lblSA.Size = new System.Drawing.Size(182, 31);
-            this.lblSA.TabIndex = 29;
-            this.lblSA.Texts = "";
-            this.lblSA.UnderLineFlat = true;
-            // 
-            // lblPA
-            // 
-            this.lblPA.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.lblPA.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.lblPA.BorderRadius = 0;
-            this.lblPA.BorderSize = 2;
-            this.lblPA.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPA.ForeColor = System.Drawing.Color.DimGray;
-            this.lblPA.Location = new System.Drawing.Point(10, 132);
-            this.lblPA.Margin = new System.Windows.Forms.Padding(4);
-            this.lblPA.Multilinea = false;
-            this.lblPA.Name = "lblPA";
-            this.lblPA.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.lblPA.PasswordChar = false;
-            this.lblPA.PlaceHolderColor = System.Drawing.Color.DarkGray;
-            this.lblPA.PlaceHolderText = "Primer Apellido";
-            this.lblPA.Size = new System.Drawing.Size(182, 31);
-            this.lblPA.TabIndex = 28;
-            this.lblPA.Texts = "";
-            this.lblPA.UnderLineFlat = true;
-            // 
-            // lblSN
-            // 
-            this.lblSN.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.lblSN.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.lblSN.BorderRadius = 0;
-            this.lblSN.BorderSize = 2;
-            this.lblSN.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSN.ForeColor = System.Drawing.Color.DimGray;
-            this.lblSN.Location = new System.Drawing.Point(217, 63);
-            this.lblSN.Margin = new System.Windows.Forms.Padding(4);
-            this.lblSN.Multilinea = false;
-            this.lblSN.Name = "lblSN";
-            this.lblSN.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.lblSN.PasswordChar = false;
-            this.lblSN.PlaceHolderColor = System.Drawing.Color.DarkGray;
-            this.lblSN.PlaceHolderText = "Segundo Nombre";
-            this.lblSN.Size = new System.Drawing.Size(182, 31);
-            this.lblSN.TabIndex = 27;
-            this.lblSN.Texts = "";
-            this.lblSN.UnderLineFlat = true;
-            // 
-            // lblPn
-            // 
-            this.lblPn.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.lblPn.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.lblPn.BorderRadius = 0;
-            this.lblPn.BorderSize = 2;
-            this.lblPn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPn.ForeColor = System.Drawing.Color.DimGray;
-            this.lblPn.Location = new System.Drawing.Point(13, 63);
-            this.lblPn.Margin = new System.Windows.Forms.Padding(4);
-            this.lblPn.Multilinea = false;
-            this.lblPn.Name = "lblPn";
-            this.lblPn.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.lblPn.PasswordChar = false;
-            this.lblPn.PlaceHolderColor = System.Drawing.Color.DarkGray;
-            this.lblPn.PlaceHolderText = "Primer Nombre";
-            this.lblPn.Size = new System.Drawing.Size(182, 31);
-            this.lblPn.TabIndex = 26;
-            this.lblPn.Texts = "";
-            this.lblPn.UnderLineFlat = true;
-            this.lblPn.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.lblPn_KeyPress);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.btnCancelar.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.btnCancelar.BackGroundColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.btnCancelar.BorderColor = System.Drawing.Color.LavenderBlush;
-            this.btnCancelar.BorderRadius = 10;
-            this.btnCancelar.BorderSize = 2;
-            this.btnCancelar.FlatAppearance.BorderSize = 0;
-            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.ForeColor = System.Drawing.Color.White;
-            this.btnCancelar.Location = new System.Drawing.Point(528, 389);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(162, 35);
-            this.btnCancelar.TabIndex = 41;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.TextGroundColor = System.Drawing.Color.White;
-            this.btnCancelar.UseVisualStyleBackColor = false;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.btnAgregar.BackColor = System.Drawing.Color.ForestGreen;
-            this.btnAgregar.BackGroundColor = System.Drawing.Color.ForestGreen;
-            this.btnAgregar.BorderColor = System.Drawing.Color.Lime;
-            this.btnAgregar.BorderRadius = 10;
-            this.btnAgregar.BorderSize = 2;
-            this.btnAgregar.FlatAppearance.BorderSize = 0;
-            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregar.ForeColor = System.Drawing.Color.White;
-            this.btnAgregar.Location = new System.Drawing.Point(715, 389);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(162, 35);
-            this.btnAgregar.TabIndex = 40;
-            this.btnAgregar.Text = "Agregar";
-            this.btnAgregar.TextGroundColor = System.Drawing.Color.White;
-            this.btnAgregar.UseVisualStyleBackColor = false;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
-            // 
             // cmbPais
             // 
             this.cmbPais.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -801,27 +632,6 @@ namespace NeoCobranza.Paneles
             this.label17.TabIndex = 49;
             this.label17.Text = "Pais";
             // 
-            // txtObservacion
-            // 
-            this.txtObservacion.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.txtObservacion.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.txtObservacion.BorderRadius = 10;
-            this.txtObservacion.BorderSize = 2;
-            this.txtObservacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtObservacion.ForeColor = System.Drawing.Color.DimGray;
-            this.txtObservacion.Location = new System.Drawing.Point(454, 204);
-            this.txtObservacion.Margin = new System.Windows.Forms.Padding(4);
-            this.txtObservacion.Multilinea = true;
-            this.txtObservacion.Name = "txtObservacion";
-            this.txtObservacion.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.txtObservacion.PasswordChar = false;
-            this.txtObservacion.PlaceHolderColor = System.Drawing.Color.DarkGray;
-            this.txtObservacion.PlaceHolderText = "Observaciones";
-            this.txtObservacion.Size = new System.Drawing.Size(497, 59);
-            this.txtObservacion.TabIndex = 51;
-            this.txtObservacion.Texts = "";
-            this.txtObservacion.UnderLineFlat = false;
-            // 
             // label18
             // 
             this.label18.AutoSize = true;
@@ -854,12 +664,202 @@ namespace NeoCobranza.Paneles
             this.mtxtCelular.Texts = "";
             this.mtxtCelular.UnderLineFlat = true;
             // 
+            // txtObservacion
+            // 
+            this.txtObservacion.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.txtObservacion.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.txtObservacion.BorderRadius = 10;
+            this.txtObservacion.BorderSize = 2;
+            this.txtObservacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtObservacion.ForeColor = System.Drawing.Color.DimGray;
+            this.txtObservacion.Location = new System.Drawing.Point(454, 204);
+            this.txtObservacion.Margin = new System.Windows.Forms.Padding(4);
+            this.txtObservacion.Multilinea = true;
+            this.txtObservacion.Name = "txtObservacion";
+            this.txtObservacion.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this.txtObservacion.PasswordChar = false;
+            this.txtObservacion.PlaceHolderColor = System.Drawing.Color.DarkGray;
+            this.txtObservacion.PlaceHolderText = "Observaciones";
+            this.txtObservacion.Size = new System.Drawing.Size(497, 59);
+            this.txtObservacion.TabIndex = 51;
+            this.txtObservacion.Texts = "";
+            this.txtObservacion.UnderLineFlat = false;
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.btnAgregar.BackColor = System.Drawing.Color.ForestGreen;
+            this.btnAgregar.BackGroundColor = System.Drawing.Color.ForestGreen;
+            this.btnAgregar.BorderColor = System.Drawing.Color.Lime;
+            this.btnAgregar.BorderRadius = 10;
+            this.btnAgregar.BorderSize = 2;
+            this.btnAgregar.FlatAppearance.BorderSize = 0;
+            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregar.ForeColor = System.Drawing.Color.White;
+            this.btnAgregar.Location = new System.Drawing.Point(715, 389);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(162, 42);
+            this.btnAgregar.TabIndex = 40;
+            this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.TextGroundColor = System.Drawing.Color.White;
+            this.btnAgregar.UseVisualStyleBackColor = false;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.btnCancelar.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.btnCancelar.BackGroundColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.btnCancelar.BorderColor = System.Drawing.Color.LavenderBlush;
+            this.btnCancelar.BorderRadius = 10;
+            this.btnCancelar.BorderSize = 2;
+            this.btnCancelar.FlatAppearance.BorderSize = 0;
+            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelar.ForeColor = System.Drawing.Color.White;
+            this.btnCancelar.Location = new System.Drawing.Point(528, 389);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(162, 42);
+            this.btnCancelar.TabIndex = 41;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.TextGroundColor = System.Drawing.Color.White;
+            this.btnCancelar.UseVisualStyleBackColor = false;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // txtDireccion
+            // 
+            this.txtDireccion.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.txtDireccion.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.txtDireccion.BorderRadius = 10;
+            this.txtDireccion.BorderSize = 2;
+            this.txtDireccion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDireccion.ForeColor = System.Drawing.Color.DimGray;
+            this.txtDireccion.Location = new System.Drawing.Point(454, 291);
+            this.txtDireccion.Margin = new System.Windows.Forms.Padding(4);
+            this.txtDireccion.Multilinea = true;
+            this.txtDireccion.Name = "txtDireccion";
+            this.txtDireccion.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this.txtDireccion.PasswordChar = false;
+            this.txtDireccion.PlaceHolderColor = System.Drawing.Color.DarkGray;
+            this.txtDireccion.PlaceHolderText = "Direccion";
+            this.txtDireccion.Size = new System.Drawing.Size(497, 66);
+            this.txtDireccion.TabIndex = 39;
+            this.txtDireccion.Texts = "";
+            this.txtDireccion.UnderLineFlat = false;
+            // 
+            // lblProfesion
+            // 
+            this.lblProfesion.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.lblProfesion.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.lblProfesion.BorderRadius = 0;
+            this.lblProfesion.BorderSize = 2;
+            this.lblProfesion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProfesion.ForeColor = System.Drawing.Color.DimGray;
+            this.lblProfesion.Location = new System.Drawing.Point(217, 193);
+            this.lblProfesion.Margin = new System.Windows.Forms.Padding(4);
+            this.lblProfesion.Multilinea = false;
+            this.lblProfesion.Name = "lblProfesion";
+            this.lblProfesion.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this.lblProfesion.PasswordChar = false;
+            this.lblProfesion.PlaceHolderColor = System.Drawing.Color.DarkGray;
+            this.lblProfesion.PlaceHolderText = "Profesion";
+            this.lblProfesion.Size = new System.Drawing.Size(182, 31);
+            this.lblProfesion.TabIndex = 31;
+            this.lblProfesion.Texts = "";
+            this.lblProfesion.UnderLineFlat = true;
+            // 
+            // lblSA
+            // 
+            this.lblSA.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.lblSA.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.lblSA.BorderRadius = 0;
+            this.lblSA.BorderSize = 2;
+            this.lblSA.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSA.ForeColor = System.Drawing.Color.DimGray;
+            this.lblSA.Location = new System.Drawing.Point(217, 132);
+            this.lblSA.Margin = new System.Windows.Forms.Padding(4);
+            this.lblSA.Multilinea = false;
+            this.lblSA.Name = "lblSA";
+            this.lblSA.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this.lblSA.PasswordChar = false;
+            this.lblSA.PlaceHolderColor = System.Drawing.Color.DarkGray;
+            this.lblSA.PlaceHolderText = "Segundo Apellido";
+            this.lblSA.Size = new System.Drawing.Size(182, 31);
+            this.lblSA.TabIndex = 29;
+            this.lblSA.Texts = "";
+            this.lblSA.UnderLineFlat = true;
+            // 
+            // lblPA
+            // 
+            this.lblPA.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.lblPA.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.lblPA.BorderRadius = 0;
+            this.lblPA.BorderSize = 2;
+            this.lblPA.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPA.ForeColor = System.Drawing.Color.DimGray;
+            this.lblPA.Location = new System.Drawing.Point(10, 132);
+            this.lblPA.Margin = new System.Windows.Forms.Padding(4);
+            this.lblPA.Multilinea = false;
+            this.lblPA.Name = "lblPA";
+            this.lblPA.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this.lblPA.PasswordChar = false;
+            this.lblPA.PlaceHolderColor = System.Drawing.Color.DarkGray;
+            this.lblPA.PlaceHolderText = "Primer Apellido";
+            this.lblPA.Size = new System.Drawing.Size(182, 31);
+            this.lblPA.TabIndex = 28;
+            this.lblPA.Texts = "";
+            this.lblPA.UnderLineFlat = true;
+            // 
+            // lblSN
+            // 
+            this.lblSN.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.lblSN.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.lblSN.BorderRadius = 0;
+            this.lblSN.BorderSize = 2;
+            this.lblSN.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSN.ForeColor = System.Drawing.Color.DimGray;
+            this.lblSN.Location = new System.Drawing.Point(217, 63);
+            this.lblSN.Margin = new System.Windows.Forms.Padding(4);
+            this.lblSN.Multilinea = false;
+            this.lblSN.Name = "lblSN";
+            this.lblSN.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this.lblSN.PasswordChar = false;
+            this.lblSN.PlaceHolderColor = System.Drawing.Color.DarkGray;
+            this.lblSN.PlaceHolderText = "Segundo Nombre";
+            this.lblSN.Size = new System.Drawing.Size(182, 31);
+            this.lblSN.TabIndex = 27;
+            this.lblSN.Texts = "";
+            this.lblSN.UnderLineFlat = true;
+            // 
+            // lblPn
+            // 
+            this.lblPn.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.lblPn.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.lblPn.BorderRadius = 0;
+            this.lblPn.BorderSize = 2;
+            this.lblPn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPn.ForeColor = System.Drawing.Color.DimGray;
+            this.lblPn.Location = new System.Drawing.Point(13, 63);
+            this.lblPn.Margin = new System.Windows.Forms.Padding(4);
+            this.lblPn.Multilinea = false;
+            this.lblPn.Name = "lblPn";
+            this.lblPn.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this.lblPn.PasswordChar = false;
+            this.lblPn.PlaceHolderColor = System.Drawing.Color.DarkGray;
+            this.lblPn.PlaceHolderText = "Primer Nombre";
+            this.lblPn.Size = new System.Drawing.Size(182, 31);
+            this.lblPn.TabIndex = 26;
+            this.lblPn.Texts = "";
+            this.lblPn.UnderLineFlat = true;
+            this.lblPn.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.lblPn_KeyPress);
+            // 
             // PanelCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(987, 436);
+            this.ClientSize = new System.Drawing.Size(987, 443);
             this.Controls.Add(this.mtxtCelular);
             this.Controls.Add(this.txtObservacion);
             this.Controls.Add(this.label18);
@@ -914,25 +914,11 @@ namespace NeoCobranza.Paneles
         }
 
         #endregion
-        private System.Windows.Forms.RadioButton rbtnSoltero;
-        private System.Windows.Forms.RadioButton rbtnCasado;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.DateTimePicker lblFecha;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox cmbDepartamento;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
         private System.Windows.Forms.Label lblSexo;
-        private System.Windows.Forms.RadioButton rbtnMasculino;
-        private System.Windows.Forms.RadioButton rbtnFemenino;
         private System.Windows.Forms.Label label2;
-        private Controladores.LoginUserControl lblPn;
-        private Controladores.LoginUserControl lblSN;
-        private Controladores.LoginUserControl lblPA;
-        private Controladores.LoginUserControl lblSA;
-        private Controladores.LoginUserControl lblProfesion;
-        private Controladores.LoginUserControl txtDireccion;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
@@ -946,17 +932,31 @@ namespace NeoCobranza.Paneles
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.MaskedTextBox mtxtCedula;
-        private System.Windows.Forms.MaskedTextBox mtxtEmail;
-        private System.Windows.Forms.MaskedTextBox mtxtTelefono;
         private System.Windows.Forms.Label label16;
         private DataSetFinal dataSetFinal1;
-        private Especiales.EspecialButton btnCancelar;
-        private Especiales.EspecialButton btnAgregar;
-        private System.Windows.Forms.ComboBox cmbPais;
         private System.Windows.Forms.Label label17;
-        private Controladores.LoginUserControl txtObservacion;
         private System.Windows.Forms.Label label18;
-        private Controladores.LoginUserControl mtxtCelular;
+        public System.Windows.Forms.RadioButton rbtnSoltero;
+        public System.Windows.Forms.RadioButton rbtnCasado;
+        public System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        public System.Windows.Forms.DateTimePicker lblFecha;
+        public System.Windows.Forms.ComboBox cmbDepartamento;
+        public System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
+        public System.Windows.Forms.RadioButton rbtnMasculino;
+        public System.Windows.Forms.RadioButton rbtnFemenino;
+        public Controladores.LoginUserControl lblPn;
+        public Controladores.LoginUserControl lblSN;
+        public Controladores.LoginUserControl lblPA;
+        public Controladores.LoginUserControl lblSA;
+        public Controladores.LoginUserControl lblProfesion;
+        public Controladores.LoginUserControl txtDireccion;
+        public System.Windows.Forms.MaskedTextBox mtxtCedula;
+        public System.Windows.Forms.MaskedTextBox mtxtEmail;
+        public System.Windows.Forms.MaskedTextBox mtxtTelefono;
+        public Especiales.EspecialButton btnCancelar;
+        public Especiales.EspecialButton btnAgregar;
+        public System.Windows.Forms.ComboBox cmbPais;
+        public Controladores.LoginUserControl txtObservacion;
+        public Controladores.LoginUserControl mtxtCelular;
     }
 }
