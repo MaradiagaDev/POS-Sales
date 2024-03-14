@@ -30,6 +30,8 @@ namespace NeoCobranza.Paneles_Auditorias
               
         }
 
+        
+
         private void CreacionUsuario_Load(object sender, EventArgs e)
         {
             AuditoriaModel.AgregarAuditoria(VariablesEntorno.UserNameSesion, "Seguridad", "Gestion Usuario", "Acceso Gestion User", "Normal");
@@ -39,8 +41,8 @@ namespace NeoCobranza.Paneles_Auditorias
         //LLenar Data
         private void LlenarDataUser()
         {
-            foreach(Usuario user in this.userStatic.GetAll()){
-                DGVUser.Rows.Add(user.IdUsuarios, user.Nombre,user.PrimerNombre, user.PrimerApellido,this.rolStatic.GetById(int.Parse(user.Rol)),user.Estado);
+            foreach(var user in this.userStatic.GetAll()){
+                DGVUser.Rows.Add(user.IdUsuarios, user.Nombre,user.PrimerNombre, user.PrimerApellido,this.rolStatic.GetById(int.Parse(user.Rol)),user.Estado,user.SucursalId);
             }
         }
 
@@ -51,27 +53,47 @@ namespace NeoCobranza.Paneles_Auditorias
             {
                 foreach (Usuario user in this.userStatic.GetById(txtFiltroUsuario.Texts))
                 {
-                    DGVUser.Rows.Add(user.IdUsuarios, user.Nombre, user.PrimerNombre, user.PrimerApellido, this.rolStatic.GetById(int.Parse(user.Rol)), user.Estado);
+                    using(NeoCobranzaContext db = new NeoCobranzaContext())
+                    {
+                        Sucursales sucursal = db.Sucursales.Where(s => s.SucursalId == user.SucursalId).FirstOrDefault();
+
+                        DGVUser.Rows.Add(user.IdUsuarios, user.Nombre, user.PrimerNombre, user.PrimerApellido, this.rolStatic.GetById(int.Parse(user.Rol)), user.Estado, sucursal.NombreSucursal);
+                    }
                 }
             }else if(CmbFiltro.Text == "USER" || CmbFiltro.Text == "" )
             {
                 foreach (Usuario user in this.userStatic.GetByUser(txtFiltroUsuario.Texts))
                 {
-                    DGVUser.Rows.Add(user.IdUsuarios, user.Nombre, user.PrimerNombre, user.PrimerApellido, this.rolStatic.GetById(int.Parse(user.Rol)), user.Estado);
+                    using (NeoCobranzaContext db = new NeoCobranzaContext())
+                    {
+                        Sucursales sucursal = db.Sucursales.Where(s => s.SucursalId == user.SucursalId).FirstOrDefault();
+
+                        DGVUser.Rows.Add(user.IdUsuarios, user.Nombre, user.PrimerNombre, user.PrimerApellido, this.rolStatic.GetById(int.Parse(user.Rol)), user.Estado, sucursal.NombreSucursal);
+                    }
                 }
             }
             else if (CmbFiltro.Text == "NOMBRE")
             {
                 foreach (Usuario user in this.userStatic.GetByPNombre(txtFiltroUsuario.Texts))
                 {
-                    DGVUser.Rows.Add(user.IdUsuarios, user.Nombre, user.PrimerNombre, user.PrimerApellido, this.rolStatic.GetById(int.Parse(user.Rol)), user.Estado);
+                    using (NeoCobranzaContext db = new NeoCobranzaContext())
+                    {
+                        Sucursales sucursal = db.Sucursales.Where(s => s.SucursalId == user.SucursalId).FirstOrDefault();
+
+                        DGVUser.Rows.Add(user.IdUsuarios, user.Nombre, user.PrimerNombre, user.PrimerApellido, this.rolStatic.GetById(int.Parse(user.Rol)), user.Estado, sucursal.NombreSucursal);
+                    }
                 }
             }
             else if (CmbFiltro.Text == "APELLIDO")
             {
                 foreach (Usuario user in this.userStatic.GetByPApellido(txtFiltroUsuario.Texts))
                 {
-                    DGVUser.Rows.Add(user.IdUsuarios, user.Nombre, user.PrimerNombre, user.PrimerApellido, this.rolStatic.GetById(int.Parse(user.Rol)), user.Estado);
+                    using (NeoCobranzaContext db = new NeoCobranzaContext())
+                    {
+                        Sucursales sucursal = db.Sucursales.Where(s => s.SucursalId == user.SucursalId).FirstOrDefault();
+
+                        DGVUser.Rows.Add(user.IdUsuarios, user.Nombre, user.PrimerNombre, user.PrimerApellido, this.rolStatic.GetById(int.Parse(user.Rol)), user.Estado, sucursal.NombreSucursal);
+                    }
                 }
             }
         }
@@ -103,7 +125,6 @@ namespace NeoCobranza.Paneles_Auditorias
 
         private void BtnCrearUsuario_Click(object sender, EventArgs e)
         {
-            
             PnlCMUsuario pnl = new PnlCMUsuario("Crear");
             pnl.Show();
         }

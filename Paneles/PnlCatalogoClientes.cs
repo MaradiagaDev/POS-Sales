@@ -1,6 +1,7 @@
 ﻿using NeoCobranza.Clases;
 using NeoCobranza.Data;
 using NeoCobranza.DataController;
+using NeoCobranza.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,99 +18,60 @@ namespace NeoCobranza.Paneles
 {
     public partial class PnlCatalogoClientes : Form
     {
-        public Conexion conexion;
-        public CCliente cCliente;
-        public PanelCliente panelCliente;
-        public PanelModificarCliente panelModificarCliente;
-        public PnlCatalogoClientes(Conexion conexion)
+        VMCatalogoCliente vMCatalogoCliente = new VMCatalogoCliente();
+
+        public PnlCatalogoClientes()
         {
             InitializeComponent();
-            this.conexion = conexion;
-            cCliente = new CCliente(conexion);
-            dgvCatalogoClientes.DataSource = cCliente.MostrarCliente(txtFiltrar.Texts);
-            panelCliente = new PanelCliente(conexion, "Agregar");
-
-            //Estilo del data
-            dgvCatalogoClientes.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11);
-            dgvCatalogoClientes.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11);
-
-        }
-
-
-
-
-        private void txtFiltrar__TextChanged(object sender, EventArgs e)
-        {
-            dgvCatalogoClientes.DataSource= cCliente.MostrarCliente(txtFiltrar.Texts);
-
-
-        }
-
-        private void btnAgregar_Click(object sender, EventArgs e)
-        {
-            Auditorias auditorias = new Auditorias(conexion);
-            //Insertar en auditorias
-            auditorias.Insertar(conexion.usuario, " Boton Creacion", dgvCatalogoClientes.Rows[0].Cells[0].Value.ToString(), "Clientes");
-
-
-            panelCliente.ShowDialog();
-
-            //Actualizar datos
-
-            dgvCatalogoClientes.DataSource = cCliente.MostrarCliente(txtFiltrar.Texts);
-        }
-        public DataGridView DgvCatalogoCliente
-        {
-            get { return dgvCatalogoClientes; }
-            set { dgvCatalogoClientes = value; }
-        }
-        private void LLenarPanel()
-        {
-            panelModificarCliente = new PanelModificarCliente(conexion, this.dgvCatalogoClientes, "Actualizar");
-            panelModificarCliente.Show();
-        }
-        private void btnActualizar_Click(object sender, EventArgs e)
-        {
-            if (dgvCatalogoClientes.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Seleccione el cliente que quiere actualizar");
-                return;
-
-            }
-            panelModificarCliente = new PanelModificarCliente(conexion, this.dgvCatalogoClientes, "Actualizar");
-            
-            panelModificarCliente.Show();
-            
-            cCliente.MostrarCliente("");
-
-            Auditorias auditorias = new Auditorias(conexion);
-            //Insertar en auditorias
-            auditorias.Insertar(conexion.usuario, "Boton Actualizacion", dgvCatalogoClientes.SelectedRows[0].Cells[0].Value.ToString(), "Clientes");
-
-
-            //Actualizar datos
-
-            dgvCatalogoClientes.DataSource = cCliente.MostrarCliente(txtFiltrar.Texts);
-        }
-
-        private void especialButton1_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         private void PnlCatalogoClientes_Load(object sender, EventArgs e)
         {
-            dgvCatalogoClientes.AlternatingRowsDefaultCellStyle.BackColor = Color.LightBlue;
+            vMCatalogoCliente.InitModuloCatalogoClientes(this);
         }
 
-        private void especialButton2_Click(object sender, EventArgs e)
+
+
+        private void BtnBuscarCliente_Click(object sender, EventArgs e)
         {
-            dgvCatalogoClientes.DataSource = cCliente.MostrarCliente(txtFiltrar.Texts);
+            vMCatalogoCliente.FuncionesPrincipales(this,"Buscar");
         }
 
-        private void pictureBox4_Click(object sender, EventArgs e)
+        private void btnAgregar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            PanelModificarCliente frm = new PanelModificarCliente(this,"Crear");
+            frm.ShowDialog();
+        }
+
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+            if (dgvCatalogoClientes.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dgvCatalogoClientes.SelectedRows[0];
+                object cellValue = selectedRow.Cells[1].Value;
+
+                if (cellValue != null)
+                {
+                    PanelModificarCliente frm = new PanelModificarCliente(this, cellValue.ToString());
+                    frm.ShowDialog();
+                }
+            }
+            else
+            {
+                //Validaciones
+
+                    MessageBox.Show("Debe seleccionar un cliente.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);                
+            }
+
+        }
+
+        private void dgvCatalogoClientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                object cellValue = dgvCatalogoClientes.Rows[e.RowIndex].Cells[1].Value;
+                vMCatalogoCliente.CambiarEstadoCliente(this, cellValue.ToString());
+            }
         }
     }
 }

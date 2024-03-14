@@ -410,7 +410,7 @@ namespace NeoCobranza.Paneles_Contrato
 
         private void BtnCliente_Click(object sender, EventArgs e)
         {
-            Panel_Cliente_Contrato panelCliente = new Panel_Cliente_Contrato(conexion, "ActualizarContrato");
+            Panel_Cliente_Contrato panelCliente = new Panel_Cliente_Contrato("ActualizarContrato");
             AddOwnedForm(panelCliente);
             panelCliente.Show();
         }

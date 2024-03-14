@@ -28,183 +28,59 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PnlAgregarProveedor));
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtNombre = new NeoCobranza.Controladores.LoginUserControl();
-            this.txtTelefono = new System.Windows.Forms.MaskedTextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.txtNoRuc = new System.Windows.Forms.MaskedTextBox();
-            this.txtEmail = new System.Windows.Forms.MaskedTextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.txtDireccion = new NeoCobranza.Controladores.LoginUserControl();
-            this.label2 = new System.Windows.Forms.Label();
+            this.LblDynamicoProveedor = new System.Windows.Forms.Label();
             this.btnAgregar = new NeoCobranza.Especiales.EspecialButton();
             this.btnCancelar = new NeoCobranza.Especiales.EspecialButton();
+            this.TxtNombreEmpresa = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.TxtNoTelefono = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.TxtNoRuc = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtDireccion = new System.Windows.Forms.TextBox();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.MenuText;
-            this.panel3.Controls.Add(this.label1);
+            this.panel3.Controls.Add(this.LblDynamicoProveedor);
             this.panel3.Location = new System.Drawing.Point(-10, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(860, 33);
+            this.panel3.Size = new System.Drawing.Size(1066, 33);
             this.panel3.TabIndex = 47;
             // 
-            // label1
+            // LblDynamicoProveedor
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.label1.Location = new System.Drawing.Point(12, 8);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(159, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Agregar Proveedor";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label6.Location = new System.Drawing.Point(11, 53);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(173, 20);
-            this.label6.TabIndex = 49;
-            this.label6.Text = "Nombre de la empresa:";
-            // 
-            // txtNombre
-            // 
-            this.txtNombre.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.txtNombre.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.txtNombre.BorderRadius = 0;
-            this.txtNombre.BorderSize = 2;
-            this.txtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombre.ForeColor = System.Drawing.Color.DimGray;
-            this.txtNombre.Location = new System.Drawing.Point(16, 86);
-            this.txtNombre.Margin = new System.Windows.Forms.Padding(4);
-            this.txtNombre.Multilinea = false;
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.txtNombre.PasswordChar = false;
-            this.txtNombre.PlaceHolderColor = System.Drawing.Color.DarkGray;
-            this.txtNombre.PlaceHolderText = "Nombre de la Empresa";
-            this.txtNombre.Size = new System.Drawing.Size(345, 33);
-            this.txtNombre.TabIndex = 48;
-            this.txtNombre.Texts = "";
-            this.txtNombre.UnderLineFlat = true;
-            // 
-            // txtTelefono
-            // 
-            this.txtTelefono.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTelefono.Location = new System.Drawing.Point(15, 183);
-            this.txtTelefono.Mask = "000000000000000000";
-            this.txtTelefono.Name = "txtTelefono";
-            this.txtTelefono.Size = new System.Drawing.Size(169, 24);
-            this.txtTelefono.TabIndex = 50;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label13.Location = new System.Drawing.Point(12, 138);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(75, 20);
-            this.label13.TabIndex = 51;
-            this.label13.Text = "Telefono:";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label11.Location = new System.Drawing.Point(13, 220);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(59, 18);
-            this.label11.TabIndex = 53;
-            this.label11.Text = "NoRuc:";
-            // 
-            // txtNoRuc
-            // 
-            this.txtNoRuc.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNoRuc.Location = new System.Drawing.Point(15, 254);
-            this.txtNoRuc.Mask = "0000000000000000000000";
-            this.txtNoRuc.Name = "txtNoRuc";
-            this.txtNoRuc.Size = new System.Drawing.Size(205, 24);
-            this.txtNoRuc.TabIndex = 54;
-            // 
-            // txtEmail
-            // 
-            this.txtEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmail.Location = new System.Drawing.Point(15, 320);
-            this.txtEmail.Mask = "LCCCCCCCCCCCCCCCCCC@LLLLLLLLL.LLLLL";
-            this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(298, 24);
-            this.txtEmail.TabIndex = 55;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label12.Location = new System.Drawing.Point(12, 293);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(41, 13);
-            this.label12.TabIndex = 56;
-            this.label12.Text = "Email:";
-            // 
-            // txtDireccion
-            // 
-            this.txtDireccion.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.txtDireccion.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.txtDireccion.BorderRadius = 10;
-            this.txtDireccion.BorderSize = 2;
-            this.txtDireccion.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDireccion.ForeColor = System.Drawing.Color.DimGray;
-            this.txtDireccion.Location = new System.Drawing.Point(429, 107);
-            this.txtDireccion.Margin = new System.Windows.Forms.Padding(4);
-            this.txtDireccion.Multilinea = true;
-            this.txtDireccion.Name = "txtDireccion";
-            this.txtDireccion.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.txtDireccion.PasswordChar = false;
-            this.txtDireccion.PlaceHolderColor = System.Drawing.Color.DarkGray;
-            this.txtDireccion.PlaceHolderText = "Direccion";
-            this.txtDireccion.Size = new System.Drawing.Size(358, 75);
-            this.txtDireccion.TabIndex = 58;
-            this.txtDireccion.Texts = "";
-            this.txtDireccion.UnderLineFlat = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label2.Location = new System.Drawing.Point(426, 72);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 20);
-            this.label2.TabIndex = 57;
-            this.label2.Text = "Direccion ";
+            this.LblDynamicoProveedor.AutoSize = true;
+            this.LblDynamicoProveedor.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblDynamicoProveedor.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.LblDynamicoProveedor.Location = new System.Drawing.Point(22, 9);
+            this.LblDynamicoProveedor.Margin = new System.Windows.Forms.Padding(3, 0, 10, 0);
+            this.LblDynamicoProveedor.Name = "LblDynamicoProveedor";
+            this.LblDynamicoProveedor.Size = new System.Drawing.Size(158, 18);
+            this.LblDynamicoProveedor.TabIndex = 1;
+            this.LblDynamicoProveedor.Text = "Modificar Cliente Id:";
             // 
             // btnAgregar
             // 
             this.btnAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.btnAgregar.BackColor = System.Drawing.Color.ForestGreen;
-            this.btnAgregar.BackGroundColor = System.Drawing.Color.ForestGreen;
+            this.btnAgregar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(186)))));
+            this.btnAgregar.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(186)))));
             this.btnAgregar.BorderColor = System.Drawing.Color.Lime;
-            this.btnAgregar.BorderRadius = 10;
-            this.btnAgregar.BorderSize = 2;
+            this.btnAgregar.BorderRadius = 5;
+            this.btnAgregar.BorderSize = 0;
             this.btnAgregar.FlatAppearance.BorderSize = 0;
             this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnAgregar.ForeColor = System.Drawing.Color.White;
-            this.btnAgregar.Location = new System.Drawing.Point(605, 357);
+            this.btnAgregar.Location = new System.Drawing.Point(877, 558);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(209, 35);
-            this.btnAgregar.TabIndex = 40;
+            this.btnAgregar.Size = new System.Drawing.Size(173, 35);
+            this.btnAgregar.TabIndex = 59;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.TextGroundColor = System.Drawing.Color.White;
             this.btnAgregar.UseVisualStyleBackColor = false;
@@ -216,41 +92,119 @@
             this.btnCancelar.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.btnCancelar.BackGroundColor = System.Drawing.SystemColors.ControlDarkDark;
             this.btnCancelar.BorderColor = System.Drawing.Color.LavenderBlush;
-            this.btnCancelar.BorderRadius = 10;
-            this.btnCancelar.BorderSize = 2;
+            this.btnCancelar.BorderRadius = 5;
+            this.btnCancelar.BorderSize = 0;
             this.btnCancelar.FlatAppearance.BorderSize = 0;
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnCancelar.ForeColor = System.Drawing.Color.White;
-            this.btnCancelar.Location = new System.Drawing.Point(374, 357);
+            this.btnCancelar.Location = new System.Drawing.Point(694, 558);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(209, 35);
-            this.btnCancelar.TabIndex = 41;
+            this.btnCancelar.Size = new System.Drawing.Size(173, 35);
+            this.btnCancelar.TabIndex = 60;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.TextGroundColor = System.Drawing.Color.White;
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // TxtNombreEmpresa
+            // 
+            this.TxtNombreEmpresa.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TxtNombreEmpresa.Location = new System.Drawing.Point(17, 93);
+            this.TxtNombreEmpresa.Name = "TxtNombreEmpresa";
+            this.TxtNombreEmpresa.Size = new System.Drawing.Size(392, 23);
+            this.TxtNombreEmpresa.TabIndex = 72;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label7.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label7.Location = new System.Drawing.Point(13, 67);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(204, 18);
+            this.label7.TabIndex = 73;
+            this.label7.Text = "Nombre de la Empresa: (*)";
+            // 
+            // TxtNoTelefono
+            // 
+            this.TxtNoTelefono.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TxtNoTelefono.Location = new System.Drawing.Point(18, 164);
+            this.TxtNoTelefono.Name = "TxtNoTelefono";
+            this.TxtNoTelefono.Size = new System.Drawing.Size(202, 23);
+            this.TxtNoTelefono.TabIndex = 74;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label2.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label2.Location = new System.Drawing.Point(16, 139);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(98, 18);
+            this.label2.TabIndex = 75;
+            this.label2.Text = "Telefono: (*)";
+            // 
+            // TxtNoRuc
+            // 
+            this.TxtNoRuc.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TxtNoRuc.Location = new System.Drawing.Point(19, 235);
+            this.TxtNoRuc.Name = "TxtNoRuc";
+            this.TxtNoRuc.Size = new System.Drawing.Size(201, 23);
+            this.TxtNoRuc.TabIndex = 76;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label3.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label3.Location = new System.Drawing.Point(18, 208);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(91, 18);
+            this.label3.TabIndex = 77;
+            this.label3.Text = "No RUC: (*)";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label4.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label4.Location = new System.Drawing.Point(19, 285);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(85, 18);
+            this.label4.TabIndex = 79;
+            this.label4.Text = "Dirección:";
+            // 
+            // txtDireccion
+            // 
+            this.txtDireccion.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.txtDireccion.Location = new System.Drawing.Point(21, 320);
+            this.txtDireccion.Multiline = true;
+            this.txtDireccion.Name = "txtDireccion";
+            this.txtDireccion.Size = new System.Drawing.Size(469, 95);
+            this.txtDireccion.TabIndex = 80;
             // 
             // PnlAgregarProveedor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(840, 397);
+            this.ClientSize = new System.Drawing.Size(1056, 600);
+            this.Controls.Add(this.txtDireccion);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.TxtNoRuc);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.TxtNoTelefono);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.TxtNombreEmpresa);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.txtDireccion);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtEmail);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.txtNoRuc);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.txtTelefono);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.panel3);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(1072, 639);
+            this.MinimumSize = new System.Drawing.Size(1072, 639);
             this.Name = "PnlAgregarProveedor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PnlAgregarProveedor";
@@ -264,18 +218,16 @@
         #endregion
 
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label6;
-        private Controladores.LoginUserControl txtNombre;
-        private System.Windows.Forms.MaskedTextBox txtTelefono;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.MaskedTextBox txtNoRuc;
-        private System.Windows.Forms.MaskedTextBox txtEmail;
-        private System.Windows.Forms.Label label12;
-        private Controladores.LoginUserControl txtDireccion;
-        private System.Windows.Forms.Label label2;
-        private Especiales.EspecialButton btnCancelar;
         public Especiales.EspecialButton btnAgregar;
+        public Especiales.EspecialButton btnCancelar;
+        public System.Windows.Forms.TextBox TxtNombreEmpresa;
+        public System.Windows.Forms.Label label7;
+        public System.Windows.Forms.TextBox TxtNoTelefono;
+        public System.Windows.Forms.Label label2;
+        public System.Windows.Forms.TextBox TxtNoRuc;
+        public System.Windows.Forms.Label label3;
+        public System.Windows.Forms.Label label4;
+        public System.Windows.Forms.TextBox txtDireccion;
+        public System.Windows.Forms.Label LblDynamicoProveedor;
     }
 }

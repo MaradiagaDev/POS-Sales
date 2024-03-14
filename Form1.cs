@@ -16,47 +16,72 @@ using NeoCobranza.Data;
 using NeoCobranza.ModelObjectCobranza;
 using NeoCobranza.ModelsCobranza;
 using NeoCobranza.Paneles;
+using NeoCobranza.ViewModels;
 
 namespace NeoCobranza
 {
     public partial class Form1 : Form
     {
-       
+
         public Form1()
         {
             InitializeComponent();
-            
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           
+            // Habilita el KeyPreview para que el formulario maneje los eventos de teclado
+            this.KeyPreview = true;
+
         }
 
-
-            private void btnLogin_Click(object sender, EventArgs e)
+        private void btnLogin_Click(object sender, EventArgs e)
         {
-            
-            if (txtUser.Texts == "" && txtPassword.Texts == "")
+
+            Acceder();
+        }
+
+        private void ChkMostrarContra_CheckedChanged(object sender, EventArgs e)
+        {
+            TxtPass.PasswordChar = ChkMostrarContra.Checked ? '\0' : '●';
+        }
+
+        private void BtnSalir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void Acceder()
+        {
+            if (TxtPass.Text == "" && TxtPass.Text == "")
             {
-                MessageBox.Show("Campos vacios", "Alerta");
+                MessageBox.Show("Campos vacios", "Atención",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 return;
             }
-            
-            if (txtUser.Texts == "")
+
+            if (TxtPass.Text == "")
             {
-               MessageBox.Show("Digite el usuario", "Alerta");
+                MessageBox.Show("Digite el usuario", "Atención",
+                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-                
-            if (txtPassword.Texts == "")
+
+            if (TxtPass.Text == "")
             {
-              MessageBox.Show("Digite la contraseña", "Alerta");
+                MessageBox.Show("Digite la contraseña", "Atención",
+                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-                    
-            Conexion con = new Conexion("123456","sa");
+
+            Conexion con = new Conexion("123456", "sa");
 
             Clases.Usuario usuario = new Clases.Usuario(con);
 
@@ -64,35 +89,33 @@ namespace NeoCobranza
             {
                 using (NeoCobranzaContext db = new NeoCobranzaContext())
                 {
-                    ModelsCobranza.Usuario user = db.Usuario.Where(p => p.Pass.Trim() == txtPassword.Texts.Trim() &&  p.Nombre.Trim() == txtUser.Texts.Trim()).FirstOrDefault();
-                 
-                    //.Where(p => p.Pass == txtPassword.Texts).FirstOrDefault();
-
-                    
-
+                    ModelsCobranza.Usuario user = db.Usuario.Where(p => p.Pass.Trim() == TxtPass.Text.Trim() && p.Nombre.Trim() == TxtUser.Text.Trim()).FirstOrDefault();
                     if (user != null)
                     {
+                        Utilidades.RolUsuario = user.Rol;
+                        Utilidades.IdUsuario = user.IdUsuarios.ToString();
+                        Utilidades.SucursalId = user.SucursalId.ToString();
 
                         if (user.Estado == "Inhabilitado")
                         {
                             MessageBox.Show("Su usuario ha sido bloqueado. Pongase en contacto con el administrador.", "Alerta");
                             return;
                         }
-                        AuditoriaModel.AgregarAuditoria(user.Nombre,"Inicio","Usuario","Acceso","Normal");
+                        AuditoriaModel.AgregarAuditoria(user.Nombre, "Inicio", "Usuario", "Acceso", "Normal");
 
                         VariablesEntorno.idUsuarioSesion = user.IdUsuarios;
                         VariablesEntorno.RoleSesion = user.Rol;
                         VariablesEntorno.UserNameSesion = user.Nombre;
 
-                        MessageBox.Show("Acceso realizado.", "Correcto");
+                        MessageBox.Show("Acceso realizado.", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Hide();
-                        PnlPrincipal pnlPrincipal = new PnlPrincipal(txtUser.Texts, con);
+                        PnlPrincipal pnlPrincipal = new PnlPrincipal(TxtUser.Text, con);
                         AddOwnedForm(pnlPrincipal);
                         pnlPrincipal.Show();
 
                         //Limpia
-                        txtPassword.clear();
-                        txtUser.clear();
+                        TxtPass.Text = "";
+                        TxtPass.Text = "";
                     }
                     else
                     {
@@ -102,36 +125,37 @@ namespace NeoCobranza
             }
             else
             {
-             MessageBox.Show ("Error de servidor","Error");     
+                MessageBox.Show("Error de servidor", "Error");
             }
-
-
-                   
-
-                   
-            
         }
 
-        private void especialButton1_Click(object sender, EventArgs e)
+        private void TxtUser_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Application.Exit();
-        }
-
-        private void txtUser__TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if(txtPassword.PasswordChar == true)
+            if (e.KeyChar == (char)Keys.Enter)
             {
-                txtPassword.PasswordChar = false;
-            }else if (txtPassword.PasswordChar == false)
-            {
-                txtPassword.PasswordChar = true;
+                Acceder();
             }
-           
+        }
+
+        private void TxtPass_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                Acceder();
+            }
+        }
+
+        private void ChkMostrarContra_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                Acceder();
+            }
+        }
+
+        private void LblVersion_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

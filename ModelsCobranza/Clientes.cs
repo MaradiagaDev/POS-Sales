@@ -29,5 +29,6 @@ namespace NeoCobranza.ModelsCobranza
         public string Departamento { get; set; }
         public string Pais { get; set; }
         public string Observacion { get; set; }
+        public string NoRuc { get; set; }
     }
 }

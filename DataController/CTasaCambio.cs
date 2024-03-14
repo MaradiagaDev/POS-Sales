@@ -24,35 +24,19 @@ namespace NeoCobranza.DataController
         {
             using (NeoCobranzaContext db = new NeoCobranzaContext())
             {
-                    TipoCambio tipo = db.TipoCambio.Where(t => t.FechaCambio.Equals(DateTime.Today)).FirstOrDefault();
 
-                    if (tipo == null)
-                    {
-                        MessageBox.Show("No se han insertado las tasas de cambio de este mes","Atención",MessageBoxButtons.OK,MessageBoxIcon.Warning);
-                        return "";
-                    }
-                    else
-                    {
-                        return tipo.Tasa.ToString().Substring(0,6);
-                    }
+                return "36,6243";
+                    
             }
         }
+
         public string MostrarIdTasa()
         {
-            using (NeoCobranzaContext db = new NeoCobranzaContext())
-            {
-                TipoCambio tipo = db.TipoCambio.Where(t => t.FechaCambio.Equals(DateTime.Today)).FirstOrDefault();
+           
 
-                if (tipo == null)
-                {
-                    MessageBox.Show("No se han insertado las tasas de cambio de este mes", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return "";
-                }
-                else
-                {
-                    return tipo.IdTasaCambio.ToString();
-                }
-            }
+                return "1198";
+
+
         }
     }
 }

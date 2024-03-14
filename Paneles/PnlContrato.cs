@@ -26,7 +26,6 @@ namespace NeoCobranza.Paneles
         
         public Panel_Cliente_Contrato panelCliente;
         public CGeneral cGeneral;
-        public PnlInsertarAgencia pnlInsertarAgencia = new PnlInsertarAgencia();
         public PnlVendedores pnlVendedores;
         public PnlBeneficiario pnlBeneficiario;
         public CContrato cContrato;
@@ -44,7 +43,7 @@ namespace NeoCobranza.Paneles
             pnlVendedores = new PnlVendedores(conexion,"Contrato");
             AddOwnedForm(pnlVendedores);
             
-            panelCliente = new Panel_Cliente_Contrato(conexion,"Contrato");
+            panelCliente = new Panel_Cliente_Contrato("Contrato");
             AddOwnedForm(panelCliente);
             cGeneral = new CGeneral(conexion);
 
@@ -96,7 +95,6 @@ namespace NeoCobranza.Paneles
 
         private void especialButton3_Click(object sender, EventArgs e)
         {
-            pnlInsertarAgencia.Show();
         }
 
         private void especialButton2_Click(object sender, EventArgs e)

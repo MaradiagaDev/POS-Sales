@@ -10,14 +10,53 @@ namespace NeoCobranza.ModelObjectCobranza
 {
     internal class UserModel
     {
+        public class UserModelClass
+        {
+            public int IdUsuarios { get; set; }
+            public string Nombre { get; set; }
+            public DateTime? FechaCreacion { get; set; }
+            public string Rol { get; set; }
+            public string Estado { get; set; }
+            public string PrimerNombre { get; set; }
+            public string PrimerApellido { get; set; }
+            public string Pass { get; set; }
+            public string SucursalId { get; set; }
+        }
 
         //GET
-        public List<Usuario> GetAll()
+        public List<UserModelClass> GetAll()
         {
             using(NeoCobranzaContext db = new NeoCobranzaContext())
             {
                 List<Usuario> ListUser = db.Usuario.OrderBy(p => p.IdUsuarios).ToList();
-                return ListUser;
+
+                List<UserModelClass> userFinal = new List<UserModelClass>();
+
+                foreach(Usuario u in ListUser)
+                {
+                    Sucursales sucursal = db.Sucursales.Where(s => s.SucursalId == u.SucursalId).FirstOrDefault();
+
+                    if(sucursal != null)
+                    {
+                        UserModelClass userModelClass = new UserModelClass() 
+                        {
+                         IdUsuarios = u.IdUsuarios,
+                         Nombre = u.Nombre,
+                         FechaCreacion = u.FechaCreacion,
+                         Rol= u.Rol,
+                         Estado = u.Estado,
+                         PrimerApellido = u.PrimerApellido,
+                         PrimerNombre = u.PrimerNombre,
+                         Pass = u.Pass,
+                         SucursalId = sucursal.NombreSucursal
+                        };
+
+                        userFinal.Add(userModelClass);
+                        
+                    }
+                }
+
+                return userFinal;
             }
         }
 

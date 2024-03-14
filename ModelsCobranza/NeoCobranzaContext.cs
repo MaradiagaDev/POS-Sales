@@ -19,11 +19,33 @@ namespace NeoCobranza.ModelsCobranza
         {
         }
 
+        public virtual DbSet<AjustesInventario> AjustesInventario { get; set; }
+        public virtual DbSet<Almacenes> Almacenes { get; set; }
         public virtual DbSet<AuditoriaSistema> AuditoriaSistema { get; set; }
+        public virtual DbSet<Bancos> Bancos { get; set; }
         public virtual DbSet<Clientes> Clientes { get; set; }
+        public virtual DbSet<ComprasInventario> ComprasInventario { get; set; }
+        public virtual DbSet<ConfigFacturacion> ConfigFacturacion { get; set; }
+        public virtual DbSet<ConfigInventario> ConfigInventario { get; set; }
+        public virtual DbSet<Imagenes> Imagenes { get; set; }
+        public virtual DbSet<Inventario> Inventario { get; set; }
+        public virtual DbSet<LotesProducto> LotesProducto { get; set; }
+        public virtual DbSet<Mermas> Mermas { get; set; }
+        public virtual DbSet<MotivosCancelacion> MotivosCancelacion { get; set; }
+        public virtual DbSet<Proveedores> Proveedores { get; set; }
+        public virtual DbSet<RelAlmacenDetalle> RelAlmacenDetalle { get; set; }
+        public virtual DbSet<RelAlmacenProducto> RelAlmacenProducto { get; set; }
+        public virtual DbSet<RelBancoTipo> RelBancoTipo { get; set; }
+        public virtual DbSet<RelProductoSucursales> RelProductoSucursales { get; set; }
+        public virtual DbSet<RelProveedorProducto> RelProveedorProducto { get; set; }
         public virtual DbSet<RolPermisos> RolPermisos { get; set; }
         public virtual DbSet<RolUsuario> RolUsuario { get; set; }
+        public virtual DbSet<Salas> Salas { get; set; }
+        public virtual DbSet<ServiciosEstadares> ServiciosEstadares { get; set; }
+        public virtual DbSet<Sucursales> Sucursales { get; set; }
         public virtual DbSet<TipoCambio> TipoCambio { get; set; }
+        public virtual DbSet<TipoServicios> TipoServicios { get; set; }
+        public virtual DbSet<TipoTarjeta> TipoTarjeta { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -31,12 +53,32 @@ namespace NeoCobranza.ModelsCobranza
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=192.168.1.165;Database=NeoCobranza;UID=sa;PWD=123456;TrustServerCertificate=True");
+                optionsBuilder.UseSqlServer("Server=192.168.1.165;Database=NeoCobranza;UID=cobranzanew;PWD=12345678;TrustServerCertificate=True");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AjustesInventario>(entity =>
+            {
+                entity.HasKey(e => e.AjusteId);
+
+                entity.Property(e => e.TipoProducto).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Almacenes>(entity =>
+            {
+                entity.HasKey(e => e.AlmacenId);
+
+                entity.Property(e => e.AlmacenId).HasColumnName("AlmacenID");
+
+                entity.Property(e => e.Estatus).HasMaxLength(50);
+
+                entity.Property(e => e.NombreAlmacen).HasMaxLength(100);
+
+                entity.Property(e => e.SucursalId).HasColumnName("SucursalID");
+            });
+
             modelBuilder.Entity<AuditoriaSistema>(entity =>
             {
                 entity.HasKey(e => e.IdAuditoria);
@@ -56,6 +98,17 @@ namespace NeoCobranza.ModelsCobranza
                 entity.Property(e => e.Usuario)
                     .IsRequired()
                     .HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<Bancos>(entity =>
+            {
+                entity.HasKey(e => e.BancoId);
+
+                entity.Property(e => e.BancoId).HasColumnName("BancoID");
+
+                entity.Property(e => e.Banco).HasMaxLength(100);
+
+                entity.Property(e => e.Estado).HasMaxLength(50);
             });
 
             modelBuilder.Entity<Clientes>(entity =>
@@ -82,6 +135,8 @@ namespace NeoCobranza.ModelsCobranza
                 entity.Property(e => e.Fax).HasMaxLength(50);
 
                 entity.Property(e => e.FechaNac).HasColumnType("date");
+
+                entity.Property(e => e.NoRuc).HasMaxLength(50);
 
                 entity.Property(e => e.Observacion)
                     .HasColumnName("observacion")
@@ -112,6 +167,189 @@ namespace NeoCobranza.ModelsCobranza
                     .HasMaxLength(255);
 
                 entity.Property(e => e.Telefono).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<ComprasInventario>(entity =>
+            {
+                entity.HasKey(e => e.CompraId);
+
+                entity.Property(e => e.CompraId).HasColumnName("CompraID");
+
+                entity.Property(e => e.AlmacenId).HasColumnName("AlmacenID");
+
+                entity.Property(e => e.CostoTotal).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.Descripcion).HasMaxLength(100);
+
+                entity.Property(e => e.FechaAlta).HasColumnType("datetime");
+
+                entity.Property(e => e.SucursalId)
+                    .HasColumnName("SucursalID")
+                    .HasMaxLength(10)
+                    .IsFixedLength();
+
+                entity.Property(e => e.UsuarioId).HasColumnName("UsuarioID");
+            });
+
+            modelBuilder.Entity<ConfigFacturacion>(entity =>
+            {
+                entity.Property(e => e.ConfigFacturacionId).HasColumnName("ConfigFacturacionID");
+
+                entity.Property(e => e.Serie).HasMaxLength(5);
+
+                entity.Property(e => e.SucursalId).HasColumnName("SucursalID");
+            });
+
+            modelBuilder.Entity<ConfigInventario>(entity =>
+            {
+                entity.Property(e => e.ConfigInventarioId).HasColumnName("ConfigInventarioID");
+
+                entity.Property(e => e.SucursalId).HasColumnName("SucursalID");
+            });
+
+            modelBuilder.Entity<Imagenes>(entity =>
+            {
+                entity.HasKey(e => e.IdImagen)
+                    .HasName("PK__Imagenes__B42D8F2A06CD04F7");
+
+                entity.ToTable("Imagenes", "RECURSOS");
+
+                entity.Property(e => e.Imagen)
+                    .HasColumnName("imagen")
+                    .HasColumnType("image");
+            });
+
+            modelBuilder.Entity<Inventario>(entity =>
+            {
+                entity.Property(e => e.InventarioId).HasColumnName("InventarioID");
+
+                entity.Property(e => e.ProductoId).HasColumnName("ProductoID");
+            });
+
+            modelBuilder.Entity<LotesProducto>(entity =>
+            {
+                entity.HasKey(e => e.LoteId);
+
+                entity.Property(e => e.LoteId)
+                    .HasColumnName("LoteID")
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.AlmacenId).HasColumnName("AlmacenID");
+
+                entity.Property(e => e.CompraId).HasColumnName("CompraID");
+
+                entity.Property(e => e.CostoU).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.Expira).HasMaxLength(50);
+
+                entity.Property(e => e.FechaCreacion).HasColumnType("date");
+
+                entity.Property(e => e.FechaExpiracion).HasColumnType("date");
+
+                entity.Property(e => e.Producto).HasMaxLength(200);
+
+                entity.Property(e => e.ProductoId).HasColumnName("ProductoID");
+
+                entity.Property(e => e.ProveedorId).HasColumnName("ProveedorID");
+
+                entity.Property(e => e.SubTotal).HasColumnType("decimal(18, 2)");
+            });
+
+            modelBuilder.Entity<Mermas>(entity =>
+            {
+                entity.HasKey(e => e.MermaId);
+
+                entity.Property(e => e.MermaId).HasColumnName("MermaID");
+
+                entity.Property(e => e.FechaRealizacion).HasColumnType("datetime");
+
+                entity.Property(e => e.Identificador).HasMaxLength(500);
+
+                entity.Property(e => e.LoteId)
+                    .HasColumnName("LoteID")
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.PrecioVenta).HasColumnType("decimal(18, 2)");
+            });
+
+            modelBuilder.Entity<MotivosCancelacion>(entity =>
+            {
+                entity.HasKey(e => e.MotivoCancelacionId);
+
+                entity.Property(e => e.MotivoCancelacionId).HasColumnName("MotivoCancelacionID");
+
+                entity.Property(e => e.Estado).HasMaxLength(50);
+
+                entity.Property(e => e.Motivo).HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<Proveedores>(entity =>
+            {
+                entity.HasKey(e => e.IdProveedor)
+                    .HasName("PK__Proveedo__E8B631AF72C60C4A");
+
+                entity.ToTable("Proveedores", "OPERATIVOS");
+
+                entity.Property(e => e.Correo).HasMaxLength(30);
+
+                entity.Property(e => e.Direccion).HasMaxLength(200);
+
+                entity.Property(e => e.NoRuc).HasMaxLength(30);
+
+                entity.Property(e => e.NoTelefono)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.NombreEmpresa)
+                    .IsRequired()
+                    .HasMaxLength(200);
+            });
+
+            modelBuilder.Entity<RelAlmacenDetalle>(entity =>
+            {
+                entity.HasKey(e => e.IdRelAlmacenDetalle);
+
+                entity.Property(e => e.Color).HasMaxLength(50);
+
+                entity.Property(e => e.Estado).HasMaxLength(50);
+
+                entity.Property(e => e.Modelo).HasMaxLength(50);
+
+                entity.Property(e => e.Serie).HasMaxLength(50);
+
+                entity.Property(e => e.Talla).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<RelAlmacenProducto>(entity =>
+            {
+                entity.Property(e => e.RelAlmacenProductoId).HasColumnName("RelAlmacenProductoID");
+            });
+
+            modelBuilder.Entity<RelBancoTipo>(entity =>
+            {
+                entity.HasKey(e => e.RelBancoTarjetaTipo);
+
+                entity.Property(e => e.BancoId).HasColumnName("BancoID");
+
+                entity.Property(e => e.TarjetaTipoId).HasColumnName("TarjetaTipoID");
+            });
+
+            modelBuilder.Entity<RelProductoSucursales>(entity =>
+            {
+                entity.Property(e => e.RelProductoSucursalesId).HasMaxLength(50);
+
+                entity.Property(e => e.ProductoId).HasColumnName("ProductoID");
+
+                entity.Property(e => e.SucursalId).HasColumnName("SucursalID");
+            });
+
+            modelBuilder.Entity<RelProveedorProducto>(entity =>
+            {
+                entity.HasKey(e => e.RelProductoProveedor);
+
+                entity.Property(e => e.ProductoId).HasColumnName("ProductoID");
+
+                entity.Property(e => e.ProveedorId).HasColumnName("ProveedorID");
             });
 
             modelBuilder.Entity<RolPermisos>(entity =>
@@ -255,6 +493,62 @@ namespace NeoCobranza.ModelsCobranza
                     .HasMaxLength(100);
             });
 
+            modelBuilder.Entity<Salas>(entity =>
+            {
+                entity.HasKey(e => e.SalaId);
+
+                entity.Property(e => e.SalaId).HasColumnName("SalaID");
+
+                entity.Property(e => e.Estado).HasMaxLength(50);
+
+                entity.Property(e => e.NombreSala).HasMaxLength(150);
+
+                entity.Property(e => e.SucursalId).HasColumnName("SucursalID");
+            });
+
+            modelBuilder.Entity<ServiciosEstadares>(entity =>
+            {
+                entity.HasKey(e => e.IdEstandar)
+                    .HasName("PK__Servicio__BB570ABD4589517F");
+
+                entity.ToTable("Servicios_Estadares", "OPERATIVOS");
+
+                entity.Property(e => e.ClasificacionInventario).HasMaxLength(50);
+
+                entity.Property(e => e.Codigo).HasMaxLength(100);
+
+                entity.Property(e => e.Descripcion).HasMaxLength(500);
+
+                entity.Property(e => e.Estado).HasMaxLength(50);
+
+                entity.Property(e => e.Expira).HasMaxLength(50);
+
+                entity.Property(e => e.ManejoInventario).HasMaxLength(50);
+
+                entity.Property(e => e.MontoVd).HasColumnName("MontoVD");
+
+                entity.Property(e => e.NombreEstandar).HasMaxLength(100);
+
+                entity.Property(e => e.TipoServicio).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Sucursales>(entity =>
+            {
+                entity.HasKey(e => e.SucursalId);
+
+                entity.Property(e => e.SucursalId).HasColumnName("SucursalID");
+
+                entity.Property(e => e.Correo).HasMaxLength(200);
+
+                entity.Property(e => e.Direccion).HasMaxLength(500);
+
+                entity.Property(e => e.Estado).HasMaxLength(50);
+
+                entity.Property(e => e.NombreSucursal).HasMaxLength(50);
+
+                entity.Property(e => e.Telefono).HasMaxLength(50);
+            });
+
             modelBuilder.Entity<TipoCambio>(entity =>
             {
                 entity.HasKey(e => e.IdTasaCambio)
@@ -263,6 +557,29 @@ namespace NeoCobranza.ModelsCobranza
                 entity.ToTable("TipoCambio", "OPERATIVOS");
 
                 entity.Property(e => e.FechaCambio).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<TipoServicios>(entity =>
+            {
+                entity.HasKey(e => e.TipoServicionId)
+                    .HasName("PK_OPERATIVOS.TipoServicios");
+
+                entity.Property(e => e.TipoServicionId).HasColumnName("TipoServicionID");
+
+                entity.Property(e => e.Descripcion).HasMaxLength(100);
+
+                entity.Property(e => e.Estado).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<TipoTarjeta>(entity =>
+            {
+                entity.Property(e => e.TipoTarjetaId)
+                    .HasColumnName("TipoTarjetaID")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Estado).HasMaxLength(50);
+
+                entity.Property(e => e.NombreTipo).HasMaxLength(100);
             });
 
             modelBuilder.Entity<Usuario>(entity =>
@@ -287,6 +604,8 @@ namespace NeoCobranza.ModelsCobranza
                 entity.Property(e => e.PrimerNombre).HasMaxLength(100);
 
                 entity.Property(e => e.Rol).HasMaxLength(50);
+
+                entity.Property(e => e.SucursalId).HasColumnName("SucursalID");
             });
 
             OnModelCreatingPartial(modelBuilder);

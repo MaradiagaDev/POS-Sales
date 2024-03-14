@@ -1,5 +1,6 @@
-﻿using NeoCobranza.Clases;
+﻿
 using NeoCobranza.Data;
+using NeoCobranza.ModelsCobranza;
 using NeoCobranza.Paneles_ComprasComercial;
 using NeoCobranza.PnlInventario;
 using System;
@@ -18,56 +19,66 @@ namespace NeoCobranza.Paneles
     {
         public Conexion conexion;
 
-        public Proveedor proveedor;
 
-        public PnlSeleccionarProveedor(Conexion conexion)
+        public PnlSeleccionarProveedor()
         {
             InitializeComponent();
 
-            this.conexion= conexion;
-            this.proveedor = new Proveedor(conexion);
-
-            //Estilo
-            dgvProveedor.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11);
-            dgvProveedor.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11);
-
-            dgvProveedor.DataSource = proveedor.Mostra_Proveedores(txtFiltro.Texts);
-        }
-
-        private void txtFiltro__TextChanged(object sender, EventArgs e)
-        {
-            dgvProveedor.DataSource = proveedor.Mostra_Proveedores(txtFiltro.Texts);
-        }
-
-        private void BtnSeleccionar_Click(object sender, EventArgs e)
-        {
-            if (dgvProveedor.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("No ha seleccionado ninguna fila");
-                return;
-            }
-
-            PnlCompras pnlCompras = Owner as PnlCompras;
-
-            pnlCompras.txtNombreProveedor.Text = dgvProveedor.SelectedRows[0].Cells["NombreEmpresa"].Value.ToString();
-
-            pnlCompras.txtIdProveedor.Text= dgvProveedor.SelectedRows[0].Cells["IdProveedor"].Value.ToString();
-
-            pnlCompras.txtEstadoProveedor.ForeColor = Color.Green;
-
-            pnlCompras.txtEstadoProveedor.Text = "Agregado en el sistema";
-
-            this.Hide();
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            this.Hide();
+            DataTable dataBuscar = new DataTable();
         }
 
         private void PnlSeleccionarProveedor_Load(object sender, EventArgs e)
         {
-            dgvProveedor.AlternatingRowsDefaultCellStyle.BackColor = Color.LightBlue;
+            FiltrarProveedor();
+        }
+
+        public void FiltrarProveedor()
+        {
+            using (NeoCobranzaContext db = new NeoCobranzaContext())
+            {
+                List<Proveedores> proveedors = db.Proveedores.Where(s => s.Estatus == true).Where(item => item.NombreEmpresa.Contains(txtFiltro.Texts) || item.NoRuc.Contains(txtFiltro.Texts)).OrderByDescending(s => s.IdProveedor).ToList();
+
+                DataTable dt = new DataTable();
+
+                dt.Columns.Add("Id", typeof(string));
+                dt.Columns.Add("Proveedor", typeof(string));
+                dt.Columns.Add("RUC", typeof(string));
+                dt.Columns.Add("Celular", typeof(string));
+
+                foreach (var item in proveedors)
+                {
+                    dt.Rows.Add(item.IdProveedor,item.NombreEmpresa, item.NoRuc, item.NoTelefono);
+                }
+
+                DgvProveedor.DataSource = dt;
+            }
+        }
+
+        private void txtFiltro__TextChanged(object sender, EventArgs e)
+        {
+            FiltrarProveedor();
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void BtnSeleccionar_Click(object sender, EventArgs e)
+        {
+            if(DgvProveedor.SelectedRows.Count != 0)
+            {
+                ComprasInventario compras = Owner as ComprasInventario;
+
+                compras.TxtIdProveedor.Text = DgvProveedor.SelectedRows[0].Cells[0].Value.ToString();
+                compras.TxtNombreProveedor.Text = DgvProveedor.SelectedRows[0].Cells[1].Value.ToString();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("No ha seleccionado un proveedor. Los proveedores se agregan en la sección de catalogo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
         }
     }
 }

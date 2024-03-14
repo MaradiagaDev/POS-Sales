@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using NeoCobranza.Data;
 using NeoCobranza.DataController;
+using NeoCobranza.ModelsCobranza;
 using NeoCobranza.Paneles_Contrato;
 using NeoCobranza.Paneles_Venta;
 
@@ -16,105 +17,83 @@ namespace NeoCobranza.Paneles
 {
     public partial class Panel_Cliente_Contrato : Form
     {
-        Conexion conexion;
         CCliente cliente;
         string panel;
-        public Panel_Cliente_Contrato(Conexion conexion, string panel)
+        public Panel_Cliente_Contrato( string panel)
         {
-
-
             InitializeComponent();
-            this.conexion = conexion;
-            cliente = new CCliente(conexion);
-            DgvCliente.DataSource = cliente.MostrarCliente(txtFiltro.Texts);
-
-            //Estilo del data
-            DgvCliente.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11);
-            DgvCliente.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11);
-
+            FiltrarClientes();
             this.panel = panel;
         }
 
         private void txtFiltro__TextChanged(object sender, EventArgs e)
         {
-            DgvCliente.DataSource = cliente.MostrarCliente(txtFiltro.Texts);
+           FiltrarClientes();
+        }
+
+        public void FiltrarClientes()
+        {
+            using(NeoCobranzaContext db = new NeoCobranzaContext())
+            {
+                List<Clientes> clientes = db.Clientes.Where(s => s.Estado == 1).Where(item => (item.Pnombre + "" + item.Snombre + " " + item.Papellido + " " + item.Sapellido).Contains(txtFiltro.Texts) || item.Celular.Contains(txtFiltro.Texts) || item.Cedula.Contains(txtFiltro.Texts)).OrderByDescending(s => s.IdCliente).ToList();
+
+                DataTable dt = new DataTable();
+
+                dt.Columns.Add("Id", typeof(string));
+                dt.Columns.Add("Nombre Completo", typeof(string));
+                dt.Columns.Add("Cédula", typeof(string));
+                dt.Columns.Add("Celular", typeof(string));
+
+                foreach (var item in clientes)
+                {
+                    dt.Rows.Add(item.IdCliente, item.Pnombre + "" + item.Snombre + " " + item.Papellido + " " + item.Sapellido, item.Cedula.ToString(), item.Celular.ToString());
+                }
+
+                DgvCliente.DataSource = dt;
+            }
         }
 
         private void BtnSeleccionar_Click(object sender, EventArgs e)
         {
+            if (DgvCliente.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("No ha seleccionado ningún registro", "Atención", MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
 
             if (panel == "Proforma")
             {
-                if (DgvCliente.SelectedRows.Count == 0)
-                {
-                    MessageBox.Show("No has seleccionado ningun registro", "ERROR");
-                    return;
-                }
-                if (DgvCliente.SelectedRows[0].Cells["PNombre"].Value == null)
-                {
-                    MessageBox.Show("No has seleccionado ningun registro", "ERROR");
-                    return;
-                }
 
                 PnlProforma pnlProforma = Owner as PnlProforma;
-                pnlProforma.lblNombreCliente.Text = DgvCliente.SelectedRows[0].Cells["PNombre"].Value.ToString()
-                    + " " + DgvCliente.SelectedRows[0].Cells["SNombre"].Value.ToString() + " " +
-                    DgvCliente.SelectedRows[0].Cells["PApellido"].Value.ToString() + " " +
-                    DgvCliente.SelectedRows[0].Cells["SApellido"].Value.ToString();
+                pnlProforma.lblNombreCliente.Text = DgvCliente.SelectedRows[0].Cells[1].Value.ToString();               
 
                 pnlProforma.lblEstadoCliente.Text = "Cliente Seleccionado";
                 pnlProforma.lblEstadoCliente.ForeColor = Color.Green;
-                pnlProforma.lblIdCliente.Text = DgvCliente.SelectedRows[0].Cells["IdCliente"].Value.ToString();
+                pnlProforma.lblIdCliente.Text = DgvCliente.SelectedRows[0].Cells[0].Value.ToString();
                 this.Hide();
             }
             if(panel == "Contrato")
             {
-                if (DgvCliente.SelectedRows.Count == 0)
-                {
-                    MessageBox.Show("No has seleccionado ningun registro", "ERROR");
-                    return;
-                }
-                if (DgvCliente.SelectedRows[0].Cells["PNombre"].Value == null)
-                {
-                    MessageBox.Show("No has seleccionado ningun registro", "ERROR");
-                    return;
-                }
 
                 PnlContrato pnlProforma = Owner as PnlContrato;
-                pnlProforma.lblNombreCliente.Text = DgvCliente.SelectedRows[0].Cells["PNombre"].Value.ToString()
-                    + " " + DgvCliente.SelectedRows[0].Cells["SNombre"].Value.ToString() + " " +
-                    DgvCliente.SelectedRows[0].Cells["PApellido"].Value.ToString() + " " +
-                    DgvCliente.SelectedRows[0].Cells["SApellido"].Value.ToString();
-
+                pnlProforma.lblNombreCliente.Text = DgvCliente.SelectedRows[0].Cells[1].Value.ToString();
+              
                 pnlProforma.lblEstadoCliente.Text = "Cliente Seleccionado";
                 pnlProforma.lblEstadoCliente.ForeColor = Color.Green;
-                pnlProforma.lblIdCliente.Text = DgvCliente.SelectedRows[0].Cells["IdCliente"].Value.ToString();
+                pnlProforma.lblIdCliente.Text = DgvCliente.SelectedRows[0].Cells[0].Value.ToString();
                 this.Hide();
 
             }
             if(panel == "ContratoProforma")
             {
 
-
-                if (DgvCliente.SelectedRows.Count == 0)
-                {
-                    MessageBox.Show("No has seleccionado ningun registro", "ERROR");
-                    return;
-                }
-                if (DgvCliente.SelectedRows[0].Cells["PNombre"].Value == null)
-                {
-                    MessageBox.Show("No has seleccionado ningun registro", "ERROR");
-                    return;
-                }
                 PnlProformaContrato pnlProformaContrato= Owner as PnlProformaContrato;
-                pnlProformaContrato.lblNombreCliente.Text = DgvCliente.SelectedRows[0].Cells["PNombre"].Value.ToString()
-                    + " " + DgvCliente.SelectedRows[0].Cells["SNombre"].Value.ToString() + " " +
-                    DgvCliente.SelectedRows[0].Cells["PApellido"].Value.ToString() + " " +
-                    DgvCliente.SelectedRows[0].Cells["SApellido"].Value.ToString();
+                pnlProformaContrato.lblNombreCliente.Text = DgvCliente.SelectedRows[0].Cells[1].Value.ToString();
 
                 pnlProformaContrato.lblEstadoCliente.Text = "Cliente Seleccionado";
                 pnlProformaContrato.lblEstadoCliente.ForeColor = Color.Green;
-                pnlProformaContrato.lblIdCliente.Text = DgvCliente.SelectedRows[0].Cells["IdCliente"].Value.ToString();
+                pnlProformaContrato.lblIdCliente.Text = DgvCliente.SelectedRows[0].Cells[0].Value.ToString();
                 this.Hide();
 
 
@@ -122,51 +101,40 @@ namespace NeoCobranza.Paneles
             if (panel == "Venta")
             {
 
+                PnlVentas pnlVenta = Owner as PnlVentas;
+                pnlVenta.LblNombreClientes.Text = DgvCliente.SelectedRows[0].Cells[1].Value.ToString();
 
-                if (DgvCliente.SelectedRows.Count == 0)
-                {
-                    MessageBox.Show("No has seleccionado ningun registro", "ERROR");
-                    return;
-                }
-                if (DgvCliente.SelectedRows[0].Cells["PNombre"].Value == null)
-                {
-                    MessageBox.Show("No has seleccionado ningun registro", "ERROR");
-                    return;
-                }
-                PnlVentas pnlProformaContrato = Owner as PnlVentas;
-                pnlProformaContrato.lblNombreCliente.Text = DgvCliente.SelectedRows[0].Cells["PNombre"].Value.ToString()
-                    + " " + DgvCliente.SelectedRows[0].Cells["SNombre"].Value.ToString() + " " +
-                    DgvCliente.SelectedRows[0].Cells["PApellido"].Value.ToString() + " " +
-                    DgvCliente.SelectedRows[0].Cells["SApellido"].Value.ToString();
+                pnlVenta.lblEstadoCliente.Text = "Cliente Seleccionado";
+                pnlVenta.lblEstadoCliente.ForeColor = Color.Green;
+                pnlVenta.LblIdClientes.Text = DgvCliente.SelectedRows[0].Cells[0].Value.ToString();
 
-                pnlProformaContrato.lblEstadoCliente.Text = "Cliente Seleccionado";
-                pnlProformaContrato.lblEstadoCliente.ForeColor = Color.Green;
-                pnlProformaContrato.lblIdCliente.Text = DgvCliente.SelectedRows[0].Cells["IdCliente"].Value.ToString();
-                this.Hide();
+                using(NeoCobranzaContext db = new NeoCobranzaContext())
+                {
+                    Clientes cliente = db.Clientes.Where(s => s.IdCliente.ToString() == DgvCliente.SelectedRows[0].Cells[0].Value.ToString()).FirstOrDefault();
+                    if(cliente.NoRuc != null && cliente.NoRuc.Length == 14)
+                    {
+                        pnlVenta.ChkRetencionAlcaldia.Visible = true;
+                        pnlVenta.ChkRetencionDgi.Visible = true;
+                    }
+                    else
+                    {
+                        pnlVenta.ChkRetencionAlcaldia.Visible = false;
+                        pnlVenta.ChkRetencionDgi.Visible = false;
+                    }
+                }
+
+                this.Close();
 
 
             }if(panel == "ActualizarContrato")
             {
-                if (DgvCliente.SelectedRows.Count == 0)
-                {
-                    MessageBox.Show("No has seleccionado ningun registro", "ERROR");
-                    return;
-                }
-                if (DgvCliente.SelectedRows[0].Cells["PNombre"].Value == null)
-                {
-                    MessageBox.Show("No has seleccionado ningun registro", "ERROR");
-                    return;
-                }
 
                 PnlGeneralContrato pnlProformaContrato = Owner as PnlGeneralContrato;
-                pnlProformaContrato.lblNombreCliente.Text = DgvCliente.SelectedRows[0].Cells["PNombre"].Value.ToString()
-                    + " " + DgvCliente.SelectedRows[0].Cells["SNombre"].Value.ToString() + " " +
-                    DgvCliente.SelectedRows[0].Cells["PApellido"].Value.ToString() + " " +
-                    DgvCliente.SelectedRows[0].Cells["SApellido"].Value.ToString();
+                pnlProformaContrato.lblNombreCliente.Text = DgvCliente.SelectedRows[0].Cells[1].Value.ToString();
 
                 pnlProformaContrato.lblEstadoCliente.Text = "Cliente Seleccionado";
                 pnlProformaContrato.lblEstadoCliente.ForeColor = Color.Green;
-                pnlProformaContrato.lblIdCliente.Text = DgvCliente.SelectedRows[0].Cells["IdCliente"].Value.ToString();
+                pnlProformaContrato.lblIdCliente.Text = DgvCliente.SelectedRows[0].Cells[0].Value.ToString();
                 this.Hide();
 
 
@@ -177,12 +145,11 @@ namespace NeoCobranza.Paneles
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
         }
 
         private void Panel_Cliente_Contrato_Load(object sender, EventArgs e)
         {
-            DgvCliente.AlternatingRowsDefaultCellStyle.BackColor = Color.LightBlue;
         }
     }
 }

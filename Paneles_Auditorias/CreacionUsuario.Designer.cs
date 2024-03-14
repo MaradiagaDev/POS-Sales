@@ -39,14 +39,18 @@
             this.PrimerApellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Rol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sucursal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CmbFiltro = new System.Windows.Forms.ComboBox();
             this.BtnCancelar = new NeoCobranza.Especiales.EspecialButton();
             this.txtFiltroUsuario = new NeoCobranza.Controladores.LoginUserControl();
             this.BtnCambiarEstado = new NeoCobranza.Especiales.EspecialButton();
             this.BtnCrearUsuario = new NeoCobranza.Especiales.EspecialButton();
             this.BtnActualizar = new NeoCobranza.Especiales.EspecialButton();
+            this.PnlTitulo = new System.Windows.Forms.Panel();
+            this.TbTitulo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.BtnBuscar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVUser)).BeginInit();
+            this.PnlTitulo.SuspendLayout();
             this.SuspendLayout();
             // 
             // BtnBuscar
@@ -70,12 +74,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DGVUser.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DGVUser.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.DGVUser.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DGVUser.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.DGVUser.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.DGVUser.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft JhengHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
@@ -88,7 +91,8 @@
             this.PrimerNombre,
             this.PrimerApellido,
             this.Rol,
-            this.Estado});
+            this.Estado,
+            this.Sucursal});
             this.DGVUser.EnableHeadersVisualStyles = false;
             this.DGVUser.Location = new System.Drawing.Point(13, 138);
             this.DGVUser.MultiSelect = false;
@@ -103,7 +107,7 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.DGVUser.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.DGVUser.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGVUser.Size = new System.Drawing.Size(1132, 451);
+            this.DGVUser.Size = new System.Drawing.Size(1132, 391);
             this.DGVUser.TabIndex = 45;
             // 
             // IDUser
@@ -144,6 +148,12 @@
             this.Estado.HeaderText = "Estado";
             this.Estado.Name = "Estado";
             this.Estado.ReadOnly = true;
+            // 
+            // Sucursal
+            // 
+            this.Sucursal.HeaderText = "Sucursal";
+            this.Sucursal.Name = "Sucursal";
+            this.Sucursal.ReadOnly = true;
             // 
             // CmbFiltro
             // 
@@ -211,13 +221,13 @@
             this.BtnCambiarEstado.BackColor = System.Drawing.Color.Black;
             this.BtnCambiarEstado.BackGroundColor = System.Drawing.Color.Black;
             this.BtnCambiarEstado.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.BtnCambiarEstado.BorderRadius = 15;
+            this.BtnCambiarEstado.BorderRadius = 5;
             this.BtnCambiarEstado.BorderSize = 0;
             this.BtnCambiarEstado.FlatAppearance.BorderSize = 0;
             this.BtnCambiarEstado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnCambiarEstado.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnCambiarEstado.ForeColor = System.Drawing.Color.White;
-            this.BtnCambiarEstado.Location = new System.Drawing.Point(564, 75);
+            this.BtnCambiarEstado.Location = new System.Drawing.Point(605, 75);
             this.BtnCambiarEstado.Name = "BtnCambiarEstado";
             this.BtnCambiarEstado.Size = new System.Drawing.Size(171, 40);
             this.BtnCambiarEstado.TabIndex = 48;
@@ -232,13 +242,13 @@
             this.BtnCrearUsuario.BackColor = System.Drawing.SystemColors.Highlight;
             this.BtnCrearUsuario.BackGroundColor = System.Drawing.SystemColors.Highlight;
             this.BtnCrearUsuario.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.BtnCrearUsuario.BorderRadius = 15;
+            this.BtnCrearUsuario.BorderRadius = 5;
             this.BtnCrearUsuario.BorderSize = 0;
             this.BtnCrearUsuario.FlatAppearance.BorderSize = 0;
             this.BtnCrearUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnCrearUsuario.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnCrearUsuario.ForeColor = System.Drawing.Color.White;
-            this.BtnCrearUsuario.Location = new System.Drawing.Point(961, 75);
+            this.BtnCrearUsuario.Location = new System.Drawing.Point(971, 75);
             this.BtnCrearUsuario.Name = "BtnCrearUsuario";
             this.BtnCrearUsuario.Size = new System.Drawing.Size(171, 40);
             this.BtnCrearUsuario.TabIndex = 49;
@@ -253,13 +263,13 @@
             this.BtnActualizar.BackColor = System.Drawing.Color.Gray;
             this.BtnActualizar.BackGroundColor = System.Drawing.Color.Gray;
             this.BtnActualizar.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.BtnActualizar.BorderRadius = 15;
+            this.BtnActualizar.BorderRadius = 5;
             this.BtnActualizar.BorderSize = 0;
             this.BtnActualizar.FlatAppearance.BorderSize = 0;
             this.BtnActualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnActualizar.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnActualizar.ForeColor = System.Drawing.Color.White;
-            this.BtnActualizar.Location = new System.Drawing.Point(758, 75);
+            this.BtnActualizar.Location = new System.Drawing.Point(781, 75);
             this.BtnActualizar.Name = "BtnActualizar";
             this.BtnActualizar.Size = new System.Drawing.Size(185, 40);
             this.BtnActualizar.TabIndex = 50;
@@ -268,12 +278,37 @@
             this.BtnActualizar.UseVisualStyleBackColor = false;
             this.BtnActualizar.Click += new System.EventHandler(this.BtnActualizar_Click);
             // 
+            // PnlTitulo
+            // 
+            this.PnlTitulo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PnlTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.PnlTitulo.Controls.Add(this.TbTitulo);
+            this.PnlTitulo.Location = new System.Drawing.Point(0, 557);
+            this.PnlTitulo.Name = "PnlTitulo";
+            this.PnlTitulo.Size = new System.Drawing.Size(1160, 44);
+            this.PnlTitulo.TabIndex = 146;
+            // 
+            // TbTitulo
+            // 
+            this.TbTitulo.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.TbTitulo.AutoSize = true;
+            this.TbTitulo.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TbTitulo.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.TbTitulo.Location = new System.Drawing.Point(12, 3);
+            this.TbTitulo.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.TbTitulo.Name = "TbTitulo";
+            this.TbTitulo.Size = new System.Drawing.Size(275, 33);
+            this.TbTitulo.TabIndex = 1;
+            this.TbTitulo.Text = "Gestión de Usuarios";
+            // 
             // CreacionUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.HighlightText;
             this.ClientSize = new System.Drawing.Size(1157, 601);
+            this.Controls.Add(this.PnlTitulo);
             this.Controls.Add(this.BtnActualizar);
             this.Controls.Add(this.BtnCrearUsuario);
             this.Controls.Add(this.BtnCambiarEstado);
@@ -288,6 +323,8 @@
             this.Load += new System.EventHandler(this.CreacionUsuario_Load);
             ((System.ComponentModel.ISupportInitialize)(this.BtnBuscar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVUser)).EndInit();
+            this.PnlTitulo.ResumeLayout(false);
+            this.PnlTitulo.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -298,14 +335,17 @@
         private System.Windows.Forms.DataGridView DGVUser;
         private Especiales.EspecialButton BtnCancelar;
         public System.Windows.Forms.ComboBox CmbFiltro;
+        private Especiales.EspecialButton BtnCambiarEstado;
+        private Especiales.EspecialButton BtnCrearUsuario;
+        private Especiales.EspecialButton BtnActualizar;
         private System.Windows.Forms.DataGridViewTextBoxColumn IDUser;
         private System.Windows.Forms.DataGridViewTextBoxColumn User;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrimerNombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrimerApellido;
         private System.Windows.Forms.DataGridViewTextBoxColumn Rol;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
-        private Especiales.EspecialButton BtnCambiarEstado;
-        private Especiales.EspecialButton BtnCrearUsuario;
-        private Especiales.EspecialButton BtnActualizar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Sucursal;
+        private System.Windows.Forms.Panel PnlTitulo;
+        public System.Windows.Forms.Label TbTitulo;
     }
 }

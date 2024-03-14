@@ -26,7 +26,7 @@ namespace NeoCobranza.Paneles_ComprasComercial
             InitializeComponent();
             this.conexion = conexion;
 
-            pnlSeleccionar = new PnlSeleccionarProveedor(conexion);
+           // pnlSeleccionar = new PnlSeleccionarProveedor(conexion);
 
             AddOwnedForm(pnlSeleccionar);
         }

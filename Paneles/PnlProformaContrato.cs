@@ -24,7 +24,6 @@ namespace NeoCobranza.Paneles
         //Clases necesarias para crear la proforma
         public Panel_Cliente_Contrato panelCliente;
         public CGeneral cGeneral;
-        public PnlInsertarAgencia pnlInsertarAgencia = new PnlInsertarAgencia();
         public PnlVendedores pnlVendedores;
     
         public CContrato cContrato;
@@ -206,7 +205,7 @@ namespace NeoCobranza.Paneles
             AddOwnedForm(pnlVendedores);
 
             //Para el panel de cliente
-            panelCliente = new Panel_Cliente_Contrato(conexion, "ContratoProforma");
+            panelCliente = new Panel_Cliente_Contrato("ContratoProforma");
             AddOwnedForm(panelCliente);
             cGeneral = new CGeneral(conexion);
             
@@ -500,34 +499,6 @@ namespace NeoCobranza.Paneles
             int cantidadBeneficiarios = dgvBenficiarios.Rows.Count;
             
 
-            /*
-            if (cantidadBeneficiarios == 1 && int.Parse(cmbCancelacion.Text) > 3)
-            {
-                MessageBox.Show("Si solo hay un beneficiario el plazo maximo es para 3 años2", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                lblCuotaCordoba.Text = "x";
-                lblCuotaDolar.Text = "x";
-                lblCuotas.Text = "x";
-                return;
-            }
-
-            if (cantidadBeneficiarios == 2 && int.Parse(cmbCancelacion.Text) > 5)
-            {
-                MessageBox.Show("Para dos beneficiarios el plazo maximo es de 5 años", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                lblCuotaCordoba.Text = "x";
-                lblCuotaDolar.Text = "x";
-                lblCuotas.Text = "x";
-                return;
-            }
-
-            if (cantidadBeneficiarios == 3 && int.Parse(cmbCancelacion.Text) > 6)
-            {
-                MessageBox.Show("Para tres beneficiarios el plazo maximo es de 6 años", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                lblCuotaCordoba.Text = "x";
-                lblCuotaDolar.Text = "x";
-                lblCuotas.Text = "x";
-                return;
-            }
-            */
             //AGREGAR A LA BASE DE DATOS
 
             DialogResult Result;
@@ -537,15 +508,14 @@ namespace NeoCobranza.Paneles
             if (Result == DialogResult.Yes)
             {
                 //variables para calculo de los valores
-                float[] nominales = new float[dgvBenficiarios.Rows.Count];
-
-
-                
+                float[] nominales = new float[25];
 
                 //Agregar los montos por servicios
 
                 for (int i = 0; i < dgvBenficiarios.Rows.Count; i++)
                 {
+
+
                     nominales[i] = float.Parse(dgvBenficiarios.Rows[i].Cells[2].Value.ToString()) * int.Parse(dgvBenficiarios.Rows[i].Cells[1].Value.ToString());
 
                 }
@@ -555,14 +525,9 @@ namespace NeoCobranza.Paneles
                     for (int i = 0; i < dgvServicios.Rows.Count; i++)
                     {
                         nominales[0] = nominales[0] + float.Parse(dgvServicios.Rows[i].Cells[2].Value.ToString()) * int.Parse(dgvServicios.Rows[i].Cells[1].Value.ToString());
-
                     }
 
-
                 }
-
-
-
 
 
                 //Crear el contrato

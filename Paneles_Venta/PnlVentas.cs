@@ -2,1002 +2,411 @@
 using NeoCobranza.Data;
 using NeoCobranza.DataController;
 using NeoCobranza.Paneles;
+using NeoCobranza.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace NeoCobranza.Paneles_Venta
 {
     public partial class PnlVentas : Form
     {
-        //Variable de Conexion
-        public Conexion conexion;
-
-        //Clase de procedimientos almacenados
-
-        VentasDirectas ventas;
-
-        CTasaCambio ctasa;
-
-        //Paneles utilizados
-
         public PnlVendedores pnlVendedores;
+        VMOrdenes vMOrdenes = new VMOrdenes();
+        public string auxOpc = "";
 
         //Constructor
-        public PnlVentas(Conexion conexion)
+        public PnlVentas(Conexion conexion,string opc)
         {
             InitializeComponent();
-
-            especialButton2.Enabled = false;
-            //Inicializacion de las clases a utilizar
-            this.conexion = conexion;   
-            //Clase de ventas
-            ventas = new VentasDirectas(conexion);
-            ctasa = new CTasaCambio(conexion);
-            //LLenado del Cmb
-            cmbCategoria.DataSource = ventas.CmbCategorias();
-
-            cmbServicios.DataSource = ventas.CmbCategoriasServicios();
-            //LLenado de la tasa de cambio
-
-            lblTasa.Text= ctasa.MostrarTasa();
-
-            //Verificar que haya ataudes registrados en las categorias
-            if(cmbCategoria.Items.Count == 0)
-            {
-                txtFiltro.Enabled = false;
-                MessageBox.Show("No hay Categorias de ataudes registrados","Error");
-                return;
-            }
-            else
-            {
-                dgvStock.DataSource = ventas.Mostra_Stock(txtFiltro.Texts,int.Parse(ventas.Mostra_idXNombre_Categoria(cmbCategoria.Text)));
-            }
-
-
-            //PnlVendedores
-            pnlVendedores = new PnlVendedores(conexion, "Venta");
+            pnlVendedores = new PnlVendedores(conexion,"Venta");
             AddOwnedForm(pnlVendedores);
-
-            //Verificar que al entrar hay selecciones cargadas
-            if (dgvStock.SelectedRows.Count == 0)
-            {
-                txtDescuento.Enabled = false;
-            }
-            else
-            {
-
-                lblNominal.Text = (double.Parse(dgvStock.SelectedRows[0].Cells[2].Value.ToString()) / 1.15).ToString();
-
-                lblDescuento.Text = "0";
-
-                lblIva.Text = (double.Parse(dgvStock.SelectedRows[0].Cells[2].Value.ToString()) - double.Parse(lblNominal.Text)).ToString();
-
-                lblTotal.Text = dgvStock.SelectedRows[0].Cells[2].Value.ToString();
-
-                txtDescuento.Enabled = true;
-            }
-
-        }
-
-        //Constructor para actualizaciones
-
-        public int idPublico ;
-
-        public string tipo;
-        public PnlVentas(Conexion conexion,int id,String tipo)
-        {
-            this.InitializeComponent();
-            if (tipo == "Final")
-            {
-                txtMonto.Enabled = false;
-            }
-
-            BtnRealizarVenta.Enabled = false;
-            especialButton1.Enabled = false;
-            BtnReservar.Enabled = false;
-
-            this.idPublico = id;
-            this.tipo = tipo;
-            //Inicializacion de las clases a utilizar
-            this.conexion = conexion;
-            //Clase de ventas
-            ventas = new VentasDirectas(conexion);
-            ctasa = new CTasaCambio(conexion);
-            //LLenado del Cmb
-            cmbCategoria.DataSource = ventas.CmbCategorias();
-
-            cmbServicios.DataSource = ventas.CmbCategoriasServicios();
-            //LLenado de la tasa de cambio
-
-            lblTasa.Text = ctasa.MostrarTasa();
-
-            //Verificar que haya ataudes registrados en las categorias
-            if (cmbCategoria.Items.Count == 0)
-            {
-                txtFiltro.Enabled = false;
-                MessageBox.Show("No hay Categorias de ataudes registrados", "Error");
-                return;
-            }
-            else
-            {
-                dgvStock.DataSource = ventas.Mostra_Stock(txtFiltro.Texts, int.Parse(ventas.Mostra_idXNombre_Categoria(cmbCategoria.Text)));
-            }
-
-
-            //PnlVendedores
-            pnlVendedores = new PnlVendedores(conexion, "Venta");
-            AddOwnedForm(pnlVendedores);
-
-            //Verificar que al entrar hay selecciones cargadas
-            if (dgvStock.SelectedRows.Count == 0)
-            {
-                txtDescuento.Enabled = false;
-            }
-            else
-            {
-
-                lblNominal.Text = (double.Parse(dgvStock.SelectedRows[0].Cells[2].Value.ToString()) / 1.15).ToString();
-
-                lblDescuento.Text = "0";
-
-                lblIva.Text = (double.Parse(dgvStock.SelectedRows[0].Cells[2].Value.ToString()) - double.Parse(lblNominal.Text)).ToString();
-
-                lblTotal.Text = dgvStock.SelectedRows[0].Cells[2].Value.ToString();
-
-                txtDescuento.Enabled = true;
-            }
-
-
-            //--------------------- LLenado de los campos -----------------------------
-
-            lblIdCliente.Text = ventas.Actualizar_Cliente(id).Rows[0][0].ToString();
-            lblNombreCliente.Text = ventas.Actualizar_Cliente(id).Rows[0][1].ToString();
-
-            lblEstadoCliente.Text = "Registrado en el sistema";
-            lblEstadoCliente.ForeColor = Color.Green;
-
-            BtnCliente.Enabled = false;
-
-            //LLenado de los datos del vendedor
-
-            lblIdColector.Text = ventas.Actualizar_Vendedor(id).Rows[0][0].ToString();
-            lblNombreColector.Text = ventas.Actualizar_Vendedor(id).Rows[0][1].ToString();
-
-            BtnVendedor.Enabled = false;
-
-            //LLenado de las informaciones generales
-
-            txtDescripcion.Text = ventas.Actualizar_Info(id).Rows[0][0].ToString();
-            txtMonto.Text = ventas.Actualizar_Info(id).Rows[0][1].ToString();
-            txtFactura.Text = ventas.Actualizar_Info(id).Rows[0][2].ToString();
-
-            //Insertar ataudes
-
-            for (int i = 0; i< ventas.Actualizar_Ataudes(id).Rows.Count; i++) {
-
-                dgvAtaudes.Rows.Add(ventas.Actualizar_Ataudes(id).Rows[i][0].ToString(),
-                    ventas.Actualizar_Ataudes(id).Rows[i][1].ToString(),
-                    ventas.Actualizar_Ataudes(id).Rows[i][2].ToString(),
-                    ventas.Actualizar_Ataudes(id).Rows[i][3].ToString(),
-                    ventas.Actualizar_Ataudes(id).Rows[i][4].ToString());
-            }
-
-            //Insertar servicios
-
-            for (int i = 0; i < ventas.Actualizar_Servicios(id).Rows.Count; i++)
-            {
-                dgvServicios.Rows.Add(ventas.Actualizar_Servicios(id).Rows[i][0].ToString(),
-                                   ventas.Actualizar_Servicios(id).Rows[i][1].ToString(),
-                                   ventas.Actualizar_Servicios(id).Rows[i][2].ToString(),
-                                   ventas.Actualizar_Servicios(id).Rows[i][3].ToString(),
-                                   ventas.Actualizar_Servicios(id).Rows[i][4].ToString());
-
-
-            }
-
-            RealizarCalculos();
-
-        }
-
-        private void limpiar()
-        {
-            txtFactura.Text = "";
-            txtMonto.Text = "0";
-
-            //Reinicio del los clientes
-            lblEstadoCliente.Text = "Sin Registrar";
-            lblEstadoCliente.ForeColor = Color.Red;
-
-            lblNombreCliente.Text = ".";
-
-            lblIdCliente.Text = ".";
-
-            //Reinico de los vendedores
-
-            lblNombreColector.Text = ".";
-            lblIdColector.Text = ".";
-
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void cmbCategoria_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbCategoria.Items.Count == 0)
-            {
-                MessageBox.Show("No hay Categorias de ataudes registrados", "Error");
-                return;
-            }
-            else
-            {
-                dgvStock.DataSource = ventas.Mostra_Stock(txtFiltro.Texts, int.Parse(ventas.Mostra_idXNombre_Categoria(cmbCategoria.Text)));
-            }
-            if (dgvStock.SelectedRows.Count == 0)
-            {
-                lblNominal.Text = "x";
-
-                lblDescuento.Text = "x";
-
-                lblIva.Text = "x";
-
-                lblTotal.Text = "x";
-
-                lblCordoba.Text = "x";
-
-                txtDescuento.Text = "0";
-            }
-
-        }
-
-        private void txtFiltro__TextChanged(object sender, EventArgs e)
-        {
-            dgvStock.DataSource = ventas.Mostra_Stock(txtFiltro.Texts, int.Parse(ventas.Mostra_idXNombre_Categoria(cmbCategoria.Text)));
-
-        }
-
-        private void BtnRealizarVenta_Click(object sender, EventArgs e)
-        {
-            //VERIFICAR Que algo este seleccionado en los dos
-            if(dgvServicios.Rows.Count == 0 && dgvAtaudes.Rows.Count==0)
-            {
-                MessageBox.Show("No ha seleccionado nada para la venta", "Error");
-                return;
-            }
-
-            //Verificar que se haya calculado algo
-
-            if (lblTotalTotalDolar.Text == "")
-            {
-                MessageBox.Show("No ha seleccionado nada para la venta", "Error");
-                return ;
-            }
-            //VERIFICAR QUE SE HAYA SELECCIONADO UN CLIENTE
-            if (lblIdCliente.Text == ".")
-            {
-                MessageBox.Show("No ha seleccionado ningun Cliente", "Error");
-                return;
-            }
-            //VERIFICAR QUE SE HAYA SELECCIONADO UN VENDEDOR
-            if (lblIdColector.Text == ".")
-            {
-                MessageBox.Show("No ha seleccionado ningun Vendedor", "Error");
-                return;
-            }
-            //VERIFICAR QUE SE HAYA DIGITADO ALGUNA FACTURA
-            if (txtFactura.Text == "")
-            {
-                MessageBox.Show("No ha digitado el numero de factura", "Error");
-                return;
-            }
-            //EN EL CASO DE HABER ALGUNA SELECCION
-
-
-            //Procedimiento almacenado PARA LA VENTA GENERAL
-
-           
-            ventas.VentaDirecta(txtDescripcion.Text,int.Parse( lblIdCliente.Text),int.Parse( lblIdColector.Text), txtFactura.Text, "Venta Directa", "Sin Imprimir", 0);
-
-            //LLenado de los detalles
-            if(dgvAtaudes.Rows.Count != 0)
-            {
-                for (int i =0;i<dgvAtaudes.Rows.Count; i++)
-                {
-                    ventas.VentaFutura(int.Parse(ventas.Mostrar_Ultima_Venta()),int.Parse( dgvAtaudes.Rows[i].Cells[4].Value.ToString()),int.Parse( dgvAtaudes.Rows[i].Cells[0].Value.ToString()));
-
-                    //Cambios de estado para los estandares
-
-                    ventas.VentaDirectas_Estandares(int.Parse(dgvAtaudes.Rows[i].Cells[0].Value.ToString()));
-                }
-            }
-
-            //LLenado de detalles de servicios
-            if (dgvServicios.Rows.Count != 0)
-            {
-                for (int i = 0; i < dgvServicios.Rows.Count; i++)
-                {
-                    ventas.VentaReserva(int.Parse(ventas.Mostrar_Ultima_Venta()), int.Parse(dgvServicios.Rows[i].Cells[4].Value.ToString()), int.Parse(dgvServicios.Rows[i].Cells[0].Value.ToString()), int.Parse(dgvServicios.Rows[i].Cells[3].Value.ToString()));
-                }
-            }
-
-
-
-            //Mostrar Mensaje
-            MessageBox.Show("Venta realizada", "Correcto");
-
-                //Actualizar el data
-                dgvStock.DataSource = ventas.Mostra_Stock(txtFiltro.Texts, int.Parse(ventas.Mostra_idXNombre_Categoria(cmbCategoria.Text)));
-            limpiar();
-
-            this.Close();
-        }
-
-        private void BtnVendedor_Click(object sender, EventArgs e)
-        {
-            pnlVendedores.Show();
-        }
-
-        private void lblNombreCliente_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BtnCliente_Click(object sender, EventArgs e)
-        {
-            Panel_Cliente_Contrato panelCliente = new Panel_Cliente_Contrato(conexion, "Venta");
-            AddOwnedForm(panelCliente);
-            panelCliente.Show();
-        }
-
-        private void especialButton1_Click(object sender, EventArgs e)
-        {
-            //VERIFICAR Que algo este seleccionado en los dos
-            if (dgvServicios.Rows.Count == 0 && dgvAtaudes.Rows.Count == 0)
-            {
-                MessageBox.Show("No ha seleccionado nada para la venta", "Error");
-                return;
-            }
-
-            //Verificar que se haya calculado algo
-
-            if (lblTotalTotalDolar.Text == "")
-            {
-                MessageBox.Show("No ha seleccionado nada para la venta", "Error");
-                return;
-            }
-            //VERIFICAR QUE SE HAYA SELECCIONADO UN CLIENTE
-            if (lblIdCliente.Text == ".")
-            {
-                MessageBox.Show("No ha seleccionado ningun Cliente", "Error");
-                return;
-            }
-            //VERIFICAR QUE SE HAYA SELECCIONADO UN VENDEDOR
-            if (lblIdColector.Text == ".")
-            {
-                MessageBox.Show("No ha seleccionado ningun Vendedor", "Error");
-                return;
-            }
-            //VERIFICAR QUE SE HAYA DIGITADO ALGUNA FACTURA
-            if (txtFactura.Text == "")
-            {
-                MessageBox.Show("No ha digitado el numero de factura", "Error");
-                return;
-            }
-            //VERIFICAR QUE SE HAYA DIGITADO UN MONTO DE RESERVA
-            if (txtMonto.Text == "" || txtMonto.Text == "0")
-            {
-                MessageBox.Show("No ha digitado un monto inicial", "Error");
-                return;
-            }
-
-            //VERIFICAR QUE SE HAYA DIGITADO UN MONTO DE RESERVA
-            if (float.Parse(txtMonto.Text)> float.Parse(lblTotalTotalDolar.Text) )
-            {
-                MessageBox.Show("El monto no puede ser mayor al total", "Error");
-                return;
-            }
-            if (float.Parse(txtMonto.Text)< (float.Parse(lblTotalTotalDolar.Text)/2))
-            {
-                MessageBox.Show("El monto no puede ser menor al 50 %", "Error");
-                return;
-            }
-
-
-            //EN EL CASO DE HABER ALGUNA SELECCION
-
-            //Procedimiento almacenado PARA LA VENTA GENERAL
-
-
-            ventas.VentaDirecta(txtDescripcion.Text, int.Parse(lblIdCliente.Text), int.Parse(lblIdColector.Text), txtFactura.Text, "Venta Futura", "Sin Retirar",float.Parse( txtMonto.Text));
-
-            //LLenado de los detalles
-            if (dgvAtaudes.Rows.Count != 0)
-            {
-                for (int i = 0; i < dgvAtaudes.Rows.Count; i++)
-                {
-                    ventas.VentaFutura(int.Parse(ventas.Mostrar_Ultima_Venta()), int.Parse(dgvAtaudes.Rows[i].Cells[4].Value.ToString()), int.Parse(dgvAtaudes.Rows[i].Cells[0].Value.ToString()));
-
-                    //Cambios de estado para los estandares
-
-                    ventas.VentaDirectas_Futuras(int.Parse(dgvAtaudes.Rows[i].Cells[0].Value.ToString()));
-                }
-            }
-
-            //LLenado de detalles de servicios
-            if (dgvServicios.Rows.Count != 0)
-            {
-                for (int i = 0; i < dgvServicios.Rows.Count; i++)
-                {
-                    ventas.VentaReserva(int.Parse(ventas.Mostrar_Ultima_Venta()), int.Parse(dgvServicios.Rows[i].Cells[4].Value.ToString()), int.Parse(dgvServicios.Rows[i].Cells[0].Value.ToString()), int.Parse(dgvServicios.Rows[i].Cells[3].Value.ToString()));
-                }
-            }
-
-
-
-
-
-
-            MessageBox.Show("Venta realizada", "Correcto");
-
-            //Actualizar el data
-            dgvStock.DataSource = ventas.Mostra_Stock(txtFiltro.Texts, int.Parse(ventas.Mostra_idXNombre_Categoria(cmbCategoria.Text)));
-
-            limpiar();
-
-            this.Close();
-        }
-
-        private void BtnReservar_Click(object sender, EventArgs e)
-        {
-            //VERIFICAR Que algo este seleccionado en los dos
-            if (dgvServicios.Rows.Count == 0 && dgvAtaudes.Rows.Count == 0)
-            {
-                MessageBox.Show("No ha seleccionado nada para la venta", "Error");
-                return;
-            }
-
-            //Verificar que se haya calculado algo
-
-            if (lblTotalTotalDolar.Text == "")
-            {
-                MessageBox.Show("No ha seleccionado nada para la venta", "Error");
-                return;
-            }
-            //VERIFICAR QUE SE HAYA SELECCIONADO UN CLIENTE
-            if (lblIdCliente.Text == ".")
-            {
-                MessageBox.Show("No ha seleccionado ningun Cliente", "Error");
-                return;
-            }
-            //VERIFICAR QUE SE HAYA SELECCIONADO UN VENDEDOR
-            if (lblIdColector.Text == ".")
-            {
-                MessageBox.Show("No ha seleccionado ningun Vendedor", "Error");
-                return;
-            }
-            //VERIFICAR QUE SE HAYA DIGITADO ALGUNA FACTURA
-            if (txtFactura.Text == "")
-            {
-                MessageBox.Show("No ha digitado el numero de factura", "Error");
-                return;
-            }
-            //VERIFICAR QUE SE HAYA DIGITADO UN MONTO DE RESERVA
-            if (txtMonto.Text == "" || txtMonto.Text == "0")
-            {
-                MessageBox.Show("No ha digitado un monto inicial", "Error");
-                return;
-            }
-
-            if (float.Parse(txtMonto.Text) > float.Parse(lblTotalTotalDolar.Text))
-            {
-                MessageBox.Show("El monto no puede ser mayor al total", "Error");
-                return;
-            }
-            if (float.Parse(txtMonto.Text) < 0)
-            {
-                MessageBox.Show("El monto no puede ser menor a 0 %", "Error");
-                return;
-            }
-
-
-            ventas.VentaDirecta(txtDescripcion.Text, int.Parse(lblIdCliente.Text), int.Parse(lblIdColector.Text), txtFactura.Text, "Reservado", "Sin Retirar", float.Parse(txtMonto.Text));
-
-            //LLenado de los detalles
-            if (dgvAtaudes.Rows.Count != 0)
-            {
-                for (int i = 0; i < dgvAtaudes.Rows.Count; i++)
-                {
-                    ventas.VentaFutura(int.Parse(ventas.Mostrar_Ultima_Venta()), int.Parse(dgvAtaudes.Rows[i].Cells[4].Value.ToString()), int.Parse(dgvAtaudes.Rows[i].Cells[0].Value.ToString()));
-
-                    //Cambios de estado para los estandares
-
-                    ventas.VentaDirectas_Reservas(int.Parse(dgvAtaudes.Rows[i].Cells[0].Value.ToString()));
-                }
-            }
-
-            //LLenado de detalles de servicios
-            if (dgvServicios.Rows.Count != 0)
-            {
-                for (int i = 0; i < dgvServicios.Rows.Count; i++)
-                {
-                    ventas.VentaReserva(int.Parse(ventas.Mostrar_Ultima_Venta()), int.Parse(dgvServicios.Rows[i].Cells[4].Value.ToString()), int.Parse(dgvServicios.Rows[i].Cells[0].Value.ToString()), int.Parse(dgvServicios.Rows[i].Cells[3].Value.ToString()));
-                }
-            }
-
-
-
-
-
-
-
-            //Mostrar Mensaje
-            MessageBox.Show("Reservacion realizada", "Correcto");
-
-            //Actualizar el data
-            dgvStock.DataSource = ventas.Mostra_Stock(txtFiltro.Texts, int.Parse(ventas.Mostra_idXNombre_Categoria(cmbCategoria.Text)));
-
-            limpiar();
-
-            this.Close();
-        }
-
-        private void dgvStock_SelectionChanged(object sender, EventArgs e)
-        {
-
-            if (dgvStock.SelectedRows.Count == 0)
-            {
-                txtDescuento.Enabled = false;
-            }
-            else
-            {
-                txtDescuento.Enabled = true;
-            }
-            
-        }
-
-        private void txtDescuento_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (Char.IsDigit(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else if (Char.IsControl(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else if (Char.IsSeparator(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void txtDescuento_TextChanged(object sender, EventArgs e)
-        {
-            if (dgvStock.SelectedRows.Count == 0)
-            {
-                return;
-            }
-            
-            if(txtDescuento.Text == "")
-            {
-                lblNominal.Text = "x";
-
-                lblDescuento.Text = "x";
-
-                lblIva.Text = "x";
-
-                lblTotal.Text = "x";
-
-                lblCordoba.Text = "x";
-
-
-                return;
-            }
-            if (dgvStock.SelectedRows.Count == 0)
-            {
-                lblNominal.Text = "x";
-
-                lblDescuento.Text = "x";
-
-                lblIva.Text = "x";
-
-                lblTotal.Text = "x";
-
-                lblCordoba.Text = "x";
-            }
-            if (double.Parse(txtDescuento.Text) > 50)
-            {
-                MessageBox.Show("Los descuentos no pueden ser mayores al 50%", "Error");
-
-                txtDescuento.Text = "50";
-            }
-
-            if (txtDescuento.Text == "0")
-            {
-                lblNominal.Text = (Math.Round( double.Parse(dgvStock.SelectedRows[0].Cells[2].Value.ToString()) / 1.15,2)).ToString();
-
-                lblDescuento.Text = "0";
-
-                lblIva.Text = (Math.Round(double.Parse(dgvStock.SelectedRows[0].Cells[2].Value.ToString()) - double.Parse(lblNominal.Text),2)).ToString();
-
-                lblTotal.Text = dgvStock.SelectedRows[0].Cells[2].Value.ToString();
-
-                lblCordoba.Text = Math.Round( double.Parse(lblTotal.Text) * double.Parse(lblTasa.Text),2).ToString();
-            }
-            else
-            {
-                lblNominal.Text = (Math.Round(double.Parse(dgvStock.SelectedRows[0].Cells[2].Value.ToString()) / 1.15,2)).ToString();
-
-                lblDescuento.Text = (Math.Round(double.Parse(lblNominal.Text) * (double.Parse(txtDescuento.Text) / 100),2)).ToString();
-
-                lblIva.Text = (Math.Round((double.Parse(lblNominal.Text) - double.Parse(lblDescuento.Text)) * 0.15,2)).ToString();
-
-                lblTotal.Text = (Math.Round(double.Parse(lblNominal.Text) - double.Parse(lblDescuento.Text)+double.Parse(lblIva.Text),2)).ToString();
-
-                lblCordoba.Text = Math.Round(double.Parse(lblTotal.Text) * double.Parse(lblTasa.Text), 2).ToString();
-            }
+            auxOpc = opc;
         }
 
         private void PnlVentas_Load(object sender, EventArgs e)
         {
-
+            vMOrdenes.InitModuloOrdenes(this,auxOpc,"");
         }
 
-        private void txtMonto_TextChanged(object sender, EventArgs e)
+        private void BtnCliente_Click(object sender, EventArgs e)
         {
-
+            Panel_Cliente_Contrato panelCliente = new Panel_Cliente_Contrato("Venta");
+            AddOwnedForm(panelCliente);
+            panelCliente.Show();
         }
 
-        private void txtFactura_TextChanged(object sender, EventArgs e)
+        private void BtnVolver_Click(object sender, EventArgs e)
         {
-
+            vMOrdenes.ConfigUI(this, "Menu");
         }
 
-        private void label9_Click(object sender, EventArgs e)
+        private void BtnAgregarPro_Click(object sender, EventArgs e)
         {
-
+            vMOrdenes.ConfigUI(this, "Productos");
         }
 
-        private void label6_Click(object sender, EventArgs e)
+        private void BtnAgregarServicio_Click(object sender, EventArgs e)
         {
-
+            vMOrdenes.ConfigUI(this, "Servicios");
         }
 
-        private void btnSeleccionarAtaud_Click(object sender, EventArgs e)
+        private void BtnPagarOrden_Click(object sender, EventArgs e)
         {
-            //Verificar que haya seleccionada una fila en el stock
+            vMOrdenes.ConfigUI(this, "Pagar");
+        }
 
-            if (dgvStock.SelectedRows.Count == 0)
+        private void BtnBuscar_Click(object sender, EventArgs e)
+        {
+            vMOrdenes.FuncionesPrincipales(this);
+        }
+
+        private void CmbTipoServicio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            vMOrdenes.FuncionesPrincipales(this);
+        }
+
+        private void TxtCantidadProducto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si la tecla presionada es un número o la tecla de retroceso
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-                MessageBox.Show("No ha seleccionado ningun ataud","Error");
-                return;
+                // Si no es un número ni la tecla de retroceso, ignorar la entrada de teclado
+                e.Handled = true;
             }
+        }
 
-            //Verificar que haya algo en el descuento
-            if (txtDescuento.Text == "")
+        private void DgvProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 6)
             {
-                txtDescuento.Text = "";
-            }
-            //Verificar que el ataud no se haya agregado antes
-            if (dgvAtaudes.Rows.Count > 0)
-            {
-
-                for(int i =0; i< dgvAtaudes.Rows.Count; i++)
+                if (vMOrdenes.auxSubModulo == "Productos")
                 {
-                    if (dgvStock.SelectedRows[0].Cells[5].Value.ToString() == dgvAtaudes.Rows[i].Cells[3].Value.ToString())
-                    {
-                        MessageBox.Show("El ataud ya fue seleccionado", "Error");
-                        return;
-                    }
+                    object cellValue = DgvProductos.Rows[e.RowIndex].Cells[0].Value;
+                    PnlDisponibilidad disponibilidad = new PnlDisponibilidad(cellValue.ToString());
+                    disponibilidad.ShowDialog();
                 }
+                else
+                {
+                    MessageBox.Show("No se puede revisar la disponibilidad en servicios.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+               
+            }
+
+            if (e.ColumnIndex == 5)
+            {
+                int Prueba;
+                if(int.TryParse(TxtCantidadProducto.Text.Trim(), out Prueba) == false || TxtCantidadProducto.Text.Trim() == "0"
+                    || TxtCantidadProducto.Text.Trim() == "00" || TxtCantidadProducto.Text.Trim() == "000" || TxtCantidadProducto.Text.Trim() == "0000")
+                {
+                    MessageBox.Show("Debe agregar una cantidad valida","Atención", MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                    TxtCantidadProducto.Text = "1";
+                    return;
+                }
+
+                object cellValue = DgvProductos.Rows[e.RowIndex].Cells[0].Value;
                 
+                vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(),TxtCantidadProducto.Text.Trim(),"Aumentar");
+
+                var informativeMessageBox = new InformativeMessageBox($"Producto {DgvProductos.Rows[e.RowIndex].Cells[1].Value.ToString()} Agregado Correctamente a la Orden.", "Producto Agregado", 3000); // 3000 milisegundos = 3 segundos
+                informativeMessageBox.Show();
             }
-
-            //Agregar al dtagrid
-
-
-            dgvAtaudes.Rows.Add(dgvStock.SelectedRows[0].Cells[0].Value.ToString(), dgvStock.SelectedRows[0].Cells[1].Value.ToString(), dgvStock.SelectedRows[0].Cells[2].Value.ToString(), dgvStock.SelectedRows[0].Cells[5].Value.ToString(),txtDescuento.Text);
-
-
-            RealizarCalculos();
-            txtDescuento.Text = "0";
-
-            lblNominal.Text = "x";
-
-            lblDescuento.Text = "x";
-
-            lblIva.Text = "x";
-
-            lblTotal.Text = "x";
-
-            lblCordoba.Text = "x";
         }
 
-        private void btnSeleccionarServicio_Click(object sender, EventArgs e)
+        private void ChkRetencionDgi_Click(object sender, EventArgs e)
         {
-            //Verificar que la cantidad no sea cero
+            vMOrdenes.AgregarProductosOrden(this,"", "", "Aumentar");
+        }
 
-            if (txtCantidad.Text=="0")
+        private void ChkRetencionAlcaldia_Click(object sender, EventArgs e)
+        {
+            vMOrdenes.AgregarProductosOrden(this, "", "", "Aumentar");
+        }
+
+
+        private void LblIdClientes_TextChanged(object sender, EventArgs e)
+        {
+            if (LblIdClientes.Text.Trim() != "-")
             {
-                MessageBox.Show("La cantidad de servicios no puede ser cero", "Error");
-                return;
+                var informativeMessageBox = new InformativeMessageBox($"El Cliente se ha cambiado correctamente.", "Cambio de Cliente", 3000); // 3000 milisegundos = 3 segundos
+                informativeMessageBox.Show();
             }
-            if (txtDescServicio.Text == "")
+        }
+
+        private void DgvItemsOrden_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Agregar
+            if (e.ColumnIndex == 0)
             {
-                txtDescServicio.Text = "0";
-            }
-            for (int i = 0; i < dgvServicios.Rows.Count; i++)
-            {
-                if (cmbServicios.Text == dgvServicios.Rows[i].Cells[1].Value.ToString())
+                int Prueba;
+                if (int.TryParse(TxtCantidadItems.Text.Trim(), out Prueba) == false || TxtCantidadItems.Text.Trim() == "0"
+                    || TxtCantidadItems.Text.Trim() == "00" || TxtCantidadItems.Text.Trim() == "000" || TxtCantidadItems.Text.Trim() == "0000")
                 {
-                    MessageBox.Show("El Servicio ya fue seleccionado", "Error");
+                    MessageBox.Show("Debe agregar una cantidad valida", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    TxtCantidadProducto.Text = "1";
                     return;
                 }
+
+                object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[3].Value;
+
+                vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), TxtCantidadItems.Text.Trim(), "Aumentar");
             }
 
-            //Insertar en el data
-            dgvServicios.Rows.Add(ventas.Mostra_idXNombre_Categoria(cmbServicios.Text),cmbServicios.Text,ventas.Mostra_PrecioXNombre(cmbServicios.Text),txtCantidad.Text,txtDescServicio.Text);
-
-            RealizarCalculos();
-
-            //Resetear todo\
-
-            txtDescServicio.Text = "0";
-            txtCantidad.Text = "1";
-        }
-
-        private void btnEliminarFilaAtaud_Click(object sender, EventArgs e)
-        {
-            if (ventas.Obtener_Estado(idPublico) == "Anulado")
+            //Quitar
+            if (e.ColumnIndex == 1)
             {
-                MessageBox.Show("No se pueden modificar las ventas anuladas", "Error");
-                return;
-            }
-            if (dgvAtaudes.CurrentRow == null)
-            {
-                MessageBox.Show("Seleccione una fila", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
-            else
-            {
-                if (dgvAtaudes.Rows.Count > 0)
+                int Prueba;
+                if (int.TryParse(TxtCantidadItems.Text.Trim(), out Prueba) == false || TxtCantidadItems.Text.Trim() == "0"
+                    || TxtCantidadItems.Text.Trim() == "00" || TxtCantidadItems.Text.Trim() == "000" || TxtCantidadItems.Text.Trim() == "0000")
                 {
-
-                    ventas.Actualizar_Disponible(int.Parse(dgvAtaudes.SelectedRows[0].Cells[0].Value.ToString()));
-                    dgvAtaudes.Rows.Remove(dgvAtaudes.CurrentRow);
-                    RealizarCalculos();
-                    
-
-                    
-
+                    MessageBox.Show("Debe agregar una cantidad valida", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    TxtCantidadProducto.Text = "1";
                     return;
                 }
-                MessageBox.Show("No hay ataudes Agregados", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-        }
 
-        private void especialButton3_Click(object sender, EventArgs e)
-        {
-            if (ventas.Obtener_Estado(idPublico) == "Anulado")
-            {
-                MessageBox.Show("No se pueden modificar las ventas anuladas", "Error");
-                return;
+                object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[3].Value;
+
+                vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), TxtCantidadItems.Text.Trim(), "Disminuir");
             }
-            if (dgvServicios.CurrentRow == null)
+
+            //Quitar
+            if (e.ColumnIndex == 2)
             {
-                MessageBox.Show("Seleccione una fila", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
-            else
-            {
-                if (dgvServicios.Rows.Count > 0)
+                DialogResult result = MessageBox.Show("¿Estás seguro que deseas hacer esta acción?", "Quitar Producto Venta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                
+                if (result == DialogResult.Yes)
                 {
-                    dgvServicios.Rows.Remove(dgvServicios.CurrentRow);
-                    RealizarCalculos();
-                    return;
+
+                    int Prueba;
+                    if (int.TryParse(TxtCantidadItems.Text.Trim(), out Prueba) == false || TxtCantidadItems.Text.Trim() == "0"
+                        || TxtCantidadItems.Text.Trim() == "00" || TxtCantidadItems.Text.Trim() == "000" || TxtCantidadItems.Text.Trim() == "0000")
+                    {
+                        MessageBox.Show("Debe agregar una cantidad valida", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        TxtCantidadProducto.Text = "1";
+                        return;
+                    }
+
+                    object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[3].Value;
+                    object cellValueCantidad = DgvItemsOrden.Rows[e.RowIndex].Cells[5].Value;
+
+                    vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), cellValueCantidad.ToString(), "Disminuir");
                 }
-                MessageBox.Show("No hay Servicios Agregados", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
-        private void RealizarCalculos()
+        private void TxtCantidadItems_KeyPress(object sender, KeyPressEventArgs e)
         {
-            float suma=0;
-
-            double descuento =0;
-
-            //SUMAS DE NOMINALES
-            for(int i = 0; i < dgvServicios.Rows.Count; i++)
+            // Verificar si la tecla presionada es un número o la tecla de retroceso
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-                suma = suma + (float.Parse(dgvServicios.Rows[i].Cells[2].Value.ToString())* float.Parse(dgvServicios.Rows[i].Cells[3].Value.ToString()));
-            }
-
-            for (int i = 0; i < dgvAtaudes.Rows.Count; i++)
-            {
-                suma = suma + float.Parse(dgvAtaudes.Rows[i].Cells[2].Value.ToString());
-            }
-
-            //SUMAS DE DESCUENTOS
-            for (int i = 0; i < dgvServicios.Rows.Count; i++)
-            {
-                descuento = descuento + (((float.Parse(dgvServicios.Rows[i].Cells[2].Value.ToString())/1.15)*(float.Parse(dgvServicios.Rows[i].Cells[4].Value.ToString())/100)* float.Parse(dgvServicios.Rows[i].Cells[3].Value.ToString())));
-            }
-
-            for (int i = 0; i < dgvAtaudes.Rows.Count; i++)
-            {
-                descuento = descuento + ((float.Parse(dgvAtaudes.Rows[i].Cells[2].Value.ToString()) / 1.15) * (float.Parse(dgvAtaudes.Rows[i].Cells[4].Value.ToString()) / 100));
-            }
-            lblNominalTotal.Text=(Math.Round(suma/1.15,2)).ToString();    
-
-            lblDescuentoTotal.Text = (Math.Round(descuento, 2)).ToString();
-
-            lblIvaTotal.Text = (Math.Round((float.Parse(lblNominalTotal.Text) - float.Parse(lblDescuentoTotal.Text)) * 0.15,2)).ToString();
-
-            lblTotalTotalDolar.Text = (Math.Round(float.Parse(lblNominalTotal.Text) - float.Parse(lblDescuentoTotal.Text) + float.Parse(lblIvaTotal.Text),2)).ToString();
-
-            lblTotalTotalCordoba.Text = Math.Round(double.Parse(lblTotalTotalDolar.Text) * double.Parse(lblTasa.Text), 2).ToString();
-        }
-
-        private void txtDescServicio_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (Char.IsDigit(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else if (Char.IsControl(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else if (Char.IsSeparator(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else
-            {
+                // Si no es un número ni la tecla de retroceso, ignorar la entrada de teclado
                 e.Handled = true;
             }
         }
 
-        private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e)
+        private void BtnVolverFormasPago_Click(object sender, EventArgs e)
         {
-            if (Char.IsDigit(e.KeyChar))
+            vMOrdenes.ConfigUI(this, "Menu");
+        }
+
+        private void BtnEfectivo_Click(object sender, EventArgs e)
+        {
+            vMOrdenes.ConfigUI(this, "Efectivo");
+        }
+
+        private void BtnVolverEfectivo_Click(object sender, EventArgs e)
+        {
+            vMOrdenes.ConfigUI(this, "Pagar");
+        }
+
+        private void BtnEfectivoUno_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Button clickedButton = (System.Windows.Forms.Button)sender;
+
+            if (clickedButton.Text == ".")
             {
-                e.Handled = false;
+                // Verifica si ya existe un punto en el texto
+                if (TxtCantidadAbonadaEfectivo.Text.Contains("."))
+                {
+                    // Si ya existe un punto, no se hace nada
+                    return;
+                }
             }
-            else if (Char.IsControl(e.KeyChar))
+            else if (TxtCantidadAbonadaEfectivo.Text.Contains("."))
             {
-                e.Handled = false;
+                // Si ya hay un punto decimal en el texto, se verifica la cantidad de dígitos después del punto
+                int index = TxtCantidadAbonadaEfectivo.Text.IndexOf(".");
+                string decimals = TxtCantidadAbonadaEfectivo.Text.Substring(index + 1);
+                if (decimals.Length >= 2)
+                {
+                    // Si ya hay dos dígitos después del punto, no se agrega más
+                    return;
+                }
             }
-            else if (Char.IsSeparator(e.KeyChar))
+
+            // Agrega el texto del botón al final del texto en el TextBox
+            TxtCantidadAbonadaEfectivo.Text += clickedButton.Text;
+        }
+
+        private void BtnEfectivoDos_Click(object sender, EventArgs e)
+        {
+            BotonesCalc(sender);
+        }
+
+        private void BtnEfectivoTres_Click(object sender, EventArgs e)
+        {
+            BotonesCalc(sender);
+        }
+
+        private void BtnEfectivoCuatro_Click(object sender, EventArgs e)
+        {
+            BotonesCalc(sender);
+        }
+
+        private void BtnEfectivoCinco_Click(object sender, EventArgs e)
+        {
+            BotonesCalc(sender);
+        }
+
+        private void BtnEfectivoSeis_Click(object sender, EventArgs e)
+        {
+            BotonesCalc(sender);
+        }
+
+        private void BtnEfectivoSiete_Click(object sender, EventArgs e)
+        {
+            BotonesCalc(sender);
+        }
+
+        private void BtnEfectivoOcho_Click(object sender, EventArgs e)
+        {
+            BotonesCalc(sender);
+        }
+
+        private void BtnEfectivoNueve_Click(object sender, EventArgs e)
+        {
+            BotonesCalc(sender);
+        }
+
+        private void BtnEfectivoPunto_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(TxtCantidadAbonadaEfectivo.Text))
             {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
+                if (TxtCantidadAbonadaEfectivo.Text.Contains("."))
+                {
+                    return;
+                }
+                else
+                {
+                    BotonesCalc(sender);
+                }
             }
         }
 
-        private void especialButton2_Click(object sender, EventArgs e)
+        private void BtnEfectivoCero_Click(object sender, EventArgs e)
         {
-            if(dgvAtaudes.Rows.Count==0 && dgvServicios.Rows.Count == 0)
+            BotonesCalc(sender);
+        }
+
+        private void BtnEfectivoBorrar_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(TxtCantidadAbonadaEfectivo.Text))
             {
-                MessageBox.Show("Tiene que seleccionar un servicio o ataud","Error");
-                return;
+                TxtCantidadAbonadaEfectivo.Text = TxtCantidadAbonadaEfectivo.Text.Substring(0, TxtCantidadAbonadaEfectivo.Text.Length - 1);
+                TxtCantidadAbonadaEfectivo.SelectionStart = TxtCantidadAbonadaEfectivo.Text.Length;
+
+                if(TxtCantidadAbonadaEfectivo.Text.Trim() == "")
+                {
+                    TxtCantidadAbonadaEfectivo.Text = "0";
+                }
+
+                if (double.Parse(TxtCantidadAbonadaEfectivo.Text) > double.Parse(TxtTotalEfectivo.Text))
+                {
+                    TxtDiferenciaEfectivo.Text = (Math.Round(double.Parse(TxtCantidadAbonadaEfectivo.Text) - double.Parse(TxtTotalEfectivo.Text), 2)).ToString();
+                }
+                else
+                {
+                    TxtDiferenciaEfectivo.Text = "0";
+                }
             }
-            if (txtFactura.Text == "")
+        }
+
+        private void BotonesCalc(object sender)
+        {
+            System.Windows.Forms.Button clickedButton = (System.Windows.Forms.Button)sender;
+
+            if (clickedButton.Text == ".")
             {
-                MessageBox.Show("El numero de factura no puede estar en blanco","Error");
-                return;
+                // Verifica si ya existe un punto en el texto
+                if (TxtCantidadAbonadaEfectivo.Text.Contains("."))
+                {
+                    // Si ya existe un punto, no se hace nada
+                    return;
+                }
             }
-            if (ventas.Obtener_Estado(idPublico) == "Anulado")
+            else if (TxtCantidadAbonadaEfectivo.Text.Contains("."))
             {
-                MessageBox.Show("No se pueden modificar las ventas anuladas", "Error");
-                return;
+                // Si ya hay un punto decimal en el texto, se verifica la cantidad de dígitos después del punto
+                int index = TxtCantidadAbonadaEfectivo.Text.IndexOf(".");
+                string decimals = TxtCantidadAbonadaEfectivo.Text.Substring(index + 1);
+                if (decimals.Length >= 2)
+                {
+                    // Si ya hay dos dígitos después del punto, no se agrega más
+                    return;
+                }
             }
 
-            
+            // Agrega el texto del botón al final del texto en el TextBox
+            TxtCantidadAbonadaEfectivo.Text += clickedButton.Text;
 
-                ventas.Actualizar_Detalles(idPublico, txtDescripcion.Text, txtFactura.Text);
-
-            //Verificar si es venta futura,reserva o normal
-
-            if (tipo == "Final")
+            if(double.Parse(TxtCantidadAbonadaEfectivo.Text) > double.Parse(TxtTotalEfectivo.Text))
             {
-                txtMonto.Text = "0";
+                TxtDiferenciaEfectivo.Text = (Math.Round(double.Parse(TxtCantidadAbonadaEfectivo.Text) - double.Parse(TxtTotalEfectivo.Text),2)).ToString();
             }
             else
             {
-                if(tipo == "VF")
-                {
-                    if (float.Parse(txtMonto.Text) < 1)
-                    {
-                        MessageBox.Show("El monto no puede ser menor a 1", "Error");
-                        return;
-                    }
-                    if (float.Parse(txtMonto.Text) > float.Parse(lblTotalTotalDolar.Text))
-                    {
-                        MessageBox.Show("El monto no puede ser mayor al total", "Error");
-                        return;
-                    }
-                    if (float.Parse(txtMonto.Text) < (float.Parse(lblTotalTotalDolar.Text) / 2))
-                    {
-                        MessageBox.Show("El monto no puede ser menor al 50 %", "Error");
-                        return;
-                    }
-
-                }
-                if(tipo == "Reserva")
-                {
-                    if (float.Parse(txtMonto.Text) <1)
-                    {
-                        MessageBox.Show("El monto no puede ser menor a 1", "Error");
-                        return;
-                    }
-                    if (float.Parse(txtMonto.Text) > float.Parse(lblTotalTotalDolar.Text))
-                    {
-                        MessageBox.Show("El monto no puede ser mayor al total", "Error");
-                        return;
-                    }
-                    if (float.Parse(txtMonto.Text) > (float.Parse(lblTotalTotalDolar.Text) / 2))
-                    {
-                        MessageBox.Show("El monto no puede ser mayor al 50 %", "Error");
-                        return;
-                    }
-
-                }
+                TxtDiferenciaEfectivo.Text = "0";
             }
-
-            //Actualizar monto
-
-            ventas.Actualizar_Monto(idPublico,float.Parse(txtMonto.Text));
-
-                //Borrar detalles de la venta
-
-                ventas.Actualizar_Delete(idPublico);
-
-            //Insertar detalles nuevamente
-
-            //LLenado de los detalles
-            if (dgvAtaudes.Rows.Count != 0)
-                {
-                    for (int i = 0; i < dgvAtaudes.Rows.Count; i++)
-                    {
-                        ventas.VentaFutura(idPublico, int.Parse(dgvAtaudes.Rows[i].Cells[4].Value.ToString()), int.Parse(dgvAtaudes.Rows[i].Cells[0].Value.ToString()));
-
-                        //Cambios de estado para los estandares
-
-                        ventas.VentaDirectas_Estandares(int.Parse(dgvAtaudes.Rows[i].Cells[0].Value.ToString()));
-                    }
-                }
-
-            //LLenado de detalles de servicios
-            if (dgvServicios.Rows.Count != 0)
-            {
-                for (int i = 0; i < dgvServicios.Rows.Count; i++)
-                {
-                    ventas.VentaReserva(idPublico, int.Parse(dgvServicios.Rows[i].Cells[4].Value.ToString()), int.Parse(dgvServicios.Rows[i].Cells[0].Value.ToString()), int.Parse(dgvServicios.Rows[i].Cells[3].Value.ToString()));
-                }
-            }
-
-            MessageBox.Show("Venta Actualizada con exito", "Correcto");
-
-            this.Close();
         }
 
-       
+        private void BtnPagarEfectivo_Click(object sender, EventArgs e)
+        {
+            if(TxtDiferenciaEfectivo.Text != "0")
+            {
+                MessageBox.Show($"Debe dar {TxtDiferenciaEfectivo.Text} (NIO) de Cambio.", "Cambio o Diferencia",MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+        }
+
+        private void BtnNotaOrden_Click(object sender, EventArgs e)
+        {
+            AgregarNotaOrden nota = new AgregarNotaOrden("");
+            nota.ShowDialog();
+        }
+
+        private void BtnCancelarOrden_Click(object sender, EventArgs e)
+        {
+            PnlCancelarOrden pnlCancelarOrden = new PnlCancelarOrden("");
+            pnlCancelarOrden.ShowDialog();
+        }
+
+        private void BtnListaOrdenes_Click(object sender, EventArgs e)
+        {
+            vMOrdenes.ConfigUI(this, "Lista");
+        }
+
+        private void BtnVoverLista_Click(object sender, EventArgs e)
+        {
+            vMOrdenes.ConfigUI(this, "Menu");
+        }
     }
 }

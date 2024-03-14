@@ -28,17 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PnlCatalogoClientes));
             this.dgvCatalogoClientes = new System.Windows.Forms.DataGridView();
-            this.txtFiltrar = new NeoCobranza.Controladores.LoginUserControl();
-            this.btnAgregar = new NeoCobranza.Especiales.EspecialButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.CmbBuscarPor = new System.Windows.Forms.ComboBox();
+            this.BtnBuscarCliente = new NeoCobranza.Especiales.EspecialButton();
             this.btnActualizar = new NeoCobranza.Especiales.EspecialButton();
-            this.especialButton2 = new NeoCobranza.Especiales.EspecialButton();
-            this.label2 = new System.Windows.Forms.Label();
-            this.llbTitulo = new System.Windows.Forms.Label();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.btnAgregar = new NeoCobranza.Especiales.EspecialButton();
+            this.TxtFiltrar = new NeoCobranza.Controladores.LoginUserControl();
+            this.PnlTitulo = new System.Windows.Forms.Panel();
+            this.TbTitulo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCatalogoClientes)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            this.PnlTitulo.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvCatalogoClientes
@@ -47,77 +51,109 @@
             this.dgvCatalogoClientes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvCatalogoClientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvCatalogoClientes.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dgvCatalogoClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCatalogoClientes.Location = new System.Drawing.Point(12, 96);
+            this.dgvCatalogoClientes.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvCatalogoClientes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dgvCatalogoClientes.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCatalogoClientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvCatalogoClientes.ColumnHeadersHeight = 30;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCatalogoClientes.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvCatalogoClientes.GridColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dgvCatalogoClientes.Location = new System.Drawing.Point(12, 86);
             this.dgvCatalogoClientes.Name = "dgvCatalogoClientes";
             this.dgvCatalogoClientes.ReadOnly = true;
+            this.dgvCatalogoClientes.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCatalogoClientes.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvCatalogoClientes.RowHeadersWidth = 15;
             this.dgvCatalogoClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCatalogoClientes.Size = new System.Drawing.Size(1081, 386);
+            this.dgvCatalogoClientes.Size = new System.Drawing.Size(1117, 358);
             this.dgvCatalogoClientes.TabIndex = 1;
+            this.dgvCatalogoClientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCatalogoClientes_CellContentClick);
             // 
-            // txtFiltrar
+            // label1
             // 
-            this.txtFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFiltrar.BorderColor = System.Drawing.Color.MediumSlateBlue;
-            this.txtFiltrar.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.txtFiltrar.BorderRadius = 0;
-            this.txtFiltrar.BorderSize = 2;
-            this.txtFiltrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFiltrar.ForeColor = System.Drawing.Color.DimGray;
-            this.txtFiltrar.Location = new System.Drawing.Point(16, 48);
-            this.txtFiltrar.Margin = new System.Windows.Forms.Padding(4);
-            this.txtFiltrar.Multilinea = false;
-            this.txtFiltrar.Name = "txtFiltrar";
-            this.txtFiltrar.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.txtFiltrar.PasswordChar = false;
-            this.txtFiltrar.PlaceHolderColor = System.Drawing.Color.DarkGray;
-            this.txtFiltrar.PlaceHolderText = "Buscar Cliente";
-            this.txtFiltrar.Size = new System.Drawing.Size(1081, 35);
-            this.txtFiltrar.TabIndex = 0;
-            this.txtFiltrar.Texts = "";
-            this.txtFiltrar.UnderLineFlat = true;
-            this.txtFiltrar._TextChanged += new System.EventHandler(this.txtFiltrar__TextChanged);
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label1.Location = new System.Drawing.Point(499, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(78, 17);
+            this.label1.TabIndex = 101;
+            this.label1.Text = "Buscar Por:";
             // 
-            // btnAgregar
+            // CmbBuscarPor
             // 
-            this.btnAgregar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnAgregar.BackColor = System.Drawing.Color.ForestGreen;
-            this.btnAgregar.BackGroundColor = System.Drawing.Color.ForestGreen;
-            this.btnAgregar.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.btnAgregar.BorderRadius = 5;
-            this.btnAgregar.BorderSize = 0;
-            this.btnAgregar.FlatAppearance.BorderSize = 0;
-            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregar.ForeColor = System.Drawing.Color.White;
-            this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
-            this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAgregar.Location = new System.Drawing.Point(665, 500);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(203, 38);
-            this.btnAgregar.TabIndex = 66;
-            this.btnAgregar.Text = "Insertar Cliente";
-            this.btnAgregar.TextGroundColor = System.Drawing.Color.White;
-            this.btnAgregar.UseVisualStyleBackColor = false;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            this.CmbBuscarPor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CmbBuscarPor.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.CmbBuscarPor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbBuscarPor.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CmbBuscarPor.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.CmbBuscarPor.FormattingEnabled = true;
+            this.CmbBuscarPor.Location = new System.Drawing.Point(502, 38);
+            this.CmbBuscarPor.Name = "CmbBuscarPor";
+            this.CmbBuscarPor.Size = new System.Drawing.Size(272, 29);
+            this.CmbBuscarPor.TabIndex = 102;
+            // 
+            // BtnBuscarCliente
+            // 
+            this.BtnBuscarCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnBuscarCliente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(186)))));
+            this.BtnBuscarCliente.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(186)))));
+            this.BtnBuscarCliente.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.BtnBuscarCliente.BorderRadius = 5;
+            this.BtnBuscarCliente.BorderSize = 0;
+            this.BtnBuscarCliente.FlatAppearance.BorderSize = 0;
+            this.BtnBuscarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnBuscarCliente.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnBuscarCliente.ForeColor = System.Drawing.Color.White;
+            this.BtnBuscarCliente.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnBuscarCliente.Location = new System.Drawing.Point(820, 29);
+            this.BtnBuscarCliente.Name = "BtnBuscarCliente";
+            this.BtnBuscarCliente.Size = new System.Drawing.Size(148, 38);
+            this.BtnBuscarCliente.TabIndex = 103;
+            this.BtnBuscarCliente.Text = "Buscar";
+            this.BtnBuscarCliente.TextGroundColor = System.Drawing.Color.White;
+            this.BtnBuscarCliente.UseVisualStyleBackColor = false;
+            this.BtnBuscarCliente.Click += new System.EventHandler(this.BtnBuscarCliente_Click);
             // 
             // btnActualizar
             // 
-            this.btnActualizar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnActualizar.BackColor = System.Drawing.Color.ForestGreen;
-            this.btnActualizar.BackGroundColor = System.Drawing.Color.ForestGreen;
+            this.btnActualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnActualizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(186)))));
+            this.btnActualizar.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(186)))));
             this.btnActualizar.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.btnActualizar.BorderRadius = 5;
             this.btnActualizar.BorderSize = 0;
             this.btnActualizar.FlatAppearance.BorderSize = 0;
             this.btnActualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnActualizar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnActualizar.Font = new System.Drawing.Font("Century Gothic", 12F);
             this.btnActualizar.ForeColor = System.Drawing.Color.White;
             this.btnActualizar.Image = ((System.Drawing.Image)(resources.GetObject("btnActualizar.Image")));
             this.btnActualizar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnActualizar.Location = new System.Drawing.Point(885, 500);
+            this.btnActualizar.Location = new System.Drawing.Point(935, 463);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(193, 38);
             this.btnActualizar.TabIndex = 67;
@@ -126,79 +162,94 @@
             this.btnActualizar.UseVisualStyleBackColor = false;
             this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
-            // especialButton2
+            // btnAgregar
             // 
-            this.especialButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.especialButton2.BackColor = System.Drawing.Color.ForestGreen;
-            this.especialButton2.BackGroundColor = System.Drawing.Color.ForestGreen;
-            this.especialButton2.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.especialButton2.BorderRadius = 5;
-            this.especialButton2.BorderSize = 0;
-            this.especialButton2.FlatAppearance.BorderSize = 0;
-            this.especialButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.especialButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.especialButton2.ForeColor = System.Drawing.Color.White;
-            this.especialButton2.Image = ((System.Drawing.Image)(resources.GetObject("especialButton2.Image")));
-            this.especialButton2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.especialButton2.Location = new System.Drawing.Point(16, 500);
-            this.especialButton2.Name = "especialButton2";
-            this.especialButton2.Size = new System.Drawing.Size(148, 38);
-            this.especialButton2.TabIndex = 69;
-            this.especialButton2.Text = "Refrescar";
-            this.especialButton2.TextGroundColor = System.Drawing.Color.White;
-            this.especialButton2.UseVisualStyleBackColor = false;
-            this.especialButton2.Click += new System.EventHandler(this.especialButton2_Click);
+            this.btnAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAgregar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(186)))));
+            this.btnAgregar.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(186)))));
+            this.btnAgregar.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.btnAgregar.BorderRadius = 5;
+            this.btnAgregar.BorderSize = 0;
+            this.btnAgregar.FlatAppearance.BorderSize = 0;
+            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregar.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.btnAgregar.ForeColor = System.Drawing.Color.White;
+            this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
+            this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAgregar.Location = new System.Drawing.Point(715, 463);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(203, 38);
+            this.btnAgregar.TabIndex = 66;
+            this.btnAgregar.Text = "Insertar Cliente";
+            this.btnAgregar.TextGroundColor = System.Drawing.Color.White;
+            this.btnAgregar.UseVisualStyleBackColor = false;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
-            // label2
+            // TxtFiltrar
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label2.Location = new System.Drawing.Point(13, 32);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(287, 16);
-            this.label2.TabIndex = 99;
-            this.label2.Text = "________________________________________";
+            this.TxtFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtFiltrar.BorderColor = System.Drawing.Color.Silver;
+            this.TxtFiltrar.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.TxtFiltrar.BorderRadius = 0;
+            this.TxtFiltrar.BorderSize = 2;
+            this.TxtFiltrar.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtFiltrar.ForeColor = System.Drawing.Color.DimGray;
+            this.TxtFiltrar.Location = new System.Drawing.Point(16, 34);
+            this.TxtFiltrar.Margin = new System.Windows.Forms.Padding(4);
+            this.TxtFiltrar.Multilinea = false;
+            this.TxtFiltrar.Name = "TxtFiltrar";
+            this.TxtFiltrar.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this.TxtFiltrar.PasswordChar = false;
+            this.TxtFiltrar.PlaceHolderColor = System.Drawing.Color.DarkGray;
+            this.TxtFiltrar.PlaceHolderText = "Buscar Cliente";
+            this.TxtFiltrar.Size = new System.Drawing.Size(465, 36);
+            this.TxtFiltrar.TabIndex = 0;
+            this.TxtFiltrar.Texts = "";
+            this.TxtFiltrar.UnderLineFlat = true;
             // 
-            // llbTitulo
+            // PnlTitulo
             // 
-            this.llbTitulo.AutoSize = true;
-            this.llbTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.llbTitulo.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.llbTitulo.Location = new System.Drawing.Point(11, 7);
-            this.llbTitulo.Name = "llbTitulo";
-            this.llbTitulo.Size = new System.Drawing.Size(208, 25);
-            this.llbTitulo.TabIndex = 98;
-            this.llbTitulo.Text = "Catalogo de clientes";
+            this.PnlTitulo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PnlTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.PnlTitulo.Controls.Add(this.TbTitulo);
+            this.PnlTitulo.Location = new System.Drawing.Point(-1, 518);
+            this.PnlTitulo.Name = "PnlTitulo";
+            this.PnlTitulo.Size = new System.Drawing.Size(1144, 44);
+            this.PnlTitulo.TabIndex = 104;
             // 
-            // pictureBox4
+            // TbTitulo
             // 
-            this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(1094, 7);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(24, 25);
-            this.pictureBox4.TabIndex = 100;
-            this.pictureBox4.TabStop = false;
-            this.pictureBox4.Click += new System.EventHandler(this.pictureBox4_Click);
+            this.TbTitulo.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.TbTitulo.AutoSize = true;
+            this.TbTitulo.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TbTitulo.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.TbTitulo.Location = new System.Drawing.Point(4, 3);
+            this.TbTitulo.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.TbTitulo.Name = "TbTitulo";
+            this.TbTitulo.Size = new System.Drawing.Size(305, 33);
+            this.TbTitulo.TabIndex = 1;
+            this.TbTitulo.Text = "Catálogo de Clientes";
             // 
             // PnlCatalogoClientes
             // 
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(1141, 562);
-            this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.llbTitulo);
-            this.Controls.Add(this.especialButton2);
+            this.Controls.Add(this.PnlTitulo);
+            this.Controls.Add(this.BtnBuscarCliente);
+            this.Controls.Add(this.CmbBuscarPor);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.dgvCatalogoClientes);
-            this.Controls.Add(this.txtFiltrar);
+            this.Controls.Add(this.TxtFiltrar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "PnlCatalogoClientes";
             this.Load += new System.EventHandler(this.PnlCatalogoClientes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCatalogoClientes)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            this.PnlTitulo.ResumeLayout(false);
+            this.PnlTitulo.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,13 +261,14 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridView DgvCliente;
         private Controladores.LoginUserControl txtFiltro;
-        private Controladores.LoginUserControl txtFiltrar;
-        private System.Windows.Forms.DataGridView dgvCatalogoClientes;
         private Especiales.EspecialButton btnAgregar;
         private Especiales.EspecialButton btnActualizar;
-        private Especiales.EspecialButton especialButton2;
-        private System.Windows.Forms.Label label2;
-        public System.Windows.Forms.Label llbTitulo;
-        private System.Windows.Forms.PictureBox pictureBox4;
+        public System.Windows.Forms.DataGridView dgvCatalogoClientes;
+        public System.Windows.Forms.Label label1;
+        private Especiales.EspecialButton BtnBuscarCliente;
+        public System.Windows.Forms.ComboBox CmbBuscarPor;
+        public Controladores.LoginUserControl TxtFiltrar;
+        private System.Windows.Forms.Panel PnlTitulo;
+        public System.Windows.Forms.Label TbTitulo;
     }
 }

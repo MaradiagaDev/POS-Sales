@@ -57,7 +57,7 @@ namespace NeoCobranza.PnlInventario
             this.ataudes = new Ataudes(conexion);
             this.auditorias = new Auditorias(conexion);
 
-            pnlSeleccionar = new PnlSeleccionarProveedor(conexion);
+          //  pnlSeleccionar = new PnlSeleccionarProveedor(conexion);
             //Proveedor
             AddOwnedForm(pnlSeleccionar);
 

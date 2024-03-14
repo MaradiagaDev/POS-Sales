@@ -1,6 +1,7 @@
 ﻿using NeoCobranza.Clases;
 using NeoCobranza.Data;
 using NeoCobranza.DataController;
+using NeoCobranza.ModelsCobranza;
 using NeoCobranza.Paneles_Contrato;
 using System;
 using System.Collections.Generic;
@@ -37,21 +38,21 @@ namespace NeoCobranza.Paneles
             proformaVenta = new ProformaVenta(conexion);
             auditorias = new Auditorias(conexion);
 
-            //Estilo del data
-            DgvBusquedas.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11);
-            DgvBusquedas.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11);
-
-            //Estilo del data
-            DgvServicios.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11);
-            DgvServicios.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11);
-
-
             cProforma = new CProforma(conexion);
             tasaCambio = new CTasaCambio(conexion);
             cGeneral = new CGeneral(conexion);
             btnActualizar.Hide();
-            pnlVendedores = new PnlVendedores(conexion, "VentaProforma");
-            AddOwnedForm(pnlVendedores);
+
+            using(NeoCobranzaContext db = new NeoCobranzaContext())
+            {
+                List<TipoServicios> tipoServicios = db.TipoServicios.Where(s => s.Estado == "Activo").ToList();
+
+                CmbTipoProducto.DisplayMember = "Descripcion";
+                CmbTipoProducto.ValueMember = "TipoServicionId";
+                CmbTipoProducto.DataSource = tipoServicios;
+            }
+
+            CargarProductos();
         }
         public int idPublico;
 
@@ -59,6 +60,18 @@ namespace NeoCobranza.Paneles
         public PnlProforma(Conexion conexion, int idProforma)
         {
             InitializeComponent();
+
+            using (NeoCobranzaContext db = new NeoCobranzaContext())
+            {
+                List<TipoServicios> tipoServicios = db.TipoServicios.Where(s => s.Estado == "Activo").ToList();
+
+                CmbTipoProducto.DisplayMember = "Descripcion";
+                CmbTipoProducto.ValueMember = "TipoServicionId";
+                CmbTipoProducto.DataSource = tipoServicios;
+            }
+
+            CargarProductos();
+
             //variable de conexion
             this.conexion = conexion;
             //Incializacion de la clase de proforma venta
@@ -68,15 +81,6 @@ namespace NeoCobranza.Paneles
             auditorias = new Auditorias(conexion);
             //Llenado de la variable publica
             this.idPublico = idProforma;
-
-            //Estilo del data
-            DgvBusquedas.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11);
-            DgvBusquedas.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11);
-
-            //Estilo del data
-            DgvServicios.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11);
-            DgvServicios.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11);
-
 
             //LLenar datos del data de servicios
             try
@@ -131,6 +135,27 @@ namespace NeoCobranza.Paneles
             }
         }
 
+        private void CargarProductos()
+        {
+            using(NeoCobranzaContext db = new NeoCobranzaContext())
+            {
+                List<ServiciosEstadares> todosProductos = db.ServiciosEstadares.Where(s => s.ClasificacionTipo.ToString() == CmbTipoProducto.SelectedValue.ToString() && s.MontoVd != 0).OrderBy(s => s.NombreEstandar).ToList();
+
+                DataTable dtProductos = new DataTable();
+
+                dtProductos.Columns.Add("Id", typeof(string));
+                dtProductos.Columns.Add("Nombre", typeof(string));
+                dtProductos.Columns.Add("Precio", typeof(string));
+                dtProductos.Columns.Add("Descripcion", typeof(string));
+
+                foreach(var item in todosProductos)
+                {
+                    dtProductos.Rows.Add(item.IdEstandar, item.NombreEstandar, item.MontoVd, item.Descripcion);
+                }
+
+                DgvBusquedas.DataSource = dtProductos;
+            }
+        }
 
 
         #region ModificarProforma
@@ -155,27 +180,26 @@ namespace NeoCobranza.Paneles
 
         }
 
-        private void radioButton3_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbtnAtaud.Checked)
-                DgvBusquedas.DataSource = proformaVenta.Listar_Ataudes(txtfiltro.Texts);
-            txtCantidad.Text = "1";
-        }
-
-        private void rbntServicios_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbntServicios.Checked)
-                DgvBusquedas.DataSource = proformaVenta.Listar_Servicios(txtfiltro.Texts);
-            txtCantidad.Text = "1";
-        }
-
         private void txtfiltro__TextChanged(object sender, EventArgs e)
         {
-            if (rbntServicios.Checked)
-                DgvBusquedas.DataSource = proformaVenta.Listar_Servicios(txtfiltro.Texts);
-            if (rbtnAtaud.Checked)
-                DgvBusquedas.DataSource = proformaVenta.Listar_Ataudes(txtfiltro.Texts);
-            txtCantidad.Text = "1";
+            using (NeoCobranzaContext db = new NeoCobranzaContext())
+            {
+                List<ServiciosEstadares> todosProductos = db.ServiciosEstadares.Where(s => s.ClasificacionTipo.ToString() == CmbTipoProducto.SelectedValue.ToString() && s.MontoVd != 0 && s.NombreEstandar.Contains(txtfiltro.Texts)).OrderBy(s => s.NombreEstandar).ToList();
+
+                DataTable dtProductos = new DataTable();
+
+                dtProductos.Columns.Add("Id", typeof(string));
+                dtProductos.Columns.Add("Nombre", typeof(string));
+                dtProductos.Columns.Add("Precio", typeof(string));
+                dtProductos.Columns.Add("Descripcion", typeof(string));
+
+                foreach (var item in todosProductos)
+                {
+                    dtProductos.Rows.Add(item.IdEstandar, item.NombreEstandar, item.MontoVd, item.Descripcion);
+                }
+
+                DgvBusquedas.DataSource = dtProductos;
+            }
         }
 
         private void BtnSeleccionar_Click(object sender, EventArgs e)
@@ -226,7 +250,7 @@ namespace NeoCobranza.Paneles
                 MessageBox.Show("Solo se puede pagar una sala velatoria", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txtCantidad.Text = "1";
             }
-            if (rbntServicios.Checked || rbtnAtaud.Checked)
+            if (CmbTipoProducto.Items.Count>0)
             {
                 // DgvServicios.Rows.Add(DgvBusquedas.SelectedRows[0].Cells[0].Value.ToString(), DgvBusquedas.SelectedRows[0].Cells[1].Value.ToString(), DgvBusquedas.SelectedRows[0].Cells[5].Value.ToString(), (double.Parse(DgvBusquedas.SelectedRows[0].Cells[5].Value.ToString()) * double.Parse(tasaCambio.MostrarTasa())).ToString(), txtCantidad.Text, (double.Parse(DgvBusquedas.SelectedRows[0].Cells[5].Value.ToString())) * int.Parse(txtCantidad.Text), double.Parse(tasaCambio.MostrarTasa())*IvaDolar(double.Parse(DgvBusquedas.SelectedRows[0].Cells[5].Value.ToString()), int.Parse(txtCantidad.Text), double.Parse(lblDescuentoN.Text)), IvaDolar(double.Parse(DgvBusquedas.SelectedRows[0].Cells[5].Value.ToString()),int.Parse(txtCantidad.Text), double.Parse(lblDescuentoN.Text) / 100, ((double.Parse(DgvBusquedas.SelectedRows[0].Cells[5].Value.ToString())) * double.Parse(tasaCambio.MostrarTasa())) * 0.15) * int.Parse(txtCantidad.Text), lblDescuentoN.Text, (((double.Parse(lblDescuentoN.Text) / 100) * double.Parse(DgvBusquedas.SelectedRows[0].Cells[5].Value.ToString())) * double.Parse(txtCantidad.Text)).ToString());
                 DgvServicios.Rows.Add(DgvBusquedas.SelectedRows[0].Cells[0].Value.ToString(),
@@ -266,9 +290,9 @@ namespace NeoCobranza.Paneles
         private void BtnCliente_Click(object sender, EventArgs e)
         {
 
-            Panel_Cliente_Contrato panelCliente = new Panel_Cliente_Contrato(conexion,"Proforma");
+            Panel_Cliente_Contrato panelCliente = new Panel_Cliente_Contrato("Proforma");
             AddOwnedForm(panelCliente);
-            panelCliente.Show();
+            panelCliente.ShowDialog();
 
         }
 
@@ -491,20 +515,28 @@ namespace NeoCobranza.Paneles
 
             pnlGeneral.Show();
 
-
-
             this.Close();
         }
 
         private void especialButton2_Click(object sender, EventArgs e)
         {
+            var pnlVendedores = new PnlVendedores(conexion, "VentaProforma");
+            AddOwnedForm(pnlVendedores);
             pnlVendedores.Show();
         }
 
         private void PnlProforma_Load(object sender, EventArgs e)
         {
-            DgvBusquedas.AlternatingRowsDefaultCellStyle.BackColor = Color.LightBlue;
-            DgvServicios.AlternatingRowsDefaultCellStyle.BackColor = Color.LightBlue;
+        }
+
+        private void txtObservaciones_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmbTipoProducto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CargarProductos();
         }
     }
 }

@@ -28,52 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCancelar = new NeoCobranza.Especiales.EspecialButton();
             this.BtnSeleccionar = new NeoCobranza.Especiales.EspecialButton();
-            this.label1 = new System.Windows.Forms.Label();
-            this.DgvVendedor = new System.Windows.Forms.DataGridView();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.LblDynamico = new System.Windows.Forms.Label();
             this.txtFiltro = new NeoCobranza.Controladores.LoginUserControl();
+            this.DgvVendedor = new System.Windows.Forms.DataGridView();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvVendedor)).BeginInit();
             this.SuspendLayout();
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.SystemColors.MenuText;
-            this.panel3.Controls.Add(this.label3);
-            this.panel3.Location = new System.Drawing.Point(-1, 1);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(880, 31);
-            this.panel3.TabIndex = 23;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.label3.Location = new System.Drawing.Point(12, 8);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(195, 20);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Seleccion de Vendedor";
             // 
             // btnCancelar
             // 
             this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.btnCancelar.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.btnCancelar.BackGroundColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.btnCancelar.BorderColor = System.Drawing.Color.LavenderBlush;
-            this.btnCancelar.BorderRadius = 10;
+            this.btnCancelar.BorderColor = System.Drawing.Color.Transparent;
+            this.btnCancelar.BorderRadius = 5;
             this.btnCancelar.BorderSize = 2;
             this.btnCancelar.FlatAppearance.BorderSize = 0;
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelar.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancelar.ForeColor = System.Drawing.Color.White;
-            this.btnCancelar.Location = new System.Drawing.Point(463, 513);
+            this.btnCancelar.Location = new System.Drawing.Point(702, 556);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(168, 37);
+            this.btnCancelar.Size = new System.Drawing.Size(168, 32);
             this.btnCancelar.TabIndex = 20;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.TextGroundColor = System.Drawing.Color.White;
@@ -85,50 +67,42 @@
             this.BtnSeleccionar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.BtnSeleccionar.BackColor = System.Drawing.Color.ForestGreen;
             this.BtnSeleccionar.BackGroundColor = System.Drawing.Color.ForestGreen;
-            this.BtnSeleccionar.BorderColor = System.Drawing.Color.Lime;
-            this.BtnSeleccionar.BorderRadius = 10;
+            this.BtnSeleccionar.BorderColor = System.Drawing.Color.Transparent;
+            this.BtnSeleccionar.BorderRadius = 5;
             this.BtnSeleccionar.BorderSize = 2;
             this.BtnSeleccionar.FlatAppearance.BorderSize = 0;
             this.BtnSeleccionar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnSeleccionar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnSeleccionar.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnSeleccionar.ForeColor = System.Drawing.Color.White;
-            this.BtnSeleccionar.Location = new System.Drawing.Point(652, 510);
+            this.BtnSeleccionar.Location = new System.Drawing.Point(876, 556);
             this.BtnSeleccionar.Name = "BtnSeleccionar";
-            this.BtnSeleccionar.Size = new System.Drawing.Size(168, 40);
+            this.BtnSeleccionar.Size = new System.Drawing.Size(168, 32);
             this.BtnSeleccionar.TabIndex = 20;
             this.BtnSeleccionar.Text = "Seleccionar";
             this.BtnSeleccionar.TextGroundColor = System.Drawing.Color.White;
             this.BtnSeleccionar.UseVisualStyleBackColor = false;
             this.BtnSeleccionar.Click += new System.EventHandler(this.BtnSeleccionar_Click);
             // 
-            // label1
+            // panel3
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label1.Location = new System.Drawing.Point(34, 66);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(246, 24);
-            this.label1.TabIndex = 27;
-            this.label1.Text = " Informacion de vendedores";
+            this.panel3.BackColor = System.Drawing.SystemColors.MenuText;
+            this.panel3.Controls.Add(this.LblDynamico);
+            this.panel3.Location = new System.Drawing.Point(0, -1);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1056, 33);
+            this.panel3.TabIndex = 88;
             // 
-            // DgvVendedor
+            // LblDynamico
             // 
-            this.DgvVendedor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.DgvVendedor.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.DgvVendedor.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.DgvVendedor.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.DgvVendedor.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.DgvVendedor.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
-            this.DgvVendedor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DgvVendedor.Location = new System.Drawing.Point(37, 157);
-            this.DgvVendedor.MultiSelect = false;
-            this.DgvVendedor.Name = "DgvVendedor";
-            this.DgvVendedor.ReadOnly = true;
-            this.DgvVendedor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvVendedor.Size = new System.Drawing.Size(801, 334);
-            this.DgvVendedor.TabIndex = 26;
+            this.LblDynamico.AutoSize = true;
+            this.LblDynamico.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblDynamico.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.LblDynamico.Location = new System.Drawing.Point(22, 9);
+            this.LblDynamico.Margin = new System.Windows.Forms.Padding(3, 0, 10, 0);
+            this.LblDynamico.Name = "LblDynamico";
+            this.LblDynamico.Size = new System.Drawing.Size(177, 18);
+            this.LblDynamico.TabIndex = 1;
+            this.LblDynamico.Text = "Seleccionar Vendedor";
             // 
             // txtFiltro
             // 
@@ -136,35 +110,75 @@
             this.txtFiltro.BorderFocusColor = System.Drawing.Color.HotPink;
             this.txtFiltro.BorderRadius = 0;
             this.txtFiltro.BorderSize = 2;
-            this.txtFiltro.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFiltro.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFiltro.ForeColor = System.Drawing.Color.DimGray;
-            this.txtFiltro.Location = new System.Drawing.Point(37, 109);
+            this.txtFiltro.Location = new System.Drawing.Point(18, 64);
             this.txtFiltro.Margin = new System.Windows.Forms.Padding(4);
             this.txtFiltro.Multilinea = false;
             this.txtFiltro.Name = "txtFiltro";
             this.txtFiltro.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
             this.txtFiltro.PasswordChar = false;
             this.txtFiltro.PlaceHolderColor = System.Drawing.Color.DarkGray;
-            this.txtFiltro.PlaceHolderText = "Buscar Vendedor..";
-            this.txtFiltro.Size = new System.Drawing.Size(801, 31);
-            this.txtFiltro.TabIndex = 25;
+            this.txtFiltro.PlaceHolderText = "Buscar Vendedor";
+            this.txtFiltro.Size = new System.Drawing.Size(1024, 32);
+            this.txtFiltro.TabIndex = 89;
             this.txtFiltro.Texts = "";
             this.txtFiltro.UnderLineFlat = true;
-            this.txtFiltro._TextChanged += new System.EventHandler(this.loginUserControl1__TextChanged);
+            // 
+            // DgvVendedor
+            // 
+            this.DgvVendedor.AllowUserToAddRows = false;
+            this.DgvVendedor.AllowUserToDeleteRows = false;
+            this.DgvVendedor.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DgvVendedor.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.DgvVendedor.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.DgvVendedor.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvVendedor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.DgvVendedor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DgvVendedor.DefaultCellStyle = dataGridViewCellStyle2;
+            this.DgvVendedor.Location = new System.Drawing.Point(16, 111);
+            this.DgvVendedor.MultiSelect = false;
+            this.DgvVendedor.Name = "DgvVendedor";
+            this.DgvVendedor.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvVendedor.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.DgvVendedor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DgvVendedor.Size = new System.Drawing.Size(1024, 433);
+            this.DgvVendedor.TabIndex = 90;
             // 
             // PnlVendedores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(875, 562);
-            this.Controls.Add(this.BtnSeleccionar);
-            this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(1056, 600);
             this.Controls.Add(this.DgvVendedor);
             this.Controls.Add(this.txtFiltro);
             this.Controls.Add(this.panel3);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Controls.Add(this.BtnSeleccionar);
+            this.Controls.Add(this.btnCancelar);
+            this.MaximumSize = new System.Drawing.Size(1072, 639);
+            this.MinimumSize = new System.Drawing.Size(1072, 639);
             this.Name = "PnlVendedores";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PnlVendedores";
@@ -173,18 +187,15 @@
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvVendedor)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label3;
         private Especiales.EspecialButton btnCancelar;
         private Especiales.EspecialButton BtnSeleccionar;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView DgvVendedor;
+        private System.Windows.Forms.Panel panel3;
+        public System.Windows.Forms.Label LblDynamico;
         private Controladores.LoginUserControl txtFiltro;
+        private System.Windows.Forms.DataGridView DgvVendedor;
     }
 }

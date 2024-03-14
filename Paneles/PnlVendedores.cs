@@ -23,10 +23,6 @@ namespace NeoCobranza.Paneles
         {
             InitializeComponent();
             cVendedor = new CVendedor(conexion);
-            //Estilo del data
-            DgvVendedor.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11);
-            DgvVendedor.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11);
-
 
             this.DgvVendedor.DataSource = cVendedor.MostrarVendedor(txtFiltro.Texts);
             this.panel = panel;
@@ -34,52 +30,32 @@ namespace NeoCobranza.Paneles
 
         private void BtnSeleccionar_Click(object sender, EventArgs e)
         {
+            if (DgvVendedor.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("No ha seleccionado ningún registro", "Atención", MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
             if (panel == "Contrato")
             {
-
-                if (DgvVendedor.SelectedRows.Count == 0)
-                {
-                    MessageBox.Show("No has seleccionado ningun registro", "ERROR");
-                    return;
-                }
-                if (this.DgvVendedor.SelectedRows[0].Cells[1].Value == null)
-                {
-                    MessageBox.Show("No has seleccionado ningun registro", "ERROR");
-                    return;
-                }
                 PnlContrato pnlContrato = Owner as PnlContrato;
-
 
                 // pnlContrato.dgvColector.Rows.Add(this.DgvColector.SelectedRows[0].Cells[0].Value +" "+ this.DgvColector.SelectedRows[0].Cells[1].Value + " "+this.DgvColector.SelectedRows[0].Cells[2].Value + " " + this.DgvColector.SelectedRows[0].Cells[3].Value, this.DgvColector.SelectedRows[0].Cells[4].Value);
                 pnlContrato.lblNombreColector.Text = this.DgvVendedor.SelectedRows[0].Cells[1].Value.ToString();
                 pnlContrato.lblIdColector.Text = this.DgvVendedor.SelectedRows[0].Cells[0].Value.ToString();
 
-
-
                 this.Hide();
 
             }
-            if(panel == "ContratoProforma")
+            if (panel == "ContratoProforma")
             {
-                if (DgvVendedor.SelectedRows.Count == 0)
-                {
-                    MessageBox.Show("No has seleccionado ningun registro", "ERROR");
-                    return;
-                }
 
-                if (this.DgvVendedor.SelectedRows[0].Cells[1].Value== null)
-                {
-                    MessageBox.Show("No has seleccionado ningun registro", "ERROR");
-                    return;
-                }
                 PnlProformaContrato pnlProformaContrato = Owner as PnlProformaContrato;
 
-                
-                    // pnlContrato.dgvColector.Rows.Add(this.DgvColector.SelectedRows[0].Cells[0].Value +" "+ this.DgvColector.SelectedRows[0].Cells[1].Value + " "+this.DgvColector.SelectedRows[0].Cells[2].Value + " " + this.DgvColector.SelectedRows[0].Cells[3].Value, this.DgvColector.SelectedRows[0].Cells[4].Value);
-                    pnlProformaContrato.lblNombreColector.Text = this.DgvVendedor.SelectedRows[0].Cells[1].Value.ToString();
-                    pnlProformaContrato.lblIdColector.Text = this.DgvVendedor.SelectedRows[0].Cells[0].Value.ToString();
-               
-
+                // pnlContrato.dgvColector.Rows.Add(this.DgvColector.SelectedRows[0].Cells[0].Value +" "+ this.DgvColector.SelectedRows[0].Cells[1].Value + " "+this.DgvColector.SelectedRows[0].Cells[2].Value + " " + this.DgvColector.SelectedRows[0].Cells[3].Value, this.DgvColector.SelectedRows[0].Cells[4].Value);
+                pnlProformaContrato.lblNombreColector.Text = this.DgvVendedor.SelectedRows[0].Cells[1].Value.ToString();
+                pnlProformaContrato.lblIdColector.Text = this.DgvVendedor.SelectedRows[0].Cells[0].Value.ToString();
 
                 this.Hide();
 
@@ -87,79 +63,33 @@ namespace NeoCobranza.Paneles
             }
             if (panel == "VentaProforma")
             {
-                if (DgvVendedor.SelectedRows.Count == 0)
-                {
-                    MessageBox.Show("No has seleccionado ningun registro", "ERROR");
-                    return;
-                }
-
-                if (this.DgvVendedor.SelectedRows[0].Cells[1].Value == null)
-                {
-                    MessageBox.Show("No has seleccionado ningun registro", "ERROR");
-                    return;
-                }
                 PnlProforma pnlProformaContrato = Owner as PnlProforma;
-
 
                 // pnlContrato.dgvColector.Rows.Add(this.DgvColector.SelectedRows[0].Cells[0].Value +" "+ this.DgvColector.SelectedRows[0].Cells[1].Value + " "+this.DgvColector.SelectedRows[0].Cells[2].Value + " " + this.DgvColector.SelectedRows[0].Cells[3].Value, this.DgvColector.SelectedRows[0].Cells[4].Value);
                 pnlProformaContrato.lblNombreColector.Text = this.DgvVendedor.SelectedRows[0].Cells[1].Value.ToString();
                 pnlProformaContrato.lblIdColector.Text = this.DgvVendedor.SelectedRows[0].Cells[0].Value.ToString();
 
-
-
                 this.Hide();
-
-
             }
             if (panel == "Venta")
             {
-                if (DgvVendedor.SelectedRows.Count == 0)
-                {
-                    MessageBox.Show("No has seleccionado ningun registro", "ERROR");
-                    return;
-                }
-
-                if (this.DgvVendedor.SelectedRows[0].Cells[1].Value == null)
-                {
-                    MessageBox.Show("No has seleccionado ningun registro", "ERROR");
-                    return;
-                }
-                PnlVentas pnlProformaContrato = Owner as PnlVentas;
-
+                PnlVentas pnlVentas = Owner as PnlVentas;
 
                 // pnlContrato.dgvColector.Rows.Add(this.DgvColector.SelectedRows[0].Cells[0].Value +" "+ this.DgvColector.SelectedRows[0].Cells[1].Value + " "+this.DgvColector.SelectedRows[0].Cells[2].Value + " " + this.DgvColector.SelectedRows[0].Cells[3].Value, this.DgvColector.SelectedRows[0].Cells[4].Value);
-                pnlProformaContrato.lblNombreColector.Text = this.DgvVendedor.SelectedRows[0].Cells[1].Value.ToString();
-                pnlProformaContrato.lblIdColector.Text = this.DgvVendedor.SelectedRows[0].Cells[0].Value.ToString();
-
-
+                pnlVentas.LblNombreVendedor.Text = this.DgvVendedor.SelectedRows[0].Cells[1].Value.ToString();
+                pnlVentas.LblIdVendedor.Text = this.DgvVendedor.SelectedRows[0].Cells[0].Value.ToString();
 
                 this.Hide();
-
-
             }
-            if(panel == "ActualizarContrato")
+            if (panel == "ActualizarContrato")
             {
-                if (DgvVendedor.SelectedRows.Count == 0)
-                {
-                    MessageBox.Show("No has seleccionado ningun registro", "ERROR");
-                    return;
-                }
-
-                if (this.DgvVendedor.SelectedRows[0].Cells[1].Value == null)
-                {
-                    MessageBox.Show("No has seleccionado ningun registro", "ERROR");
-                    return;
-                }
                 PnlGeneralContrato pnlProformaContrato = Owner as PnlGeneralContrato;
-
 
                 // pnlContrato.dgvColector.Rows.Add(this.DgvColector.SelectedRows[0].Cells[0].Value +" "+ this.DgvColector.SelectedRows[0].Cells[1].Value + " "+this.DgvColector.SelectedRows[0].Cells[2].Value + " " + this.DgvColector.SelectedRows[0].Cells[3].Value, this.DgvColector.SelectedRows[0].Cells[4].Value);
                 pnlProformaContrato.LblNombreColector.Text = this.DgvVendedor.SelectedRows[0].Cells[1].Value.ToString();
                 pnlProformaContrato.txtIdColector.Text = this.DgvVendedor.SelectedRows[0].Cells[0].Value.ToString();
 
                 this.Hide();
-
-
             }
 
 
@@ -177,7 +107,6 @@ namespace NeoCobranza.Paneles
 
         private void PnlVendedores_Load(object sender, EventArgs e)
         {
-            DgvVendedor.AlternatingRowsDefaultCellStyle.BackColor = Color.LightBlue;
         }
     }
 }

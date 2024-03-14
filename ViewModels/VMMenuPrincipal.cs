@@ -69,8 +69,7 @@ namespace NeoCobranza.ViewModels
 
 
                 frm.ventasDirectasDeAtaudesToolStripMenuItem.Visible = (bool)permisos.VentasDirectas;
-                frm.registroDeVentasToolStripMenuItem.Visible = (bool)permisos.VentarRetiros;
-                frm.realizacionDeFacturasToolStripMenuItem.Visible = (bool)permisos.VentasFacturas;
+                frm.BtnOrdenMesa.Visible = (bool)permisos.VentarRetiros;
 
                 if (permisos.VentasCrearProforma == false &&
                     permisos.VentasBuscarProformas == false &&
@@ -83,8 +82,7 @@ namespace NeoCobranza.ViewModels
 
                 //Inventario
                 frm.BtnInventario.Visible = (bool)permisos.Inventario;
-                frm.inventarioDeServiciosToolStripMenuItem.Visible = (bool)permisos.InventarioInventarioServicios;
-                frm.otrasModificacionesToolStripMenuItem.Visible = (bool)permisos.InventarioModificacionesProductos;
+
 
                 if (permisos.InventarioInventarioServicios == false && permisos.InventarioModificacionesProductos == false)
                 {
@@ -93,8 +91,7 @@ namespace NeoCobranza.ViewModels
 
                 //Caja
                 frm.btnCaja.Visible = (bool)permisos.Caja;
-                frm.reciboOficialDeCajaToolStripMenuItem.Visible = (bool)permisos.CajaRecibosOficiales;
-                frm.historialDeRecibosToolStripMenuItem.Visible = (bool)permisos.CajaHistorialRecibos;
+        
 
                 if (permisos.CajaRecibosOficiales == false && permisos.CajaHistorialRecibos == false)
                 {
@@ -102,7 +99,7 @@ namespace NeoCobranza.ViewModels
                 }
 
                 //Personal
-                frm.especialButton4.Visible = (bool)permisos.Personal;
+                frm.BtnConfigTurnos.Visible = (bool)permisos.Personal;
 
                 //TODO: Agregar la parte de visibilidad para la parte de personal cuando ya este funcionando ese modulo
 
@@ -123,7 +120,7 @@ namespace NeoCobranza.ViewModels
 
                 //
                 frm.BtnOpciones.Visible = (bool)permisos.Opciones;
-                frm.configTipoDeCambioToolStripMenuItem.Visible = (bool)permisos.OpcionesTipoCambio;
+                frm.BtnConfigInventario.Visible = (bool)permisos.OpcionesTipoCambio;
 
                 if (permisos.OpcionesTipoCambio == false)
                 {

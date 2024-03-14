@@ -26,13 +26,14 @@ namespace NeoCobranza.ViewGestionUsuario
             this.CmbRol.ValueMember = "RolId";
             this.CmbRol.DataSource = this.rolStatic.GetAll();
             this.accion = accion;
-        }
 
-       
-
-        private void especialButton1_Click(object sender, EventArgs e)
-        {
-            this.Close();
+            using(NeoCobranzaContext db = new NeoCobranzaContext())
+            {
+                var sucursales = db.Sucursales.Where(s => s.Estado == "Activo").ToList();
+                this.CmbSucursal.DisplayMember = "NombreSucursal";
+                this.CmbSucursal.ValueMember = "SucursalId";
+                this.CmbSucursal.DataSource = sucursales;
+            }
         }
 
         private void PnlCMUsuario_Load(object sender, EventArgs e)
@@ -67,9 +68,9 @@ namespace NeoCobranza.ViewGestionUsuario
                     {
                         if(usu.Nombre.Trim() == TxtUsuario.Texts.Trim())
                         {
-                            MessageBox.Show($"El nombre de usuario ya fue ocupado. Por favor, seleccionar otro.", "Error",
+                            MessageBox.Show($"El nombre de usuario ya fue ocupado. Por favor, seleccionar otro.", "Atención",
                                                 MessageBoxButtons.OK,
-                                                MessageBoxIcon.Error);
+                                                MessageBoxIcon.Warning);
                             return;
                         }
                     }
@@ -77,50 +78,58 @@ namespace NeoCobranza.ViewGestionUsuario
             }
 
             //Validaciones
+            if(CmbSucursal.Items.Count == 0)
+            {
+                MessageBox.Show($"No hay sucursales agregadas en el catalogo.", "Atención",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
             if(TxtUsuario.Texts == "")
             {
-                MessageBox.Show($"Debe digitar un nombre de usuario.", "Error",
+                MessageBox.Show($"Debe digitar un nombre de usuario.", "Atención",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                    MessageBoxIcon.Warning);
                     return;
             }else if(TxtNombre.Texts == "")
             {
-                MessageBox.Show($"Debe digitar su primer nombre.", "Error",
+                MessageBox.Show($"Debe digitar su primer nombre.", "Atención",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                    MessageBoxIcon.Warning);
             }else if(TxtApellido.Texts == "")
             {
-                MessageBox.Show($"Debe digitar su primer apellido.", "Error",
+                MessageBox.Show($"Debe digitar su primer apellido.", "Atención",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                    MessageBoxIcon.Warning);
                     return;
             }
             else if(TxtContraseña.Texts == "")
             {
-                MessageBox.Show($"Debe digitar una contraseña.", "Error",
+                MessageBox.Show($"Debe digitar una contraseña.", "Atención",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                    MessageBoxIcon.Warning);
                     return;
             }
             else if(TxtContraseñaConfirmar.Texts == "")
             {
-                MessageBox.Show($"Debe validar su contraseña.", "Error",
+                MessageBox.Show($"Debe validar su contraseña.", "Atención",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                    MessageBoxIcon.Warning);
                 return;
             }
             else if (TxtContraseña.Texts != TxtContraseñaConfirmar.Texts)
             {
                 MessageBox.Show($"Las contraseñas no son iguales", "Error",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                    MessageBoxIcon.Warning);
                 return;
             }
             else if(CmbRol.Text == "")
             {
                 MessageBox.Show($"Debe seleccionar un rol para el usuario.", "Error",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                    MessageBoxIcon.Warning);
                 return;
             }
 
@@ -131,7 +140,9 @@ namespace NeoCobranza.ViewGestionUsuario
                 PrimerApellido = TxtApellido.Texts,
                 Rol = CmbRol.SelectedValue.ToString(),
                 Pass = TxtContraseña.Texts,
-                Estado = "Habilitado"
+                Estado = "Habilitado",
+                SucursalId = int.Parse(CmbSucursal.SelectedValue.ToString())
+
             };
             AuditoriaModel.AgregarAuditoria(VariablesEntorno.UserNameSesion, "Seguridad", "Crear Usuario", "Todos", "Alto");
             this.userStatic.PostUser(usuario);

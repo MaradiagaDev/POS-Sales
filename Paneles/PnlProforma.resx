@@ -150,39 +150,6 @@
   <metadata name="DescuentoD.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="IdServicio.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Servicio.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="PrecioDolar.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="PrecioCordoba.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Cantidad.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="SubTotalDolar2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="SubTotalCordoba2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="IVAD.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="IVAD1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Descuento.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="DescuentoD.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="BtnAgregarProforma.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -204,32 +171,6 @@
         ARqe/30dQHM4aIKYFu2l7JC9vbEagD76BnUB/qZfcOVCQFaqvTRciNETuCMvWlESL9obaOtsipaj4gV0
         tBLnTQc8+Dq4a9uyAm2GoE8p6WAllm6QbTgIPSsH485ydNzBGJw72bg2sOdV6V8rSX4Bzetgm6rmsGcA
         AAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="BtnVendd.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAaFJREFUSEvNlckuREEUhi8WBBFsLS1MYWlITPvesjEtTHvDhjfyCIZEeAoxBC9g
-        ywr/d7pud9/rVt1qJPzJl9SpqntO9TmnqpP/ojGxJvYdq27uR+oQh+JBfHhg7UCwtylNi2eBkzOxLYZE
-        l4PxjmCNPezlmyhVxKu4FXNMlGhesJdvlpgo05Y4EX1mxalfXAuCTDFRpBYxUB1+SwS5E0+isCYUlBO0
-        mVWsGRHK9YKgJnRaRq2CyBdm+cV62Z5zcV8d1jUuiLxhll+XjpDoLnyNmuW0KZgcNMuvmAC0ML5WzHI6
-        Fky2m1UXOT8V/Gx4caQ2a+xpVLfAFxewpjRAvvoxAfJF7xH4yhT6N1M0LPCVSdGEYHLdLL9iAuwKfGWK
-        nLYpb0tIMW3KOhfui47Eu5g1q1jkO3TRFgWn3zMrp07xKG5ELxNNiqeCC4aPfDfWxOv5Jq4EH8Sq8bGb
-        ZCKkZcFG8sjbUibSwsmjn2vEk0vRySf9zvWn/dI/HMZ0CwVlD2kpPXleXDouC6fDSRGsUVBvzmNFT/NH
-        T0AcMh4Rf60k+QQipW9YQyE15AAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="BtnCliente.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAaFJREFUSEvNlckuREEUhi8WBBFsLS1MYWlITPvesjEtTHvDhjfyCIZEeAoxBC9g
-        ywr/d7pud9/rVt1qJPzJl9SpqntO9TmnqpP/ojGxJvYdq27uR+oQh+JBfHhg7UCwtylNi2eBkzOxLYZE
-        l4PxjmCNPezlmyhVxKu4FXNMlGhesJdvlpgo05Y4EX1mxalfXAuCTDFRpBYxUB1+SwS5E0+isCYUlBO0
-        mVWsGRHK9YKgJnRaRq2CyBdm+cV62Z5zcV8d1jUuiLxhll+XjpDoLnyNmuW0KZgcNMuvmAC0ML5WzHI6
-        Fky2m1UXOT8V/Gx4caQ2a+xpVLfAFxewpjRAvvoxAfJF7xH4yhT6N1M0LPCVSdGEYHLdLL9iAuwKfGWK
-        nLYpb0tIMW3KOhfui47Eu5g1q1jkO3TRFgWn3zMrp07xKG5ELxNNiqeCC4aPfDfWxOv5Jq4EH8Sq8bGb
-        ZCKkZcFG8sjbUibSwsmjn2vEk0vRySf9zvWn/dI/HMZ0CwVlD2kpPXleXDouC6fDSRGsUVBvzmNFT/NH
-        T0AcMh4Rf60k+QQipW9YQyE15AAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="BtnSeleccionar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

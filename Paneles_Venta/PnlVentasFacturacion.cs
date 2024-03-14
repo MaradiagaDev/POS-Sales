@@ -73,14 +73,12 @@ namespace NeoCobranza.Paneles_Venta
                 return;
             }
 
-            PnlVentas pnlVentas = new PnlVentas(conexion, int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()),"Final");
+           /// PnlVentas pnlVentas = new PnlVentas(conexion, int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()),"Final");
 
 
             //LLamado al panel central
             PnlPrincipal pnlPrincipal = Owner as PnlPrincipal;
-            pnlVentas.TopLevel = false;
-            pnlPrincipal.PnlCentral.Controls.Add(pnlVentas);
-            pnlVentas.Show();
+       //
 
             //Cerrado ocultado del panel de facturacion
             this.Hide();

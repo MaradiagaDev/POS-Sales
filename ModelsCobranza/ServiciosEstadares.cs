@@ -19,5 +19,11 @@ namespace NeoCobranza.ModelsCobranza
         public int? IdProveedor { get; set; }
         public string TipoServicio { get; set; }
         public double? MontoMejora { get; set; }
+        public int? ClasificacionProducto { get; set; }
+        public int? ClasificacionTipo { get; set; }
+        public string ClasificacionInventario { get; set; }
+        public string Codigo { get; set; }
+        public string ManejoInventario { get; set; }
+        public string Expira { get; set; }
     }
 }

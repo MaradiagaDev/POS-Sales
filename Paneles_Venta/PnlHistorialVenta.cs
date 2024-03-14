@@ -223,14 +223,14 @@ namespace NeoCobranza.Paneles_Venta
 
 
 
-            PnlVentas pnlVentas = new PnlVentas(conexion, int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()), tipo);
+            //PnlVentas pnlVentas = new PnlVentas(conexion, int.Parse(dgvStock.SelectedRows[0].Cells[0].Value.ToString()), tipo);
 
             
             //LLamado al panel central
             PnlPrincipal pnlPrincipal = Owner as PnlPrincipal;
-            pnlVentas.TopLevel = false;
-            pnlPrincipal.PnlCentral.Controls.Add(pnlVentas);
-            pnlVentas.Show();
+            //pnlVentas.TopLevel = false;
+            //pnlPrincipal.PnlCentral.Controls.Add(pnlVentas);
+            //pnlVentas.Show();
 
             //Cerrado ocultado del panel de facturacion
             this.Hide();

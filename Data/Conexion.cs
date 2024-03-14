@@ -41,11 +41,6 @@ namespace NeoCobranza.Data
         {
             return usuario;
         }
-        //MAE AQUI PUSE LAS ONDAS DE SUCURSAL
-        //PARA CARGAR DEPARTAMENTOS 
-
-
-
 
     }
 }

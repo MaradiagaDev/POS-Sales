@@ -17,5 +17,6 @@ namespace NeoCobranza.ModelsCobranza
         public string PrimerNombre { get; set; }
         public string PrimerApellido { get; set; }
         public string Pass { get; set; }
+        public int? SucursalId { get; set; }
     }
 }

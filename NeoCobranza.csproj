@@ -18,20 +18,21 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
-    <PublishUrl>C:\Users\Usuario\Desktop\Actualizacion\</PublishUrl>
+    <PublishUrl>\\192.168.1.68\versionesneocobranza\Actualizaciones\</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Background</UpdateMode>
+    <InstallFrom>Unc</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>\\192.168.1.68\versionesneocobranza\Actualizaciones\</UpdateUrl>
-    <MinimumRequiredVersion>1.0.0.13</MinimumRequiredVersion>
+    <MinimumRequiredVersion>1.0.0.15</MinimumRequiredVersion>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>34</ApplicationRevision>
+    <ApplicationRevision>49</ApplicationRevision>
     <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -489,18 +490,39 @@
     <Compile Include="ModelObjectCobranza\RolModel.cs" />
     <Compile Include="ModelObjectCobranza\UserModel.cs" />
     <Compile Include="ModelObjectCobranza\VariablesEntorno.cs" />
+    <Compile Include="ModelsCobranza\AjustesInventario.cs" />
+    <Compile Include="ModelsCobranza\Almacenes.cs" />
     <Compile Include="ModelsCobranza\AuditoriaSistema.cs" />
+    <Compile Include="ModelsCobranza\Bancos.cs" />
     <Compile Include="ModelsCobranza\Cambio.cs" />
     <Compile Include="ModelsCobranza\ClienteContrato.cs" />
     <Compile Include="ModelsCobranza\Clientes.cs" />
+    <Compile Include="ModelsCobranza\ComprasInventario.cs" />
+    <Compile Include="ModelsCobranza\ConfigFacturacion.cs" />
+    <Compile Include="ModelsCobranza\ConfigInventario.cs" />
     <Compile Include="ModelsCobranza\Contratos.cs" />
     <Compile Include="ModelsCobranza\ControlladorTC.cs" />
     <Compile Include="ModelsCobranza\FirmasCompañia.cs" />
+    <Compile Include="ModelsCobranza\Imagenes.cs" />
+    <Compile Include="ModelsCobranza\Inventario.cs" />
+    <Compile Include="ModelsCobranza\LotesProducto.cs" />
+    <Compile Include="ModelsCobranza\Mermas.cs" />
+    <Compile Include="ModelsCobranza\MotivosCancelacion.cs" />
     <Compile Include="ModelsCobranza\NeoCobranzaContext.cs" />
+    <Compile Include="ModelsCobranza\Proveedores.cs" />
+    <Compile Include="ModelsCobranza\RelAlmacenDetalle.cs" />
+    <Compile Include="ModelsCobranza\RelAlmacenProducto.cs" />
+    <Compile Include="ModelsCobranza\RelBancoTipo.cs" />
+    <Compile Include="ModelsCobranza\RelProductoSucursales.cs" />
+    <Compile Include="ModelsCobranza\RelProveedorProducto.cs" />
     <Compile Include="ModelsCobranza\RolPermisos.cs" />
     <Compile Include="ModelsCobranza\RolUsuario.cs" />
+    <Compile Include="ModelsCobranza\Salas.cs" />
     <Compile Include="ModelsCobranza\ServiciosEstadares.cs" />
+    <Compile Include="ModelsCobranza\Sucursales.cs" />
     <Compile Include="ModelsCobranza\TipoCambio.cs" />
+    <Compile Include="ModelsCobranza\TipoServicios.cs" />
+    <Compile Include="ModelsCobranza\TipoTarjeta.cs" />
     <Compile Include="ModelsCobranza\Usuario.cs" />
     <Compile Include="NeoCobranzaDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -512,11 +534,89 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>NuevoServi_Contrato.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Paneles\AgregarBancos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\AgregarBancos.Designer.cs">
+      <DependentUpon>AgregarBancos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\AgregarMotivoCancelacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\AgregarMotivoCancelacion.Designer.cs">
+      <DependentUpon>AgregarMotivoCancelacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\AgregarNotaOrden.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\AgregarNotaOrden.Designer.cs">
+      <DependentUpon>AgregarNotaOrden.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\AgregarSala.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\AgregarSala.Designer.cs">
+      <DependentUpon>AgregarSala.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\AlertasInventario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\AlertasInventario.Designer.cs">
+      <DependentUpon>AlertasInventario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Paneles\BuscarContrato.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Paneles\BuscarContrato.Designer.cs">
       <DependentUpon>BuscarContrato.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\CatalogoBancos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\CatalogoBancos.Designer.cs">
+      <DependentUpon>CatalogoBancos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\CatalogoSalas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\CatalogoSalas.Designer.cs">
+      <DependentUpon>CatalogoSalas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\CatalogosInventario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\CatalogosInventario.Designer.cs">
+      <DependentUpon>CatalogosInventario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\CatalogoTiposTarjeta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\CatalogoTiposTarjeta.Designer.cs">
+      <DependentUpon>CatalogoTiposTarjeta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\CatologoMotivosCancelacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\CatologoMotivosCancelacion.Designer.cs">
+      <DependentUpon>CatologoMotivosCancelacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\ComprasInventario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\ComprasInventario.Designer.cs">
+      <DependentUpon>ComprasInventario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\ConfigFacturacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\ConfigFacturacion.Designer.cs">
+      <DependentUpon>ConfigFacturacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\InformativeMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\InformativeMessageBox.Designer.cs">
+      <DependentUpon>InformativeMessageBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Paneles\InformeReporteServiciosVD.cs">
       <SubType>Form</SubType>
@@ -530,11 +630,11 @@
     <Compile Include="Paneles\InformeVD.Designer.cs">
       <DependentUpon>InformeVD.cs</DependentUpon>
     </Compile>
-    <Compile Include="Paneles\PanelCliente.cs">
+    <Compile Include="Paneles\ListaMermas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Paneles\PanelCliente.Designer.cs">
-      <DependentUpon>PanelCliente.cs</DependentUpon>
+    <Compile Include="Paneles\ListaMermas.Designer.cs">
+      <DependentUpon>ListaMermas.cs</DependentUpon>
     </Compile>
     <Compile Include="Paneles\PanelFinal.cs">
       <SubType>Form</SubType>
@@ -554,17 +654,53 @@
     <Compile Include="Paneles\Panel_Cliente_Contrato.Designer.cs">
       <DependentUpon>Panel_Cliente_Contrato.cs</DependentUpon>
     </Compile>
-    <Compile Include="Paneles\PnlActualizarProveedor.cs">
+    <Compile Include="Paneles\PnlAgregarAlmacen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Paneles\PnlActualizarProveedor.Designer.cs">
-      <DependentUpon>PnlActualizarProveedor.cs</DependentUpon>
+    <Compile Include="Paneles\PnlAgregarAlmacen.Designer.cs">
+      <DependentUpon>PnlAgregarAlmacen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlAgregarProductoInd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlAgregarProductoInd.Designer.cs">
+      <DependentUpon>PnlAgregarProductoInd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlAgregarProductos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlAgregarProductos.Designer.cs">
+      <DependentUpon>PnlAgregarProductos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlAgregarProductoSerie.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlAgregarProductoSerie.Designer.cs">
+      <DependentUpon>PnlAgregarProductoSerie.cs</DependentUpon>
     </Compile>
     <Compile Include="Paneles\PnlAgregarProveedor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Paneles\PnlAgregarProveedor.Designer.cs">
       <DependentUpon>PnlAgregarProveedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlAgregarSucursal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlAgregarSucursal.Designer.cs">
+      <DependentUpon>PnlAgregarSucursal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlAgregarTipo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlAgregarTipo.Designer.cs">
+      <DependentUpon>PnlAgregarTipo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlAgregarTipoTarjeta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlAgregarTipoTarjeta.Designer.cs">
+      <DependentUpon>PnlAgregarTipoTarjeta.cs</DependentUpon>
     </Compile>
     <Compile Include="Paneles\PnlBeneficiario.cs">
       <SubType>Form</SubType>
@@ -578,6 +714,18 @@
     <Compile Include="Paneles\PnlBuscarProforma.Designer.cs">
       <DependentUpon>PnlBuscarProforma.cs</DependentUpon>
     </Compile>
+    <Compile Include="Paneles\PnlCancelarOrden.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlCancelarOrden.Designer.cs">
+      <DependentUpon>PnlCancelarOrden.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlCatalogoAlmacenes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlCatalogoAlmacenes.Designer.cs">
+      <DependentUpon>PnlCatalogoAlmacenes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Paneles\PnlCatalogoClientes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -590,23 +738,41 @@
     <Compile Include="Paneles\PnlCatalogoProveedores.Designer.cs">
       <DependentUpon>PnlCatalogoProveedores.cs</DependentUpon>
     </Compile>
+    <Compile Include="Paneles\PnlCatalogoSucursales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlCatalogoSucursales.Designer.cs">
+      <DependentUpon>PnlCatalogoSucursales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlCatologoTiposServicios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlCatologoTiposServicios.Designer.cs">
+      <DependentUpon>PnlCatologoTiposServicios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlConfigInventario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlConfigInventario.Designer.cs">
+      <DependentUpon>PnlConfigInventario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Paneles\PnlContrato.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Paneles\PnlContrato.Designer.cs">
       <DependentUpon>PnlContrato.cs</DependentUpon>
     </Compile>
-    <Compile Include="Paneles\PnlInsertarAgencia.cs">
+    <Compile Include="Paneles\PnlDisponibilidad.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Paneles\PnlInsertarAgencia.Designer.cs">
-      <DependentUpon>PnlInsertarAgencia.cs</DependentUpon>
+    <Compile Include="Paneles\PnlDisponibilidad.Designer.cs">
+      <DependentUpon>PnlDisponibilidad.cs</DependentUpon>
     </Compile>
-    <Compile Include="Paneles\PnlModificacionesServiciosContrato.cs">
+    <Compile Include="Paneles\PnlInventarioAlmacenes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Paneles\PnlModificacionesServiciosContrato.Designer.cs">
-      <DependentUpon>PnlModificacionesServiciosContrato.cs</DependentUpon>
+    <Compile Include="Paneles\PnlInventarioAlmacenes.Designer.cs">
+      <DependentUpon>PnlInventarioAlmacenes.cs</DependentUpon>
     </Compile>
     <Compile Include="Paneles\PnlPagoCheque.cs">
       <SubType>Form</SubType>
@@ -625,12 +791,6 @@
     </Compile>
     <Compile Include="Paneles\PnlPagoEfectivo.Designer.cs">
       <DependentUpon>PnlPagoEfectivo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Paneles\PnlPagoMinuta.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Paneles\PnlPagoMinuta.Designer.cs">
-      <DependentUpon>PnlPagoMinuta.cs</DependentUpon>
     </Compile>
     <Compile Include="Paneles\PnlPrincipal.cs">
       <SubType>Form</SubType>
@@ -656,23 +816,35 @@
     <Compile Include="Paneles\PnlReporteProforma.Designer.cs">
       <DependentUpon>PnlReporteProforma.cs</DependentUpon>
     </Compile>
+    <Compile Include="Paneles\PnlRevisionInventario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlRevisionInventario.Designer.cs">
+      <DependentUpon>PnlRevisionInventario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Paneles\PnlSeleccionarProveedor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Paneles\PnlSeleccionarProveedor.Designer.cs">
       <DependentUpon>PnlSeleccionarProveedor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Paneles\PnlTasaCambio.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Paneles\PnlTasaCambio.Designer.cs">
-      <DependentUpon>PnlTasaCambio.cs</DependentUpon>
-    </Compile>
     <Compile Include="Paneles\PnlVendedores.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Paneles\PnlVendedores.Designer.cs">
       <DependentUpon>PnlVendedores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\Promociones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\Promociones.Designer.cs">
+      <DependentUpon>Promociones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\TasaCambio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\TasaCambio.Designer.cs">
+      <DependentUpon>TasaCambio.cs</DependentUpon>
     </Compile>
     <Compile Include="Paneles_Auditorias\CreacionUsuario.cs">
       <SubType>Form</SubType>
@@ -848,12 +1020,6 @@
     <Compile Include="PnlInventario\Pnl_InformeInventario.Designer.cs">
       <DependentUpon>Pnl_InformeInventario.cs</DependentUpon>
     </Compile>
-    <Compile Include="PnlOpc\PnlModificarServicios.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PnlOpc\PnlModificarServicios.Designer.cs">
-      <DependentUpon>PnlModificarServicios.cs</DependentUpon>
-    </Compile>
     <Compile Include="Poo\CuotaCalculos.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -875,9 +1041,24 @@
     <Compile Include="ViewGestionUsuario\PnlCMUsuario.Designer.cs">
       <DependentUpon>PnlCMUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\VMClientes.cs" />
+    <Compile Include="ViewModels\Utilidades.cs" />
+    <Compile Include="ViewModels\VMCatalogoAlmacenes.cs" />
+    <Compile Include="ViewModels\VMCatalogoBanco.cs" />
+    <Compile Include="ViewModels\VMCatalogoCliente.cs" />
+    <Compile Include="ViewModels\VMCatalogoProveedores.cs" />
+    <Compile Include="ViewModels\VMCatalogoSalas.cs" />
+    <Compile Include="ViewModels\VMCatalogosInventario.cs" />
+    <Compile Include="ViewModels\VMCatalogoSucursales.cs" />
+    <Compile Include="ViewModels\VMCatalogoTiposServicio.cs" />
+    <Compile Include="ViewModels\VMCatalogoTipoTarjetas.cs" />
+    <Compile Include="ViewModels\VMConfigInventario.cs" />
+    <Compile Include="ViewModels\VMInventarioAlmacenes.cs" />
+    <Compile Include="ViewModels\VMInventarioGeneral.cs" />
     <Compile Include="ViewModels\VMMenuPrincipal.cs" />
+    <Compile Include="ViewModels\VMMotivosCancelacion.cs" />
+    <Compile Include="ViewModels\VMOrdenes.cs" />
     <Compile Include="ViewModels\VMPermisosUsuario.cs" />
+    <Compile Include="ViewModels\VMPromciones.cs" />
     <EmbeddedResource Include="ControlActualizaciones\PnlActualizacion.resx">
       <DependentUpon>PnlActualizacion.cs</DependentUpon>
     </EmbeddedResource>
@@ -896,8 +1077,47 @@
     <EmbeddedResource Include="Informes\ProformaContrato.rdlc" />
     <EmbeddedResource Include="Informes\ReporteVentasContrato.rdlc" />
     <EmbeddedResource Include="Informes\ReporteVentasDirectas.rdlc" />
+    <EmbeddedResource Include="Paneles\AgregarBancos.resx">
+      <DependentUpon>AgregarBancos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\AgregarMotivoCancelacion.resx">
+      <DependentUpon>AgregarMotivoCancelacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\AgregarNotaOrden.resx">
+      <DependentUpon>AgregarNotaOrden.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\AgregarSala.resx">
+      <DependentUpon>AgregarSala.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\AlertasInventario.resx">
+      <DependentUpon>AlertasInventario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Paneles\BuscarContrato.resx">
       <DependentUpon>BuscarContrato.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\CatalogoBancos.resx">
+      <DependentUpon>CatalogoBancos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\CatalogoSalas.resx">
+      <DependentUpon>CatalogoSalas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\CatalogosInventario.resx">
+      <DependentUpon>CatalogosInventario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\CatalogoTiposTarjeta.resx">
+      <DependentUpon>CatalogoTiposTarjeta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\CatologoMotivosCancelacion.resx">
+      <DependentUpon>CatologoMotivosCancelacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\ComprasInventario.resx">
+      <DependentUpon>ComprasInventario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\ConfigFacturacion.resx">
+      <DependentUpon>ConfigFacturacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\InformativeMessageBox.resx">
+      <DependentUpon>InformativeMessageBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\InformeReporteServiciosVD.resx">
       <DependentUpon>InformeReporteServiciosVD.cs</DependentUpon>
@@ -905,8 +1125,8 @@
     <EmbeddedResource Include="Paneles\InformeVD.resx">
       <DependentUpon>InformeVD.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Paneles\PanelCliente.resx">
-      <DependentUpon>PanelCliente.cs</DependentUpon>
+    <EmbeddedResource Include="Paneles\ListaMermas.resx">
+      <DependentUpon>ListaMermas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PanelFinal.resx">
       <DependentUpon>PanelFinal.cs</DependentUpon>
@@ -917,11 +1137,29 @@
     <EmbeddedResource Include="Paneles\Panel_Cliente_Contrato.resx">
       <DependentUpon>Panel_Cliente_Contrato.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Paneles\PnlActualizarProveedor.resx">
-      <DependentUpon>PnlActualizarProveedor.cs</DependentUpon>
+    <EmbeddedResource Include="Paneles\PnlAgregarAlmacen.resx">
+      <DependentUpon>PnlAgregarAlmacen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlAgregarProductoInd.resx">
+      <DependentUpon>PnlAgregarProductoInd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlAgregarProductos.resx">
+      <DependentUpon>PnlAgregarProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlAgregarProductoSerie.resx">
+      <DependentUpon>PnlAgregarProductoSerie.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlAgregarProveedor.resx">
       <DependentUpon>PnlAgregarProveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlAgregarSucursal.resx">
+      <DependentUpon>PnlAgregarSucursal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlAgregarTipo.resx">
+      <DependentUpon>PnlAgregarTipo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlAgregarTipoTarjeta.resx">
+      <DependentUpon>PnlAgregarTipoTarjeta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlBeneficiario.resx">
       <DependentUpon>PnlBeneficiario.cs</DependentUpon>
@@ -929,20 +1167,35 @@
     <EmbeddedResource Include="Paneles\PnlBuscarProforma.resx">
       <DependentUpon>PnlBuscarProforma.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlCancelarOrden.resx">
+      <DependentUpon>PnlCancelarOrden.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlCatalogoAlmacenes.resx">
+      <DependentUpon>PnlCatalogoAlmacenes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlCatalogoClientes.resx">
       <DependentUpon>PnlCatalogoClientes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlCatalogoProveedores.resx">
       <DependentUpon>PnlCatalogoProveedores.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlCatalogoSucursales.resx">
+      <DependentUpon>PnlCatalogoSucursales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlCatologoTiposServicios.resx">
+      <DependentUpon>PnlCatologoTiposServicios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlConfigInventario.resx">
+      <DependentUpon>PnlConfigInventario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlContrato.resx">
       <DependentUpon>PnlContrato.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Paneles\PnlInsertarAgencia.resx">
-      <DependentUpon>PnlInsertarAgencia.cs</DependentUpon>
+    <EmbeddedResource Include="Paneles\PnlDisponibilidad.resx">
+      <DependentUpon>PnlDisponibilidad.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Paneles\PnlModificacionesServiciosContrato.resx">
-      <DependentUpon>PnlModificacionesServiciosContrato.cs</DependentUpon>
+    <EmbeddedResource Include="Paneles\PnlInventarioAlmacenes.resx">
+      <DependentUpon>PnlInventarioAlmacenes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlPagoCheque.resx">
       <DependentUpon>PnlPagoCheque.cs</DependentUpon>
@@ -952,9 +1205,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlPagoEfectivo.resx">
       <DependentUpon>PnlPagoEfectivo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Paneles\PnlPagoMinuta.resx">
-      <DependentUpon>PnlPagoMinuta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlPrincipal.resx">
       <DependentUpon>PnlPrincipal.cs</DependentUpon>
@@ -968,14 +1218,20 @@
     <EmbeddedResource Include="Paneles\PnlReporteProforma.resx">
       <DependentUpon>PnlReporteProforma.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlRevisionInventario.resx">
+      <DependentUpon>PnlRevisionInventario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlSeleccionarProveedor.resx">
       <DependentUpon>PnlSeleccionarProveedor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Paneles\PnlTasaCambio.resx">
-      <DependentUpon>PnlTasaCambio.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlVendedores.resx">
       <DependentUpon>PnlVendedores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\Promociones.resx">
+      <DependentUpon>Promociones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\TasaCambio.resx">
+      <DependentUpon>TasaCambio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles_Auditorias\CreacionUsuario.resx">
       <DependentUpon>CreacionUsuario.cs</DependentUpon>
@@ -1070,9 +1326,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PnlInventario\Pnl_InformeInventario.resx">
       <DependentUpon>Pnl_InformeInventario.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PnlOpc\PnlModificarServicios.resx">
-      <DependentUpon>PnlModificarServicios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -1295,9 +1548,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Vistas_Informes\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>

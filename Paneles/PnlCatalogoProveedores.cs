@@ -1,5 +1,6 @@
 ﻿using NeoCobranza.Clases;
 using NeoCobranza.Data;
+using NeoCobranza.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,96 +15,64 @@ namespace NeoCobranza.Paneles
 {
     public partial class PnlCatalogoProveedores : Form
     {
-        //Variable de conexion
-
-        public Conexion conexion;
-
-        //Variables propias
-
-        public Proveedor proveedor;
-
-        public PnlCatalogoProveedores(Conexion conexion)
+        VMCatalogoProveedores vMCatalogoProveedores = new VMCatalogoProveedores();
+        public PnlCatalogoProveedores()
         {
             InitializeComponent();
-
-            this.conexion = conexion;
-            this.proveedor = new Proveedor(conexion);
-
-            dgvCatalogoClientes.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11);
-            dgvCatalogoClientes.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11);
-
-            dgvCatalogoClientes.DataSource = proveedor.Mostra_Proveedores(txtFiltrar.Texts);
-        }
-
-        private void especialButton1_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void txtFiltrar__TextChanged(object sender, EventArgs e)
-        {
-            dgvCatalogoClientes.DataSource = proveedor.Mostra_Proveedores(txtFiltrar.Texts);
-        }
-
-        private void btnAgregar_Click(object sender, EventArgs e)
-        {
-            Auditorias auditorias = new Auditorias(conexion);
-            //Insertar en auditorias
-            auditorias.Insertar(conexion.usuario, "Boton Creacion", dgvCatalogoClientes.Rows[0].Cells[0].Value.ToString(), "Proveedor");
-
-
-
-            PnlAgregarProveedor pnlAgregarProveedor = new PnlAgregarProveedor(conexion);
-            pnlAgregarProveedor.Show();
-
-            
-
-        }
-
-        private void Actualiza()
-        {
-            dgvCatalogoClientes.DataSource = proveedor.Mostra_Proveedores(txtFiltrar.Texts);
-        }
-
-        private void btnActualizar_Click(object sender, EventArgs e)
-        {
-            if (dgvCatalogoClientes.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("No ha seleccionado ningun proveedor para actualziar");
-                return;
-            }
-
-            Auditorias auditorias = new Auditorias(conexion);
-            //Insertar en auditorias
-            auditorias.Insertar(conexion.usuario, "Boton de Actualizacion", dgvCatalogoClientes.SelectedRows[0].Cells[0].Value.ToString(), "Proveedor");
-
-
-
-            PnlActualizarProveedor pnlActualizarProveedor = new PnlActualizarProveedor(conexion);
-
-            pnlActualizarProveedor.Show();
-
-            pnlActualizarProveedor.txtId.Text = dgvCatalogoClientes.SelectedRows[0].Cells["IdProveedor"].Value.ToString();
-            pnlActualizarProveedor.txtNombre.Text= dgvCatalogoClientes.SelectedRows[0].Cells["NombreEmpresa"].Value.ToString();
-            pnlActualizarProveedor.txtTelefono.Text = dgvCatalogoClientes.SelectedRows[0].Cells["NoTelefono"].Value.ToString();
-            pnlActualizarProveedor.txtNoRuc.Text = dgvCatalogoClientes.SelectedRows[0].Cells["NoRuc"].Value.ToString();
-            pnlActualizarProveedor.txtEmail.Text = dgvCatalogoClientes.SelectedRows[0].Cells["Correo"].Value.ToString();
-            pnlActualizarProveedor.txtDireccion.Text = dgvCatalogoClientes.SelectedRows[0].Cells["Direccion"].Value.ToString();
         }
 
         private void PnlCatalogoProveedores_Load(object sender, EventArgs e)
         {
-            dgvCatalogoClientes.AlternatingRowsDefaultCellStyle.BackColor = Color.LightBlue;
+            vMCatalogoProveedores.InitModuloProveedores(this);
         }
 
-        private void especialButton2_Click(object sender, EventArgs e)
+        private void BtnSalir_Click(object sender, EventArgs e)
         {
-            dgvCatalogoClientes.DataSource = proveedor.Mostra_Proveedores(txtFiltrar.Texts);
+            //TODO: Mostrar el dashboard\
+            this.Dispose();
         }
 
-        private void pictureBox4_Click(object sender, EventArgs e)
+        private void dgvCatalogoProveedores_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.Close();
+            if (e.ColumnIndex == 0)
+            {
+                object cellValue = dgvCatalogoProveedores.Rows[e.RowIndex].Cells[1].Value;
+                vMCatalogoProveedores.FuncionesPrincipales(this,"CambiarEstado",cellValue.ToString());
+            }
+        }
+
+        private void BtnBuscarCliente_Click(object sender, EventArgs e)
+        {
+            vMCatalogoProveedores.FuncionesPrincipales(this, "Buscar", "");
+
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            PnlAgregarProveedor frm = new PnlAgregarProveedor(this,"Crear","");
+            frm.ShowDialog();
+        }
+
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+            if (dgvCatalogoProveedores.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dgvCatalogoProveedores.SelectedRows[0];
+                object cellValue = selectedRow.Cells[1].Value;
+
+                if (cellValue != null)
+                {
+                    vMCatalogoProveedores.auxId = cellValue.ToString();
+                    PnlAgregarProveedor frm = new PnlAgregarProveedor(this, "Modificar",cellValue.ToString());
+                    frm.ShowDialog();
+                }
+            }
+            else
+            {
+                //Validaciones
+
+                MessageBox.Show("Debe seleccionar un proveedor.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }

@@ -6,33 +6,33 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.56381cm</Width>
+              <Width>1.48145cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.90074cm</Width>
+              <Width>3.79242cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.73345cm</Width>
+              <Width>1.65109cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.90887cm</Width>
+              <Width>1.82651cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.47677cm</Width>
+              <Width>2.39441cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.85351cm</Width>
+              <Width>1.77115cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.40592cm</Width>
+              <Width>2.32356cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.54947cm</Width>
+              <Width>3.46711cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.88621cm</Height>
+              <Height>0.43434cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -44,7 +44,11 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Cantidad</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Century Gothic</FontFamily>
+                                <FontSize>7pt</FontSize>
+                                <FontWeight>SemiBold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -78,7 +82,11 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Servicio</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Century Gothic</FontFamily>
+                                <FontSize>7pt</FontSize>
+                                <FontWeight>SemiBold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -112,7 +120,11 @@
                           <TextRuns>
                             <TextRun>
                               <Value>SubTotal</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Century Gothic</FontFamily>
+                                <FontSize>7pt</FontSize>
+                                <FontWeight>SemiBold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -146,7 +158,11 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Descuento</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Century Gothic</FontFamily>
+                                <FontSize>7pt</FontSize>
+                                <FontWeight>SemiBold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -180,7 +196,11 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Descuento ($)</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Century Gothic</FontFamily>
+                                <FontSize>7pt</FontSize>
+                                <FontWeight>SemiBold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -214,7 +234,11 @@
                           <TextRuns>
                             <TextRun>
                               <Value>IVA</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Century Gothic</FontFamily>
+                                <FontSize>7pt</FontSize>
+                                <FontWeight>SemiBold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -248,7 +272,11 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Total Dolar</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Century Gothic</FontFamily>
+                                <FontSize>7pt</FontSize>
+                                <FontWeight>SemiBold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -282,7 +310,11 @@
                           <TextRuns>
                             <TextRun>
                               <Value />
-                              <Style />
+                              <Style>
+                                <FontFamily>Century Gothic</FontFamily>
+                                <FontSize>7pt</FontSize>
+                                <FontWeight>SemiBold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -309,7 +341,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>1.49475cm</Height>
+              <Height>1.37569cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -606,10 +638,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>10.21855cm</Top>
-        <Left>1.23575cm</Left>
-        <Height>2.38096cm</Height>
-        <Width>18.39254cm</Width>
+        <Top>5.88228cm</Top>
+        <Left>1.23645cm</Left>
+        <Height>1.81002cm</Height>
+        <Width>18.70766cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -625,20 +657,22 @@
               <TextRun>
                 <Value> Proforma de venta</Value>
                 <Style>
-                  <FontFamily>Lucida Fax</FontFamily>
-                  <FontSize>15pt</FontSize>
+                  <FontFamily>Century Gothic</FontFamily>
                   <FontWeight>Bold</FontWeight>
+                  <TextDecoration>None</TextDecoration>
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>4.83092cm</Top>
-        <Left>8.87439cm</Left>
-        <Height>0.94396cm</Height>
-        <Width>5.8342cm</Width>
+        <Top>1.23054cm</Top>
+        <Left>15.81289cm</Left>
+        <Height>0.75329cm</Height>
+        <Width>4.15315cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -656,10 +690,10 @@
             <Source>Embedded</Source>
             <Value>IMG20221007WA0007removebgpreview1</Value>
             <Sizing>FitProportional</Sizing>
-            <Top>0.52917cm</Top>
-            <Left>0.66635cm</Left>
-            <Height>2.40771cm</Height>
-            <Width>2.19101cm</Width>
+            <Top>0.22225cm</Top>
+            <Left>0.2182cm</Left>
+            <Height>1.35917cm</Height>
+            <Width>1.3708cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -668,10 +702,10 @@
           </Image>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Top>1.07975cm</Top>
-        <Left>4.14227cm</Left>
-        <Height>3.36021cm</Height>
-        <Width>3.29065cm</Width>
+        <Top>0.0955cm</Top>
+        <Left>4.58677cm</Left>
+        <Height>1.75225cm</Height>
+        <Width>1.80563cm</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>
@@ -684,10 +718,10 @@
         <Source>Embedded</Source>
         <Value>logofunerariacatolica02</Value>
         <Sizing>FitProportional</Sizing>
-        <Top>1.60892cm</Top>
-        <Left>7.73135cm</Left>
-        <Height>3.0456cm</Height>
-        <Width>8.99583cm</Width>
+        <Top>0.3495cm</Top>
+        <Left>8.291cm</Left>
+        <Height>1.25983cm</Height>
+        <Width>5.30383cm</Width>
         <ZIndex>3</ZIndex>
         <Style>
           <Border>
@@ -704,10 +738,9 @@
               <TextRun>
                 <Value>RUC: J0310000166706</Value>
                 <Style>
-                  <FontFamily>Arial Narrow</FontFamily>
-                  <FontSize>11pt</FontSize>
+                  <FontFamily>Century Gothic</FontFamily>
+                  <FontSize>7pt</FontSize>
                   <FontWeight>Bold</FontWeight>
-                  <TextDecoration>Underline</TextDecoration>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -715,10 +748,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>4.85192cm</Top>
-        <Left>1.07806cm</Left>
-        <Height>0.73229cm</Height>
-        <Width>3.94683cm</Width>
+        <Top>2.18492cm</Top>
+        <Left>1.20506cm</Left>
+        <Height>0.48379cm</Height>
+        <Width>2.7774cm</Width>
         <ZIndex>4</ZIndex>
         <Style>
           <Border>
@@ -737,27 +770,29 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Datos del cliente:</Value>
+                <Value>Datos del cliente</Value>
                 <Style>
-                  <FontFamily>Arial Narrow</FontFamily>
-                  <FontSize>14pt</FontSize>
+                  <FontFamily>Century Gothic</FontFamily>
                   <FontWeight>Bold</FontWeight>
-                  <TextDecoration>Underline</TextDecoration>
+                  <TextDecoration>None</TextDecoration>
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>5.90216cm</Top>
-        <Left>1.07806cm</Left>
-        <Height>0.94396cm</Height>
-        <Width>4.35208cm</Width>
+        <Top>2.89388cm</Top>
+        <Left>15.74939cm</Left>
+        <Height>0.60904cm</Height>
+        <Width>4.20411cm</Width>
         <ZIndex>5</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
+            <Width>0.5pt</Width>
           </Border>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
@@ -772,10 +807,10 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Nombre Completo:</Value>
+                <Value>Nombre completo:</Value>
                 <Style>
-                  <FontFamily>Arial Narrow</FontFamily>
-                  <FontSize>11pt</FontSize>
+                  <FontFamily>Century Gothic</FontFamily>
+                  <FontSize>7pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
@@ -784,10 +819,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>6.98722cm</Top>
-        <Left>1.47494cm</Left>
-        <Height>0.73229cm</Height>
-        <Width>3.19333cm</Width>
+        <Top>3.75207cm</Top>
+        <Left>1.2047cm</Left>
+        <Height>0.4811cm</Height>
+        <Width>2.71426cm</Width>
         <ZIndex>6</ZIndex>
         <Style>
           <Border>
@@ -808,18 +843,20 @@
               <TextRun>
                 <Value>=First(Fields!NombreCliente.Value, "DataSet1")</Value>
                 <Style>
-                  <FontFamily>Arial Narrow</FontFamily>
-                  <FontSize>11pt</FontSize>
+                  <FontFamily>Century Gothic</FontFamily>
+                  <FontSize>7pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>6.98722cm</Top>
-        <Left>4.61447cm</Left>
-        <Height>0.73229cm</Height>
+        <Top>3.76265cm</Top>
+        <Left>4.0614cm</Left>
+        <Height>0.4811cm</Height>
         <Width>7.78974cm</Width>
         <ZIndex>7</ZIndex>
         <Style>
@@ -841,8 +878,8 @@
               <TextRun>
                 <Value>Cedula:</Value>
                 <Style>
-                  <FontFamily>Arial Narrow</FontFamily>
-                  <FontSize>11pt</FontSize>
+                  <FontFamily>Century Gothic</FontFamily>
+                  <FontSize>7pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
@@ -851,10 +888,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>7.70159cm</Top>
-        <Left>1.47494cm</Left>
-        <Height>0.73229cm</Height>
-        <Width>1.42062cm</Width>
+        <Top>4.31431cm</Top>
+        <Left>1.23645cm</Left>
+        <Height>0.45319cm</Height>
+        <Width>1.25383cm</Width>
         <ZIndex>8</ZIndex>
         <Style>
           <Border>
@@ -875,8 +912,8 @@
               <TextRun>
                 <Value>=First(Fields!Cedula.Value, "DataSet1")</Value>
                 <Style>
-                  <FontFamily>Arial Narrow</FontFamily>
-                  <FontSize>11pt</FontSize>
+                  <FontFamily>Century Gothic</FontFamily>
+                  <FontSize>7pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -886,9 +923,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>7.70159cm</Top>
-        <Left>3.21218cm</Left>
-        <Height>0.73229cm</Height>
+        <Top>4.31431cm</Top>
+        <Left>2.62787cm</Left>
+        <Height>0.45319cm</Height>
         <Width>3.5933cm</Width>
         <ZIndex>9</ZIndex>
         <Style>
@@ -909,10 +946,10 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Fecha :</Value>
+                <Value>Fecha realización:</Value>
                 <Style>
-                  <FontFamily>Arial Narrow</FontFamily>
-                  <FontSize>11pt</FontSize>
+                  <FontFamily>Century Gothic</FontFamily>
+                  <FontSize>7pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
@@ -921,10 +958,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>6.21966cm</Top>
-        <Left>11.22171cm</Left>
-        <Height>0.73229cm</Height>
-        <Width>1.42062cm</Width>
+        <Top>2.79522cm</Top>
+        <Left>1.23565cm</Left>
+        <Height>0.47674cm</Height>
+        <Width>2.43187cm</Width>
         <ZIndex>10</ZIndex>
         <Style>
           <Border>
@@ -945,8 +982,8 @@
               <TextRun>
                 <Value>=First(Fields!FechaRealizacion.Value, "DataSet1")</Value>
                 <Style>
-                  <FontFamily>Arial Narrow</FontFamily>
-                  <FontSize>11pt</FontSize>
+                  <FontFamily>Century Gothic</FontFamily>
+                  <FontSize>7pt</FontSize>
                   <Format>f</Format>
                 </Style>
               </TextRun>
@@ -957,10 +994,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>6.21966cm</Top>
-        <Left>12.64232cm</Left>
-        <Height>0.73229cm</Height>
-        <Width>6.67728cm</Width>
+        <Top>2.79522cm</Top>
+        <Left>3.7953cm</Left>
+        <Height>0.47674cm</Height>
+        <Width>4.26288cm</Width>
         <ZIndex>11</ZIndex>
         <Style>
           <Border>
@@ -980,10 +1017,10 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>="Fecha de Impresion: "&amp;Day(Now())&amp;"/"&amp;Month(Now())&amp;"/"&amp;Year(Now())</Value>
+                <Value>=""&amp;Day(Now())&amp;"/"&amp;Month(Now())&amp;"/"&amp;Year(Now())</Value>
                 <Style>
-                  <FontFamily>Arial Narrow</FontFamily>
-                  <FontSize>11pt</FontSize>
+                  <FontFamily>Century Gothic</FontFamily>
+                  <FontSize>7pt</FontSize>
                   <Format>f</Format>
                 </Style>
               </TextRun>
@@ -994,46 +1031,16 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>8.16886cm</Top>
-        <Left>14.47186cm</Left>
-        <Height>0.73229cm</Height>
-        <Width>5.15643cm</Width>
+        <Top>2.17482cm</Top>
+        <Left>6.69866cm</Left>
+        <Height>0.46999cm</Height>
+        <Width>2.67245cm</Width>
         <ZIndex>12</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
           <VerticalAlign>Middle</VerticalAlign>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox26">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>="Id Proforma: "&amp;First(Fields!IdProforma.Value, "DataSet1")</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox26</rd:DefaultName>
-        <Top>7.30472cm</Top>
-        <Left>14.47186cm</Left>
-        <Height>0.6cm</Height>
-        <Width>5.15643cm</Width>
-        <ZIndex>13</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>
@@ -1047,64 +1054,22 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>= "Nombre del Vendedor: "&amp;First(Fields!NombreVendedor.Value, "DataSet1")</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox24</rd:DefaultName>
-        <Top>8.57501cm</Top>
-        <Left>1.47494cm</Left>
-        <Height>0.6cm</Height>
-        <Width>9.64375cm</Width>
-        <ZIndex>14</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Line Name="Line3">
-        <Top>10.11272cm</Top>
-        <Left>1.55325cm</Left>
-        <Height>0cm</Height>
-        <Width>17.78951cm</Width>
-        <ZIndex>15</ZIndex>
-        <Style>
-          <Border>
-            <Style>Solid</Style>
-          </Border>
-        </Style>
-      </Line>
-      <Textbox Name="Textbox37">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Datos de Proforma:</Value>
+                <Value>= ""&amp;First(Fields!NombreVendedor.Value, "DataSet1")</Value>
                 <Style>
-                  <FontSize>12pt</FontSize>
-                  <FontWeight>Bold</FontWeight>
+                  <FontFamily>Century Gothic</FontFamily>
+                  <FontSize>7pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
-        <rd:DefaultName>Textbox37</rd:DefaultName>
-        <Top>9.30133cm</Top>
-        <Left>1.28302cm</Left>
-        <Height>0.6cm</Height>
-        <Width>4.24315cm</Width>
-        <ZIndex>16</ZIndex>
+        <rd:DefaultName>Textbox24</rd:DefaultName>
+        <Top>2.16022cm</Top>
+        <Left>11.03507cm</Left>
+        <Height>0.48379cm</Height>
+        <Width>5.40067cm</Width>
+        <ZIndex>13</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1122,19 +1087,22 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>="Cambio de Dolar(C$): "&amp;First(Fields!Tasa.Value, "DataSet1")</Value>
-                <Style />
+                <Value>=""&amp;First(Fields!Tasa.Value, "DataSet1")</Value>
+                <Style>
+                  <FontFamily>Century Gothic</FontFamily>
+                  <FontSize>7pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox56</rd:DefaultName>
-        <Top>9.20308cm</Top>
-        <Left>13.03511cm</Left>
-        <Height>0.6cm</Height>
-        <Width>4.85486cm</Width>
-        <ZIndex>17</ZIndex>
+        <Top>2.79863cm</Top>
+        <Left>13.91534cm</Left>
+        <Height>0.44499cm</Height>
+        <Width>1.26734cm</Width>
+        <ZIndex>14</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1154,7 +1122,8 @@
               <TextRun>
                 <Value>Id Proforma: </Value>
                 <Style>
-                  <FontSize>11pt</FontSize>
+                  <FontFamily>Century Gothic</FontFamily>
+                  <FontSize>7pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                   <TextDecoration>None</TextDecoration>
                 </Style>
@@ -1164,11 +1133,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>5.27636cm</Top>
-        <Left>15.47004cm</Left>
-        <Height>0.73229cm</Height>
-        <Width>2.51808cm</Width>
-        <ZIndex>18</ZIndex>
+        <Top>2.77807cm</Top>
+        <Left>8.21888cm</Left>
+        <Height>0.48379cm</Height>
+        <Width>1.62285cm</Width>
+        <ZIndex>15</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1187,18 +1156,23 @@
             <TextRuns>
               <TextRun>
                 <Value>=First(Fields!IdProforma.Value, "DataSet1")</Value>
-                <Style />
+                <Style>
+                  <FontFamily>Century Gothic</FontFamily>
+                  <FontSize>7pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox10</rd:DefaultName>
-        <Top>5.27636cm</Top>
-        <Left>18.05868cm</Left>
-        <Height>0.6cm</Height>
-        <Width>0.96658cm</Width>
-        <ZIndex>19</ZIndex>
+        <Top>2.77807cm</Top>
+        <Left>9.92287cm</Left>
+        <Height>0.48379cm</Height>
+        <Width>1.36761cm</Width>
+        <ZIndex>16</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1224,7 +1198,8 @@
                           <TextRun>
                             <Value>Producto</Value>
                             <Style>
-                              <FontSize>8pt</FontSize>
+                              <FontFamily>Century Gothic</FontFamily>
+                              <FontSize>6pt</FontSize>
                               <FontWeight>SemiBold</FontWeight>
                             </Style>
                           </TextRun>
@@ -1255,7 +1230,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>8.11137cm</Width>
+              <Width>7.89504cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1273,7 +1248,8 @@
                             <TextRun>
                               <Value>=Fields!Descripcion1.Value</Value>
                               <Style>
-                                <FontSize>7pt</FontSize>
+                                <FontFamily>Century Gothic</FontFamily>
+                                <FontSize>6pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1307,7 +1283,7 @@
                 </GroupExpressions>
               </Group>
               <TablixHeader>
-                <Size>0.6cm</Size>
+                <Size>0.48352cm</Size>
                 <CellContents>
                   <Textbox Name="Textbox11">
                     <CanGrow>true</CanGrow>
@@ -1318,7 +1294,8 @@
                           <TextRun>
                             <Value>Descripción</Value>
                             <Style>
-                              <FontSize>8pt</FontSize>
+                              <FontFamily>Century Gothic</FontFamily>
+                              <FontSize>6pt</FontSize>
                               <FontWeight>SemiBold</FontWeight>
                             </Style>
                           </TextRun>
@@ -1360,7 +1337,7 @@
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
-                <Size>4.32069cm</Size>
+                <Size>4.53868cm</Size>
                 <CellContents>
                   <Textbox Name="NombreEstandar1">
                     <CanGrow>true</CanGrow>
@@ -1371,7 +1348,8 @@
                           <TextRun>
                             <Value>=Fields!NombreEstandar.Value</Value>
                             <Style>
-                              <FontSize>7pt</FontSize>
+                              <FontFamily>Century Gothic</FontFamily>
+                              <FontSize>6pt</FontSize>
                             </Style>
                           </TextRun>
                         </TextRuns>
@@ -1396,11 +1374,11 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>23.62625cm</Top>
-        <Left>1.12533cm</Left>
-        <Height>1.2cm</Height>
-        <Width>12.43206cm</Width>
-        <ZIndex>20</ZIndex>
+        <Top>14.57102cm</Top>
+        <Left>1.15899cm</Left>
+        <Height>1.08352cm</Height>
+        <Width>12.43372cm</Width>
+        <ZIndex>17</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1411,31 +1389,44 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Tablix>
-      <Image Name="Image6">
-        <Source>Embedded</Source>
-        <Value>WhatsAppImage20230825at35836PM1</Value>
-        <Sizing>FitProportional</Sizing>
-        <Top>25.29368cm</Top>
-        <Left>1.07806cm</Left>
-        <Height>3.76481cm</Height>
-        <Width>9.45662cm</Width>
-        <ZIndex>21</ZIndex>
+      <Line Name="Line4">
+        <Top>1.98383cm</Top>
+        <Left>1.1611cm</Left>
+        <Height>0cm</Height>
+        <Width>18.80494cm</Width>
+        <ZIndex>18</ZIndex>
         <Style>
           <Border>
-            <Style>None</Style>
+            <Style>Solid</Style>
+            <Width>0.5pt</Width>
           </Border>
         </Style>
-      </Image>
-      <Textbox Name="Textbox1">
+      </Line>
+      <Line Name="Line5">
+        <Top>3.6447cm</Top>
+        <Left>1.1611cm</Left>
+        <Height>0cm</Height>
+        <Width>18.81476cm</Width>
+        <ZIndex>19</ZIndex>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+            <Width>0.5pt</Width>
+          </Border>
+        </Style>
+      </Line>
+      <Textbox Name="Textbox23">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>="Descripcion: "&amp;First(Fields!Descripcion.Value, "DataSet1")</Value>
+                <Value>Fecha impresión:</Value>
                 <Style>
-                  <FontSize>8pt</FontSize>
+                  <FontFamily>Century Gothic</FontFamily>
+                  <FontSize>7pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -1443,10 +1434,80 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>23.62625cm</Top>
-        <Left>14.35985cm</Left>
-        <Height>0.7312cm</Height>
-        <Width>5.27907cm</Width>
+        <Top>2.16808cm</Top>
+        <Left>4.14944cm</Left>
+        <Height>0.47674cm</Height>
+        <Width>2.40732cm</Width>
+        <ZIndex>20</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox7">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Vendedor: </Value>
+                <Style>
+                  <FontFamily>Century Gothic</FontFamily>
+                  <FontSize>7pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <TextDecoration>None</TextDecoration>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox1</rd:DefaultName>
+        <Top>2.16022cm</Top>
+        <Left>9.52842cm</Left>
+        <Height>0.47674cm</Height>
+        <Width>1.40082cm</Width>
+        <ZIndex>21</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox13">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Cambio dolar(C$): </Value>
+                <Style>
+                  <FontFamily>Century Gothic</FontFamily>
+                  <FontSize>7pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <TextDecoration>None</TextDecoration>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox1</rd:DefaultName>
+        <Top>2.79863cm</Top>
+        <Left>11.46687cm</Left>
+        <Height>0.45909cm</Height>
+        <Width>2.38144cm</Width>
         <ZIndex>22</ZIndex>
         <Style>
           <Border>
@@ -1458,31 +1519,36 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="Textbox9">
+      <Textbox Name="Textbox17">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=IIf(First(Fields!Column1.Value, "DataSet2")=1,"LOS TRAMITES LEGALES INCLUYEN: REGISTRO CIVIL, MINSA, EMBAJADA,MEDICINA LEGAL Y POLICIA NACIONAL"&amp;Chr(10)&amp;"CLIENTE ASUME BOLETO DE AVION","")</Value>
+                <Value>Productos/Servicios</Value>
                 <Style>
-                  <FontSize>8pt</FontSize>
+                  <FontFamily>Century Gothic</FontFamily>
+                  <FontWeight>Bold</FontWeight>
+                  <TextDecoration>None</TextDecoration>
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
-        <rd:DefaultName>Textbox9</rd:DefaultName>
-        <Top>24.65566cm</Top>
-        <Left>14.35985cm</Left>
-        <Height>0.6cm</Height>
-        <Width>5.27907cm</Width>
+        <rd:DefaultName>Textbox1</rd:DefaultName>
+        <Top>4.14366cm</Top>
+        <Left>15.78114cm</Left>
+        <Height>0.60904cm</Height>
+        <Width>4.16297cm</Width>
         <ZIndex>23</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
+            <Width>0.5pt</Width>
           </Border>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
@@ -1490,33 +1556,159 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="Textbox32">
+      <Line Name="Line6">
+        <Top>4.94389cm</Top>
+        <Left>1.1611cm</Left>
+        <Height>0cm</Height>
+        <Width>18.81476cm</Width>
+        <ZIndex>24</ZIndex>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+            <Width>0.5pt</Width>
+          </Border>
+        </Style>
+      </Line>
+      <Textbox Name="Textbox33">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=IIF(First(Fields!SalaA.Value, "DataSet1") =1 Or First(Fields!SalaA.Value, "DataSet1") = 1,"Adicional por cada Sala Velatoria"&amp;Chr(10)&amp;""&amp;Chr(10)&amp;"- Atencion en Cafeteria"&amp;Chr(10)&amp;"- Servicio de Meseros" &amp;Chr(10)&amp;"- Salas Climatizadas"&amp;Chr(10)&amp;"- WI-FI Gratis"&amp;Chr(10)&amp;"- Podium y libro de condolencias"&amp;Chr(10)&amp;"- Video Homenaje"&amp;Chr(10)&amp;"- Estacionamiento con camaras de vigilancia"&amp;Chr(10)&amp;"- Seguridad interna las 24 horas"&amp;Chr(10)&amp;"- Transporte para funeral en la ciudad de Managua","-")</Value>
+                <Value>=First(Fields!Total.Value, "DataSet1")</Value>
                 <Style>
-                  <FontSize>8pt</FontSize>
-                  <FontWeight>Bold</FontWeight>
+                  <FontFamily>Century Gothic</FontFamily>
+                  <FontSize>7pt</FontSize>
+                  <Format>'$' #,0.00;('$' #,0.00);'-'</Format>
                 </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
-        <rd:DefaultName>Textbox31</rd:DefaultName>
-        <Top>25.58472cm</Top>
-        <Left>14.35985cm</Left>
-        <Height>0.75875cm</Height>
-        <Width>5.27907cm</Width>
-        <ZIndex>24</ZIndex>
+        <rd:DefaultName>Textbox33</rd:DefaultName>
+        <Top>5.08853cm</Top>
+        <Left>12.57162cm</Left>
+        <Height>0.5044cm</Height>
+        <Width>2.0491cm</Width>
+        <ZIndex>25</ZIndex>
+        <Style>
+          <Border>
+            <Style>Double</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+          <rd:FormatSymbolCulture>es-US</rd:FormatSymbolCulture>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox34">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>TOTAL(C$):</Value>
+                <Style>
+                  <FontFamily>Century Gothic</FontFamily>
+                  <FontSize>7pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <TextDecoration>Underline</TextDecoration>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox34</rd:DefaultName>
+        <Top>5.08501cm</Top>
+        <Left>14.76536cm</Left>
+        <Height>0.50793cm</Height>
+        <Width>2.50863cm</Width>
+        <ZIndex>26</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
+          <BackgroundColor>Silver</BackgroundColor>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox35">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!TotalCordoba.Value, "DataSet1")</Value>
+                <Style>
+                  <FontFamily>Century Gothic</FontFamily>
+                  <FontSize>7pt</FontSize>
+                  <Format>'C$' #,0.00;('C$' #,0.00);'-'</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox35</rd:DefaultName>
+        <Top>5.08853cm</Top>
+        <Left>17.41863cm</Left>
+        <Height>0.5044cm</Height>
+        <Width>2.42276cm</Width>
+        <ZIndex>27</ZIndex>
+        <Style>
+          <Border>
+            <Style>Double</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+          <rd:FormatSymbolCulture>es-NI</rd:FormatSymbolCulture>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox36">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>TOTAL($):</Value>
+                <Style>
+                  <FontFamily>Century Gothic</FontFamily>
+                  <FontSize>7pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <TextDecoration>Underline</TextDecoration>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox34</rd:DefaultName>
+        <Top>5.08501cm</Top>
+        <Left>10.44138cm</Left>
+        <Height>0.50793cm</Height>
+        <Width>2.0491cm</Width>
+        <ZIndex>28</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <BackgroundColor>Silver</BackgroundColor>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>
@@ -1524,38 +1716,40 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>29.95889cm</Height>
+    <Height>17.11792cm</Height>
     <Style>
       <Border>
         <Style>None</Style>
+        <Width>0.5pt</Width>
       </Border>
     </Style>
   </Body>
-  <Width>20.97509cm</Width>
+  <Width>21cm</Width>
   <Page>
     <PageFooter>
-      <Height>6cm</Height>
+      <Height>10cm</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
         <Image Name="Image5">
           <Source>Embedded</Source>
           <Value>Banner</Value>
           <Sizing>FitProportional</Sizing>
-          <Top>3.42441cm</Top>
-          <Left>1.25395cm</Left>
+          <Top>7.02923cm</Top>
+          <Left>1.15899cm</Left>
           <Height>1.79103cm</Height>
-          <Width>18.78541cm</Width>
+          <Width>18.81476cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
             </Border>
           </Style>
         </Image>
-        <Line Name="Line2">
-          <Top>3.24802cm</Top>
-          <Left>0.99157cm</Left>
+        <Line Name="Line1">
+          <Top>6.05749cm</Top>
+          <Left>8.84794cm</Left>
           <Height>0cm</Height>
-          <Width>18.78541cm</Width>
+          <Width>4.07143cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
@@ -1572,6 +1766,8 @@
                 <TextRun>
                   <Value>Firma del vendedor</Value>
                   <Style>
+                    <FontFamily>Century Gothic</FontFamily>
+                    <FontSize>8pt</FontSize>
                     <FontWeight>Bold</FontWeight>
                   </Style>
                 </TextRun>
@@ -1586,6 +1782,8 @@
                 <TextRun>
                   <Value />
                   <Style>
+                    <FontFamily>Century Gothic</FontFamily>
+                    <FontSize>8pt</FontSize>
                     <FontWeight>Bold</FontWeight>
                   </Style>
                 </TextRun>
@@ -1594,8 +1792,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox30</rd:DefaultName>
-          <Top>2.45372cm</Top>
-          <Left>8.31809cm</Left>
+          <Top>6.23388cm</Top>
+          <Left>8.76514cm</Left>
           <Height>0.49445cm</Height>
           <Width>4.07143cm</Width>
           <ZIndex>2</ZIndex>
@@ -1606,146 +1804,82 @@
             <VerticalAlign>Middle</VerticalAlign>
           </Style>
         </Textbox>
-        <Line Name="Line1">
-          <Top>2.14502cm</Top>
-          <Left>8.31809cm</Left>
-          <Height>0cm</Height>
-          <Width>4.07143cm</Width>
+        <Image Name="Image6">
+          <Source>Embedded</Source>
+          <Value>WhatsAppImage20230825at35836PM1</Value>
+          <Sizing>FitProportional</Sizing>
+          <Top>2.65801cm</Top>
+          <Left>1.15899cm</Left>
+          <Height>2.5667cm</Height>
+          <Width>6.64438cm</Width>
           <ZIndex>3</ZIndex>
           <Style>
             <Border>
-              <Style>Solid</Style>
+              <Style>None</Style>
             </Border>
           </Style>
-        </Line>
-        <Textbox Name="Textbox33">
+        </Image>
+        <Textbox Name="Textbox1">
           <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
           <Paragraphs>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>=First(Fields!Total.Value, "DataSet1")</Value>
+                  <Value>="Descripcion: "&amp;First(Fields!Descripcion.Value, "DataSet1")</Value>
                   <Style>
-                    <Format>'$' #,0.00;('$' #,0.00);'-'</Format>
+                    <FontFamily>Century Gothic</FontFamily>
+                    <FontSize>7pt</FontSize>
                   </Style>
                 </TextRun>
               </TextRuns>
               <Style />
             </Paragraph>
           </Paragraphs>
-          <rd:DefaultName>Textbox33</rd:DefaultName>
-          <Top>1.22752cm</Top>
-          <Left>13.98727cm</Left>
-          <Height>0.6cm</Height>
-          <Width>2.5cm</Width>
+          <rd:DefaultName>Textbox1</rd:DefaultName>
+          <Top>0.49599cm</Top>
+          <Left>15.40343cm</Left>
+          <Height>0.48352cm</Height>
+          <Width>5.27907cm</Width>
           <ZIndex>4</ZIndex>
           <Style>
             <Border>
-              <Style>Double</Style>
+              <Style>None</Style>
             </Border>
             <PaddingLeft>2pt</PaddingLeft>
             <PaddingRight>2pt</PaddingRight>
             <PaddingTop>2pt</PaddingTop>
             <PaddingBottom>2pt</PaddingBottom>
-            <rd:FormatSymbolCulture>es-US</rd:FormatSymbolCulture>
           </Style>
         </Textbox>
-        <Textbox Name="Textbox34">
+        <Textbox Name="Textbox32">
           <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
           <Paragraphs>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>TOTAL(C$):</Value>
+                  <Value>=IIF(First(Fields!SalaA.Value, "DataSet1") =1 Or First(Fields!Salab.Value, "DataSet1") = 1,"Adicional por cada Sala Velatoria"&amp;Chr(10)&amp;""&amp;Chr(10)&amp;"- Atencion en Cafeteria" &amp;Chr(10)&amp;"- Salas Climatizadas"&amp;Chr(10)&amp;"- WI-FI Gratis"&amp;Chr(10)&amp;"- Podium y libro de condolencias"&amp;Chr(10)&amp;"- Video Homenaje"&amp;Chr(10)&amp;"- Estacionamiento con camaras de vigilancia"&amp;Chr(10)&amp;"- Seguridad interna las 24 horas"&amp;Chr(10)&amp;"- Transporte para funeral en la ciudad de Managua","-")</Value>
                   <Style>
+                    <FontFamily>Century Gothic</FontFamily>
+                    <FontSize>7pt</FontSize>
                     <FontWeight>Bold</FontWeight>
-                    <TextDecoration>Underline</TextDecoration>
                   </Style>
                 </TextRun>
               </TextRuns>
               <Style />
             </Paragraph>
           </Paragraphs>
-          <rd:DefaultName>Textbox34</rd:DefaultName>
-          <Top>0.61376cm</Top>
-          <Left>17.77491cm</Left>
-          <Height>0.6cm</Height>
-          <Width>2.50863cm</Width>
+          <rd:DefaultName>Textbox31</rd:DefaultName>
+          <Top>1.12089cm</Top>
+          <Left>15.40343cm</Left>
+          <Height>0.47586cm</Height>
+          <Width>5.27907cm</Width>
           <ZIndex>5</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
             </Border>
-            <BackgroundColor>Silver</BackgroundColor>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox35">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>=First(Fields!TotalCordoba.Value, "DataSet1")</Value>
-                  <Style>
-                    <Format>'C$' #,0.00;('C$' #,0.00);'-'</Format>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox35</rd:DefaultName>
-          <Top>1.22752cm</Top>
-          <Left>17.77491cm</Left>
-          <Height>0.6cm</Height>
-          <Width>2.50863cm</Width>
-          <ZIndex>6</ZIndex>
-          <Style>
-            <Border>
-              <Style>Double</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-            <rd:FormatSymbolCulture>es-NI</rd:FormatSymbolCulture>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox36">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>TOTAL($):</Value>
-                  <Style>
-                    <FontWeight>Bold</FontWeight>
-                    <TextDecoration>Underline</TextDecoration>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox34</rd:DefaultName>
-          <Top>0.61376cm</Top>
-          <Left>13.98727cm</Left>
-          <Height>0.6cm</Height>
-          <Width>2.44847cm</Width>
-          <ZIndex>7</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <BackgroundColor>Silver</BackgroundColor>
             <PaddingLeft>2pt</PaddingLeft>
             <PaddingRight>2pt</PaddingRight>
             <PaddingTop>2pt</PaddingTop>
@@ -1760,18 +1894,21 @@
               <TextRuns>
                 <TextRun>
                   <Value>=IIf(First(Fields!NombreVendedor.Value, "DataSet1")="Pedro Joaquin Mejia Hernandez"," No Contacto +505 8219 4869","")</Value>
-                  <Style />
+                  <Style>
+                    <FontFamily>Century Gothic</FontFamily>
+                    <FontSize>7pt</FontSize>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style />
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox8</rd:DefaultName>
-          <Top>1.54502cm</Top>
-          <Left>1.25395cm</Left>
-          <Height>0.6cm</Height>
+          <Top>1.77314cm</Top>
+          <Left>15.40343cm</Left>
+          <Height>0.5168cm</Height>
           <Width>5.24943cm</Width>
-          <ZIndex>8</ZIndex>
+          <ZIndex>6</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
