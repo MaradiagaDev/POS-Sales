@@ -21,6 +21,11 @@ namespace NeoCobranza.Paneles
 
         private void CatalogoSalas_Load(object sender, EventArgs e)
         {
+            dgvCatalogo.EnableHeadersVisualStyles = false;
+            dgvCatalogo.ColumnHeadersDefaultCellStyle.BackColor = Color.CadetBlue;
+            dgvCatalogo.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvCatalogo.RowsDefaultCellStyle.Font = new Font("Century Gothic", 9);
+            dgvCatalogo.RowsDefaultCellStyle.BackColor = Color.White;
             vMCatalogoSalas.InitModuloSalas(this);
         }
 
@@ -43,6 +48,7 @@ namespace NeoCobranza.Paneles
             if(dgvCatalogo.Rows.Count == 10)
             {
                 MessageBox.Show("No se puede agregar mas de 10 Salas por sucursal.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
 
             AgregarSala agregarSala = new AgregarSala("Crear", "");

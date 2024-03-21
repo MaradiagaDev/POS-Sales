@@ -67,6 +67,8 @@
             this.TxtPrecioVenta = new System.Windows.Forms.TextBox();
             this.LblPrecioVenta = new System.Windows.Forms.Label();
             this.ChkDisponibleVentas = new System.Windows.Forms.CheckBox();
+            this.LblCodigo = new System.Windows.Forms.Label();
+            this.TxtCodigo = new System.Windows.Forms.TextBox();
             this.BtnAgregarProveedor = new NeoCobranza.Especiales.EspecialButton();
             this.BtnQuitarProveedor = new NeoCobranza.Especiales.EspecialButton();
             this.BtnAgregarSucursal = new NeoCobranza.Especiales.EspecialButton();
@@ -234,7 +236,7 @@
             this.panel1.Controls.Add(this.BtnAgregarSucursal);
             this.panel1.Controls.Add(this.BtnQuitarSucursal);
             this.panel1.Controls.Add(this.label6);
-            this.panel1.Location = new System.Drawing.Point(480, 249);
+            this.panel1.Location = new System.Drawing.Point(480, 280);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(323, 328);
             this.panel1.TabIndex = 113;
@@ -406,7 +408,7 @@
             this.PnlProveedores.Controls.Add(this.BtnAgregarProveedor);
             this.PnlProveedores.Controls.Add(this.BtnQuitarProveedor);
             this.PnlProveedores.Controls.Add(this.label1);
-            this.PnlProveedores.Location = new System.Drawing.Point(839, 249);
+            this.PnlProveedores.Location = new System.Drawing.Point(839, 280);
             this.PnlProveedores.Name = "PnlProveedores";
             this.PnlProveedores.Size = new System.Drawing.Size(323, 328);
             this.PnlProveedores.TabIndex = 131;
@@ -515,6 +517,26 @@
             this.ChkDisponibleVentas.Text = "Disponible en Ventas";
             this.ChkDisponibleVentas.UseVisualStyleBackColor = true;
             this.ChkDisponibleVentas.Click += new System.EventHandler(this.ChkDisponibleVentas_Click_1);
+            // 
+            // LblCodigo
+            // 
+            this.LblCodigo.AutoSize = true;
+            this.LblCodigo.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.LblCodigo.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.LblCodigo.Location = new System.Drawing.Point(450, 172);
+            this.LblCodigo.Name = "LblCodigo";
+            this.LblCodigo.Size = new System.Drawing.Size(68, 18);
+            this.LblCodigo.TabIndex = 135;
+            this.LblCodigo.Text = "Codigo:";
+            // 
+            // TxtCodigo
+            // 
+            this.TxtCodigo.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TxtCodigo.Location = new System.Drawing.Point(453, 197);
+            this.TxtCodigo.MaxLength = 30;
+            this.TxtCodigo.Name = "TxtCodigo";
+            this.TxtCodigo.Size = new System.Drawing.Size(297, 23);
+            this.TxtCodigo.TabIndex = 136;
             // 
             // BtnAgregarProveedor
             // 
@@ -668,6 +690,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1189, 664);
+            this.Controls.Add(this.TxtCodigo);
+            this.Controls.Add(this.LblCodigo);
             this.Controls.Add(this.TxtPrecioVenta);
             this.Controls.Add(this.LblPrecioVenta);
             this.Controls.Add(this.ChkDisponibleVentas);
@@ -753,5 +777,7 @@
         public System.Windows.Forms.TextBox TxtPrecioVenta;
         public System.Windows.Forms.Label LblPrecioVenta;
         private System.Windows.Forms.CheckBox ChkDisponibleVentas;
+        public System.Windows.Forms.Label LblCodigo;
+        public System.Windows.Forms.TextBox TxtCodigo;
     }
 }

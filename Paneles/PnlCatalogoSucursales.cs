@@ -23,6 +23,11 @@ namespace NeoCobranza.Paneles
 
         private void PnlCatalogoSucursales_Load(object sender, EventArgs e)
         {
+            dgvCatalogoSucursales.EnableHeadersVisualStyles = false;
+            dgvCatalogoSucursales.ColumnHeadersDefaultCellStyle.BackColor = Color.CadetBlue;
+            dgvCatalogoSucursales.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvCatalogoSucursales.RowsDefaultCellStyle.Font = new Font("Century Gothic", 9);
+            dgvCatalogoSucursales.RowsDefaultCellStyle.BackColor = Color.White;
             vMCatalogoSucursales.auxSearch = TxtFiltrar.Texts;
             vMCatalogoSucursales.InitModuloCatalogoSucursales(this, "Buscar");
         }

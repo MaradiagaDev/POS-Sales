@@ -640,5 +640,41 @@ namespace NeoCobranza.Paneles
             PnlCentral.Tag = pnlGeneral;
             pnlGeneral.Show();
         }
+
+        private void datosDeLaEmpresaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            limpiar();
+            PnlEmpresa pnlGeneral = new PnlEmpresa();
+            AddOwnedForm(pnlGeneral);
+            pnlGeneral.TopLevel = false;
+            PnlCentral.Controls.Add(pnlGeneral);
+            pnlGeneral.Dock = DockStyle.Fill;
+            PnlCentral.Tag = pnlGeneral;
+            pnlGeneral.Show();
+        }
+
+        private void BtnConsultar_Click(object sender, EventArgs e)
+        {
+            limpiar();
+            ConsultaPrecio pnlGeneral = new ConsultaPrecio();
+            AddOwnedForm(pnlGeneral);
+            pnlGeneral.TopLevel = false;
+            PnlCentral.Controls.Add(pnlGeneral);
+            pnlGeneral.Dock = DockStyle.Fill;
+            PnlCentral.Tag = pnlGeneral;
+            pnlGeneral.Show();
+        }
+
+        private void trasladosDeProductoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            limpiar();
+            PnlTrasladoProduco pnlGeneral = new PnlTrasladoProduco();
+            AddOwnedForm(pnlGeneral);
+            pnlGeneral.TopLevel = false;
+            PnlCentral.Controls.Add(pnlGeneral);
+            pnlGeneral.Dock = DockStyle.Fill;
+            PnlCentral.Tag = pnlGeneral;
+            pnlGeneral.Show();
+        }
     }
 }

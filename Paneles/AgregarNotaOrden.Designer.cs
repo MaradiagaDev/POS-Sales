@@ -33,7 +33,7 @@
             this.btnCancelar = new NeoCobranza.Especiales.EspecialButton();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.TxtMotivoCancelacion = new System.Windows.Forms.TextBox();
+            this.TxtNotaOrden = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnGuardarNota
@@ -98,14 +98,14 @@
             this.label2.TabIndex = 166;
             this.label2.Text = "*Escriba una pequeña explicación o detalle acerca de la orden.*";
             // 
-            // TxtMotivoCancelacion
+            // TxtNotaOrden
             // 
-            this.TxtMotivoCancelacion.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtMotivoCancelacion.Location = new System.Drawing.Point(12, 63);
-            this.TxtMotivoCancelacion.Multiline = true;
-            this.TxtMotivoCancelacion.Name = "TxtMotivoCancelacion";
-            this.TxtMotivoCancelacion.Size = new System.Drawing.Size(778, 250);
-            this.TxtMotivoCancelacion.TabIndex = 165;
+            this.TxtNotaOrden.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtNotaOrden.Location = new System.Drawing.Point(12, 63);
+            this.TxtNotaOrden.Multiline = true;
+            this.TxtNotaOrden.Name = "TxtNotaOrden";
+            this.TxtNotaOrden.Size = new System.Drawing.Size(778, 250);
+            this.TxtNotaOrden.TabIndex = 165;
             // 
             // AgregarNotaOrden
             // 
@@ -115,7 +115,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.TxtMotivoCancelacion);
+            this.Controls.Add(this.TxtNotaOrden);
             this.Controls.Add(this.btnGuardarNota);
             this.Controls.Add(this.btnCancelar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -135,6 +135,6 @@
         public Especiales.EspecialButton btnCancelar;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox TxtMotivoCancelacion;
+        private System.Windows.Forms.TextBox TxtNotaOrden;
     }
 }

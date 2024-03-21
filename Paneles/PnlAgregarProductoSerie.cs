@@ -19,6 +19,13 @@ namespace NeoCobranza.Paneles
         int auxIdAlmacen;
         public DataTable auxTablaDinamicaAgregar = new DataTable();
         public DataTable auxTablaDinamicaEliminar = new DataTable();
+
+        private class OrdenarPorClass
+        {
+            public int id { get; set; }
+            public string opc { get; set; }
+        }
+
         public PnlAgregarProductoSerie(int idProducto, int idAlmacen)
         {
             InitializeComponent();
@@ -28,6 +35,15 @@ namespace NeoCobranza.Paneles
 
         private void PnlAgregarProductoSerie_Load(object sender, EventArgs e)
         {
+            List<OrdenarPorClass> ordenar = new List<OrdenarPorClass> { new OrdenarPorClass() {id = 0,opc = "Fecha Agregarción (Ascendente)" },
+            new OrdenarPorClass() {id = 1,opc = "Fecha Agregarción (Descendente)" },
+            new OrdenarPorClass() {id = 2,opc = "Fecha Expiración (Ascendente)" },
+            new OrdenarPorClass() {id = 0,opc = "Fecha Expiración (Descendente)" }};
+
+            CmbOrdenarPor.DataSource = ordenar;
+            CmbOrdenarPor.DisplayMember = "opc";
+            CmbOrdenarPor.ValueMember = "id";
+
             using (NeoCobranzaContext db = new NeoCobranzaContext())
             {
                 ServiciosEstadares productos = db.ServiciosEstadares.Where(s => s.IdEstandar == this.auxIdProducto).FirstOrDefault();
@@ -50,7 +66,7 @@ namespace NeoCobranza.Paneles
 
                 DgvLotes.DataSource = auxTablaDinamicaAgregar;
 
-                var lotes = db.LotesProducto.Where(s => s.ProductoId == productos.IdEstandar && s.AlmacenId == almacenes.AlmacenId && s.CantidadRestante > 0).ToList();
+                var lotes = db.LotesProducto.Where(s => s.ProductoId == productos.IdEstandar && s.AlmacenId == almacenes.AlmacenId && s.CantidadRestante > 0).OrderBy(s => s.FechaCreacion).ToList();
 
                 if(lotes.Count == 0)
                 {
@@ -172,6 +188,63 @@ namespace NeoCobranza.Paneles
             {
                 // Si no es un número ni una tecla de control, ignorar el evento de pulsación de tecla
                 e.Handled = true;
+            }
+        }
+
+        private void CmbOrdenarPor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            using(NeoCobranzaContext db = new NeoCobranzaContext())
+            {
+                ServiciosEstadares productos = db.ServiciosEstadares.Where(s => s.IdEstandar == this.auxIdProducto).FirstOrDefault();
+                Almacenes almacenes = db.Almacenes.Where(s => s.AlmacenId == this.auxIdAlmacen).FirstOrDefault();
+
+                auxTablaDinamicaAgregar.Rows.Clear();
+
+                if(CmbOrdenarPor.SelectedValue.ToString() == "0") 
+                {
+                    var lotes = db.LotesProducto.Where(s => s.ProductoId == productos.IdEstandar && s.AlmacenId == almacenes.AlmacenId && s.CantidadRestante > 0).OrderBy(s => s.FechaCreacion).ToList();
+
+                    foreach (var lote in lotes)
+                    {
+                        var prov = db.Proveedores.Where(p => p.IdProveedor == lote.ProveedorId).FirstOrDefault();
+                        auxTablaDinamicaAgregar.Rows.Add(lote.LoteId, lote.CompraId, lote.ProductoId, lote.Producto, prov.NombreEmpresa, lote.Cantidad, lote.CantidadRestante, lote.FechaCreacion, lote.FechaExpiracion, lote.CostoU);
+                    }
+                }
+
+                if(CmbOrdenarPor.SelectedValue.ToString() == "1")
+                {
+                    var lotes = db.LotesProducto.Where(s => s.ProductoId == productos.IdEstandar && s.AlmacenId == almacenes.AlmacenId && s.CantidadRestante > 0).OrderByDescending(s => s.FechaCreacion).ToList();
+
+                    foreach (var lote in lotes)
+                    {
+                        var prov = db.Proveedores.Where(p => p.IdProveedor == lote.ProveedorId).FirstOrDefault();
+                        auxTablaDinamicaAgregar.Rows.Add(lote.LoteId, lote.CompraId, lote.ProductoId, lote.Producto, prov.NombreEmpresa, lote.Cantidad, lote.CantidadRestante, lote.FechaCreacion, lote.FechaExpiracion, lote.CostoU);
+                    }
+                }
+
+                if (CmbOrdenarPor.SelectedValue.ToString() == "2")
+                {
+
+                    var lotes = db.LotesProducto.Where(s => s.ProductoId == productos.IdEstandar && s.AlmacenId == almacenes.AlmacenId && s.CantidadRestante > 0).OrderBy(s => s.FechaExpiracion).ToList();
+
+                    foreach (var lote in lotes)
+                    {
+                        var prov = db.Proveedores.Where(p => p.IdProveedor == lote.ProveedorId).FirstOrDefault();
+                        auxTablaDinamicaAgregar.Rows.Add(lote.LoteId, lote.CompraId, lote.ProductoId, lote.Producto, prov.NombreEmpresa, lote.Cantidad, lote.CantidadRestante, lote.FechaCreacion, lote.FechaExpiracion, lote.CostoU);
+                    }
+                }
+
+                if (CmbOrdenarPor.SelectedValue.ToString() == "3")
+                {
+                    var lotes = db.LotesProducto.Where(s => s.ProductoId == productos.IdEstandar && s.AlmacenId == almacenes.AlmacenId && s.CantidadRestante > 0).OrderByDescending(s => s.FechaExpiracion).ToList();
+
+                    foreach (var lote in lotes)
+                    {
+                        var prov = db.Proveedores.Where(p => p.IdProveedor == lote.ProveedorId).FirstOrDefault();
+                        auxTablaDinamicaAgregar.Rows.Add(lote.LoteId, lote.CompraId, lote.ProductoId, lote.Producto, prov.NombreEmpresa, lote.Cantidad, lote.CantidadRestante, lote.FechaCreacion, lote.FechaExpiracion, lote.CostoU);
+                    }
+                }
+
             }
         }
     }

@@ -502,6 +502,7 @@
     <Compile Include="ModelsCobranza\ConfigInventario.cs" />
     <Compile Include="ModelsCobranza\Contratos.cs" />
     <Compile Include="ModelsCobranza\ControlladorTC.cs" />
+    <Compile Include="ModelsCobranza\Empresa.cs" />
     <Compile Include="ModelsCobranza\FirmasCompañia.cs" />
     <Compile Include="ModelsCobranza\Imagenes.cs" />
     <Compile Include="ModelsCobranza\Inventario.cs" />
@@ -509,6 +510,8 @@
     <Compile Include="ModelsCobranza\Mermas.cs" />
     <Compile Include="ModelsCobranza\MotivosCancelacion.cs" />
     <Compile Include="ModelsCobranza\NeoCobranzaContext.cs" />
+    <Compile Include="ModelsCobranza\OrdenDetalle.cs" />
+    <Compile Include="ModelsCobranza\Ordenes.cs" />
     <Compile Include="ModelsCobranza\Proveedores.cs" />
     <Compile Include="ModelsCobranza\RelAlmacenDetalle.cs" />
     <Compile Include="ModelsCobranza\RelAlmacenProducto.cs" />
@@ -611,6 +614,12 @@
     </Compile>
     <Compile Include="Paneles\ConfigFacturacion.Designer.cs">
       <DependentUpon>ConfigFacturacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\ConsultaPrecio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\ConsultaPrecio.Designer.cs">
+      <DependentUpon>ConsultaPrecio.cs</DependentUpon>
     </Compile>
     <Compile Include="Paneles\InformativeMessageBox.cs">
       <SubType>Form</SubType>
@@ -768,29 +777,23 @@
     <Compile Include="Paneles\PnlDisponibilidad.Designer.cs">
       <DependentUpon>PnlDisponibilidad.cs</DependentUpon>
     </Compile>
+    <Compile Include="Paneles\PnlEmpresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlEmpresa.Designer.cs">
+      <DependentUpon>PnlEmpresa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Paneles\PnlInventarioAlmacenes.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Paneles\PnlInventarioAlmacenes.Designer.cs">
       <DependentUpon>PnlInventarioAlmacenes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Paneles\PnlPagoCheque.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Paneles\PnlPagoCheque.Designer.cs">
-      <DependentUpon>PnlPagoCheque.cs</DependentUpon>
-    </Compile>
     <Compile Include="Paneles\PnlPagoCuotas.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Paneles\PnlPagoCuotas.Designer.cs">
       <DependentUpon>PnlPagoCuotas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Paneles\PnlPagoEfectivo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Paneles\PnlPagoEfectivo.Designer.cs">
-      <DependentUpon>PnlPagoEfectivo.cs</DependentUpon>
     </Compile>
     <Compile Include="Paneles\PnlPrincipal.cs">
       <SubType>Form</SubType>
@@ -827,6 +830,12 @@
     </Compile>
     <Compile Include="Paneles\PnlSeleccionarProveedor.Designer.cs">
       <DependentUpon>PnlSeleccionarProveedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlTrasladoProduco.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlTrasladoProduco.Designer.cs">
+      <DependentUpon>PnlTrasladoProduco.cs</DependentUpon>
     </Compile>
     <Compile Include="Paneles\PnlVendedores.cs">
       <SubType>Form</SubType>
@@ -1008,12 +1017,6 @@
     <Compile Include="Paneles_Venta\PnlVentasFacturacion.Designer.cs">
       <DependentUpon>PnlVentasFacturacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="PnlInventario\PnlCompras.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PnlInventario\PnlCompras.Designer.cs">
-      <DependentUpon>PnlCompras.cs</DependentUpon>
-    </Compile>
     <Compile Include="PnlInventario\Pnl_InformeInventario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1116,6 +1119,9 @@
     <EmbeddedResource Include="Paneles\ConfigFacturacion.resx">
       <DependentUpon>ConfigFacturacion.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\ConsultaPrecio.resx">
+      <DependentUpon>ConsultaPrecio.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Paneles\InformativeMessageBox.resx">
       <DependentUpon>InformativeMessageBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -1194,17 +1200,14 @@
     <EmbeddedResource Include="Paneles\PnlDisponibilidad.resx">
       <DependentUpon>PnlDisponibilidad.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlEmpresa.resx">
+      <DependentUpon>PnlEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlInventarioAlmacenes.resx">
       <DependentUpon>PnlInventarioAlmacenes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Paneles\PnlPagoCheque.resx">
-      <DependentUpon>PnlPagoCheque.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlPagoCuotas.resx">
       <DependentUpon>PnlPagoCuotas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Paneles\PnlPagoEfectivo.resx">
-      <DependentUpon>PnlPagoEfectivo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlPrincipal.resx">
       <DependentUpon>PnlPrincipal.cs</DependentUpon>
@@ -1223,6 +1226,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlSeleccionarProveedor.resx">
       <DependentUpon>PnlSeleccionarProveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlTrasladoProduco.resx">
+      <DependentUpon>PnlTrasladoProduco.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlVendedores.resx">
       <DependentUpon>PnlVendedores.cs</DependentUpon>
@@ -1321,9 +1327,6 @@
       <DependentUpon>PnlVentasFacturacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PnlInventario\Informes\Rpt_Inventario.rdlc" />
-    <EmbeddedResource Include="PnlInventario\PnlCompras.resx">
-      <DependentUpon>PnlCompras.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PnlInventario\Pnl_InformeInventario.resx">
       <DependentUpon>Pnl_InformeInventario.cs</DependentUpon>
     </EmbeddedResource>

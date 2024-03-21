@@ -1,6 +1,7 @@
 ﻿using NeoCobranza.Clases;
 using NeoCobranza.Data;
 using NeoCobranza.DataController;
+using NeoCobranza.ModelsCobranza;
 using NeoCobranza.Paneles;
 using NeoCobranza.ViewModels;
 using System;
@@ -30,18 +31,45 @@ namespace NeoCobranza.Paneles_Venta
             pnlVendedores = new PnlVendedores(conexion,"Venta");
             AddOwnedForm(pnlVendedores);
             auxOpc = opc;
+
+            this.Enter += new EventHandler(Form1_Enter);
+        }
+
+
+        private void Form1_Enter(object sender, EventArgs e)
+        {
+            // Cuando el formulario recibe el foco, establecer el foco en el TextBox deseado
+            TxtCodigoProducto.Focus();
         }
 
         private void PnlVentas_Load(object sender, EventArgs e)
         {
+            this.TxtCodigoProducto.LostFocus += new System.EventHandler(textBox_LostFocus);
             vMOrdenes.InitModuloOrdenes(this,auxOpc,"");
+        }
+
+        private void textBox_LostFocus(object sender, EventArgs e)
+        {
+            if(TCMain.SelectedIndex == 0)
+            {
+                ((System.Windows.Forms.TextBox)sender).Focus();
+            }
         }
 
         private void BtnCliente_Click(object sender, EventArgs e)
         {
             Panel_Cliente_Contrato panelCliente = new Panel_Cliente_Contrato("Venta");
             AddOwnedForm(panelCliente);
-            panelCliente.Show();
+            panelCliente.ShowDialog();
+
+            using(NeoCobranzaContext db = new NeoCobranzaContext())
+            {
+                Ordenes ordenes = db.Ordenes.Where(s => s.OrdenId == int.Parse(LblNoOrden.Text)).FirstOrDefault();
+                ordenes.ClienteId = int.Parse(LblIdClientes.Text);
+
+                db.Update(ordenes);
+                db.SaveChanges();
+            }
         }
 
         private void BtnVolver_Click(object sender, EventArgs e)
@@ -144,7 +172,7 @@ namespace NeoCobranza.Paneles_Venta
         private void DgvItemsOrden_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             //Agregar
-            if (e.ColumnIndex == 0)
+            if (e.ColumnIndex == 7 )
             {
                 int Prueba;
                 if (int.TryParse(TxtCantidadItems.Text.Trim(), out Prueba) == false || TxtCantidadItems.Text.Trim() == "0"
@@ -155,13 +183,28 @@ namespace NeoCobranza.Paneles_Venta
                     return;
                 }
 
-                object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[3].Value;
+                object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[2].Value;
+
+                vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), TxtCantidadItems.Text.Trim(), "Aumentar");
+            }
+            else if ((e.ColumnIndex == 0 && LblOrdenMesa.Text == "-"))
+            {
+                int Prueba;
+                if (int.TryParse(TxtCantidadItems.Text.Trim(), out Prueba) == false || TxtCantidadItems.Text.Trim() == "0"
+                    || TxtCantidadItems.Text.Trim() == "00" || TxtCantidadItems.Text.Trim() == "000" || TxtCantidadItems.Text.Trim() == "0000")
+                {
+                    MessageBox.Show("Debe agregar una cantidad valida", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    TxtCantidadProducto.Text = "1";
+                    return;
+                }
+
+                object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[5].Value;
 
                 vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), TxtCantidadItems.Text.Trim(), "Aumentar");
             }
 
             //Quitar
-            if (e.ColumnIndex == 1)
+            if (e.ColumnIndex == 8)
             {
                 int Prueba;
                 if (int.TryParse(TxtCantidadItems.Text.Trim(), out Prueba) == false || TxtCantidadItems.Text.Trim() == "0"
@@ -172,13 +215,28 @@ namespace NeoCobranza.Paneles_Venta
                     return;
                 }
 
-                object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[3].Value;
+                object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[2].Value;
+
+                vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), TxtCantidadItems.Text.Trim(), "Disminuir");
+            }
+            else if ((e.ColumnIndex == 1 && LblOrdenMesa.Text == "-"))
+            {
+                int Prueba;
+                if (int.TryParse(TxtCantidadItems.Text.Trim(), out Prueba) == false || TxtCantidadItems.Text.Trim() == "0"
+                    || TxtCantidadItems.Text.Trim() == "00" || TxtCantidadItems.Text.Trim() == "000" || TxtCantidadItems.Text.Trim() == "0000")
+                {
+                    MessageBox.Show("Debe agregar una cantidad valida", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    TxtCantidadProducto.Text = "1";
+                    return;
+                }
+
+                object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[5].Value;
 
                 vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), TxtCantidadItems.Text.Trim(), "Disminuir");
             }
 
             //Quitar
-            if (e.ColumnIndex == 2)
+            if (e.ColumnIndex == 9 )
             {
                 DialogResult result = MessageBox.Show("¿Estás seguro que deseas hacer esta acción?", "Quitar Producto Venta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -195,12 +253,36 @@ namespace NeoCobranza.Paneles_Venta
                         return;
                     }
 
-                    object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[3].Value;
-                    object cellValueCantidad = DgvItemsOrden.Rows[e.RowIndex].Cells[5].Value;
+                    object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[2].Value;
+                    object cellValueCantidad = DgvItemsOrden.Rows[e.RowIndex].Cells[4].Value;
 
                     vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), cellValueCantidad.ToString(), "Disminuir");
                 }
             }
+            else if((e.ColumnIndex == 2 && LblOrdenMesa.Text == "-"))
+            {
+                DialogResult result = MessageBox.Show("¿Estás seguro que deseas hacer esta acción?", "Quitar Producto Venta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+
+                if (result == DialogResult.Yes)
+                {
+
+                    int Prueba;
+                    if (int.TryParse(TxtCantidadItems.Text.Trim(), out Prueba) == false || TxtCantidadItems.Text.Trim() == "0"
+                        || TxtCantidadItems.Text.Trim() == "00" || TxtCantidadItems.Text.Trim() == "000" || TxtCantidadItems.Text.Trim() == "0000")
+                    {
+                        MessageBox.Show("Debe agregar una cantidad valida", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        TxtCantidadProducto.Text = "1";
+                        return;
+                    }
+
+                    object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[5].Value;
+                    object cellValueCantidad = DgvItemsOrden.Rows[e.RowIndex].Cells[7].Value;
+
+                    vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), cellValueCantidad.ToString(), "Disminuir");
+                }
+            }
+
         }
 
         private void TxtCantidadItems_KeyPress(object sender, KeyPressEventArgs e)
@@ -389,7 +471,7 @@ namespace NeoCobranza.Paneles_Venta
 
         private void BtnNotaOrden_Click(object sender, EventArgs e)
         {
-            AgregarNotaOrden nota = new AgregarNotaOrden("");
+            AgregarNotaOrden nota = new AgregarNotaOrden(LblNoOrden.Text);
             nota.ShowDialog();
         }
 
@@ -407,6 +489,80 @@ namespace NeoCobranza.Paneles_Venta
         private void BtnVoverLista_Click(object sender, EventArgs e)
         {
             vMOrdenes.ConfigUI(this, "Menu");
+        }
+
+        private void TxtCodigoProducto_TextChanged(object sender, EventArgs e)
+        {
+            int prueba = 0;
+            if(ChkAutomatico.Checked)
+            {
+                if(TxtCodigoProducto.Text.Length > 0 && int.TryParse(TxtCantidadItems.Text,out prueba) == true && prueba !=0)
+                {
+                    using(NeoCobranzaContext db = new NeoCobranzaContext())
+                    {
+                        var servicio = db.ServiciosEstadares.Where(s => s.Codigo == TxtCodigoProducto.Text.Trim()).FirstOrDefault();
+
+                        if(servicio != null)
+                        {
+                            vMOrdenes.AgregarProductosOrden(this,servicio.IdEstandar.ToString(), TxtCantidadItems.Text, "Aumentar");
+                            TxtCodigoProducto.Text = string.Empty;
+                            TxtCodigoProducto.Focus();
+                        }
+                    }
+                }
+            }
+        }
+
+        private void BtnBuscarCodigo_Click(object sender, EventArgs e)
+        {
+            int prueba = 0;
+            if (TxtCodigoProducto.Text.Length > 0 && int.TryParse(TxtCantidadItems.Text, out prueba) == true && prueba != 0)
+            {
+                using (NeoCobranzaContext db = new NeoCobranzaContext())
+                {
+                    var servicio = db.ServiciosEstadares.Where(s => s.Codigo == TxtCodigoProducto.Text.Trim()).FirstOrDefault();
+
+                    if (servicio != null)
+                    {
+                        vMOrdenes.AgregarProductosOrden(this, servicio.IdEstandar.ToString(), TxtCantidadItems.Text, "Aumentar");
+                        TxtCodigoProducto.Text = string.Empty;
+                        TxtCodigoProducto.Focus();
+                    }
+                }
+            }
+        }
+
+        private void label42_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvCatalogo_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex ==  8)
+            {
+                    vMOrdenes.OrdenAux = int.Parse(dgvCatalogoOrdenes.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    vMOrdenes.InitModuloOrdenes(this, "OrdenRapida", "");                
+            }
+            else if(e.ColumnIndex == 9)
+            {
+                PnlCancelarOrden pnlCancelarOrden = new PnlCancelarOrden("");
+                pnlCancelarOrden.ShowDialog();
+            }
+        }
+
+        private void tabPage1_Enter(object sender, EventArgs e)
+        {
+            TxtCodigoProducto.Focus();
+        }
+
+        private void PnlVentas_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '\r' && TCMain.SelectedIndex == 1) // El caracter '\r' representa el retorno de carro (Enter)
+            {
+                // Mover el foco al campo de texto deseado
+                TxtCodigoProducto.Focus();
+            }
         }
     }
 }

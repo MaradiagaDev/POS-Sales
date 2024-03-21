@@ -23,6 +23,11 @@ namespace NeoCobranza.Paneles
 
         private void PnlInventarioAlmacenes_Load(object sender, EventArgs e)
         {
+            dgvCatalogo.EnableHeadersVisualStyles = false;
+            dgvCatalogo.ColumnHeadersDefaultCellStyle.BackColor = Color.CadetBlue;
+            dgvCatalogo.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvCatalogo.RowsDefaultCellStyle.Font = new Font("Century Gothic", 9);
+
             vMInventarioAlmacenes.InitModuloInventarioAlmacenes(this);
         }
 
@@ -41,7 +46,23 @@ namespace NeoCobranza.Paneles
             vMInventarioAlmacenes.BuscarInventario();
         }
 
-        private void dgvCatalogo_CellContentClick(object sender, DataGridViewCellEventArgs e)
+
+        private void BtnListaMermas_Click(object sender, EventArgs e)
+        {
+            if(CmbAlmacenes.Items.Count == 0)
+            {
+                MessageBox.Show("Para ver la lista de mermas debe haber almacenes en catalogos.", "Atención",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else
+            {
+                ListaMermas frm = new ListaMermas(int.Parse(CmbAlmacenes.SelectedValue.ToString()));
+                frm.ShowDialog();
+            }
+        }
+
+        private void dgvCatalogo_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0)
             {
@@ -63,21 +84,6 @@ namespace NeoCobranza.Paneles
                     frmSerie.ShowDialog();
 
                 }
-            }
-        }
-
-        private void BtnListaMermas_Click(object sender, EventArgs e)
-        {
-            if(CmbAlmacenes.Items.Count == 0)
-            {
-                MessageBox.Show("Para ver la lista de mermas debe haber almacenes en catalogos.", "Atención",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            else
-            {
-                ListaMermas frm = new ListaMermas(int.Parse(CmbAlmacenes.SelectedValue.ToString()));
-                frm.ShowDialog();
             }
         }
     }

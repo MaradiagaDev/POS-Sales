@@ -135,6 +135,8 @@ namespace NeoCobranza.Paneles
                     LblPrecioContrato.Enabled = servicios.MontoContrato.ToString() == "0" ? false : true;
                     LblPrecioMejora.Enabled = servicios.MontoMejora.ToString() == "0" ? false : true;
 
+                    TxtCodigo.Text = servicios.Codigo == null ? "" : servicios.Codigo;
+
                     TxtPrecioVenta.Text = servicios.MontoVd.ToString();
                     TxtPrecioContrato.Text = servicios.MontoContrato.ToString();
                     TxtPrecioMejora.Text = servicios.MontoMejora.ToString();
@@ -203,6 +205,8 @@ namespace NeoCobranza.Paneles
                 PnlProveedores.Visible = false;
                 CmbManejoInventario.Visible = false;
                 LblManejoInventario.Visible = false;
+                LblCodigo.Visible = false;
+                TxtCodigo.Visible = false;
             }
 
             switch (auxOpc)
@@ -362,6 +366,19 @@ namespace NeoCobranza.Paneles
             {
                 if (auxOpc == "Crear")
                 {
+
+                    if (TxtCodigo.Text.Trim().Length > 0)
+                    {
+                        var VerificarCodigoCrear = db.ServiciosEstadares.Where(s => s.Codigo.Trim() == TxtCodigo.Text.Trim()).FirstOrDefault();
+
+                        if(VerificarCodigoCrear != null)
+                        {
+                            MessageBox.Show("Ya existe un producto con ese codigo. Los codigos deben de ser individuales por producto.", "Atención",
+                                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                    }
+
                     try
                     {
                         //Primero agregar la imagen
@@ -395,7 +412,8 @@ namespace NeoCobranza.Paneles
                             ClasificacionProducto = auxModulo == "Productos" ? 0 : 1,
                             ClasificacionInventario = CmbTipoInventario.Text.Trim(),
                             Expira = CmbTipoInventario.Text,
-                            ManejoInventario = CmbManejoInventario.Text
+                            ManejoInventario = CmbManejoInventario.Text,
+                            Codigo = TxtCodigo.Text.Trim(),
                         };
 
                         db.Add(servicio);
@@ -469,6 +487,22 @@ namespace NeoCobranza.Paneles
                 {
                     try
                     {
+                        if (TxtCodigo.Text.Trim().Length > 0)
+                        {
+                            var VerificarCodigoCrear = db.ServiciosEstadares.Where(s => s.Codigo.Trim() == TxtCodigo.Text.Trim()).ToList();
+
+                            if (VerificarCodigoCrear.Count > 0)
+                            {
+
+                                if (VerificarCodigoCrear[0].IdEstandar != int.Parse(auxId) || VerificarCodigoCrear.Count>1)
+                                {
+                                    MessageBox.Show("Ya existe un producto con ese codigo. Los codigos deben de ser individuales por producto.", "Atención",
+                                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    return;
+                                }                           
+                            }
+                        }
+
                         //Primero agregar la imagen
 
                         int _idImg = Utilidades.IdImagenInicial;
@@ -498,6 +532,7 @@ namespace NeoCobranza.Paneles
                         servicio.ClasificacionTipo = int.Parse(CmbTipoProducto.SelectedValue.ToString());
                         servicio.Expira = CmbTipoInventario.Text.Trim();
                         servicio.ManejoInventario = CmbManejoInventario.Text.Trim();
+                        servicio.Codigo = TxtCodigo.Text.Trim();
 
                         db.Update(servicio);
                         db.SaveChanges();

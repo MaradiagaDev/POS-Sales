@@ -83,6 +83,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Silver;
+            this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
             this.panel2.Controls.Add(this.LblTituloPrincipal);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.LblContra);
@@ -100,17 +101,18 @@
             // LblTituloPrincipal
             // 
             this.LblTituloPrincipal.AutoSize = true;
+            this.LblTituloPrincipal.BackColor = System.Drawing.Color.Transparent;
             this.LblTituloPrincipal.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LblTituloPrincipal.ForeColor = System.Drawing.Color.GhostWhite;
-            this.LblTituloPrincipal.Location = new System.Drawing.Point(60, 76);
+            this.LblTituloPrincipal.Location = new System.Drawing.Point(120, 76);
             this.LblTituloPrincipal.Name = "LblTituloPrincipal";
-            this.LblTituloPrincipal.Size = new System.Drawing.Size(252, 25);
+            this.LblTituloPrincipal.Size = new System.Drawing.Size(125, 25);
             this.LblTituloPrincipal.TabIndex = 7;
-            this.LblTituloPrincipal.Text = "Bienvenido a Cobranza";
+            this.LblTituloPrincipal.Text = "Bienvenido";
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.RoyalBlue;
+            this.panel3.BackColor = System.Drawing.Color.LightSlateGray;
             this.panel3.Controls.Add(this.LblVersion);
             this.panel3.Location = new System.Drawing.Point(1, 470);
             this.panel3.Name = "panel3";
@@ -132,6 +134,7 @@
             // LblContra
             // 
             this.LblContra.AutoSize = true;
+            this.LblContra.BackColor = System.Drawing.Color.Transparent;
             this.LblContra.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LblContra.ForeColor = System.Drawing.Color.GhostWhite;
             this.LblContra.Location = new System.Drawing.Point(65, 213);
@@ -145,28 +148,28 @@
             this.BtnSalir.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.BtnSalir.BackGroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.BtnSalir.BorderColor = System.Drawing.Color.SlateGray;
-            this.BtnSalir.BorderRadius = 10;
+            this.BtnSalir.BorderRadius = 0;
             this.BtnSalir.BorderSize = 0;
             this.BtnSalir.FlatAppearance.BorderSize = 0;
             this.BtnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnSalir.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnSalir.ForeColor = System.Drawing.Color.SlateGray;
+            this.BtnSalir.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(20)))), ((int)(((byte)(43)))));
             this.BtnSalir.Location = new System.Drawing.Point(69, 360);
             this.BtnSalir.Name = "BtnSalir";
             this.BtnSalir.Size = new System.Drawing.Size(234, 35);
             this.BtnSalir.TabIndex = 4;
             this.BtnSalir.Text = "Salir";
-            this.BtnSalir.TextGroundColor = System.Drawing.Color.SlateGray;
+            this.BtnSalir.TextGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(20)))), ((int)(((byte)(43)))));
             this.BtnSalir.UseVisualStyleBackColor = false;
             this.BtnSalir.Click += new System.EventHandler(this.BtnSalir_Click);
             // 
             // btnLogin
             // 
-            this.btnLogin.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnLogin.BackGroundColor = System.Drawing.Color.RoyalBlue;
-            this.btnLogin.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.btnLogin.BorderRadius = 10;
-            this.btnLogin.BorderSize = 0;
+            this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(20)))), ((int)(((byte)(43)))));
+            this.btnLogin.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(20)))), ((int)(((byte)(43)))));
+            this.btnLogin.BorderColor = System.Drawing.Color.LavenderBlush;
+            this.btnLogin.BorderRadius = 0;
+            this.btnLogin.BorderSize = 2;
             this.btnLogin.FlatAppearance.BorderSize = 0;
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogin.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -183,6 +186,7 @@
             // LblUsuario
             // 
             this.LblUsuario.AutoSize = true;
+            this.LblUsuario.BackColor = System.Drawing.Color.Transparent;
             this.LblUsuario.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LblUsuario.ForeColor = System.Drawing.Color.GhostWhite;
             this.LblUsuario.Location = new System.Drawing.Point(65, 141);

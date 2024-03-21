@@ -23,6 +23,11 @@ namespace NeoCobranza.Paneles
 
         private void PnlCatalogoProveedores_Load(object sender, EventArgs e)
         {
+            dgvCatalogoProveedores.EnableHeadersVisualStyles = false;
+            dgvCatalogoProveedores.ColumnHeadersDefaultCellStyle.BackColor = Color.CadetBlue;
+            dgvCatalogoProveedores.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvCatalogoProveedores.RowsDefaultCellStyle.Font = new Font("Century Gothic", 9);
+            dgvCatalogoProveedores.RowsDefaultCellStyle.BackColor = Color.White;
             vMCatalogoProveedores.InitModuloProveedores(this);
         }
 

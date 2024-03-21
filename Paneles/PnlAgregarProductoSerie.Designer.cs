@@ -44,6 +44,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.TxtIdentificador = new System.Windows.Forms.TextBox();
             this.LblIdentificadorAjuste = new System.Windows.Forms.Label();
+            this.CmbOrdenarPor = new System.Windows.Forms.ComboBox();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvLotes)).BeginInit();
             this.SuspendLayout();
@@ -232,12 +233,26 @@
             this.LblIdentificadorAjuste.TabIndex = 146;
             this.LblIdentificadorAjuste.Text = "Nombre o Identificador (*)";
             // 
+            // CmbOrdenarPor
+            // 
+            this.CmbOrdenarPor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.CmbOrdenarPor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbOrdenarPor.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CmbOrdenarPor.FormattingEnabled = true;
+            this.CmbOrdenarPor.Location = new System.Drawing.Point(779, 49);
+            this.CmbOrdenarPor.Name = "CmbOrdenarPor";
+            this.CmbOrdenarPor.Size = new System.Drawing.Size(454, 25);
+            this.CmbOrdenarPor.TabIndex = 152;
+            this.CmbOrdenarPor.SelectedIndexChanged += new System.EventHandler(this.CmbOrdenarPor_SelectedIndexChanged);
+            // 
             // PnlAgregarProductoSerie
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1356, 742);
+            this.Controls.Add(this.CmbOrdenarPor);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.TxtCantidad);
             this.Controls.Add(this.TxtRazon);
@@ -278,5 +293,6 @@
         public System.Windows.Forms.Label label4;
         public System.Windows.Forms.TextBox TxtIdentificador;
         public System.Windows.Forms.Label LblIdentificadorAjuste;
+        private System.Windows.Forms.ComboBox CmbOrdenarPor;
     }
 }

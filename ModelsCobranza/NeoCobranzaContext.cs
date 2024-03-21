@@ -27,11 +27,14 @@ namespace NeoCobranza.ModelsCobranza
         public virtual DbSet<ComprasInventario> ComprasInventario { get; set; }
         public virtual DbSet<ConfigFacturacion> ConfigFacturacion { get; set; }
         public virtual DbSet<ConfigInventario> ConfigInventario { get; set; }
+        public virtual DbSet<Empresa> Empresa { get; set; }
         public virtual DbSet<Imagenes> Imagenes { get; set; }
         public virtual DbSet<Inventario> Inventario { get; set; }
         public virtual DbSet<LotesProducto> LotesProducto { get; set; }
         public virtual DbSet<Mermas> Mermas { get; set; }
         public virtual DbSet<MotivosCancelacion> MotivosCancelacion { get; set; }
+        public virtual DbSet<OrdenDetalle> OrdenDetalle { get; set; }
+        public virtual DbSet<Ordenes> Ordenes { get; set; }
         public virtual DbSet<Proveedores> Proveedores { get; set; }
         public virtual DbSet<RelAlmacenDetalle> RelAlmacenDetalle { get; set; }
         public virtual DbSet<RelAlmacenProducto> RelAlmacenProducto { get; set; }
@@ -207,6 +210,25 @@ namespace NeoCobranza.ModelsCobranza
                 entity.Property(e => e.SucursalId).HasColumnName("SucursalID");
             });
 
+            modelBuilder.Entity<Empresa>(entity =>
+            {
+                entity.HasKey(e => e.IdEmpresa);
+
+                entity.Property(e => e.Email).HasMaxLength(50);
+
+                entity.Property(e => e.NombreComercial).HasMaxLength(200);
+
+                entity.Property(e => e.NombreEmpresa)
+                    .IsRequired()
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.Ruc)
+                    .HasColumnName("RUC")
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Telefono).HasMaxLength(50);
+            });
+
             modelBuilder.Entity<Imagenes>(entity =>
             {
                 entity.HasKey(e => e.IdImagen)
@@ -281,6 +303,64 @@ namespace NeoCobranza.ModelsCobranza
                 entity.Property(e => e.Estado).HasMaxLength(50);
 
                 entity.Property(e => e.Motivo).HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<OrdenDetalle>(entity =>
+            {
+                entity.Property(e => e.OrdenDetalleId).HasColumnName("OrdenDetalleID");
+
+                entity.Property(e => e.OrdenId).HasColumnName("OrdenID");
+
+                entity.Property(e => e.PrecioUnitario).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.ProductoId).HasColumnName("ProductoID");
+
+                entity.Property(e => e.Subtotal).HasColumnType("decimal(18, 2)");
+            });
+
+            modelBuilder.Entity<Ordenes>(entity =>
+            {
+                entity.HasKey(e => e.OrdenId);
+
+                entity.Property(e => e.OrdenId).HasColumnName("OrdenID");
+
+                entity.Property(e => e.CambioDolar).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.ClienteId).HasColumnName("ClienteID");
+
+                entity.Property(e => e.Descuento).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.FechaRealizacion).HasColumnType("datetime");
+
+                entity.Property(e => e.Iva)
+                    .HasColumnName("IVA")
+                    .HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.OrdenProceso).HasMaxLength(50);
+
+                entity.Property(e => e.Pagado).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.PagoProceso).HasMaxLength(50);
+
+                entity.Property(e => e.RestantePago).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.RetencionAlcaldia).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.RetencionDgi)
+                    .HasColumnName("RetencionDGI")
+                    .HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.SalaMesa).HasMaxLength(50);
+
+                entity.Property(e => e.Serie).HasMaxLength(50);
+
+                entity.Property(e => e.SubTotal).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.SucursalId).HasColumnName("SucursalID");
+
+                entity.Property(e => e.TotalOrden).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.UsuarioId).HasColumnName("UsuarioID");
             });
 
             modelBuilder.Entity<Proveedores>(entity =>

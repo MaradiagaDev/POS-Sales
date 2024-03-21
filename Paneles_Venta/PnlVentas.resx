@@ -653,6 +653,15 @@
         uk91DkyHs/6sWir9BkPnR5pm4FgqAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="BtnGestionSalas.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DAAACwwBP0AiyAAAAMxJREFUWEftllEKwkAMRPcSilcqHrs30A//VdBLaJy4Y0FprCb1YzEPhm6zk83Q
+        9qMlSV4RkTV0hObmAHUcYwPTL4Y/2HOMDY3C29ngsdPn0pcBMsCoEeW+7r6lp/0J7jUeIAKPbTwAyvkN
+        uOGxjQdAeewVDI9c17VkcqHVhkZvgCnOtNrQ6HoFbB16sVxAm3tRZAetuGVTvfEAuHw/XKn+WADgG67U
+        nnAA33Cl9oUDKFtoya3PQZP+vUbxDVfQ2EHeEFfoBPmGJ39IKTfpNN90P2GI7QAAAABJRU5ErkJggg==
+</value>
+  </data>
   <data name="BtnListaOrdenes.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL

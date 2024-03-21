@@ -22,6 +22,11 @@ namespace NeoCobranza.Paneles
 
         private void PnlCatalogoAlmacenes_Load(object sender, EventArgs e)
         {
+            dgvCatalogoAlmacenes.EnableHeadersVisualStyles = false;
+            dgvCatalogoAlmacenes.ColumnHeadersDefaultCellStyle.BackColor = Color.CadetBlue;
+            dgvCatalogoAlmacenes.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvCatalogoAlmacenes.RowsDefaultCellStyle.Font = new Font("Century Gothic", 9);
+            dgvCatalogoAlmacenes.RowsDefaultCellStyle.BackColor = Color.White;
             vMCatalogoAlmacenes.auxSearch = TxtFiltrar.Texts;
             vMCatalogoAlmacenes.InitModuloCatalogoAlmacenes(this, "Buscar");
         }

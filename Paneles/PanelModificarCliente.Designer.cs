@@ -29,6 +29,7 @@ namespace NeoCobranza.Paneles
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PanelModificarCliente));
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblId = new System.Windows.Forms.Label();
             this.LblDynamicoCliente = new System.Windows.Forms.Label();
@@ -733,6 +734,8 @@ namespace NeoCobranza.Paneles
             this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAgregar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnAgregar.ForeColor = System.Drawing.Color.White;
+            this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
+            this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAgregar.Location = new System.Drawing.Point(875, 556);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(173, 35);
@@ -849,6 +852,7 @@ namespace NeoCobranza.Paneles
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.panel3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(1072, 639);
             this.MinimumSize = new System.Drawing.Size(1072, 639);
             this.Name = "PanelModificarCliente";

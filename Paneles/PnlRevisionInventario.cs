@@ -19,6 +19,10 @@ namespace NeoCobranza.Paneles
         public PnlRevisionInventario()
         {
             InitializeComponent();
+            dgvCatalogo.EnableHeadersVisualStyles = false;
+            dgvCatalogo.ColumnHeadersDefaultCellStyle.BackColor = Color.CadetBlue;
+            dgvCatalogo.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvCatalogo.RowsDefaultCellStyle.Font = new Font("Century Gothic", 9);
         }
 
         private void PnlRevisionInventario_Load(object sender, EventArgs e)

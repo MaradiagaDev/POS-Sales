@@ -27,7 +27,7 @@ namespace NeoCobranza.ViewModels
 
 
         /*
-         * Scaffold-DbContext "Server=192.168.1.165;Database=NeoCobranza;UID=cobranzanew;PWD=12345678;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir "ModelsCobranza"-Tables Usuario,RolUsuario,AuditoriaSistema,TipoCambio,Proveedores,TipoServicios,Clientes,RolPermisos,Sucursales,Almacenes,Servicios_Estadares,Imagenes,RelProductoSucursales, RelAlmacenProducto,Inventario,RelAlmacenDetalle,AjustesInventario,MotivosCancelacion,Bancos,TipoTarjeta,RelBancoTipo,ConfigFacturacion,ConfigInventario,ComprasInventario,LotesProducto,RelProveedorProducto,Mermas,Salas   -force 
+         * Scaffold-DbContext "Server=192.168.1.165;Database=NeoCobranza;UID=cobranzanew;PWD=12345678;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir "ModelsCobranza"-Tables Usuario,RolUsuario,AuditoriaSistema,TipoCambio,Proveedores,TipoServicios,Clientes,RolPermisos,Sucursales,Almacenes,Servicios_Estadares,Imagenes,RelProductoSucursales, RelAlmacenProducto,Inventario,RelAlmacenDetalle,AjustesInventario,MotivosCancelacion,Bancos,TipoTarjeta,RelBancoTipo,ConfigFacturacion,ConfigInventario,ComprasInventario,LotesProducto,RelProveedorProducto,Mermas,Salas,Ordenes,OrdenDetalle,Empresa   -force 
          */
     }
 }
