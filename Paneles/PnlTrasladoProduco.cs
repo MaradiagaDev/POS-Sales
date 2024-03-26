@@ -1,4 +1,5 @@
-﻿using NeoCobranza.ModelsCobranza;
+﻿using NeoCobranza.Clases;
+using NeoCobranza.ModelsCobranza;
 using NeoCobranza.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -61,6 +62,14 @@ namespace NeoCobranza.Paneles
                 CmbAlmacenSalida.ValueMember = "AlmacenId";
                 CmbAlmacenSalida.DisplayMember = "NombreAlmacen";
                 CmbAlmacenSalida.DataSource = listBdAlmacenesSalida;
+
+                DataGridViewButtonColumn BtnCambioEstado = new DataGridViewButtonColumn();
+
+                BtnCambioEstado.Text = " Quitar ";
+                BtnCambioEstado.Name = "...";
+                BtnCambioEstado.UseColumnTextForButtonValue = true;
+                BtnCambioEstado.DefaultCellStyle.ForeColor = Color.Blue;
+                dgvCatalogo.Columns.Add(BtnCambioEstado);
 
                 auxTablaDinamica.Columns.Add("Lote-ID", typeof(string));
                 auxTablaDinamica.Columns.Add("Lote-ID Traslado", typeof(string));
@@ -146,15 +155,256 @@ namespace NeoCobranza.Paneles
                     if(int.Parse(cellValue.ToString()) == 0) 
                     {
                         MessageBox.Show("No hay Existencias del Producto Seleccionado.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
                     }
-                   // PnlAgregarTipoTarjeta tipo = new PnlAgregarTipoTarjeta("Modificar", cellValue.ToString());
-                   // tipo.ShowDialog();
-                   // vMCatalogoTipoTarjetas.FuncionesPrincipales(this, "Buscar", "");
+
+                    if(int.Parse(CmbAlmacenSalida.SelectedValue.ToString()) == int.Parse(CmbAlmacenEntrado.SelectedValue.ToString()))
+                    {
+                        MessageBox.Show("Debe seleccionar almacenes distintos para realizar el traslado.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    
+                    PnlAgregarTraslado traslado = new PnlAgregarTraslado(this, int.Parse(selectedRow.Cells[0].Value.ToString()),int.Parse(CmbAlmacenSalida.SelectedValue.ToString()), int.Parse(CmbAlmacenEntrado.SelectedValue.ToString()));
+                    traslado.ShowDialog();
+
                 }
             }
             else
             {
                 MessageBox.Show("Debe seleccionar un Producto.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void dgvCatalogo_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.ColumnIndex == 0)
+            {
+                auxTablaDinamica.Rows.RemoveAt(e.RowIndex);
+
+                if (auxTablaDinamica.Rows.Count > 0)
+                {
+                    CmbAlmacenEntrado.Enabled = false;
+                    CmbAlmacenSalida.Enabled = false;
+                }
+                else
+                {
+                    CmbAlmacenEntrado.Enabled = true;
+                    CmbAlmacenSalida.Enabled = true;
+                }
+            }
+        }
+
+        private void especialButton1_Click(object sender, EventArgs e)
+        {
+            auxTablaDinamica.Rows.Clear();
+            CmbAlmacenSalida.Enabled = true;
+            CmbAlmacenEntrado.Enabled = true;
+        }
+
+        private void BtnGuardar_Click(object sender, EventArgs e)
+        {
+            if(auxTablaDinamica.Rows.Count == 0)
+            {
+                MessageBox.Show("No se han agregado productos al traslado.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            //Crear traslado
+
+            using(NeoCobranzaContext db = new NeoCobranzaContext())
+            {
+                TrasladosInventario traslados = new TrasladosInventario()
+                {
+                    FechaTraslado = DateTime.Now,
+                    IdUsuario = int.Parse(Utilidades.IdUsuario),
+                    SucursalId = int.Parse(Utilidades.SucursalId)
+                };
+
+                db.Add(traslados);
+                db.SaveChanges();
+
+                foreach(DataRow item in auxTablaDinamica.Rows)
+                {
+                    //Verificar por cantidades
+                    LotesProducto lote = db.LotesProducto.Where(s => s.LoteId == item[0].ToString()).FirstOrDefault();
+
+                    if (int.Parse(item[5].ToString()) > lote.CantidadRestante)
+                    {
+                        MessageBox.Show($"La cantidad de producto ({lote.Producto}) del lote (SALIDA) ha sido modificada durante" +
+                            "se realizaba el traslado por lo que ya no se encuentra la misma cantidad que la que se contempló en el lote" +
+                            ".Esto pudo ocurrir por un traslado o venta al momento de realizar el traslado.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    }
+                    else
+                    {
+                        TrasladoDetalle detalleTraslado = new TrasladoDetalle()
+                        {
+                            TrasladoId = traslados.TrasladoId,
+                            LoteInicial = item[0].ToString(),
+                            LoteFinal = item[1].ToString(),
+                            AlmacenEntrada = int.Parse(CmbAlmacenEntrado.SelectedValue.ToString()),
+                            AlmacenSalida = int.Parse(CmbAlmacenSalida.SelectedValue.ToString()),
+                            ProductoId = lote.ProductoId,
+                            CantidadTrasladada = int.Parse(item[5].ToString()),
+                        };
+
+                        db.Add(detalleTraslado);
+                        db.SaveChanges();
+
+                        //Actualizar los datos de los lotes
+                        lote.CantidadRestante -= int.Parse(item[5].ToString());
+
+                        db.Update(lote);
+                        db.SaveChanges();
+
+
+                        //Kardex de lote viejo
+
+                        Kardex kardexUltimo = db.Kardex.Where(s => s.ProductoId == lote.ProductoId
+                            && s.AlmacenId == int.Parse(CmbAlmacenSalida.SelectedValue.ToString())).OrderByDescending(s => s.MovimientoId).FirstOrDefault();
+
+                        if (kardexUltimo != null)
+                        {
+                            Kardex kardex = new Kardex()
+                            {
+                                Fecha = DateTime.Now.Date,
+                                Operacion = "Traslado",
+                                AlmacenId = int.Parse(CmbAlmacenSalida.SelectedValue.ToString()),
+                                ProductoId = lote.ProductoId,
+                                UnidadesSalida = int.Parse(item[5].ToString()),
+                                CostoUnitarioSalida = lote.CostoU,
+                                TotalSalida = lote.CostoU * int.Parse(item[5].ToString()),
+                                UnidadesSaldo = kardexUltimo.UnidadesSaldo - int.Parse(item[5].ToString()),
+                                CostoUnitarioSaldo = (kardexUltimo.CostoTotalSaldo - (lote.CostoU * int.Parse(item[5].ToString()))) / (kardexUltimo.UnidadesSaldo - int.Parse(item[5].ToString())),
+                                CostoTotalSaldo = kardexUltimo.CostoTotalSaldo - (lote.CostoU * int.Parse(item[5].ToString())),
+                                IdDocumento = traslados.TrasladoId.ToString(),
+                                Lote = lote.LoteId
+                            };
+
+                            db.Add(kardex);
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            Kardex kardex = new Kardex()
+                            {
+                                Fecha = DateTime.Now.Date,
+                                Operacion = "Traslado",
+                                AlmacenId = int.Parse(CmbAlmacenSalida.SelectedValue.ToString()),
+                                ProductoId = lote.ProductoId,
+                                UnidadesSaldo = int.Parse(item[5].ToString()),
+                                CostoUnitarioSaldo = lote.CostoU * int.Parse(item[5].ToString()),
+                                CostoTotalSaldo = lote.CostoU * int.Parse(item[5].ToString()),
+                                UnidadesSalida = int.Parse(item[5].ToString()),
+                                CostoUnitarioSalida = lote.CostoU,
+                                TotalSalida = lote.CostoU * int.Parse(item[5].ToString()),
+                                IdDocumento = traslados.TrasladoId.ToString(),
+                                Lote = lote.LoteId
+                            };
+
+                            db.Add(kardex);
+                            db.SaveChanges();
+                        }
+
+                        //Kardex de lote viejo
+
+                        //Agregar el lote nuevo
+
+                        LotesProducto loteNuevo = new LotesProducto() { 
+                        LoteId = item[1].ToString(),
+                        Producto = lote.Producto,
+                        ProductoId = lote.ProductoId,
+                        CompraId = lote.CompraId,
+                        Cantidad = int.Parse(item[5].ToString()),
+                        CantidadRestante = int.Parse(item[5].ToString()),
+                        FechaCreacion = lote.FechaCreacion,
+                        FechaExpiracion = lote.FechaExpiracion,
+                        AlmacenId = int.Parse(CmbAlmacenEntrado.SelectedValue.ToString()),
+                        ProveedorId = lote.ProveedorId,
+                        CostoU =lote.CostoU,
+                        SubTotal = (lote.CostoU * int.Parse(item[5].ToString()))
+                        };
+
+                        db.Add(loteNuevo);
+                        db.SaveChanges();
+
+                        //Kardex lote nuevo
+                        Kardex kardexUltimoNuevo = db.Kardex.Where(s => s.ProductoId == loteNuevo.ProductoId
+                         && s.AlmacenId == int.Parse(CmbAlmacenEntrado.SelectedValue.ToString())).OrderByDescending(s => s.MovimientoId).FirstOrDefault();
+
+                        if (kardexUltimoNuevo != null)
+                        {
+                            Kardex kardex = new Kardex()
+                            {
+                                Fecha = DateTime.Now.Date,
+                                Operacion = "Traslado",
+                                AlmacenId = int.Parse(CmbAlmacenEntrado.SelectedValue.ToString()),
+                                ProductoId = loteNuevo.ProductoId,
+                                UnidadesEntrada = int.Parse(item[5].ToString()),
+                                CostoUnitarioEntrada = loteNuevo.CostoU,
+                                TotalEntrada = loteNuevo.CostoU * int.Parse(item[5].ToString()),
+                                UnidadesSaldo = kardexUltimoNuevo.UnidadesSaldo + int.Parse(item[5].ToString()),
+                                CostoUnitarioSaldo = (kardexUltimoNuevo.CostoTotalSaldo + (loteNuevo.CostoU * int.Parse(item[5].ToString()))) / (kardexUltimoNuevo.UnidadesSaldo + int.Parse(item[5].ToString())),
+                                CostoTotalSaldo = kardexUltimoNuevo.CostoTotalSaldo + (lote.CostoU * int.Parse(item[5].ToString())),
+                                IdDocumento = traslados.TrasladoId.ToString(),
+                                Lote = loteNuevo.LoteId
+                            };
+
+                            db.Add(kardex);
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            Kardex kardex = new Kardex()
+                            {
+                                Fecha = DateTime.Now.Date,
+                                Operacion = "Traslado",
+                                AlmacenId = int.Parse(CmbAlmacenEntrado.SelectedValue.ToString()),
+                                ProductoId = lote.ProductoId,
+                                UnidadesSaldo = int.Parse(item[5].ToString()),
+                                CostoUnitarioSaldo = lote.CostoU * int.Parse(item[5].ToString()),
+                                CostoTotalSaldo = lote.CostoU * int.Parse(item[5].ToString()),
+                                 UnidadesEntrada = int.Parse(item[5].ToString()),
+                                CostoUnitarioEntrada = lote.CostoU,
+                                TotalEntrada = lote.CostoU * int.Parse(item[5].ToString()),
+                                IdDocumento = traslados.TrasladoId.ToString(),
+                                Lote = loteNuevo.LoteId
+                            };
+
+                            db.Add(kardex);
+                            db.SaveChanges();
+                        }
+                        //Kardex lote nuevo
+
+                        //Actualizar los datos de  almacenes
+
+                        RelAlmacenProducto almacenEntrada = db.RelAlmacenProducto.Where(s => s.ProductoId == lote.ProductoId && s.AlmacenId == int.Parse(CmbAlmacenEntrado.SelectedValue.ToString())).FirstOrDefault();
+
+                        almacenEntrada.Cantidad += int.Parse(item[5].ToString());
+
+                        db.Update(almacenEntrada);
+
+                        //Salida
+
+                        RelAlmacenProducto almacenSalida = db.RelAlmacenProducto.Where(s => s.ProductoId == lote.ProductoId && s.AlmacenId == int.Parse(CmbAlmacenSalida.SelectedValue.ToString())).FirstOrDefault();
+
+                        almacenSalida.Cantidad -= int.Parse(item[5].ToString());
+
+                        db.Update(almacenSalida);
+
+                        db.SaveChanges();
+
+                    }
+
+                    
+                }
+                auxTablaDinamica.Rows.Clear();
+                CmbAlmacenSalida.Enabled = true;
+                CmbAlmacenEntrado.Enabled = true;
+
+                MessageBox.Show("Traslado realizado", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                this.Close();
             }
         }
     }

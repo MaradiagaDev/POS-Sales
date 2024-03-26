@@ -278,6 +278,54 @@ namespace NeoCobranza.Paneles
                         db.Add(lote);
                         db.SaveChanges();
 
+                        Kardex kardexUltimo = db.Kardex.Where(s => s.ProductoId == servicio.IdEstandar
+                        && s.AlmacenId == int.Parse(CmbAlmacen.SelectedValue.ToString())).OrderByDescending(s => s.MovimientoId).FirstOrDefault();
+
+                        if(kardexUltimo != null)
+                        {   
+                            Kardex kardex = new Kardex()
+                            {
+                                Fecha = DateTime.Now.Date,
+                                Operacion = "Compra",
+                                UnidadesEntrada = int.Parse(item[5].ToString()),
+                                CostoUnitarioEntrada = decimal.Parse(item[4].ToString()),
+                                TotalEntrada = decimal.Parse(item[6].ToString()),
+                                AlmacenId = int.Parse(CmbAlmacen.SelectedValue.ToString()),
+                                ProductoId = servicio.IdEstandar,
+                                UnidadesSaldo  = int.Parse(item[5].ToString()) + kardexUltimo.UnidadesSaldo,
+                                CostoUnitarioSaldo = (kardexUltimo.CostoTotalSaldo + Convert.ToDecimal(item[6])) / (int.Parse(item[5].ToString()) + kardexUltimo.UnidadesSaldo),
+                                CostoTotalSaldo = kardexUltimo.CostoTotalSaldo + decimal.Parse(item[6].ToString()),
+                                IdDocumento = NuevaCompra.CompraId.ToString(),
+                                Lote = lote.LoteId
+                            };
+
+                            db.Add(kardex);
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            Kardex kardex = new Kardex()
+                            {
+                                Fecha = DateTime.Now.Date,
+                                Operacion = "Compra",
+                                UnidadesEntrada = int.Parse(item[5].ToString()),
+                                CostoUnitarioEntrada = decimal.Parse(item[4].ToString()),
+                                TotalEntrada = decimal.Parse(item[6].ToString()),
+                                AlmacenId = int.Parse(CmbAlmacen.SelectedValue.ToString()),
+                                ProductoId = servicio.IdEstandar,
+                                UnidadesSaldo = int.Parse(item[5].ToString()),
+                                CostoUnitarioSaldo = decimal.Parse(item[4].ToString()),
+                                CostoTotalSaldo = decimal.Parse(item[6].ToString()),
+                                IdDocumento = NuevaCompra.CompraId.ToString(),
+                                Lote = lote.LoteId  
+                            };
+
+                            db.Add(kardex);
+                            db.SaveChanges();
+                        }
+                        
+                       
+
                         RelAlmacenProducto relAlmacenProducto = db.RelAlmacenProducto.Where(s => s.AlmacenId == int.Parse(CmbAlmacen.SelectedValue.ToString()) && s.ProductoId == servicio.IdEstandar).FirstOrDefault();
                         relAlmacenProducto.Cantidad += int.Parse(item[5].ToString());
 

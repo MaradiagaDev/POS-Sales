@@ -92,6 +92,9 @@
     <Reference Include="Azure.Identity, Version=1.7.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
       <HintPath>packages\Azure.Identity.1.7.0\lib\netstandard2.0\Azure.Identity.dll</HintPath>
     </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -106,6 +109,9 @@
     </Reference>
     <Reference Include="EPPlus.System.Drawing, Version=6.1.1.0, Culture=neutral, PublicKeyToken=2308d35469c9bac0, processorArchitecture=MSIL">
       <HintPath>packages\EPPlus.System.Drawing.6.1.1\lib\net462\EPPlus.System.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.7.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -193,6 +199,10 @@
     </Reference>
     <Reference Include="Microsoft.JScript">
       <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\Microsoft.JScript.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Office.Interop.Excel.15.0.4795.1001\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1586.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
@@ -506,6 +516,7 @@
     <Compile Include="ModelsCobranza\FirmasCompañia.cs" />
     <Compile Include="ModelsCobranza\Imagenes.cs" />
     <Compile Include="ModelsCobranza\Inventario.cs" />
+    <Compile Include="ModelsCobranza\Kardex.cs" />
     <Compile Include="ModelsCobranza\LotesProducto.cs" />
     <Compile Include="ModelsCobranza\Mermas.cs" />
     <Compile Include="ModelsCobranza\MotivosCancelacion.cs" />
@@ -526,6 +537,8 @@
     <Compile Include="ModelsCobranza\TipoCambio.cs" />
     <Compile Include="ModelsCobranza\TipoServicios.cs" />
     <Compile Include="ModelsCobranza\TipoTarjeta.cs" />
+    <Compile Include="ModelsCobranza\TrasladoDetalle.cs" />
+    <Compile Include="ModelsCobranza\TrasladosInventario.cs" />
     <Compile Include="ModelsCobranza\Usuario.cs" />
     <Compile Include="NeoCobranzaDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -711,6 +724,12 @@
     <Compile Include="Paneles\PnlAgregarTipoTarjeta.Designer.cs">
       <DependentUpon>PnlAgregarTipoTarjeta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Paneles\PnlAgregarTraslado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlAgregarTraslado.Designer.cs">
+      <DependentUpon>PnlAgregarTraslado.cs</DependentUpon>
+    </Compile>
     <Compile Include="Paneles\PnlBeneficiario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -765,6 +784,12 @@
     <Compile Include="Paneles\PnlConfigInventario.Designer.cs">
       <DependentUpon>PnlConfigInventario.cs</DependentUpon>
     </Compile>
+    <Compile Include="Paneles\PnlConfigurarKardex.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlConfigurarKardex.Designer.cs">
+      <DependentUpon>PnlConfigurarKardex.cs</DependentUpon>
+    </Compile>
     <Compile Include="Paneles\PnlContrato.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -788,6 +813,12 @@
     </Compile>
     <Compile Include="Paneles\PnlInventarioAlmacenes.Designer.cs">
       <DependentUpon>PnlInventarioAlmacenes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlKardx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlKardx.Designer.cs">
+      <DependentUpon>PnlKardx.cs</DependentUpon>
     </Compile>
     <Compile Include="Paneles\PnlPagoCuotas.cs">
       <SubType>Form</SubType>
@@ -1167,6 +1198,9 @@
     <EmbeddedResource Include="Paneles\PnlAgregarTipoTarjeta.resx">
       <DependentUpon>PnlAgregarTipoTarjeta.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlAgregarTraslado.resx">
+      <DependentUpon>PnlAgregarTraslado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlBeneficiario.resx">
       <DependentUpon>PnlBeneficiario.cs</DependentUpon>
     </EmbeddedResource>
@@ -1194,6 +1228,9 @@
     <EmbeddedResource Include="Paneles\PnlConfigInventario.resx">
       <DependentUpon>PnlConfigInventario.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlConfigurarKardex.resx">
+      <DependentUpon>PnlConfigurarKardex.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlContrato.resx">
       <DependentUpon>PnlContrato.cs</DependentUpon>
     </EmbeddedResource>
@@ -1205,6 +1242,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlInventarioAlmacenes.resx">
       <DependentUpon>PnlInventarioAlmacenes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlKardx.resx">
+      <DependentUpon>PnlKardx.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlPagoCuotas.resx">
       <DependentUpon>PnlPagoCuotas.cs</DependentUpon>

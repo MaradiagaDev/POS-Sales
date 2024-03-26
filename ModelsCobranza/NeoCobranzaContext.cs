@@ -30,6 +30,7 @@ namespace NeoCobranza.ModelsCobranza
         public virtual DbSet<Empresa> Empresa { get; set; }
         public virtual DbSet<Imagenes> Imagenes { get; set; }
         public virtual DbSet<Inventario> Inventario { get; set; }
+        public virtual DbSet<Kardex> Kardex { get; set; }
         public virtual DbSet<LotesProducto> LotesProducto { get; set; }
         public virtual DbSet<Mermas> Mermas { get; set; }
         public virtual DbSet<MotivosCancelacion> MotivosCancelacion { get; set; }
@@ -49,6 +50,8 @@ namespace NeoCobranza.ModelsCobranza
         public virtual DbSet<TipoCambio> TipoCambio { get; set; }
         public virtual DbSet<TipoServicios> TipoServicios { get; set; }
         public virtual DbSet<TipoTarjeta> TipoTarjeta { get; set; }
+        public virtual DbSet<TrasladoDetalle> TrasladoDetalle { get; set; }
+        public virtual DbSet<TrasladosInventario> TrasladosInventario { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -246,6 +249,37 @@ namespace NeoCobranza.ModelsCobranza
                 entity.Property(e => e.InventarioId).HasColumnName("InventarioID");
 
                 entity.Property(e => e.ProductoId).HasColumnName("ProductoID");
+            });
+
+            modelBuilder.Entity<Kardex>(entity =>
+            {
+                entity.HasKey(e => e.MovimientoId);
+
+                entity.Property(e => e.MovimientoId).HasColumnName("MovimientoID");
+
+                entity.Property(e => e.AlmacenId).HasColumnName("AlmacenID");
+
+                entity.Property(e => e.CostoTotalSaldo).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.CostoUnitarioEntrada).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.CostoUnitarioSaldo).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.CostoUnitarioSalida).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.Fecha).HasColumnType("datetime");
+
+                entity.Property(e => e.IdDocumento).HasMaxLength(200);
+
+                entity.Property(e => e.Lote).HasMaxLength(100);
+
+                entity.Property(e => e.Operacion).HasMaxLength(100);
+
+                entity.Property(e => e.ProductoId).HasColumnName("ProductoID");
+
+                entity.Property(e => e.TotalEntrada).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.TotalSalida).HasColumnType("decimal(18, 2)");
             });
 
             modelBuilder.Entity<LotesProducto>(entity =>
@@ -660,6 +694,32 @@ namespace NeoCobranza.ModelsCobranza
                 entity.Property(e => e.Estado).HasMaxLength(50);
 
                 entity.Property(e => e.NombreTipo).HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<TrasladoDetalle>(entity =>
+            {
+                entity.HasKey(e => e.DetalleTrasladoId);
+
+                entity.Property(e => e.DetalleTrasladoId).HasColumnName("DetalleTrasladoID");
+
+                entity.Property(e => e.LoteFinal).HasMaxLength(50);
+
+                entity.Property(e => e.LoteInicial).HasMaxLength(50);
+
+                entity.Property(e => e.ProductoId).HasColumnName("ProductoID");
+
+                entity.Property(e => e.TrasladoId).HasColumnName("TrasladoID");
+            });
+
+            modelBuilder.Entity<TrasladosInventario>(entity =>
+            {
+                entity.HasKey(e => e.TrasladoId);
+
+                entity.Property(e => e.TrasladoId).HasColumnName("TrasladoID");
+
+                entity.Property(e => e.FechaTraslado).HasColumnType("datetime");
+
+                entity.Property(e => e.SucursalId).HasColumnName("SucursalID");
             });
 
             modelBuilder.Entity<Usuario>(entity =>

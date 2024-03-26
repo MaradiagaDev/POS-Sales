@@ -35,6 +35,13 @@ namespace NeoCobranza.Paneles
 
         private void PnlAgregarProductoSerie_Load(object sender, EventArgs e)
         {
+            DgvLotes.EnableHeadersVisualStyles = false;
+            DgvLotes.ColumnHeadersDefaultCellStyle.BackColor = Color.CadetBlue;
+            DgvLotes.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            DgvLotes.RowsDefaultCellStyle.Font = new Font("Century Gothic", 10);
+            DgvLotes.RowsDefaultCellStyle.BackColor = Color.White;
+            
+
             List<OrdenarPorClass> ordenar = new List<OrdenarPorClass> { new OrdenarPorClass() {id = 0,opc = "Fecha Agregarción (Ascendente)" },
             new OrdenarPorClass() {id = 1,opc = "Fecha Agregarción (Descendente)" },
             new OrdenarPorClass() {id = 2,opc = "Fecha Expiración (Ascendente)" },
@@ -158,6 +165,53 @@ namespace NeoCobranza.Paneles
 
                 PnlInventarioAlmacenes frm  = Owner as PnlInventarioAlmacenes;
                 frm.vMInventarioAlmacenes.BuscarInventario();
+
+                Kardex kardexUltimo = db.Kardex.Where(s => s.ProductoId == auxIdProducto
+                    && s.AlmacenId == auxIdAlmacen).OrderByDescending(s => s.MovimientoId).FirstOrDefault();
+
+                if (kardexUltimo != null)
+                {
+                    Kardex kardex = new Kardex()
+                    {
+                        Fecha = DateTime.Now.Date,
+                        Operacion = "Merma",
+                        AlmacenId = auxIdAlmacen,
+                        ProductoId = servicio.IdEstandar,
+                        UnidadesSalida = int.Parse(TxtCantidad.Text),
+                        CostoUnitarioSalida = lote.CostoU,
+                        TotalSalida = lote.CostoU * int.Parse(TxtCantidad.Text),
+                        UnidadesSaldo = kardexUltimo.UnidadesSaldo - int.Parse(TxtCantidad.Text),
+                        CostoUnitarioSaldo = (kardexUltimo.CostoTotalSaldo - (lote.CostoU * int.Parse(TxtCantidad.Text))) / (kardexUltimo.UnidadesSaldo - int.Parse(TxtCantidad.Text)),
+                        CostoTotalSaldo = kardexUltimo.CostoTotalSaldo - (lote.CostoU * int.Parse(TxtCantidad.Text)),
+                        IdDocumento = merma.MermaId.ToString(),
+                        Lote = lote.LoteId
+                    };
+
+                    db.Add(kardex);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    Kardex kardex = new Kardex()
+                    {
+                        Fecha = DateTime.Now.Date,
+                        Operacion = "Merma",
+                        AlmacenId = auxIdAlmacen,
+                        ProductoId = servicio.IdEstandar,
+                        UnidadesSaldo = int.Parse(TxtCantidad.Text),
+                        CostoUnitarioSaldo = lote.CostoU * int.Parse(TxtCantidad.Text),
+                        CostoTotalSaldo = lote.CostoU * int.Parse(TxtCantidad.Text),
+                        UnidadesSalida = int.Parse(TxtCantidad.Text),
+                        CostoUnitarioSalida = lote.CostoU,
+                        TotalSalida = lote.CostoU * int.Parse(TxtCantidad.Text),
+                        IdDocumento = merma.MermaId.ToString(),
+                        Lote = lote.LoteId
+                    };
+
+                    db.Add(kardex);
+                    db.SaveChanges();
+                }
+
 
                 this.Close();
             }

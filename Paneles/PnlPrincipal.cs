@@ -88,7 +88,12 @@ namespace NeoCobranza.Paneles
 
         private void especialButton3_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            DialogResult result = MessageBox.Show("¿Estás seguro de que quieres salir de la aplicación?", "Confirmar salida", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
 
         private void crearContratoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -669,6 +674,18 @@ namespace NeoCobranza.Paneles
         {
             limpiar();
             PnlTrasladoProduco pnlGeneral = new PnlTrasladoProduco();
+            AddOwnedForm(pnlGeneral);
+            pnlGeneral.TopLevel = false;
+            PnlCentral.Controls.Add(pnlGeneral);
+            pnlGeneral.Dock = DockStyle.Fill;
+            PnlCentral.Tag = pnlGeneral;
+            pnlGeneral.Show();
+        }
+
+        private void kardexToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            limpiar();
+            PnlKardx pnlGeneral = new PnlKardx();
             AddOwnedForm(pnlGeneral);
             pnlGeneral.TopLevel = false;
             PnlCentral.Controls.Add(pnlGeneral);

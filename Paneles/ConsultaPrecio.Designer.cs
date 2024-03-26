@@ -39,6 +39,8 @@
             this.TxtFiltrar = new NeoCobranza.Controladores.LoginUserControl();
             this.label1 = new System.Windows.Forms.Label();
             this.TxtCodigoBarras = new System.Windows.Forms.TextBox();
+            this.especialButton1 = new NeoCobranza.Especiales.EspecialButton();
+            this.BtnExcel = new NeoCobranza.Especiales.EspecialButton();
             this.PnlTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCatalogo)).BeginInit();
             this.SuspendLayout();
@@ -132,7 +134,7 @@
             this.dgvCatalogo.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCatalogo.RowHeadersWidth = 15;
             this.dgvCatalogo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCatalogo.Size = new System.Drawing.Size(1101, 397);
+            this.dgvCatalogo.Size = new System.Drawing.Size(1101, 361);
             this.dgvCatalogo.TabIndex = 152;
             this.dgvCatalogo.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCatalogo_CellContentClick);
             // 
@@ -184,12 +186,60 @@
             this.TxtCodigoBarras.TabIndex = 154;
             this.TxtCodigoBarras.TextChanged += new System.EventHandler(this.TxtCodigoBarras_TextChanged);
             // 
+            // especialButton1
+            // 
+            this.especialButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.especialButton1.BackColor = System.Drawing.Color.White;
+            this.especialButton1.BackGroundColor = System.Drawing.Color.White;
+            this.especialButton1.BorderColor = System.Drawing.Color.Red;
+            this.especialButton1.BorderRadius = 5;
+            this.especialButton1.BorderSize = 1;
+            this.especialButton1.FlatAppearance.BorderSize = 0;
+            this.especialButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.especialButton1.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.especialButton1.ForeColor = System.Drawing.Color.DimGray;
+            this.especialButton1.Image = ((System.Drawing.Image)(resources.GetObject("especialButton1.Image")));
+            this.especialButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.especialButton1.Location = new System.Drawing.Point(627, 435);
+            this.especialButton1.Name = "especialButton1";
+            this.especialButton1.Size = new System.Drawing.Size(238, 38);
+            this.especialButton1.TabIndex = 156;
+            this.especialButton1.Text = "Documento Pdf";
+            this.especialButton1.TextGroundColor = System.Drawing.Color.DimGray;
+            this.especialButton1.UseVisualStyleBackColor = false;
+            this.especialButton1.Click += new System.EventHandler(this.especialButton1_Click);
+            // 
+            // BtnExcel
+            // 
+            this.BtnExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnExcel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.BtnExcel.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.BtnExcel.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.BtnExcel.BorderRadius = 5;
+            this.BtnExcel.BorderSize = 0;
+            this.BtnExcel.FlatAppearance.BorderSize = 0;
+            this.BtnExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnExcel.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.BtnExcel.ForeColor = System.Drawing.Color.White;
+            this.BtnExcel.Image = ((System.Drawing.Image)(resources.GetObject("BtnExcel.Image")));
+            this.BtnExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnExcel.Location = new System.Drawing.Point(877, 435);
+            this.BtnExcel.Name = "BtnExcel";
+            this.BtnExcel.Size = new System.Drawing.Size(238, 38);
+            this.BtnExcel.TabIndex = 155;
+            this.BtnExcel.Text = "Exportar a Excel";
+            this.BtnExcel.TextGroundColor = System.Drawing.Color.White;
+            this.BtnExcel.UseVisualStyleBackColor = false;
+            this.BtnExcel.Click += new System.EventHandler(this.BtnExcel_Click);
+            // 
             // ConsultaPrecio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1125, 523);
+            this.Controls.Add(this.especialButton1);
+            this.Controls.Add(this.BtnExcel);
             this.Controls.Add(this.TxtCodigoBarras);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BtnBuscar);
@@ -217,5 +267,7 @@
         public Controladores.LoginUserControl TxtFiltrar;
         public System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox TxtCodigoBarras;
+        public Especiales.EspecialButton especialButton1;
+        public Especiales.EspecialButton BtnExcel;
     }
 }

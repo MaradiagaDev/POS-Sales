@@ -132,6 +132,7 @@
             this.dgvCatalogo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCatalogo.Size = new System.Drawing.Size(514, 361);
             this.dgvCatalogo.TabIndex = 149;
+            this.dgvCatalogo.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCatalogo_CellContentClick);
             // 
             // label1
             // 
@@ -315,6 +316,7 @@
             this.especialButton1.Text = "Limpiar";
             this.especialButton1.TextGroundColor = System.Drawing.Color.White;
             this.especialButton1.UseVisualStyleBackColor = false;
+            this.especialButton1.Click += new System.EventHandler(this.especialButton1_Click);
             // 
             // BtnGuardar
             // 
@@ -337,6 +339,7 @@
             this.BtnGuardar.Text = "Guardar";
             this.BtnGuardar.TextGroundColor = System.Drawing.Color.White;
             this.BtnGuardar.UseVisualStyleBackColor = false;
+            this.BtnGuardar.Click += new System.EventHandler(this.BtnGuardar_Click);
             // 
             // BtnAgregarProducto
             // 
@@ -404,8 +407,6 @@
         public System.Windows.Forms.Label label2;
         public System.Windows.Forms.Label label3;
         public System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox CmbAlmacenEntrado;
-        private System.Windows.Forms.ComboBox CmbAlmacenSalida;
         public Especiales.EspecialButton BtnAgregarProducto;
         public Especiales.EspecialButton BtnGuardar;
         public Especiales.EspecialButton especialButton1;
@@ -413,5 +414,7 @@
         public System.Windows.Forms.DataGridView DgvProducto;
         public Especiales.EspecialButton BtnBuscarProducto;
         public System.Windows.Forms.TextBox TxtFiltroProducto;
+        public System.Windows.Forms.ComboBox CmbAlmacenEntrado;
+        public System.Windows.Forms.ComboBox CmbAlmacenSalida;
     }
 }

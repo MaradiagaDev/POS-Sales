@@ -39,10 +39,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.CmbSucursales = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.especialButton2 = new NeoCobranza.Especiales.EspecialButton();
             this.especialButton1 = new NeoCobranza.Especiales.EspecialButton();
             this.BtnBuscarCliente = new NeoCobranza.Especiales.EspecialButton();
-            this.btnActualizar = new NeoCobranza.Especiales.EspecialButton();
             this.TxtFiltrar = new NeoCobranza.Controladores.LoginUserControl();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCatalogo)).BeginInit();
             this.PnlTitulo.SuspendLayout();
@@ -171,28 +169,6 @@
             this.label2.TabIndex = 150;
             this.label2.Text = "Sucursal:";
             // 
-            // especialButton2
-            // 
-            this.especialButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.especialButton2.BackColor = System.Drawing.Color.White;
-            this.especialButton2.BackGroundColor = System.Drawing.Color.White;
-            this.especialButton2.BorderColor = System.Drawing.Color.Red;
-            this.especialButton2.BorderRadius = 5;
-            this.especialButton2.BorderSize = 1;
-            this.especialButton2.FlatAppearance.BorderSize = 0;
-            this.especialButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.especialButton2.Font = new System.Drawing.Font("Century Gothic", 12F);
-            this.especialButton2.ForeColor = System.Drawing.Color.DimGray;
-            this.especialButton2.Image = ((System.Drawing.Image)(resources.GetObject("especialButton2.Image")));
-            this.especialButton2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.especialButton2.Location = new System.Drawing.Point(372, 435);
-            this.especialButton2.Name = "especialButton2";
-            this.especialButton2.Size = new System.Drawing.Size(238, 38);
-            this.especialButton2.TabIndex = 148;
-            this.especialButton2.Text = "Ticket Pdf";
-            this.especialButton2.TextGroundColor = System.Drawing.Color.DimGray;
-            this.especialButton2.UseVisualStyleBackColor = false;
-            // 
             // especialButton1
             // 
             this.especialButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -207,13 +183,14 @@
             this.especialButton1.ForeColor = System.Drawing.Color.DimGray;
             this.especialButton1.Image = ((System.Drawing.Image)(resources.GetObject("especialButton1.Image")));
             this.especialButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.especialButton1.Location = new System.Drawing.Point(625, 435);
+            this.especialButton1.Location = new System.Drawing.Point(874, 434);
             this.especialButton1.Name = "especialButton1";
             this.especialButton1.Size = new System.Drawing.Size(238, 38);
             this.especialButton1.TabIndex = 147;
             this.especialButton1.Text = "Documento Pdf";
             this.especialButton1.TextGroundColor = System.Drawing.Color.DimGray;
             this.especialButton1.UseVisualStyleBackColor = false;
+            this.especialButton1.Click += new System.EventHandler(this.especialButton1_Click);
             // 
             // BtnBuscarCliente
             // 
@@ -237,28 +214,6 @@
             this.BtnBuscarCliente.TextGroundColor = System.Drawing.Color.White;
             this.BtnBuscarCliente.UseVisualStyleBackColor = false;
             this.BtnBuscarCliente.Click += new System.EventHandler(this.BtnBuscarCliente_Click);
-            // 
-            // btnActualizar
-            // 
-            this.btnActualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnActualizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.btnActualizar.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.btnActualizar.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.btnActualizar.BorderRadius = 5;
-            this.btnActualizar.BorderSize = 0;
-            this.btnActualizar.FlatAppearance.BorderSize = 0;
-            this.btnActualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnActualizar.Font = new System.Drawing.Font("Century Gothic", 12F);
-            this.btnActualizar.ForeColor = System.Drawing.Color.White;
-            this.btnActualizar.Image = ((System.Drawing.Image)(resources.GetObject("btnActualizar.Image")));
-            this.btnActualizar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnActualizar.Location = new System.Drawing.Point(875, 435);
-            this.btnActualizar.Name = "btnActualizar";
-            this.btnActualizar.Size = new System.Drawing.Size(238, 38);
-            this.btnActualizar.TabIndex = 143;
-            this.btnActualizar.Text = "Exportar a Excel";
-            this.btnActualizar.TextGroundColor = System.Drawing.Color.White;
-            this.btnActualizar.UseVisualStyleBackColor = false;
             // 
             // TxtFiltrar
             // 
@@ -291,12 +246,10 @@
             this.ClientSize = new System.Drawing.Size(1125, 523);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.CmbSucursales);
-            this.Controls.Add(this.especialButton2);
             this.Controls.Add(this.especialButton1);
             this.Controls.Add(this.CmbBuscarPor);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BtnBuscarCliente);
-            this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.dgvCatalogo);
             this.Controls.Add(this.TxtFiltrar);
             this.Controls.Add(this.PnlTitulo);
@@ -316,7 +269,6 @@
         #endregion
 
         public Especiales.EspecialButton BtnBuscarCliente;
-        public Especiales.EspecialButton btnActualizar;
         public System.Windows.Forms.DataGridView dgvCatalogo;
         public Controladores.LoginUserControl TxtFiltrar;
         private System.Windows.Forms.Panel PnlTitulo;
@@ -324,7 +276,6 @@
         public System.Windows.Forms.ComboBox CmbBuscarPor;
         public System.Windows.Forms.Label label1;
         public Especiales.EspecialButton especialButton1;
-        public Especiales.EspecialButton especialButton2;
         public System.Windows.Forms.ComboBox CmbSucursales;
         public System.Windows.Forms.Label label2;
     }
