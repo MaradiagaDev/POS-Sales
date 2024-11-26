@@ -1,4 +1,5 @@
-﻿using NeoCobranza.DataController;
+﻿using Microsoft.EntityFrameworkCore;
+using NeoCobranza.DataController;
 using NeoCobranza.ModelsCobranza;
 using NeoCobranza.Paneles;
 using System;
@@ -16,8 +17,14 @@ namespace NeoCobranza.ViewModels
     {
 
         DataTable dynamicDataTable = new DataTable();
+        private DataUtilities dataUtilities = new DataUtilities();
         public string auxKeyUsuario;
         public string auxId;
+
+        public int currentPage = 1;
+        public int totalPages = 0;
+        private const int pageSize = 40;
+        private List<Clientes> allClientes = new List<Clientes>();
 
         public void InitModuloCatalogoClientes(PnlCatalogoClientes frm)
         {
@@ -34,37 +41,35 @@ namespace NeoCobranza.ViewModels
                 auxId = key;
                 using (NeoCobranzaContext db = new NeoCobranzaContext())
                 {
-                    Clientes cliente =  db.Clientes.Where(c => c.IdCliente == int.Parse(key)).FirstOrDefault();
+                    DataTable dtResponse = new DataTable();
 
-                    if (cliente != null)
+                    dtResponse = dataUtilities.getRecordByPrimaryKey("Clientes", key);
+
+                    if (dtResponse.Rows.Count > 0)
                     {
-                        frm.txtPrimerNombre.Text = cliente.Pnombre;
-                        frm.txtSegundoNombre.Text = cliente.Snombre;
-                        frm.txtPrimerApellido.Text = cliente.Papellido;
-                        frm.txtSegundoApellido.Text = cliente.Sapellido;
+                        frm.txtPrimerNombre.Text = Convert.ToString(dtResponse.Rows[0]["Pnombre"]);
+                        frm.txtSegundoNombre.Text = Convert.ToString(dtResponse.Rows[0]["Snombre"]);
+                        frm.txtPrimerApellido.Text = Convert.ToString(dtResponse.Rows[0]["Papellido"]);
+                        frm.txtSegundoApellido.Text = Convert.ToString(dtResponse.Rows[0]["Sapellido"]);
 
-                        frm.txtProfesion.Text = cliente.Profesion;
-                        frm.mtxtCedula.Text = cliente.Cedula;
-                        frm.mtxtCelular.Text = cliente.Celular;
-                        frm.mtxtTelefono.Text = cliente.Telefono;
-                        frm.TxtEmail.Text = cliente.Email;
-                        frm.cmbDepartamento.SelectedValue = cliente.Departamento;
-                        frm.cmbPais.SelectedValue = cliente.Pais;
-                        frm.txtObservacion.Text = cliente.Observacion;
-                        frm.txtDireccion.Text = cliente.Direccion;
+                        frm.txtProfesion.Text = Convert.ToString(dtResponse.Rows[0]["Profesion"]);
+                        frm.mtxtCedula.Text = Convert.ToString(dtResponse.Rows[0]["Cedula"]);
+                        frm.mtxtCelular.Text = Convert.ToString(dtResponse.Rows[0]["Celular"]);
+                        frm.mtxtTelefono.Text = Convert.ToString(dtResponse.Rows[0]["Telefono"]);
+                        frm.TxtEmail.Text = Convert.ToString(dtResponse.Rows[0]["Email"]);
+                        frm.cmbDepartamento.SelectedValue = Convert.ToString(dtResponse.Rows[0]["Departamento"]);
+                        frm.cmbPais.SelectedValue = Convert.ToString(dtResponse.Rows[0]["Pais"]);
+                        frm.txtObservacion.Text = Convert.ToString(dtResponse.Rows[0]["Observacion"]);
+                        frm.txtDireccion.Text = Convert.ToString(dtResponse.Rows[0]["Direccion"]);
 
-                        frm.dtpFechaNac.Value = (DateTime)cliente.FechaNac;
-                        frm.rbtnCasado.Checked = cliente.EstadoCivil == "Casado" ? true : false;
-                        frm.rbtnSoltero.Checked = cliente.EstadoCivil == "Casado" ? false : true;
+                        frm.dtpFechaNac.Value = Convert.ToDateTime(dtResponse.Rows[0]["FechaNac"]);
                         frm.TxtNoRuc.ReadOnly = true;
-                        frm.TxtNoRuc.Text = cliente.NoRuc;
+                        frm.TxtNoRuc.Text = Convert.ToString(dtResponse.Rows[0]["NoRuc"]);
 
-                        if(Utilidades.RolUsuario == "1" || Utilidades.RolUsuario == "3")
-                        {
-                            frm.TxtNoRuc.ReadOnly = false;
-                        }
 
-                        frm.LblDynamicoCliente.Text = "Cliente a Modificar: " + cliente.Pnombre + " " + cliente.Snombre + " " + cliente.Papellido + " " + cliente.Sapellido;
+                        frm.LblDynamicoCliente.Text = "Cliente a Modificar: " + Convert.ToString(dtResponse.Rows[0]["Pnombre"]) + " " +
+                            Convert.ToString(dtResponse.Rows[0]["Snombre"]) + " " +
+                            Convert.ToString(dtResponse.Rows[0]["Papellido"]) + " " + Convert.ToString(dtResponse.Rows[0]["Sapellido"]);
                     }
                 }
             }
@@ -111,117 +116,64 @@ namespace NeoCobranza.ViewModels
 
         }
 
-        public void FuncionesCrearModificarCliente(PanelModificarCliente frm =null)
+        public void FuncionesCrearModificarCliente(PanelModificarCliente frm = null)
         {
-           
-            switch (auxKeyUsuario)
+            try
             {
+                DateTime fechaSeleccionada = frm.dtpFechaNac.Value;
+                int edad = DateTime.Today.Year - fechaSeleccionada.Year - (DateTime.Today < fechaSeleccionada.AddYears(DateTime.Today.Year - fechaSeleccionada.Year) ? 1 : 0);
 
-                case "Crear":
+                // Parámetros para creación o actualización
+                dataUtilities.SetParameter("@IdCliente", string.IsNullOrEmpty(auxId) ? (object)DBNull.Value : int.Parse(auxId));
+                dataUtilities.SetParameter("@PNombre", frm.txtPrimerNombre.Text.Trim());
+                dataUtilities.SetParameter("@SNombre", frm.txtSegundoNombre.Text.Trim());
+                dataUtilities.SetParameter("@PApellido", frm.txtPrimerApellido.Text.Trim());
+                dataUtilities.SetParameter("@SAPellido", frm.txtSegundoApellido.Text.Trim());
+                dataUtilities.SetParameter("@Estado", 1);
+                dataUtilities.SetParameter("@Direccion", frm.txtDireccion.Text.Trim());
+                dataUtilities.SetParameter("@Telefono", frm.mtxtTelefono.Text.Trim());
+                dataUtilities.SetParameter("@Celular", frm.mtxtCelular.Text.Trim());
+                dataUtilities.SetParameter("@Fax", "");
+                dataUtilities.SetParameter("@Edad", edad);
+                dataUtilities.SetParameter("@EstadoCivil", false? "Casado" : "Soltero");
+                dataUtilities.SetParameter("@Profesion", frm.txtProfesion.Text.Trim());
+                dataUtilities.SetParameter("@Sexo", frm.rbtnMasculino.Checked ? "Masculino" : "Femenino");
+                dataUtilities.SetParameter("@Cedula", frm.mtxtCedula.Text.Trim());
+                dataUtilities.SetParameter("@FechaNac", frm.dtpFechaNac.Value);
+                dataUtilities.SetParameter("@Email", frm.TxtEmail.Text.Trim());
+                dataUtilities.SetParameter("@Departamento", frm.cmbDepartamento.Text.Trim());
+                dataUtilities.SetParameter("@Pais", frm.cmbPais.Text.Trim());
+                dataUtilities.SetParameter("@Observacion", frm.txtObservacion.Text.Trim());
+                dataUtilities.SetParameter("@NoRuc", frm.TxtNoRuc.Text.Trim());
+                dataUtilities.SetParameter("@IdSucursal", Utilidades.SucursalId);
 
-                    if (!Validaciones(frm))
-                    {
-                        return;
-                    }
-
-                    DateTime fechaSeleccionada = frm.dtpFechaNac.Value;
-                    int edad = DateTime.Today.Year - fechaSeleccionada.Year - (DateTime.Today < fechaSeleccionada.AddYears(DateTime.Today.Year - fechaSeleccionada.Year) ? 1 : 0);
-
-                    using (NeoCobranzaContext db = new NeoCobranzaContext())
-                    {
-                        Clientes clientes = new Clientes()
-                        {
-                            Pnombre = frm.txtPrimerNombre.Text.Trim(),
-                            Snombre = frm.txtSegundoNombre.Text.Trim(),
-                            Papellido = frm.txtPrimerApellido.Text.Trim(),
-                            Sapellido = frm.txtSegundoApellido.Text.Trim(),
-                            Estado = 1,
-                            Direccion = frm.txtDireccion.Text.Trim(),
-                            Cedula = frm.mtxtCedula.Text.Trim(),
-                            Observacion = frm.txtObservacion.Text.Trim(),
-                            Telefono = frm.mtxtTelefono.Text.Trim(),
-                            Celular = frm.mtxtCelular.Text.Trim(),
-                            Email = frm.TxtEmail.Text.Trim(),
-                            EstadoCivil = frm.rbtnCasado.Checked == true ? "Casado" : "Soltero",
-                            Sexo = frm.rbtnMasculino.Checked == true ? "Masculino" : "Femenino",
-                            Edad = edad,
-                            FechaNac = frm.dtpFechaNac.Value,
-                            Departamento = frm.cmbDepartamento.Text.Trim() == "" ? "Managua" : frm.cmbDepartamento.Text.Trim(),
-                            Pais = frm.cmbPais.Text.Trim() == "" ? "Nicaragua" : frm.cmbPais.Text.Trim(),
-                            NoRuc = frm.TxtNoRuc.Text.Trim()
-                        };
-
-                        db.Add(clientes);
-                        db.SaveChanges();
-
-                        MessageBox.Show("El Cliente se ha creado correctamente.", "Correcto", MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
-
-                        ConfigUI(frm.frmPnlCatalogoCliente, "Catalogo");
-                        frm.Close();
-                    }
-
-                    break;
-
-                case "Modificar":
-
-                    if (!Validaciones(frm))
-                    {
-                        return;
-                    }
-
-                    DateTime fechaSeleccionadaMod = frm.dtpFechaNac.Value;
-                    int edadMod = DateTime.Today.Year - fechaSeleccionadaMod.Year - (DateTime.Today < fechaSeleccionadaMod.AddYears(DateTime.Today.Year - fechaSeleccionadaMod.Year) ? 1 : 0);
-
-                    using (NeoCobranzaContext db = new NeoCobranzaContext())
-                    {
-                        Clientes clientes = new Clientes()
-                        {
-                            IdCliente = int.Parse(auxId),
-                            Pnombre = frm.txtPrimerNombre.Text.Trim(),
-                            Snombre = frm.txtSegundoNombre.Text.Trim(),
-                            Papellido = frm.txtPrimerApellido.Text.Trim(),
-                            Sapellido = frm.txtSegundoApellido.Text.Trim(),
-                            Estado = 1,
-                            Direccion = frm.txtDireccion.Text.Trim(),
-                            Cedula = frm.mtxtCedula.Text.Trim(),
-                            Observacion = frm.txtObservacion.Text.Trim(),
-                            Telefono = frm.mtxtTelefono.Text.Trim(),
-                            Celular = frm.mtxtCelular.Text.Trim(),
-                            Email = frm.TxtEmail.Text.Trim(),
-                            EstadoCivil = frm.rbtnCasado.Checked == true ? "Casado" : "Soltero",
-                            Sexo = frm.rbtnMasculino.Checked == true ? "Masculino" : "Femenino",
-                            Edad = edadMod,
-                            FechaNac = frm.dtpFechaNac.Value,
-                            Departamento = frm.cmbDepartamento.Text.Trim() == "" ? "Managua" : frm.cmbDepartamento.Text.Trim(),
-                            Pais = frm.cmbPais.Text.Trim() == "" ? "Nicaragua" : frm.cmbPais.Text.Trim(),
-                            NoRuc = frm.TxtNoRuc.Text.Trim()
-                        };
-
-                        db.Update(clientes);
-                        db.SaveChanges();
-
-                        MessageBox.Show("El Cliente se ha modificado correctamente.", "Correcto", MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
-
-                        ConfigUI(frm.frmPnlCatalogoCliente, "Catalogo");
-                        frm.Close();
-                    }
-                    break;
-                    
+                MessageBox.Show(dataUtilities.ExecuteStoredProcedure("SP_CrearActualizarCliente").Rows[0][0].ToString(), "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ConfigUI(frm.frmPnlCatalogoCliente, "Catalogo");
+                frm.Close();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ha ocurrido un error: " + ex.Message, "Error",
+                  MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            if (!Validaciones(frm))
+            {
+                return;
+            }
+
         }
 
-        public void CambiarEstadoCliente(PnlCatalogoClientes frm,string id)
+        public void CambiarEstadoCliente(PnlCatalogoClientes frm, string id)
         {
             using (NeoCobranzaContext db = new NeoCobranzaContext())
             {
-                Clientes clienteEstado = db.Clientes.Where(c => c.IdCliente == int.Parse(id)).FirstOrDefault();
-                clienteEstado.Estado = clienteEstado.Estado == 0 ? 1 : 0;
+                // Ejecutar el procedimiento almacenado para cambiar el estado del cliente
+                var idCliente = int.Parse(id);
 
-                db.Update(clienteEstado);
-                db.SaveChanges();
+                dataUtilities.SetParameter("@IdCliente", idCliente);
+                dataUtilities.ExecuteStoredProcedure("CambiarEstadoCliente");
 
+                // Llamar la función para actualizar la vista después de cambiar el estado
                 FuncionesPrincipales(frm, "Buscar");
             }
         }
@@ -260,12 +212,14 @@ namespace NeoCobranza.ViewModels
                     dynamicDataTable.Columns.Add("Celular", typeof(string));
                     dynamicDataTable.Columns.Add("Edad", typeof(string));
                     dynamicDataTable.Columns.Add("Profesión", typeof(string));
-                    dynamicDataTable.Columns.Add("Estado Civil", typeof(string));
                     dynamicDataTable.Columns.Add("Sexo", typeof(string));
 
-                    frm.CmbBuscarPor.Items.Add("ID");
-                    frm.CmbBuscarPor.Items.Add("Nombre");
-                    frm.CmbBuscarPor.Items.Add("Cédula");
+                    if (frm.CmbBuscarPor.Items.Count == 0)
+                    {
+                        frm.CmbBuscarPor.Items.Add("ID");
+                        frm.CmbBuscarPor.Items.Add("Nombre");
+                        frm.CmbBuscarPor.Items.Add("Cédula");
+                    }
 
                     frm.CmbBuscarPor.SelectedIndex = 1;
 
@@ -282,55 +236,77 @@ namespace NeoCobranza.ViewModels
             switch (opc)
             {
                 case "Buscar":
-                    using (NeoCobranzaContext db = new NeoCobranzaContext())
-                    {
-                        List<Clientes> clientes = new List<Clientes>();
+                    dynamicDataTable.Rows.Clear();
+                    frm.dgvCatalogoClientes.DataSource = "";
 
-                        dynamicDataTable.Rows.Clear();
-                        frm.dgvCatalogoClientes.DataSource = "";
+                    int pageNumber = 1;
+                    int pageSize = 10;
+                    int totalPages = 0;
 
-                        if (frm.CmbBuscarPor.SelectedIndex == 0)
-                        {
-                            clientes = db.Clientes.Where(c => c.IdCliente.ToString() == frm.TxtFiltrar.Texts.Trim() && c.IdCliente != 1).OrderByDescending(c => c.IdCliente).ToList();
-                        }
-                        else if (frm.CmbBuscarPor.SelectedIndex == 1)
-                        {
-                            clientes = db.Clientes.Where(c => (c.Pnombre + " " + c.Snombre + " " + c.Papellido + " " + c.Sapellido).Contains(frm.TxtFiltrar.Texts.Trim()) && c.IdCliente != 1).OrderByDescending(c => c.IdCliente).ToList();
-                        }
-                        else if (frm.CmbBuscarPor.SelectedIndex == 2)
-                        {
-                            clientes = db.Clientes.Where(c => c.Cedula.Contains(frm.TxtFiltrar.Texts.Trim()) && c.IdCliente != 1).OrderByDescending(c => c.IdCliente).ToList();
-                        }
+                    var filtroPor = frm.CmbBuscarPor.SelectedIndex;
+                    var filtroValor = frm.TxtFiltrar.Texts.Trim();
+                    var idSucursal = Utilidades.SucursalId; // Asumiendo que el ID de la sucursal se captura desde un campo de texto en el formulario
 
 
-                        foreach (var item in clientes)
-                        {
-                            string idCliente = item.IdCliente.ToString();
-                            string nombreCliente = $"{item.Pnombre} {item.Snombre} {item.Papellido} {item.Sapellido}";
-                            string cedula = item.Cedula;
-                            string estado = item.Estado == null || item.Estado == 0 ? "Inactivo" : "Activo";
-                            string direccion = item.Direccion == null || item.Direccion.Trim() == "" ? "Desconocido" : item.Direccion;
-                            string pais = item.Pais == null ? "Desconocido" : item.Pais;
-                            string departamento = item.Departamento == null ? "Desconocido" : item.Departamento;
-                            string fechaNac = item.FechaNac.ToString();
-                            string telefono = item.Telefono == null || item.Telefono.Trim() == "" || double.TryParse(item.Telefono.Trim(), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out double valorNumericoTel) == false ? "Desconocido" : valorNumericoTel.ToString();
-                            string celular = item.Celular == null || item.Celular.Trim() == "" || double.TryParse(item.Celular.Trim(), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out double valorNumerico) == false ? "Desconocido" : valorNumerico.ToString();
-                            string edad = item.Edad == 0 ? "Desconocido" : item.Edad.ToString();
-                            string profesion = item.Profesion == null || item.Profesion.Trim() == "" ? "Desconocido" : item.Profesion;
-                            string estadoCivil = item.EstadoCivil;
-                            string sexo = item.Sexo;
+                    dataUtilities.SetParameter("@FiltroPor", filtroPor);
+                    dataUtilities.SetParameter("@FiltroValor", filtroValor);
+                    dataUtilities.SetParameter("@IdSucursal", idSucursal);
+                    dataUtilities.SetParameter("@PageNumber", pageNumber);
+                    dataUtilities.SetParameter("@PageSize", pageSize);
+                    
+                    DataTable dtRespuesta = new DataTable();
+                    dtRespuesta = dataUtilities.ExecuteStoredProcedure("sp_ObtenerClientesFiltrados");
 
-                            dynamicDataTable.Rows.Add(idCliente, nombreCliente, cedula, estado, direccion, pais, departamento,
-                                fechaNac, telefono, celular, edad, profesion, estadoCivil, sexo);
-                        }
+                    // Para obtener el número total de páginas
+                    totalPages = (int)Math.Ceiling((double)dtRespuesta.Rows.Count / pageSize);
+                    UpdatePagination(frm); // Actualiza la paginación en el formulario
 
-                        frm.dgvCatalogoClientes.DataSource = dynamicDataTable;
-                        frm.dgvCatalogoClientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells; // Ajustar automáticamente al contenido
-
-                    }
                     break;
 
             }
         }
+
+        public void UpdatePagination(PnlCatalogoClientes frm)
+        {
+            dataUtilities.SetParameter("@FiltroPor", frm.CmbBuscarPor.SelectedIndex);
+            dataUtilities.SetParameter("@FiltroValor", frm.TxtFiltrar.Texts.Trim());
+            dataUtilities.SetParameter("@IdSucursal", Utilidades.SucursalId);
+            dataUtilities.SetParameter("@PageNumber", currentPage);
+            dataUtilities.SetParameter("@PageSize", pageSize);
+
+            DataTable dtRespuesta = new DataTable();
+            dtRespuesta = dataUtilities.ExecuteStoredProcedure("sp_ObtenerClientesFiltrados");
+
+            foreach (DataRow item in dtRespuesta.Rows)
+            {
+                string idCliente = Convert.ToString(item["IdCliente"]);
+                string nombreCliente = $"{Convert.ToString(item["Pnombre"])} {Convert.ToString(item["Snombre"])} {Convert.ToString(item["Papellido"])} {Convert.ToString(item["Sapellido"])}";
+                string cedula = Convert.ToString(item["Cedula"]);
+                string estado = Convert.ToString(item["Estado"]) == null || Convert.ToString(item["Estado"]) == "0" ? "Inactivo" : "Activo";
+                string direccion = Convert.ToString(item["Direccion"]) == null || Convert.ToString(item["Direccion"]).Trim() == "" ? "Desconocido" : Convert.ToString(item["Direccion"]);
+                string pais = Convert.ToString(item["Pais"]) == null ? "Desconocido" : Convert.ToString(item["Pais"]);
+                string departamento = Convert.ToString(item["Departamento"]) == null ? "Desconocido" : Convert.ToString(item["Departamento"]);
+                string fechaNac = Convert.ToString(item["FechaNac"]);
+                string telefono = Convert.ToString(item["Telefono"]) == null || Convert.ToString(item["Telefono"]).Trim() == "" || double.TryParse(Convert.ToString(item["Telefono"]).Trim(), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out double valorNumericoTel) == false ? "Desconocido" : valorNumericoTel.ToString();
+                string celular = Convert.ToString(item["Celular"]) == null || Convert.ToString(item["Celular"]).Trim() == "" || double.TryParse(Convert.ToString(item["Celular"]).Trim(), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out double valorNumerico) == false ? "Desconocido" : valorNumerico.ToString();
+                string edad = Convert.ToString(item["Edad"]) == "0" ? "Desconocido" : Convert.ToString(item["Edad"]);
+                string profesion = Convert.ToString(item["Profesion"]) == null || Convert.ToString(item["Profesion"]).Trim() == "" ? "Desconocido" : Convert.ToString(item["Profesion"]);
+               // string estadoCivil = Convert.ToString(item["EstadoCivil"]);
+                string sexo = Convert.ToString(item["Sexo"]);
+
+                dynamicDataTable.Rows.Add(idCliente, nombreCliente, cedula, estado, direccion, pais, departamento,
+                                          fechaNac, telefono, celular, edad, profesion, sexo);
+            }
+
+            frm.dgvCatalogoClientes.DataSource = dynamicDataTable;
+            frm.dgvCatalogoClientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            // Actualizar la interfaz de usuario con la página actual y el total de páginas
+            totalPages = (int)Math.Ceiling((double)dtRespuesta.Rows.Count / pageSize); // Si no se obtiene el total de páginas desde la consulta, lo calculamos aquí
+            frm.TxtPaginaNo.Text = currentPage.ToString();
+            frm.TxtPaginaDe.Text = totalPages.ToString();
+        }
+
     }
 }
+

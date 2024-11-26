@@ -41,10 +41,6 @@ namespace NeoCobranza.Paneles
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.dtpFechaNac = new System.Windows.Forms.DateTimePicker();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.rbtnSoltero = new System.Windows.Forms.RadioButton();
-            this.rbtnCasado = new System.Windows.Forms.RadioButton();
             this.mtxtCelular = new System.Windows.Forms.MaskedTextBox();
             this.mtxtTelefono = new System.Windows.Forms.MaskedTextBox();
             this.mtxtCedula = new System.Windows.Forms.MaskedTextBox();
@@ -80,7 +76,6 @@ namespace NeoCobranza.Paneles
             this.panel3.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
@@ -204,53 +199,6 @@ namespace NeoCobranza.Paneles
             this.dtpFechaNac.Name = "dtpFechaNac";
             this.dtpFechaNac.Size = new System.Drawing.Size(160, 23);
             this.dtpFechaNac.TabIndex = 37;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.label3);
-            this.flowLayoutPanel1.Controls.Add(this.rbtnSoltero);
-            this.flowLayoutPanel1.Controls.Add(this.rbtnCasado);
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(613, 45);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(147, 78);
-            this.flowLayoutPanel1.TabIndex = 11;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label3.Location = new System.Drawing.Point(3, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(83, 16);
-            this.label3.TabIndex = 13;
-            this.label3.Text = "Estado Civil";
-            // 
-            // rbtnSoltero
-            // 
-            this.rbtnSoltero.AutoSize = true;
-            this.rbtnSoltero.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.rbtnSoltero.Location = new System.Drawing.Point(3, 19);
-            this.rbtnSoltero.Name = "rbtnSoltero";
-            this.rbtnSoltero.Size = new System.Drawing.Size(70, 21);
-            this.rbtnSoltero.TabIndex = 14;
-            this.rbtnSoltero.TabStop = true;
-            this.rbtnSoltero.Text = "Soltero";
-            this.rbtnSoltero.UseVisualStyleBackColor = true;
-            // 
-            // rbtnCasado
-            // 
-            this.rbtnCasado.AutoSize = true;
-            this.rbtnCasado.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.rbtnCasado.Location = new System.Drawing.Point(3, 46);
-            this.rbtnCasado.Name = "rbtnCasado";
-            this.rbtnCasado.Size = new System.Drawing.Size(78, 21);
-            this.rbtnCasado.TabIndex = 15;
-            this.rbtnCasado.TabStop = true;
-            this.rbtnCasado.Text = "Casado";
-            this.rbtnCasado.UseVisualStyleBackColor = true;
             // 
             // mtxtCelular
             // 
@@ -849,7 +797,6 @@ namespace NeoCobranza.Paneles
             this.Controls.Add(this.label2);
             this.Controls.Add(this.flowLayoutPanel3);
             this.Controls.Add(this.flowLayoutPanel2);
-            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.panel3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -864,8 +811,6 @@ namespace NeoCobranza.Paneles
             this.flowLayoutPanel3.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -875,7 +820,6 @@ namespace NeoCobranza.Paneles
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label lblSexo;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label lblId;
         public Especiales.EspecialButton btnAgregar;
@@ -883,7 +827,6 @@ namespace NeoCobranza.Paneles
         public System.Windows.Forms.Label label2;
         public System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
         public System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        public System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         public System.Windows.Forms.MaskedTextBox mtxtCelular;
         public System.Windows.Forms.MaskedTextBox mtxtTelefono;
         public System.Windows.Forms.MaskedTextBox mtxtCedula;
@@ -912,8 +855,6 @@ namespace NeoCobranza.Paneles
         public System.Windows.Forms.RadioButton rbtnMasculino;
         public System.Windows.Forms.RadioButton rbtnFemenino;
         public System.Windows.Forms.DateTimePicker dtpFechaNac;
-        public System.Windows.Forms.RadioButton rbtnSoltero;
-        public System.Windows.Forms.RadioButton rbtnCasado;
         public System.Windows.Forms.Label LblDynamicoCliente;
         public System.Windows.Forms.Label label1;
         public System.Windows.Forms.TextBox TxtNoRuc;

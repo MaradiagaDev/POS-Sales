@@ -12,6 +12,7 @@ using NeoCobranza.DataController;
 using NeoCobranza.ModelsCobranza;
 using NeoCobranza.Paneles_Contrato;
 using NeoCobranza.Paneles_Venta;
+using NeoCobranza.ViewModels;
 
 namespace NeoCobranza.Paneles
 {
@@ -19,7 +20,12 @@ namespace NeoCobranza.Paneles
     {
         CCliente cliente;
         string panel;
-        public Panel_Cliente_Contrato( string panel)
+        public int currentPage = 1;
+        public int totalPages = 0;
+        private const int pageSize = 30;
+        private List<Clientes> allClientes = new List<Clientes>();
+
+        public Panel_Cliente_Contrato(string panel)
         {
             InitializeComponent();
             FiltrarClientes();
@@ -28,29 +34,51 @@ namespace NeoCobranza.Paneles
 
         private void txtFiltro__TextChanged(object sender, EventArgs e)
         {
-           FiltrarClientes();
+            FiltrarClientes();
         }
 
         public void FiltrarClientes()
         {
-            using(NeoCobranzaContext db = new NeoCobranzaContext())
+            using (NeoCobranzaContext db = new NeoCobranzaContext())
             {
-                List<Clientes> clientes = db.Clientes.Where(s => s.Estado == 1).Where(item => (item.Pnombre + "" + item.Snombre + " " + item.Papellido + " " + item.Sapellido).Contains(txtFiltro.Texts) || item.Celular.Contains(txtFiltro.Texts) || item.Cedula.Contains(txtFiltro.Texts)).OrderByDescending(s => s.IdCliente).ToList();
+                var query = db.Clientes
+                              .Where(s => s.Estado == 1)
+                              .Where(item => (item.Pnombre + "" + item.Snombre + " " + item.Papellido + " " + item.Sapellido)
+                                             .Contains(txtFiltro.Texts)
+                                             || item.Celular.Contains(txtFiltro.Texts)
+                                             || item.Cedula.Contains(txtFiltro.Texts))
+                              .OrderByDescending(s => s.IdCliente);
 
-                DataTable dt = new DataTable();
-
-                dt.Columns.Add("Id", typeof(string));
-                dt.Columns.Add("Nombre Completo", typeof(string));
-                dt.Columns.Add("Cédula", typeof(string));
-                dt.Columns.Add("Celular", typeof(string));
-
-                foreach (var item in clientes)
-                {
-                    dt.Rows.Add(item.IdCliente, item.Pnombre + "" + item.Snombre + " " + item.Papellido + " " + item.Sapellido, item.Cedula.ToString(), item.Celular.ToString());
-                }
-
-                DgvCliente.DataSource = dt;
+                totalPages = (int)Math.Ceiling((double)query.Count() / pageSize);
+                currentPage = 1;
+                UpdatePagination(query);
             }
+        }
+
+        public void UpdatePagination(IQueryable<Clientes> query)
+        {
+            var pagedClientes = query.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+            DataTable dt = new DataTable();
+
+            dt.Columns.Add("Id", typeof(string));
+            dt.Columns.Add("Nombre Completo", typeof(string));
+            dt.Columns.Add("Cédula", typeof(string));
+            dt.Columns.Add("Celular", typeof(string));
+
+            foreach (var item in pagedClientes)
+            {
+                var cedula = item.Cedula == null ? "" : item.Cedula;
+                var celular = item.Celular == null ? "" : item.Celular;
+                dt.Rows.Add(item.IdCliente, item.Pnombre + "" + item.Snombre + " " + item.Papellido + " " + item.Sapellido, cedula, celular);
+            }
+
+            DgvCliente.DataSource = dt;
+            DgvCliente.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            // Actualizar la interfaz de usuario con la página actual y el total de páginas
+            TxtPaginaNo.Text = currentPage.ToString();
+            TxtPaginaDe.Text = totalPages.ToString();
         }
 
         private void BtnSeleccionar_Click(object sender, EventArgs e)
@@ -66,29 +94,29 @@ namespace NeoCobranza.Paneles
             {
 
                 PnlProforma pnlProforma = Owner as PnlProforma;
-                pnlProforma.lblNombreCliente.Text = DgvCliente.SelectedRows[0].Cells[1].Value.ToString();               
+                pnlProforma.lblNombreCliente.Text = DgvCliente.SelectedRows[0].Cells[1].Value.ToString();
 
                 pnlProforma.lblEstadoCliente.Text = "Cliente Seleccionado";
                 pnlProforma.lblEstadoCliente.ForeColor = Color.Green;
                 pnlProforma.lblIdCliente.Text = DgvCliente.SelectedRows[0].Cells[0].Value.ToString();
                 this.Hide();
             }
-            if(panel == "Contrato")
+            if (panel == "Contrato")
             {
 
                 PnlContrato pnlProforma = Owner as PnlContrato;
                 pnlProforma.lblNombreCliente.Text = DgvCliente.SelectedRows[0].Cells[1].Value.ToString();
-              
+
                 pnlProforma.lblEstadoCliente.Text = "Cliente Seleccionado";
                 pnlProforma.lblEstadoCliente.ForeColor = Color.Green;
                 pnlProforma.lblIdCliente.Text = DgvCliente.SelectedRows[0].Cells[0].Value.ToString();
                 this.Hide();
 
             }
-            if(panel == "ContratoProforma")
+            if (panel == "ContratoProforma")
             {
 
-                PnlProformaContrato pnlProformaContrato= Owner as PnlProformaContrato;
+                PnlProformaContrato pnlProformaContrato = Owner as PnlProformaContrato;
                 pnlProformaContrato.lblNombreCliente.Text = DgvCliente.SelectedRows[0].Cells[1].Value.ToString();
 
                 pnlProformaContrato.lblEstadoCliente.Text = "Cliente Seleccionado";
@@ -108,10 +136,10 @@ namespace NeoCobranza.Paneles
                 pnlVenta.lblEstadoCliente.ForeColor = Color.Green;
                 pnlVenta.LblIdClientes.Text = DgvCliente.SelectedRows[0].Cells[0].Value.ToString();
 
-                using(NeoCobranzaContext db = new NeoCobranzaContext())
+                using (NeoCobranzaContext db = new NeoCobranzaContext())
                 {
                     Clientes cliente = db.Clientes.Where(s => s.IdCliente.ToString() == DgvCliente.SelectedRows[0].Cells[0].Value.ToString()).FirstOrDefault();
-                    if(cliente.NoRuc != null && cliente.NoRuc.Length == 14)
+                    if (cliente.NoRuc != null && cliente.NoRuc.Length == 14)
                     {
                         pnlVenta.ChkRetencionAlcaldia.Visible = true;
                         pnlVenta.ChkRetencionDgi.Visible = true;
@@ -126,7 +154,8 @@ namespace NeoCobranza.Paneles
                 this.Close();
 
 
-            }if(panel == "ActualizarContrato")
+            }
+            if (panel == "ActualizarContrato")
             {
 
                 PnlGeneralContrato pnlProformaContrato = Owner as PnlGeneralContrato;
@@ -151,5 +180,44 @@ namespace NeoCobranza.Paneles
         private void Panel_Cliente_Contrato_Load(object sender, EventArgs e)
         {
         }
+
+        private void BtnSiguiente_Click(object sender, EventArgs e)
+        {
+            if (currentPage < totalPages)
+            {
+                currentPage++;
+                using (NeoCobranzaContext db = new NeoCobranzaContext())
+                {
+                    var query = db.Clientes
+                                  .Where(s => s.Estado == 1)
+                                  .Where(item => (item.Pnombre + "" + item.Snombre + " " + item.Papellido + " " + item.Sapellido)
+                                                 .Contains(txtFiltro.Texts)
+                                                 || item.Celular.Contains(txtFiltro.Texts)
+                                                 || item.Cedula.Contains(txtFiltro.Texts))
+                                  .OrderByDescending(s => s.IdCliente);
+                    UpdatePagination(query);
+                }
+            }
+        }
+
+        private void BtnAnterior_Click(object sender, EventArgs e)
+        {
+            if (currentPage > 1)
+            {
+                currentPage--;
+                using (NeoCobranzaContext db = new NeoCobranzaContext())
+                {
+                    var query = db.Clientes
+                                  .Where(s => s.Estado == 1)
+                                  .Where(item => (item.Pnombre + "" + item.Snombre + " " + item.Papellido + " " + item.Sapellido)
+                                                 .Contains(txtFiltro.Texts)
+                                                 || item.Celular.Contains(txtFiltro.Texts)
+                                                 || item.Cedula.Contains(txtFiltro.Texts))
+                                  .OrderByDescending(s => s.IdCliente);
+                    UpdatePagination(query);
+                }
+            }
+        }
     }
 }
+

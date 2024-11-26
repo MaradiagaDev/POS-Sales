@@ -35,7 +35,9 @@ namespace NeoCobranza.ModelsCobranza
         public virtual DbSet<Mermas> Mermas { get; set; }
         public virtual DbSet<MotivosCancelacion> MotivosCancelacion { get; set; }
         public virtual DbSet<OrdenDetalle> OrdenDetalle { get; set; }
+        public virtual DbSet<OrdenDetalleLote> OrdenDetalleLote { get; set; }
         public virtual DbSet<Ordenes> Ordenes { get; set; }
+        public virtual DbSet<Pagos> Pagos { get; set; }
         public virtual DbSet<Proveedores> Proveedores { get; set; }
         public virtual DbSet<RelAlmacenDetalle> RelAlmacenDetalle { get; set; }
         public virtual DbSet<RelAlmacenProducto> RelAlmacenProducto { get; set; }
@@ -343,6 +345,8 @@ namespace NeoCobranza.ModelsCobranza
             {
                 entity.Property(e => e.OrdenDetalleId).HasColumnName("OrdenDetalleID");
 
+                entity.Property(e => e.LoteId).HasColumnName("LoteID");
+
                 entity.Property(e => e.OrdenId).HasColumnName("OrdenID");
 
                 entity.Property(e => e.PrecioUnitario).HasColumnType("decimal(18, 2)");
@@ -350,6 +354,11 @@ namespace NeoCobranza.ModelsCobranza
                 entity.Property(e => e.ProductoId).HasColumnName("ProductoID");
 
                 entity.Property(e => e.Subtotal).HasColumnType("decimal(18, 2)");
+            });
+
+            modelBuilder.Entity<OrdenDetalleLote>(entity =>
+            {
+                entity.HasKey(e => e.RelOrdenDetalleLote);
             });
 
             modelBuilder.Entity<Ordenes>(entity =>
@@ -395,6 +404,29 @@ namespace NeoCobranza.ModelsCobranza
                 entity.Property(e => e.TotalOrden).HasColumnType("decimal(18, 2)");
 
                 entity.Property(e => e.UsuarioId).HasColumnName("UsuarioID");
+            });
+
+            modelBuilder.Entity<Pagos>(entity =>
+            {
+                entity.HasKey(e => e.PagoOrdenId);
+
+                entity.Property(e => e.PagoOrdenId).HasColumnName("PagoOrdenID");
+
+                entity.Property(e => e.BancoId).HasColumnName("BancoID");
+
+                entity.Property(e => e.Cambio).HasColumnType("decimal(18, 4)");
+
+                entity.Property(e => e.Estado).HasMaxLength(50);
+
+                entity.Property(e => e.FormaPago).HasMaxLength(50);
+
+                entity.Property(e => e.NoReferencia).HasMaxLength(100);
+
+                entity.Property(e => e.OrdenId).HasColumnName("OrdenID");
+
+                entity.Property(e => e.Pagado).HasColumnType("decimal(18, 4)");
+
+                entity.Property(e => e.Total).HasColumnType("decimal(18, 4)");
             });
 
             modelBuilder.Entity<Proveedores>(entity =>

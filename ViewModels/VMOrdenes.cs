@@ -5,6 +5,7 @@ using NeoCobranza.Paneles_Venta;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.SqlServer;
 using System.Drawing;
 using System.IdentityModel.Tokens;
 using System.Linq;
@@ -36,15 +37,19 @@ namespace NeoCobranza.ViewModels
 
             using (NeoCobranzaContext db = new NeoCobranzaContext())
             {
-                
+
                 switch (opc)
                 {
                     case "OrdenRapida":
-                        
+
                         frm.TCMain.SelectedIndex = 0;
 
                         frm.ChkAutomatico.Checked = true;
                         frm.TxtCodigoProducto.Focus();
+
+
+                        frm.ChkRetencionAlcaldia.Enabled = true;
+                        frm.ChkRetencionDgi.Enabled = true;
 
                         frm.LblEstadoOrden.Text = "Orden Abierta";
                         frm.LblFechaGeneracion.Text = DateTime.Now.ToString();
@@ -94,10 +99,10 @@ namespace NeoCobranza.ViewModels
 
                         auxSubModulo = "Orden";
                         auxAccion = "Crear";
-                     
+
                         //Agregar al Cliente Mostrador
                         Clientes cliente = db.Clientes.Where(c => c.IdCliente == 1).FirstOrDefault();
-                        if(cliente != null)
+                        if (cliente != null)
                         {
                             frm.LblNombreClientes.Text = cliente.Pnombre + " " + cliente.Snombre + " " + cliente.Papellido + " " + cliente.Sapellido;
                             frm.lblEstadoCliente.Text = "Cliente Seleccionado";
@@ -115,9 +120,9 @@ namespace NeoCobranza.ViewModels
                         //Crear la Orden
                         ModelsCobranza.ConfigFacturacion configFacturacion = db.ConfigFacturacion.Where(s => s.SucursalId == int.Parse(Utilidades.SucursalId)).FirstOrDefault();
 
-                        if(configFacturacion != null)
+                        if (configFacturacion != null)
                         {
-                            if(OrdenAux == 0)
+                            if (OrdenAux == 0)
                             {
                                 orden = new Ordenes()
                                 {
@@ -151,12 +156,12 @@ namespace NeoCobranza.ViewModels
 
                                 var ordenesDetalles = db.OrdenDetalle.Where(s => s.OrdenId == orden.OrdenId).ToList();
 
-                                foreach(var item in ordenesDetalles)
+                                foreach (var item in ordenesDetalles)
                                 {
                                     ServiciosEstadares servicios = db.ServiciosEstadares.Where(s => s.IdEstandar == item.ProductoId).FirstOrDefault();
                                     string codigo = servicios.Codigo == null ? string.Empty : servicios.Codigo;
 
-                                    dynamicDataTable.Rows.Add(item.OrdenDetalleId, codigo, servicios.IdEstandar, servicios.NombreEstandar,item.Cantidad, servicios.MontoVd, item.Subtotal);
+                                    dynamicDataTable.Rows.Add(item.OrdenDetalleId, codigo, servicios.IdEstandar, servicios.NombreEstandar, item.Cantidad, servicios.MontoVd, item.Subtotal);
                                 }
                             }
                             else
@@ -164,7 +169,60 @@ namespace NeoCobranza.ViewModels
                                 //Orden abierta
                                 orden = db.Ordenes.Where(s => s.OrdenId == OrdenAux).FirstOrDefault();
 
+                                if (orden.Pagado > 0)
+                                {
+
+                                    frm.ChkRetencionAlcaldia.Enabled = false;
+                                    frm.ChkRetencionDgi.Enabled = false;
+                                }
+
+                                Clientes clienteOrden = db.Clientes.Where(s => s.IdCliente == orden.ClienteId).FirstOrDefault();
+                                if (clienteOrden.NoRuc != null && clienteOrden.NoRuc.Length == 14)
+                                {
+                                    frm.ChkRetencionAlcaldia.Visible = true;
+                                    frm.ChkRetencionDgi.Visible = true;
+                                }
+                                else
+                                {
+                                    frm.ChkRetencionAlcaldia.Visible = false;
+                                    frm.ChkRetencionDgi.Visible = false;
+                                }
+
+                                frm.LblNombreClientes.Text = clienteOrden.Pnombre + " " + clienteOrden.Snombre + " " + clienteOrden.Papellido + " " + clienteOrden.Sapellido;
+                                frm.lblEstadoCliente.Text = "Cliente Seleccionado";
+                                frm.lblEstadoCliente.ForeColor = Color.Green;
+                                frm.LblIdClientes.Text = clienteOrden.IdCliente.ToString();
+
+                                if (orden.RetencionDgi != 0)
+                                {
+                                    frm.ChkRetencionDgi.Checked = true;
+                                }
+                                else
+                                {
+                                    frm.ChkRetencionDgi.Checked = false;
+                                }
+
+                                if (orden.RetencionAlcaldia != 0)
+                                {
+                                    frm.ChkRetencionAlcaldia.Checked = true;
+                                }
+                                else
+                                {
+                                    frm.ChkRetencionAlcaldia.Checked = false;
+                                }
+
                                 var ordenesDetalles = db.OrdenDetalle.Where(s => s.OrdenId == orden.OrdenId).ToList();
+
+                                if (ordenesDetalles.Any())
+                                {
+                                    frm.BtnPagarOrden.Enabled = true;
+                                }
+                                else
+                                {
+                                    frm.BtnPagarOrden.Enabled = false;
+                                }
+
+                                dynamicDataTable.Rows.Clear();
 
                                 foreach (var item in ordenesDetalles)
                                 {
@@ -188,12 +246,13 @@ namespace NeoCobranza.ViewModels
                         frm.TxtRetencionDGI.Text = orden.RetencionDgi.ToString();
                         frm.TxtRetencionAlcaldia.Text = orden.RetencionAlcaldia.ToString();
                         frm.TxtTotalCordoba.Text = orden.TotalOrden.ToString();
-                        frm.TxtTotalDolar.Text = (orden.TotalOrden / orden.CambioDolar).ToString();
+                        decimal? decimalValue = orden.TotalOrden / orden.CambioDolar;
+                        frm.TxtTotalDolar.Text = Math.Round(double.Parse(decimalValue.ToString()), 2).ToString();
                         frm.TxtTotalPagado.Text = orden.Pagado.ToString();
 
-                        cliente = db.Clientes.Where(s => s.IdCliente == orden.ClienteId ).FirstOrDefault();
+                        cliente = db.Clientes.Where(s => s.IdCliente == orden.ClienteId).FirstOrDefault();
 
-                        if ( cliente != null)
+                        if (cliente != null)
                         {
                             frm.LblNombreClientes.Text = cliente.Pnombre + " " + cliente.Snombre + " " + cliente.Papellido + " " + cliente.Sapellido;
                             frm.lblEstadoCliente.Text = "Cliente Seleccionado";
@@ -216,7 +275,7 @@ namespace NeoCobranza.ViewModels
 
                         int botonTop = 2;
 
-                        foreach ( var s in salas)
+                        foreach (var s in salas)
                         {
                             // Crear un nuevo botón
                             System.Windows.Forms.Button botonSala = new System.Windows.Forms.Button();
@@ -235,7 +294,7 @@ namespace NeoCobranza.ViewModels
                             botonSala.Width = botonWidth; // Establecer el ancho del botón
                             botonSala.Height = 45;
 
-                            
+
                             // Establecer la posición vertical del botón
                             botonSala.Top = botonTop;
 
@@ -246,6 +305,9 @@ namespace NeoCobranza.ViewModels
                             frm.PnlListaSalas.Controls.Add(botonSala);
                         }
 
+                        break;
+                    case "Listas":
+                        ConfigUI(frm, "Lista");
                         break;
                 }
             }
@@ -264,7 +326,7 @@ namespace NeoCobranza.ViewModels
                     {
                         control.BackColor = System.Drawing.Color.Green;
 
-                        using(NeoCobranzaContext db = new NeoCobranzaContext())
+                        using (NeoCobranzaContext db = new NeoCobranzaContext())
                         {
                             var sala = db.Salas.Where(s => s.SalaId == SalaId).FirstOrDefault();
 
@@ -305,7 +367,7 @@ namespace NeoCobranza.ViewModels
                                 {
                                     botonSala.BackColor = Color.DarkRed;
                                 }
-                                
+
                                 botonSala.Font = new Font("Century Gothic", 15, FontStyle.Regular);
                                 botonSala.ForeColor = Color.White;
                                 botonSala.Height = 45;
@@ -347,7 +409,7 @@ namespace NeoCobranza.ViewModels
             }
         }
 
-        private void MesaClick(string MesaSala, Ordenes orden,PnlVentas frm)
+        private void MesaClick(string MesaSala, Ordenes orden, PnlVentas frm)
         {
             MesaAux = MesaSala;
             if (orden != null)
@@ -356,10 +418,16 @@ namespace NeoCobranza.ViewModels
             }
             else
             {
-                OrdenAux = 0;   
+                OrdenAux = 0;
             }
 
             InitModuloOrdenes(frm, "OrdenRapida", "");
+        }
+
+        public class FormaPagoClass
+        {
+            public string value { get; set; }
+            public string desc { get; set; }
         }
 
         public void ConfigUI(PnlVentas frm, string opc)
@@ -420,7 +488,7 @@ namespace NeoCobranza.ViewModels
 
                         frm.CmbTipoServicio.ValueMember = "TipoServicionId";
                         frm.CmbTipoServicio.DisplayMember = "Descripcion";
-                        frm.CmbTipoServicio.DataSource = listTipoServicios;                       
+                        frm.CmbTipoServicio.DataSource = listTipoServicios;
                     }
 
                     FuncionesPrincipales(frm);
@@ -494,7 +562,63 @@ namespace NeoCobranza.ViewModels
                     frm.TxtPagadoEfectivo.Text = frm.TxtTotalPagado.Text;
                     frm.TxtFaltanteEfectivo.Text = (double.Parse(frm.TxtTotalEfectivo.Text) - double.Parse(frm.TxtTotalPagado.Text)).ToString();
                     frm.TxtCantidadAbonadaEfectivo.Text = "0";
-                    frm.TxtDiferenciaEfectivo.Text="0";
+                    frm.TxtDiferenciaEfectivo.Text = "0";
+                    break;
+                case "Credito":
+                    frm.TCMain.SelectedIndex = 5;
+                    frm.llbTitulo.Text = "Pago con Tarjeta";
+                    frm.TxtTotalOrdenCredito.Text = frm.TxtTotalCordoba.Text;
+                    frm.TxtTotalPagadoCredito.Text = frm.TxtTotalPagado.Text;
+                    frm.TxtFaltanteCredito.Text = (double.Parse(frm.TxtTotalOrdenCredito.Text) - double.Parse(frm.TxtTotalPagadoCredito.Text)).ToString();
+                    frm.TxtCantidadAbonadaCredito.Text = "0";
+
+                    using (NeoCobranzaContext db = new NeoCobranzaContext())
+                    {
+                        var Bancos = db.Bancos.Where(s => s.Estado == "Activo").ToList();
+                        frm.CmbBanco.ValueMember = "BancoId";
+                        frm.CmbBanco.DisplayMember = "Banco";
+                        frm.CmbBanco.DataSource = Bancos;
+                    }
+
+                    break;
+                case "Cheque":
+                    frm.TCMain.SelectedIndex = 6;
+                    frm.llbTitulo.Text = "Pago con Minuta o Checke";
+                    frm.TxtTotalCheque.Text = frm.TxtTotalCordoba.Text;
+                    frm.TxtPagadoCheque.Text = frm.TxtTotalPagado.Text;
+                    frm.TxtFaltanteCheque.Text = (double.Parse(frm.TxtTotalCheque.Text) - double.Parse(frm.TxtPagadoCheque.Text)).ToString();
+                    frm.TxtCantidadAbonadaCheque.Text = "0";
+
+                    using (NeoCobranzaContext db = new NeoCobranzaContext())
+                    {
+                        var Bancos = db.Bancos.Where(s => s.Estado == "Activo").ToList();
+                        frm.CmbBancoCheque.ValueMember = "BancoId";
+                        frm.CmbBancoCheque.DisplayMember = "Banco";
+                        frm.CmbBancoCheque.DataSource = Bancos;
+                    }
+
+                    List<FormaPagoClass> lista = new List<FormaPagoClass>();
+
+                    FormaPagoClass formaUno = new FormaPagoClass()
+                    {
+                        value = "1",
+                        desc = "Minuta"
+                    };
+
+                    FormaPagoClass formaDos = new FormaPagoClass()
+                    {
+                        value = "2",
+                        desc = "Cheque"
+                    };
+
+                    lista.Add(formaUno);
+                    lista.Add(formaDos);
+
+                    frm.CmbTipoPago.ValueMember = "value";
+                    frm.CmbTipoPago.DisplayMember = "desc";
+                    frm.CmbTipoPago.DataSource = lista;
+
+
                     break;
                 case "Menu":
                     frm.TCMain.SelectedIndex = 0;
@@ -507,7 +631,9 @@ namespace NeoCobranza.ViewModels
                     auxSubModulo = "Lista";
                     auxAccion = "Buscar";
 
-                    if (dynamicDataTableOrdenes.Columns.Count == 0)
+
+
+                    if (frm.dgvCatalogoOrdenes.Columns.Count == 0)
                     {
                         dynamicDataTableOrdenes.Columns.Add("No Orden", typeof(string));
                         dynamicDataTableOrdenes.Columns.Add("Cliente Id", typeof(string));
@@ -517,8 +643,6 @@ namespace NeoCobranza.ViewModels
                         dynamicDataTableOrdenes.Columns.Add("Estado Pago", typeof(string));
                         dynamicDataTableOrdenes.Columns.Add("Total", typeof(string));
                         dynamicDataTableOrdenes.Columns.Add("Pagado", typeof(string));
-
-                        frm.dgvCatalogoOrdenes.DataSource = dynamicDataTableOrdenes;
 
                         DataGridViewButtonColumn buttonColumnSeleccionar = new DataGridViewButtonColumn();
                         buttonColumnSeleccionar.HeaderText = "...";
@@ -533,37 +657,68 @@ namespace NeoCobranza.ViewModels
                         buttonColumnCancelar.UseColumnTextForButtonValue = true;
 
                         frm.dgvCatalogoOrdenes.Columns.Add(buttonColumnCancelar);
+                        frm.dgvCatalogoOrdenes.DataSource = dynamicDataTableOrdenes;
                     }
                     FuncionesPrincipales(frm);
                     break;
             }
         }
 
-        
+
 
         public void FuncionesPrincipales(PnlVentas frm)
         {
-            using(NeoCobranzaContext db = new NeoCobranzaContext())
+            using (NeoCobranzaContext db = new NeoCobranzaContext())
             {
                 switch (auxSubModulo)
                 {
                     case "Lista":
 
+                        // Limpiar la tabla antes de cargar nuevos datos
                         dynamicDataTableOrdenes.Rows.Clear();
-                        var ordenes = db.Ordenes.Where(s => s.SalaMesa.Length == 1 && s.SucursalId == int.Parse(Utilidades.SucursalId) && s.OrdenProceso == "Orden Abierta" && s.OrdenId.ToString().Contains(frm.TxtFiltrar.Texts)).OrderByDescending(s => s.OrdenId).ToList();
 
-                        foreach(var item in ordenes)
+                        // Obtener el valor de SucursalId una vez para evitar múltiples conversiones de cadena a entero
+                        int sucursalId = int.Parse(Utilidades.SucursalId);
+
+                        // Consulta optimizada a la base de datos para obtener las órdenes que pueden ser traducidas a SQL
+                        var ordenesQuery = db.Ordenes
+                            .Where(s => s.SalaMesa.Length == 1 &&
+                                        s.SucursalId == sucursalId &&
+                                        s.OrdenProceso == "Orden Abierta")
+                            .OrderByDescending(s => s.OrdenId);
+
+                        // Obtener las órdenes que coinciden con el texto de filtrado utilizando LINQ to Objects
+                        var ordenes = ordenesQuery.AsEnumerable()
+                            .Where(s => s.OrdenId.ToString().Contains(frm.TxtFiltrar.Texts))
+                            .ToList();
+
+                        // Llenar la tabla con los resultados de la consulta
+                        foreach (var orden in ordenes)
                         {
-                            Clientes cliente = db.Clientes.Where(s => s.IdCliente == item.ClienteId).FirstOrDefault();
-                            dynamicDataTableOrdenes.Rows.Add(item.OrdenId,item.ClienteId,cliente.Pnombre+" "+cliente.Papellido,item.FechaRealizacion,item.OrdenProceso,item.PagoProceso,item.TotalOrden,item.Pagado);
+                            // Obtener el cliente correspondiente a la orden actual
+                            Clientes cliente = db.Clientes.FirstOrDefault(c => c.IdCliente == orden.ClienteId);
+
+                            // Agregar la fila a la tabla
+                            dynamicDataTableOrdenes.Rows.Add(orden.OrdenId,
+                                                             orden.ClienteId,
+                                                             cliente != null ? $"{cliente.Pnombre} {cliente.Papellido}" : "Cliente no encontrado",
+                                                             orden.FechaRealizacion,
+                                                             orden.OrdenProceso,
+                                                             orden.PagoProceso,
+                                                             orden.TotalOrden,
+                                                             orden.Pagado);
                         }
+
 
                         break;
                     case "Productos":
 
-                        if(auxAccion == "Buscar")
+                        if (auxAccion == "Buscar")
                         {
-                            if(frm.CmbTipoServicio == null || frm.CmbTipoServicio.Items.Count == 0)
+
+                            Almacenes almacen = db.Almacenes.Where(s => s.SucursalId == int.Parse(Utilidades.SucursalId) && s.EsMostrador == true).FirstOrDefault();
+                            List<RelAlmacenProducto> listaProds = db.RelAlmacenProducto.Where(s => s.AlmacenId == almacen.AlmacenId).ToList();
+                            if (frm.CmbTipoServicio == null || frm.CmbTipoServicio.Items.Count == 0)
                             {
                                 return;
                             }
@@ -576,7 +731,8 @@ namespace NeoCobranza.ViewModels
 
                                 foreach (var item in serviciosProductos)
                                 {
-                                    dynamicDataTableProductos.Rows.Add(item.IdEstandar, item.NombreEstandar, 0, item.MontoVd, Math.Round((double.Parse(item.MontoVd.ToString()) / double.Parse(Utilidades.Tasa)), 2).ToString());
+                                    int? cantidad = listaProds.Where(s => s.ProductoId == item.IdEstandar).FirstOrDefault().Cantidad;
+                                    dynamicDataTableProductos.Rows.Add(item.IdEstandar, item.NombreEstandar, cantidad, item.MontoVd, Math.Round((double.Parse(item.MontoVd.ToString()) / double.Parse(Utilidades.Tasa)), 2).ToString());
                                 }
 
                             }
@@ -587,7 +743,8 @@ namespace NeoCobranza.ViewModels
 
                                 foreach (var item in serviciosProductos)
                                 {
-                                    dynamicDataTableProductos.Rows.Add(item.IdEstandar, item.NombreEstandar, 0, item.MontoVd, Math.Round(( double.Parse(item.MontoVd.ToString()) / double.Parse(Utilidades.Tasa)),2).ToString());
+                                    int? cantidad = listaProds.Where(s => s.ProductoId == item.IdEstandar).FirstOrDefault().Cantidad;
+                                    dynamicDataTableProductos.Rows.Add(item.IdEstandar, item.NombreEstandar, cantidad, item.MontoVd, Math.Round((double.Parse(item.MontoVd.ToString()) / double.Parse(Utilidades.Tasa)), 2).ToString());
                                 }
 
                             }
@@ -633,9 +790,9 @@ namespace NeoCobranza.ViewModels
             }
         }
 
-        public void AgregarProductosOrden(PnlVentas frm, string idProd, string Cantidad,string opc)
+        public void AgregarProductosOrden(PnlVentas frm, string idProd, string Cantidad, string opc)
         {
-            using (NeoCobranzaContext db = new NeoCobranzaContext()) 
+            using (NeoCobranzaContext db = new NeoCobranzaContext())
             {
                 if (idProd != "")
                 {
@@ -663,6 +820,11 @@ namespace NeoCobranza.ViewModels
 
                                     db.Update(orden);
                                     db.SaveChanges();
+
+                                    //llamar a la funcion
+                                    ActualizarTotales(int.Parse(frm.LblNoOrden.Text), orden.OrdenDetalleId, int.Parse(idProd), int.Parse(Cantidad), "Agregar");
+
+                                    db.SaveChanges(true);
                                 }
                                 else
                                 {
@@ -681,16 +843,24 @@ namespace NeoCobranza.ViewModels
                                     {
                                         item[4] = nuevaCantidad.ToString();
                                         item[6] = nuevoMonto;
+
+                                        db.Update(orden);
+                                        db.SaveChanges();
+
+                                       //Llamar a la funcion
                                     }
                                     else
                                     {
                                         OrdenDetalle ordenRemover = db.OrdenDetalle.Where(s => s.OrdenDetalleId == int.Parse(item[0].ToString())).FirstOrDefault();
                                         db.Remove(ordenRemover);
-                                        db.SaveChanges();
+
+                                       //LLamar a la funcion
 
                                         dynamicDataTable.Rows.RemoveAt(i);
-                                        i--; // Decrementamos el índice para ajustarnos a la eliminación del elemento
+                                        i--; 
                                     }
+
+                                    ActualizarTotales(int.Parse(frm.LblNoOrden.Text), orden.OrdenDetalleId, int.Parse(idProd), int.Parse(Cantidad), "Quitar");
                                 }
                             }
                         }
@@ -705,12 +875,15 @@ namespace NeoCobranza.ViewModels
                                 PrecioUnitario = decimal.Parse(servicios.MontoVd.ToString()),
                                 Subtotal = decimal.Parse((int.Parse(Cantidad) * servicios.MontoVd).ToString())
                             };
-                            
+
                             db.Add(ordenDetalle);
                             db.SaveChanges();
 
+                            //Llamar a la funcion
+                            ActualizarTotales(int.Parse(frm.LblNoOrden.Text), ordenDetalle.OrdenDetalleId, int.Parse(idProd), int.Parse(Cantidad), "Agregar");
+
                             string codigo = servicios.Codigo == null ? string.Empty : servicios.Codigo;
-                            dynamicDataTable.Rows.Add(ordenDetalle.OrdenDetalleId,codigo,servicios.IdEstandar, servicios.NombreEstandar, Cantidad, servicios.MontoVd, int.Parse(Cantidad) * servicios.MontoVd);
+                            dynamicDataTable.Rows.Add(ordenDetalle.OrdenDetalleId, codigo, servicios.IdEstandar, servicios.NombreEstandar, Cantidad, servicios.MontoVd, int.Parse(Cantidad) * servicios.MontoVd);
                         }
                     }
                     else
@@ -724,14 +897,13 @@ namespace NeoCobranza.ViewModels
                             Subtotal = decimal.Parse((int.Parse(Cantidad) * servicios.MontoVd).ToString())
                         };
 
-                        db.Add(ordenDetalle);
-                        db.SaveChanges();
+                        ActualizarTotales(int.Parse(frm.LblNoOrden.Text), ordenDetalle.OrdenDetalleId, int.Parse(idProd), int.Parse(Cantidad), "Agregar");
 
                         string codigo = servicios.Codigo == null ? string.Empty : servicios.Codigo;
                         dynamicDataTable.Rows.Add(ordenDetalle.OrdenDetalleId, codigo, servicios.IdEstandar, servicios.NombreEstandar, Cantidad, servicios.MontoVd, int.Parse(Cantidad) * servicios.MontoVd);
                     }
                 }
-              
+
                 //Calculos de totales
                 double SubTotal = 0;
                 foreach (DataRow row in dynamicDataTable.Rows)
@@ -739,29 +911,37 @@ namespace NeoCobranza.ViewModels
                     SubTotal = SubTotal + double.Parse(row[6].ToString());
                 }
 
-                double tasaIVA = 15; 
+                double tasaIVA = 15;
 
                 double montoIVA = SubTotal - (SubTotal / (1 + (tasaIVA / 100)));
 
-                frm.TxtSubTotal.Text = (Math.Round(SubTotal - montoIVA,2)).ToString();
-                frm.TxtIVA.Text = Math.Round(montoIVA,2).ToString();
-                frm.TxtTotalCordoba.Text = Math.Round(SubTotal,2).ToString();
-                frm.TxtTotalDolar.Text = (Math.Round(SubTotal/double.Parse(Utilidades.Tasa),2)).ToString();
+                frm.TxtSubTotal.Text = (Math.Round(SubTotal - montoIVA, 2)).ToString();
+                frm.TxtIVA.Text = Math.Round(montoIVA, 2).ToString();
+                frm.TxtTotalCordoba.Text = Math.Round(SubTotal, 2).ToString();
+                frm.TxtTotalDolar.Text = (Math.Round(SubTotal / double.Parse(Utilidades.Tasa), 2)).ToString();
 
-                if(frm.ChkRetencionAlcaldia.Checked )
+                if (frm.ChkRetencionAlcaldia.Checked)
                 {
-                    double RetencionAlcaldia = Math.Round(double.Parse(frm.TxtSubTotal.Text.Trim()) * 0.01,2);
+                    double RetencionAlcaldia = Math.Round(double.Parse(frm.TxtSubTotal.Text.Trim()) * 0.01, 2);
                     frm.TxtRetencionAlcaldia.Text = RetencionAlcaldia.ToString();
                     frm.TxtTotalCordoba.Text = (double.Parse(frm.TxtTotalCordoba.Text) - RetencionAlcaldia).ToString();
                     frm.TxtTotalDolar.Text = (Math.Round(double.Parse(frm.TxtTotalCordoba.Text) / double.Parse(Utilidades.Tasa), 2)).ToString();
                 }
-
-                if(frm.ChkRetencionDgi.Checked )
+                else
                 {
-                    double RetencionDgi = Math.Round(double.Parse(frm.TxtSubTotal.Text.Trim()) * 0.02,2);
+                    frm.TxtRetencionAlcaldia.Text = "0";
+                }
+
+                if (frm.ChkRetencionDgi.Checked)
+                {
+                    double RetencionDgi = Math.Round(double.Parse(frm.TxtSubTotal.Text.Trim()) * 0.02, 2);
                     frm.TxtRetencionDGI.Text = RetencionDgi.ToString();
                     frm.TxtTotalCordoba.Text = (double.Parse(frm.TxtTotalCordoba.Text) - RetencionDgi).ToString();
                     frm.TxtTotalDolar.Text = (Math.Round(double.Parse(frm.TxtTotalCordoba.Text) / double.Parse(Utilidades.Tasa), 2)).ToString();
+                }
+                else
+                {
+                    frm.TxtRetencionDGI.Text = "0";
                 }
 
                 Ordenes ordenes = db.Ordenes.Where(s => s.OrdenId == int.Parse(frm.LblNoOrden.Text)).FirstOrDefault();
@@ -776,15 +956,159 @@ namespace NeoCobranza.ViewModels
                 db.Update(ordenes);
                 db.SaveChanges();
 
-                if (frm.TxtTotalCordoba.Text.Trim() != "0") 
-                { 
-                  frm.BtnPagarOrden.Enabled = true;
+                if (frm.TxtTotalCordoba.Text.Trim() != "0")
+                {
+                    frm.BtnPagarOrden.Enabled = true;
                 }
                 else
                 {
-                  frm.BtnPagarOrden.Enabled = false;
+                    frm.BtnPagarOrden.Enabled = false;
                 }
             }
         }
+
+        public void ActualizarTotales(int idOrden,int idOrdenDetalle, int idProducto,int cantidad,string accion)
+        {
+            using(NeoCobranzaContext db = new NeoCobranzaContext())
+            {
+                Almacenes almacen = db.Almacenes.Where(s => s.SucursalId == int.Parse(Utilidades.SucursalId) && s.EsMostrador == true).FirstOrDefault();
+                Inventario inventario = db.Inventario.Where(s => s.ProductoId == idProducto).FirstOrDefault();
+                RelAlmacenProducto relAlmacenProducto = db.RelAlmacenProducto.Where(s => s.ProductoId == idProducto
+                && s.AlmacenId == almacen.AlmacenId).FirstOrDefault();
+                ServiciosEstadares producto = db.ServiciosEstadares.Where(s => s.IdEstandar == idProducto).FirstOrDefault();
+                Kardex kardexUltimo = db.Kardex.Where(s => s.ProductoId == idProducto
+                        && s.AlmacenId == almacen.AlmacenId ).OrderByDescending(s => s.MovimientoId).FirstOrDefault();
+
+                switch (accion)
+                {
+                    case "Agregar":
+                        //QUITAR DEL INVENTARIO  BIEN
+                        inventario.Cantidad -= cantidad;
+                        db.Update(inventario);
+
+                        //QUITAR DEL RELINVENTARIO BIEN
+                        relAlmacenProducto.Cantidad -= cantidad;
+                        db.Update(relAlmacenProducto);
+
+                        //LOTES BIEN
+                        LotesProducto lotelista = new LotesProducto();
+                        List<LotesProducto> lotesDisponibles = new List<LotesProducto>();
+
+                        if (producto.ManejoInventario.Trim() == "PEPS")
+                        {
+                            lotesDisponibles = db.LotesProducto.Where(s => s.ProductoId == producto.IdEstandar &&
+                           s.AlmacenId == almacen.AlmacenId && s.CantidadRestante > 0).OrderBy(s => s.FechaCreacion).ToList();
+                        }
+                        else if (producto.ManejoInventario.Trim() == "UEPS")
+                        {
+                            lotesDisponibles = db.LotesProducto.Where(s => s.ProductoId == producto.IdEstandar &&
+                           s.AlmacenId == almacen.AlmacenId && s.CantidadRestante > 0).OrderByDescending(s => s.FechaCreacion).ToList();
+                        }
+                        else if (producto.ManejoInventario.Trim() == "PCPS" && producto.Expira == "Expira")
+                        {
+                            lotesDisponibles = db.LotesProducto.Where(s => s.ProductoId == producto.IdEstandar &&
+                           s.AlmacenId == almacen.AlmacenId && s.CantidadRestante > 0).OrderBy(s => s.FechaExpiracion).ToList();
+                        }
+                        else
+                        {
+                            lotesDisponibles = db.LotesProducto.Where(s => s.ProductoId == producto.IdEstandar &&
+                           s.AlmacenId == almacen.AlmacenId && s.CantidadRestante > 0).OrderBy(s => s.FechaCreacion).ToList();
+                        }
+
+                        int cantidadRestante = cantidad;
+
+                        foreach (var item in lotesDisponibles)
+                        {
+                            if (cantidadRestante > 0)
+                            {
+                                OrdenDetalleLote ordenDetalleLote = db.OrdenDetalleLote.Where(s => s.LoteId  == item.LoteId && s.RelOrdenDetalleLote == idOrdenDetalle).FirstOrDefault();
+
+                                if (ordenDetalleLote == null)
+                                {
+                                    ordenDetalleLote = new OrdenDetalleLote()
+                                    {
+                                        LoteId = item.LoteId,
+                                        OrdenDetalleId = idOrdenDetalle
+                                    };
+                                }
+
+                                if (item.CantidadRestante >= cantidadRestante)
+                                {
+                                    item.CantidadRestante -= cantidadRestante;
+                                    ordenDetalleLote.Cantidad += cantidadRestante;
+                                    cantidadRestante = 0;
+                                    db.Update(item);
+                                    db.SaveChanges();
+                                }
+                                else
+                                {
+                                    cantidadRestante -= int.Parse(item.CantidadRestante.ToString());
+                                    ordenDetalleLote.Cantidad += cantidadRestante;
+                                    item.CantidadRestante = 0;
+                                    db.Update(item);
+                                    db.SaveChanges();
+                                   
+                                }
+
+                                db.Update(ordenDetalleLote); db.SaveChanges();
+                                db.SaveChanges();
+                            }
+                        }
+
+                        break;
+
+                    case "Quitar":
+                        // AGREGAR AL INVENTARIO
+                        inventario.Cantidad += cantidad;
+                        db.Update(inventario);
+
+                        // AGREGAR AL RELINVENTARIO
+                        relAlmacenProducto.Cantidad += cantidad;
+                        db.Update(relAlmacenProducto);
+
+                        // LOTES
+                        LotesProducto lotelistaQuitar = new LotesProducto();
+                        List<LotesProducto> lotesAsignados = new List<LotesProducto>();
+
+                        // Obtenemos los lotes usados en la orden detalle
+                        List<OrdenDetalleLote> ordenDetalleLotes = db.OrdenDetalleLote.Where(s => s.OrdenDetalleId == idOrdenDetalle).ToList();
+
+                        int cantidadRestanteQuitar = cantidad;
+
+                        foreach (var detalleLote in ordenDetalleLotes)
+                        {
+                            if (cantidadRestanteQuitar > 0)
+                            {
+                                var lote = db.LotesProducto.Where(s => s.LoteId == detalleLote.LoteId).FirstOrDefault();
+
+                                if (lote != null)
+                                {
+                                    if (detalleLote.Cantidad <= cantidadRestanteQuitar)
+                                    {
+                                        lote.CantidadRestante += detalleLote.Cantidad;
+                                        cantidadRestanteQuitar -= (int)detalleLote.Cantidad;
+                                        detalleLote.Cantidad = 0;
+                                    }
+                                    else
+                                    {
+                                        lote.CantidadRestante += cantidadRestanteQuitar;
+                                        detalleLote.Cantidad -= cantidadRestanteQuitar;
+                                        cantidadRestanteQuitar = 0;
+                                    }
+
+                                    db.Update(lote);
+                                    db.Update(detalleLote);
+                                    db.SaveChanges();
+                                }
+                            }
+                        }
+
+                        break;
+                }
+
+                db.SaveChanges();
+            }
+        }
+
     }
 }

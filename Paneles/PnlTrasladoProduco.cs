@@ -263,48 +263,48 @@ namespace NeoCobranza.Paneles
                         Kardex kardexUltimo = db.Kardex.Where(s => s.ProductoId == lote.ProductoId
                             && s.AlmacenId == int.Parse(CmbAlmacenSalida.SelectedValue.ToString())).OrderByDescending(s => s.MovimientoId).FirstOrDefault();
 
-                        if (kardexUltimo != null)
-                        {
-                            Kardex kardex = new Kardex()
-                            {
-                                Fecha = DateTime.Now.Date,
-                                Operacion = "Traslado",
-                                AlmacenId = int.Parse(CmbAlmacenSalida.SelectedValue.ToString()),
-                                ProductoId = lote.ProductoId,
-                                UnidadesSalida = int.Parse(item[5].ToString()),
-                                CostoUnitarioSalida = lote.CostoU,
-                                TotalSalida = lote.CostoU * int.Parse(item[5].ToString()),
-                                UnidadesSaldo = kardexUltimo.UnidadesSaldo - int.Parse(item[5].ToString()),
-                                CostoUnitarioSaldo = (kardexUltimo.CostoTotalSaldo - (lote.CostoU * int.Parse(item[5].ToString()))) / (kardexUltimo.UnidadesSaldo - int.Parse(item[5].ToString())),
-                                CostoTotalSaldo = kardexUltimo.CostoTotalSaldo - (lote.CostoU * int.Parse(item[5].ToString())),
-                                IdDocumento = traslados.TrasladoId.ToString(),
-                                Lote = lote.LoteId
-                            };
+                        //if (kardexUltimo != null)
+                        //{
+                        //    Kardex kardex = new Kardex()
+                        //    {
+                        //        Fecha = DateTime.Now.Date,
+                        //        Operacion = "Traslado",
+                        //        AlmacenId = int.Parse(CmbAlmacenSalida.SelectedValue.ToString()),
+                        //        ProductoId = lote.ProductoId,
+                        //        UnidadesSalida = int.Parse(item[5].ToString()),
+                        //        CostoUnitarioSalida = lote.CostoU,
+                        //        TotalSalida = lote.CostoU * int.Parse(item[5].ToString()),
+                        //        UnidadesSaldo = kardexUltimo.UnidadesSaldo - int.Parse(item[5].ToString()),
+                        //        CostoUnitarioSaldo = (kardexUltimo.CostoTotalSaldo - (lote.CostoU * int.Parse(item[5].ToString()))) / (kardexUltimo.UnidadesSaldo - int.Parse(item[5].ToString())),
+                        //        CostoTotalSaldo = kardexUltimo.CostoTotalSaldo - (lote.CostoU * int.Parse(item[5].ToString())),
+                        //        IdDocumento = traslados.TrasladoId.ToString(),
+                        //        Lote = lote.LoteId
+                        //    };
 
-                            db.Add(kardex);
-                            db.SaveChanges();
-                        }
-                        else
-                        {
-                            Kardex kardex = new Kardex()
-                            {
-                                Fecha = DateTime.Now.Date,
-                                Operacion = "Traslado",
-                                AlmacenId = int.Parse(CmbAlmacenSalida.SelectedValue.ToString()),
-                                ProductoId = lote.ProductoId,
-                                UnidadesSaldo = int.Parse(item[5].ToString()),
-                                CostoUnitarioSaldo = lote.CostoU * int.Parse(item[5].ToString()),
-                                CostoTotalSaldo = lote.CostoU * int.Parse(item[5].ToString()),
-                                UnidadesSalida = int.Parse(item[5].ToString()),
-                                CostoUnitarioSalida = lote.CostoU,
-                                TotalSalida = lote.CostoU * int.Parse(item[5].ToString()),
-                                IdDocumento = traslados.TrasladoId.ToString(),
-                                Lote = lote.LoteId
-                            };
+                        //    db.Add(kardex);
+                        //    db.SaveChanges();
+                        //}
+                        //else
+                        //{
+                        //    Kardex kardex = new Kardex()
+                        //    {
+                        //        Fecha = DateTime.Now.Date,
+                        //        Operacion = "Traslado",
+                        //        AlmacenId = int.Parse(CmbAlmacenSalida.SelectedValue.ToString()),
+                        //        ProductoId = lote.ProductoId,
+                        //        UnidadesSaldo = int.Parse(item[5].ToString()),
+                        //        CostoUnitarioSaldo = lote.CostoU * int.Parse(item[5].ToString()),
+                        //        CostoTotalSaldo = lote.CostoU * int.Parse(item[5].ToString()),
+                        //        UnidadesSalida = int.Parse(item[5].ToString()),
+                        //        CostoUnitarioSalida = lote.CostoU,
+                        //        TotalSalida = lote.CostoU * int.Parse(item[5].ToString()),
+                        //        IdDocumento = traslados.TrasladoId.ToString(),
+                        //        Lote = lote.LoteId
+                        //    };
 
-                            db.Add(kardex);
-                            db.SaveChanges();
-                        }
+                        //    db.Add(kardex);
+                        //    db.SaveChanges();
+                        //}
 
                         //Kardex de lote viejo
 
@@ -332,48 +332,48 @@ namespace NeoCobranza.Paneles
                         Kardex kardexUltimoNuevo = db.Kardex.Where(s => s.ProductoId == loteNuevo.ProductoId
                          && s.AlmacenId == int.Parse(CmbAlmacenEntrado.SelectedValue.ToString())).OrderByDescending(s => s.MovimientoId).FirstOrDefault();
 
-                        if (kardexUltimoNuevo != null)
-                        {
-                            Kardex kardex = new Kardex()
-                            {
-                                Fecha = DateTime.Now.Date,
-                                Operacion = "Traslado",
-                                AlmacenId = int.Parse(CmbAlmacenEntrado.SelectedValue.ToString()),
-                                ProductoId = loteNuevo.ProductoId,
-                                UnidadesEntrada = int.Parse(item[5].ToString()),
-                                CostoUnitarioEntrada = loteNuevo.CostoU,
-                                TotalEntrada = loteNuevo.CostoU * int.Parse(item[5].ToString()),
-                                UnidadesSaldo = kardexUltimoNuevo.UnidadesSaldo + int.Parse(item[5].ToString()),
-                                CostoUnitarioSaldo = (kardexUltimoNuevo.CostoTotalSaldo + (loteNuevo.CostoU * int.Parse(item[5].ToString()))) / (kardexUltimoNuevo.UnidadesSaldo + int.Parse(item[5].ToString())),
-                                CostoTotalSaldo = kardexUltimoNuevo.CostoTotalSaldo + (lote.CostoU * int.Parse(item[5].ToString())),
-                                IdDocumento = traslados.TrasladoId.ToString(),
-                                Lote = loteNuevo.LoteId
-                            };
+                        //if (kardexUltimoNuevo != null)
+                        //{
+                        //    Kardex kardex = new Kardex()
+                        //    {
+                        //        Fecha = DateTime.Now.Date,
+                        //        Operacion = "Traslado",
+                        //        AlmacenId = int.Parse(CmbAlmacenEntrado.SelectedValue.ToString()),
+                        //        ProductoId = loteNuevo.ProductoId,
+                        //        UnidadesEntrada = int.Parse(item[5].ToString()),
+                        //        CostoUnitarioEntrada = loteNuevo.CostoU,
+                        //        TotalEntrada = loteNuevo.CostoU * int.Parse(item[5].ToString()),
+                        //        UnidadesSaldo = kardexUltimoNuevo.UnidadesSaldo + int.Parse(item[5].ToString()),
+                        //        CostoUnitarioSaldo = (kardexUltimoNuevo.CostoTotalSaldo + (loteNuevo.CostoU * int.Parse(item[5].ToString()))) / (kardexUltimoNuevo.UnidadesSaldo + int.Parse(item[5].ToString())),
+                        //        CostoTotalSaldo = kardexUltimoNuevo.CostoTotalSaldo + (lote.CostoU * int.Parse(item[5].ToString())),
+                        //        IdDocumento = traslados.TrasladoId.ToString(),
+                        //        Lote = loteNuevo.LoteId
+                        //    };
 
-                            db.Add(kardex);
-                            db.SaveChanges();
-                        }
-                        else
-                        {
-                            Kardex kardex = new Kardex()
-                            {
-                                Fecha = DateTime.Now.Date,
-                                Operacion = "Traslado",
-                                AlmacenId = int.Parse(CmbAlmacenEntrado.SelectedValue.ToString()),
-                                ProductoId = lote.ProductoId,
-                                UnidadesSaldo = int.Parse(item[5].ToString()),
-                                CostoUnitarioSaldo = lote.CostoU * int.Parse(item[5].ToString()),
-                                CostoTotalSaldo = lote.CostoU * int.Parse(item[5].ToString()),
-                                 UnidadesEntrada = int.Parse(item[5].ToString()),
-                                CostoUnitarioEntrada = lote.CostoU,
-                                TotalEntrada = lote.CostoU * int.Parse(item[5].ToString()),
-                                IdDocumento = traslados.TrasladoId.ToString(),
-                                Lote = loteNuevo.LoteId
-                            };
+                        //    db.Add(kardex);
+                        //    db.SaveChanges();
+                        //}
+                        //else
+                        //{
+                        //    Kardex kardex = new Kardex()
+                        //    {
+                        //        Fecha = DateTime.Now.Date,
+                        //        Operacion = "Traslado",
+                        //        AlmacenId = int.Parse(CmbAlmacenEntrado.SelectedValue.ToString()),
+                        //        ProductoId = lote.ProductoId,
+                        //        UnidadesSaldo = int.Parse(item[5].ToString()),
+                        //        CostoUnitarioSaldo = lote.CostoU * int.Parse(item[5].ToString()),
+                        //        CostoTotalSaldo = lote.CostoU * int.Parse(item[5].ToString()),
+                        //         UnidadesEntrada = int.Parse(item[5].ToString()),
+                        //        CostoUnitarioEntrada = lote.CostoU,
+                        //        TotalEntrada = lote.CostoU * int.Parse(item[5].ToString()),
+                        //        IdDocumento = traslados.TrasladoId.ToString(),
+                        //        Lote = loteNuevo.LoteId
+                        //    };
 
-                            db.Add(kardex);
-                            db.SaveChanges();
-                        }
+                        //    db.Add(kardex);
+                        //    db.SaveChanges();
+                        //}
                         //Kardex lote nuevo
 
                         //Actualizar los datos de  almacenes

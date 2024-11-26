@@ -230,6 +230,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="StackExchange.Redis, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c219ff1ca8c2ce46, processorArchitecture=MSIL">
       <HintPath>packages\StackExchange.Redis.2.6.116\lib\net472\StackExchange.Redis.dll</HintPath>
       <Private>True</Private>
@@ -366,6 +367,7 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -374,7 +376,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\Ataudes.cs" />
@@ -490,11 +494,11 @@
     <Compile Include="Especiales\RJDropDownMenu.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="PantallasInicio\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="PantallasInicio\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="ModelObjectCobranza\AuditoriaModel.cs" />
     <Compile Include="ModelObjectCobranza\RolModel.cs" />
@@ -522,7 +526,9 @@
     <Compile Include="ModelsCobranza\MotivosCancelacion.cs" />
     <Compile Include="ModelsCobranza\NeoCobranzaContext.cs" />
     <Compile Include="ModelsCobranza\OrdenDetalle.cs" />
+    <Compile Include="ModelsCobranza\OrdenDetalleLote.cs" />
     <Compile Include="ModelsCobranza\Ordenes.cs" />
+    <Compile Include="ModelsCobranza\Pagos.cs" />
     <Compile Include="ModelsCobranza\Proveedores.cs" />
     <Compile Include="ModelsCobranza\RelAlmacenDetalle.cs" />
     <Compile Include="ModelsCobranza\RelAlmacenProducto.cs" />
@@ -1048,6 +1054,12 @@
     <Compile Include="Paneles_Venta\PnlVentasFacturacion.Designer.cs">
       <DependentUpon>PnlVentasFacturacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="PantallasInicio\frmSeleccionSucursal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasInicio\frmSeleccionSucursal.Designer.cs">
+      <DependentUpon>frmSeleccionSucursal.cs</DependentUpon>
+    </Compile>
     <Compile Include="PnlInventario\Pnl_InformeInventario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1075,6 +1087,7 @@
     <Compile Include="ViewGestionUsuario\PnlCMUsuario.Designer.cs">
       <DependentUpon>PnlCMUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\DataUtilities.cs" />
     <Compile Include="ViewModels\Utilidades.cs" />
     <Compile Include="ViewModels\VMCatalogoAlmacenes.cs" />
     <Compile Include="ViewModels\VMCatalogoBanco.cs" />
@@ -1102,8 +1115,8 @@
     <EmbeddedResource Include="Especiales\LoginUserControl.resx">
       <DependentUpon>LoginUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="PantallasInicio\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Informes\InformeVD.rdlc" />
     <EmbeddedResource Include="Informes\Informe_Inventario.rdlc" />
@@ -1365,6 +1378,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles_Venta\PnlVentasFacturacion.resx">
       <DependentUpon>PnlVentasFacturacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PantallasInicio\frmSeleccionSucursal.resx">
+      <DependentUpon>frmSeleccionSucursal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PnlInventario\Informes\Rpt_Inventario.rdlc" />
     <EmbeddedResource Include="PnlInventario\Pnl_InformeInventario.resx">

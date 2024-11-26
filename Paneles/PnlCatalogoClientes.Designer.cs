@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PnlCatalogoClientes));
             this.dgvCatalogoClientes = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
@@ -41,8 +41,16 @@
             this.TxtFiltrar = new NeoCobranza.Controladores.LoginUserControl();
             this.PnlTitulo = new System.Windows.Forms.Panel();
             this.TbTitulo = new System.Windows.Forms.Label();
+            this.PnlPaginado = new System.Windows.Forms.Panel();
+            this.TxtPaginaDe = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.TxtPaginaNo = new System.Windows.Forms.TextBox();
+            this.BtnAnterior = new System.Windows.Forms.Button();
+            this.BtnSiguiente = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCatalogoClientes)).BeginInit();
             this.PnlTitulo.SuspendLayout();
+            this.PnlPaginado.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvCatalogoClientes
@@ -56,36 +64,36 @@
             this.dgvCatalogoClientes.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvCatalogoClientes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dgvCatalogoClientes.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCatalogoClientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCatalogoClientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvCatalogoClientes.ColumnHeadersHeight = 30;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCatalogoClientes.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCatalogoClientes.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvCatalogoClientes.GridColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgvCatalogoClientes.Location = new System.Drawing.Point(12, 86);
             this.dgvCatalogoClientes.Name = "dgvCatalogoClientes";
             this.dgvCatalogoClientes.ReadOnly = true;
             this.dgvCatalogoClientes.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCatalogoClientes.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCatalogoClientes.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvCatalogoClientes.RowHeadersWidth = 15;
             this.dgvCatalogoClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCatalogoClientes.Size = new System.Drawing.Size(1117, 358);
@@ -233,10 +241,89 @@
             this.TbTitulo.TabIndex = 1;
             this.TbTitulo.Text = "Catálogo de Clientes";
             // 
+            // PnlPaginado
+            // 
+            this.PnlPaginado.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.PnlPaginado.Controls.Add(this.TxtPaginaDe);
+            this.PnlPaginado.Controls.Add(this.label4);
+            this.PnlPaginado.Controls.Add(this.label2);
+            this.PnlPaginado.Controls.Add(this.TxtPaginaNo);
+            this.PnlPaginado.Controls.Add(this.BtnAnterior);
+            this.PnlPaginado.Controls.Add(this.BtnSiguiente);
+            this.PnlPaginado.Location = new System.Drawing.Point(16, 454);
+            this.PnlPaginado.Name = "PnlPaginado";
+            this.PnlPaginado.Size = new System.Drawing.Size(545, 47);
+            this.PnlPaginado.TabIndex = 106;
+            // 
+            // TxtPaginaDe
+            // 
+            this.TxtPaginaDe.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtPaginaDe.Location = new System.Drawing.Point(468, 11);
+            this.TxtPaginaDe.Name = "TxtPaginaDe";
+            this.TxtPaginaDe.ReadOnly = true;
+            this.TxtPaginaDe.Size = new System.Drawing.Size(62, 27);
+            this.TxtPaginaDe.TabIndex = 5;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(430, 14);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(32, 21);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "De";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(261, 14);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(95, 21);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Pagina No:";
+            // 
+            // TxtPaginaNo
+            // 
+            this.TxtPaginaNo.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtPaginaNo.Location = new System.Drawing.Point(362, 11);
+            this.TxtPaginaNo.Name = "TxtPaginaNo";
+            this.TxtPaginaNo.ReadOnly = true;
+            this.TxtPaginaNo.Size = new System.Drawing.Size(62, 27);
+            this.TxtPaginaNo.TabIndex = 2;
+            // 
+            // BtnAnterior
+            // 
+            this.BtnAnterior.BackColor = System.Drawing.SystemColors.ControlText;
+            this.BtnAnterior.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnAnterior.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnAnterior.Location = new System.Drawing.Point(4, 3);
+            this.BtnAnterior.Name = "BtnAnterior";
+            this.BtnAnterior.Size = new System.Drawing.Size(118, 41);
+            this.BtnAnterior.TabIndex = 1;
+            this.BtnAnterior.Text = "Anterior";
+            this.BtnAnterior.UseVisualStyleBackColor = false;
+            this.BtnAnterior.Click += new System.EventHandler(this.BtnAnterior_Click);
+            // 
+            // BtnSiguiente
+            // 
+            this.BtnSiguiente.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.BtnSiguiente.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnSiguiente.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnSiguiente.Location = new System.Drawing.Point(127, 3);
+            this.BtnSiguiente.Name = "BtnSiguiente";
+            this.BtnSiguiente.Size = new System.Drawing.Size(118, 41);
+            this.BtnSiguiente.TabIndex = 0;
+            this.BtnSiguiente.Text = "Siguiente";
+            this.BtnSiguiente.UseVisualStyleBackColor = false;
+            this.BtnSiguiente.Click += new System.EventHandler(this.BtnSiguiente_Click);
+            // 
             // PnlCatalogoClientes
             // 
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1141, 562);
+            this.Controls.Add(this.PnlPaginado);
             this.Controls.Add(this.PnlTitulo);
             this.Controls.Add(this.BtnBuscarCliente);
             this.Controls.Add(this.CmbBuscarPor);
@@ -251,6 +338,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCatalogoClientes)).EndInit();
             this.PnlTitulo.ResumeLayout(false);
             this.PnlTitulo.PerformLayout();
+            this.PnlPaginado.ResumeLayout(false);
+            this.PnlPaginado.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -271,5 +360,12 @@
         public Controladores.LoginUserControl TxtFiltrar;
         private System.Windows.Forms.Panel PnlTitulo;
         public System.Windows.Forms.Label TbTitulo;
+        public System.Windows.Forms.Panel PnlPaginado;
+        public System.Windows.Forms.TextBox TxtPaginaDe;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label2;
+        public System.Windows.Forms.TextBox TxtPaginaNo;
+        public System.Windows.Forms.Button BtnAnterior;
+        public System.Windows.Forms.Button BtnSiguiente;
     }
 }

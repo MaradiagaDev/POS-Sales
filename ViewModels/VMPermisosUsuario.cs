@@ -66,7 +66,7 @@ namespace NeoCobranza.ViewModels
         {
             if (frm.TxtNombrePermiso.Text.Trim() == "")
             {
-                MessageBox.Show("No ha seleccionado un rol.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                System.Windows.Forms.MessageBox.Show("No ha seleccionado un rol.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -98,7 +98,7 @@ namespace NeoCobranza.ViewModels
                         }
                         else
                         {
-                            MessageBox.Show("No ha seleccionado un rol.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            System.Windows.Forms.MessageBox.Show("No ha seleccionado un rol.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
                     break;

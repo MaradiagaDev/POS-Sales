@@ -1,4 +1,5 @@
 ﻿using NeoCobranza.ModelsCobranza;
+using NeoCobranza.Paneles_Venta;
 using NeoCobranza.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,13 @@ namespace NeoCobranza.Paneles
     public partial class PnlCancelarOrden : Form
     {
         public DataTable dynamicDataTable = new DataTable();
+        public string auxKey = string.Empty;
+        PnlVentas auxFrm= null;
 
-        public PnlCancelarOrden(string key)
+        public PnlCancelarOrden(string key,PnlVentas frm)
         {
+            this.auxKey = key;
+            this.auxFrm = frm;
             InitializeComponent();
         }
 
@@ -28,8 +33,21 @@ namespace NeoCobranza.Paneles
 
         private void btnCancelarOrden_Click(object sender, EventArgs e)
         {
+            using(NeoCobranzaContext db = new NeoCobranzaContext())
+            {
+                Ordenes ordenes = db.Ordenes.Where(s => s.OrdenId == int.Parse(this.auxKey)).FirstOrDefault();
+
+                ordenes.OrdenProceso = "Orden Cancelada";
+                ordenes.MotivoCancelacion = TxtMotivoCancelacion.Text.Trim();
+                db.Update(ordenes);
+                db.SaveChanges();
+            }
+
             MessageBox.Show("La orden ha sido Cancelada", "Correcto",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            this.Close();
+            auxFrm.Close();
         }
 
         private void PnlCancelarOrden_Load(object sender, EventArgs e)

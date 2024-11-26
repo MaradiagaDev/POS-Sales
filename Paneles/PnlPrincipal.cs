@@ -31,24 +31,17 @@ namespace NeoCobranza.Paneles
 
         //Variable de ancho para menu desplegable
         int ancho = 165;
-        public PnlPrincipal(string user,Conexion conexion)
+        public PnlPrincipal()
         {
             InitializeComponent();
-            this.conexion = conexion;
-            LblUsuario.Text = user;
+            LblUsuario.Text = Utilidades.Usuario;
+            LblSucursal.Text = Utilidades.Sucursal;
 
-            using(NeoCobranzaContext db = new NeoCobranzaContext())
-            {
-                var sucursal = db.Sucursales.Where(s => s.SucursalId == int.Parse(Utilidades.SucursalId)).FirstOrDefault();
-                LblSucursal.Text = sucursal.NombreSucursal;
-            }
-
-            Timer Hora = new Timer();
-
+           Timer Hora = new Timer();
             Hora.Tick += new EventHandler(EventoHora);
             Hora.Enabled = true;
 
-            cSeguridad = new CSeguridad(conexion);
+            //cSeguridad = new CSeguridad(conexion);
         }
 
         private void EventoHora(Object ob, EventArgs e)
@@ -66,7 +59,7 @@ namespace NeoCobranza.Paneles
 
         private void PnlPrincipal_Load(object sender, EventArgs e)
         {
-            vMMenuPrincipal.InitModuloPrincipal(this);
+            //vMMenuPrincipal.InitModuloPrincipal(this);
         }
 
         private void LblUsuario_Click(object sender, EventArgs e)
@@ -81,10 +74,7 @@ namespace NeoCobranza.Paneles
                 
             }
         }
-        private void especialButton2_Click(object sender, EventArgs e)
-        {
-            DesplegableContrato.Show(especialButton2, ancho,0);
-        }
+
 
         private void especialButton3_Click(object sender, EventArgs e)
         {
@@ -157,7 +147,7 @@ namespace NeoCobranza.Paneles
 
         private void especialButton1_Click(object sender, EventArgs e)
         {
-            Form1 form1 = Owner as Form1;
+            frmLogin form1 = Owner as frmLogin;
             conexion.connect.Close();
             form1.Show();
             this.Close();
@@ -692,6 +682,17 @@ namespace NeoCobranza.Paneles
             pnlGeneral.Dock = DockStyle.Fill;
             PnlCentral.Tag = pnlGeneral;
             pnlGeneral.Show();
+        }
+
+        private void listaDeOrdenesActivasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            limpiar();
+            PnlVentas directas = new PnlVentas(conexion, "Listas");
+            directas.TopLevel = false;
+            directas.Dock = DockStyle.Fill;
+            directas.TopLevel = false;
+            PnlCentral.Controls.Add(directas);
+            directas.Show();
         }
     }
 }

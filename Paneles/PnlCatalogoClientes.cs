@@ -28,7 +28,7 @@ namespace NeoCobranza.Paneles
         private void PnlCatalogoClientes_Load(object sender, EventArgs e)
         {
             dgvCatalogoClientes.EnableHeadersVisualStyles = false;
-            dgvCatalogoClientes.ColumnHeadersDefaultCellStyle.BackColor = Color.CadetBlue;
+            dgvCatalogoClientes.ColumnHeadersDefaultCellStyle.BackColor = Color.DodgerBlue;
             dgvCatalogoClientes.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvCatalogoClientes.RowsDefaultCellStyle.Font = new Font("Century Gothic", 9);
             dgvCatalogoClientes.RowsDefaultCellStyle.BackColor = Color.White;
@@ -39,12 +39,14 @@ namespace NeoCobranza.Paneles
 
         private void BtnBuscarCliente_Click(object sender, EventArgs e)
         {
-            vMCatalogoCliente.FuncionesPrincipales(this,"Buscar");
+            vMCatalogoCliente.FuncionesPrincipales(this, "Buscar");
+
+
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            PanelModificarCliente frm = new PanelModificarCliente(this,"Crear");
+            PanelModificarCliente frm = new PanelModificarCliente(this, "Crear");
             frm.ShowDialog();
         }
 
@@ -65,7 +67,7 @@ namespace NeoCobranza.Paneles
             {
                 //Validaciones
 
-                    MessageBox.Show("Debe seleccionar un cliente.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);                
+                MessageBox.Show("Debe seleccionar un cliente.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
         }
@@ -78,5 +80,25 @@ namespace NeoCobranza.Paneles
                 vMCatalogoCliente.CambiarEstadoCliente(this, cellValue.ToString());
             }
         }
+
+        private void BtnSiguiente_Click(object sender, EventArgs e)
+        {
+            if (vMCatalogoCliente.currentPage < vMCatalogoCliente.totalPages)
+            {
+                vMCatalogoCliente.currentPage++;
+                vMCatalogoCliente.UpdatePagination(this);
+            }
+        }
+
+        private void BtnAnterior_Click(object sender, EventArgs e)
+        {
+            if (vMCatalogoCliente.currentPage > 1)
+            {
+                vMCatalogoCliente.currentPage--;
+                vMCatalogoCliente.UpdatePagination(this);
+            }
+        }
+
+
     }
 }

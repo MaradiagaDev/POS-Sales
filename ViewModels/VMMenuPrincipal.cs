@@ -34,7 +34,7 @@ namespace NeoCobranza.ViewModels
                 }
 
                 //Contratos
-                frm.especialButton2.Visible = (bool)permisos.Contratos;
+              
                 frm.crearContratoToolStripMenuItem.Visible = (bool)permisos.ContratosCrearContratos;
                 frm.buscarContratoToolStripMenuItem.Visible = (bool)permisos.ContratosBuscarProforma;
                 frm.crearProformaDeContratoToolStripMenuItem.Visible = (bool)permisos.ContratosCrearContratos;
@@ -54,19 +54,11 @@ namespace NeoCobranza.ViewModels
                     permisos.ContratosFactura == false &&
                     permisos.ContratosRetiroServicios == false)
                 {
-                    frm.especialButton2.Visible = false;
+
                 }
 
                 //Ventas
                 frm.BtnVentasDirectas.Visible = (bool)permisos.Ventas;
-
-                frm.BtnCrearProforma.Visible = (bool)permisos.VentasCrearProforma;
-                frm.BtnbuscarProformaToolStripMenuItem.Visible = (bool)permisos.VentasBuscarProformas;
-                if (permisos.VentasCrearProforma == false && permisos.VentasBuscarProformas == false)
-                {
-                    frm.BtnProforma.Visible = false;
-                }
-
 
                 frm.ventasDirectasDeAtaudesToolStripMenuItem.Visible = (bool)permisos.VentasDirectas;
                 frm.BtnOrdenMesa.Visible = (bool)permisos.VentarRetiros;
