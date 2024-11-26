@@ -225,13 +225,7 @@ namespace NeoCobranza.Paneles
 
         private void proveedoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            limpiar();
-            PnlCatalogoProveedores pnlCatalogoProveedores = new PnlCatalogoProveedores();
-            pnlCatalogoProveedores.TopLevel = false;
-            pnlCatalogoProveedores.Dock = DockStyle.Fill;
-            PnlCentral.Controls.Add(pnlCatalogoProveedores);
-            this.PnlCentral.Tag = pnlCatalogoProveedores;
-            pnlCatalogoProveedores.Show();
+            
         }
 
         private void BtnInventario_Click(object sender, EventArgs e)
@@ -277,7 +271,7 @@ namespace NeoCobranza.Paneles
         private void especialButton4_Click(object sender, EventArgs e)
         {
             limpiar();
-            MenuCaja.Show(btnCaja, ancho, 0);
+            MenuCaja.Show(btnDatosGenerales, ancho, 0);
         }
 
         private void reciboOficialDeCajaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -434,26 +428,12 @@ namespace NeoCobranza.Paneles
 
         private void BtnCategoriasProductos_Click(object sender, EventArgs e)
         {
-            limpiar();
-            PnlCatologoTiposServicios pnlGeneral = new PnlCatologoTiposServicios();
-            AddOwnedForm(pnlGeneral);
-            pnlGeneral.TopLevel = false;
-            PnlCentral.Controls.Add(pnlGeneral);
-            pnlGeneral.Dock = DockStyle.Fill;
-            PnlCentral.Tag = pnlGeneral;
-            pnlGeneral.Show();
+            
         }
 
         private void sucursalesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            limpiar();
-            PnlCatalogoSucursales pnlGeneral = new PnlCatalogoSucursales();
-            AddOwnedForm(pnlGeneral);
-            pnlGeneral.TopLevel = false;
-            PnlCentral.Controls.Add(pnlGeneral);
-            pnlGeneral.Dock = DockStyle.Fill;
-            PnlCentral.Tag = pnlGeneral;
-            pnlGeneral.Show();
+            
         }
 
         private void BtnAlmacenes_Click(object sender, EventArgs e)
@@ -530,26 +510,12 @@ namespace NeoCobranza.Paneles
 
         private void BtnMotivosCancelacion_Click(object sender, EventArgs e)
         {
-            limpiar();
-            CatologoMotivosCancelacion pnlGeneral = new CatologoMotivosCancelacion();
-            AddOwnedForm(pnlGeneral);
-            pnlGeneral.TopLevel = false;
-            PnlCentral.Controls.Add(pnlGeneral);
-            pnlGeneral.Dock = DockStyle.Fill;
-            PnlCentral.Tag = pnlGeneral;
-            pnlGeneral.Show();
+           
         }
 
         private void BtnCatalogoBanco_Click(object sender, EventArgs e)
         {
-            limpiar();
-            CatalogoBancos pnlGeneral = new CatalogoBancos();
-            AddOwnedForm(pnlGeneral);
-            pnlGeneral.TopLevel = false;
-            PnlCentral.Controls.Add(pnlGeneral);
-            pnlGeneral.Dock = DockStyle.Fill;
-            PnlCentral.Tag = pnlGeneral;
-            pnlGeneral.Show();
+            
         }
 
         private void BtnTasaCambio_Click(object sender, EventArgs e)
@@ -578,14 +544,7 @@ namespace NeoCobranza.Paneles
 
         private void BtnTiposTarjetas_Click(object sender, EventArgs e)
         {
-            limpiar();
-            CatalogoTiposTarjeta pnlGeneral = new CatalogoTiposTarjeta();
-            AddOwnedForm(pnlGeneral);
-            pnlGeneral.TopLevel = false;
-            PnlCentral.Controls.Add(pnlGeneral);
-            pnlGeneral.Dock = DockStyle.Fill;
-            PnlCentral.Tag = pnlGeneral;
-            pnlGeneral.Show();
+            
         }
 
         private void configFacturaciónToolStripMenuItem_Click(object sender, EventArgs e)
@@ -693,6 +652,82 @@ namespace NeoCobranza.Paneles
             directas.TopLevel = false;
             PnlCentral.Controls.Add(directas);
             directas.Show();
+        }
+
+        private void BtnCatalogoGeneral_Click(object sender, EventArgs e)
+        {
+            DesplegableContrato.Show(BtnCatalogoGeneral, ancho, 0);
+        }
+
+        private void BtnProveedor_Click(object sender, EventArgs e)
+        {
+            limpiar();
+            PnlCatalogoProveedores pnlCatalogoProveedores = new PnlCatalogoProveedores();
+            pnlCatalogoProveedores.TopLevel = false;
+            pnlCatalogoProveedores.Dock = DockStyle.Fill;
+            PnlCentral.Controls.Add(pnlCatalogoProveedores);
+            this.PnlCentral.Tag = pnlCatalogoProveedores;
+            pnlCatalogoProveedores.Show();
+        }
+
+        private void BtnCargorizacion_Click(object sender, EventArgs e)
+        {
+            limpiar();
+            PnlCatologoTiposServicios pnlGeneral = new PnlCatologoTiposServicios();
+            AddOwnedForm(pnlGeneral);
+            pnlGeneral.TopLevel = false;
+            PnlCentral.Controls.Add(pnlGeneral);
+            pnlGeneral.Dock = DockStyle.Fill;
+            PnlCentral.Tag = pnlGeneral;
+            pnlGeneral.Show();
+        }
+
+        private void BtnMotivoCancelacion_Click(object sender, EventArgs e)
+        {
+            limpiar();
+            CatologoMotivosCancelacion pnlGeneral = new CatologoMotivosCancelacion();
+            AddOwnedForm(pnlGeneral);
+            pnlGeneral.TopLevel = false;
+            PnlCentral.Controls.Add(pnlGeneral);
+            pnlGeneral.Dock = DockStyle.Fill;
+            PnlCentral.Tag = pnlGeneral;
+            pnlGeneral.Show();
+        }
+
+        private void BtnBancos_Click(object sender, EventArgs e)
+        {
+            limpiar();
+            CatalogoBancos pnlGeneral = new CatalogoBancos();
+            AddOwnedForm(pnlGeneral);
+            pnlGeneral.TopLevel = false;
+            PnlCentral.Controls.Add(pnlGeneral);
+            pnlGeneral.Dock = DockStyle.Fill;
+            PnlCentral.Tag = pnlGeneral;
+            pnlGeneral.Show();
+        }
+
+        private void BtnBancosTarjeta_Click(object sender, EventArgs e)
+        {
+            limpiar();
+            CatalogoTiposTarjeta pnlGeneral = new CatalogoTiposTarjeta();
+            AddOwnedForm(pnlGeneral);
+            pnlGeneral.TopLevel = false;
+            PnlCentral.Controls.Add(pnlGeneral);
+            pnlGeneral.Dock = DockStyle.Fill;
+            PnlCentral.Tag = pnlGeneral;
+            pnlGeneral.Show();
+        }
+
+        private void BtnSucursales_Click(object sender, EventArgs e)
+        {
+            limpiar();
+            PnlCatalogoSucursales pnlGeneral = new PnlCatalogoSucursales();
+            AddOwnedForm(pnlGeneral);
+            pnlGeneral.TopLevel = false;
+            PnlCentral.Controls.Add(pnlGeneral);
+            pnlGeneral.Dock = DockStyle.Fill;
+            PnlCentral.Tag = pnlGeneral;
+            pnlGeneral.Show();
         }
     }
 }

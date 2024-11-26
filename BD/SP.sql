@@ -1,5 +1,5 @@
 --PROCEDIMIENTOS ALMACENADOS
-ALTER PROCEDURE SP_LoginUser
+cREATE PROCEDURE SP_LoginUser
     @UserName NVARCHAR(50),
     @Password NVARCHAR(MAX)
 AS
@@ -52,7 +52,7 @@ BEGIN
 END;
 
 
-alter PROCEDURE SP_SaveOrUpdateUser
+cREATE PROCEDURE SP_SaveOrUpdateUser
     @IdUsuario NVARCHAR(50),
     @Usuario NVARCHAR(50),
     @ClaveUsuario NVARCHAR(MAX),
@@ -92,9 +92,9 @@ BEGIN
     END
 END;
 
-exec SP_SaveOrUpdateUser '','rmaradiaga','Facil123$','Activo',1
 
-alter PROCEDURE SP_OBTENERSUCURSALESUSUARIO
+
+CREATE PROCEDURE SP_OBTENERSUCURSALESUSUARIO
 @IdUsuario as nvarchar(50)
 as
 begin
@@ -189,7 +189,7 @@ BEGIN
 END
 
 
-alter PROCEDURE [dbo].[sp_ObtenerClientesFiltrados]
+CREATE PROCEDURE [dbo].[sp_ObtenerClientesFiltrados]
     @FiltroPor INT, -- 0 = ID, 1 = Nombre completo, 2 = Cédula
     @FiltroValor NVARCHAR(255), -- Valor a filtrar
     @IdSucursal NVARCHAR(50), -- ID de la sucursal para filtrar
@@ -276,3 +276,6 @@ BEGIN
         WHERE IdCliente = @IdCliente;
     END
 END
+
+
+--SP 26/11/2024

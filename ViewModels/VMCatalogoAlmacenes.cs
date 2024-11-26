@@ -16,6 +16,7 @@ namespace NeoCobranza.ViewModels
         DataTable dynamicDataTable = new DataTable();
         public string auxSearch;
         public string auxId;
+        DataUtilities dataUtilities = new DataUtilities();
 
         public void InitModuloCatalogoAlmacenes(PnlCatalogoAlmacenes frm, string opc)
         {
@@ -60,27 +61,26 @@ namespace NeoCobranza.ViewModels
             switch (opc)
             {
                 case "Buscar":
-                    using (NeoCobranzaContext db = new NeoCobranzaContext())
-                    {
-                        List<Almacenes> list = db.Almacenes.Where(c => c.NombreAlmacen.Contains(auxSearch)).ToList();
 
-                        foreach (Almacenes almacen in list.OrderByDescending(c => c.AlmacenId))
+                        DataTable dtRespuesta = dataUtilities.getRecordByColumn("Almacenes", "SucursalId", Utilidades.SucursalId);
+
+                        foreach (DataRow item  in dtRespuesta.Rows)
                         {
                             string sucursal;
-                            if (db.Sucursales.Where(c => c.SucursalId == almacen.SucursalId).FirstOrDefault() == null)
+                            if (Convert.ToString(item["SucursalId"]) == "")
                             {
                                 sucursal = "Sin Sucursal";
                             }
                             else
                             {
-                                sucursal = db.Sucursales.Where(c => c.SucursalId == almacen.SucursalId).FirstOrDefault().NombreSucursal.ToString(); 
+                                sucursal = dataUtilities.getRecordByPrimaryKey("Sucursal", Convert.ToString(item["SucursalId"])).Rows[0]["NombreSucursal"].ToString(); 
                             }
               
-                            dynamicDataTable.Rows.Add(almacen.AlmacenId, almacen.NombreAlmacen, almacen.Estatus, almacen.EsMostrador, sucursal);
+                            dynamicDataTable.Rows.Add(item["AlmacenId"], item["NombreAlmacen"], item["Estatus"], item["EsMostrador"], sucursal);
                         }
 
                         frm.dgvCatalogoAlmacenes.DataSource = dynamicDataTable;
-                    }
+                    
                     break;
                 case "Bloquear":
                     using (NeoCobranzaContext db = new NeoCobranzaContext())

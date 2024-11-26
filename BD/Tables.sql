@@ -81,8 +81,14 @@ ALTER TABLE [dbo].[Clientes] ADD  CONSTRAINT [DF_Clientes_Estado]  DEFAULT ((1))
 GO
 
 
-INSERT INTO [dbo].[UsuarioSucursal] (IdUsuario, IdSucursal)
-VALUES 
-('972F3360-1C03-4897-8F23-E1FBAEA1D273', 'S001'), -- Usuario U001 asignado a la Sucursal Centro
-('972F3360-1C03-4897-8F23-E1FBAEA1D273', 'S002') -- Usuario U002 asignado a la Sucursal Norte
+
+--TABLAS 26/11/2024
+
+CREATE TABLE [dbo].[Almacenes] (
+    [AlmacenId] NVARCHAR(50) NOT NULL PRIMARY KEY,                -- Identificador único para el almacén
+    [NombreAlmacen] NVARCHAR(255) NOT NULL,             -- Nombre del almacén, obligatorio
+    [EsMostrador] BIT NULL,                             -- Indica si es un mostrador (NULL si no especificado)
+    [SucursalId] NVARCHAR(50) NULL,                              -- Identificador de la sucursal, opcional
+    [Estatus] NVARCHAR(50) NOT NULL                    -- Estado del almacén (activo, inactivo, etc.)
+);
 

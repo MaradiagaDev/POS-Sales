@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PnlPrincipal));
             this.MenuVertical = new System.Windows.Forms.Panel();
+            this.BtnCatalogoGeneral = new NeoCobranza.Especiales.EspecialButton();
             this.especialButton6 = new NeoCobranza.Especiales.EspecialButton();
             this.BtnPromociones = new NeoCobranza.Especiales.EspecialButton();
             this.label4 = new System.Windows.Forms.Label();
@@ -39,7 +40,7 @@
             this.especialButton1 = new NeoCobranza.Especiales.EspecialButton();
             this.BtnConfigTurnos = new NeoCobranza.Especiales.EspecialButton();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnCaja = new NeoCobranza.Especiales.EspecialButton();
+            this.btnDatosGenerales = new NeoCobranza.Especiales.EspecialButton();
             this.BtnInventario = new NeoCobranza.Especiales.EspecialButton();
             this.btnSeguridad = new NeoCobranza.Especiales.EspecialButton();
             this.btnCatalogos = new NeoCobranza.Especiales.EspecialButton();
@@ -60,16 +61,12 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.PnlCentral = new System.Windows.Forms.Panel();
             this.DesplegableContrato = new NeoCobranza.Especiales.RJDropDownMenu(this.components);
-            this.crearContratoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.buscarContratoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.crearProformaDeContratoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gestionDeCuotasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pagoDePrimeraCuotaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pagoDeCuotasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contratosRetiradosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.informacionGeneralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.retiroDeServiciosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.realizarFacturaPorRetiroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BtnProveedor = new System.Windows.Forms.ToolStripMenuItem();
+            this.BtnCargorizacion = new System.Windows.Forms.ToolStripMenuItem();
+            this.BtnSucursales = new System.Windows.Forms.ToolStripMenuItem();
+            this.BtnMotivoCancelacion = new System.Windows.Forms.ToolStripMenuItem();
+            this.BtnBancos = new System.Windows.Forms.ToolStripMenuItem();
+            this.BtnBancosTarjeta = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuVentasDirectas = new NeoCobranza.Especiales.RJDropDownMenu(this.components);
             this.ventasDirectasDeAtaudesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BtnOrdenMesa = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,13 +78,7 @@
             this.datosDeLaEmpresaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuCatalogo = new NeoCobranza.Especiales.RJDropDownMenu(this.components);
             this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.proveedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.BtnCategoriasProductos = new System.Windows.Forms.ToolStripMenuItem();
-            this.sucursalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BtnAlmacenes = new System.Windows.Forms.ToolStripMenuItem();
-            this.BtnMotivosCancelacion = new System.Windows.Forms.ToolStripMenuItem();
-            this.BtnCatalogoBanco = new System.Windows.Forms.ToolStripMenuItem();
-            this.BtnTiposTarjetas = new System.Windows.Forms.ToolStripMenuItem();
             this.salasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuSeguridad = new NeoCobranza.Especiales.RJDropDownMenu(this.components);
             this.auditoriasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -127,6 +118,7 @@
             // 
             this.MenuVertical.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.MenuVertical.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.MenuVertical.Controls.Add(this.BtnCatalogoGeneral);
             this.MenuVertical.Controls.Add(this.especialButton6);
             this.MenuVertical.Controls.Add(this.BtnPromociones);
             this.MenuVertical.Controls.Add(this.label4);
@@ -135,7 +127,7 @@
             this.MenuVertical.Controls.Add(this.especialButton1);
             this.MenuVertical.Controls.Add(this.BtnConfigTurnos);
             this.MenuVertical.Controls.Add(this.label1);
-            this.MenuVertical.Controls.Add(this.btnCaja);
+            this.MenuVertical.Controls.Add(this.btnDatosGenerales);
             this.MenuVertical.Controls.Add(this.BtnInventario);
             this.MenuVertical.Controls.Add(this.btnSeguridad);
             this.MenuVertical.Controls.Add(this.btnCatalogos);
@@ -147,6 +139,29 @@
             this.MenuVertical.Name = "MenuVertical";
             this.MenuVertical.Size = new System.Drawing.Size(170, 700);
             this.MenuVertical.TabIndex = 0;
+            // 
+            // BtnCatalogoGeneral
+            // 
+            this.BtnCatalogoGeneral.BackColor = System.Drawing.Color.Transparent;
+            this.BtnCatalogoGeneral.BackGroundColor = System.Drawing.Color.Transparent;
+            this.BtnCatalogoGeneral.BorderColor = System.Drawing.Color.DarkGray;
+            this.BtnCatalogoGeneral.BorderRadius = 0;
+            this.BtnCatalogoGeneral.BorderSize = 2;
+            this.BtnCatalogoGeneral.FlatAppearance.BorderSize = 0;
+            this.BtnCatalogoGeneral.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.BtnCatalogoGeneral.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.BtnCatalogoGeneral.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCatalogoGeneral.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnCatalogoGeneral.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnCatalogoGeneral.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnCatalogoGeneral.Location = new System.Drawing.Point(3, 435);
+            this.BtnCatalogoGeneral.Name = "BtnCatalogoGeneral";
+            this.BtnCatalogoGeneral.Size = new System.Drawing.Size(161, 42);
+            this.BtnCatalogoGeneral.TabIndex = 14;
+            this.BtnCatalogoGeneral.Text = "Catalogo General";
+            this.BtnCatalogoGeneral.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnCatalogoGeneral.UseVisualStyleBackColor = false;
+            this.BtnCatalogoGeneral.Click += new System.EventHandler(this.BtnCatalogoGeneral_Click);
             // 
             // especialButton6
             // 
@@ -292,29 +307,29 @@
             this.label1.Text = "_______________________________________";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btnCaja
+            // btnDatosGenerales
             // 
-            this.btnCaja.BackColor = System.Drawing.Color.Transparent;
-            this.btnCaja.BackGroundColor = System.Drawing.Color.Transparent;
-            this.btnCaja.BorderColor = System.Drawing.Color.Transparent;
-            this.btnCaja.BorderRadius = 0;
-            this.btnCaja.BorderSize = 1;
-            this.btnCaja.FlatAppearance.BorderSize = 0;
-            this.btnCaja.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.btnCaja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCaja.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCaja.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnCaja.Image = ((System.Drawing.Image)(resources.GetObject("btnCaja.Image")));
-            this.btnCaja.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCaja.Location = new System.Drawing.Point(4, 221);
-            this.btnCaja.Name = "btnCaja";
-            this.btnCaja.Size = new System.Drawing.Size(161, 42);
-            this.btnCaja.TabIndex = 7;
-            this.btnCaja.Text = " Caja";
-            this.btnCaja.TextAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.btnCaja.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnCaja.UseVisualStyleBackColor = false;
-            this.btnCaja.Click += new System.EventHandler(this.especialButton4_Click);
+            this.btnDatosGenerales.BackColor = System.Drawing.Color.Transparent;
+            this.btnDatosGenerales.BackGroundColor = System.Drawing.Color.Transparent;
+            this.btnDatosGenerales.BorderColor = System.Drawing.Color.Transparent;
+            this.btnDatosGenerales.BorderRadius = 0;
+            this.btnDatosGenerales.BorderSize = 1;
+            this.btnDatosGenerales.FlatAppearance.BorderSize = 0;
+            this.btnDatosGenerales.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.btnDatosGenerales.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDatosGenerales.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDatosGenerales.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnDatosGenerales.Image = ((System.Drawing.Image)(resources.GetObject("btnDatosGenerales.Image")));
+            this.btnDatosGenerales.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDatosGenerales.Location = new System.Drawing.Point(4, 221);
+            this.btnDatosGenerales.Name = "btnDatosGenerales";
+            this.btnDatosGenerales.Size = new System.Drawing.Size(161, 42);
+            this.btnDatosGenerales.TabIndex = 7;
+            this.btnDatosGenerales.Text = " Caja";
+            this.btnDatosGenerales.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.btnDatosGenerales.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnDatosGenerales.UseVisualStyleBackColor = false;
+            this.btnDatosGenerales.Click += new System.EventHandler(this.especialButton4_Click);
             // 
             // BtnInventario
             // 
@@ -631,104 +646,66 @@
             this.DesplegableContrato.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(53)))), ((int)(((byte)(102)))));
             this.DesplegableContrato.IsMainMenu = false;
             this.DesplegableContrato.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.crearContratoToolStripMenuItem,
-            this.buscarContratoToolStripMenuItem,
-            this.crearProformaDeContratoToolStripMenuItem,
-            this.gestionDeCuotasToolStripMenuItem,
-            this.contratosRetiradosToolStripMenuItem,
-            this.informacionGeneralToolStripMenuItem,
-            this.retiroDeServiciosToolStripMenuItem,
-            this.realizarFacturaPorRetiroToolStripMenuItem});
+            this.BtnProveedor,
+            this.BtnCargorizacion,
+            this.BtnSucursales,
+            this.BtnMotivoCancelacion,
+            this.BtnBancos,
+            this.BtnBancosTarjeta});
             this.DesplegableContrato.MenuItemHeight = 25;
             this.DesplegableContrato.MenuItemTextColor = System.Drawing.Color.White;
             this.DesplegableContrato.Name = "DesplegableContrato";
             this.DesplegableContrato.PrimaryColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.DesplegableContrato.Size = new System.Drawing.Size(268, 196);
+            this.DesplegableContrato.Size = new System.Drawing.Size(222, 148);
             this.DesplegableContrato.Opening += new System.ComponentModel.CancelEventHandler(this.DesplegableContrato_Opening);
             // 
-            // crearContratoToolStripMenuItem
+            // BtnProveedor
             // 
-            this.crearContratoToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.crearContratoToolStripMenuItem.Name = "crearContratoToolStripMenuItem";
-            this.crearContratoToolStripMenuItem.Size = new System.Drawing.Size(267, 24);
-            this.crearContratoToolStripMenuItem.Text = "Crear Contrato";
-            this.crearContratoToolStripMenuItem.Click += new System.EventHandler(this.crearContratoToolStripMenuItem_Click);
+            this.BtnProveedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.BtnProveedor.Name = "BtnProveedor";
+            this.BtnProveedor.Size = new System.Drawing.Size(221, 24);
+            this.BtnProveedor.Text = "Proveedores";
+            this.BtnProveedor.Click += new System.EventHandler(this.BtnProveedor_Click);
             // 
-            // buscarContratoToolStripMenuItem
+            // BtnCargorizacion
             // 
-            this.buscarContratoToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.buscarContratoToolStripMenuItem.Name = "buscarContratoToolStripMenuItem";
-            this.buscarContratoToolStripMenuItem.Size = new System.Drawing.Size(267, 24);
-            this.buscarContratoToolStripMenuItem.Text = "Buscar Proforma";
-            this.buscarContratoToolStripMenuItem.Click += new System.EventHandler(this.buscarContratoToolStripMenuItem_Click);
+            this.BtnCargorizacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.BtnCargorizacion.Name = "BtnCargorizacion";
+            this.BtnCargorizacion.Size = new System.Drawing.Size(221, 24);
+            this.BtnCargorizacion.Text = "Categorización";
+            this.BtnCargorizacion.Click += new System.EventHandler(this.BtnCargorizacion_Click);
             // 
-            // crearProformaDeContratoToolStripMenuItem
+            // BtnSucursales
             // 
-            this.crearProformaDeContratoToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.crearProformaDeContratoToolStripMenuItem.Name = "crearProformaDeContratoToolStripMenuItem";
-            this.crearProformaDeContratoToolStripMenuItem.Size = new System.Drawing.Size(267, 24);
-            this.crearProformaDeContratoToolStripMenuItem.Text = "Crear Proforma ";
-            this.crearProformaDeContratoToolStripMenuItem.Click += new System.EventHandler(this.crearProformaDeContratoToolStripMenuItem_Click);
+            this.BtnSucursales.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.BtnSucursales.Name = "BtnSucursales";
+            this.BtnSucursales.Size = new System.Drawing.Size(221, 24);
+            this.BtnSucursales.Text = "Sucursales";
+            this.BtnSucursales.Click += new System.EventHandler(this.BtnSucursales_Click);
             // 
-            // gestionDeCuotasToolStripMenuItem
+            // BtnMotivoCancelacion
             // 
-            this.gestionDeCuotasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.pagoDePrimeraCuotaToolStripMenuItem,
-            this.pagoDeCuotasToolStripMenuItem});
-            this.gestionDeCuotasToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.gestionDeCuotasToolStripMenuItem.Name = "gestionDeCuotasToolStripMenuItem";
-            this.gestionDeCuotasToolStripMenuItem.Size = new System.Drawing.Size(267, 24);
-            this.gestionDeCuotasToolStripMenuItem.Text = "Gestion de Cuotas";
+            this.BtnMotivoCancelacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.BtnMotivoCancelacion.Name = "BtnMotivoCancelacion";
+            this.BtnMotivoCancelacion.Size = new System.Drawing.Size(221, 24);
+            this.BtnMotivoCancelacion.Text = "Motivos Cancelación";
+            this.BtnMotivoCancelacion.Click += new System.EventHandler(this.BtnMotivoCancelacion_Click);
             // 
-            // pagoDePrimeraCuotaToolStripMenuItem
+            // BtnBancos
             // 
-            this.pagoDePrimeraCuotaToolStripMenuItem.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.pagoDePrimeraCuotaToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.pagoDePrimeraCuotaToolStripMenuItem.Name = "pagoDePrimeraCuotaToolStripMenuItem";
-            this.pagoDePrimeraCuotaToolStripMenuItem.Size = new System.Drawing.Size(203, 24);
-            this.pagoDePrimeraCuotaToolStripMenuItem.Text = "Pago de Apertura";
-            this.pagoDePrimeraCuotaToolStripMenuItem.Click += new System.EventHandler(this.pagoDePrimeraCuotaToolStripMenuItem_Click);
+            this.BtnBancos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.BtnBancos.Name = "BtnBancos";
+            this.BtnBancos.Size = new System.Drawing.Size(221, 24);
+            this.BtnBancos.Text = "Bancos";
+            this.BtnBancos.Click += new System.EventHandler(this.BtnBancos_Click);
             // 
-            // pagoDeCuotasToolStripMenuItem
+            // BtnBancosTarjeta
             // 
-            this.pagoDeCuotasToolStripMenuItem.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.pagoDeCuotasToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.pagoDeCuotasToolStripMenuItem.Name = "pagoDeCuotasToolStripMenuItem";
-            this.pagoDeCuotasToolStripMenuItem.Size = new System.Drawing.Size(203, 24);
-            this.pagoDeCuotasToolStripMenuItem.Text = "Pago de Cuotas";
-            this.pagoDeCuotasToolStripMenuItem.Click += new System.EventHandler(this.pagoDeCuotasToolStripMenuItem_Click);
-            // 
-            // contratosRetiradosToolStripMenuItem
-            // 
-            this.contratosRetiradosToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.contratosRetiradosToolStripMenuItem.Name = "contratosRetiradosToolStripMenuItem";
-            this.contratosRetiradosToolStripMenuItem.Size = new System.Drawing.Size(267, 24);
-            this.contratosRetiradosToolStripMenuItem.Text = "Contratos Retirados";
-            this.contratosRetiradosToolStripMenuItem.Click += new System.EventHandler(this.contratosRetiradosToolStripMenuItem_Click);
-            // 
-            // informacionGeneralToolStripMenuItem
-            // 
-            this.informacionGeneralToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.informacionGeneralToolStripMenuItem.Name = "informacionGeneralToolStripMenuItem";
-            this.informacionGeneralToolStripMenuItem.Size = new System.Drawing.Size(267, 24);
-            this.informacionGeneralToolStripMenuItem.Text = "Informacion General";
-            this.informacionGeneralToolStripMenuItem.Click += new System.EventHandler(this.informacionGeneralToolStripMenuItem_Click);
-            // 
-            // retiroDeServiciosToolStripMenuItem
-            // 
-            this.retiroDeServiciosToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.retiroDeServiciosToolStripMenuItem.Name = "retiroDeServiciosToolStripMenuItem";
-            this.retiroDeServiciosToolStripMenuItem.Size = new System.Drawing.Size(267, 24);
-            this.retiroDeServiciosToolStripMenuItem.Text = "Retiro de Servicios ";
-            this.retiroDeServiciosToolStripMenuItem.Click += new System.EventHandler(this.retiroDeServiciosToolStripMenuItem_Click);
-            // 
-            // realizarFacturaPorRetiroToolStripMenuItem
-            // 
-            this.realizarFacturaPorRetiroToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.realizarFacturaPorRetiroToolStripMenuItem.Name = "realizarFacturaPorRetiroToolStripMenuItem";
-            this.realizarFacturaPorRetiroToolStripMenuItem.Size = new System.Drawing.Size(267, 24);
-            this.realizarFacturaPorRetiroToolStripMenuItem.Text = "Realizar Factura por Retiro";
-            this.realizarFacturaPorRetiroToolStripMenuItem.Click += new System.EventHandler(this.realizarFacturaPorRetiroToolStripMenuItem_Click);
+            this.BtnBancosTarjeta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.BtnBancosTarjeta.Name = "BtnBancosTarjeta";
+            this.BtnBancosTarjeta.Size = new System.Drawing.Size(221, 24);
+            this.BtnBancosTarjeta.Text = "Tarjetas - Banco";
+            this.BtnBancosTarjeta.Click += new System.EventHandler(this.BtnBancosTarjeta_Click);
             // 
             // MenuVentasDirectas
             // 
@@ -742,7 +719,7 @@
             this.MenuVentasDirectas.MenuItemTextColor = System.Drawing.Color.White;
             this.MenuVentasDirectas.Name = "MenuVentasDirectas";
             this.MenuVentasDirectas.PrimaryColor = System.Drawing.SystemColors.ControlDark;
-            this.MenuVentasDirectas.Size = new System.Drawing.Size(271, 82);
+            this.MenuVentasDirectas.Size = new System.Drawing.Size(271, 104);
             // 
             // ventasDirectasDeAtaudesToolStripMenuItem
             // 
@@ -832,111 +809,45 @@
             // 
             // MenuCatalogo
             // 
-            this.MenuCatalogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(40)))), ((int)(((byte)(32)))));
+            this.MenuCatalogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(53)))), ((int)(((byte)(102)))));
             this.MenuCatalogo.IsMainMenu = false;
             this.MenuCatalogo.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.clientesToolStripMenuItem,
-            this.proveedoresToolStripMenuItem,
-            this.BtnCategoriasProductos,
-            this.sucursalesToolStripMenuItem,
             this.BtnAlmacenes,
-            this.BtnMotivosCancelacion,
-            this.BtnCatalogoBanco,
-            this.BtnTiposTarjetas,
             this.salasToolStripMenuItem});
             this.MenuCatalogo.MenuItemHeight = 25;
             this.MenuCatalogo.MenuItemTextColor = System.Drawing.Color.White;
             this.MenuCatalogo.Name = "MenuCatalogo";
             this.MenuCatalogo.PrimaryColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.MenuCatalogo.Size = new System.Drawing.Size(306, 238);
+            this.MenuCatalogo.Size = new System.Drawing.Size(156, 76);
             // 
             // clientesToolStripMenuItem
             // 
-            this.clientesToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(40)))), ((int)(((byte)(32)))));
-            this.clientesToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clientesToolStripMenuItem.BackColor = System.Drawing.Color.Transparent;
+            this.clientesToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.clientesToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(305, 26);
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
             this.clientesToolStripMenuItem.Text = "Clientes";
             this.clientesToolStripMenuItem.Click += new System.EventHandler(this.clientesToolStripMenuItem_Click);
             // 
-            // proveedoresToolStripMenuItem
-            // 
-            this.proveedoresToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(40)))), ((int)(((byte)(32)))));
-            this.proveedoresToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 12F);
-            this.proveedoresToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.proveedoresToolStripMenuItem.Name = "proveedoresToolStripMenuItem";
-            this.proveedoresToolStripMenuItem.Size = new System.Drawing.Size(305, 26);
-            this.proveedoresToolStripMenuItem.Text = "Proveedores";
-            this.proveedoresToolStripMenuItem.Click += new System.EventHandler(this.proveedoresToolStripMenuItem_Click);
-            // 
-            // BtnCategoriasProductos
-            // 
-            this.BtnCategoriasProductos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(40)))), ((int)(((byte)(32)))));
-            this.BtnCategoriasProductos.Font = new System.Drawing.Font("Century Gothic", 12F);
-            this.BtnCategoriasProductos.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BtnCategoriasProductos.Name = "BtnCategoriasProductos";
-            this.BtnCategoriasProductos.Size = new System.Drawing.Size(305, 26);
-            this.BtnCategoriasProductos.Text = "Categorización de Productos";
-            this.BtnCategoriasProductos.Click += new System.EventHandler(this.BtnCategoriasProductos_Click);
-            // 
-            // sucursalesToolStripMenuItem
-            // 
-            this.sucursalesToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(40)))), ((int)(((byte)(32)))));
-            this.sucursalesToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 12F);
-            this.sucursalesToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.sucursalesToolStripMenuItem.Name = "sucursalesToolStripMenuItem";
-            this.sucursalesToolStripMenuItem.Size = new System.Drawing.Size(305, 26);
-            this.sucursalesToolStripMenuItem.Text = "Sucursales";
-            this.sucursalesToolStripMenuItem.Click += new System.EventHandler(this.sucursalesToolStripMenuItem_Click);
-            // 
             // BtnAlmacenes
             // 
-            this.BtnAlmacenes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(40)))), ((int)(((byte)(32)))));
-            this.BtnAlmacenes.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.BtnAlmacenes.BackColor = System.Drawing.Color.Transparent;
+            this.BtnAlmacenes.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.BtnAlmacenes.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.BtnAlmacenes.Name = "BtnAlmacenes";
-            this.BtnAlmacenes.Size = new System.Drawing.Size(305, 26);
+            this.BtnAlmacenes.Size = new System.Drawing.Size(155, 24);
             this.BtnAlmacenes.Text = "Almacenes";
             this.BtnAlmacenes.Click += new System.EventHandler(this.BtnAlmacenes_Click);
             // 
-            // BtnMotivosCancelacion
-            // 
-            this.BtnMotivosCancelacion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(40)))), ((int)(((byte)(32)))));
-            this.BtnMotivosCancelacion.Font = new System.Drawing.Font("Century Gothic", 12F);
-            this.BtnMotivosCancelacion.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BtnMotivosCancelacion.Name = "BtnMotivosCancelacion";
-            this.BtnMotivosCancelacion.Size = new System.Drawing.Size(305, 26);
-            this.BtnMotivosCancelacion.Text = "Motivos Cancelación";
-            this.BtnMotivosCancelacion.Click += new System.EventHandler(this.BtnMotivosCancelacion_Click);
-            // 
-            // BtnCatalogoBanco
-            // 
-            this.BtnCatalogoBanco.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(40)))), ((int)(((byte)(32)))));
-            this.BtnCatalogoBanco.Font = new System.Drawing.Font("Century Gothic", 12F);
-            this.BtnCatalogoBanco.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BtnCatalogoBanco.Name = "BtnCatalogoBanco";
-            this.BtnCatalogoBanco.Size = new System.Drawing.Size(305, 26);
-            this.BtnCatalogoBanco.Text = "Bancos ";
-            this.BtnCatalogoBanco.Click += new System.EventHandler(this.BtnCatalogoBanco_Click);
-            // 
-            // BtnTiposTarjetas
-            // 
-            this.BtnTiposTarjetas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(40)))), ((int)(((byte)(32)))));
-            this.BtnTiposTarjetas.Font = new System.Drawing.Font("Century Gothic", 12F);
-            this.BtnTiposTarjetas.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.BtnTiposTarjetas.Name = "BtnTiposTarjetas";
-            this.BtnTiposTarjetas.Size = new System.Drawing.Size(305, 26);
-            this.BtnTiposTarjetas.Text = "Tipos de Tarjetas";
-            this.BtnTiposTarjetas.Click += new System.EventHandler(this.BtnTiposTarjetas_Click);
-            // 
             // salasToolStripMenuItem
             // 
-            this.salasToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(40)))), ((int)(((byte)(32)))));
-            this.salasToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.salasToolStripMenuItem.BackColor = System.Drawing.Color.Transparent;
+            this.salasToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.salasToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.salasToolStripMenuItem.Name = "salasToolStripMenuItem";
-            this.salasToolStripMenuItem.Size = new System.Drawing.Size(305, 26);
+            this.salasToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
             this.salasToolStripMenuItem.Text = "Salas";
             this.salasToolStripMenuItem.Click += new System.EventHandler(this.salasToolStripMenuItem_Click);
             // 
@@ -1170,8 +1081,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private Especiales.RJDropDownMenu MenuInventario;
         private Especiales.RJDropDownMenu MenuCaja;
-        private System.Windows.Forms.ToolStripMenuItem pagoDePrimeraCuotaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pagoDeCuotasToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
@@ -1184,18 +1093,10 @@
         public Especiales.EspecialButton btnCatalogos;
         public Especiales.EspecialButton btnSeguridad;
         public Especiales.EspecialButton BtnInventario;
-        public Especiales.EspecialButton btnCaja;
+        public Especiales.EspecialButton btnDatosGenerales;
         public Especiales.EspecialButton BtnConfigTurnos;
         public System.Windows.Forms.ToolStripMenuItem clientesToolStripMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem proveedoresToolStripMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem crearContratoToolStripMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem buscarContratoToolStripMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem crearProformaDeContratoToolStripMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem gestionDeCuotasToolStripMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem contratosRetiradosToolStripMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem informacionGeneralToolStripMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem retiroDeServiciosToolStripMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem realizarFacturaPorRetiroToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem BtnProveedor;
         public System.Windows.Forms.ToolStripMenuItem ventasDirectasDeAtaudesToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem BtnOrdenMesa;
         public System.Windows.Forms.ToolStripMenuItem auditoriasToolStripMenuItem;
@@ -1203,8 +1104,6 @@
         public System.Windows.Forms.ToolStripMenuItem permisosToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem revisionDeSeguridadToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem BtnConfigInventario;
-        private System.Windows.Forms.ToolStripMenuItem BtnCategoriasProductos;
-        private System.Windows.Forms.ToolStripMenuItem sucursalesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem BtnAlmacenes;
         private System.Windows.Forms.ToolStripMenuItem BtnCatalogoProductos;
         private System.Windows.Forms.ToolStripMenuItem catalogoDeServiciosToolStripMenuItem;
@@ -1216,17 +1115,20 @@
         private System.Windows.Forms.ToolStripMenuItem BtnInventarioGeneral;
         public Especiales.EspecialButton BtnPromociones;
         public Especiales.EspecialButton especialButton6;
-        private System.Windows.Forms.ToolStripMenuItem BtnMotivosCancelacion;
-        private System.Windows.Forms.ToolStripMenuItem BtnCatalogoBanco;
         private System.Windows.Forms.ToolStripMenuItem configFacturaciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem BtnTasaCambio;
         private System.Windows.Forms.ToolStripMenuItem configTurnosToolStripMenuItem;
         private System.Windows.Forms.Label LblSucursal;
         private System.Windows.Forms.Label LblHora;
-        private System.Windows.Forms.ToolStripMenuItem BtnTiposTarjetas;
         private System.Windows.Forms.ToolStripMenuItem salasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listaDeOrdenesActivasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem datosDeLaEmpresaToolStripMenuItem;
         public Especiales.EspecialButton BtnConsultar;
+        public Especiales.EspecialButton BtnCatalogoGeneral;
+        private System.Windows.Forms.ToolStripMenuItem BtnCargorizacion;
+        private System.Windows.Forms.ToolStripMenuItem BtnSucursales;
+        private System.Windows.Forms.ToolStripMenuItem BtnMotivoCancelacion;
+        private System.Windows.Forms.ToolStripMenuItem BtnBancos;
+        private System.Windows.Forms.ToolStripMenuItem BtnBancosTarjeta;
     }
 }

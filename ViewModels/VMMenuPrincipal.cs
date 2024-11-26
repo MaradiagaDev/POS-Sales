@@ -25,7 +25,7 @@ namespace NeoCobranza.ViewModels
                 //Catalogos
                 frm.btnCatalogos.Visible = (bool)permisos.Catalogos;
                 frm.clientesToolStripMenuItem.Visible = (bool)permisos.CatalogoClientes;
-                frm.proveedoresToolStripMenuItem.Visible = (bool)permisos.CatalogoProveedores;
+                //frm.proveedoresToolStripMenuItem.Visible = (bool)permisos.CatalogoProveedores;
 
                 //verificar no dejar el boton sin funcionamiento
                 if (permisos.CatalogoClientes == false && permisos.CatalogoProveedores == false)
@@ -35,14 +35,14 @@ namespace NeoCobranza.ViewModels
 
                 //Contratos
               
-                frm.crearContratoToolStripMenuItem.Visible = (bool)permisos.ContratosCrearContratos;
-                frm.buscarContratoToolStripMenuItem.Visible = (bool)permisos.ContratosBuscarProforma;
-                frm.crearProformaDeContratoToolStripMenuItem.Visible = (bool)permisos.ContratosCrearContratos;
-                frm.gestionDeCuotasToolStripMenuItem.Visible = (bool)permisos.ContratosGestionCuotas;
-                frm.contratosRetiradosToolStripMenuItem.Visible = (bool)permisos.ContratosContratosRetirados;
-                frm.informacionGeneralToolStripMenuItem.Visible = (bool)permisos.ContratosInformacionGeneral;
-                frm.retiroDeServiciosToolStripMenuItem.Visible = (bool)permisos.ContratosRetiroServicios;
-                frm.realizarFacturaPorRetiroToolStripMenuItem.Visible = (bool)permisos.ContratosFactura;
+                frm.BtnProveedor.Visible = (bool)permisos.ContratosCrearContratos;
+                //frm.buscarContratoToolStripMenuItem.Visible = (bool)permisos.ContratosBuscarProforma;
+                //frm.crearProformaDeContratoToolStripMenuItem.Visible = (bool)permisos.ContratosCrearContratos;
+                //frm.gestionDeCuotasToolStripMenuItem.Visible = (bool)permisos.ContratosGestionCuotas;
+                //frm.contratosRetiradosToolStripMenuItem.Visible = (bool)permisos.ContratosContratosRetirados;
+                //frm.informacionGeneralToolStripMenuItem.Visible = (bool)permisos.ContratosInformacionGeneral;
+                //frm.retiroDeServiciosToolStripMenuItem.Visible = (bool)permisos.ContratosRetiroServicios;
+                //frm.realizarFacturaPorRetiroToolStripMenuItem.Visible = (bool)permisos.ContratosFactura;
 
                 //verificar no dejar el boton sin funcionamiento
                 if (permisos.ContratosBuscarProforma == false &&
@@ -82,12 +82,12 @@ namespace NeoCobranza.ViewModels
                 }
 
                 //Caja
-                frm.btnCaja.Visible = (bool)permisos.Caja;
+                frm.btnDatosGenerales.Visible = (bool)permisos.Caja;
         
 
                 if (permisos.CajaRecibosOficiales == false && permisos.CajaHistorialRecibos == false)
                 {
-                    frm.btnCaja.Visible = false;
+                    frm.btnDatosGenerales.Visible = false;
                 }
 
                 //Personal

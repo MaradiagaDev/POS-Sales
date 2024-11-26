@@ -10,7 +10,7 @@ namespace NeoCobranza.ViewModels
     internal static class Utilidades
     {
         //Conexion
-        public static Conexion conexion = new Conexion("123456", "sa");
+        //public static Conexion conexion = new Conexion("123456", "sa");
 
         //Imagen
         public static int IdImagenInicial = 27;
