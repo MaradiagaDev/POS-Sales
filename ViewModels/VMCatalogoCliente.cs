@@ -65,7 +65,8 @@ namespace NeoCobranza.ViewModels
                         frm.dtpFechaNac.Value = Convert.ToDateTime(dtResponse.Rows[0]["FechaNac"]);
                         frm.TxtNoRuc.ReadOnly = true;
                         frm.TxtNoRuc.Text = Convert.ToString(dtResponse.Rows[0]["NoRuc"]);
-
+                        frm.rbtnMasculino.Checked = Convert.ToString(dtResponse.Rows[0]["Sexo"]) == "Masculino" ? true : false;
+                        frm.rbtnFemenino.Checked = Convert.ToString(dtResponse.Rows[0]["Sexo"]) == "Femenino" ? true : false;
 
                         frm.LblDynamicoCliente.Text = "Cliente a Modificar: " + Convert.ToString(dtResponse.Rows[0]["Pnombre"]) + " " +
                             Convert.ToString(dtResponse.Rows[0]["Snombre"]) + " " +

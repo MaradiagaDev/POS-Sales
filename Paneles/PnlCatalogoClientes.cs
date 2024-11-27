@@ -35,8 +35,6 @@ namespace NeoCobranza.Paneles
             vMCatalogoCliente.InitModuloCatalogoClientes(this);
         }
 
-
-
         private void BtnBuscarCliente_Click(object sender, EventArgs e)
         {
             vMCatalogoCliente.FuncionesPrincipales(this, "Buscar");

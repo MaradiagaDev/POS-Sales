@@ -34,10 +34,10 @@
             this.LblDynamico = new System.Windows.Forms.Label();
             this.ChkAlmacenMostrador = new System.Windows.Forms.CheckBox();
             this.ChkAsignarSucursal = new System.Windows.Forms.CheckBox();
-            this.CmbSucursal = new System.Windows.Forms.ComboBox();
-            this.LblSucursal = new System.Windows.Forms.Label();
             this.btnAgregar = new NeoCobranza.Especiales.EspecialButton();
             this.btnCancelar = new NeoCobranza.Especiales.EspecialButton();
+            this.TxtDireccion = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,7 +85,6 @@
             // ChkAlmacenMostrador
             // 
             this.ChkAlmacenMostrador.AutoSize = true;
-            this.ChkAlmacenMostrador.Enabled = false;
             this.ChkAlmacenMostrador.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
             this.ChkAlmacenMostrador.ForeColor = System.Drawing.SystemColors.Highlight;
             this.ChkAlmacenMostrador.Location = new System.Drawing.Point(21, 185);
@@ -102,35 +101,11 @@
             this.ChkAsignarSucursal.ForeColor = System.Drawing.SystemColors.Highlight;
             this.ChkAsignarSucursal.Location = new System.Drawing.Point(22, 140);
             this.ChkAsignarSucursal.Name = "ChkAsignarSucursal";
-            this.ChkAsignarSucursal.Size = new System.Drawing.Size(147, 22);
+            this.ChkAsignarSucursal.Size = new System.Drawing.Size(231, 22);
             this.ChkAsignarSucursal.TabIndex = 92;
-            this.ChkAsignarSucursal.Text = "Asignar Sucursal";
+            this.ChkAsignarSucursal.Text = "Asignar a la Sucursal Actual";
             this.ChkAsignarSucursal.UseVisualStyleBackColor = true;
             this.ChkAsignarSucursal.Click += new System.EventHandler(this.ChkAsignarSucursal_Click);
-            // 
-            // CmbSucursal
-            // 
-            this.CmbSucursal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbSucursal.Enabled = false;
-            this.CmbSucursal.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.CmbSucursal.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.CmbSucursal.FormattingEnabled = true;
-            this.CmbSucursal.Location = new System.Drawing.Point(21, 254);
-            this.CmbSucursal.Name = "CmbSucursal";
-            this.CmbSucursal.Size = new System.Drawing.Size(392, 25);
-            this.CmbSucursal.TabIndex = 93;
-            // 
-            // LblSucursal
-            // 
-            this.LblSucursal.AutoSize = true;
-            this.LblSucursal.Enabled = false;
-            this.LblSucursal.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
-            this.LblSucursal.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.LblSucursal.Location = new System.Drawing.Point(18, 223);
-            this.LblSucursal.Name = "LblSucursal";
-            this.LblSucursal.Size = new System.Drawing.Size(69, 18);
-            this.LblSucursal.TabIndex = 94;
-            this.LblSucursal.Text = "Sucursal";
             // 
             // btnAgregar
             // 
@@ -174,14 +149,35 @@
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // TxtDireccion
+            // 
+            this.TxtDireccion.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TxtDireccion.Location = new System.Drawing.Point(20, 258);
+            this.TxtDireccion.MaxLength = 100;
+            this.TxtDireccion.Multiline = true;
+            this.TxtDireccion.Name = "TxtDireccion";
+            this.TxtDireccion.Size = new System.Drawing.Size(481, 158);
+            this.TxtDireccion.TabIndex = 93;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label1.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label1.Location = new System.Drawing.Point(18, 220);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(81, 18);
+            this.label1.TabIndex = 94;
+            this.label1.Text = "Dirección";
+            // 
             // PnlAgregarAlmacen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1056, 600);
-            this.Controls.Add(this.LblSucursal);
-            this.Controls.Add(this.CmbSucursal);
+            this.Controls.Add(this.TxtDireccion);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.ChkAsignarSucursal);
             this.Controls.Add(this.ChkAlmacenMostrador);
             this.Controls.Add(this.TxtNombre);
@@ -212,7 +208,7 @@
         public System.Windows.Forms.Label LblDynamico;
         private System.Windows.Forms.CheckBox ChkAlmacenMostrador;
         private System.Windows.Forms.CheckBox ChkAsignarSucursal;
-        private System.Windows.Forms.ComboBox CmbSucursal;
-        public System.Windows.Forms.Label LblSucursal;
+        public System.Windows.Forms.TextBox TxtDireccion;
+        public System.Windows.Forms.Label label1;
     }
 }

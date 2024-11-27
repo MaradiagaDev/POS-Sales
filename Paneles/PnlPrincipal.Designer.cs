@@ -719,7 +719,7 @@
             this.MenuVentasDirectas.MenuItemTextColor = System.Drawing.Color.White;
             this.MenuVentasDirectas.Name = "MenuVentasDirectas";
             this.MenuVentasDirectas.PrimaryColor = System.Drawing.SystemColors.ControlDark;
-            this.MenuVentasDirectas.Size = new System.Drawing.Size(271, 104);
+            this.MenuVentasDirectas.Size = new System.Drawing.Size(271, 82);
             // 
             // ventasDirectasDeAtaudesToolStripMenuItem
             // 

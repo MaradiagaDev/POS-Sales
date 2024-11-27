@@ -88,7 +88,26 @@ CREATE TABLE [dbo].[Almacenes] (
     [AlmacenId] NVARCHAR(50) NOT NULL PRIMARY KEY,                -- Identificador único para el almacén
     [NombreAlmacen] NVARCHAR(255) NOT NULL,             -- Nombre del almacén, obligatorio
     [EsMostrador] BIT NULL,                             -- Indica si es un mostrador (NULL si no especificado)
-    [SucursalId] NVARCHAR(50) NULL,                              -- Identificador de la sucursal, opcional
+    [SucursalId] NVARCHAR(50) NULL,   
+    [Direccion]	NVARCHAR(mAX) NULL,										-- Identificador de la sucursal, opcional
     [Estatus] NVARCHAR(50) NOT NULL                    -- Estado del almacén (activo, inactivo, etc.)
 );
 
+CREATE TABLE ProductosServicios (
+    ProductoId nvarchar(50) NOT NULL PRIMARY KEY, -- Identificador único
+    NombreProducto NVARCHAR(Max) NOT NULL, -- Nombre del estándar
+    ImagenId INT NULL, -- Identificador de la imagen (opcional)
+    Descripcion NVARCHAR(MAX) NULL, -- Descripción del estándar
+    Estado NVARCHAR(50) NOT NULL, -- Estado (activo/inactivo o similar)
+    Precio decimal(18,0) NULL, -- Monto de venta directa (opcional)
+    ClasificacionProducto nvarchar(50), -- Clasificación del producto (opcional)
+    CategoriaId INT NULL, -- Clasificación del tipo (opcional)
+    Codigo NVARCHAR(50) NULL, -- Código único o identificador (opcional)
+);
+
+CREATE TABLE RelAlmacenProducto (
+    RelAlmacenProductoId decimal(18,0) identity(1,1) NOT NULL PRIMARY KEY, -- Identificador único para la relación
+    AlmacenId NVARCHAR(50) NULL, -- Identificador del almacén (opcional)
+    ProductoId NVARCHAR(50), -- Identificador del producto (opcional)
+    Cantidad INT NULL -- Cantidad de producto en el almacén (opcional)
+);

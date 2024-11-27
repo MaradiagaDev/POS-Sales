@@ -15,4 +15,4 @@ VALUES
 ('1438ECF3-D8A0-491B-94D4-EB859FCE6C0C', 'SUC001'), -- Usuario U001 asignado a la Sucursal Centro
 ('1438ECF3-D8A0-491B-94D4-EB859FCE6C0C', 'SUC002') -- Usuario U002 asignado a la Sucursal Norte
 
-insert into Almacenes values ('A001','Almacen Mostrador',1,'SUC001','Activo')
+insert into Almacenes values ('A001','Almacen Mostrador',1,'S001','Sucursal Central','Activo')

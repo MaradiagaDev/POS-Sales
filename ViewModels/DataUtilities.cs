@@ -15,7 +15,10 @@ namespace NeoCobranza.ViewModels
         private List<object> vGlobListParameters = new List<object>();
         private List<string> vGlobListParamentersNames = new List<string>();
 
-        private string vGlobServerName = "DF-INF-PRO2"; //"DESKTOP-GKTE05O\\SQLEXPRESS";Integrated Security=True
+        private List<string> vGlobListColumnNames = new List<string>();
+        private List<object> vGlobListColumnValues = new List<object>();
+
+        private string vGlobServerName = "DESKTOP-GKTE05O\\SQLEXPRESS"; //"DF-INF-PRO2"
         private string vGlobUserName = "LoginPos";
         private string vGlobUserPassword = "facil123$";
 
@@ -23,8 +26,8 @@ namespace NeoCobranza.ViewModels
 
         public DataUtilities() 
         {
-            //string connectionString = "Server=" + vGlobServerName + ";Database=POSIDEVBD;UID=" + vGlobUserName + ";PWD=" + vGlobUserPassword + "; MultipleActiveResultSets=True"; //CASA
-            string connectionString = "Server=" + vGlobServerName + ";Database=POSIDEVBD;Integrated Security=True"; //TRABAJO
+            string connectionString = "Server=" + vGlobServerName + ";Database=POSIDEVBD;UID=" + vGlobUserName + ";PWD=" + vGlobUserPassword + "; MultipleActiveResultSets=True"; //CASA
+           // string connectionString = "Server=" + vGlobServerName + ";Database=POSIDEVBD;Integrated Security=True"; //TRABAJO
 
             vGlobConnection = new SqlConnection(connectionString);
         }
@@ -38,6 +41,17 @@ namespace NeoCobranza.ViewModels
 
             vGlobListParamentersNames.Add(parameterName);
             vGlobListParameters.Add(value);
+        }
+
+        public void SetColumns(string columnName, object value)
+        {
+            if (string.IsNullOrWhiteSpace(columnName))
+            {
+                throw new ArgumentException("El nombre del parámetro no puede ser nulo, vacío o contener solo espacios.");
+            }
+
+            vGlobListColumnNames.Add(columnName);
+            vGlobListColumnValues.Add(value);
         }
 
         public DataTable ExecuteStoredProcedure(string procedureName)
@@ -233,6 +247,202 @@ namespace NeoCobranza.ViewModels
             catch (Exception ex)
             {
                 throw new InvalidOperationException("Error al obtener el registro por columna: " + ex.Message, ex);
+            }
+
+            return resultTable;
+        }
+
+        public void UpdateRecordByPrimaryKey(string tableName, object keyValue)
+        {
+            if (string.IsNullOrWhiteSpace(tableName))
+            {
+                throw new ArgumentException("El nombre de la tabla no puede ser nulo, vacío o contener solo espacios.");
+            }
+
+            if (keyValue == null)
+            {
+                throw new ArgumentNullException(nameof(keyValue), "El valor de la clave primaria no puede ser nulo.");
+            }
+
+            if (vGlobListColumnNames.Count == 0 || vGlobListColumnValues.Count == 0)
+            {
+                throw new InvalidOperationException("No se han especificado columnas ni valores para actualizar.");
+            }
+
+            if (vGlobListColumnNames.Count != vGlobListColumnValues.Count)
+            {
+                throw new InvalidOperationException("El número de columnas y valores no coincide.");
+            }
+
+            try
+            {
+                bool wasConnectionOpen = HandleConnectionState(true);
+
+                string primaryKeyColumn = null;
+                using (SqlCommand command = new SqlCommand(@"
+        SELECT COLUMN_NAME
+        FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS TC
+        INNER JOIN INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE CCU
+            ON TC.CONSTRAINT_NAME = CCU.CONSTRAINT_NAME
+        WHERE TC.TABLE_NAME = @TableName AND TC.CONSTRAINT_TYPE = 'PRIMARY KEY';", vGlobConnection))
+                {
+                    command.Parameters.AddWithValue("@TableName", tableName);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            primaryKeyColumn = reader["COLUMN_NAME"].ToString();
+                        }
+                    }
+                }
+
+                if (string.IsNullOrWhiteSpace(primaryKeyColumn))
+                {
+                    throw new InvalidOperationException($"No se encontró una clave primaria para la tabla '{tableName}'.");
+                }
+
+                // Construir la consulta UPDATE dinámicamente
+                StringBuilder updateQuery = new StringBuilder($"UPDATE {tableName} SET ");
+                for (int i = 0; i < vGlobListColumnNames.Count; i++)
+                {
+                    if (i > 0)
+                    {
+                        updateQuery.Append(", ");
+                    }
+                    updateQuery.Append($"{vGlobListColumnNames[i]} = @ColumnValue{i}");
+                }
+                updateQuery.Append($" WHERE {primaryKeyColumn} = @KeyValue");
+
+                using (SqlCommand command = new SqlCommand(updateQuery.ToString(), vGlobConnection))
+                {
+                    // Agregar valores para las columnas a actualizar
+                    for (int i = 0; i < vGlobListColumnNames.Count; i++)
+                    {
+                        command.Parameters.AddWithValue($"@ColumnValue{i}", vGlobListColumnValues[i]);
+                    }
+
+                    // Agregar el valor de la clave primaria
+                    command.Parameters.AddWithValue("@KeyValue", keyValue);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    if (rowsAffected == 0)
+                    {
+                        throw new InvalidOperationException($"No se pudo actualizar el registro con la clave primaria '{keyValue}' en la tabla '{tableName}'.");
+                    }
+                }
+
+                vGlobListColumnNames.Clear();
+                vGlobListColumnValues.Clear();
+
+                if (!wasConnectionOpen)
+                {
+                    HandleConnectionState(false);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Error al actualizar el registro: " + ex.Message, ex);
+            }
+        }
+
+        public void InsertRecord(string tableName)
+        {
+            if (string.IsNullOrWhiteSpace(tableName))
+            {
+                throw new ArgumentException("El nombre de la tabla no puede ser nulo, vacío o contener solo espacios.");
+            }
+
+            if (vGlobListColumnNames.Count == 0 || vGlobListColumnValues.Count == 0)
+            {
+                throw new InvalidOperationException("No se han especificado columnas ni valores para insertar.");
+            }
+
+            if (vGlobListColumnNames.Count != vGlobListColumnValues.Count)
+            {
+                throw new InvalidOperationException("El número de columnas y valores no coincide.");
+            }
+
+            try
+            {
+                bool wasConnectionOpen = HandleConnectionState(true);
+
+                // Construir la consulta INSERT dinámicamente
+                StringBuilder insertQuery = new StringBuilder($"INSERT INTO {tableName} (");
+                insertQuery.Append(string.Join(", ", vGlobListColumnNames));
+                insertQuery.Append(") VALUES (");
+                for (int i = 0; i < vGlobListColumnValues.Count; i++)
+                {
+                    if (i > 0)
+                    {
+                        insertQuery.Append(", ");
+                    }
+                    insertQuery.Append($"@Value{i}");
+                }
+                insertQuery.Append(")");
+
+                using (SqlCommand command = new SqlCommand(insertQuery.ToString(), vGlobConnection))
+                {
+                    // Agregar valores para las columnas
+                    for (int i = 0; i < vGlobListColumnValues.Count; i++)
+                    {
+                        command.Parameters.AddWithValue($"@Value{i}", vGlobListColumnValues[i]);
+                    }
+
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    if (rowsAffected == 0)
+                    {
+                        throw new InvalidOperationException($"No se pudo insertar el registro en la tabla '{tableName}'.");
+                    }
+                }
+
+                vGlobListColumnNames.Clear();
+                vGlobListColumnValues.Clear();
+
+                if (!wasConnectionOpen)
+                {
+                    HandleConnectionState(false);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Error al insertar el registro: " + ex.Message, ex);
+            }
+        }
+
+        public DataTable GetAllRecords(string tableName)
+        {
+            if (string.IsNullOrWhiteSpace(tableName))
+            {
+                throw new ArgumentException("El nombre de la tabla no puede ser nulo, vacío o contener solo espacios.");
+            }
+
+            DataTable resultTable = new DataTable();
+
+            try
+            {
+                bool wasConnectionOpen = HandleConnectionState(true);
+
+                string query = $"SELECT * FROM {tableName}";
+
+                using (SqlCommand command = new SqlCommand(query, vGlobConnection))
+                {
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        adapter.Fill(resultTable);
+                    }
+                }
+
+                if (!wasConnectionOpen)
+                {
+                    HandleConnectionState(false);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Error al obtener todos los registros: " + ex.Message, ex);
             }
 
             return resultTable;

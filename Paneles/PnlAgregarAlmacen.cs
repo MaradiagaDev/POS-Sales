@@ -1,4 +1,5 @@
 ﻿using NeoCobranza.ModelsCobranza;
+using NeoCobranza.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +17,8 @@ namespace NeoCobranza.Paneles
         private string auxId;
         private string auxAccion;
         private PnlCatalogoAlmacenes auxFrmPrincipal;
-        public PnlAgregarAlmacen(PnlCatalogoAlmacenes frm,string opc,string id)
+        private DataUtilities dataUtilities = new DataUtilities();
+        public PnlAgregarAlmacen(PnlCatalogoAlmacenes frm, string opc, string id)
         {
             this.auxId = id;
             this.auxAccion = opc;
@@ -27,35 +29,27 @@ namespace NeoCobranza.Paneles
 
         private void PnlAgregarAlmacen_Load(object sender, EventArgs e)
         {
-
-            using(NeoCobranzaContext db = new NeoCobranzaContext())
-            {
-                List<Sucursales> list = db.Sucursales.Where(c => c.Estado == "Activo").ToList();
-
-                CmbSucursal.ValueMember = "SucursalId";
-                CmbSucursal.DisplayMember = "NombreSucursal";
-                CmbSucursal.DataSource = list;
-            }
-
-            switch(auxAccion) 
+            switch (auxAccion)
             {
 
                 case "Crear":
                     LblDynamico.Text = "Crear Almacén";
                     btnAgregar.Text = "Guardar";
+                    ChkAlmacenMostrador.Enabled = false;
                     break;
                 case "Modificar":
                     LblDynamico.Text = "Actualizar Almacén";
                     btnAgregar.Text = "Actualizar";
+                    ChkAlmacenMostrador.Enabled = false;
                     ChkAsignarSucursal.Enabled = false;
 
-                    using(NeoCobranzaContext db = new NeoCobranzaContext())
+                    using (NeoCobranzaContext db = new NeoCobranzaContext())
                     {
-                        Almacenes almacen = db.Almacenes.Where( c => c.AlmacenId == int.Parse(auxId)).FirstOrDefault();
-                        TxtNombre.Text = almacen.NombreAlmacen;
-                        ChkAsignarSucursal.Checked = almacen.SucursalId != 0 ? true : false;
-                        ChkAlmacenMostrador.Checked = (bool)almacen.EsMostrador;
-                        CmbSucursal.SelectedValue = almacen.SucursalId != 0 ? almacen.SucursalId : CmbSucursal.SelectedValue;
+                        DataTable dtRespuesta = dataUtilities.getRecordByPrimaryKey("Almacenes", auxId);
+                        TxtNombre.Text = Convert.ToString(dtRespuesta.Rows[0]["NombreAlmacen"]);
+                        ChkAsignarSucursal.Checked = Convert.ToString(dtRespuesta.Rows[0]["SucursalId"]) == "" ? false : true;
+                        ChkAlmacenMostrador.Checked = Convert.ToBoolean(dtRespuesta.Rows[0]["EsMostrador"]);
+                        TxtDireccion.Text = Convert.ToString(dtRespuesta.Rows[0]["Direccion"]);
                     }
                     break;
             }
@@ -70,83 +64,72 @@ namespace NeoCobranza.Paneles
         {
             //Verificaciones
 
-            if(TxtNombre.Text.Trim().Length == 0)
+            if (TxtNombre.Text.Trim().Length == 0)
             {
                 MessageBox.Show("El nombre del Almacén no puede estár vacío.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            using (NeoCobranzaContext db = new NeoCobranzaContext())
+
+            if (auxAccion == "Crear")
             {
-                if(auxAccion == "Crear")
+                if (ChkAsignarSucursal.Checked && ChkAlmacenMostrador.Checked)
                 {
-                    if (ChkAsignarSucursal.Checked)
+
+                    DataTable dtRespuesta = dataUtilities.getRecordByColumn("Almacenes", "SucursalId", Utilidades.SucursalId);
+
+                    int countMostrador = 0;
+
+                    foreach (DataRow item in dtRespuesta.Rows)
                     {
-                        if (CmbSucursal.Items.Count == 0)
+                        if (Convert.ToBoolean(item["EsMostrador"]) == true)
                         {
-                            MessageBox.Show("Debe agregar una sucursal en el catalogo antes de asignar almacenes a sucursales.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-
-                        List<Almacenes> list = db.Almacenes.Where(c => c.SucursalId == int.Parse(CmbSucursal.SelectedValue.ToString())).ToList();
-
-                        if (list.Count == 2)
-                        {
-                            MessageBox.Show("Una Sucursal solo puede tener dos almacenes asignados.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-
-                        if (list.Count == 1)
-                        {
-                            if (list.Where(c => c.EsMostrador == true).Any() && ChkAlmacenMostrador.Checked)
-                            {
-                                MessageBox.Show("La Sucursal ya tiene un Almacén mostrador asignado. Favor asigne un almacén normal.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            else if (!list.Where(c => c.EsMostrador == true).Any() && !ChkAlmacenMostrador.Checked)
-                            {
-                                MessageBox.Show("La Sucursal ya tiene un Almacén normal asignado. Favor asigne un Almacén mostrado.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
+                            countMostrador++;
                         }
                     }
 
-                    Almacenes almacen = new Almacenes()
+                    if (countMostrador == 1)
                     {
-                        NombreAlmacen = TxtNombre.Text.Trim(),
-                        EsMostrador = ChkAlmacenMostrador.Checked,
-                        SucursalId = ChkAsignarSucursal.Checked == true ? int.Parse(CmbSucursal.SelectedValue.ToString()) : 0,
-                        Estatus = "Activo"
-                    };
-
-                    db.Add(almacen);
-                    db.SaveChanges();
-
-                    List<ServiciosEstadares> servicios = db.ServiciosEstadares.Where(s => s.ClasificacionProducto == 0).ToList();
-
-                    foreach(var item in servicios)
-                    {
-                        RelAlmacenProducto rel = new RelAlmacenProducto() {
-                        AlmacenId = almacen.AlmacenId,
-                        ProductoId = item.IdEstandar,
-                        Cantidad = 0
-                        };
-
-                        db.Add(rel);
+                        MessageBox.Show("La Sucursal ya tiene un Almacén mostrador asignado. Favor asigne un almacén normal.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
                     }
-
-                    db.SaveChanges();
                 }
-                else
-                {
-                    Almacenes almacen = db.Almacenes.Where(c => c.AlmacenId == int.Parse(auxId)).FirstOrDefault();
-                    almacen.NombreAlmacen = TxtNombre.Text.Trim();
 
-                    db.Update(almacen);
-                    db.SaveChanges();
+                string sucursalId = ChkAsignarSucursal.Checked == true ? Utilidades.SucursalId : "";
+                string AlmacenId = Guid.NewGuid().ToString();
+
+                //insertar registro
+
+                dataUtilities.SetColumns("AlmacenId", AlmacenId);
+                dataUtilities.SetColumns("NombreAlmacen", TxtNombre.Text.Trim());
+                dataUtilities.SetColumns("EsMostrador", ChkAlmacenMostrador.Checked);
+                dataUtilities.SetColumns("SucursalId", sucursalId);
+                dataUtilities.SetColumns("Estatus", "Activo");
+                dataUtilities.SetColumns("Direccion", TxtDireccion.Text.Trim());
+
+                dataUtilities.InsertRecord("Almacenes");
+
+                //agregar productos en la tabla relacional
+
+                DataTable dtRespuestaProductos = dataUtilities.GetAllRecords("ProductosServicios");
+
+                foreach (DataRow item in dtRespuestaProductos.Rows)
+                {
+                    //Insertar Registro
+
+                    dataUtilities.SetColumns("AlmacenId", AlmacenId);
+                    dataUtilities.SetColumns("ProductoId", Convert.ToString(item["ProductoId"]));
+                    dataUtilities.SetColumns("Cantidad", 0);
+
+                    dataUtilities.InsertRecord("RelAlmacenProducto");
                 }
             }
-
+            else
+            {
+                dataUtilities.SetColumns("Direccion", TxtDireccion.Text.Trim());
+                dataUtilities.SetColumns("NombreAlmacen", TxtNombre.Text.Trim());
+                dataUtilities.UpdateRecordByPrimaryKey("Almacenes", auxId);
+            }
 
             auxFrmPrincipal.vMCatalogoAlmacenes.InitModuloCatalogoAlmacenes(auxFrmPrincipal, "Buscar");
             this.Dispose();
@@ -156,15 +139,11 @@ namespace NeoCobranza.Paneles
         {
             if (ChkAsignarSucursal.Checked)
             {
-                CmbSucursal.Enabled = true;
                 ChkAlmacenMostrador.Enabled = true;
-                LblSucursal.Enabled = true;
             }
             else
             {
-                CmbSucursal.Enabled = false;
                 ChkAlmacenMostrador.Enabled = false;
-                LblSucursal.Enabled = false;
             }
         }
     }
