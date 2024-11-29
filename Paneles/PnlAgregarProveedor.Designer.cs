@@ -41,6 +41,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtDireccion = new System.Windows.Forms.TextBox();
+            this.TxtNombreRepresentante = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.TxtCelularRepresentante = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.TxtCorreo = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -148,7 +154,7 @@
             // TxtNoRuc
             // 
             this.TxtNoRuc.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.TxtNoRuc.Location = new System.Drawing.Point(19, 235);
+            this.TxtNoRuc.Location = new System.Drawing.Point(17, 306);
             this.TxtNoRuc.Name = "TxtNoRuc";
             this.TxtNoRuc.Size = new System.Drawing.Size(201, 23);
             this.TxtNoRuc.TabIndex = 76;
@@ -158,7 +164,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
             this.label3.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label3.Location = new System.Drawing.Point(18, 208);
+            this.label3.Location = new System.Drawing.Point(16, 279);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(91, 18);
             this.label3.TabIndex = 77;
@@ -169,7 +175,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
             this.label4.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label4.Location = new System.Drawing.Point(19, 285);
+            this.label4.Location = new System.Drawing.Point(17, 356);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(85, 18);
             this.label4.TabIndex = 79;
@@ -178,11 +184,68 @@
             // txtDireccion
             // 
             this.txtDireccion.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.txtDireccion.Location = new System.Drawing.Point(21, 320);
+            this.txtDireccion.Location = new System.Drawing.Point(19, 391);
             this.txtDireccion.Multiline = true;
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(469, 95);
             this.txtDireccion.TabIndex = 80;
+            // 
+            // TxtNombreRepresentante
+            // 
+            this.TxtNombreRepresentante.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TxtNombreRepresentante.Location = new System.Drawing.Point(556, 93);
+            this.TxtNombreRepresentante.Name = "TxtNombreRepresentante";
+            this.TxtNombreRepresentante.Size = new System.Drawing.Size(392, 23);
+            this.TxtNombreRepresentante.TabIndex = 81;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label1.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label1.Location = new System.Drawing.Point(552, 67);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(210, 18);
+            this.label1.TabIndex = 82;
+            this.label1.Text = "Nombre del Representante:";
+            // 
+            // TxtCelularRepresentante
+            // 
+            this.TxtCelularRepresentante.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TxtCelularRepresentante.Location = new System.Drawing.Point(555, 164);
+            this.TxtCelularRepresentante.Name = "TxtCelularRepresentante";
+            this.TxtCelularRepresentante.Size = new System.Drawing.Size(202, 23);
+            this.TxtCelularRepresentante.TabIndex = 83;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label5.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label5.Location = new System.Drawing.Point(553, 139);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(204, 18);
+            this.label5.TabIndex = 84;
+            this.label5.Text = "Celular del Representante:";
+            // 
+            // TxtCorreo
+            // 
+            this.TxtCorreo.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TxtCorreo.Location = new System.Drawing.Point(15, 237);
+            this.TxtCorreo.Name = "TxtCorreo";
+            this.TxtCorreo.Size = new System.Drawing.Size(202, 23);
+            this.TxtCorreo.TabIndex = 85;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label6.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label6.Location = new System.Drawing.Point(16, 204);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(64, 18);
+            this.label6.TabIndex = 86;
+            this.label6.Text = "Correo:";
             // 
             // PnlAgregarProveedor
             // 
@@ -190,6 +253,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1056, 600);
+            this.Controls.Add(this.TxtCorreo);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.TxtCelularRepresentante);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.TxtNombreRepresentante);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.txtDireccion);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.TxtNoRuc);
@@ -229,5 +298,11 @@
         public System.Windows.Forms.Label label4;
         public System.Windows.Forms.TextBox txtDireccion;
         public System.Windows.Forms.Label LblDynamicoProveedor;
+        public System.Windows.Forms.TextBox TxtNombreRepresentante;
+        public System.Windows.Forms.Label label1;
+        public System.Windows.Forms.TextBox TxtCelularRepresentante;
+        public System.Windows.Forms.Label label5;
+        public System.Windows.Forms.TextBox TxtCorreo;
+        public System.Windows.Forms.Label label6;
     }
 }

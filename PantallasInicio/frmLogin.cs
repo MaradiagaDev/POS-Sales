@@ -83,11 +83,9 @@ namespace NeoCobranza
                 Utilidades.IdUsuario = dtRespuesta.Rows[0][1].ToString();
 
                 Utilidades.Usuario = TxtUser.Text.Trim();
+
                 frmSeleccionSucursal frm = new frmSeleccionSucursal(Utilidades.IdUsuario);
                 frm.ShowDialog();
-
-                this.Close();
-
             }
             catch (Exception ex)
             {

@@ -1,4 +1,5 @@
-﻿using NeoCobranza.ModelsCobranza;
+﻿using NeoCobranza.Clases;
+using NeoCobranza.ModelsCobranza;
 using NeoCobranza.Paneles;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace NeoCobranza.ViewModels
         PnlCatologoTiposServicios auxFrmCatalogo;
         public string auxAccion;
         public string auxBuscador;
+        DataUtilities dataUtilities = new DataUtilities();
 
         public void InitModuloPnlCatalogoServicio(PnlCatologoTiposServicios frm, string opc)
         {
@@ -38,7 +40,7 @@ namespace NeoCobranza.ViewModels
                         frm.dgvCatalogoTipos.Columns.Add(BtnCambioEstado);
 
                         dynamicDataTable.Columns.Add("Id", typeof(string));
-                        dynamicDataTable.Columns.Add("Nombre Tipo", typeof(string));
+                        dynamicDataTable.Columns.Add("Descripción", typeof(string));
                         dynamicDataTable.Columns.Add("Estado", typeof(string));
                     }
                     AccionesPrincipales(frm, "Buscar");
@@ -63,11 +65,13 @@ namespace NeoCobranza.ViewModels
 
                         dynamicDataTable.Rows.Clear();
 
-                        List<TipoServicios> list = db.TipoServicios.Where(c => c.Descripcion.Contains(auxBuscador)).ToList();
+                        DataTable dtResponse = dataUtilities.GetAllRecords("Categorizacion");
 
-                        foreach (TipoServicios t in list.OrderByDescending(c => c.TipoServicionId))
+                        var filterRow = from row in dtResponse.AsEnumerable() where Convert.ToString(row.Field<string>("Descripcion")).Contains(frm.TxtFiltrar.Texts.Trim()) orderby row.Field<int>("CategorizacionId") descending select row;
+
+                        if (filterRow.Any())
                         {
-                            dynamicDataTable.Rows.Add(t.TipoServicionId, t.Descripcion,t.Estado);
+                            dynamicDataTable = filterRow.CopyToDataTable();
                         }
 
                         frm.dgvCatalogoTipos.DataSource = dynamicDataTable; 
@@ -76,14 +80,14 @@ namespace NeoCobranza.ViewModels
                 case "Bloquear":
                     using (NeoCobranzaContext db = new NeoCobranzaContext())
                     {
-                        TipoServicios tipo = db.TipoServicios.Where(c => c.TipoServicionId == int.Parse(auxId)).FirstOrDefault();
-                        tipo.Estado = tipo.Estado == "Activo" ? "Bloqueado" : "Activo";
-                        db.Update(tipo);
-                        db.SaveChanges();
+                        DataTable dtRespuesta = dataUtilities.getRecordByPrimaryKey("Categorizacion", auxId);
+                        string statusActual = Convert.ToString(dtRespuesta.Rows[0]["Estado"]) == "Activo" ? "Bloqueado" : "Activo";
+
+                        dataUtilities.SetColumns("Estado", statusActual);
+                        dataUtilities.UpdateRecordByPrimaryKey("Categorizacion", auxId);
                     }
 
                     AccionesPrincipales(frm, "Buscar");
-
                     break;
             }
         }

@@ -1,4 +1,5 @@
-﻿using NeoCobranza.ModelsCobranza;
+﻿using NeoCobranza.Clases;
+using NeoCobranza.ModelsCobranza;
 using NeoCobranza.Paneles;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace NeoCobranza.ViewModels
         DataTable dynamicDataTable = new DataTable();
         public string auxSearch;
         public string auxId;
+        DataUtilities dataUtilities = new DataUtilities();
 
         public void InitModuloCatalogoSucursales(PnlCatalogoSucursales frm, string opc)
         {
@@ -65,30 +67,26 @@ namespace NeoCobranza.ViewModels
             switch (opc)
             {
                 case "Buscar":
-                    using(NeoCobranzaContext db = new NeoCobranzaContext())
-                    {
-                        List<Sucursales> list = db.Sucursales.Where(c => c.NombreSucursal.Contains(auxSearch)).ToList();
+                        DataTable dtResponse = dataUtilities.GetAllRecords("Sucursal");
 
-                        foreach (Sucursales sucursales in list.OrderByDescending(c => c.SucursalId))
+                        var filterRow = from row in dtResponse.AsEnumerable() where Convert.ToString(row.Field<string>("NombreSucursal")).Contains(auxSearch) orderby row.Field<string>("NombreSucursal") descending select row;
+
+                        if (filterRow.Any())
                         {
-                            dynamicDataTable.Rows.Add(sucursales.SucursalId,sucursales.NombreSucursal,sucursales.Estado,sucursales.Telefono,
-                                sucursales.Correo,sucursales.Direccion);
-                        }
+                            dynamicDataTable = filterRow.CopyToDataTable();
+                        };
 
                         frm.dgvCatalogoSucursales.DataSource = dynamicDataTable;
-                    }
                     break;
                 case "Bloquear":
-                    using (NeoCobranzaContext db = new NeoCobranzaContext())
-                    {
-                        Sucursales sucursal = db.Sucursales.Where(p => p.SucursalId == int.Parse(auxId)).FirstOrDefault();
-                        sucursal.Estado = sucursal.Estado == "Activo" ? "Bloqueado" : "Activo";
+                    DataTable dtRespuesta = dataUtilities.getRecordByPrimaryKey("IdSucursal", auxId);
+                    string statusActual = Convert.ToString(dtRespuesta.Rows[0]["Estado"]) == "Activo" ? "Bloqueado" : "Activo";
 
-                        db.Update(sucursal);
-                        db.SaveChanges();
+                    dataUtilities.SetColumns("Estado", statusActual);
+                    dataUtilities.UpdateRecordByPrimaryKey("Proveedores", auxId);
 
                         ConfigUI(frm, "Buscar");
-                    }
+                    
                     break;
             }
         }

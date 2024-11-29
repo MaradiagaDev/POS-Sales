@@ -154,7 +154,7 @@
             this.TxtDireccion.MaxLength = 500;
             this.TxtDireccion.Multiline = true;
             this.TxtDireccion.Name = "TxtDireccion";
-            this.TxtDireccion.Size = new System.Drawing.Size(302, 111);
+            this.TxtDireccion.Size = new System.Drawing.Size(541, 111);
             this.TxtDireccion.TabIndex = 93;
             // 
             // label2

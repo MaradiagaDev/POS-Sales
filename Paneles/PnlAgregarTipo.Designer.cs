@@ -53,9 +53,9 @@
             this.label7.ForeColor = System.Drawing.SystemColors.Highlight;
             this.label7.Location = new System.Drawing.Point(18, 71);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(240, 18);
+            this.label7.Size = new System.Drawing.Size(170, 18);
             this.label7.TabIndex = 85;
-            this.label7.Text = "Nombre del Tipo de Servicio (*)";
+            this.label7.Text = "Nombre Categoría (*)";
             // 
             // btnAgregar
             // 
@@ -116,9 +116,9 @@
             this.LblDynamicoProveedor.Location = new System.Drawing.Point(22, 9);
             this.LblDynamicoProveedor.Margin = new System.Windows.Forms.Padding(3, 0, 10, 0);
             this.LblDynamicoProveedor.Name = "LblDynamicoProveedor";
-            this.LblDynamicoProveedor.Size = new System.Drawing.Size(101, 18);
+            this.LblDynamicoProveedor.Size = new System.Drawing.Size(123, 18);
             this.LblDynamicoProveedor.TabIndex = 1;
-            this.LblDynamicoProveedor.Text = "Tipo Servicio";
+            this.LblDynamicoProveedor.Text = "Categorización";
             // 
             // PnlAgregarTipo
             // 

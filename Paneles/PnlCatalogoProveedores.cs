@@ -16,6 +16,7 @@ namespace NeoCobranza.Paneles
     public partial class PnlCatalogoProveedores : Form
     {
         VMCatalogoProveedores vMCatalogoProveedores = new VMCatalogoProveedores();
+
         public PnlCatalogoProveedores()
         {
             InitializeComponent();
@@ -24,7 +25,7 @@ namespace NeoCobranza.Paneles
         private void PnlCatalogoProveedores_Load(object sender, EventArgs e)
         {
             dgvCatalogoProveedores.EnableHeadersVisualStyles = false;
-            dgvCatalogoProveedores.ColumnHeadersDefaultCellStyle.BackColor = Color.CadetBlue;
+            dgvCatalogoProveedores.ColumnHeadersDefaultCellStyle.BackColor = Color.DodgerBlue;
             dgvCatalogoProveedores.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvCatalogoProveedores.RowsDefaultCellStyle.Font = new Font("Century Gothic", 9);
             dgvCatalogoProveedores.RowsDefaultCellStyle.BackColor = Color.White;

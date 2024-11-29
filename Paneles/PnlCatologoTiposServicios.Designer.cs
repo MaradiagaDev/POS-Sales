@@ -63,9 +63,9 @@
             this.TbTitulo.Location = new System.Drawing.Point(4, 3);
             this.TbTitulo.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.TbTitulo.Name = "TbTitulo";
-            this.TbTitulo.Size = new System.Drawing.Size(415, 33);
+            this.TbTitulo.Size = new System.Drawing.Size(726, 33);
             this.TbTitulo.TabIndex = 1;
-            this.TbTitulo.Text = "Catálogo de Tipos de Servicio";
+            this.TbTitulo.Text = "Catálogo de Categorización de Servicios / Productos";
             // 
             // dgvCatalogoTipos
             // 

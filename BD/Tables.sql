@@ -111,3 +111,21 @@ CREATE TABLE RelAlmacenProducto (
     ProductoId NVARCHAR(50), -- Identificador del producto (opcional)
     Cantidad INT NULL -- Cantidad de producto en el almacén (opcional)
 );
+
+CREATE TABLE Proveedores (
+    IdProveedor INT PRIMARY KEY IDENTITY(1,1), -- Llave primaria con autoincremento
+    NombreEmpresa NVARCHAR(255) NOT NULL,      -- Nombre de la empresa (string)
+    NoTelefono NVARCHAR(50),                   -- Número de teléfono (string)
+    NoRuc NVARCHAR(50),                        -- Número de RUC (string)
+    Correo NVARCHAR(255),                      -- Correo electrónico (string)
+    Direccion NVARCHAR(MAX),                   -- Dirección (string)
+    Estatus nvarchar(50) NULL,
+	NombreRepresentante nvarchar(255) null,
+	NoCelularRepresentante nvarchar(100) null
+);
+
+CREATE TABLE Categorizacion (
+    CategorizacionId INT IDENTITY(1,1) PRIMARY KEY, -- Clave primaria con incremento automático
+    Descripcion NVARCHAR(255) NOT NULL,          -- Campo de texto para la descripción
+    Estado NVARCHAR(50) NOT NULL                 -- Campo de texto para el estado
+);

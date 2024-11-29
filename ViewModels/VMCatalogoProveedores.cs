@@ -1,4 +1,5 @@
-﻿using NeoCobranza.Clases;
+﻿
+using NeoCobranza.Clases;
 using NeoCobranza.ModelsCobranza;
 using NeoCobranza.Paneles;
 using System;
@@ -19,16 +20,17 @@ namespace NeoCobranza.ViewModels
         public string auxId;
         PnlCatalogoProveedores auxFrmCatalogo;
         public string auxAccion;
+        private DataUtilities dataUtilities = new DataUtilities();
 
         public void InitModuloProveedores(PnlCatalogoProveedores frm)
         {
             ConfigUI(frm, "Buscar");
         }
 
-        public void InitModuloCrearProveedor(PnlCatalogoProveedores frmCatalogo,PnlAgregarProveedor frmAgregar, string opc,string key)
+        public void InitModuloCrearProveedor(PnlCatalogoProveedores frmCatalogo, PnlAgregarProveedor frmAgregar, string opc, string key)
         {
             auxFrmCatalogo = frmCatalogo;
-            switch(opc)
+            switch (opc)
             {
                 case "Crear":
                     frmAgregar.LblDynamicoProveedor.Text = "Nuevo Proveedor";
@@ -36,19 +38,23 @@ namespace NeoCobranza.ViewModels
                     frmAgregar.btnAgregar.Text = "Crear";
                     break;
                 case "Modificar":
-                    using(NeoCobranzaContext db = new NeoCobranzaContext())
+                    using (NeoCobranzaContext db = new NeoCobranzaContext())
                     {
                         auxAccion = "Modificar";
                         auxId = key;
 
                         frmAgregar.btnAgregar.Text = "Modificar";
 
-                        Proveedores proveedor = db.Proveedores.Where(c => c.IdProveedor == int.Parse(key)).FirstOrDefault();
-                        frmAgregar.LblDynamicoProveedor.Text = "Modificar Proveedor: "+proveedor.NombreEmpresa;
-                        frmAgregar.TxtNombreEmpresa.Text = proveedor.NombreEmpresa;
-                        frmAgregar.TxtNoRuc.Text = proveedor.NoRuc;
-                        frmAgregar.TxtNoTelefono.Text= proveedor.NoTelefono;
-                        frmAgregar.txtDireccion.Text = proveedor.Direccion;
+                        DataTable dtRespuesta = dataUtilities.getRecordByPrimaryKey("Proveedores", auxId);
+
+                        frmAgregar.LblDynamicoProveedor.Text = "Modificar Proveedor: " + Convert.ToString(dtRespuesta.Rows[0]["NombreEmpresa"]);
+                        frmAgregar.TxtNombreEmpresa.Text = Convert.ToString(dtRespuesta.Rows[0]["NombreEmpresa"]);
+                        frmAgregar.TxtNoRuc.Text = Convert.ToString(dtRespuesta.Rows[0]["NoRuc"]);
+                        frmAgregar.TxtNoTelefono.Text = Convert.ToString(dtRespuesta.Rows[0]["NoTelefono"]);
+                        frmAgregar.txtDireccion.Text = Convert.ToString(dtRespuesta.Rows[0]["Direccion"]);
+                        frmAgregar.TxtCelularRepresentante.Text = Convert.ToString(dtRespuesta.Rows[0]["NoCelularRepresentante"]);
+                        frmAgregar.TxtNombreRepresentante.Text = Convert.ToString(dtRespuesta.Rows[0]["NombreRepresentante"]);
+                        frmAgregar.TxtCorreo.Text = Convert.ToString(dtRespuesta.Rows[0]["Correo"]);
                     }
                     break;
             }
@@ -60,7 +66,7 @@ namespace NeoCobranza.ViewModels
             {
                 case "Buscar":
 
-                   
+
 
                     //Datatable
                     dynamicDataTable.Columns.Clear();
@@ -83,6 +89,8 @@ namespace NeoCobranza.ViewModels
                     dynamicDataTable.Columns.Add("RUC", typeof(string));
                     dynamicDataTable.Columns.Add("Correo", typeof(string));
                     dynamicDataTable.Columns.Add("Dirección", typeof(string));
+                    dynamicDataTable.Columns.Add("Representante", typeof(string));
+                    dynamicDataTable.Columns.Add("Contacto", typeof(string));
 
                     frm.dgvCatalogoProveedores.DataSource = dynamicDataTable;
 
@@ -92,7 +100,7 @@ namespace NeoCobranza.ViewModels
 
                     frm.CmbBuscarPor.SelectedIndex = 1;
 
-                    FuncionesPrincipales(frm, "Buscar","");
+                    FuncionesPrincipales(frm, "Buscar", "");
                     frm.dgvCatalogoProveedores.AlternatingRowsDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#ECECEC");
 
                     break;
@@ -103,7 +111,7 @@ namespace NeoCobranza.ViewModels
         {
             if (frm.TxtNombreEmpresa.Text.Trim().Length == 0)
             {
-                MessageBox.Show("El Nombre de la empresa no puede estar vacío.","Atención",
+                MessageBox.Show("El Nombre de la empresa no puede estar vacío.", "Atención",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -122,108 +130,120 @@ namespace NeoCobranza.ViewModels
                 return;
             }
 
-            using (NeoCobranzaContext db = new NeoCobranzaContext())
+            switch (auxAccion)
             {
-                switch (auxAccion)
-                {
 
-                    case "Crear":
-                        Proveedores proveedor = new Proveedores()
-                        {
-                            NombreEmpresa = frm.TxtNombreEmpresa.Text.Trim(),
-                            NoRuc = frm.TxtNoRuc.Text.Trim(),
-                            NoTelefono = frm.TxtNoTelefono.Text.Trim(),
-                            Direccion = frm.txtDireccion.Text.Trim(),
-                            Estatus = true
-                        };
+                case "Crear":
 
-                        db.Add(proveedor);
-                        db.SaveChanges();
+                    dataUtilities.SetColumns("NombreEmpresa", frm.TxtNombreEmpresa.Text.Trim());
+                    dataUtilities.SetColumns("NoTelefono", frm.TxtNoTelefono.Text.Trim());
+                    dataUtilities.SetColumns("NoRuc", frm.TxtNoRuc.Text.Trim());
+                    dataUtilities.SetColumns("Correo", frm.TxtCorreo.Text.Trim());
+                    dataUtilities.SetColumns("Direccion", frm.txtDireccion.Text.Trim());
+                    dataUtilities.SetColumns("Estatus", "Activo");
+                    dataUtilities.SetColumns("NombreRepresentante", frm.TxtNombreRepresentante.Text.Trim());
+                    dataUtilities.SetColumns("NoCelularRepresentante", frm.TxtCelularRepresentante.Text.Trim());
+                    dataUtilities.InsertRecord("Proveedores");
 
-                        MessageBox.Show("El Proveedor se ha creado correctamente.", "Correcto", MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
+                    MessageBox.Show("El Proveedor se ha creado correctamente.", "Correcto", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
 
+                    ConfigUI(auxFrmCatalogo, "Buscar");
+                    frm.Close();
 
-                        ConfigUI(auxFrmCatalogo, "Buscar");
-                        frm.Close();
+                    break;
+                case "Modificar":
 
-                        break;
-                    case "Modificar":
-                        Proveedores proveedorMod = db.Proveedores.Where(p => p.IdProveedor == int.Parse(auxId)).FirstOrDefault();
+                    dataUtilities.SetColumns("NombreEmpresa", frm.TxtNombreEmpresa.Text.Trim());
+                    dataUtilities.SetColumns("NoTelefono", frm.TxtNoTelefono.Text.Trim());
+                    dataUtilities.SetColumns("NoRuc", frm.TxtNoRuc.Text.Trim());
+                    dataUtilities.SetColumns("Correo", frm.TxtCorreo.Text.Trim());
+                    dataUtilities.SetColumns("Direccion", frm.txtDireccion.Text.Trim());
+                    dataUtilities.SetColumns("Estatus", "Activo");
+                    dataUtilities.SetColumns("NombreRepresentante", frm.TxtNombreRepresentante.Text.Trim());
+                    dataUtilities.SetColumns("NoCelularRepresentante", frm.TxtCelularRepresentante.Text.Trim());
+                    dataUtilities.UpdateRecordByPrimaryKey("Proveedores", auxId);
 
-                        proveedorMod.NombreEmpresa = frm.TxtNombreEmpresa.Text.Trim();
-                        proveedorMod.NoRuc = frm.TxtNoRuc.Text.Trim();
-                        proveedorMod.NoTelefono = frm.TxtNoTelefono.Text.Trim();
-                        proveedorMod.Direccion = frm.txtDireccion.Text.Trim();
+                    MessageBox.Show("El Proveedor se ha modificado correctamente.", "Correcto", MessageBoxButtons.OK,
+                       MessageBoxIcon.Information);
 
-                        db.Update(proveedorMod);
-                        db.SaveChanges();
+                    ConfigUI(auxFrmCatalogo, "Buscar");
+                    frm.Close();
 
-                        MessageBox.Show("El Proveedor se ha modificado correctamente.", "Correcto", MessageBoxButtons.OK,
-                           MessageBoxIcon.Information);
-
-                        ConfigUI(auxFrmCatalogo, "Buscar");
-                        frm.Close();
-
-                        break;
-                }
+                    break;
             }
+
 
         }
 
-        public void FuncionesPrincipales(PnlCatalogoProveedores frm, string opc,string key)
+        public void FuncionesPrincipales(PnlCatalogoProveedores frm, string opc, string key)
         {
             using (NeoCobranzaContext db = new NeoCobranzaContext())
             {
                 switch (opc)
                 {
                     case "Buscar":
-                        List<Proveedores> proveedores = new List<Proveedores>();
+                        DataTable dtResponse = dataUtilities.GetAllRecords("Proveedores");
+                        DataTable proveedores = new DataTable();
 
                         frm.dgvCatalogoProveedores.DataSource = "";
 
                         if (frm.CmbBuscarPor.SelectedIndex == 0)
                         {
-                            proveedores = db.Proveedores.Where(c => c.IdProveedor.ToString() == frm.TxtFiltrar.Texts.Trim()).OrderByDescending(c => c.IdProveedor).ToList();
+                           var filterRow = from row in dtResponse.AsEnumerable() where Convert.ToString(row.Field<int>("IdProveedor")) == frm.TxtFiltrar.Texts.Trim() orderby row.Field<int>("IdProveedor") descending select row;
+
+                            if (filterRow.Any())
+                            {
+                                proveedores = filterRow.CopyToDataTable();
+                            }
                         }
                         else if (frm.CmbBuscarPor.SelectedIndex == 1)
                         {
-                            proveedores = db.Proveedores.Where(c => c.NombreEmpresa.Contains(frm.TxtFiltrar.Texts.Trim())).OrderByDescending(c => c.IdProveedor).ToList();
+                            var filterRow = from row in dtResponse.AsEnumerable() where Convert.ToString(row.Field<string>("NombreEmpresa")).Contains(frm.TxtFiltrar.Texts.Trim()) orderby row.Field<int>("IdProveedor") descending select row;
+
+                            if (filterRow.Any())
+                            {
+                                proveedores = filterRow.CopyToDataTable();
+                            }
                         }
                         else if (frm.CmbBuscarPor.SelectedIndex == 2)
                         {
-                            proveedores = db.Proveedores.Where(c => c.NoRuc.Contains(frm.TxtFiltrar.Texts.Trim())).OrderByDescending(c => c.IdProveedor).ToList();
+                            var filterRow = from row in dtResponse.AsEnumerable() where Convert.ToString(row.Field<string>("NoRuc")).Contains(frm.TxtFiltrar.Texts.Trim()) orderby row.Field<int>("IdProveedor") descending select row;
+
+                            if (filterRow.Any())
+                            {
+                                proveedores = filterRow.CopyToDataTable();
+                            }
                         }
 
-
-
-                        foreach (var item in proveedores.OrderByDescending( c => c.IdProveedor))
+                        foreach (DataRow item in proveedores.Rows)
                         {
-                            string idProveedor = item.IdProveedor.ToString();
-                            string nombreProveedor = item.NombreEmpresa;
-                            string estado = item.Estatus == null || item.Estatus == false ? "Inactivo" : "Activo";
-                            string telefono = item.NoTelefono.ToString();
-                            string ruc = item.NoRuc == null || item.NoRuc.Trim() == "" ? "Desconocido" : item.NoRuc;
-                            string correo = item.Correo == null ? "Desconocido" : item.Correo;
-                            string direccion = item.Direccion == null ? "Desconocido" : item.Direccion;
-                            
+                            string idProveedor = Convert.ToString(item["IdProveedor"]);
+                            string nombreProveedor = Convert.ToString(item["NombreEmpresa"]);
+                            string estado = Convert.ToString(item["Estatus"]);
+                            string telefono = Convert.ToString(item["NoTelefono"]);
+                            string ruc = Convert.ToString(item["NoRuc"]) == ""  ? "Desconocido" : Convert.ToString(item["NoRuc"]);
+                            string correo = Convert.ToString(item["Correo"]) == null ? "Desconocido" : Convert.ToString(item["Correo"]);
+                            string direccion = Convert.ToString(item["Direccion"]) == null ? "Desconocido" : Convert.ToString(item["Direccion"]);
 
-                            dynamicDataTable.Rows.Add(idProveedor, nombreProveedor, estado, telefono, ruc, correo, direccion);
+
+                            dynamicDataTable.Rows.Add(idProveedor, nombreProveedor, estado, telefono, ruc, correo, direccion,
+                                Convert.ToString(item["NombreRepresentante"]), Convert.ToString(item["NoCelularRepresentante"]));
                         }
 
                         frm.dgvCatalogoProveedores.DataSource = dynamicDataTable;
                         frm.dgvCatalogoProveedores.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells; // Ajustar automáticamente al contenido
+
                         break;
                     case "CambiarEstado":
+                        auxId = key.ToString();
+                        DataTable dtRespuesta = dataUtilities.getRecordByPrimaryKey("Proveedores", auxId);
+                        string statusActual = Convert.ToString(dtRespuesta.Rows[0]["Estatus"]) == "Activo" ? "Bloqueado" : "Activo"; 
 
-                        Proveedores proveedorEstado = db.Proveedores.Where( p => p.IdProveedor == int.Parse(key) ).FirstOrDefault();
-                        proveedorEstado.Estatus = proveedorEstado.Estatus == true ? false : true;
-
-                        db.Update(proveedorEstado);
-                        db.SaveChanges();
+                        dataUtilities.SetColumns("Estatus", statusActual);
+                        dataUtilities.UpdateRecordByPrimaryKey("Proveedores", auxId);
 
                         ConfigUI(frm, "Buscar");
-
                         break;
                 }
             }
