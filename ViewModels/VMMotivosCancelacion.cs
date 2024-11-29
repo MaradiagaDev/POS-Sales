@@ -14,6 +14,7 @@ namespace NeoCobranza.ViewModels
     public class VMMotivosCancelacion
     {
         public DataTable auxDatatable = new DataTable();
+        public DataUtilities dataUtilities = new DataUtilities();
 
         public void InitModuloMotivosCancelacion(CatologoMotivosCancelacion frm)
         {
@@ -43,35 +44,31 @@ namespace NeoCobranza.ViewModels
             FuncionesPrincipales(frm, "Buscar", "");
         }
 
-        public void FuncionesPrincipales(CatologoMotivosCancelacion frm,string opc, string key)
+        public void FuncionesPrincipales(CatologoMotivosCancelacion frm, string opc, string key)
         {
-            using(NeoCobranzaContext db = new NeoCobranzaContext())
+            if (opc == "Buscar")
             {
-                if(opc == "Buscar")
+
+                DataTable dtResponse = dataUtilities.GetAllRecords("MotivosCancelacion");
+
+                var filterRow = from row in dtResponse.AsEnumerable() where Convert.ToString(row.Field<string>("Motivo")).Contains(frm.TxtFiltrar.Texts) orderby row.Field<string>("Motivo") descending select row;
+
+                if (filterRow.Any())
                 {
-                    auxDatatable.Rows.Clear();
+                    auxDatatable = filterRow.CopyToDataTable();
+                };
 
-                    var ListaMotivos = db.MotivosCancelacion.Where(e => e.Motivo.Contains(frm.TxtFiltrar.Texts)).ToList();
+                frm.dgvCatalogo.DataSource = auxDatatable;
+            }
+            else if (opc == "Bloquear")
+            {
+                DataTable dtRespuesta = dataUtilities.getRecordByPrimaryKey("MotivosCancelacion", key);
+                string statusActual = Convert.ToString(dtRespuesta.Rows[0]["Estado"]) == "Activo" ? "Bloqueado" : "Activo";
 
-                    foreach(var item in ListaMotivos)
-                    {
-                        auxDatatable.Rows.Add(item.MotivoCancelacionId,item.Motivo,item.Estado);
-                    }
-                }
-                else if(opc == "Bloquear")
-                {
-                    var Motivo = db.MotivosCancelacion.Where(m => m.MotivoCancelacionId == int.Parse(key)).FirstOrDefault();
+                dataUtilities.SetColumns("Estado", statusActual);
+                dataUtilities.UpdateRecordByPrimaryKey("MotivosCancelacion", key);
 
-                    if(Motivo != null)
-                    {
-                        Motivo.Estado = Motivo.Estado == "Activo" ? "Bloqueado" : "Activo";
-
-                        db.Update(Motivo);
-                        db.SaveChanges();
-
-                        FuncionesPrincipales(frm, "Buscar", "");
-                    }
-                }
+                FuncionesPrincipales(frm, "Buscar", "");
             }
         }
     }

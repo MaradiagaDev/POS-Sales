@@ -1,4 +1,5 @@
 ﻿using NeoCobranza.ModelsCobranza;
+using NeoCobranza.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,7 @@ namespace NeoCobranza.Paneles
     {
         PnlCatalogoSucursales auxFrmPrincipal;
         string auxOpc, auxId;
+        DataUtilities dataUtilities = new DataUtilities();
 
         public PnlAgregarSucursal(PnlCatalogoSucursales frm, string opc, string id)
         {
@@ -28,18 +30,17 @@ namespace NeoCobranza.Paneles
         {
             if(auxOpc != "Crear") 
             {
-                using(NeoCobranzaContext db = new NeoCobranzaContext())
-                {
-                    Sucursales sucursal = db.Sucursales.Where(c => c.SucursalId == int.Parse(auxId)).FirstOrDefault();
+                DataTable dtResponse = dataUtilities.getRecordByPrimaryKey("Sucursal", auxId);
 
-                    TxtNombreSucursal.Text = sucursal.NombreSucursal;
-                    TxtTelefono.Text = sucursal.Telefono;
-                    TxtDireccion.Text = sucursal.Direccion;
-                    TxtCorreo.Text = sucursal.Correo;
+
+                    TxtNombreSucursal.Text = Convert.ToString(dtResponse.Rows[0]["NombreSucursal"]);
+                    TxtTelefono.Text = Convert.ToString(dtResponse.Rows[0]["Telefono"]);
+                    TxtDireccion.Text = Convert.ToString(dtResponse.Rows[0]["Direccion"]);
+                    TxtCorreo.Text = Convert.ToString(dtResponse.Rows[0]["Correo"]);
 
                     LblDynamico.Text = "Modificar Sucursal";
                     btnAgregar.Text = "Modificar";
-                }
+                
             }
         }
 
@@ -66,57 +67,38 @@ namespace NeoCobranza.Paneles
             switch (this.auxOpc)
             {
                 case "Crear":
-                    using(NeoCobranzaContext db = new NeoCobranzaContext())
-                    {
-                        Sucursales sucursal = new Sucursales() {
-                            NombreSucursal = TxtNombreSucursal.Text.Trim(),
-                            Telefono = TxtTelefono.Text.Trim(),
-                            Correo = TxtCorreo.Text.Trim(),
-                            Direccion = TxtDireccion.Text.Trim(),
-                            Estado = "Activo"
-                        };
 
-                        db.Add(sucursal);
-                        db.SaveChanges();
+                    string SucursalID = Guid.NewGuid().ToString();
 
-                        ModelsCobranza.ConfigFacturacion configFacturacion = new ModelsCobranza.ConfigFacturacion() 
-                        { 
-                            SucursalId = sucursal.SucursalId,
-                            Serie = sucursal.NombreSucursal.Substring(0,1),
-                            ConsecutivoFactura = 1,
-                            RangoFactura = 999,
-                            ConsecutivoOrden = 1,
-                            RangoOrden = 999,
-                        };
+                    dataUtilities.SetColumns("IdSucursal", SucursalID);
+                    dataUtilities.SetColumns("NombreSucursal",TxtNombreSucursal.Text.Trim());
+                    dataUtilities.SetColumns("Direccion", TxtDireccion.Text.Trim());
+                    dataUtilities.SetColumns("Telefono", TxtTelefono.Text.Trim());
+                    dataUtilities.SetColumns("Correo", TxtCorreo.Text.Trim());
+                    dataUtilities.SetColumns("Estado", "Activo");
+                    dataUtilities.SetColumns("FechaCreo",DateTime.Now.ToString());
+                    dataUtilities.InsertRecord("Sucursal");
 
-                        db.Add(configFacturacion);
-                        db.SaveChanges();
+                    dataUtilities.SetColumns("SucursalId", SucursalID);
+                    dataUtilities.SetColumns("Serie", TxtNombreSucursal.Text.Trim().Substring(0, 1));
+                    dataUtilities.SetColumns("ConsecutivoFactura",1);
+                    dataUtilities.SetColumns("RangoFactura", 99999);
+                    dataUtilities.SetColumns("ConsecutivoOrden", 1);
+                    dataUtilities.SetColumns("RangoOrden", 99999);
+                    dataUtilities.InsertRecord("ConfigFacturacion");
 
-                        ConfigInventario configInventario = new ConfigInventario()
-                        {
-                            SucursalId = sucursal.SucursalId,
-                            InventarioNegativo = false,
-                            SinInventario = false
-                        };
-
-                        db.Add(configInventario);
-                        db.SaveChanges();
-                    }
+                    
                     break;
                 case "Modificar":
-                    using (NeoCobranzaContext db = new NeoCobranzaContext())
-                    {
-
-                        Sucursales sucursal = db.Sucursales.Where(c => c.SucursalId == int.Parse(auxId)).FirstOrDefault();
-
-                        sucursal.NombreSucursal = TxtNombreSucursal.Text.Trim();
-                        sucursal.Telefono = TxtTelefono.Text.Trim();
-                        sucursal.Correo = TxtCorreo.Text.Trim();
-                        sucursal.Direccion = TxtDireccion.Text.Trim();
-
-                        db.Update(sucursal);
-                        db.SaveChanges();
-                    }
+     
+                    dataUtilities.SetColumns("NombreSucursal", TxtNombreSucursal.Text.Trim());
+                    dataUtilities.SetColumns("Direccion", TxtDireccion.Text.Trim());
+                    dataUtilities.SetColumns("Telefono", TxtTelefono.Text.Trim());
+                    dataUtilities.SetColumns("Correo", TxtCorreo.Text.Trim());
+                    dataUtilities.SetColumns("Estado", "Activo");
+                    dataUtilities.SetColumns("FechaActualizo", DateTime.Now.ToString());
+                    dataUtilities.UpdateRecordByPrimaryKey("Sucursal", auxId);
+                    
                     break;
             }
 

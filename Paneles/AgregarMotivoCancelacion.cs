@@ -1,4 +1,5 @@
 ﻿using NeoCobranza.ModelsCobranza;
+using NeoCobranza.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +16,8 @@ namespace NeoCobranza.Paneles
     {
         string auxKey = "";
         string auxOpc = "";
-        public AgregarMotivoCancelacion(string opc,string key)
+        DataUtilities dataUtilities = new DataUtilities();
+        public AgregarMotivoCancelacion(string opc, string key)
         {
             InitializeComponent();
             auxKey = key;
@@ -28,18 +30,11 @@ namespace NeoCobranza.Paneles
             {
                 LblDynamico.Text = "Crear Motivo Cancelación";
                 btnAgregar.Text = "Guardar";
-            } 
-            else 
+            }
+            else
             {
-                using(NeoCobranzaContext db = new NeoCobranzaContext())
-                {
-                    MotivosCancelacion motivo = db.MotivosCancelacion.Where(s => s.MotivoCancelacionId == int.Parse(auxKey)).FirstOrDefault();
-
-                    if (motivo != null)
-                    {
-                        TxtMotivoCancelacion.Text = motivo.Motivo;
-                    }
-                }
+                DataTable dtResponse = dataUtilities.getRecordByPrimaryKey("MotivosCancelacion", auxKey);
+                TxtMotivoCancelacion.Text = Convert.ToString(dtResponse.Rows[0]["Motivo"]);
 
                 LblDynamico.Text = $"Modificar Motivo Cancelación con ID: {auxKey}";
                 btnAgregar.Text = "Modificar";
@@ -53,39 +48,27 @@ namespace NeoCobranza.Paneles
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            if(TxtMotivoCancelacion.Text.Trim() == "")
+            if (TxtMotivoCancelacion.Text.Trim() == "")
             {
-                MessageBox.Show("Debe digitar el motivo de cancelación.","Atención",MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Debe digitar el motivo de cancelación.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            using(NeoCobranzaContext db = new NeoCobranzaContext())
+            if (auxOpc == "Crear")
             {
-                if (auxOpc == "Crear")
-                {
-                    MotivosCancelacion motivo = new MotivosCancelacion()
-                    {
-                        Motivo = TxtMotivoCancelacion.Text.Trim(),
-                        Estado = "Activo"
-                    };
+                dataUtilities.SetColumns("Motivo", TxtMotivoCancelacion.Text.Trim());
+                dataUtilities.SetColumns("Estado", "Activo");
 
-                    db.Add(motivo);
-                    db.SaveChanges();
-                }
-                else
-                {
-                    MotivosCancelacion  motivo = db.MotivosCancelacion.Where(s => s.MotivoCancelacionId == int.Parse(auxKey)).FirstOrDefault();
+                dataUtilities.InsertRecord("MotivosCancelacion");
 
-                    if(motivo != null)
-                    {
-                        motivo.Motivo = TxtMotivoCancelacion.Text.Trim();
-                        db.Update(motivo);
-                        db.SaveChanges();
-                    }
-                }
-
-                this.Close();
             }
+            else
+            {
+                dataUtilities.SetColumns("Motivo", TxtMotivoCancelacion.Text.Trim());
+                dataUtilities.UpdateRecordByPrimaryKey("MotivosCancelacion", auxKey);
+            }
+
+            this.Close();
         }
     }
 }

@@ -23,7 +23,7 @@ namespace NeoCobranza.Paneles
         private void CatologoMotivosCancelacion_Load(object sender, EventArgs e)
         {
             dgvCatalogo.EnableHeadersVisualStyles = false;
-            dgvCatalogo.ColumnHeadersDefaultCellStyle.BackColor = Color.CadetBlue;
+            dgvCatalogo.ColumnHeadersDefaultCellStyle.BackColor = Color.DodgerBlue;
             dgvCatalogo.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvCatalogo.RowsDefaultCellStyle.Font = new Font("Century Gothic", 9);
             dgvCatalogo.RowsDefaultCellStyle.BackColor = Color.White;

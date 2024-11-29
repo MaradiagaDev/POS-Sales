@@ -79,11 +79,12 @@ namespace NeoCobranza.ViewModels
                         frm.dgvCatalogoSucursales.DataSource = dynamicDataTable;
                     break;
                 case "Bloquear":
-                    DataTable dtRespuesta = dataUtilities.getRecordByPrimaryKey("IdSucursal", auxId);
+                    DataTable dtRespuesta = dataUtilities.getRecordByPrimaryKey("Sucursal", auxId);
                     string statusActual = Convert.ToString(dtRespuesta.Rows[0]["Estado"]) == "Activo" ? "Bloqueado" : "Activo";
 
                     dataUtilities.SetColumns("Estado", statusActual);
-                    dataUtilities.UpdateRecordByPrimaryKey("Proveedores", auxId);
+                    dataUtilities.SetColumns("FechaActualizo", DateTime.Now.ToString());
+                    dataUtilities.UpdateRecordByPrimaryKey("Sucursal", auxId);
 
                         ConfigUI(frm, "Buscar");
                     
