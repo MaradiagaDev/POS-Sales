@@ -33,6 +33,7 @@ CREATE TABLE [dbo].[Sucursal] (
     [FechaCreo] DATETIME DEFAULT GETDATE(),  -- Fecha de creación, con valor predeterminado actual
     [FechaActualizo] DATETIME NULL           -- Fecha de última actualización
 );
+alter table Sucursal add Correo nvarchar(255) 
 
 CREATE TABLE [dbo].[UsuarioSucursal] (
     [IdUsuarioSucursal] INT IDENTITY(1,1) PRIMARY KEY, -- Clave primaria de la tabla de relación
@@ -128,4 +129,20 @@ CREATE TABLE Categorizacion (
     CategorizacionId INT IDENTITY(1,1) PRIMARY KEY, -- Clave primaria con incremento automático
     Descripcion NVARCHAR(255) NOT NULL,          -- Campo de texto para la descripción
     Estado NVARCHAR(50) NOT NULL                 -- Campo de texto para el estado
+);
+
+CREATE TABLE ConfigFacturacion (
+    ConfigFacturacionId Decimal(18,0) identity (1,1) NOT NULL PRIMARY KEY, -- ID principal de la configuración de facturación
+    SucursalId nvarchar(50) NULL,                         -- ID de la sucursal (puede ser nulo)
+    Serie NVARCHAR(50) NOT NULL,                -- Serie de la factura (ajustable según longitud esperada)
+    ConsecutivoFactura Decimal(18,0) NULL,                -- Consecutivo actual de las facturas (puede ser nulo)
+    RangoFactura Decimal(18,0)  NULL,                      -- Rango permitido de las facturas (puede ser nulo)
+    ConsecutivoOrden Decimal(18,0)  NULL,                  -- Consecutivo actual de las órdenes (puede ser nulo)
+    RangoOrden Decimal(18,0)  NULL                         -- Rango permitido de las órdenes (puede ser nulo)
+);
+
+CREATE TABLE MotivosCancelacion (
+    MotivoCancelacionId INT identity(1,1) NOT NULL PRIMARY KEY, -- ID único para cada motivo de cancelación
+    Motivo NVARCHAR(250) NOT NULL,               -- Descripción del motivo de cancelación
+    Estado NVARCHAR(50) NOT NULL                 -- Estado del motivo (e.g., Activo, Inactivo)
 );
