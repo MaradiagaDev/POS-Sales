@@ -51,7 +51,7 @@ namespace NeoCobranza.ViewModels
 
                 DataTable dtResponse = dataUtilities.GetAllRecords("MotivosCancelacion");
 
-                var filterRow = from row in dtResponse.AsEnumerable() where Convert.ToString(row.Field<string>("Motivo")).Contains(frm.TxtFiltrar.Texts) orderby row.Field<string>("Motivo") descending select row;
+                var filterRow = from row in dtResponse.AsEnumerable() where Convert.ToString(row.Field<string>("Motivo")).Contains(frm.TxtFiltrar.Text) orderby row.Field<string>("Motivo") descending select row;
 
                 if (filterRow.Any())
                 {

@@ -190,7 +190,7 @@ namespace NeoCobranza.ViewModels
 
                         if (frm.CmbBuscarPor.SelectedIndex == 0)
                         {
-                           var filterRow = from row in dtResponse.AsEnumerable() where Convert.ToString(row.Field<int>("IdProveedor")) == frm.TxtFiltrar.Texts.Trim() orderby row.Field<int>("IdProveedor") descending select row;
+                           var filterRow = from row in dtResponse.AsEnumerable() where Convert.ToString(row.Field<int>("IdProveedor")) == frm.TxtFiltrar.Text.Trim() orderby row.Field<int>("IdProveedor") descending select row;
 
                             if (filterRow.Any())
                             {
@@ -199,7 +199,7 @@ namespace NeoCobranza.ViewModels
                         }
                         else if (frm.CmbBuscarPor.SelectedIndex == 1)
                         {
-                            var filterRow = from row in dtResponse.AsEnumerable() where Convert.ToString(row.Field<string>("NombreEmpresa")).Contains(frm.TxtFiltrar.Texts.Trim()) orderby row.Field<int>("IdProveedor") descending select row;
+                            var filterRow = from row in dtResponse.AsEnumerable() where Convert.ToString(row.Field<string>("NombreEmpresa")).Contains(frm.TxtFiltrar.Text.Trim()) orderby row.Field<int>("IdProveedor") descending select row;
 
                             if (filterRow.Any())
                             {
@@ -208,7 +208,7 @@ namespace NeoCobranza.ViewModels
                         }
                         else if (frm.CmbBuscarPor.SelectedIndex == 2)
                         {
-                            var filterRow = from row in dtResponse.AsEnumerable() where Convert.ToString(row.Field<string>("NoRuc")).Contains(frm.TxtFiltrar.Texts.Trim()) orderby row.Field<int>("IdProveedor") descending select row;
+                            var filterRow = from row in dtResponse.AsEnumerable() where Convert.ToString(row.Field<string>("NoRuc")).Contains(frm.TxtFiltrar.Text.Trim()) orderby row.Field<int>("IdProveedor") descending select row;
 
                             if (filterRow.Any())
                             {

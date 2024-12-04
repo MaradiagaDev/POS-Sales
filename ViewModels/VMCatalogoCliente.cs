@@ -245,7 +245,7 @@ namespace NeoCobranza.ViewModels
                     int totalPages = 0;
 
                     var filtroPor = frm.CmbBuscarPor.SelectedIndex;
-                    var filtroValor = frm.TxtFiltrar.Texts.Trim();
+                    var filtroValor = frm.TxtFiltrar.Text.Trim();
                     var idSucursal = Utilidades.SucursalId; // Asumiendo que el ID de la sucursal se captura desde un campo de texto en el formulario
 
 
@@ -270,7 +270,7 @@ namespace NeoCobranza.ViewModels
         public void UpdatePagination(PnlCatalogoClientes frm)
         {
             dataUtilities.SetParameter("@FiltroPor", frm.CmbBuscarPor.SelectedIndex);
-            dataUtilities.SetParameter("@FiltroValor", frm.TxtFiltrar.Texts.Trim());
+            dataUtilities.SetParameter("@FiltroValor", frm.TxtFiltrar.Text.Trim());
             dataUtilities.SetParameter("@IdSucursal", Utilidades.SucursalId);
             dataUtilities.SetParameter("@PageNumber", currentPage);
             dataUtilities.SetParameter("@PageSize", pageSize);
@@ -283,7 +283,7 @@ namespace NeoCobranza.ViewModels
                 string idCliente = Convert.ToString(item["IdCliente"]);
                 string nombreCliente = $"{Convert.ToString(item["Pnombre"])} {Convert.ToString(item["Snombre"])} {Convert.ToString(item["Papellido"])} {Convert.ToString(item["Sapellido"])}";
                 string cedula = Convert.ToString(item["Cedula"]);
-                string estado = Convert.ToString(item["Estado"]) == null || Convert.ToString(item["Estado"]) == "0" ? "Inactivo" : "Activo";
+                string estado = Convert.ToString(item["Estado"]) == null || Convert.ToString(item["Estado"]) == "0" ? "Bloqueado" : "Activo";
                 string direccion = Convert.ToString(item["Direccion"]) == null || Convert.ToString(item["Direccion"]).Trim() == "" ? "Desconocido" : Convert.ToString(item["Direccion"]);
                 string pais = Convert.ToString(item["Pais"]) == null ? "Desconocido" : Convert.ToString(item["Pais"]);
                 string departamento = Convert.ToString(item["Departamento"]) == null ? "Desconocido" : Convert.ToString(item["Departamento"]);

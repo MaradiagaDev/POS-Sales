@@ -76,7 +76,7 @@ namespace NeoCobranza.Paneles
                     dataUtilities.SetColumns("Telefono", TxtTelefono.Text.Trim());
                     dataUtilities.SetColumns("Correo", TxtCorreo.Text.Trim());
                     dataUtilities.SetColumns("Estado", "Activo");
-                    dataUtilities.SetColumns("FechaCreo",DateTime.Now.ToString());
+                    dataUtilities.SetColumns("FechaCreo",DateTime.Now);
                     dataUtilities.InsertRecord("Sucursal");
 
                     dataUtilities.SetColumns("SucursalId", SucursalID);
@@ -96,7 +96,7 @@ namespace NeoCobranza.Paneles
                     dataUtilities.SetColumns("Telefono", TxtTelefono.Text.Trim());
                     dataUtilities.SetColumns("Correo", TxtCorreo.Text.Trim());
                     dataUtilities.SetColumns("Estado", "Activo");
-                    dataUtilities.SetColumns("FechaActualizo", DateTime.Now.ToString());
+                    dataUtilities.SetColumns("FechaActualizo", DateTime.Now);
                     dataUtilities.UpdateRecordByPrimaryKey("Sucursal", auxId);
                     
                     break;

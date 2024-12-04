@@ -450,14 +450,7 @@ namespace NeoCobranza.Paneles
 
         private void BtnCatalogoProductos_Click(object sender, EventArgs e)
         {
-            limpiar();
-            CatalogosInventario pnlGeneral = new CatalogosInventario("Productos");
-            AddOwnedForm(pnlGeneral);
-            pnlGeneral.TopLevel = false;
-            PnlCentral.Controls.Add(pnlGeneral);
-            pnlGeneral.Dock = DockStyle.Fill;
-            PnlCentral.Tag = pnlGeneral;
-            pnlGeneral.Show();
+            
         }
 
         private void catalogoDeServiciosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -722,6 +715,30 @@ namespace NeoCobranza.Paneles
         {
             limpiar();
             PnlCatalogoSucursales pnlGeneral = new PnlCatalogoSucursales();
+            AddOwnedForm(pnlGeneral);
+            pnlGeneral.TopLevel = false;
+            PnlCentral.Controls.Add(pnlGeneral);
+            pnlGeneral.Dock = DockStyle.Fill;
+            PnlCentral.Tag = pnlGeneral;
+            pnlGeneral.Show();
+        }
+
+        private void productosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            limpiar();
+            CatalogosInventario pnlGeneral = new CatalogosInventario("Productos");
+            AddOwnedForm(pnlGeneral);
+            pnlGeneral.TopLevel = false;
+            PnlCentral.Controls.Add(pnlGeneral);
+            pnlGeneral.Dock = DockStyle.Fill;
+            PnlCentral.Tag = pnlGeneral;
+            pnlGeneral.Show();
+        }
+
+        private void serviciosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            limpiar();
+            CatalogosInventario pnlGeneral = new CatalogosInventario("Servicios");
             AddOwnedForm(pnlGeneral);
             pnlGeneral.TopLevel = false;
             PnlCentral.Controls.Add(pnlGeneral);

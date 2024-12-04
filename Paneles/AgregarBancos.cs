@@ -1,4 +1,5 @@
 ﻿using NeoCobranza.ModelsCobranza;
+using NeoCobranza.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,8 @@ namespace NeoCobranza.Paneles
     {
         string auxKey = "";
         string auxOpc = "";
+        DataUtilities dataUtilities = new DataUtilities();
+
         public AgregarBancos(string opc, string key)
         {
             InitializeComponent();
@@ -30,15 +33,9 @@ namespace NeoCobranza.Paneles
             }
             else
             {
-                using (NeoCobranzaContext db = new NeoCobranzaContext())
-                {
-                    Bancos banco = db.Bancos.Where(s => s.BancoId == int.Parse(auxKey)).FirstOrDefault();
+                DataTable dtResponse = dataUtilities.getRecordByPrimaryKey("Bancos", auxKey);
 
-                    if (banco != null)
-                    {
-                        TxtBanco.Text = banco.Banco;
-                    }
-                }
+                TxtBanco.Text = Convert.ToString(dtResponse.Rows[0][0]);
 
                 LblDynamico.Text = $"Modificar Banco con ID: {auxKey}";
                 btnAgregar.Text = "Modificar";
@@ -58,33 +55,21 @@ namespace NeoCobranza.Paneles
                 return;
             }
 
-            using (NeoCobranzaContext db = new NeoCobranzaContext())
+            if (auxOpc == "Crear")
             {
-                if (auxOpc == "Crear")
-                {
-                    Bancos motivo = new Bancos()
-                    {
-                        Banco = TxtBanco.Text.Trim(),
-                        Estado = "Activo"
-                    };
+                dataUtilities.SetColumns("Banco", TxtBanco.Text.Trim());
+                dataUtilities.SetColumns("Estado", "Activo");
 
-                    db.Add(motivo);
-                    db.SaveChanges();
-                }
-                else
-                {
-                    Bancos motivo = db.Bancos.Where(s => s.BancoId == int.Parse(auxKey)).FirstOrDefault();
-
-                    if (motivo != null)
-                    {
-                        motivo.Banco = TxtBanco.Text.Trim();
-                        db.Update(motivo);
-                        db.SaveChanges();
-                    }
-                }
-
-                this.Close();
+                dataUtilities.InsertRecord("Bancos");
             }
+            else
+            {
+                dataUtilities.SetColumns("Banco", TxtBanco.Text.Trim());
+                dataUtilities.UpdateRecordByPrimaryKey("Bancos", auxKey);
+            }
+
+            this.Close();
+
         }
     }
 }

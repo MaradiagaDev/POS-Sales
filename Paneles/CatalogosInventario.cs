@@ -21,11 +21,6 @@ namespace NeoCobranza.Paneles
             InitializeComponent();
             this.auxModulo = opc;
             vMCatalogosInventario.InitModuloCatalogosInventario(this, opc);
-            dgvCatalogo.EnableHeadersVisualStyles = false;
-            dgvCatalogo.ColumnHeadersDefaultCellStyle.BackColor = Color.CadetBlue;
-            dgvCatalogo.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgvCatalogo.RowsDefaultCellStyle.Font = new Font("Century Gothic", 9);
-            dgvCatalogo.RowsDefaultCellStyle.BackColor = Color.White;
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -70,11 +65,14 @@ namespace NeoCobranza.Paneles
 
         private void CatalogosInventario_Load(object sender, EventArgs e)
         {
-            dgvCatalogo.EnableHeadersVisualStyles = false;
-            dgvCatalogo.ColumnHeadersDefaultCellStyle.BackColor = Color.CadetBlue;
-            dgvCatalogo.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgvCatalogo.RowsDefaultCellStyle.Font = new Font("Century Gothic", 9);
-            dgvCatalogo.RowsDefaultCellStyle.BackColor = Color.White;
+            //Configuraciones UI
+            UIUtilities.PersonalizarDataGridView(dgvCatalogo);
+            UIUtilities.EstablecerFondo(this);
+            UIUtilities.ConfigurarBotonBuscar(BtnBuscarCliente);
+            UIUtilities.ConfigurarTextBoxBuscar(TxtFiltrar);
+            UIUtilities.ConfigurarBotonCrear(btnAgregar);
+            UIUtilities.ConfigurarBotonActualizar(btnActualizar);
+            UIUtilities.ConfigurarTituloPantalla(TbTitulo, PnlTitulo);
         }
     }
 }

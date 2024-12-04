@@ -22,18 +22,19 @@ namespace NeoCobranza.Paneles
 
         private void PnlCatalogoAlmacenes_Load(object sender, EventArgs e)
         {
-            dgvCatalogoAlmacenes.EnableHeadersVisualStyles = false;
-            dgvCatalogoAlmacenes.ColumnHeadersDefaultCellStyle.BackColor = Color.DodgerBlue;
-            dgvCatalogoAlmacenes.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgvCatalogoAlmacenes.RowsDefaultCellStyle.Font = new Font("Century Gothic", 9);
-            dgvCatalogoAlmacenes.RowsDefaultCellStyle.BackColor = Color.White;
-            vMCatalogoAlmacenes.auxSearch = TxtFiltrar.Texts;
+            UIUtilities.PersonalizarDataGridView(dgvCatalogoAlmacenes);
+            UIUtilities.EstablecerFondo(this);
+            UIUtilities.ConfigurarBotonBuscar(BtnBuscarCliente);
+            UIUtilities.ConfigurarTextBoxBuscar(TxtFiltrar);
+            UIUtilities.ConfigurarBotonCrear(btnAgregar);
+            UIUtilities.ConfigurarBotonActualizar(btnActualizar);
+            UIUtilities.ConfigurarTituloPantalla(TbTitulo, PnlTitulo);
             vMCatalogoAlmacenes.InitModuloCatalogoAlmacenes(this, "Buscar");
         }
 
         private void BtnBuscarCliente_Click(object sender, EventArgs e)
         {
-            vMCatalogoAlmacenes.auxSearch = TxtFiltrar.Texts;
+            vMCatalogoAlmacenes.auxSearch = TxtFiltrar.Text;
             vMCatalogoAlmacenes.InitModuloCatalogoAlmacenes(this, "Buscar");
         }
 

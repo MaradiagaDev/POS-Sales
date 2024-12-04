@@ -146,3 +146,41 @@ CREATE TABLE MotivosCancelacion (
     Motivo NVARCHAR(250) NOT NULL,               -- Descripción del motivo de cancelación
     Estado NVARCHAR(50) NOT NULL                 -- Estado del motivo (e.g., Activo, Inactivo)
 );
+
+--Nuevas
+CREATE TABLE Bancos (
+    BancoId INT PRIMARY KEY IDENTITY(1,1), -- Asumí que este es un campo autoincremental
+    Banco NVARCHAR(255) NOT NULL,          -- Asumí un tamaño de 255 caracteres para el nombre del banco
+    Estado NVARCHAR(50) NOT NULL          -- Asumí un tamaño de 50 caracteres para el estado
+);
+
+CREATE TABLE TipoTarjeta (
+    TipoTarjetaId INT PRIMARY KEY IDENTITY(1,1), -- Asumí que este es un campo autoincremental
+    NombreTipo NVARCHAR(255) NOT NULL,           -- Asumí un tamaño de 255 caracteres para el nombre del tipo de 
+    Estado NVARCHAR(50) NOT NULL,                -- Asumí un tamaño de 50 caracteres para el estado
+	BancoId Int,
+	Porcentaje float
+);
+
+CREATE TABLE Salas (
+    SalaId INT PRIMARY KEY IDENTITY(1,1),        -- Clave primaria autoincremental
+    NombreSala NVARCHAR(255) NOT NULL,          -- Nombre de la sala, asumí un tamaño de 255 caracteres
+    NoMesas INT NULL,                           -- Número de mesas, puede ser NULL
+    SucursalId nvarchar(50) NULL,                        -- ID de la sucursal, puede ser NULL
+    Estado NVARCHAR(50) NOT NULL                -- Estado, asumí un tamaño de 50 caracteres
+);
+
+CREATE TABLE Empresa (
+    IdEmpresa INT PRIMARY KEY IDENTITY(1,1), -- Llave primaria con incremento automático
+    NombreEmpresa NVARCHAR(255) NOT NULL,   -- Campo requerido
+    NombreComercial NVARCHAR(255) NOT NULL, -- Campo requerido
+    Telefono NVARCHAR(20),                  -- Opcional, admite formato de teléfono
+    Ruc NVARCHAR(20),                       -- Opcional, depende del formato del país
+    Email NVARCHAR(255),                    -- Opcional, tamaño adecuado para emails
+);
+
+CREATE TABLE TasaCambio (
+    IdTasaCambio INT PRIMARY KEY IDENTITY(1,1), -- Llave primaria autoincremental
+    Tasa FLOAT NOT NULL, -- Representación del campo double
+    FechaCambio DATETIME NOT NULL -- Representación del campo DateTime
+);

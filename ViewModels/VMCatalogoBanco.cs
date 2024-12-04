@@ -1,4 +1,5 @@
-﻿using NeoCobranza.ModelsCobranza;
+﻿
+using NeoCobranza.ModelsCobranza;
 using NeoCobranza.Paneles;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace NeoCobranza.ViewModels
     public class VMCatalogoBanco
     {
         public DataTable auxDatatable = new DataTable();
+        DataUtilities dataUtilities = new DataUtilities();
 
         public void InitModuloBancos(CatalogoBancos frm)
         {
@@ -45,33 +47,28 @@ namespace NeoCobranza.ViewModels
 
         public void FuncionesPrincipales(CatalogoBancos frm, string opc, string key)
         {
-            using (NeoCobranzaContext db = new NeoCobranzaContext())
+            if (opc == "Buscar")
             {
-                if (opc == "Buscar")
+                DataTable dtResponse = dataUtilities.GetAllRecords("Bancos");
+
+                var filterRow = from row in dtResponse.AsEnumerable() where Convert.ToString(row.Field<string>("Banco")).Contains(key) orderby row.Field<string>("Banco") descending select row;
+
+                if (filterRow.Any())
                 {
-                    auxDatatable.Rows.Clear();
+                    auxDatatable = filterRow.CopyToDataTable();
+                };
 
-                    var ListaBanco = db.Bancos.Where(e => e.Banco.Contains(frm.TxtFiltrar.Texts)).ToList();
+                frm.dgvCatalogo.DataSource = auxDatatable;
+            }
+            else if (opc == "Bloquear")
+            {
+                DataTable dtRespuesta = dataUtilities.getRecordByPrimaryKey("Bancos", key);
+                string statusActual = Convert.ToString(dtRespuesta.Rows[0]["Estado"]) == "Activo" ? "Bloqueado" : "Activo";
 
-                    foreach (var item in ListaBanco)
-                    {
-                        auxDatatable.Rows.Add(item.BancoId, item.Banco, item.Estado);
-                    }
-                }
-                else if (opc == "Bloquear")
-                {
-                    var banco = db.Bancos.Where(m => m.BancoId == int.Parse(key)).FirstOrDefault();
+                dataUtilities.SetColumns("Estado", statusActual);
+                dataUtilities.UpdateRecordByPrimaryKey("Bancos", key);
 
-                    if (banco != null)
-                    {
-                        banco.Estado = banco.Estado == "Activo" ? "Bloqueado" : "Activo";
-
-                        db.Update(banco);
-                        db.SaveChanges();
-
-                        FuncionesPrincipales(frm, "Buscar", "");
-                    }
-                }
+                FuncionesPrincipales(frm, "Buscar", "");
             }
         }
     }

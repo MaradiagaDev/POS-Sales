@@ -127,6 +127,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "TasaCambio";
             this.Text = "TasaCambio";
+            this.Load += new System.EventHandler(this.TasaCambio_Load);
             this.PnlTitulo.ResumeLayout(false);
             this.PnlTitulo.PerformLayout();
             this.ResumeLayout(false);

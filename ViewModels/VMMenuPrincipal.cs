@@ -112,7 +112,7 @@ namespace NeoCobranza.ViewModels
 
                 //
                 frm.BtnOpciones.Visible = (bool)permisos.Opciones;
-                frm.BtnConfigInventario.Visible = (bool)permisos.OpcionesTipoCambio;
+                //frm.BtnConfigInventario.Visible = (bool)permisos.OpcionesTipoCambio;
 
                 if (permisos.OpcionesTipoCambio == false)
                 {

@@ -24,11 +24,13 @@ namespace NeoCobranza.Paneles
 
         private void PnlCatalogoProveedores_Load(object sender, EventArgs e)
         {
-            dgvCatalogoProveedores.EnableHeadersVisualStyles = false;
-            dgvCatalogoProveedores.ColumnHeadersDefaultCellStyle.BackColor = Color.DodgerBlue;
-            dgvCatalogoProveedores.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgvCatalogoProveedores.RowsDefaultCellStyle.Font = new Font("Century Gothic", 9);
-            dgvCatalogoProveedores.RowsDefaultCellStyle.BackColor = Color.White;
+            UIUtilities.PersonalizarDataGridView(dgvCatalogoProveedores);
+            UIUtilities.EstablecerFondo(this);
+            UIUtilities.ConfigurarBotonBuscar(BtnBuscarCliente);
+            UIUtilities.ConfigurarTextBoxBuscar(TxtFiltrar);
+            UIUtilities.ConfigurarBotonCrear(btnAgregar);
+            UIUtilities.ConfigurarBotonActualizar(btnActualizar);
+            UIUtilities.ConfigurarTituloPantalla(TbTitulo, PnlTitulo);
             vMCatalogoProveedores.InitModuloProveedores(this);
         }
 
@@ -49,7 +51,7 @@ namespace NeoCobranza.Paneles
 
         private void BtnBuscarCliente_Click(object sender, EventArgs e)
         {
-            vMCatalogoProveedores.FuncionesPrincipales(this, "Buscar", "");
+            vMCatalogoProveedores.FuncionesPrincipales(this, "Buscar", TxtFiltrar.Text);
 
         }
 

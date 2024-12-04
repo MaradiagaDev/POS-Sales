@@ -1,4 +1,5 @@
 ﻿using NeoCobranza.ModelsCobranza;
+using NeoCobranza.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,41 +14,40 @@ namespace NeoCobranza.Paneles
 {
     public partial class TasaCambio : Form
     {
+        DataUtilities dataUtilities = new DataUtilities();
+        private bool boolExiste = false;
         public TasaCambio()
         {
             InitializeComponent();
 
-            using(NeoCobranzaContext db = new NeoCobranzaContext())
-            {
-                ModelsCobranza.TipoCambio ultimaTasa = db.TipoCambio
-                            .OrderByDescending(tc => tc.IdTasaCambio) 
-                            .FirstOrDefault();
+            DataTable dtResponse = dataUtilities.GetAllRecords("TasaCambio");
 
-                if (ultimaTasa != null)
-                {
-                    LblTasaActual.Text = $"La tasa de cambio actual es: {ultimaTasa.Tasa.ToString()} (NIO)";
-                }
-                else
-                {
-                    LblTasaActual.Text = $"No hay tasa de cambio registradas.";
-                }
+            if (dtResponse.Rows.Count > 0)
+            {
+                boolExiste = true;
+                LblTasaActual.Text = $"La tasa de cambio actual es: {Convert.ToString(dtResponse.Rows[0]["Tasa"])} (NIO)";
             }
+            else
+            {
+                LblTasaActual.Text = $"No hay tasa de cambio registradas.";
+            }
+
         }
 
         private void TxtTasaCambio_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Verificar si el carácter presionado es un número o un punto decimal
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != ',')
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
                 // Si no es un número ni un punto decimal, cancelar el evento de pulsación de tecla
                 e.Handled = true;
             }
 
             // Verificar si el carácter presionado es un punto
-            if (e.KeyChar == ',')
+            if (e.KeyChar == '.')
             {
                 // Si hay un punto ya presente o es el primer carácter, cancelar el evento de pulsación de tecla
-                if ((sender as TextBox).Text.Contains(',') || (sender as TextBox).Text.Length == 0)
+                if ((sender as TextBox).Text.Contains('.') || (sender as TextBox).Text.Length == 0)
                 {
                     e.Handled = true;
                 }
@@ -55,9 +55,9 @@ namespace NeoCobranza.Paneles
 
             // Limitar a cuatro decimales
             TextBox textBox = sender as TextBox;
-            if (textBox != null && textBox.Text.Contains(','))
+            if (textBox != null && textBox.Text.Contains('.'))
             {
-                int index = textBox.Text.IndexOf(',');
+                int index = textBox.Text.IndexOf('.');
                 if (textBox.Text.Substring(index).Length > 4 && !char.IsControl(e.KeyChar))
                 {
                     e.Handled = true;
@@ -67,65 +67,51 @@ namespace NeoCobranza.Paneles
 
         private void BtnGuardar_Click(object sender, EventArgs e)
         {
-            using(NeoCobranzaContext db = new NeoCobranzaContext())
+
+            if (TxtTasaCambio.Text.Trim().Length == 0)
             {
-                if (TxtTasaCambio.Text.Trim().Length == 0) 
-                {
-                    MessageBox.Show("Debe digitar una tasa.","Atención",MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                double prueba = 0;
-
-                if(double.TryParse(TxtTasaCambio.Text.Trim(), out prueba) == false)
-                {
-                    MessageBox.Show("Debe digitar una tasa valida.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                ModelsCobranza.TipoCambio ultimaTasa = db.TipoCambio
-                            .OrderByDescending(tc => tc.IdTasaCambio)
-                            .FirstOrDefault();
-
-                if(ultimaTasa != null)
-                {
-                    ultimaTasa.Tasa = double.Parse(TxtTasaCambio.Text.Trim());
-                    ultimaTasa.FechaCambio = DateTime.Now;
-                    db.Update(ultimaTasa);
-                    db.SaveChanges();
-
-                    if (ultimaTasa != null)
-                    {
-                        LblTasaActual.Text = $"La tasa de cambio actual es: {ultimaTasa.Tasa.ToString()} (NIO)";
-                    }
-                    else
-                    {
-                        LblTasaActual.Text = $"No hay tasa de cambio registradas.";
-                    }
-
-                    TxtTasaCambio.Text = string.Empty ;
-                }
-                else
-                {
-                    ultimaTasa = new TipoCambio();
-                    ultimaTasa.Tasa = double.Parse(TxtTasaCambio.Text.Trim());
-                    ultimaTasa.FechaCambio = DateTime.Now;
-
-                    db.Add(ultimaTasa);
-                    db.SaveChanges();
-
-                    if (ultimaTasa != null)
-                    {
-                        LblTasaActual.Text = $"La tasa de cambio actual es: {ultimaTasa.Tasa.ToString()} (NIO)";
-                    }
-                    else
-                    {
-                        LblTasaActual.Text = $"No hay tasa de cambio registradas.";
-                    }
-
-                    TxtTasaCambio.Text = string.Empty;
-                }
+                MessageBox.Show("Debe digitar una tasa.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
+
+            double prueba = 0;
+
+            if (double.TryParse(TxtTasaCambio.Text.Trim(), out prueba) == false)
+            {
+                MessageBox.Show("Debe digitar una tasa valida.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!boolExiste)
+            {
+                dataUtilities.SetColumns("Tasa", TxtTasaCambio.Text.Trim());
+                dataUtilities.SetColumns("FechaCambio", DateTime.Now);
+                dataUtilities.InsertRecord("TasaCambio");
+
+                LblTasaActual.Text = $"La tasa de cambio actual es: {TxtTasaCambio.Text.Trim()} (NIO)";
+
+                MessageBox.Show("Se ha agregado la tasa al sistema.", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            else
+            {
+                dataUtilities.SetColumns("Tasa", TxtTasaCambio.Text.Trim());
+                dataUtilities.SetColumns("FechaCambio", DateTime.Now);
+                dataUtilities.UpdateRecordByPrimaryKey("TasaCambio",1);
+
+                LblTasaActual.Text = $"La tasa de cambio actual es: {TxtTasaCambio.Text.Trim()} (NIO)";
+
+                MessageBox.Show("Se ha actualizado la tasa en el sistema.", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+             
+        }
+
+        private void TasaCambio_Load(object sender, EventArgs e)
+        {
+            UIUtilities.EstablecerFondo(this);
+            UIUtilities.ConfigurarBotonCrear(BtnGuardar);
+            UIUtilities.ConfigurarTituloPantalla(TbTitulo, PnlTitulo);
         }
     }
 }

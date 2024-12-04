@@ -42,6 +42,10 @@
             this.label6 = new System.Windows.Forms.Label();
             this.btnAgregar = new NeoCobranza.Especiales.EspecialButton();
             this.btnCancelar = new NeoCobranza.Especiales.EspecialButton();
+            this.CmbBancoTipo = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.TxtPorcentajeAplicado = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSucursalesProductos)).BeginInit();
             this.SuspendLayout();
@@ -75,10 +79,11 @@
             this.panel1.Controls.Add(this.BtnAgregarBanco);
             this.panel1.Controls.Add(this.BtnQuitarBanco);
             this.panel1.Controls.Add(this.label6);
-            this.panel1.Location = new System.Drawing.Point(12, 103);
+            this.panel1.Location = new System.Drawing.Point(721, 205);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(323, 328);
             this.panel1.TabIndex = 115;
+            this.panel1.Visible = false;
             // 
             // dgvSucursalesProductos
             // 
@@ -232,12 +237,59 @@
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // CmbBancoTipo
+            // 
+            this.CmbBancoTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbBancoTipo.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.CmbBancoTipo.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.CmbBancoTipo.FormattingEnabled = true;
+            this.CmbBancoTipo.Location = new System.Drawing.Point(11, 169);
+            this.CmbBancoTipo.Name = "CmbBancoTipo";
+            this.CmbBancoTipo.Size = new System.Drawing.Size(297, 25);
+            this.CmbBancoTipo.TabIndex = 119;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label1.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label1.Location = new System.Drawing.Point(8, 143);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(163, 18);
+            this.label1.TabIndex = 120;
+            this.label1.Text = "Seleccione el Banco";
+            // 
+            // TxtPorcentajeAplicado
+            // 
+            this.TxtPorcentajeAplicado.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TxtPorcentajeAplicado.Location = new System.Drawing.Point(11, 102);
+            this.TxtPorcentajeAplicado.MaxLength = 100;
+            this.TxtPorcentajeAplicado.Name = "TxtPorcentajeAplicado";
+            this.TxtPorcentajeAplicado.Size = new System.Drawing.Size(323, 23);
+            this.TxtPorcentajeAplicado.TabIndex = 121;
+            this.TxtPorcentajeAplicado.TextChanged += new System.EventHandler(this.TxtPorcentajeAplicado_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label2.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label2.Location = new System.Drawing.Point(7, 76);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(165, 18);
+            this.label2.TabIndex = 122;
+            this.label2.Text = "Porcentaje Aplicado:";
+            // 
             // PnlAgregarTipoTarjeta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1056, 600);
+            this.Controls.Add(this.TxtPorcentajeAplicado);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.CmbBancoTipo);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.panel1);
@@ -270,5 +322,9 @@
         public System.Windows.Forms.Label label6;
         public Especiales.EspecialButton btnAgregar;
         public Especiales.EspecialButton btnCancelar;
+        private System.Windows.Forms.ComboBox CmbBancoTipo;
+        public System.Windows.Forms.Label label1;
+        public System.Windows.Forms.TextBox TxtPorcentajeAplicado;
+        public System.Windows.Forms.Label label2;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using NeoCobranza.Clases;
 using NeoCobranza.ModelsCobranza;
+using NeoCobranza.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,7 @@ namespace NeoCobranza.Paneles
         public DataTable auxTablaDinamica = new DataTable();
         string auxKey = "";
         string auxOpc = "";
+        DataUtilities dataUtilities = new DataUtilities();
 
         public PnlAgregarTipoTarjeta(string opc, string key)
         {
@@ -27,21 +29,19 @@ namespace NeoCobranza.Paneles
 
         private void PnlAgregarTipoTarjeta_Load(object sender, EventArgs e)
         {
-            if (auxTablaDinamica.Columns.Count == 0)
-            {
-                auxTablaDinamica.Columns.Add("Id", typeof(string));
-                auxTablaDinamica.Columns.Add("Banco", typeof(string));
+            //if (auxTablaDinamica.Columns.Count == 0)
+            //{
+            //    auxTablaDinamica.Columns.Add("Id", typeof(string));
+            //    auxTablaDinamica.Columns.Add("Banco", typeof(string));
 
-                dgvSucursalesProductos.DataSource = auxTablaDinamica;
-            }
+            //    dgvSucursalesProductos.DataSource = auxTablaDinamica;
+            //}
 
-            using (NeoCobranzaContext db = new NeoCobranzaContext())
-            {
-                List<Bancos> listBancos = db.Bancos.Where(c => c.Estado == "Activo").OrderByDescending(c => c.BancoId).ToList();
-                CmbBancos.ValueMember = "BancoId";
-                CmbBancos.DisplayMember = "Banco";
-                CmbBancos.DataSource = listBancos;
-            }
+            DataTable dtResponse = dataUtilities.GetAllRecords("Bancos");
+
+            CmbBancoTipo.ValueMember = "BancoId";
+            CmbBancoTipo.DisplayMember = "Banco";
+            CmbBancoTipo.DataSource = dtResponse;
 
             if (auxOpc == "Crear")
             {
@@ -53,19 +53,11 @@ namespace NeoCobranza.Paneles
                 btnAgregar.Text = "Modificar";
                 LblNombreDinamico.Text = "Modificar Tipo Tarjeta";
 
-                using(NeoCobranzaContext db = new NeoCobranzaContext())
-                {
-                    TipoTarjeta tipo = db.TipoTarjeta.Where(s => s.TipoTarjetaId == int.Parse(auxKey)).FirstOrDefault();
-                    var lista = db.RelBancoTipo.Where(s => s.TarjetaTipoId == tipo.TipoTarjetaId).ToList();
+                DataTable dtResponseTipoTarjeta = dataUtilities.getRecordByPrimaryKey("TipoTarjeta", auxKey);
 
-                    TxtNombre.Text = tipo.NombreTipo.ToString();
-                    foreach(var item in lista)
-                    {
-                        Bancos banco = db.Bancos.Where(s => s.BancoId == item.BancoId).FirstOrDefault();
-
-                        auxTablaDinamica.Rows.Add(banco.BancoId,banco.Banco);
-                    }
-                }
+                TxtNombre.Text = Convert.ToString(dtResponseTipoTarjeta.Rows[0]["NombreTipo"]);
+                TxtPorcentajeAplicado.Text = Convert.ToString(dtResponseTipoTarjeta.Rows[0]["Porcentaje"]);
+                CmbBancoTipo.SelectedValue = Convert.ToString(dtResponseTipoTarjeta.Rows[0]["BancoId"]);
             }
         }
 
@@ -123,68 +115,63 @@ namespace NeoCobranza.Paneles
                 return;
             }
 
-            if (auxTablaDinamica.Rows.Count == 0)
+            if (CmbBancoTipo.Items.Count == 0)
             {
-                MessageBox.Show("Debe asignarle al menos un banco.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Debe agregar un banco en el catalogo para agregar un tipo de tarjeta.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            using (NeoCobranzaContext db = new NeoCobranzaContext())
+
+            if (auxOpc == "Crear")
             {
-                if (auxOpc == "Crear")
+                double valorPorcenta = 0;
+                if (double.TryParse(TxtPorcentajeAplicado.Text, out double porcentaje))
                 {
-                    TipoTarjeta tipo = new TipoTarjeta()
-                    {
-                        NombreTipo = TxtNombre.Text.Trim(),
-                        Estado = "Activo"
-                    };
-
-                    db.Add(tipo);
-                    db.SaveChanges();
-
-                    foreach (DataRow row in auxTablaDinamica.Rows)
-                    {
-                        RelBancoTipo rel = new RelBancoTipo();
-
-                        rel.TarjetaTipoId = tipo.TipoTarjetaId;
-                        rel.BancoId = int.Parse(row[0].ToString());
-
-                        db.Add(rel);
-                        db.SaveChanges();
-                    }
+                    valorPorcenta = porcentaje;
                 }
-                else
+                dataUtilities.SetColumns("NombreTipo", TxtNombre.Text);
+                dataUtilities.SetColumns("Estado", "Activo");
+                dataUtilities.SetColumns("BancoId", CmbBancoTipo.SelectedValue);
+                dataUtilities.SetColumns("Porcentaje", porcentaje);
+
+                dataUtilities.InsertRecord("TipoTarjeta");
+
+            }
+            else
+            {
+                double valorPorcenta = 0;
+                if (double.TryParse(TxtPorcentajeAplicado.Text, out double porcentaje))
                 {
-                    TipoTarjeta tipo = db.TipoTarjeta.Where(s => s.TipoTarjetaId == int.Parse(auxKey)).FirstOrDefault();
-
-                    if (tipo != null)
-                    {
-                        tipo.NombreTipo = TxtNombre.Text.Trim();
-                        db.Update(tipo);
-
-                        List<RelBancoTipo> list = db.RelBancoTipo.Where(p => p.TarjetaTipoId == tipo.TipoTarjetaId).ToList();
-
-                        foreach (DataRow row in auxTablaDinamica.Rows)
-                        {
-                            RelBancoTipo rel = new RelBancoTipo();
-                            rel.TarjetaTipoId = tipo.TipoTarjetaId;
-                            rel.BancoId = int.Parse(row[0].ToString());
-                            db.Add(rel);
-                        }
-
-                        foreach (var item in list)
-                        {
-                            db.Remove(item);
-                        }
-
-                        db.SaveChanges();
-
-                        
-                    }
-
+                    valorPorcenta = porcentaje;
                 }
-                this.Close();
+                dataUtilities.SetColumns("NombreTipo", TxtNombre.Text);
+                dataUtilities.SetColumns("BancoId", CmbBancoTipo.SelectedValue);
+                dataUtilities.SetColumns("Porcentaje", valorPorcenta);
+
+                dataUtilities.UpdateRecordByPrimaryKey("TipoTarjeta", auxKey);
+            }
+
+            this.Close();
+
+        }
+
+        private void TxtPorcentajeAplicado_TextChanged(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (textBox == null) return;
+
+            string input = textBox.Text;
+
+            System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"^\d*\.?\d*$");
+
+            if (!regex.IsMatch(input))
+            {
+                int cursorPosition = textBox.SelectionStart;
+                textBox.Text = input.Remove(cursorPosition - 1, 1);
+                textBox.SelectionStart = cursorPosition - 1;
             }
         }
+
     }
 }

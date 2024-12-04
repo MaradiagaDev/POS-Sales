@@ -69,7 +69,7 @@ namespace NeoCobranza.ViewModels
                 case "Buscar":
                         DataTable dtResponse = dataUtilities.GetAllRecords("Sucursal");
 
-                        var filterRow = from row in dtResponse.AsEnumerable() where Convert.ToString(row.Field<string>("NombreSucursal")).Contains(auxSearch) orderby row.Field<string>("NombreSucursal") descending select row;
+                        var filterRow = from row in dtResponse.AsEnumerable() where Convert.ToString(row.Field<string>("NombreSucursal")).Contains(Convert.ToString(frm.TxtFiltrar.Text)) orderby row.Field<string>("NombreSucursal") descending select row;
 
                         if (filterRow.Any())
                         {

@@ -1,4 +1,5 @@
-﻿using NeoCobranza.ModelsCobranza;
+﻿
+using NeoCobranza.ModelsCobranza;
 using NeoCobranza.Paneles;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace NeoCobranza.ViewModels
     public class VMCatalogoSalas
     {
         public DataTable auxDatatable = new DataTable();
+        DataUtilities dataUtilities = new DataUtilities();
 
         public void InitModuloSalas(CatalogoSalas frm)
         {
@@ -37,7 +39,6 @@ namespace NeoCobranza.ViewModels
             auxDatatable.Columns.Add("Id", typeof(string));
             auxDatatable.Columns.Add("Nombre Sala", typeof(string));
             auxDatatable.Columns.Add("Mesas en Sala", typeof(string));
-            auxDatatable.Columns.Add("Sucursal", typeof(string));
             auxDatatable.Columns.Add("Estado", typeof(string));
 
             frm.dgvCatalogo.DataSource = auxDatatable;
@@ -51,25 +52,27 @@ namespace NeoCobranza.ViewModels
             {
                 if (opc == "Buscar")
                 {
-                   auxDatatable.Rows.Clear();
+                    auxDatatable.Rows.Clear();
 
-                   var salas = db.Salas.Where(s => s.NombreSala.Contains(frm.TxtFiltrar.Texts) && s.SucursalId == int.Parse(Utilidades.SucursalId)).OrderByDescending(s => s.SucursalId).ToList();
+                    DataTable dtResponse = dataUtilities.GetAllRecords("Salas");
 
-                    foreach(var item in salas)
+                    var filterRow = from row in dtResponse.AsEnumerable() where Convert.ToString(row.Field<string>("NombreSala")).Contains(key) && Convert.ToString(row.Field<string>("SucursalId")) == Utilidades.SucursalId orderby row.Field<int>("SalaId") descending select row;
+
+                    if (filterRow.Any())
                     {
-                        Sucursales sucursales = db.Sucursales.Where(s => s.SucursalId == item.SucursalId).FirstOrDefault();
-
-                        auxDatatable.Rows.Add(item.SalaId,item.NombreSala,item.NoMesas,sucursales.NombreSucursal,item.Estado);
-                    }
+                        foreach (DataRow item in filterRow.CopyToDataTable().Rows)
+                        {
+                            auxDatatable.Rows.Add(Convert.ToString(item["SalaId"]), Convert.ToString(item["NombreSala"]), Convert.ToString(item["NoMesas"]), Convert.ToString(item["Estado"]));
+                        }
+                    };
                 }
                 else if (opc == "Bloquear")
                 {
-                    var sala = db.Salas.Where(s => s.SalaId == int.Parse(key)).FirstOrDefault();
+                    DataTable dtRespuesta = dataUtilities.getRecordByPrimaryKey("Salas", key);
+                    string statusActual = Convert.ToString(dtRespuesta.Rows[0]["Estado"]) == "Activo" ? "Bloqueado" : "Activo";
 
-                    sala.Estado = sala.Estado == "Activo" ? "Bloqueado" : "Activo";
-
-                    db.Update(sala);
-                    db.SaveChanges();
+                    dataUtilities.SetColumns("Estado", statusActual);
+                    dataUtilities.UpdateRecordByPrimaryKey("Salas", key);
 
                     FuncionesPrincipales(frm, "Buscar", "");
                 }

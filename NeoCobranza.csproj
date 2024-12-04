@@ -1088,6 +1088,7 @@
       <DependentUpon>PnlCMUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\DataUtilities.cs" />
+    <Compile Include="ViewModels\UIUtilities.cs" />
     <Compile Include="ViewModels\Utilidades.cs" />
     <Compile Include="ViewModels\VMCatalogoAlmacenes.cs" />
     <Compile Include="ViewModels\VMCatalogoBanco.cs" />

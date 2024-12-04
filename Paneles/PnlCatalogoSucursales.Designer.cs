@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PnlCatalogoSucursales));
             this.dgvCatalogoSucursales = new System.Windows.Forms.DataGridView();
             this.PnlTitulo = new System.Windows.Forms.Panel();
@@ -38,7 +38,7 @@
             this.BtnBuscarCliente = new NeoCobranza.Especiales.EspecialButton();
             this.btnActualizar = new NeoCobranza.Especiales.EspecialButton();
             this.btnAgregar = new NeoCobranza.Especiales.EspecialButton();
-            this.TxtFiltrar = new NeoCobranza.Controladores.LoginUserControl();
+            this.TxtFiltrar = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCatalogoSucursales)).BeginInit();
             this.PnlTitulo.SuspendLayout();
             this.SuspendLayout();
@@ -55,36 +55,36 @@
             this.dgvCatalogoSucursales.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvCatalogoSucursales.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dgvCatalogoSucursales.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCatalogoSucursales.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCatalogoSucursales.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvCatalogoSucursales.ColumnHeadersHeight = 30;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCatalogoSucursales.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCatalogoSucursales.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvCatalogoSucursales.GridColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgvCatalogoSucursales.Location = new System.Drawing.Point(12, 94);
             this.dgvCatalogoSucursales.Name = "dgvCatalogoSucursales";
             this.dgvCatalogoSucursales.ReadOnly = true;
             this.dgvCatalogoSucursales.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCatalogoSucursales.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCatalogoSucursales.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvCatalogoSucursales.RowHeadersWidth = 15;
             this.dgvCatalogoSucursales.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCatalogoSucursales.Size = new System.Drawing.Size(1117, 363);
@@ -188,24 +188,10 @@
             // 
             this.TxtFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TxtFiltrar.BorderColor = System.Drawing.Color.Silver;
-            this.TxtFiltrar.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.TxtFiltrar.BorderRadius = 0;
-            this.TxtFiltrar.BorderSize = 2;
-            this.TxtFiltrar.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtFiltrar.ForeColor = System.Drawing.Color.DimGray;
-            this.TxtFiltrar.Location = new System.Drawing.Point(16, 38);
-            this.TxtFiltrar.Margin = new System.Windows.Forms.Padding(4);
-            this.TxtFiltrar.Multilinea = false;
+            this.TxtFiltrar.Location = new System.Drawing.Point(23, 41);
             this.TxtFiltrar.Name = "TxtFiltrar";
-            this.TxtFiltrar.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.TxtFiltrar.PasswordChar = false;
-            this.TxtFiltrar.PlaceHolderColor = System.Drawing.Color.DarkGray;
-            this.TxtFiltrar.PlaceHolderText = "Buscar Sucursales...";
-            this.TxtFiltrar.Size = new System.Drawing.Size(465, 36);
-            this.TxtFiltrar.TabIndex = 122;
-            this.TxtFiltrar.Texts = "";
-            this.TxtFiltrar.UnderLineFlat = true;
+            this.TxtFiltrar.Size = new System.Drawing.Size(483, 20);
+            this.TxtFiltrar.TabIndex = 157;
             // 
             // PnlCatalogoSucursales
             // 
@@ -213,11 +199,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1141, 562);
+            this.Controls.Add(this.TxtFiltrar);
             this.Controls.Add(this.BtnBuscarCliente);
             this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.dgvCatalogoSucursales);
-            this.Controls.Add(this.TxtFiltrar);
             this.Controls.Add(this.PnlTitulo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "PnlCatalogoSucursales";
@@ -227,6 +213,7 @@
             this.PnlTitulo.ResumeLayout(false);
             this.PnlTitulo.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -236,8 +223,8 @@
         private Especiales.EspecialButton btnActualizar;
         private Especiales.EspecialButton btnAgregar;
         public System.Windows.Forms.DataGridView dgvCatalogoSucursales;
-        public Controladores.LoginUserControl TxtFiltrar;
         private System.Windows.Forms.Panel PnlTitulo;
         public System.Windows.Forms.Label TbTitulo;
+        public System.Windows.Forms.TextBox TxtFiltrar;
     }
 }

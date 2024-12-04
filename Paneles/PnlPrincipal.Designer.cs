@@ -72,7 +72,6 @@
             this.BtnOrdenMesa = new System.Windows.Forms.ToolStripMenuItem();
             this.listaDeOrdenesActivasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuOpc = new NeoCobranza.Especiales.RJDropDownMenu(this.components);
-            this.BtnConfigInventario = new System.Windows.Forms.ToolStripMenuItem();
             this.configFacturaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BtnTasaCambio = new System.Windows.Forms.ToolStripMenuItem();
             this.datosDeLaEmpresaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -96,6 +95,8 @@
             this.BtnInventarioGeneral = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuCaja = new NeoCobranza.Especiales.RJDropDownMenu(this.components);
             this.configTurnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.productosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.serviciosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuVertical.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel2.SuspendLayout();
@@ -116,7 +117,7 @@
             // 
             // MenuVertical
             // 
-            this.MenuVertical.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.MenuVertical.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(58)))), ((int)(((byte)(64)))));
             this.MenuVertical.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.MenuVertical.Controls.Add(this.BtnCatalogoGeneral);
             this.MenuVertical.Controls.Add(this.especialButton6);
@@ -651,12 +652,14 @@
             this.BtnSucursales,
             this.BtnMotivoCancelacion,
             this.BtnBancos,
-            this.BtnBancosTarjeta});
+            this.BtnBancosTarjeta,
+            this.productosToolStripMenuItem,
+            this.serviciosToolStripMenuItem});
             this.DesplegableContrato.MenuItemHeight = 25;
             this.DesplegableContrato.MenuItemTextColor = System.Drawing.Color.White;
             this.DesplegableContrato.Name = "DesplegableContrato";
             this.DesplegableContrato.PrimaryColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.DesplegableContrato.Size = new System.Drawing.Size(222, 148);
+            this.DesplegableContrato.Size = new System.Drawing.Size(222, 218);
             this.DesplegableContrato.Opening += new System.ComponentModel.CancelEventHandler(this.DesplegableContrato_Opening);
             // 
             // BtnProveedor
@@ -755,10 +758,9 @@
             // 
             // MenuOpc
             // 
-            this.MenuOpc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(40)))), ((int)(((byte)(32)))));
+            this.MenuOpc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(53)))), ((int)(((byte)(102)))));
             this.MenuOpc.IsMainMenu = false;
             this.MenuOpc.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.BtnConfigInventario,
             this.configFacturaciónToolStripMenuItem,
             this.BtnTasaCambio,
             this.datosDeLaEmpresaToolStripMenuItem});
@@ -766,44 +768,34 @@
             this.MenuOpc.MenuItemTextColor = System.Drawing.Color.White;
             this.MenuOpc.Name = "MenuOpc";
             this.MenuOpc.PrimaryColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.MenuOpc.Size = new System.Drawing.Size(238, 108);
-            // 
-            // BtnConfigInventario
-            // 
-            this.BtnConfigInventario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(40)))), ((int)(((byte)(32)))));
-            this.BtnConfigInventario.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnConfigInventario.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BtnConfigInventario.Name = "BtnConfigInventario";
-            this.BtnConfigInventario.Size = new System.Drawing.Size(237, 26);
-            this.BtnConfigInventario.Text = "Config. Inventario";
-            this.BtnConfigInventario.Click += new System.EventHandler(this.BtnConfigInventario_Click);
+            this.MenuOpc.Size = new System.Drawing.Size(226, 76);
             // 
             // configFacturaciónToolStripMenuItem
             // 
-            this.configFacturaciónToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(40)))), ((int)(((byte)(32)))));
-            this.configFacturaciónToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.configFacturaciónToolStripMenuItem.BackColor = System.Drawing.Color.Transparent;
+            this.configFacturaciónToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.configFacturaciónToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.configFacturaciónToolStripMenuItem.Name = "configFacturaciónToolStripMenuItem";
-            this.configFacturaciónToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
+            this.configFacturaciónToolStripMenuItem.Size = new System.Drawing.Size(225, 24);
             this.configFacturaciónToolStripMenuItem.Text = "Config. Facturación";
             this.configFacturaciónToolStripMenuItem.Click += new System.EventHandler(this.configFacturaciónToolStripMenuItem_Click);
             // 
             // BtnTasaCambio
             // 
-            this.BtnTasaCambio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(40)))), ((int)(((byte)(32)))));
-            this.BtnTasaCambio.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnTasaCambio.BackColor = System.Drawing.Color.Transparent;
+            this.BtnTasaCambio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.BtnTasaCambio.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.BtnTasaCambio.Name = "BtnTasaCambio";
-            this.BtnTasaCambio.Size = new System.Drawing.Size(237, 26);
+            this.BtnTasaCambio.Size = new System.Drawing.Size(225, 24);
             this.BtnTasaCambio.Text = "Tasa de Cambio";
             this.BtnTasaCambio.Click += new System.EventHandler(this.BtnTasaCambio_Click);
             // 
             // datosDeLaEmpresaToolStripMenuItem
             // 
-            this.datosDeLaEmpresaToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.datosDeLaEmpresaToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.datosDeLaEmpresaToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.datosDeLaEmpresaToolStripMenuItem.Name = "datosDeLaEmpresaToolStripMenuItem";
-            this.datosDeLaEmpresaToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
+            this.datosDeLaEmpresaToolStripMenuItem.Size = new System.Drawing.Size(225, 24);
             this.datosDeLaEmpresaToolStripMenuItem.Text = "Datos de la Empresa";
             this.datosDeLaEmpresaToolStripMenuItem.Click += new System.EventHandler(this.datosDeLaEmpresaToolStripMenuItem_Click);
             // 
@@ -1022,6 +1014,22 @@
             this.configTurnosToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.configTurnosToolStripMenuItem.Text = "Config.Turnos";
             // 
+            // productosToolStripMenuItem
+            // 
+            this.productosToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.productosToolStripMenuItem.Name = "productosToolStripMenuItem";
+            this.productosToolStripMenuItem.Size = new System.Drawing.Size(221, 24);
+            this.productosToolStripMenuItem.Text = "Productos";
+            this.productosToolStripMenuItem.Click += new System.EventHandler(this.productosToolStripMenuItem_Click);
+            // 
+            // serviciosToolStripMenuItem
+            // 
+            this.serviciosToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.serviciosToolStripMenuItem.Name = "serviciosToolStripMenuItem";
+            this.serviciosToolStripMenuItem.Size = new System.Drawing.Size(221, 24);
+            this.serviciosToolStripMenuItem.Text = "Servicios";
+            this.serviciosToolStripMenuItem.Click += new System.EventHandler(this.serviciosToolStripMenuItem_Click);
+            // 
             // PnlPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1103,7 +1111,6 @@
         public System.Windows.Forms.ToolStripMenuItem crearUsuarioToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem permisosToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem revisionDeSeguridadToolStripMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem BtnConfigInventario;
         private System.Windows.Forms.ToolStripMenuItem BtnAlmacenes;
         private System.Windows.Forms.ToolStripMenuItem BtnCatalogoProductos;
         private System.Windows.Forms.ToolStripMenuItem catalogoDeServiciosToolStripMenuItem;
@@ -1130,5 +1137,7 @@
         private System.Windows.Forms.ToolStripMenuItem BtnMotivoCancelacion;
         private System.Windows.Forms.ToolStripMenuItem BtnBancos;
         private System.Windows.Forms.ToolStripMenuItem BtnBancosTarjeta;
+        private System.Windows.Forms.ToolStripMenuItem productosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem serviciosToolStripMenuItem;
     }
 }

@@ -14,6 +14,7 @@ namespace NeoCobranza.ViewModels
     public class VMCatalogoTipoTarjetas
     {
         public DataTable auxDatatable = new DataTable();
+        DataUtilities dataUtilities = new DataUtilities();
 
         public void InitModuloBancos(CatalogoTiposTarjeta frm)
         {
@@ -35,8 +36,10 @@ namespace NeoCobranza.ViewModels
 
             // Definir las columnas
             auxDatatable.Columns.Add("Id", typeof(string));
-            auxDatatable.Columns.Add("TipoTarjeta", typeof(string));
+            auxDatatable.Columns.Add("Tipo de Tarjeta", typeof(string));
+            auxDatatable.Columns.Add("Porcentaje Por Uso", typeof(string));
             auxDatatable.Columns.Add("Estado", typeof(string));
+            auxDatatable.Columns.Add("Banco", typeof(string));
 
             frm.dgvCatalogo.DataSource = auxDatatable;
 
@@ -51,26 +54,38 @@ namespace NeoCobranza.ViewModels
                 {
                     auxDatatable.Rows.Clear();
 
-                    var ListaTipo = db.TipoTarjeta.Where(e => e.NombreTipo.Contains(frm.TxtFiltrar.Texts)).ToList();
+                    DataTable dtResponse = dataUtilities.GetAllRecords("TipoTarjeta");
 
-                    foreach (var item in ListaTipo)
+                    var filterRow = from row in dtResponse.AsEnumerable() where Convert.ToString(row.Field<string>("NombreTipo")).Contains(key) orderby row.Field<int>("BancoId") descending select row;
+
+                    if (filterRow.Any())
                     {
-                        auxDatatable.Rows.Add(item.TipoTarjetaId, item.NombreTipo, item.Estado);
-                    }
+                        DataTable auxFilter = filterRow.CopyToDataTable();
+
+                        foreach(DataRow dr in auxFilter.Rows)
+                        {
+                            DataTable dtBanco = dataUtilities.getRecordByPrimaryKey("Bancos", Convert.ToString(dr["BancoId"]));
+
+                            string banco = Convert.ToString(dtBanco.Rows[0]["Banco"]);
+                            string porcentaje = Convert.ToDouble(dr["Porcentaje"])+" %";
+
+                            auxDatatable.Rows.Add(Convert.ToString(dr["TipoTarjetaId"]), Convert.ToString(dr["NombreTipo"]),porcentaje,
+                                Convert.ToString(dr["Estado"]), banco);
+                        }
+                    };
+
+                    frm.dgvCatalogo.DataSource = auxDatatable;
+
                 }
                 else if (opc == "Bloquear")
                 {
-                    var tipo = db.TipoTarjeta.Where(m => m.TipoTarjetaId == int.Parse(key)).FirstOrDefault();
+                    DataTable dtRespuesta = dataUtilities.getRecordByPrimaryKey("TipoTarjeta", key);
+                    string statusActual = Convert.ToString(dtRespuesta.Rows[0]["Estado"]) == "Activo" ? "Bloqueado" : "Activo";
 
-                    if (tipo != null)
-                    {
-                        tipo.Estado = tipo.Estado == "Activo" ? "Bloqueado" : "Activo";
+                    dataUtilities.SetColumns("Estado", statusActual);
+                    dataUtilities.UpdateRecordByPrimaryKey("TipoTarjeta", key);
 
-                        db.Update(tipo);
-                        db.SaveChanges();
-
-                        FuncionesPrincipales(frm, "Buscar", "");
-                    }
+                    FuncionesPrincipales(frm, "Buscar", "");
                 }
             }
         }

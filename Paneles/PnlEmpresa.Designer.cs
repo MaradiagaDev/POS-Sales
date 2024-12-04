@@ -41,8 +41,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.TxtEmail = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.TxtDireccion = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.PnlTitulo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -192,35 +190,12 @@
             this.label4.TabIndex = 166;
             this.label4.Text = "Email";
             // 
-            // TxtDireccion
-            // 
-            this.TxtDireccion.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.TxtDireccion.Location = new System.Drawing.Point(12, 344);
-            this.TxtDireccion.MaxLength = 100;
-            this.TxtDireccion.Multiline = true;
-            this.TxtDireccion.Name = "TxtDireccion";
-            this.TxtDireccion.Size = new System.Drawing.Size(412, 85);
-            this.TxtDireccion.TabIndex = 167;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
-            this.label5.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label5.Location = new System.Drawing.Point(8, 323);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(81, 18);
-            this.label5.TabIndex = 168;
-            this.label5.Text = "Dirección";
-            // 
             // PnlEmpresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1125, 523);
-            this.Controls.Add(this.TxtDireccion);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.TxtEmail);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.TxtNoRuc);
@@ -259,7 +234,5 @@
         public System.Windows.Forms.Label label3;
         public System.Windows.Forms.TextBox TxtEmail;
         public System.Windows.Forms.Label label4;
-        public System.Windows.Forms.TextBox TxtDireccion;
-        public System.Windows.Forms.Label label5;
     }
 }

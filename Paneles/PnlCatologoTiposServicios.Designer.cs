@@ -38,7 +38,7 @@
             this.BtnBuscarCliente = new NeoCobranza.Especiales.EspecialButton();
             this.btnActualizar = new NeoCobranza.Especiales.EspecialButton();
             this.btnAgregar = new NeoCobranza.Especiales.EspecialButton();
-            this.TxtFiltrar = new NeoCobranza.Controladores.LoginUserControl();
+            this.TxtFiltrar = new System.Windows.Forms.TextBox();
             this.PnlTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCatalogoTipos)).BeginInit();
             this.SuspendLayout();
@@ -188,24 +188,10 @@
             // 
             this.TxtFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TxtFiltrar.BorderColor = System.Drawing.Color.Silver;
-            this.TxtFiltrar.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.TxtFiltrar.BorderRadius = 0;
-            this.TxtFiltrar.BorderSize = 2;
-            this.TxtFiltrar.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtFiltrar.ForeColor = System.Drawing.Color.DimGray;
-            this.TxtFiltrar.Location = new System.Drawing.Point(16, 38);
-            this.TxtFiltrar.Margin = new System.Windows.Forms.Padding(4);
-            this.TxtFiltrar.Multilinea = false;
+            this.TxtFiltrar.Location = new System.Drawing.Point(12, 41);
             this.TxtFiltrar.Name = "TxtFiltrar";
-            this.TxtFiltrar.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.TxtFiltrar.PasswordChar = false;
-            this.TxtFiltrar.PlaceHolderColor = System.Drawing.Color.DarkGray;
-            this.TxtFiltrar.PlaceHolderText = "Buscar Tipo...";
-            this.TxtFiltrar.Size = new System.Drawing.Size(465, 36);
-            this.TxtFiltrar.TabIndex = 114;
-            this.TxtFiltrar.Texts = "";
-            this.TxtFiltrar.UnderLineFlat = true;
+            this.TxtFiltrar.Size = new System.Drawing.Size(483, 20);
+            this.TxtFiltrar.TabIndex = 157;
             // 
             // PnlCatologoTiposServicios
             // 
@@ -213,11 +199,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1141, 562);
+            this.Controls.Add(this.TxtFiltrar);
             this.Controls.Add(this.BtnBuscarCliente);
             this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.dgvCatalogoTipos);
-            this.Controls.Add(this.TxtFiltrar);
             this.Controls.Add(this.PnlTitulo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "PnlCatologoTiposServicios";
@@ -228,6 +214,7 @@
             this.PnlTitulo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCatalogoTipos)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -239,6 +226,6 @@
         private Especiales.EspecialButton btnActualizar;
         private Especiales.EspecialButton btnAgregar;
         public System.Windows.Forms.DataGridView dgvCatalogoTipos;
-        public Controladores.LoginUserControl TxtFiltrar;
+        public System.Windows.Forms.TextBox TxtFiltrar;
     }
 }

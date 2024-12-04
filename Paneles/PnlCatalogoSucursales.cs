@@ -23,18 +23,19 @@ namespace NeoCobranza.Paneles
 
         private void PnlCatalogoSucursales_Load(object sender, EventArgs e)
         {
-            dgvCatalogoSucursales.EnableHeadersVisualStyles = false;
-            dgvCatalogoSucursales.ColumnHeadersDefaultCellStyle.BackColor = Color.DodgerBlue;
-            dgvCatalogoSucursales.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgvCatalogoSucursales.RowsDefaultCellStyle.Font = new Font("Century Gothic", 9);
-            dgvCatalogoSucursales.RowsDefaultCellStyle.BackColor = Color.White;
-            vMCatalogoSucursales.auxSearch = TxtFiltrar.Texts;
+            UIUtilities.PersonalizarDataGridView(dgvCatalogoSucursales);
+            UIUtilities.EstablecerFondo(this);
+            UIUtilities.ConfigurarBotonBuscar(BtnBuscarCliente);
+            UIUtilities.ConfigurarTextBoxBuscar(TxtFiltrar);
+            UIUtilities.ConfigurarBotonCrear(btnAgregar);
+            UIUtilities.ConfigurarBotonActualizar(btnActualizar);
+            UIUtilities.ConfigurarTituloPantalla(TbTitulo, PnlTitulo);
             vMCatalogoSucursales.InitModuloCatalogoSucursales(this, "Buscar");
         }
 
         private void BtnBuscarCliente_Click(object sender, EventArgs e)
         {
-            vMCatalogoSucursales.auxSearch = TxtFiltrar.Texts;
+            vMCatalogoSucursales.auxSearch = TxtFiltrar.Text;
             vMCatalogoSucursales.InitModuloCatalogoSucursales(this, "Buscar");
         }
 

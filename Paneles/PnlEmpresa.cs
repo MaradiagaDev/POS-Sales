@@ -1,4 +1,5 @@
 ﻿using NeoCobranza.ModelsCobranza;
+using NeoCobranza.ViewModels;
 using OfficeOpenXml.Drawing.Chart;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace NeoCobranza.Paneles
     public partial class PnlEmpresa : Form
     {
         int auxEmpresa = 0;
+        DataUtilities dataUtilities = new DataUtilities();
         public PnlEmpresa()
         {
             InitializeComponent();
@@ -22,22 +24,23 @@ namespace NeoCobranza.Paneles
 
         private void PnlEmpresa_Load(object sender, EventArgs e)
         {
-            using(NeoCobranzaContext db = new NeoCobranzaContext())
+            UIUtilities.EstablecerFondo(this);
+            UIUtilities.ConfigurarBotonActualizar(BtnActualizar);
+            UIUtilities.ConfigurarTituloPantalla(TbTitulo, PnlTitulo);
+
+            DataTable dtResponse = dataUtilities.GetAllRecords("Empresa");
+
+            if (dtResponse.Rows.Count > 0)
             {
-                Empresa empresa = db.Empresa.FirstOrDefault();
+                TxtNombreComercial.Text = Convert.ToString(dtResponse.Rows[0]["NombreComercial"]);
+                TxtNombreEmpresa.Text = Convert.ToString(dtResponse.Rows[0]["NombreEmpresa"]);
+                TxtTelefono.Text = Convert.ToString(dtResponse.Rows[0]["Telefono"]);
+                TxtNoRuc.Text = Convert.ToString(dtResponse.Rows[0]["Ruc"]);
+                TxtEmail.Text = Convert.ToString(dtResponse.Rows[0]["Email"]);
 
-                if (empresa != null)
-                {
-                   TxtNombreComercial.Text = empresa.NombreComercial ;
-                   TxtNombreEmpresa.Text = empresa.NombreEmpresa;
-                   TxtTelefono.Text = empresa.Telefono;
-                   TxtNoRuc.Text = empresa.Ruc;
-                   TxtEmail.Text = empresa.Email;
-                   TxtDireccion.Text = empresa.Direccion;
-
-                    auxEmpresa = empresa.IdEmpresa;
-                }
+                auxEmpresa = Convert.ToInt32(dtResponse.Rows[0]["IdEmpresa"]);
             }
+
         }
 
         private void BtnActualizar_Click(object sender, EventArgs e)
@@ -51,7 +54,7 @@ namespace NeoCobranza.Paneles
 
             if (TxtNombreComercial.Text.Trim().Length == 0)
             {
-                MessageBox.Show("El nombre comercial de la empresa no puede estar vacío.","Atención",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                MessageBox.Show("El nombre comercial de la empresa no puede estar vacío.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -73,50 +76,33 @@ namespace NeoCobranza.Paneles
                 return;
             }
 
-            if (TxtDireccion.Text.Trim().Length == 0)
-            {
-                MessageBox.Show("La dirección no puede estar vacía.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-
             using (NeoCobranzaContext db = new NeoCobranzaContext())
             {
                 if (auxEmpresa == 0)
                 {
-                    Empresa empresa = new Empresa()
-                    {
-                        NombreComercial = TxtNombreComercial.Text,
-                        NombreEmpresa = TxtNombreEmpresa.Text,
-                        Telefono = TxtTelefono.Text,
-                        Ruc = TxtNoRuc.Text,
-                        Email = TxtEmail.Text,
-                        Direccion = TxtDireccion.Text
-                    };
+                    dataUtilities.SetColumns("NombreComercial", TxtNombreComercial.Text);
+                    dataUtilities.SetColumns("NombreEmpresa", TxtNombreEmpresa.Text);
+                    dataUtilities.SetColumns("Telefono", TxtTelefono.Text);
+                    dataUtilities.SetColumns("Ruc", TxtNoRuc.Text);
+                    dataUtilities.SetColumns("Email", TxtEmail.Text);
+                    dataUtilities.InsertRecord("Empresa");
 
-                    db.Add(empresa);
-                    db.SaveChanges();
-
-                    MessageBox.Show("La empresa ha sido creada correctamente.","Correcto",MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("La empresa ha sido creada correctamente.", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    Empresa empresa = db.Empresa.Where(s => s.IdEmpresa == auxEmpresa).FirstOrDefault();
-                    empresa.NombreComercial = TxtNombreComercial.Text;
-                    empresa.NombreEmpresa = TxtNombreEmpresa.Text;
-                    empresa.Telefono = TxtTelefono.Text;
-                    empresa.Ruc = TxtNoRuc.Text;
-                    empresa.Email = TxtEmail.Text;
-                    empresa.Direccion = TxtDireccion.Text;
-
-                    db.Update(empresa);
-                    db.SaveChanges();
+                    dataUtilities.SetColumns("NombreComercial", TxtNombreComercial.Text);
+                    dataUtilities.SetColumns("NombreEmpresa", TxtNombreEmpresa.Text);
+                    dataUtilities.SetColumns("Telefono", TxtTelefono.Text);
+                    dataUtilities.SetColumns("Ruc", TxtNoRuc.Text);
+                    dataUtilities.SetColumns("Email", TxtEmail.Text);
+                    dataUtilities.UpdateRecordByPrimaryKey("Empresa",auxEmpresa);
 
                     MessageBox.Show("La empresa ha sido actualizada correctamente.", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 this.Close();
-            }           
+            }
         }
     }
 }

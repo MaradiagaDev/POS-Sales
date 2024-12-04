@@ -1,4 +1,5 @@
-﻿using NeoCobranza.ModelsCobranza;
+﻿
+using NeoCobranza.ModelsCobranza;
 using NeoCobranza.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace NeoCobranza.Paneles
     {
         string auxKey = "";
         string auxOpc = "";
+        DataUtilities dataUtilities = new DataUtilities();
         public AgregarSala(string opc, string key)
         {
             InitializeComponent();
@@ -38,13 +40,9 @@ namespace NeoCobranza.Paneles
             {
                 using (NeoCobranzaContext db = new NeoCobranzaContext())
                 {
-                    Salas salas = db.Salas.Where(s => s.SalaId == int.Parse(auxKey)).FirstOrDefault();
-
-                    if (salas != null)
-                    {
-                        TxtNombreSala.Text = salas.NombreSala;
-                        TxtNoMesas.Text = salas.NoMesas.ToString();
-                    }
+                    DataTable dtResponse = dataUtilities.getRecordByPrimaryKey("Salas", auxKey);
+                    TxtNombreSala.Text = Convert.ToString(dtResponse.Rows[0]["NombreSala"]);
+                    TxtNoMesas.Text = Convert.ToString(dtResponse.Rows[0]["NoMesas"]);
                 }
 
                 LblDynamico.Text = $"Modificar Sala con ID: {auxKey}";
@@ -87,28 +85,20 @@ namespace NeoCobranza.Paneles
             {
                 if (auxOpc == "Crear")
                 {
-                    Salas salas = new Salas()
-                    {
-                        NombreSala = TxtNombreSala.Text.Trim(),
-                        NoMesas = int.Parse(TxtNoMesas.Text),
-                        SucursalId = int.Parse(Utilidades.SucursalId),
-                        Estado = "Activo"
-                    };
+                    dataUtilities.SetColumns("NombreSala", TxtNombreSala.Text.Trim());
+                    dataUtilities.SetColumns("NoMesas",int.Parse(TxtNoMesas.Text));
+                    dataUtilities.SetColumns("SucursalId",Utilidades.SucursalId);
+                    dataUtilities.SetColumns("Estado", "Activo");
 
-                    db.Add(salas);
-                    db.SaveChanges();
+                    dataUtilities.InsertRecord("Salas");
                 }
                 else
                 {
-                    Salas salas = db.Salas.Where(s => s.SalaId == int.Parse(auxKey)).FirstOrDefault();
+                    dataUtilities.SetColumns("NombreSala", TxtNombreSala.Text.Trim());
+                    dataUtilities.SetColumns("NoMesas", int.Parse(TxtNoMesas.Text));
+                    dataUtilities.SetColumns("SucursalId", Utilidades.SucursalId);
 
-                    if (salas != null)
-                    {
-                        salas.NombreSala = TxtNombreSala.Text.Trim();
-                        salas.NoMesas = int.Parse(TxtNoMesas.Text);
-                        db.Update(salas);
-                        db.SaveChanges();
-                    }
+                    dataUtilities.UpdateRecordByPrimaryKey("Salas",auxKey);
                 }
 
                 this.Close();

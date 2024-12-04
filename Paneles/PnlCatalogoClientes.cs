@@ -27,11 +27,18 @@ namespace NeoCobranza.Paneles
 
         private void PnlCatalogoClientes_Load(object sender, EventArgs e)
         {
-            dgvCatalogoClientes.EnableHeadersVisualStyles = false;
-            dgvCatalogoClientes.ColumnHeadersDefaultCellStyle.BackColor = Color.DodgerBlue;
-            dgvCatalogoClientes.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgvCatalogoClientes.RowsDefaultCellStyle.Font = new Font("Century Gothic", 9);
-            dgvCatalogoClientes.RowsDefaultCellStyle.BackColor = Color.White;
+            //Configuraciones UI
+            UIUtilities.PersonalizarDataGridView(dgvCatalogoClientes);
+            UIUtilities.EstablecerFondo(this);
+            UIUtilities.ConfigurarBotonBuscar(BtnBuscarCliente);
+            UIUtilities.ConfigurarTextBoxBuscar(TxtFiltrar);
+            UIUtilities.ConfigurarComboBox(CmbBuscarPor);
+            UIUtilities.ConfigurarBotonCrear(btnAgregar);
+            UIUtilities.ConfigurarBotonActualizar(btnActualizar);
+            UIUtilities.ConfigurarBotonAnterior(BtnAnterior);
+            UIUtilities.ConfigurarBotonSiguiente(BtnSiguiente);
+            UIUtilities.ConfigurarTituloPantalla(TbTitulo, PnlTitulo);
+
             vMCatalogoCliente.InitModuloCatalogoClientes(this);
         }
 

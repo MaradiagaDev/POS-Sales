@@ -36,9 +36,9 @@
             this.btnActualizar = new NeoCobranza.Especiales.EspecialButton();
             this.btnAgregar = new NeoCobranza.Especiales.EspecialButton();
             this.dgvCatalogo = new System.Windows.Forms.DataGridView();
-            this.TxtFiltrar = new NeoCobranza.Controladores.LoginUserControl();
             this.PnlTitulo = new System.Windows.Forms.Panel();
             this.TbTitulo = new System.Windows.Forms.Label();
+            this.TxtFiltrar = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCatalogo)).BeginInit();
             this.PnlTitulo.SuspendLayout();
             this.SuspendLayout();
@@ -141,7 +141,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvCatalogo.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvCatalogo.GridColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dgvCatalogo.Location = new System.Drawing.Point(-4, 58);
+            this.dgvCatalogo.Location = new System.Drawing.Point(10, 58);
             this.dgvCatalogo.Name = "dgvCatalogo";
             this.dgvCatalogo.ReadOnly = true;
             this.dgvCatalogo.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -155,32 +155,9 @@
             this.dgvCatalogo.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCatalogo.RowHeadersWidth = 15;
             this.dgvCatalogo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCatalogo.Size = new System.Drawing.Size(1117, 363);
+            this.dgvCatalogo.Size = new System.Drawing.Size(1105, 363);
             this.dgvCatalogo.TabIndex = 153;
             this.dgvCatalogo.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCatalogo_CellContentClick);
-            // 
-            // TxtFiltrar
-            // 
-            this.TxtFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TxtFiltrar.BorderColor = System.Drawing.Color.Silver;
-            this.TxtFiltrar.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.TxtFiltrar.BorderRadius = 0;
-            this.TxtFiltrar.BorderSize = 2;
-            this.TxtFiltrar.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtFiltrar.ForeColor = System.Drawing.Color.DimGray;
-            this.TxtFiltrar.Location = new System.Drawing.Point(8, 15);
-            this.TxtFiltrar.Margin = new System.Windows.Forms.Padding(4);
-            this.TxtFiltrar.Multilinea = false;
-            this.TxtFiltrar.Name = "TxtFiltrar";
-            this.TxtFiltrar.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.TxtFiltrar.PasswordChar = false;
-            this.TxtFiltrar.PlaceHolderColor = System.Drawing.Color.DarkGray;
-            this.TxtFiltrar.PlaceHolderText = "Buscar...";
-            this.TxtFiltrar.Size = new System.Drawing.Size(465, 36);
-            this.TxtFiltrar.TabIndex = 152;
-            this.TxtFiltrar.Texts = "";
-            this.TxtFiltrar.UnderLineFlat = true;
             // 
             // PnlTitulo
             // 
@@ -206,17 +183,26 @@
             this.TbTitulo.TabIndex = 1;
             this.TbTitulo.Text = "Catálogo de Tipos de Tarjetas";
             // 
+            // TxtFiltrar
+            // 
+            this.TxtFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtFiltrar.Location = new System.Drawing.Point(14, 19);
+            this.TxtFiltrar.Name = "TxtFiltrar";
+            this.TxtFiltrar.Size = new System.Drawing.Size(483, 20);
+            this.TxtFiltrar.TabIndex = 157;
+            // 
             // CatalogoTiposTarjeta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1125, 523);
+            this.Controls.Add(this.TxtFiltrar);
             this.Controls.Add(this.BtnBuscar);
             this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.dgvCatalogo);
-            this.Controls.Add(this.TxtFiltrar);
             this.Controls.Add(this.PnlTitulo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CatalogoTiposTarjeta";
@@ -226,6 +212,7 @@
             this.PnlTitulo.ResumeLayout(false);
             this.PnlTitulo.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -235,8 +222,8 @@
         public Especiales.EspecialButton btnActualizar;
         public Especiales.EspecialButton btnAgregar;
         public System.Windows.Forms.DataGridView dgvCatalogo;
-        public Controladores.LoginUserControl TxtFiltrar;
         private System.Windows.Forms.Panel PnlTitulo;
         public System.Windows.Forms.Label TbTitulo;
+        public System.Windows.Forms.TextBox TxtFiltrar;
     }
 }

@@ -35,10 +35,10 @@
             this.PnlTitulo = new System.Windows.Forms.Panel();
             this.TbTitulo = new System.Windows.Forms.Label();
             this.dgvCatalogo = new System.Windows.Forms.DataGridView();
+            this.TxtFiltrar = new System.Windows.Forms.TextBox();
             this.BtnBuscar = new NeoCobranza.Especiales.EspecialButton();
             this.btnActualizar = new NeoCobranza.Especiales.EspecialButton();
             this.btnAgregar = new NeoCobranza.Especiales.EspecialButton();
-            this.TxtFiltrar = new NeoCobranza.Controladores.LoginUserControl();
             this.PnlTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCatalogo)).BeginInit();
             this.SuspendLayout();
@@ -114,6 +114,15 @@
             this.dgvCatalogo.TabIndex = 152;
             this.dgvCatalogo.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCatalogo_CellContentClick);
             // 
+            // TxtFiltrar
+            // 
+            this.TxtFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtFiltrar.Location = new System.Drawing.Point(14, 12);
+            this.TxtFiltrar.Name = "TxtFiltrar";
+            this.TxtFiltrar.Size = new System.Drawing.Size(483, 20);
+            this.TxtFiltrar.TabIndex = 156;
+            // 
             // BtnBuscar
             // 
             this.BtnBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -183,40 +192,17 @@
             this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
-            // TxtFiltrar
-            // 
-            this.TxtFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TxtFiltrar.BorderColor = System.Drawing.Color.Silver;
-            this.TxtFiltrar.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.TxtFiltrar.BorderRadius = 0;
-            this.TxtFiltrar.BorderSize = 2;
-            this.TxtFiltrar.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtFiltrar.ForeColor = System.Drawing.Color.DimGray;
-            this.TxtFiltrar.Location = new System.Drawing.Point(7, 10);
-            this.TxtFiltrar.Margin = new System.Windows.Forms.Padding(4);
-            this.TxtFiltrar.Multilinea = false;
-            this.TxtFiltrar.Name = "TxtFiltrar";
-            this.TxtFiltrar.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.TxtFiltrar.PasswordChar = false;
-            this.TxtFiltrar.PlaceHolderColor = System.Drawing.Color.DarkGray;
-            this.TxtFiltrar.PlaceHolderText = "Buscar...";
-            this.TxtFiltrar.Size = new System.Drawing.Size(465, 36);
-            this.TxtFiltrar.TabIndex = 151;
-            this.TxtFiltrar.Texts = "";
-            this.TxtFiltrar.UnderLineFlat = true;
-            // 
             // CatalogoSalas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(1125, 523);
+            this.Controls.Add(this.TxtFiltrar);
             this.Controls.Add(this.BtnBuscar);
             this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.dgvCatalogo);
-            this.Controls.Add(this.TxtFiltrar);
             this.Controls.Add(this.PnlTitulo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CatalogoSalas";
@@ -226,6 +212,7 @@
             this.PnlTitulo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCatalogo)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -237,6 +224,6 @@
         public Especiales.EspecialButton btnActualizar;
         public Especiales.EspecialButton btnAgregar;
         public System.Windows.Forms.DataGridView dgvCatalogo;
-        public Controladores.LoginUserControl TxtFiltrar;
+        public System.Windows.Forms.TextBox TxtFiltrar;
     }
 }
