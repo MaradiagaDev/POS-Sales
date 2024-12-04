@@ -187,7 +187,7 @@
             // 
             this.TxtFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TxtFiltrar.Location = new System.Drawing.Point(15, 19);
+            this.TxtFiltrar.Location = new System.Drawing.Point(15, 15);
             this.TxtFiltrar.Name = "TxtFiltrar";
             this.TxtFiltrar.Size = new System.Drawing.Size(483, 20);
             this.TxtFiltrar.TabIndex = 139;

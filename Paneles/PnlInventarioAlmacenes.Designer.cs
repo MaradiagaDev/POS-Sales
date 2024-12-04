@@ -41,8 +41,8 @@
             this.dgvCatalogo = new System.Windows.Forms.DataGridView();
             this.BtnListaMermas = new NeoCobranza.Especiales.EspecialButton();
             this.BtnBuscarCliente = new NeoCobranza.Especiales.EspecialButton();
-            this.TxtFiltrar = new NeoCobranza.Controladores.LoginUserControl();
             this.especialButton1 = new NeoCobranza.Especiales.EspecialButton();
+            this.TxtFiltrar = new System.Windows.Forms.TextBox();
             this.PnlTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCatalogo)).BeginInit();
             this.SuspendLayout();
@@ -224,29 +224,6 @@
             this.BtnBuscarCliente.UseVisualStyleBackColor = false;
             this.BtnBuscarCliente.Click += new System.EventHandler(this.BtnBuscarCliente_Click);
             // 
-            // TxtFiltrar
-            // 
-            this.TxtFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TxtFiltrar.BorderColor = System.Drawing.Color.Silver;
-            this.TxtFiltrar.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.TxtFiltrar.BorderRadius = 0;
-            this.TxtFiltrar.BorderSize = 2;
-            this.TxtFiltrar.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtFiltrar.ForeColor = System.Drawing.Color.DimGray;
-            this.TxtFiltrar.Location = new System.Drawing.Point(17, 24);
-            this.TxtFiltrar.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
-            this.TxtFiltrar.Multilinea = false;
-            this.TxtFiltrar.Name = "TxtFiltrar";
-            this.TxtFiltrar.Padding = new System.Windows.Forms.Padding(17, 12, 17, 12);
-            this.TxtFiltrar.PasswordChar = false;
-            this.TxtFiltrar.PlaceHolderColor = System.Drawing.Color.DarkGray;
-            this.TxtFiltrar.PlaceHolderText = "Buscar...";
-            this.TxtFiltrar.Size = new System.Drawing.Size(387, 46);
-            this.TxtFiltrar.TabIndex = 140;
-            this.TxtFiltrar.Texts = "";
-            this.TxtFiltrar.UnderLineFlat = true;
-            // 
             // especialButton1
             // 
             this.especialButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -270,12 +247,22 @@
             this.especialButton1.UseVisualStyleBackColor = false;
             this.especialButton1.Click += new System.EventHandler(this.especialButton1_Click);
             // 
+            // TxtFiltrar
+            // 
+            this.TxtFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtFiltrar.Location = new System.Drawing.Point(12, 40);
+            this.TxtFiltrar.Name = "TxtFiltrar";
+            this.TxtFiltrar.Size = new System.Drawing.Size(380, 27);
+            this.TxtFiltrar.TabIndex = 159;
+            // 
             // PnlInventarioAlmacenes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1250, 549);
+            this.Controls.Add(this.TxtFiltrar);
             this.Controls.Add(this.especialButton1);
             this.Controls.Add(this.dgvCatalogo);
             this.Controls.Add(this.BtnListaMermas);
@@ -284,7 +271,6 @@
             this.Controls.Add(this.CmbBuscarPor);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BtnBuscarCliente);
-            this.Controls.Add(this.TxtFiltrar);
             this.Controls.Add(this.PnlTitulo);
             this.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -303,7 +289,6 @@
         #endregion
 
         public Especiales.EspecialButton BtnBuscarCliente;
-        public Controladores.LoginUserControl TxtFiltrar;
         private System.Windows.Forms.Panel PnlTitulo;
         public System.Windows.Forms.Label TbTitulo;
         public System.Windows.Forms.Label label2;
@@ -313,5 +298,6 @@
         public Especiales.EspecialButton BtnListaMermas;
         public System.Windows.Forms.DataGridView dgvCatalogo;
         public Especiales.EspecialButton especialButton1;
+        public System.Windows.Forms.TextBox TxtFiltrar;
     }
 }

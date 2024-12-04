@@ -28,10 +28,13 @@ namespace NeoCobranza.Paneles
 
         private void PnlInventarioAlmacenes_Load(object sender, EventArgs e)
         {
-            dgvCatalogo.EnableHeadersVisualStyles = false;
-            dgvCatalogo.ColumnHeadersDefaultCellStyle.BackColor = Color.CadetBlue;
-            dgvCatalogo.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgvCatalogo.RowsDefaultCellStyle.Font = new Font("Century Gothic", 9);
+            UIUtilities.PersonalizarDataGridView(dgvCatalogo);
+            UIUtilities.EstablecerFondo(this);
+            UIUtilities.ConfigurarBotonBuscar(BtnBuscarCliente);
+            UIUtilities.ConfigurarTextBoxBuscar(TxtFiltrar);
+            UIUtilities.ConfigurarTituloPantalla(TbTitulo, PnlTitulo);
+            UIUtilities.ConfigurarComboBox(CmbBuscarPor);
+            UIUtilities.ConfigurarComboBox(CmbAlmacenes);
 
             vMInventarioAlmacenes.InitModuloInventarioAlmacenes(this);
         }
@@ -71,7 +74,7 @@ namespace NeoCobranza.Paneles
         {
             if (e.ColumnIndex == 0)
             {
-                if (CmbAlmacenes.Text == "Mostrar Todas")
+                if (CmbAlmacenes.Text == "Mostrar Todo")
                 {
                     MessageBox.Show("Para hacer Ajuste de inventario tiene que seleccionar el almacén.", "Atención",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -80,15 +83,10 @@ namespace NeoCobranza.Paneles
 
                 object cellValue = dgvCatalogo.Rows[e.RowIndex].Cells[1].Value;
 
-                using (NeoCobranzaContext db = new NeoCobranzaContext())
-                {
-                    ServiciosEstadares productos = db.ServiciosEstadares.Where(s => s.IdEstandar == int.Parse(cellValue.ToString())).FirstOrDefault();
-
-                    PnlAgregarProductoSerie frmSerie = new PnlAgregarProductoSerie(int.Parse(cellValue.ToString()), int.Parse(CmbAlmacenes.SelectedValue.ToString()));
-                    AddOwnedForm(frmSerie);
-                    frmSerie.ShowDialog();
-
-                }
+                PnlAgregarProductoSerie frmSerie = new PnlAgregarProductoSerie(cellValue.ToString(), CmbAlmacenes.SelectedValue.ToString());
+                AddOwnedForm(frmSerie);
+                frmSerie.ShowDialog();
+                vMInventarioAlmacenes.BuscarInventario();
             }
         }
 

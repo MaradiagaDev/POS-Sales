@@ -59,6 +59,8 @@ namespace NeoCobranza.Paneles
 
         private void PnlPrincipal_Load(object sender, EventArgs e)
         {
+            //UIUtilities.ConfigurarPanelPrincipal(PnlTitulo,LblTitulo,LblHora);
+
             //vMMenuPrincipal.InitModuloPrincipal(this);
         }
 

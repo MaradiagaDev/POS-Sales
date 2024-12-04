@@ -279,3 +279,60 @@ END
 
 
 --SP 26/11/2024
+
+exec sp_ObtenerCantidadProductoPorSucursalYCategoria '0',0
+
+alter PROCEDURE sp_ObtenerCantidadProductoPorSucursalYCategoria
+    @IdSucursal NVARCHAR(50), -- Parámetro para filtrar por sucursal
+    @CategoriaId INT ,         -- Parámetro para filtrar por categoría,
+	@Filtro nvarchar(Max)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Selección de datos considerando los filtros proporcionados
+    SELECT 
+        P.ProductoId as [ID],                -- ID del producto
+        P.NombreProducto as [PRODUCTO],           -- Nombre del producto
+        P.Precio AS [PRECIO (NIO)],                   -- Precio del producto
+        SUM(R.Cantidad)  AS [EXISTENCIA]-- Suma de cantidades
+    FROM RelAlmacenProducto R
+    INNER JOIN Almacenes A ON R.AlmacenId = A.AlmacenId
+    INNER JOIN ProductosServicios P ON R.ProductoId = P.ProductoId
+    WHERE (@IdSucursal = '0' OR A.SucursalId = @IdSucursal) -- Filtro por sucursal
+      AND (@CategoriaId = 0 OR P.CategoriaId = @CategoriaId) -- Filtro por categoría
+	  And p.ClasificacionProducto = 'Productos' and p.Estado = 'Activo' and p.NombreProducto like '%'+@Filtro+'%'  
+    GROUP BY 
+        P.ProductoId, 
+        P.NombreProducto, 
+        P.Precio;
+END;
+GO
+
+CREATE PROCEDURE sp_ObtenerCantidadProductoPorAlmacen
+    @AlmacenId NVARCHAR(50), -- Parámetro para filtrar por almacén
+    @CategoriaId INT,        -- Parámetro para filtrar por categoría
+	@Filtro nvarchar(Max)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Selección de datos considerando los filtros proporcionados
+    SELECT 
+		P.ProductoId AS [ID],
+        p.NombreProducto as PRODUCTO,  
+		p.Precio as [PRECIO (NIO)],
+        SUM(R.Cantidad) AS  [EXISTENCIA]
+    FROM RelAlmacenProducto R
+    INNER JOIN Almacenes A ON R.AlmacenId = A.AlmacenId
+    INNER JOIN ProductosServicios P ON R.ProductoId = P.ProductoId
+    WHERE (@AlmacenId = '0' OR A.AlmacenId = @AlmacenId) -- Filtro por almacén
+      AND (@CategoriaId = 0 OR P.CategoriaId = @CategoriaId) -- Filtro por categoría
+	  And p.ClasificacionProducto = 'Productos' and p.Estado = 'Activo' and p.NombreProducto like '%'+@Filtro+'%' 
+    GROUP BY 
+        P.ProductoId, 
+        p.NombreProducto,
+		p.Precio;
+END;
+GO
+

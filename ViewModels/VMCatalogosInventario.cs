@@ -110,6 +110,8 @@ namespace NeoCobranza.ViewModels
 
             if (opc == "Buscar")
             {
+                dynamicDataTable.Rows.Clear();
+
                 DataTable dtResponse = dataUtilities.getRecordByColumn("ProductosServicios", "ClasificacionProducto", auxOpc);
 
                 foreach(DataRow row in dtResponse.Rows)
@@ -118,6 +120,7 @@ namespace NeoCobranza.ViewModels
 
                     dynamicDataTable.Rows.Add(Convert.ToString(row["ProductoId"]),
                         Convert.ToString(row["NombreProducto"]),
+                        Convert.ToString(row["Estado"]),
                         Convert.ToString(row["Precio"]),
                         Convert.ToString(dtResponseCategoria.Rows[0]["Descripcion"]));
                 }

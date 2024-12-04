@@ -136,24 +136,6 @@
         RgZu0IHs59hytAbNR5X2jFFqaWn5B+Qm1grBTVKGAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="BtnPromociones.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAtlJREFUWEft1k1IFGEcx/FNzVIitbIORamkl0KkshfIgiLt0At2qi5S2KUwSCoI
-        woN0KIgieoOKIjwEFUXQoUiMTglBhmAvFEUWvUjvr0gv0/c3/Bnc2V3dlmf35A8+6Pz/M8/MPjPz7EaG
-        4yKe541HHSqsFBN6ozDHNt2FQRfhI5S/aLVWVKi34bltuguD3sNlFKARuohya/thezP+oM5K7sKgn9Fo
-        /xdCqfWbhP/nox8tVnIbBr6Ap9iEK3iPIusV4wWuIss/wHUYeAJ0EZ9wFwutno126OL8C8poOOle/MRs
-        K2UunHQl9DButFLmwknLodtxwkqqDblOOAknyEc37mC01ZJaJ5yEwbXYvMM0K6mmdeISEq4TTsKgWxCz
-        2LA96DqhoqaoEjlW+u9wbMLFhlrCdcIPGy+h/MBtHEEDCm2XIcO+rbiImMWGWtx1IgiFHGgGNkAn10Xo
-        /X2FUqg/A0uxAtMxwg5PTzhBEXqgi/iOcB5C93yMHeI+DH4aT6AnVzOkqdRrNg/HoQv7gJOoR7Ed6iYM
-        2IFgMQmHnhaXneiEnn6lC9uRZ7ulHgbpxQ7bHDTsp1um5+MYtOjoFk2xtvq50LOzDLUotVb8sEMetGDU
-        WykItT3YhQWIeXWpTcIzXMcpaGX8jXBuYrIdFh0aM/1d+GulINQO4bXf9byv0IkOognrsQ1v8A23sA9r
-        UY1x0Nf0YtxHpw0bHRp6qHRfE95Leno1t+IM9Gm02PxCH/TJ4/4GoD4R+qr+gl4rR4fGASj6BGuQba2U
-        wxhlOAoteG+h2zhWDU3R+QFuQPdfF6GfUpoJfbpmFNh4SYdjqnAOeg40jtaPfGv7O4Qv4CxWW1v9CmiF
-        1P3WtB3GXGvHDf2RWIVrUPR6rkPK3zcaVN9kescfQXkMvRE10Fet+kugmdNDqFnUbKblp/gs7Idet3Ae
-        YDdKbPf0hhNNhX5uLUew+AwnuUQi/wBO70BiHrWH5AAAAABJRU5ErkJggg==
-</value>
-  </data>
   <data name="pictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
@@ -1025,7 +1007,7 @@
     <value>348, 17</value>
   </metadata>
   <metadata name="MenuCatalogo.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>453, 16</value>
+    <value>457, 16</value>
   </metadata>
   <metadata name="MenuSeguridad.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>585, 17</value>

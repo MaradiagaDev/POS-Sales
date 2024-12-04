@@ -1,4 +1,5 @@
 ﻿using NeoCobranza.ModelsCobranza;
+using NeoCobranza.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,18 +16,18 @@ namespace NeoCobranza.Paneles
 {
     public partial class PnlAgregarProductoSerie : Form
     {
-        int auxIdProducto;
-        int auxIdAlmacen;
-        public DataTable auxTablaDinamicaAgregar = new DataTable();
-        public DataTable auxTablaDinamicaEliminar = new DataTable();
+        string auxIdProducto;
+        string auxIdAlmacen;
 
+        DataUtilities dataUtilities = new DataUtilities();
+        
         private class OrdenarPorClass
         {
             public int id { get; set; }
             public string opc { get; set; }
         }
 
-        public PnlAgregarProductoSerie(int idProducto, int idAlmacen)
+        public PnlAgregarProductoSerie(string idProducto, string idAlmacen)
         {
             InitializeComponent();
             this.auxIdProducto = idProducto;
@@ -35,64 +36,24 @@ namespace NeoCobranza.Paneles
 
         private void PnlAgregarProductoSerie_Load(object sender, EventArgs e)
         {
-            DgvLotes.EnableHeadersVisualStyles = false;
-            DgvLotes.ColumnHeadersDefaultCellStyle.BackColor = Color.CadetBlue;
-            DgvLotes.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            DgvLotes.RowsDefaultCellStyle.Font = new Font("Century Gothic", 10);
-            DgvLotes.RowsDefaultCellStyle.BackColor = Color.White;
-            
+            //Colocar la descripcion del producto y el almacen
+            DataTable dtResponseProducto
+        }
 
-            List<OrdenarPorClass> ordenar = new List<OrdenarPorClass> { new OrdenarPorClass() {id = 0,opc = "Fecha Agregarción (Ascendente)" },
-            new OrdenarPorClass() {id = 1,opc = "Fecha Agregarción (Descendente)" },
-            new OrdenarPorClass() {id = 2,opc = "Fecha Expiración (Ascendente)" },
-            new OrdenarPorClass() {id = 0,opc = "Fecha Expiración (Descendente)" }};
-
-            CmbOrdenarPor.DataSource = ordenar;
-            CmbOrdenarPor.DisplayMember = "opc";
-            CmbOrdenarPor.ValueMember = "id";
-
-            using (NeoCobranzaContext db = new NeoCobranzaContext())
+        private void TxtCantidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '.' && !char.IsControl(e.KeyChar))
             {
-                ServiciosEstadares productos = db.ServiciosEstadares.Where(s => s.IdEstandar == this.auxIdProducto).FirstOrDefault();
-                Almacenes almacenes = db.Almacenes.Where(s => s.AlmacenId == this.auxIdAlmacen).FirstOrDefault();
+                e.Handled = true;
+            }
 
-                LblDinamico.Text = "Merma de Producto/ Producto: " + productos.NombreEstandar + "             Almacén: " + almacenes.NombreAlmacen;
-
-
-                //Configuracion del data
-                auxTablaDinamicaAgregar.Columns.Add("Lote ID", typeof(string));
-                auxTablaDinamicaAgregar.Columns.Add("CompraID", typeof(string));
-                auxTablaDinamicaAgregar.Columns.Add("Producto ID", typeof(string));
-                auxTablaDinamicaAgregar.Columns.Add("Producto", typeof(string));
-                auxTablaDinamicaAgregar.Columns.Add("Proveedor", typeof(string));
-                auxTablaDinamicaAgregar.Columns.Add("Cantidad Inicial", typeof(string));
-                auxTablaDinamicaAgregar.Columns.Add("Restante", typeof(string));
-                auxTablaDinamicaAgregar.Columns.Add("Fecha Creación", typeof(string));
-                auxTablaDinamicaAgregar.Columns.Add("Fecha Expira", typeof(string));
-                auxTablaDinamicaAgregar.Columns.Add("Costo Unitario", typeof(string));
-
-                DgvLotes.DataSource = auxTablaDinamicaAgregar;
-
-                var lotes = db.LotesProducto.Where(s => s.ProductoId == productos.IdEstandar && s.AlmacenId == almacenes.AlmacenId && s.CantidadRestante > 0).OrderBy(s => s.FechaCreacion).ToList();
-
-                if(lotes.Count == 0)
-                {
-                    MessageBox.Show("No hay lotes con producto.","Atención",MessageBoxButtons.OK,MessageBoxIcon.Warning);
-                    this.Close();
-                    return;
-                }
-
-                foreach ( var lote in lotes )
-                {
-                    var prov = db.Proveedores.Where(p => p.IdProveedor == lote.ProveedorId).FirstOrDefault();
-                    auxTablaDinamicaAgregar.Rows.Add(lote.LoteId, lote.CompraId, lote.ProductoId, lote.Producto, prov.NombreEmpresa, lote.Cantidad, lote.CantidadRestante, lote.FechaCreacion,lote.FechaExpiracion,lote.CostoU);
-                }
-
-                TxtIdentificador.Focus();
+            if (e.KeyChar == '.' && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
             }
         }
 
-        private void BtnGuardar_Click(object sender, EventArgs e)
+        private void BtnGuardar_Click_1(object sender, EventArgs e)
         {
             if (TxtIdentificador.Text.Trim().Length == 0)
             {
@@ -110,196 +71,56 @@ namespace NeoCobranza.Paneles
 
             int Cantidad = 0;
 
-            if(int.TryParse(TxtCantidad.Text.Trim(), out Cantidad) == false || Cantidad == 0)
+            if (int.TryParse(TxtCantidad.Text.Trim(), out Cantidad) == false || Cantidad == 0)
             {
                 MessageBox.Show("Debe agregar una cantidad.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 TxtCantidad.Focus();
                 return;
             }
 
-            using(NeoCobranzaContext db = new NeoCobranzaContext())
+            // Validar que el almacen tenga lo necesario para eliminar esa cantidad de producto
+            DataTable dtResponse = dataUtilities.GetAllRecords("RelAlmacenProducto");
+            var filterRow = 
+                from row in dtResponse.AsEnumerable() 
+                where Convert.ToString(row.Field<string>("AlmacenId")) == auxIdAlmacen
+                && Convert.ToString(row.Field<string>("ProductoId")) == auxIdProducto
+                select row;
+
+            dtResponse = filterRow.CopyToDataTable();
+
+            decimal cantidadActual = Convert.ToDecimal(dtResponse.Rows[0]["Cantidad"]);
+
+            if(cantidadActual < Convert.ToDecimal(TxtCantidad.Text))
             {
-                //Verificar que la cantidad se puede quitar
+                MessageBox.Show("No hay suficiente inventario.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TxtCantidad.Focus();
 
-                LotesProducto lote = db.LotesProducto.Where(s => s.LoteId == DgvLotes.SelectedRows[0].Cells[0].Value.ToString()).FirstOrDefault();
-
-                if(int.Parse(TxtCantidad.Text) > lote.CantidadRestante)
-                {
-                    MessageBox.Show("La cantidad a mermar no puede ser mayor a la cantidad existente.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    TxtCantidad.Focus();
-                    return;
-                }
-
-                //Crear Merma
-
-                ServiciosEstadares servicio = db.ServiciosEstadares.Where(s => s.IdEstandar == auxIdProducto).FirstOrDefault();
-
-                Mermas merma = new Mermas();
-                merma.Razon = TxtRazon.Text.Trim();
-                merma.Identificador = TxtIdentificador.Text.Trim();
-                merma.LoteId = DgvLotes.SelectedRows[0].Cells[0].Value.ToString();
-                merma.CantidadMermada = int.Parse(TxtCantidad.Text);
-                merma.FechaRealizacion = DateTime.Now;
-                merma.PrecioVenta = decimal.Parse(servicio.MontoVd.ToString());
-
-                db.Add(merma);
-                db.SaveChanges();
-
-                //lote
-
-                lote.CantidadRestante -= int.Parse(TxtCantidad.Text);
-                db.Update(lote);
-
-                //Almacen
-
-                RelAlmacenProducto relAlmacenProducto = db.RelAlmacenProducto.Where(s => s.ProductoId == auxIdProducto && s.AlmacenId == auxIdAlmacen).FirstOrDefault();
-                relAlmacenProducto.Cantidad -= int.Parse(TxtCantidad.Text);
-                db.Update(relAlmacenProducto);
-                //Inventario
-
-                Inventario inventario = db.Inventario.Where(s => s.ProductoId == auxIdProducto).FirstOrDefault();
-                inventario.Cantidad -= int.Parse(TxtCantidad.Text);
-                db.Update(inventario);
-
-                db.SaveChanges();
-
-                PnlInventarioAlmacenes frm  = Owner as PnlInventarioAlmacenes;
-                frm.vMInventarioAlmacenes.BuscarInventario();
-
-                Kardex kardexUltimo = db.Kardex.Where(s => s.ProductoId == auxIdProducto
-                    && s.AlmacenId == auxIdAlmacen).OrderByDescending(s => s.MovimientoId).FirstOrDefault();
-
-                if (kardexUltimo != null)
-                {
-                    Kardex kardex = new Kardex()
-                    {
-                        Fecha = DateTime.Now.Date,
-                        Operacion = "Merma",
-                        AlmacenId = auxIdAlmacen,
-                        ProductoId = servicio.IdEstandar,
-                        UnidadesSalida = int.Parse(TxtCantidad.Text),
-                        CostoUnitarioSalida = lote.CostoU,
-                        TotalSalida = lote.CostoU * int.Parse(TxtCantidad.Text),
-                        UnidadesSaldo = kardexUltimo.UnidadesSaldo - int.Parse(TxtCantidad.Text),
-                        CostoUnitarioSaldo = (kardexUltimo.CostoTotalSaldo - (lote.CostoU * int.Parse(TxtCantidad.Text))) / (kardexUltimo.UnidadesSaldo - int.Parse(TxtCantidad.Text)),
-                        CostoTotalSaldo = kardexUltimo.CostoTotalSaldo - (lote.CostoU * int.Parse(TxtCantidad.Text)),
-                        IdDocumento = merma.MermaId.ToString(),
-                        Lote = lote.LoteId
-                    };
-
-                    db.Add(kardex);
-                    db.SaveChanges();
-                }
-                else
-                {
-                    Kardex kardex = new Kardex()
-                    {
-                        Fecha = DateTime.Now.Date,
-                        Operacion = "Merma",
-                        AlmacenId = auxIdAlmacen,
-                        ProductoId = servicio.IdEstandar,
-                        UnidadesSaldo = int.Parse(TxtCantidad.Text),
-                        CostoUnitarioSaldo = lote.CostoU * int.Parse(TxtCantidad.Text),
-                        CostoTotalSaldo = lote.CostoU * int.Parse(TxtCantidad.Text),
-                        UnidadesSalida = int.Parse(TxtCantidad.Text),
-                        CostoUnitarioSalida = lote.CostoU,
-                        TotalSalida = lote.CostoU * int.Parse(TxtCantidad.Text),
-                        IdDocumento = merma.MermaId.ToString(),
-                        Lote = lote.LoteId
-                    };
-
-                    db.Add(kardex);
-                    db.SaveChanges();
-                }
-
-
-                this.Close();
+                return;
             }
 
-        }
+            //Realizar la merma
+            dataUtilities.SetColumns("Identificador",TxtIdentificador.Text.Trim());
+            dataUtilities.SetColumns("Razon", TxtRazon.Text.Trim());
+            dataUtilities.SetColumns("CantidadMermada",Convert.ToDecimal(TxtCantidad.Text.Trim()));
+            dataUtilities.SetColumns("FechaRealizacion",DateTime.Now.ToString());
+            dataUtilities.SetColumns("AlmacenId",auxIdAlmacen);
+            dataUtilities.SetColumns("Usuario",Utilidades.Usuario);
 
+            dataUtilities.InsertRecord("Mermas");
 
+            //Quitar la cantidad del almacen
 
-        private void dgvBorrarProducto_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+            dataUtilities.SetColumns("Cantidad", (cantidadActual - Convert.ToDecimal(TxtCantidad.Text)));
+            dataUtilities.UpdateRecordByPrimaryKey("RelAlmacenProducto", Convert.ToDecimal(dtResponse.Rows[0]["RelAlmacenProductoId"]));
 
-        }
+            MessageBox.Show("Merma realizada correctamente.", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
             this.Close();
         }
 
-        private void TxtCantidad_KeyPress(object sender, KeyPressEventArgs e)
+        private void btnCancelar_Click_1(object sender, EventArgs e)
         {
-            // Verificar si el carácter ingresado no es un número y no es una tecla de control
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
-                // Si no es un número ni una tecla de control, ignorar el evento de pulsación de tecla
-                e.Handled = true;
-            }
-        }
-
-        private void CmbOrdenarPor_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            using(NeoCobranzaContext db = new NeoCobranzaContext())
-            {
-                ServiciosEstadares productos = db.ServiciosEstadares.Where(s => s.IdEstandar == this.auxIdProducto).FirstOrDefault();
-                Almacenes almacenes = db.Almacenes.Where(s => s.AlmacenId == this.auxIdAlmacen).FirstOrDefault();
-
-                auxTablaDinamicaAgregar.Rows.Clear();
-
-                if(CmbOrdenarPor.SelectedValue.ToString() == "0") 
-                {
-                    var lotes = db.LotesProducto.Where(s => s.ProductoId == productos.IdEstandar && s.AlmacenId == almacenes.AlmacenId && s.CantidadRestante > 0).OrderBy(s => s.FechaCreacion).ToList();
-
-                    foreach (var lote in lotes)
-                    {
-                        var prov = db.Proveedores.Where(p => p.IdProveedor == lote.ProveedorId).FirstOrDefault();
-                        auxTablaDinamicaAgregar.Rows.Add(lote.LoteId, lote.CompraId, lote.ProductoId, lote.Producto, prov.NombreEmpresa, lote.Cantidad, lote.CantidadRestante, lote.FechaCreacion, lote.FechaExpiracion, lote.CostoU);
-                    }
-                }
-
-                if(CmbOrdenarPor.SelectedValue.ToString() == "1")
-                {
-                    var lotes = db.LotesProducto.Where(s => s.ProductoId == productos.IdEstandar && s.AlmacenId == almacenes.AlmacenId && s.CantidadRestante > 0).OrderByDescending(s => s.FechaCreacion).ToList();
-
-                    foreach (var lote in lotes)
-                    {
-                        var prov = db.Proveedores.Where(p => p.IdProveedor == lote.ProveedorId).FirstOrDefault();
-                        auxTablaDinamicaAgregar.Rows.Add(lote.LoteId, lote.CompraId, lote.ProductoId, lote.Producto, prov.NombreEmpresa, lote.Cantidad, lote.CantidadRestante, lote.FechaCreacion, lote.FechaExpiracion, lote.CostoU);
-                    }
-                }
-
-                if (CmbOrdenarPor.SelectedValue.ToString() == "2")
-                {
-
-                    var lotes = db.LotesProducto.Where(s => s.ProductoId == productos.IdEstandar && s.AlmacenId == almacenes.AlmacenId && s.CantidadRestante > 0).OrderBy(s => s.FechaExpiracion).ToList();
-
-                    foreach (var lote in lotes)
-                    {
-                        var prov = db.Proveedores.Where(p => p.IdProveedor == lote.ProveedorId).FirstOrDefault();
-                        auxTablaDinamicaAgregar.Rows.Add(lote.LoteId, lote.CompraId, lote.ProductoId, lote.Producto, prov.NombreEmpresa, lote.Cantidad, lote.CantidadRestante, lote.FechaCreacion, lote.FechaExpiracion, lote.CostoU);
-                    }
-                }
-
-                if (CmbOrdenarPor.SelectedValue.ToString() == "3")
-                {
-                    var lotes = db.LotesProducto.Where(s => s.ProductoId == productos.IdEstandar && s.AlmacenId == almacenes.AlmacenId && s.CantidadRestante > 0).OrderByDescending(s => s.FechaExpiracion).ToList();
-
-                    foreach (var lote in lotes)
-                    {
-                        var prov = db.Proveedores.Where(p => p.IdProveedor == lote.ProveedorId).FirstOrDefault();
-                        auxTablaDinamicaAgregar.Rows.Add(lote.LoteId, lote.CompraId, lote.ProductoId, lote.Producto, prov.NombreEmpresa, lote.Cantidad, lote.CantidadRestante, lote.FechaCreacion, lote.FechaExpiracion, lote.CostoU);
-                    }
-                }
-
-            }
+            this.Close();
         }
     }
 }

@@ -18,7 +18,7 @@ namespace NeoCobranza.ViewModels
         private List<string> vGlobListColumnNames = new List<string>();
         private List<object> vGlobListColumnValues = new List<object>();
 
-        private string vGlobServerName = "DESKTOP-GKTE05O\\SQLEXPRESS"; //"DESKTOP-GKTE05O\\SQLEXPRESS""DF-INF-PRO2"
+        private string vGlobServerName = "DF-INF-PRO2"; //"DESKTOP-GKTE05O\\SQLEXPRESS""DF-INF-PRO2"
         private string vGlobUserName = "LoginPos";
         private string vGlobUserPassword = "facil123$";
 
@@ -26,8 +26,8 @@ namespace NeoCobranza.ViewModels
 
         public DataUtilities() 
         {
-           string connectionString = "Server=" + vGlobServerName + ";Database=POSIDEVBD;UID=" + vGlobUserName + ";PWD=" + vGlobUserPassword + "; MultipleActiveResultSets=True"; //CASA
-           // string connectionString = "Server=" + vGlobServerName + ";Database=POSIDEVBD;Integrated Security=True"; //TRABAJO
+           //string connectionString = "Server=" + vGlobServerName + ";Database=POSIDEVBD;UID=" + vGlobUserName + ";PWD=" + vGlobUserPassword + "; MultipleActiveResultSets=True"; //CASA
+            string connectionString = "Server=" + vGlobServerName + ";Database=POSIDEVBD;Integrated Security=True"; //TRABAJO
 
             vGlobConnection = new SqlConnection(connectionString);
         }
@@ -448,6 +448,67 @@ namespace NeoCobranza.ViewModels
             return resultTable;
         }
 
+        public void DeleteRecordByColumn(string tableName, string columnName, object columnValue)
+        {
+            if (string.IsNullOrWhiteSpace(tableName))
+            {
+                throw new ArgumentException("El nombre de la tabla no puede ser nulo, vacío o contener solo espacios.");
+            }
 
+            if (string.IsNullOrWhiteSpace(columnName))
+            {
+                throw new ArgumentException("El nombre de la columna no puede ser nulo, vacío o contener solo espacios.");
+            }
+
+            if (columnValue == null)
+            {
+                throw new ArgumentNullException(nameof(columnValue), "El valor de la columna no puede ser nulo.");
+            }
+
+            try
+            {
+                bool wasConnectionOpen = HandleConnectionState(true);
+
+                // Verificar si la columna existe
+                bool columnExists = false;
+                using (SqlCommand command = new SqlCommand(@"
+            SELECT 1
+            FROM INFORMATION_SCHEMA.COLUMNS
+            WHERE TABLE_NAME = @TableName AND COLUMN_NAME = @ColumnName;", vGlobConnection))
+                {
+                    command.Parameters.AddWithValue("@TableName", tableName);
+                    command.Parameters.AddWithValue("@ColumnName", columnName);
+
+                    object result = command.ExecuteScalar();
+                    columnExists = result != null;
+                }
+
+                if (!columnExists)
+                {
+                    throw new InvalidOperationException($"La columna '{columnName}' no existe en la tabla '{tableName}'.");
+                }
+
+                // Eliminar registros
+                using (SqlCommand command = new SqlCommand($"DELETE FROM {tableName} WHERE {columnName} = @ColumnValue", vGlobConnection))
+                {
+                    command.Parameters.AddWithValue("@ColumnValue", columnValue);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected == 0)
+                    {
+                        throw new InvalidOperationException($"No se encontraron registros para eliminar en la tabla '{tableName}' con la columna '{columnName}' igual a '{columnValue}'.");
+                    }
+                }
+
+                if (!wasConnectionOpen)
+                {
+                    HandleConnectionState(false);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Error al eliminar registros por columna: " + ex.Message, ex);
+            }
+        }
     }
 }

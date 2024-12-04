@@ -279,6 +279,48 @@ namespace NeoCobranza.ViewModels
             boton.MouseUp += (s, e) => boton.BackColor = ControlPaint.Light(colorBase, 0.8f); // Restaurar al dejar de presionar
         }
 
+        //UI Menu Principal
+        private static void MostrarHora(Label lblHora)
+        {
+            lblHora.Font = new Font("Segoe UI", 14, FontStyle.Regular); // Fuente moderna y clara
+            lblHora.ForeColor = Color.White; // Texto blanco para contraste
+            lblHora.TextAlign = ContentAlignment.MiddleCenter; // Centrar el texto
+            lblHora.AutoSize = false; // Para controlar el tamaño exacto del Label
+            lblHora.Dock = DockStyle.Right; // Ubicarlo a la derecha del panel
+            lblHora.Padding = new Padding(0, 10, 20, 0); // Separación agradable
 
+            // Actualizar la hora cada segundo
+            Timer timer = new Timer { Interval = 1000 }; // Intervalo de 1 segundo
+            timer.Tick += (s, e) =>
+            {
+                lblHora.Text = DateTime.Now.ToString("hh:mm:ss tt"); // Formato 12 horas
+            };
+            timer.Start();
+        }
+
+        private static void ConfigurarTituloSistema(Label lblTitulo)
+        {
+            lblTitulo.Font = new Font("Segoe UI", 15, FontStyle.Bold); // Fuente moderna y elegante
+            lblTitulo.ForeColor = Color.White; // Texto blanco
+            lblTitulo.BackColor = Color.Transparent; // Fondo transparente para un diseño limpio
+            lblTitulo.TextAlign = ContentAlignment.MiddleLeft; // Alinear a la izquierda
+            lblTitulo.Dock = DockStyle.Left; // Ubicar a la izquierda
+            lblTitulo.Padding = new Padding(20, 10, 0, 0); // Espaciado para una mejor apariencia
+        }
+
+        public static void ConfigurarPanelPrincipal(Panel panelTitulo, Label lblTitulo, Label lblHora)
+        {
+            // Configurar el panel de fondo con un color fijo
+            panelTitulo.BackColor = Color.FromArgb(44, 62, 80); // Azul grisáceo elegante
+            panelTitulo.Height = 40; // Altura del panel
+            panelTitulo.Padding = new Padding(0); // Sin margen extra
+
+            // Añadir los elementos al panel
+            ConfigurarTituloSistema(lblTitulo);
+            MostrarHora(lblHora);
+
+            panelTitulo.Controls.Add(lblTitulo);
+            panelTitulo.Controls.Add(lblHora);
+        }
     }
 }

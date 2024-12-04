@@ -81,8 +81,6 @@ GO
 ALTER TABLE [dbo].[Clientes] ADD  CONSTRAINT [DF_Clientes_Estado]  DEFAULT ((1)) FOR [Estado]
 GO
 
-
-
 --TABLAS 26/11/2024
 
 CREATE TABLE [dbo].[Almacenes] (
@@ -100,17 +98,17 @@ CREATE TABLE ProductosServicios (
     ImagenId INT NULL, -- Identificador de la imagen (opcional)
     Descripcion NVARCHAR(MAX) NULL, -- Descripción del estándar
     Estado NVARCHAR(50) NOT NULL, -- Estado (activo/inactivo o similar)
-    Precio decimal(18,0) NULL, -- Monto de venta directa (opcional)
+    Precio decimal(18,2) NULL, -- Monto de venta directa (opcional)
     ClasificacionProducto nvarchar(50), -- Clasificación del producto (opcional)
     CategoriaId INT NULL, -- Clasificación del tipo (opcional)
     Codigo NVARCHAR(50) NULL, -- Código único o identificador (opcional)
 );
 
-CREATE TABLE RelAlmacenProducto (
+create TABLE RelAlmacenProducto (
     RelAlmacenProductoId decimal(18,0) identity(1,1) NOT NULL PRIMARY KEY, -- Identificador único para la relación
     AlmacenId NVARCHAR(50) NULL, -- Identificador del almacén (opcional)
     ProductoId NVARCHAR(50), -- Identificador del producto (opcional)
-    Cantidad INT NULL -- Cantidad de producto en el almacén (opcional)
+    Cantidad decimal(18,1) NULL -- Cantidad de producto en el almacén (opcional)
 );
 
 CREATE TABLE Proveedores (
@@ -183,4 +181,23 @@ CREATE TABLE TasaCambio (
     IdTasaCambio INT PRIMARY KEY IDENTITY(1,1), -- Llave primaria autoincremental
     Tasa FLOAT NOT NULL, -- Representación del campo double
     FechaCambio DATETIME NOT NULL -- Representación del campo DateTime
+);
+
+
+Create table RelProveedoresProducto
+(
+    RelAlmacenProductoId decimal(18,0) identity(1,1) NOT NULL PRIMARY KEY,
+    ProveedorId Integer NULL, 
+    ProductoId NVARCHAR(50), 
+)
+
+CREATE TABLE Mermas (
+    MermaId INT IDENTITY(1,1) PRIMARY KEY,       -- Identificador único de la merma
+    Identificador NVARCHAR(50) NULL,           -- Identificador adicional opcional
+    Razon NVARCHAR(MAX) NULL,                   -- Razón de la merma
+    CantidadMermada Decimal (18,1) NULL,                   -- Cantidad mermada (opcional)
+    FechaRealizacion DATETIME NULL,             -- Fecha de realización de la merma
+    PrecioVenta DECIMAL(18, 2) NULL ,           -- Precio de venta del producto mermado (opcional)
+	[AlmacenId] NVARCHAR(50) NOT NULL,
+	Usuario nvarchar(50)
 );

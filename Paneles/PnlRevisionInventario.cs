@@ -17,17 +17,13 @@ using System.Security.Cryptography;
 
 namespace NeoCobranza.Paneles
 {
-    public partial class PnlRevisionInventario : Form
+    public partial class  PnlRevisionInventario : Form
     {
         VMInventarioGeneral vMInventarioGeneral = new VMInventarioGeneral();
         private bool busquedaInicialRealizada = false;
         public PnlRevisionInventario()
         {
             InitializeComponent();
-            dgvCatalogo.EnableHeadersVisualStyles = false;
-            dgvCatalogo.ColumnHeadersDefaultCellStyle.BackColor = Color.CadetBlue;
-            dgvCatalogo.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgvCatalogo.RowsDefaultCellStyle.Font = new System.Drawing.Font("Century Gothic", 9);
         }
 
         private void PnlRevisionInventario_Load(object sender, EventArgs e)
@@ -37,6 +33,14 @@ namespace NeoCobranza.Paneles
                 vMInventarioGeneral.InitPantallaRevision(this);
                 busquedaInicialRealizada = true;
             }
+
+            UIUtilities.PersonalizarDataGridView(dgvCatalogo);
+            UIUtilities.EstablecerFondo(this);
+            UIUtilities.ConfigurarBotonBuscar(BtnBuscarCliente);
+            UIUtilities.ConfigurarTextBoxBuscar(TxtFiltrar);
+            UIUtilities.ConfigurarTituloPantalla(TbTitulo, PnlTitulo);
+            UIUtilities.ConfigurarComboBox(CmbBuscarPor);
+            UIUtilities.ConfigurarComboBox(CmbSucursales);
         }
 
         private void BtnBuscarCliente_Click(object sender, EventArgs e)

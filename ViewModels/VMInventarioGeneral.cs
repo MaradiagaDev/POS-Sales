@@ -3,6 +3,7 @@ using NeoCobranza.Paneles;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,9 @@ namespace NeoCobranza.ViewModels
 {
     public class VMInventarioGeneral
     {
+
+        DataUtilities dataUtilities = new DataUtilities();
+
         public class MostrarInventarioGeneral
         {
             public string ID { get; set; }
@@ -28,53 +32,52 @@ namespace NeoCobranza.ViewModels
         {
             auxFrm = frm;
 
-            using (NeoCobranzaContext db = new NeoCobranzaContext())
+            DataTable dtResponse = dataUtilities.GetAllRecords("Categorizacion");
+            var filterRow = from row in dtResponse.AsEnumerable() where Convert.ToString(row.Field<string>("Estado")) == "Activo" select row;
+
+            if (filterRow.Any())
             {
-                //Tipos Servicios
-                List<TipoServicios> listTipoServicios = new List<TipoServicios>();
+                DataTable dataCmbTipoServicio = new DataTable();
+                dataCmbTipoServicio = filterRow.CopyToDataTable();
+                DataRow newRow = dataCmbTipoServicio.NewRow();
+                newRow["CategorizacionId"] = "0"; 
+                newRow["Descripcion"] = "Mostrar Todo"; 
+                newRow["Estado"] = "Actio"; 
 
-                TipoServicios tipoServicios = new TipoServicios()
-                {
-                    Descripcion = "Mostrar Todas",
-                    Estado = "Activo",
-                    TipoServicionId = 0
-                };
+                dataCmbTipoServicio.Rows.InsertAt(newRow, 0);
 
-                listTipoServicios.Add(tipoServicios);
-
-                List<TipoServicios> listBdTipo = db.TipoServicios.Where(s => s.Estado == "Activo").OrderByDescending(s => s.TipoServicionId).ToList();
-                listTipoServicios.AddRange(listBdTipo);
-
-                auxFrm.CmbBuscarPor.ValueMember = "TipoServicionId";
+                auxFrm.CmbBuscarPor.ValueMember = "CategorizacionId";
                 auxFrm.CmbBuscarPor.DisplayMember = "Descripcion";
-                auxFrm.CmbBuscarPor.DataSource = listTipoServicios;
+                auxFrm.CmbBuscarPor.DataSource = dataCmbTipoServicio;
+            }
 
-                ////Sucursales
-                List<Sucursales> listSucursales = new List<Sucursales>();
+            // Obtiene todos los registros de la tabla Sucursal
+            DataTable dtResponseSucursales = dataUtilities.GetAllRecords("Sucursal");
 
-                Sucursales sucursales = new Sucursales()
-                {
-                    SucursalId = 0,
-                    NombreSucursal = "Mostrar Todas"
-                };
+            // Filtra las filas donde el campo Estado sea "Activo"
+            var filterRowSucursales = from row in dtResponseSucursales.AsEnumerable()
+                            where Convert.ToString(row.Field<string>("Estado")) == "Activo"
+                            select row;
 
-                listSucursales.Add(sucursales);
-                List<Sucursales> listBdSucursales = db.Sucursales.OrderByDescending(s => s.SucursalId).ToList();
+            if (filterRowSucursales.Any())
+            {
+                // Crea un DataTable para los datos filtrados
+                DataTable dataCmbSucursal = new DataTable();
+                dataCmbSucursal = filterRowSucursales.CopyToDataTable();
 
-                if (listBdSucursales.Count == 0)
-                {
-                    MessageBox.Show("No ha agregado Sucursales o no hay Sucursales activas.", "Atención",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                // Crea una nueva fila para "Mostrar Todo"
+                DataRow newRow = dataCmbSucursal.NewRow();
+                newRow["IdSucursal"] = "0";
+                newRow["NombreSucursal"] = "Mostrar Todo";
+                newRow["Estado"] = "Activo"; // Puedes mantener el estado "Activo" para esta fila
 
-                    auxFrm.Dispose();
-                    return;
-                }
+                // Inserta la nueva fila en la posición 0
+                dataCmbSucursal.Rows.InsertAt(newRow, 0);
 
-                listSucursales.AddRange(listBdSucursales);
-
-                auxFrm.CmbSucursales.ValueMember = "SucursalId";
+                // Configura el DataSource del combo box
+                auxFrm.CmbSucursales.ValueMember = "IdSucursal";
                 auxFrm.CmbSucursales.DisplayMember = "NombreSucursal";
-                auxFrm.CmbSucursales.DataSource = listSucursales;
+                auxFrm.CmbSucursales.DataSource = dataCmbSucursal;
             }
 
             BuscarInventario();
@@ -82,101 +85,10 @@ namespace NeoCobranza.ViewModels
 
         public void BuscarInventario()
         {
-            using (NeoCobranzaContext db = new NeoCobranzaContext())
-            {
-                IQueryable<MostrarInventarioGeneral> queryMostrar = null;
-                object objTipo = auxFrm.CmbBuscarPor.SelectedValue;
-
-                if (auxFrm.CmbSucursales.Text == "Mostrar Todas")
-                {
-                    auxFrm.TbTitulo.Text = "Inventario General";
-
-                        var inventarioPorProducto = db.Inventario
-                        .GroupBy(i => i.ProductoId)
-                        .Select(g => new MostrarInventarioGeneral
-                        {
-                            ID = g.Key.ToString(),
-                            Cantidad = g.Sum(i => i.Cantidad).ToString(),
-                            CantidadMinima = g.Max(i => i.StockMinimo).ToString(),
-                            CantidadMaxima = g.Max(i => i.StockMaximo).ToString()
-                        });
-
-                     var productos = db.ServiciosEstadares
-                    .Where(s => inventarioPorProducto.Any(q => q.ID == s.IdEstandar.ToString()))
-                    .ToDictionary(s => s.IdEstandar, s => s.NombreEstandar);
-
-                    queryMostrar = inventarioPorProducto.Select(q => new MostrarInventarioGeneral
-                    {
-                        ID = q.ID,
-                        Producto = productos.ContainsKey(int.Parse(q.ID)) ? productos[int.Parse(q.ID)] : "",
-                        Cantidad = q.Cantidad,
-                        CantidadMaxima = q.CantidadMaxima,
-                        CantidadMinima = q.CantidadMinima,
-                    });
-                }
-                else if (!string.IsNullOrEmpty(auxFrm.CmbSucursales.Text))
-                {
-                    int sucursalId = int.Parse(auxFrm.CmbSucursales.SelectedValue.ToString());
-                    var almacenes = db.Almacenes.Where(a => a.SucursalId == sucursalId).ToList();
-
-                    if (almacenes.Count > 0)
-                    {
-                        var almacenesIds = almacenes.Select(a => a.AlmacenId).ToList();
-
-                        // Obtener los productos relacionados con los almacenes específicos
-                        var relAlmacenProductosList = db.RelAlmacenProducto
-                            .Where(r => almacenesIds.Contains((int)r.AlmacenId))
-                            .ToList();
-
-                        // Obtener los nombres de los productos
-                        var productosIds = relAlmacenProductosList.Select(r => r.ProductoId).ToList();
-                        var productos = db.ServiciosEstadares
-                            .Where(s => productosIds.Contains(s.IdEstandar))
-                            .ToDictionary(s => s.IdEstandar, s => s.NombreEstandar);
-
-                        // Crear una consulta para mostrar el inventario
-                        queryMostrar = (from r in relAlmacenProductosList
-                                        join i in db.Inventario on r.ProductoId equals i.ProductoId
-                                        where almacenesIds.Contains((int)r.AlmacenId)
-                                        group new { r, i } by r.ProductoId into g
-                                        select new MostrarInventarioGeneral
-                                        {
-                                            ID = g.Key.ToString(),
-                                            Producto = productos.ContainsKey((int)g.Key) ? productos[(int)g.Key] : "",
-                                            Cantidad = g.Max(x => x.i.Cantidad).ToString(),
-                                            CantidadMinima = g.Max(i => i.i.StockMinimo).ToString(),
-                                            CantidadMaxima = g.Max(x => x.i.StockMaximo).ToString()
-                                        }).AsQueryable();
-                    }
-                    else
-                    {
-                        auxFrm.dgvCatalogo.DataSource = null; 
-                        MessageBox.Show("La Sucursal seleccionada no tiene almacenes agregados.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-                }
-
-                if (queryMostrar != null)
-                {
-                    if (objTipo != null && auxFrm.CmbBuscarPor.Text != "Mostrar Todas")
-                    {
-                        int tipoId = (int)objTipo;
-                        queryMostrar = queryMostrar.Where(m => db.ServiciosEstadares.Any(s => s.IdEstandar.ToString() == m.ID && s.ClasificacionTipo == tipoId));
-                    }
-
-                    if (!string.IsNullOrEmpty(auxFrm.TxtFiltrar.Text))
-                    {
-                        string filtro = auxFrm.TxtFiltrar.Text.ToLowerInvariant();
-                        queryMostrar = queryMostrar.Where(m => m.Producto.ToLowerInvariant().Contains(filtro));
-                    }
-
-                    auxFrm.dgvCatalogo.DataSource = queryMostrar.ToList();
-                }
-            }
+            dataUtilities.SetParameter("@IdSucursal", auxFrm.CmbSucursales.SelectedValue);
+            dataUtilities.SetParameter("@CategoriaId", auxFrm.CmbBuscarPor.SelectedValue);
+            dataUtilities.SetParameter("@Filtro", auxFrm.TxtFiltrar.Text);
+            auxFrm.dgvCatalogo.DataSource = dataUtilities.ExecuteStoredProcedure("sp_ObtenerCantidadProductoPorSucursalYCategoria");
         }
-
-
-
-
     }
 }

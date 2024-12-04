@@ -21,6 +21,7 @@ namespace NeoCobranza.Paneles
         public string auxModulo;
         public DataTable auxTablaDinamica = new DataTable();
         public DataTable auxTablaDinamicaProveedor = new DataTable();
+        DataUtilities dataUtilities = new DataUtilities();
 
         private class TipoInventario
         {
@@ -53,145 +54,58 @@ namespace NeoCobranza.Paneles
                 DgvProveedor.DataSource = auxTablaDinamicaProveedor;
             }
 
-            if (auxTablaDinamica.Columns.Count == 0)
-            {
-                auxTablaDinamica.Columns.Add("Id", typeof(string));
-                auxTablaDinamica.Columns.Add("Sucursal", typeof(string));
-
-                dgvSucursalesProductos.DataSource = auxTablaDinamica;
-            }
-
             using (NeoCobranzaContext db = new NeoCobranzaContext())
             {
-                //Sucursales
-                List<Sucursales> listSucursales = db.Sucursales.Where(c => c.Estado == "Activo").OrderByDescending(c => c.SucursalId).ToList();
-                CmbSucursal.ValueMember = "SucursalId";
-                CmbSucursal.DisplayMember = "NombreSucursal";
-                CmbSucursal.DataSource = listSucursales;
+                DataTable dtResponse = dataUtilities.GetAllRecords("Proveedores");
+                var filterRow = from row in dtResponse.AsEnumerable() where Convert.ToString(row.Field<string>("Estatus")) == "Activo" orderby row.Field<int>("IdProveedor") descending select row;
 
-                //Proveedor
-                List<Proveedores> listProveedor = db.Proveedores.Where(c => c.Estatus == true).OrderBy(c => c.NombreEmpresa).ToList();
-                CmbProveedor.ValueMember = "IdProveedor";
-                CmbProveedor.DisplayMember = "NombreEmpresa";
-                CmbProveedor.DataSource = listProveedor;
+                if (filterRow.Any() && auxModulo == "Productos")
+                {
+                    CmbProveedor.ValueMember = "IdProveedor";
+                    CmbProveedor.DisplayMember = "NombreEmpresa";
+                    CmbProveedor.DataSource = filterRow.CopyToDataTable();
+                }
+                else if (filterRow.Any() == false && auxModulo == "Productos")
+                {
+                    MessageBox.Show("Para agregar productos debe haber un proveedor ACTIVO.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    this.Close();
+                }
+                else
+                {
+                    PnlProveedores.Visible = false;
+                }
 
-                //Tipo Producto
-                List<TipoServicios> listTipos = db.TipoServicios.Where(c => c.Estado == "Activo").OrderByDescending(c => c.TipoServicionId).ToList();
-                CmbTipoProducto.ValueMember = "TipoServicionId";
+                DataTable dtResponseCategoria = dataUtilities.GetAllRecords("Categorizacion");
+
+                //Categorizacion
+                CmbTipoProducto.ValueMember = "CategorizacionId";
                 CmbTipoProducto.DisplayMember = "Descripcion";
-                CmbTipoProducto.DataSource = listTipos;
-
-                //Tipo Inventario
-                List<TipoInventario> listTiposInventario = new List<TipoInventario>();
-
-
-                TipoInventario tipoUno = new TipoInventario()
-                { tipo = "Expira" };
-
-                TipoInventario tipoDos = new TipoInventario()
-                { tipo = "No Expira" };
-
-                listTiposInventario.Add(tipoUno);
-                listTiposInventario.Add(tipoDos);
-
-                CmbTipoInventario.ValueMember = "tipo";
-                CmbTipoInventario.DisplayMember = "tipo";
-                CmbTipoInventario.DataSource = listTiposInventario;
-
-                TipoInventario tipoUnoManejo = new TipoInventario()
-                { tipo = "PEPS" };
-
-                TipoInventario tipoDosManejo = new TipoInventario()
-                { tipo = "UEPS" };
-
-                TipoInventario tipoTresManejo = new TipoInventario()
-                { tipo = "PCPS" };
-
-                List<TipoInventario> listTiposManejos = new List<TipoInventario>() { tipoUnoManejo, tipoDosManejo, tipoTresManejo };
-
-                CmbManejoInventario.ValueMember = "tipo";
-                CmbManejoInventario.DisplayMember = "tipo";
-                CmbManejoInventario.DataSource = listTiposManejos;
+                CmbTipoProducto.DataSource = dtResponseCategoria;
             }
 
             if (auxOpc != "Crear")
             {
-                using (NeoCobranzaContext db = new NeoCobranzaContext())
+                DataTable dtResponse = dataUtilities.getRecordByPrimaryKey("ProductosServicios", auxId);
+
+                TxtNombre.Text = Convert.ToString(dtResponse.Rows[0]["NombreProducto"]);
+                TxtDescripcion.Text = Convert.ToString(dtResponse.Rows[0]["Descripcion"]);
+                TxtCodigo.Text = Convert.ToString(dtResponse.Rows[0]["Codigo"]);
+                TxtPrecioVenta.Text = Convert.ToString(dtResponse.Rows[0]["Precio"]);
+                CmbTipoProducto.SelectedValue = Convert.ToString(dtResponse.Rows[0]["CategoriaId"]);
+
+                DataTable dtResponseRelacional = dataUtilities.getRecordByColumn("RelProveedoresProducto", "ProductoId", auxId);
+
+                if (dtResponseRelacional.Rows.Count > 0)
                 {
-                    ServiciosEstadares servicios = db.ServiciosEstadares.Where(c => c.IdEstandar == int.Parse(auxId)).FirstOrDefault();
-
-                    TxtNombre.Text = servicios.NombreEstandar;
-                    TxtDescripcion.Text = servicios.Descripcion;
-
-                    ChkDisponibleVentas.Checked = servicios.MontoVd.ToString() == "0" ? false : true;
-                    ChkDisponibleContrato.Checked = servicios.MontoContrato.ToString() == "0" ? false : true;
-                    ChkDisponibleMejoras.Checked = servicios.MontoMejora.ToString() == "0" ? false : true;
-
-                    TxtPrecioVenta.Enabled = servicios.MontoVd.ToString() == "0" ? false : true;
-                    TxtPrecioContrato.Enabled = servicios.MontoContrato.ToString() == "0" ? false : true;
-                    TxtPrecioMejora.Enabled = servicios.MontoMejora.ToString() == "0" ? false : true;
-
-                    LblPrecioVenta.Enabled = servicios.MontoVd.ToString() == "0" ? false : true;
-                    LblPrecioContrato.Enabled = servicios.MontoContrato.ToString() == "0" ? false : true;
-                    LblPrecioMejora.Enabled = servicios.MontoMejora.ToString() == "0" ? false : true;
-
-                    TxtCodigo.Text = servicios.Codigo == null ? "" : servicios.Codigo;
-
-                    TxtPrecioVenta.Text = servicios.MontoVd.ToString();
-                    TxtPrecioContrato.Text = servicios.MontoContrato.ToString();
-                    TxtPrecioMejora.Text = servicios.MontoMejora.ToString();
-
-                    if (servicios.ClasificacionInventario != null)
+                    foreach (DataRow item in dtResponseRelacional.Rows)
                     {
-                        CmbTipoInventario.SelectedValue = servicios.ClasificacionInventario.ToString();
-                    }
+                        DataTable dtProveedor = dataUtilities.getRecordByPrimaryKey("Proveedores", Convert.ToString(item["ProveedorId"]));
 
-                    CmbTipoInventario.SelectedValue = servicios.Expira;
-                    CmbManejoInventario.SelectedValue = servicios.ManejoInventario;
-
-                    CmbTipoInventario.Enabled = false;
-                    LblTipoInventario.Enabled = false;
-
-
-                    Imagenes imagen = db.Imagenes.Where(c => c.IdImagen == servicios.IdImagen).FirstOrDefault();
-                    if (imagen != null)
-                    {
-                        if (imagen.Imagen != null)
-                        {
-                            MostrarImagenEnPictureBox(imagen.Imagen, ImgProducto);
-                        }
-                    }
-
-                    //Sucursales
-
-                    List<RelProductoSucursales> listRel = db.RelProductoSucursales.Where(p => p.ProductoId == servicios.IdEstandar).ToList();
-
-                    if (listRel.Count > 0)
-                    {
-                        foreach (var item in listRel)
-                        {
-                            Sucursales sucursales = db.Sucursales.Where(p => p.SucursalId == item.SucursalId).FirstOrDefault();
-
-                            auxTablaDinamica.Rows.Add(sucursales.SucursalId.ToString(), sucursales.NombreSucursal);
-                        }
-                    }
-
-                    //Proveedores
-
-                    List<RelProveedorProducto> listRelProveedor = db.RelProveedorProducto.Where(s => s.ProductoId == servicios.IdEstandar).ToList();
-
-                    if(listRelProveedor.Count > 0)
-                    {
-                        foreach(var item in listRelProveedor)
-                        {
-                            Proveedores proveedor = db.Proveedores.Where(s => s.IdProveedor == item.ProveedorId).FirstOrDefault();
-
-                            auxTablaDinamicaProveedor.Rows.Add(proveedor.IdProveedor, proveedor.NombreEmpresa);
-                        }
+                        auxTablaDinamicaProveedor.Rows.Add(Convert.ToString(dtProveedor.Rows[0]["IdProveedor"]),
+                            Convert.ToString(dtProveedor.Rows[0]["NombreEmpresa"]));
                     }
                 }
             }
-
 
             if (auxModulo == "Productos")
             {
@@ -200,11 +114,7 @@ namespace NeoCobranza.Paneles
             else if (auxModulo == "Servicios")
             {
                 LblNombreDinamico.Text = "Nombre del Servicio";
-                CmbTipoInventario.Visible = false;
-                LblTipoInventario.Visible = false;
                 PnlProveedores.Visible = false;
-                CmbManejoInventario.Visible = false;
-                LblManejoInventario.Visible = false;
                 LblCodigo.Visible = false;
                 TxtCodigo.Visible = false;
             }
@@ -244,21 +154,21 @@ namespace NeoCobranza.Paneles
             }
         }
 
-        private void MostrarImagenEnPictureBox(byte[] imagenBytes, PictureBox pictureBox)
-        {
-            try
-            {
-                using (MemoryStream ms = new MemoryStream(imagenBytes))
-                {
-                    Image imagen = Image.FromStream(ms);
-                    pictureBox.Image = imagen;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al cargar la imagen: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        //private void MostrarImagenEnPictureBox(byte[] imagenBytes, PictureBox pictureBox)
+        //{
+        //    try
+        //    {
+        //        using (MemoryStream ms = new MemoryStream(imagenBytes))
+        //        {
+        //            Image imagen = Image.FromStream(ms);
+        //            pictureBox.Image = imagen;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Error al cargar la imagen: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
 
         public void FuncionesPrincipales()
         {
@@ -277,80 +187,21 @@ namespace NeoCobranza.Paneles
                 return;
             }
 
-            if (auxTablaDinamica.Rows.Count == 0)
+            if (!decimal.TryParse(TxtPrecioVenta.Text.Trim(), out decimal _disponible))
             {
-                MessageBox.Show("Debe agregar al menos una Sucursal.", "Atención",
-                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                MessageBox.Show("El monto de venta no es valido.", "Atención",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TxtPrecioVenta.Focus();
                 return;
             }
 
-            //Disponible en venta
-            if (ChkDisponibleVentas.Checked)
+            if (_disponible == 0)
             {
-                decimal _disponible;
-
-                if (TxtPrecioVenta.Text.Trim().Length == 0 || TxtPrecioVenta.Text.Trim() == "0" || TxtPrecioVenta.Text.Trim() == "00"
-                    || TxtPrecioVenta.Text.Trim() == "000")
-                {
-                    MessageBox.Show("El monto de venta está vacío.", "Atención",
-                                   MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    TxtPrecioVenta.Focus();
-                    return;
-                }
-
-                if (!decimal.TryParse(TxtPrecioVenta.Text.Trim(), out _disponible))
-                {
-                    MessageBox.Show("El monto de venta no es valido.", "Atención",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    TxtPrecioVenta.Focus();
-                    return;
-                }
-            }
-
-            //Disponible en contrato
-            if (ChkDisponibleContrato.Checked)
-            {
-                decimal _disponible;
-
-                if (TxtPrecioContrato.Text.Trim().Length == 0 || TxtPrecioContrato.Text.Trim() == "0" || TxtPrecioContrato.Text.Trim() == "00"
-                    || TxtPrecioContrato.Text.Trim() == "000")
-                {
-                    MessageBox.Show("El monto de contrato está vacío.", "Atención",
-                                   MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    TxtPrecioVenta.Focus();
-                    return;
-                }
-
-                if (!decimal.TryParse(TxtPrecioContrato.Text.Trim(), out _disponible))
-                {
-                    MessageBox.Show("El monto de contrato no es valido.", "Atención",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    TxtPrecioVenta.Focus();
-                    return;
-                }
-            }
-
-            //Disponible en mejora
-            if (ChkDisponibleMejoras.Checked)
-            {
-                decimal _disponible;
-
-                if (TxtPrecioMejora.Text.Trim().Length == 0 || TxtPrecioMejora.Text.Trim() == "0" || TxtPrecioMejora.Text.Trim() == "00"
-                    || TxtPrecioMejora.Text.Trim() == "000")
-                {
-                    MessageBox.Show("El monto de mejora está vacío.", "Atención",
-                                   MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    TxtPrecioVenta.Focus();
-                    return;
-                }
-
-                if (!decimal.TryParse(TxtPrecioMejora.Text.Trim(), out _disponible))
-                {
-                    MessageBox.Show("El monto de mejora no es valido.", "Atención",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    TxtPrecioVenta.Focus();
-                    return;
-                }
+                MessageBox.Show("El monto de venta está vacío.", "Atención",
+                                               MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TxtPrecioVenta.Focus();
+                return;
             }
 
             //Verificar los tipo servicios
@@ -362,16 +213,82 @@ namespace NeoCobranza.Paneles
                 return;
             }
 
-            using (NeoCobranzaContext db = new NeoCobranzaContext())
-            {
-                if (auxOpc == "Crear")
-                {
 
+            if (auxOpc == "Crear")
+            {
+
+                if (TxtCodigo.Text.Trim().Length > 0)
+                {
+                    DataTable dtResponseCodigo = dataUtilities.GetAllRecords("ProductosServicios");
+                    var filterRow = from row in dtResponseCodigo.AsEnumerable() where Convert.ToString(row.Field<string>("Codigo")) == TxtCodigo.Text.Trim() select row;
+
+                    if (filterRow.Any())
+                    {
+                        MessageBox.Show("Ya existe un producto con ese codigo. Los codigos deben de ser individuales por producto.", "Atención",
+                                   MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+                try
+                {
+                    string idProductoCrear = Guid.NewGuid().ToString();
+
+                    dataUtilities.SetColumns("ProductoId", idProductoCrear);
+                    dataUtilities.SetColumns("NombreProducto", TxtNombre.Text.Trim());
+                    dataUtilities.SetColumns("ImagenId",0);
+                    dataUtilities.SetColumns("Descripcion", TxtDescripcion.Text.Trim());
+                    dataUtilities.SetColumns("Estado", "Activo");
+                    dataUtilities.SetColumns("Precio", TxtPrecioVenta.Text.Trim());
+                    dataUtilities.SetColumns("ClasificacionProducto", auxModulo);
+                    dataUtilities.SetColumns("CategoriaId", Convert.ToInt32(CmbTipoProducto.SelectedValue.ToString()));
+                    dataUtilities.SetColumns("Codigo", TxtCodigo.Text.Trim());
+
+                    dataUtilities.InsertRecord("ProductosServicios");
+
+                    if (auxModulo == "Productos")
+                    {
+                        foreach (DataRow row in auxTablaDinamicaProveedor.Rows)
+                        {
+                            dataUtilities.SetColumns("ProveedorId", int.Parse(row[0].ToString()));
+                            dataUtilities.SetColumns("ProductoId", idProductoCrear);
+
+                            dataUtilities.InsertRecord("RelProveedoresProducto");
+                        }
+
+                        DataTable dtResponseAlmacenes = dataUtilities.GetAllRecords("Almacenes");
+
+                        foreach (DataRow item in dtResponseAlmacenes.Rows)
+                        {
+                            dataUtilities.SetColumns("AlmacenId", Convert.ToString(item["AlmacenId"]));
+                            dataUtilities.SetColumns("ProductoId", idProductoCrear);
+                            dataUtilities.SetColumns("Cantidad", 0);
+
+                            dataUtilities.InsertRecord("RelAlmacenProducto");
+                        }
+                    }
+
+                    frmAuxPrincipal.vMCatalogosInventario.InitModuloCatalogosInventario(frmAuxPrincipal, auxModulo);
+                    this.Dispose();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"No se pudo crear el producto. Error: {ex.Message}", "Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                try
+                {
                     if (TxtCodigo.Text.Trim().Length > 0)
                     {
-                        var VerificarCodigoCrear = db.ServiciosEstadares.Where(s => s.Codigo.Trim() == TxtCodigo.Text.Trim()).FirstOrDefault();
+                        DataTable dtResponseCodigo = dataUtilities.GetAllRecords("ProductosServicios");
+                        var filterRow = from row in dtResponseCodigo.AsEnumerable()
+                                        where Convert.ToString(row.Field<string>("Codigo")) == TxtCodigo.Text.Trim() 
+                                        && Convert.ToString(row.Field<string>("ProductoId")) != auxId
+                                        select row;
 
-                        if(VerificarCodigoCrear != null)
+                        if (filterRow.Any())
                         {
                             MessageBox.Show("Ya existe un producto con ese codigo. Los codigos deben de ser individuales por producto.", "Atención",
                                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -379,224 +296,43 @@ namespace NeoCobranza.Paneles
                         }
                     }
 
-                    try
+                    //Datos del servicio
+                    dataUtilities.SetColumns("NombreProducto", TxtNombre.Text.Trim());
+                    dataUtilities.SetColumns("ImagenId", 0);
+                    dataUtilities.SetColumns("Descripcion", TxtDescripcion.Text.Trim());
+                    dataUtilities.SetColumns("Estado", "Activo");
+                    dataUtilities.SetColumns("Precio", TxtPrecioVenta.Text.Trim());
+                    dataUtilities.SetColumns("ClasificacionProducto", auxModulo);
+                    dataUtilities.SetColumns("CategoriaId", Convert.ToInt32(CmbTipoProducto.SelectedValue.ToString()));
+                    dataUtilities.SetColumns("Codigo", TxtCodigo.Text.Trim());
+
+                    dataUtilities.UpdateRecordByPrimaryKey("ProductosServicios",auxId);
+
+
+                    if (auxModulo == "Productos")
                     {
-                        //Primero agregar la imagen
+                        dataUtilities.DeleteRecordByColumn("RelProveedoresProducto", "ProductoId", auxId);
 
-                        int _idImg = Utilidades.IdImagenInicial;
-
-                        if (this.ImgProducto.Image != null)
+                        foreach (DataRow row in auxTablaDinamicaProveedor.Rows)
                         {
-                            Imagenes img = new Imagenes()
-                            {
-                                Imagen = ImageToByteArray(ImgProducto.Image)
-                            };
+                            dataUtilities.SetColumns("ProveedorId", int.Parse(row[0].ToString()));
+                            dataUtilities.SetColumns("ProductoId", auxId);
 
-                            db.Add(img);
-                            db.SaveChanges();
-
-                            _idImg = img.IdImagen;
+                            dataUtilities.InsertRecord("RelProveedoresProducto");
                         }
-
-                        //Datos del servicio
-                        ServiciosEstadares servicio = new ServiciosEstadares()
-                        {
-                            NombreEstandar = TxtNombre.Text.Trim(),
-                            IdImagen = _idImg,
-                            Descripcion = TxtDescripcion.Text.Trim(),
-                            Estado = "Activo",
-                            MontoVd = Double.Parse(TxtPrecioVenta.Text.Trim()),
-                            MontoContrato = Double.Parse(TxtPrecioContrato.Text.Trim()),
-                            MontoMejora = Double.Parse(TxtPrecioMejora.Text.Trim()),
-                            ClasificacionTipo = int.Parse(CmbTipoProducto.SelectedValue.ToString()),
-                            ClasificacionProducto = auxModulo == "Productos" ? 0 : 1,
-                            ClasificacionInventario = CmbTipoInventario.Text.Trim(),
-                            Expira = CmbTipoInventario.Text,
-                            ManejoInventario = CmbManejoInventario.Text,
-                            Codigo = TxtCodigo.Text.Trim(),
-                        };
-
-                        db.Add(servicio);
-                        db.SaveChanges();
-
-                        foreach (DataRow row in auxTablaDinamica.Rows)
-                        {
-
-                            RelProductoSucursales rel = new RelProductoSucursales()
-                            {
-                                RelProductoSucursalesId = Guid.NewGuid().ToString(),
-                                ProductoId = servicio.IdEstandar,
-                                SucursalId = int.Parse(row[0].ToString())
-                            };
-
-                            db.Add(rel);
-                        }
-
-
-                        if (auxModulo == "Productos")
-                        {
-                            foreach (DataRow row in auxTablaDinamicaProveedor.Rows)
-                            {
-                                RelProveedorProducto rel = new RelProveedorProducto()
-                                {
-                                    ProductoId = servicio.IdEstandar,
-                                    ProveedorId = int.Parse(row[0].ToString())
-                                };
-
-                                db.Add(rel);
-                            }
-
-                            Inventario inventario = new Inventario()
-                            {
-                                ProductoId = servicio.IdEstandar,
-                                Cantidad = 0,
-                                StockMaximo = 100,
-                                StockMinimo = 0
-                            };
-
-                            db.Add(inventario);
-
-                            List<Almacenes> listAlmacenes = db.Almacenes.ToList();
-
-                            foreach (var item in listAlmacenes)
-                            {
-                                RelAlmacenProducto almacenProducto = new RelAlmacenProducto()
-                                {
-                                    ProductoId = servicio.IdEstandar,
-                                    Cantidad = 0,
-                                    AlmacenId = item.AlmacenId
-                                };
-
-                                db.Add(almacenProducto);
-                            }
-                        }
-
-                        db.SaveChanges();
-
-                        frmAuxPrincipal.vMCatalogosInventario.InitModuloCatalogosInventario(frmAuxPrincipal, auxModulo);
-                        this.Dispose();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"No se pudo crear el producto. Error: {ex.Message}", "Error",
-                           MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
+                    frmAuxPrincipal.vMCatalogosInventario.InitModuloCatalogosInventario(frmAuxPrincipal, auxModulo);
+                    this.Dispose();
                 }
-                else
+                catch (Exception ex)
                 {
-                    try
-                    {
-                        if (TxtCodigo.Text.Trim().Length > 0)
-                        {
-                            var VerificarCodigoCrear = db.ServiciosEstadares.Where(s => s.Codigo.Trim() == TxtCodigo.Text.Trim()).ToList();
-
-                            if (VerificarCodigoCrear.Count > 0)
-                            {
-
-                                if (VerificarCodigoCrear[0].IdEstandar != int.Parse(auxId) || VerificarCodigoCrear.Count>1)
-                                {
-                                    MessageBox.Show("Ya existe un producto con ese codigo. Los codigos deben de ser individuales por producto.", "Atención",
-                                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                    return;
-                                }                           
-                            }
-                        }
-
-                        //Primero agregar la imagen
-
-                        int _idImg = Utilidades.IdImagenInicial;
-
-                        if (this.ImgProducto.Image != null)
-                        {
-                            Imagenes img = new Imagenes()
-                            {
-                                Imagen = ImageToByteArray(ImgProducto.Image)
-                            };
-
-                            db.Add(img);
-                            db.SaveChanges();
-
-                            _idImg = img.IdImagen;
-                        }
-
-                        //Datos del servicio
-                        ServiciosEstadares servicio = db.ServiciosEstadares.Where(c => c.IdEstandar == int.Parse(auxId)).FirstOrDefault();
-
-                        servicio.NombreEstandar = TxtNombre.Text.Trim();
-                        servicio.IdImagen = _idImg;
-                        servicio.Descripcion = TxtDescripcion.Text.Trim();
-                        servicio.MontoVd = Double.Parse(TxtPrecioVenta.Text.Trim());
-                        servicio.MontoContrato = Double.Parse(TxtPrecioContrato.Text.Trim());
-                        servicio.MontoMejora = Double.Parse(TxtPrecioMejora.Text.Trim());
-                        servicio.ClasificacionTipo = int.Parse(CmbTipoProducto.SelectedValue.ToString());
-                        servicio.Expira = CmbTipoInventario.Text.Trim();
-                        servicio.ManejoInventario = CmbManejoInventario.Text.Trim();
-                        servicio.Codigo = TxtCodigo.Text.Trim();
-
-                        db.Update(servicio);
-                        db.SaveChanges();
-
-                        List<RelProductoSucursales> list = db.RelProductoSucursales.Where(p => p.ProductoId == servicio.IdEstandar).ToList();
-
-                        foreach (var item in list)
-                        {
-                            db.Remove(item);
-                        }
-
-                        db.SaveChanges();
-
-                        foreach (DataRow row in auxTablaDinamica.Rows)
-                        {
-
-                            RelProductoSucursales rel = new RelProductoSucursales()
-                            {
-                                RelProductoSucursalesId = Guid.NewGuid().ToString(),
-                                ProductoId = servicio.IdEstandar,
-                                SucursalId = int.Parse(row[0].ToString())
-                            };
-
-                            db.Add(rel);
-                        }
-
-                        db.SaveChanges();
-
-                        if (auxModulo == "Productos")
-                        {
-                            var listaProveedorProducto = db.RelProveedorProducto.Where(p => p.ProductoId == servicio.IdEstandar).ToList();
-
-                            foreach(var item in  listaProveedorProducto)
-                            {
-                                db.Remove(item);
-                            }
-
-                            db.SaveChanges();
-
-                            foreach (DataRow row in auxTablaDinamicaProveedor.Rows)
-                            {
-                                RelProveedorProducto rel = new RelProveedorProducto()
-                                {
-                                    ProductoId = servicio.IdEstandar,
-                                    ProveedorId = int.Parse(row[0].ToString())
-                                };
-
-                                db.Add(rel);
-                            }
-
-                            db.SaveChanges();
-                        }
-
-                            frmAuxPrincipal.vMCatalogosInventario.InitModuloCatalogosInventario(frmAuxPrincipal, auxModulo);
-                        this.Dispose();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"No se pudo modificar el producto. Error: {ex.Message}", "Error",
-                           MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-
+                    MessageBox.Show($"No se pudo modificar el producto. Error: {ex.Message}", "Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+
             }
+
         }
 
         private byte[] ImageToByteArray(Image image)
@@ -637,76 +373,76 @@ namespace NeoCobranza.Paneles
 
 
 
-        private void ChkDisponibleContrato_Click(object sender, EventArgs e)
-        {
-            if (ChkDisponibleContrato.Checked)
-            {
-                LblPrecioContrato.Enabled = true;
-                TxtPrecioContrato.Enabled = true;
-                TxtPrecioContrato.Text = "";
-                TxtPrecioContrato.Focus();
-            }
-            else
-            {
-                LblPrecioContrato.Enabled = false;
-                TxtPrecioContrato.Enabled = false;
-                TxtPrecioContrato.Text = "0";
-            }
-        }
+        //private void ChkDisponibleContrato_Click(object sender, EventArgs e)
+        //{
+        //    if (ChkDisponibleContrato.Checked)
+        //    {
+        //        LblPrecioContrato.Enabled = true;
+        //        TxtPrecioContrato.Enabled = true;
+        //        TxtPrecioContrato.Text = "";
+        //        TxtPrecioContrato.Focus();
+        //    }
+        //    else
+        //    {
+        //        LblPrecioContrato.Enabled = false;
+        //        TxtPrecioContrato.Enabled = false;
+        //        TxtPrecioContrato.Text = "0";
+        //    }
+        //}
 
-        private void ChkDisponibleMejoras_Click(object sender, EventArgs e)
-        {
-            if (ChkDisponibleMejoras.Checked)
-            {
-                LblPrecioMejora.Enabled = true;
-                TxtPrecioMejora.Enabled = true;
-                TxtPrecioMejora.Text = "";
-                TxtPrecioMejora.Focus();
-            }
-            else
-            {
-                LblPrecioMejora.Enabled = false;
-                TxtPrecioMejora.Enabled = false;
-                TxtPrecioMejora.Text = "0";
-            }
-        }
+        //private void ChkDisponibleMejoras_Click(object sender, EventArgs e)
+        //{
+        //    if (ChkDisponibleMejoras.Checked)
+        //    {
+        //        LblPrecioMejora.Enabled = true;
+        //        TxtPrecioMejora.Enabled = true;
+        //        TxtPrecioMejora.Text = "";
+        //        TxtPrecioMejora.Focus();
+        //    }
+        //    else
+        //    {
+        //        LblPrecioMejora.Enabled = false;
+        //        TxtPrecioMejora.Enabled = false;
+        //        TxtPrecioMejora.Text = "0";
+        //    }
+        //}
 
-        private void BtnAgregarSucursal_Click(object sender, EventArgs e)
-        {
-            if (CmbSucursal.Items.Count > 0)
-            {
+        //private void BtnAgregarSucursal_Click(object sender, EventArgs e)
+        //{
+        //    if (CmbSucursal.Items.Count > 0)
+        //    {
 
-                foreach (DataRow row in auxTablaDinamica.Rows)
-                {
-                    if (row[0].ToString() == CmbSucursal.SelectedValue.ToString())
-                    {
-                        MessageBox.Show("La Sucursal seleccionada ya ha sido agregada.", "Atención",
-                                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-                }
+        //        foreach (DataRow row in auxTablaDinamica.Rows)
+        //        {
+        //            if (row[0].ToString() == CmbSucursal.SelectedValue.ToString())
+        //            {
+        //                MessageBox.Show("La Sucursal seleccionada ya ha sido agregada.", "Atención",
+        //                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //                return;
+        //            }
+        //        }
 
-                auxTablaDinamica.Rows.Add(CmbSucursal.SelectedValue.ToString(), CmbSucursal.Text);
-            }
-            else
-            {
-                MessageBox.Show("Debe agregar una Sucursal en la sección de Catalogo para realizar esta acción.", "Atención",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
+        //        auxTablaDinamica.Rows.Add(CmbSucursal.SelectedValue.ToString(), CmbSucursal.Text);
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Debe agregar una Sucursal en la sección de Catalogo para realizar esta acción.", "Atención",
+        //            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //    }
+        //}
 
-        private void BtnQuitarSucursal_Click(object sender, EventArgs e)
-        {
-            if (dgvSucursalesProductos.SelectedRows.Count > 0)
-            {
-                auxTablaDinamica.Rows.RemoveAt(dgvSucursalesProductos.SelectedRows[0].Index);
-            }
-            else
-            {
-                MessageBox.Show("Debe seleccionar una Sucursal en la lista para quitarla.", "Atención",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
+        //private void BtnQuitarSucursal_Click(object sender, EventArgs e)
+        //{
+        //    if (dgvSucursalesProductos.SelectedRows.Count > 0)
+        //    {
+        //        auxTablaDinamica.Rows.RemoveAt(dgvSucursalesProductos.SelectedRows[0].Index);
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Debe seleccionar una Sucursal en la lista para quitarla.", "Atención",
+        //            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //    }
+        //}
 
         private void BtnSeleccionarImagen_Click(object sender, EventArgs e)
         {
@@ -736,22 +472,22 @@ namespace NeoCobranza.Paneles
 
         }
 
-        private void ChkDisponibleVentas_Click_1(object sender, EventArgs e)
-        {
-            if (ChkDisponibleVentas.Checked)
-            {
-                LblPrecioVenta.Enabled = true;
-                TxtPrecioVenta.Enabled = true;
-                TxtPrecioVenta.Text = "";
-                TxtPrecioVenta.Focus();
-            }
-            else
-            {
-                LblPrecioVenta.Enabled = false;
-                TxtPrecioVenta.Enabled = false;
-                TxtPrecioVenta.Text = "0";
-            }
-        }
+        //private void ChkDisponibleVentas_Click_1(object sender, EventArgs e)
+        //{
+        //    if (ChkDisponibleVentas.Checked)
+        //    {
+        //        LblPrecioVenta.Enabled = true;
+        //        TxtPrecioVenta.Enabled = true;
+        //        TxtPrecioVenta.Text = "";
+        //        TxtPrecioVenta.Focus();
+        //    }
+        //    else
+        //    {
+        //        LblPrecioVenta.Enabled = false;
+        //        TxtPrecioVenta.Enabled = false;
+        //        TxtPrecioVenta.Text = "0";
+        //    }
+        //}
 
         private void TxtPrecioVenta_KeyPress_1(object sender, KeyPressEventArgs e)
         {
@@ -804,3 +540,31 @@ namespace NeoCobranza.Paneles
         }
     }
 }
+
+
+
+//Imagenes imagen = db.Imagenes.Where(c => c.IdImagen == servicios.IdImagen).FirstOrDefault();
+//if (imagen != null)
+//{
+//    if (imagen.Imagen != null)
+//    {
+//        MostrarImagenEnPictureBox(imagen.Imagen, ImgProducto);
+//    }
+//}
+
+////Primero agregar la imagen
+
+//int _idImg = Utilidades.IdImagenInicial;
+
+//if (this.ImgProducto.Image != null)
+//{
+//    Imagenes img = new Imagenes()
+//    {
+//        Imagen = ImageToByteArray(ImgProducto.Image)
+//    };
+
+//    db.Add(img);
+//    db.SaveChanges();
+
+//    _idImg = img.IdImagen;
+//}

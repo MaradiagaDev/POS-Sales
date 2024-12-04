@@ -33,7 +33,6 @@
             this.MenuVertical = new System.Windows.Forms.Panel();
             this.BtnCatalogoGeneral = new NeoCobranza.Especiales.EspecialButton();
             this.especialButton6 = new NeoCobranza.Especiales.EspecialButton();
-            this.BtnPromociones = new NeoCobranza.Especiales.EspecialButton();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -47,12 +46,12 @@
             this.BtnOpciones = new NeoCobranza.Especiales.EspecialButton();
             this.BtnVentasDirectas = new NeoCobranza.Especiales.EspecialButton();
             this.especialButton3 = new NeoCobranza.Especiales.EspecialButton();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.PnlTitulo = new System.Windows.Forms.Panel();
             this.LblHora = new System.Windows.Forms.Label();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.LblTitulo = new System.Windows.Forms.Label();
             this.LblUsuario = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.BtnConsultar = new NeoCobranza.Especiales.EspecialButton();
@@ -67,6 +66,8 @@
             this.BtnMotivoCancelacion = new System.Windows.Forms.ToolStripMenuItem();
             this.BtnBancos = new System.Windows.Forms.ToolStripMenuItem();
             this.BtnBancosTarjeta = new System.Windows.Forms.ToolStripMenuItem();
+            this.productosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.serviciosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuVentasDirectas = new NeoCobranza.Especiales.RJDropDownMenu(this.components);
             this.ventasDirectasDeAtaudesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BtnOrdenMesa = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,8 +86,6 @@
             this.crearUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.permisosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuInventario = new NeoCobranza.Especiales.RJDropDownMenu(this.components);
-            this.BtnCatalogoProductos = new System.Windows.Forms.ToolStripMenuItem();
-            this.catalogoDeServiciosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kardexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trasladosDeProductoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BtnCompras = new System.Windows.Forms.ToolStripMenuItem();
@@ -95,11 +94,9 @@
             this.BtnInventarioGeneral = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuCaja = new NeoCobranza.Especiales.RJDropDownMenu(this.components);
             this.configTurnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.productosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.serviciosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuVertical.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.panel2.SuspendLayout();
+            this.PnlTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -121,7 +118,6 @@
             this.MenuVertical.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.MenuVertical.Controls.Add(this.BtnCatalogoGeneral);
             this.MenuVertical.Controls.Add(this.especialButton6);
-            this.MenuVertical.Controls.Add(this.BtnPromociones);
             this.MenuVertical.Controls.Add(this.label4);
             this.MenuVertical.Controls.Add(this.label3);
             this.MenuVertical.Controls.Add(this.pictureBox2);
@@ -178,7 +174,7 @@
             this.especialButton6.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.especialButton6.Image = ((System.Drawing.Image)(resources.GetObject("especialButton6.Image")));
             this.especialButton6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.especialButton6.Location = new System.Drawing.Point(4, 365);
+            this.especialButton6.Location = new System.Drawing.Point(4, 321);
             this.especialButton6.Name = "especialButton6";
             this.especialButton6.Size = new System.Drawing.Size(161, 42);
             this.especialButton6.TabIndex = 13;
@@ -186,30 +182,6 @@
             this.especialButton6.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.especialButton6.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.especialButton6.UseVisualStyleBackColor = false;
-            // 
-            // BtnPromociones
-            // 
-            this.BtnPromociones.BackColor = System.Drawing.Color.Transparent;
-            this.BtnPromociones.BackGroundColor = System.Drawing.Color.Transparent;
-            this.BtnPromociones.BorderColor = System.Drawing.Color.Transparent;
-            this.BtnPromociones.BorderRadius = 0;
-            this.BtnPromociones.BorderSize = 1;
-            this.BtnPromociones.FlatAppearance.BorderSize = 0;
-            this.BtnPromociones.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.BtnPromociones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnPromociones.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnPromociones.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BtnPromociones.Image = ((System.Drawing.Image)(resources.GetObject("BtnPromociones.Image")));
-            this.BtnPromociones.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnPromociones.Location = new System.Drawing.Point(4, 317);
-            this.BtnPromociones.Name = "BtnPromociones";
-            this.BtnPromociones.Size = new System.Drawing.Size(161, 42);
-            this.BtnPromociones.TabIndex = 12;
-            this.BtnPromociones.Text = "Promociones";
-            this.BtnPromociones.TextAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.BtnPromociones.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BtnPromociones.UseVisualStyleBackColor = false;
-            this.BtnPromociones.Click += new System.EventHandler(this.BtnPromociones_Click);
             // 
             // label4
             // 
@@ -477,29 +449,29 @@
             this.especialButton3.UseVisualStyleBackColor = false;
             this.especialButton3.Click += new System.EventHandler(this.especialButton3_Click);
             // 
-            // panel2
+            // PnlTitulo
             // 
-            this.panel2.BackColor = System.Drawing.Color.Black;
-            this.panel2.Controls.Add(this.LblHora);
-            this.panel2.Controls.Add(this.pictureBox6);
-            this.panel2.Controls.Add(this.pictureBox5);
-            this.panel2.Controls.Add(this.pictureBox4);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(170, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1170, 40);
-            this.panel2.TabIndex = 2;
-            this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
+            this.PnlTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.PnlTitulo.Controls.Add(this.LblHora);
+            this.PnlTitulo.Controls.Add(this.pictureBox6);
+            this.PnlTitulo.Controls.Add(this.pictureBox5);
+            this.PnlTitulo.Controls.Add(this.pictureBox4);
+            this.PnlTitulo.Controls.Add(this.LblTitulo);
+            this.PnlTitulo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PnlTitulo.Location = new System.Drawing.Point(170, 0);
+            this.PnlTitulo.Name = "PnlTitulo";
+            this.PnlTitulo.Size = new System.Drawing.Size(1170, 40);
+            this.PnlTitulo.TabIndex = 2;
+            this.PnlTitulo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
             // 
             // LblHora
             // 
             this.LblHora.AutoSize = true;
-            this.LblHora.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblHora.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LblHora.ForeColor = System.Drawing.Color.White;
-            this.LblHora.Location = new System.Drawing.Point(7, 15);
+            this.LblHora.Location = new System.Drawing.Point(18, 18);
             this.LblHora.Name = "LblHora";
-            this.LblHora.Size = new System.Drawing.Size(14, 21);
+            this.LblHora.Size = new System.Drawing.Size(13, 17);
             this.LblHora.TabIndex = 13;
             this.LblHora.Text = ".";
             // 
@@ -536,27 +508,27 @@
             this.pictureBox4.TabStop = false;
             this.pictureBox4.Click += new System.EventHandler(this.pictureBox4_Click);
             // 
-            // label2
+            // LblTitulo
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.label2.Location = new System.Drawing.Point(523, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(144, 22);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Sys Admin POS";
+            this.LblTitulo.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.LblTitulo.AutoSize = true;
+            this.LblTitulo.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblTitulo.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.LblTitulo.Location = new System.Drawing.Point(523, 9);
+            this.LblTitulo.Name = "LblTitulo";
+            this.LblTitulo.Size = new System.Drawing.Size(153, 22);
+            this.LblTitulo.TabIndex = 2;
+            this.LblTitulo.Text = "Sys Admin POS";
             // 
             // LblUsuario
             // 
             this.LblUsuario.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.LblUsuario.AutoSize = true;
-            this.LblUsuario.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblUsuario.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
             this.LblUsuario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(55)))), ((int)(((byte)(148)))));
             this.LblUsuario.Location = new System.Drawing.Point(972, 8);
             this.LblUsuario.Name = "LblUsuario";
-            this.LblUsuario.Size = new System.Drawing.Size(15, 22);
+            this.LblUsuario.Size = new System.Drawing.Size(16, 22);
             this.LblUsuario.TabIndex = 1;
             this.LblUsuario.Text = ".";
             this.LblUsuario.Click += new System.EventHandler(this.LblUsuario_Click);
@@ -603,11 +575,11 @@
             // LblSucursal
             // 
             this.LblSucursal.AutoSize = true;
-            this.LblSucursal.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblSucursal.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F);
             this.LblSucursal.ForeColor = System.Drawing.Color.Black;
             this.LblSucursal.Location = new System.Drawing.Point(52, 7);
             this.LblSucursal.Name = "LblSucursal";
-            this.LblSucursal.Size = new System.Drawing.Size(15, 24);
+            this.LblSucursal.Size = new System.Drawing.Size(16, 22);
             this.LblSucursal.TabIndex = 12;
             this.LblSucursal.Text = ".";
             // 
@@ -659,7 +631,7 @@
             this.DesplegableContrato.MenuItemTextColor = System.Drawing.Color.White;
             this.DesplegableContrato.Name = "DesplegableContrato";
             this.DesplegableContrato.PrimaryColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.DesplegableContrato.Size = new System.Drawing.Size(222, 218);
+            this.DesplegableContrato.Size = new System.Drawing.Size(222, 196);
             this.DesplegableContrato.Opening += new System.ComponentModel.CancelEventHandler(this.DesplegableContrato_Opening);
             // 
             // BtnProveedor
@@ -709,6 +681,22 @@
             this.BtnBancosTarjeta.Size = new System.Drawing.Size(221, 24);
             this.BtnBancosTarjeta.Text = "Tarjetas - Banco";
             this.BtnBancosTarjeta.Click += new System.EventHandler(this.BtnBancosTarjeta_Click);
+            // 
+            // productosToolStripMenuItem
+            // 
+            this.productosToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.productosToolStripMenuItem.Name = "productosToolStripMenuItem";
+            this.productosToolStripMenuItem.Size = new System.Drawing.Size(221, 24);
+            this.productosToolStripMenuItem.Text = "Productos";
+            this.productosToolStripMenuItem.Click += new System.EventHandler(this.productosToolStripMenuItem_Click);
+            // 
+            // serviciosToolStripMenuItem
+            // 
+            this.serviciosToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.serviciosToolStripMenuItem.Name = "serviciosToolStripMenuItem";
+            this.serviciosToolStripMenuItem.Size = new System.Drawing.Size(221, 24);
+            this.serviciosToolStripMenuItem.Text = "Servicios";
+            this.serviciosToolStripMenuItem.Click += new System.EventHandler(this.serviciosToolStripMenuItem_Click);
             // 
             // MenuVentasDirectas
             // 
@@ -896,11 +884,9 @@
             // 
             // MenuInventario
             // 
-            this.MenuInventario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(40)))), ((int)(((byte)(32)))));
+            this.MenuInventario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(53)))), ((int)(((byte)(102)))));
             this.MenuInventario.IsMainMenu = false;
             this.MenuInventario.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.BtnCatalogoProductos,
-            this.catalogoDeServiciosToolStripMenuItem,
             this.kardexToolStripMenuItem,
             this.trasladosDeProductoToolStripMenuItem,
             this.BtnCompras,
@@ -911,86 +897,66 @@
             this.MenuInventario.MenuItemTextColor = System.Drawing.Color.White;
             this.MenuInventario.Name = "MenuInventario";
             this.MenuInventario.PrimaryColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.MenuInventario.Size = new System.Drawing.Size(275, 212);
-            // 
-            // BtnCatalogoProductos
-            // 
-            this.BtnCatalogoProductos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(40)))), ((int)(((byte)(32)))));
-            this.BtnCatalogoProductos.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnCatalogoProductos.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BtnCatalogoProductos.Name = "BtnCatalogoProductos";
-            this.BtnCatalogoProductos.Size = new System.Drawing.Size(274, 26);
-            this.BtnCatalogoProductos.Text = "Catalogo de Productos";
-            this.BtnCatalogoProductos.Click += new System.EventHandler(this.BtnCatalogoProductos_Click);
-            // 
-            // catalogoDeServiciosToolStripMenuItem
-            // 
-            this.catalogoDeServiciosToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(40)))), ((int)(((byte)(32)))));
-            this.catalogoDeServiciosToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.catalogoDeServiciosToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.catalogoDeServiciosToolStripMenuItem.Name = "catalogoDeServiciosToolStripMenuItem";
-            this.catalogoDeServiciosToolStripMenuItem.Size = new System.Drawing.Size(274, 26);
-            this.catalogoDeServiciosToolStripMenuItem.Text = "Catalogo de Servicios";
-            this.catalogoDeServiciosToolStripMenuItem.Click += new System.EventHandler(this.catalogoDeServiciosToolStripMenuItem_Click);
+            this.MenuInventario.Size = new System.Drawing.Size(252, 170);
             // 
             // kardexToolStripMenuItem
             // 
-            this.kardexToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(40)))), ((int)(((byte)(32)))));
-            this.kardexToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kardexToolStripMenuItem.BackColor = System.Drawing.Color.Transparent;
+            this.kardexToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.kardexToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.kardexToolStripMenuItem.Name = "kardexToolStripMenuItem";
-            this.kardexToolStripMenuItem.Size = new System.Drawing.Size(274, 26);
+            this.kardexToolStripMenuItem.Size = new System.Drawing.Size(251, 24);
             this.kardexToolStripMenuItem.Text = "Kardex ";
             this.kardexToolStripMenuItem.Click += new System.EventHandler(this.kardexToolStripMenuItem_Click);
             // 
             // trasladosDeProductoToolStripMenuItem
             // 
-            this.trasladosDeProductoToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(40)))), ((int)(((byte)(32)))));
-            this.trasladosDeProductoToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.trasladosDeProductoToolStripMenuItem.BackColor = System.Drawing.Color.Transparent;
+            this.trasladosDeProductoToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.trasladosDeProductoToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.trasladosDeProductoToolStripMenuItem.Name = "trasladosDeProductoToolStripMenuItem";
-            this.trasladosDeProductoToolStripMenuItem.Size = new System.Drawing.Size(274, 26);
+            this.trasladosDeProductoToolStripMenuItem.Size = new System.Drawing.Size(251, 24);
             this.trasladosDeProductoToolStripMenuItem.Text = "Traslados de Producto";
             this.trasladosDeProductoToolStripMenuItem.Click += new System.EventHandler(this.trasladosDeProductoToolStripMenuItem_Click);
             // 
             // BtnCompras
             // 
-            this.BtnCompras.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(40)))), ((int)(((byte)(32)))));
-            this.BtnCompras.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnCompras.BackColor = System.Drawing.Color.Transparent;
+            this.BtnCompras.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.BtnCompras.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.BtnCompras.Name = "BtnCompras";
-            this.BtnCompras.Size = new System.Drawing.Size(274, 26);
+            this.BtnCompras.Size = new System.Drawing.Size(251, 24);
             this.BtnCompras.Text = "Compras ";
             this.BtnCompras.Click += new System.EventHandler(this.BtnCompras_Click);
             // 
             // BtnAlertas
             // 
-            this.BtnAlertas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(40)))), ((int)(((byte)(32)))));
-            this.BtnAlertas.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnAlertas.BackColor = System.Drawing.Color.Transparent;
+            this.BtnAlertas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.BtnAlertas.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.BtnAlertas.Name = "BtnAlertas";
-            this.BtnAlertas.Size = new System.Drawing.Size(274, 26);
+            this.BtnAlertas.Size = new System.Drawing.Size(251, 24);
             this.BtnAlertas.Text = "Alertas";
             this.BtnAlertas.Click += new System.EventHandler(this.BtnAlertas_Click);
             // 
             // inventarioEnSucursalesAlmacenesToolStripMenuItem
             // 
-            this.inventarioEnSucursalesAlmacenesToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(40)))), ((int)(((byte)(32)))));
-            this.inventarioEnSucursalesAlmacenesToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inventarioEnSucursalesAlmacenesToolStripMenuItem.BackColor = System.Drawing.Color.Transparent;
+            this.inventarioEnSucursalesAlmacenesToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.inventarioEnSucursalesAlmacenesToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.inventarioEnSucursalesAlmacenesToolStripMenuItem.Name = "inventarioEnSucursalesAlmacenesToolStripMenuItem";
-            this.inventarioEnSucursalesAlmacenesToolStripMenuItem.Size = new System.Drawing.Size(274, 26);
+            this.inventarioEnSucursalesAlmacenesToolStripMenuItem.Size = new System.Drawing.Size(251, 24);
             this.inventarioEnSucursalesAlmacenesToolStripMenuItem.Text = "Inventario en Almacenes";
             this.inventarioEnSucursalesAlmacenesToolStripMenuItem.Click += new System.EventHandler(this.inventarioEnSucursalesAlmacenesToolStripMenuItem_Click);
             // 
             // BtnInventarioGeneral
             // 
-            this.BtnInventarioGeneral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(40)))), ((int)(((byte)(32)))));
-            this.BtnInventarioGeneral.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnInventarioGeneral.BackColor = System.Drawing.Color.Transparent;
+            this.BtnInventarioGeneral.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.BtnInventarioGeneral.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.BtnInventarioGeneral.Name = "BtnInventarioGeneral";
-            this.BtnInventarioGeneral.Size = new System.Drawing.Size(274, 26);
-            this.BtnInventarioGeneral.Text = "Inventario General";
+            this.BtnInventarioGeneral.Size = new System.Drawing.Size(251, 24);
+            this.BtnInventarioGeneral.Text = "Inventario en Sucursales";
             this.BtnInventarioGeneral.Click += new System.EventHandler(this.BtnInventarioGeneral_Click);
             // 
             // MenuCaja
@@ -1014,22 +980,6 @@
             this.configTurnosToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.configTurnosToolStripMenuItem.Text = "Config.Turnos";
             // 
-            // productosToolStripMenuItem
-            // 
-            this.productosToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.productosToolStripMenuItem.Name = "productosToolStripMenuItem";
-            this.productosToolStripMenuItem.Size = new System.Drawing.Size(221, 24);
-            this.productosToolStripMenuItem.Text = "Productos";
-            this.productosToolStripMenuItem.Click += new System.EventHandler(this.productosToolStripMenuItem_Click);
-            // 
-            // serviciosToolStripMenuItem
-            // 
-            this.serviciosToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.serviciosToolStripMenuItem.Name = "serviciosToolStripMenuItem";
-            this.serviciosToolStripMenuItem.Size = new System.Drawing.Size(221, 24);
-            this.serviciosToolStripMenuItem.Text = "Servicios";
-            this.serviciosToolStripMenuItem.Click += new System.EventHandler(this.serviciosToolStripMenuItem_Click);
-            // 
             // PnlPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1038,7 +988,7 @@
             this.ClientSize = new System.Drawing.Size(1340, 700);
             this.Controls.Add(this.PnlCentral);
             this.Controls.Add(this.panel5);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.PnlTitulo);
             this.Controls.Add(this.MenuVertical);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1050,8 +1000,8 @@
             this.MenuVertical.ResumeLayout(false);
             this.MenuVertical.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.PnlTitulo.ResumeLayout(false);
+            this.PnlTitulo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
@@ -1074,8 +1024,8 @@
 
         private System.Windows.Forms.Panel MenuVertical;
         private Especiales.EspecialButton especialButton1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel PnlTitulo;
+        private System.Windows.Forms.Label LblTitulo;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label LblUsuario;
         private System.Windows.Forms.Panel panel5;
@@ -1112,15 +1062,12 @@
         public System.Windows.Forms.ToolStripMenuItem permisosToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem revisionDeSeguridadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem BtnAlmacenes;
-        private System.Windows.Forms.ToolStripMenuItem BtnCatalogoProductos;
-        private System.Windows.Forms.ToolStripMenuItem catalogoDeServiciosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem kardexToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem trasladosDeProductoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem BtnCompras;
         private System.Windows.Forms.ToolStripMenuItem BtnAlertas;
         private System.Windows.Forms.ToolStripMenuItem inventarioEnSucursalesAlmacenesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem BtnInventarioGeneral;
-        public Especiales.EspecialButton BtnPromociones;
         public Especiales.EspecialButton especialButton6;
         private System.Windows.Forms.ToolStripMenuItem configFacturaciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem BtnTasaCambio;
