@@ -35,32 +35,23 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.LblDynamico = new System.Windows.Forms.Label();
             this.dgvCatalogo = new System.Windows.Forms.DataGridView();
-            this.TxtRelacionPrecioVenta = new System.Windows.Forms.TextBox();
-            this.TxtRelacionCosto = new System.Windows.Forms.TextBox();
-            this.TxtCostoCompra = new System.Windows.Forms.TextBox();
             this.TxtPrecioVenta = new System.Windows.Forms.TextBox();
-            this.TxtCostoUnitario = new System.Windows.Forms.TextBox();
             this.TxtRazon = new System.Windows.Forms.TextBox();
             this.TxtIdentificador = new System.Windows.Forms.TextBox();
             this.TxtCantidadRemover = new System.Windows.Forms.TextBox();
-            this.TxtCompraId = new System.Windows.Forms.TextBox();
-            this.TxtLoteId = new System.Windows.Forms.TextBox();
+            this.TxtProducto = new System.Windows.Forms.TextBox();
             this.TxtIDMerma = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.BtnBuscarCliente = new NeoCobranza.Especiales.EspecialButton();
-            this.TxtFiltrar = new NeoCobranza.Controladores.LoginUserControl();
+            this.TxtFiltrar = new System.Windows.Forms.TextBox();
             this.BtnVolver = new NeoCobranza.Especiales.EspecialButton();
+            this.BtnBuscarCliente = new NeoCobranza.Especiales.EspecialButton();
+            this.BtnRevertir = new NeoCobranza.Especiales.EspecialButton();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCatalogo)).BeginInit();
             this.SuspendLayout();
@@ -132,60 +123,20 @@
             this.dgvCatalogo.TabIndex = 142;
             this.dgvCatalogo.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCatalogo_CellContentClick);
             // 
-            // TxtRelacionPrecioVenta
-            // 
-            this.TxtRelacionPrecioVenta.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtRelacionPrecioVenta.Location = new System.Drawing.Point(645, 673);
-            this.TxtRelacionPrecioVenta.MaxLength = 100;
-            this.TxtRelacionPrecioVenta.Name = "TxtRelacionPrecioVenta";
-            this.TxtRelacionPrecioVenta.ReadOnly = true;
-            this.TxtRelacionPrecioVenta.Size = new System.Drawing.Size(280, 27);
-            this.TxtRelacionPrecioVenta.TabIndex = 197;
-            // 
-            // TxtRelacionCosto
-            // 
-            this.TxtRelacionCosto.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtRelacionCosto.Location = new System.Drawing.Point(645, 614);
-            this.TxtRelacionCosto.MaxLength = 100;
-            this.TxtRelacionCosto.Name = "TxtRelacionCosto";
-            this.TxtRelacionCosto.ReadOnly = true;
-            this.TxtRelacionCosto.Size = new System.Drawing.Size(280, 27);
-            this.TxtRelacionCosto.TabIndex = 196;
-            // 
-            // TxtCostoCompra
-            // 
-            this.TxtCostoCompra.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtCostoCompra.Location = new System.Drawing.Point(645, 562);
-            this.TxtCostoCompra.MaxLength = 100;
-            this.TxtCostoCompra.Name = "TxtCostoCompra";
-            this.TxtCostoCompra.ReadOnly = true;
-            this.TxtCostoCompra.Size = new System.Drawing.Size(280, 27);
-            this.TxtCostoCompra.TabIndex = 195;
-            // 
             // TxtPrecioVenta
             // 
             this.TxtPrecioVenta.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtPrecioVenta.Location = new System.Drawing.Point(1005, 515);
+            this.TxtPrecioVenta.Location = new System.Drawing.Point(645, 457);
             this.TxtPrecioVenta.MaxLength = 100;
             this.TxtPrecioVenta.Name = "TxtPrecioVenta";
             this.TxtPrecioVenta.ReadOnly = true;
             this.TxtPrecioVenta.Size = new System.Drawing.Size(280, 27);
             this.TxtPrecioVenta.TabIndex = 194;
             // 
-            // TxtCostoUnitario
-            // 
-            this.TxtCostoUnitario.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtCostoUnitario.Location = new System.Drawing.Point(645, 515);
-            this.TxtCostoUnitario.MaxLength = 100;
-            this.TxtCostoUnitario.Name = "TxtCostoUnitario";
-            this.TxtCostoUnitario.ReadOnly = true;
-            this.TxtCostoUnitario.Size = new System.Drawing.Size(280, 27);
-            this.TxtCostoUnitario.TabIndex = 193;
-            // 
             // TxtRazon
             // 
             this.TxtRazon.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtRazon.Location = new System.Drawing.Point(644, 387);
+            this.TxtRazon.Location = new System.Drawing.Point(644, 328);
             this.TxtRazon.MaxLength = 100;
             this.TxtRazon.Multiline = true;
             this.TxtRazon.Name = "TxtRazon";
@@ -196,7 +147,7 @@
             // TxtIdentificador
             // 
             this.TxtIdentificador.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtIdentificador.Location = new System.Drawing.Point(645, 308);
+            this.TxtIdentificador.Location = new System.Drawing.Point(645, 249);
             this.TxtIdentificador.MaxLength = 100;
             this.TxtIdentificador.Multiline = true;
             this.TxtIdentificador.Name = "TxtIdentificador";
@@ -207,33 +158,22 @@
             // TxtCantidadRemover
             // 
             this.TxtCantidadRemover.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtCantidadRemover.Location = new System.Drawing.Point(645, 248);
+            this.TxtCantidadRemover.Location = new System.Drawing.Point(645, 189);
             this.TxtCantidadRemover.MaxLength = 100;
             this.TxtCantidadRemover.Name = "TxtCantidadRemover";
             this.TxtCantidadRemover.ReadOnly = true;
             this.TxtCantidadRemover.Size = new System.Drawing.Size(280, 27);
             this.TxtCantidadRemover.TabIndex = 190;
             // 
-            // TxtCompraId
+            // TxtProducto
             // 
-            this.TxtCompraId.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtCompraId.Location = new System.Drawing.Point(1027, 124);
-            this.TxtCompraId.MaxLength = 100;
-            this.TxtCompraId.Name = "TxtCompraId";
-            this.TxtCompraId.ReadOnly = true;
-            this.TxtCompraId.Size = new System.Drawing.Size(280, 27);
-            this.TxtCompraId.TabIndex = 189;
-            // 
-            // TxtLoteId
-            // 
-            this.TxtLoteId.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtLoteId.Location = new System.Drawing.Point(645, 193);
-            this.TxtLoteId.MaxLength = 100;
-            this.TxtLoteId.Name = "TxtLoteId";
-            this.TxtLoteId.ReadOnly = true;
-            this.TxtLoteId.Size = new System.Drawing.Size(280, 27);
-            this.TxtLoteId.TabIndex = 188;
-            this.TxtLoteId.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.TxtProducto.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtProducto.Location = new System.Drawing.Point(1027, 124);
+            this.TxtProducto.MaxLength = 100;
+            this.TxtProducto.Name = "TxtProducto";
+            this.TxtProducto.ReadOnly = true;
+            this.TxtProducto.Size = new System.Drawing.Size(280, 27);
+            this.TxtProducto.TabIndex = 189;
             // 
             // TxtIDMerma
             // 
@@ -251,59 +191,11 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label12.Location = new System.Drawing.Point(1001, 493);
+            this.label12.Location = new System.Drawing.Point(641, 435);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(233, 19);
             this.label12.TabIndex = 186;
             this.label12.Text = "Precio de Venta al Momento:";
-            // 
-            // label11
-            // 
-            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label11.Location = new System.Drawing.Point(641, 646);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(618, 19);
-            this.label11.TabIndex = 185;
-            this.label11.Text = "Costo de la merma( En relación al precio de venta al momento de la merma ):";
-            // 
-            // label10
-            // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label10.Location = new System.Drawing.Point(640, 493);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(117, 19);
-            this.label10.TabIndex = 184;
-            this.label10.Text = "Costo Unitario:";
-            // 
-            // label9
-            // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label9.Location = new System.Drawing.Point(641, 588);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(330, 19);
-            this.label9.TabIndex = 183;
-            this.label9.Text = "Costo de la merma( En relación al costo ):";
-            // 
-            // label8
-            // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label8.Location = new System.Drawing.Point(640, 540);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(124, 19);
-            this.label8.TabIndex = 182;
-            this.label8.Text = "Costo Compra:";
             // 
             // label7
             // 
@@ -313,9 +205,9 @@
             this.label7.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.label7.Location = new System.Drawing.Point(1023, 97);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(108, 19);
+            this.label7.Size = new System.Drawing.Size(82, 19);
             this.label7.TabIndex = 181;
-            this.label7.Text = "ID - Compra:";
+            this.label7.Text = "Producto:";
             // 
             // label6
             // 
@@ -323,7 +215,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label6.Location = new System.Drawing.Point(640, 365);
+            this.label6.Location = new System.Drawing.Point(640, 306);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(164, 19);
             this.label6.TabIndex = 180;
@@ -335,7 +227,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label5.Location = new System.Drawing.Point(641, 283);
+            this.label5.Location = new System.Drawing.Point(641, 224);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(111, 19);
             this.label5.TabIndex = 179;
@@ -347,23 +239,11 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label4.Location = new System.Drawing.Point(640, 221);
+            this.label4.Location = new System.Drawing.Point(640, 162);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(171, 19);
             this.label4.TabIndex = 178;
             this.label4.Text = "Cantidad Removida:";
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label3.Location = new System.Drawing.Point(640, 158);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(74, 19);
-            this.label3.TabIndex = 177;
-            this.label3.Text = "ID - Lote:";
             // 
             // label2
             // 
@@ -389,6 +269,37 @@
             this.label1.TabIndex = 175;
             this.label1.Text = "Datos de la Merma";
             // 
+            // TxtFiltrar
+            // 
+            this.TxtFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtFiltrar.Location = new System.Drawing.Point(24, 58);
+            this.TxtFiltrar.Name = "TxtFiltrar";
+            this.TxtFiltrar.Size = new System.Drawing.Size(420, 20);
+            this.TxtFiltrar.TabIndex = 199;
+            // 
+            // BtnVolver
+            // 
+            this.BtnVolver.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnVolver.BackColor = System.Drawing.Color.Gray;
+            this.BtnVolver.BackGroundColor = System.Drawing.Color.Gray;
+            this.BtnVolver.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.BtnVolver.BorderRadius = 5;
+            this.BtnVolver.BorderSize = 0;
+            this.BtnVolver.FlatAppearance.BorderSize = 0;
+            this.BtnVolver.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnVolver.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnVolver.ForeColor = System.Drawing.Color.White;
+            this.BtnVolver.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnVolver.Location = new System.Drawing.Point(1027, 673);
+            this.BtnVolver.Name = "BtnVolver";
+            this.BtnVolver.Size = new System.Drawing.Size(148, 38);
+            this.BtnVolver.TabIndex = 198;
+            this.BtnVolver.Text = "Volver";
+            this.BtnVolver.TextGroundColor = System.Drawing.Color.White;
+            this.BtnVolver.UseVisualStyleBackColor = false;
+            this.BtnVolver.Click += new System.EventHandler(this.BtnVolver_Click);
+            // 
             // BtnBuscarCliente
             // 
             this.BtnBuscarCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -411,50 +322,27 @@
             this.BtnBuscarCliente.UseVisualStyleBackColor = false;
             this.BtnBuscarCliente.Click += new System.EventHandler(this.BtnBuscarCliente_Click);
             // 
-            // TxtFiltrar
+            // BtnRevertir
             // 
-            this.TxtFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TxtFiltrar.BorderColor = System.Drawing.Color.Silver;
-            this.TxtFiltrar.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.TxtFiltrar.BorderRadius = 0;
-            this.TxtFiltrar.BorderSize = 2;
-            this.TxtFiltrar.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtFiltrar.ForeColor = System.Drawing.Color.DimGray;
-            this.TxtFiltrar.Location = new System.Drawing.Point(21, 53);
-            this.TxtFiltrar.Margin = new System.Windows.Forms.Padding(4);
-            this.TxtFiltrar.Multilinea = false;
-            this.TxtFiltrar.Name = "TxtFiltrar";
-            this.TxtFiltrar.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.TxtFiltrar.PasswordChar = false;
-            this.TxtFiltrar.PlaceHolderColor = System.Drawing.Color.DarkGray;
-            this.TxtFiltrar.PlaceHolderText = "Buscar...";
-            this.TxtFiltrar.Size = new System.Drawing.Size(422, 36);
-            this.TxtFiltrar.TabIndex = 145;
-            this.TxtFiltrar.Texts = "";
-            this.TxtFiltrar.UnderLineFlat = true;
-            // 
-            // BtnVolver
-            // 
-            this.BtnVolver.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnVolver.BackColor = System.Drawing.Color.Gray;
-            this.BtnVolver.BackGroundColor = System.Drawing.Color.Gray;
-            this.BtnVolver.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.BtnVolver.BorderRadius = 5;
-            this.BtnVolver.BorderSize = 0;
-            this.BtnVolver.FlatAppearance.BorderSize = 0;
-            this.BtnVolver.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnVolver.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnVolver.ForeColor = System.Drawing.Color.White;
-            this.BtnVolver.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnVolver.Location = new System.Drawing.Point(1183, 677);
-            this.BtnVolver.Name = "BtnVolver";
-            this.BtnVolver.Size = new System.Drawing.Size(148, 38);
-            this.BtnVolver.TabIndex = 198;
-            this.BtnVolver.Text = "Volver";
-            this.BtnVolver.TextGroundColor = System.Drawing.Color.White;
-            this.BtnVolver.UseVisualStyleBackColor = false;
-            this.BtnVolver.Click += new System.EventHandler(this.BtnVolver_Click);
+            this.BtnRevertir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnRevertir.BackColor = System.Drawing.Color.Firebrick;
+            this.BtnRevertir.BackGroundColor = System.Drawing.Color.Firebrick;
+            this.BtnRevertir.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.BtnRevertir.BorderRadius = 5;
+            this.BtnRevertir.BorderSize = 0;
+            this.BtnRevertir.FlatAppearance.BorderSize = 0;
+            this.BtnRevertir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnRevertir.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnRevertir.ForeColor = System.Drawing.Color.White;
+            this.BtnRevertir.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnRevertir.Location = new System.Drawing.Point(1183, 673);
+            this.BtnRevertir.Name = "BtnRevertir";
+            this.BtnRevertir.Size = new System.Drawing.Size(148, 38);
+            this.BtnRevertir.TabIndex = 200;
+            this.BtnRevertir.Text = "Revertir";
+            this.BtnRevertir.TextGroundColor = System.Drawing.Color.White;
+            this.BtnRevertir.UseVisualStyleBackColor = false;
+            this.BtnRevertir.Click += new System.EventHandler(this.BtnRevertir_Click);
             // 
             // ListaMermas
             // 
@@ -462,37 +350,28 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(1343, 723);
+            this.Controls.Add(this.BtnRevertir);
+            this.Controls.Add(this.TxtFiltrar);
             this.Controls.Add(this.BtnVolver);
-            this.Controls.Add(this.TxtRelacionPrecioVenta);
-            this.Controls.Add(this.TxtRelacionCosto);
-            this.Controls.Add(this.TxtCostoCompra);
             this.Controls.Add(this.TxtPrecioVenta);
-            this.Controls.Add(this.TxtCostoUnitario);
             this.Controls.Add(this.TxtRazon);
             this.Controls.Add(this.TxtIdentificador);
             this.Controls.Add(this.TxtCantidadRemover);
-            this.Controls.Add(this.TxtCompraId);
-            this.Controls.Add(this.TxtLoteId);
+            this.Controls.Add(this.TxtProducto);
             this.Controls.Add(this.TxtIDMerma);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BtnBuscarCliente);
-            this.Controls.Add(this.TxtFiltrar);
             this.Controls.Add(this.dgvCatalogo);
             this.Controls.Add(this.panel3);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(1359, 762);
-            this.MinimumSize = new System.Drawing.Size(1359, 762);
+            this.MinimumSize = new System.Drawing.Size(1359, 726);
             this.Name = "ListaMermas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mermas";
@@ -511,30 +390,21 @@
         public System.Windows.Forms.Label LblDynamico;
         public System.Windows.Forms.DataGridView dgvCatalogo;
         public Especiales.EspecialButton BtnBuscarCliente;
-        public Controladores.LoginUserControl TxtFiltrar;
-        public System.Windows.Forms.TextBox TxtRelacionPrecioVenta;
-        public System.Windows.Forms.TextBox TxtRelacionCosto;
-        public System.Windows.Forms.TextBox TxtCostoCompra;
         public System.Windows.Forms.TextBox TxtPrecioVenta;
-        public System.Windows.Forms.TextBox TxtCostoUnitario;
         public System.Windows.Forms.TextBox TxtRazon;
         public System.Windows.Forms.TextBox TxtIdentificador;
         public System.Windows.Forms.TextBox TxtCantidadRemover;
-        public System.Windows.Forms.TextBox TxtCompraId;
-        public System.Windows.Forms.TextBox TxtLoteId;
+        public System.Windows.Forms.TextBox TxtProducto;
         public System.Windows.Forms.TextBox TxtIDMerma;
         public System.Windows.Forms.Label label12;
-        public System.Windows.Forms.Label label11;
-        public System.Windows.Forms.Label label10;
-        public System.Windows.Forms.Label label9;
-        public System.Windows.Forms.Label label8;
         public System.Windows.Forms.Label label7;
         public System.Windows.Forms.Label label6;
         public System.Windows.Forms.Label label5;
         public System.Windows.Forms.Label label4;
-        public System.Windows.Forms.Label label3;
         public System.Windows.Forms.Label label2;
         public System.Windows.Forms.Label label1;
         public Especiales.EspecialButton BtnVolver;
+        public System.Windows.Forms.TextBox TxtFiltrar;
+        public Especiales.EspecialButton BtnRevertir;
     }
 }

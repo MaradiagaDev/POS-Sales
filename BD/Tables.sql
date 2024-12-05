@@ -191,7 +191,7 @@ Create table RelProveedoresProducto
     ProductoId NVARCHAR(50), 
 )
 
-CREATE TABLE Mermas (
+create TABLE Mermas (
     MermaId INT IDENTITY(1,1) PRIMARY KEY,       -- Identificador único de la merma
     Identificador NVARCHAR(50) NULL,           -- Identificador adicional opcional
     Razon NVARCHAR(MAX) NULL,                   -- Razón de la merma
@@ -199,5 +199,19 @@ CREATE TABLE Mermas (
     FechaRealizacion DATETIME NULL,             -- Fecha de realización de la merma
     PrecioVenta DECIMAL(18, 2) NULL ,           -- Precio de venta del producto mermado (opcional)
 	[AlmacenId] NVARCHAR(50) NOT NULL,
-	Usuario nvarchar(50)
+	Usuario nvarchar(50),
+	BoolRevertida bit default 1,
+	UsuarioRevirtio nvarchar(50) null,
+	ProductoId nvarchar(50) NOT NULL
 );
+
+CREATE TABLE Compras (
+    CompraId nvarchar(50) PRIMARY KEY,                       -- La propiedad CompraId se usa como clave primaria
+    Usuario nvarchar(200),                            -- La propiedad UsuarioId es nullable
+    AlmacenId nvarchar(50),                            -- La propiedad AlmacenId es nullable
+    SucursalId VARCHAR(50) NULL,                   -- La propiedad SucursalId es nullable y de tipo cadena
+    Descripcion VARCHAR(255) NULL,                 -- La propiedad Descripcion es nullable y de tipo cadena
+    CostoTotal DECIMAL(18, 2) NULL,                -- La propiedad CostoTotal es nullable y de tipo decimal
+    FechaAlta DATETIME NULL                        -- La propiedad FechaAlta es nullable y de tipo datetime
+);
+

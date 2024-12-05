@@ -37,7 +37,13 @@ namespace NeoCobranza.Paneles
         private void PnlAgregarProductoSerie_Load(object sender, EventArgs e)
         {
             //Colocar la descripcion del producto y el almacen
-            DataTable dtResponseProducto
+            DataTable dtResponseProducto = dataUtilities.getRecordByPrimaryKey("ProductosServicios", auxIdProducto);
+            DataTable dtResponseAlmacenes = dataUtilities.getRecordByPrimaryKey("Almacenes", auxIdAlmacen);
+
+            string nombreProducto = Convert.ToString(dtResponseProducto.Rows[0]["NombreProducto"]);
+            string nombreAlmacen = Convert.ToString(dtResponseAlmacenes.Rows[0]["NombreAlmacen"]);
+
+            LblDinamico.Text = $"Merma del producto: {nombreProducto} en {nombreAlmacen}";
         }
 
         private void TxtCantidad_KeyPress(object sender, KeyPressEventArgs e)
@@ -98,6 +104,8 @@ namespace NeoCobranza.Paneles
                 return;
             }
 
+            DataTable dtResponseProducto = dataUtilities.getRecordByPrimaryKey("ProductosServicios", auxIdProducto);
+
             //Realizar la merma
             dataUtilities.SetColumns("Identificador",TxtIdentificador.Text.Trim());
             dataUtilities.SetColumns("Razon", TxtRazon.Text.Trim());
@@ -105,6 +113,9 @@ namespace NeoCobranza.Paneles
             dataUtilities.SetColumns("FechaRealizacion",DateTime.Now.ToString());
             dataUtilities.SetColumns("AlmacenId",auxIdAlmacen);
             dataUtilities.SetColumns("Usuario",Utilidades.Usuario);
+            dataUtilities.SetColumns("BoolRevertida", false);
+            dataUtilities.SetColumns("PrecioVenta", Convert.ToString(dtResponseProducto.Rows[0]["Precio"]));
+            dataUtilities.SetColumns("ProductoId", Convert.ToString(dtResponseProducto.Rows[0]["ProductoId"]));
 
             dataUtilities.InsertRecord("Mermas");
 

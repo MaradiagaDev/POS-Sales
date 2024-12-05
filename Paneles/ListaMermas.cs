@@ -14,9 +14,14 @@ namespace NeoCobranza.Paneles
 {
     public partial class ListaMermas : Form
     {
-        int auxIdAlmacen;
+        string auxIdAlmacen;
+        string auxIdAlmacenSeleccionado;
+        string auxIdProducto;
+        string nombreAlmacen;
         DataTable dataMerma = new DataTable();
-        public ListaMermas(int AlmacenID)
+        DataUtilities dataUtilities = new DataUtilities();
+
+        public ListaMermas(string AlmacenID)
         {
             InitializeComponent();
             auxIdAlmacen = AlmacenID;
@@ -24,6 +29,10 @@ namespace NeoCobranza.Paneles
 
         private void ListaMermas_Load(object sender, EventArgs e)
         {
+            UIUtilities.PersonalizarDataGridView(dgvCatalogo);
+            UIUtilities.EstablecerFondo(this);
+            UIUtilities.ConfigurarBotonBuscar(BtnBuscarCliente);
+            UIUtilities.ConfigurarTextBoxBuscar(TxtFiltrar);
 
             DataGridViewButtonColumn BtnCambioEstado = new DataGridViewButtonColumn();
 
@@ -33,62 +42,91 @@ namespace NeoCobranza.Paneles
             BtnCambioEstado.DefaultCellStyle.ForeColor = Color.Blue;
             dgvCatalogo.Columns.Add(BtnCambioEstado);
 
+            BtnRevertir.Enabled = false;
 
             dataMerma.Columns.Add("MermaID", typeof(string));
-            dataMerma.Columns.Add("LoteID", typeof(string));
-            dataMerma.Columns.Add("Producto ID", typeof(string));
             dataMerma.Columns.Add("Producto", typeof(string));
+            dataMerma.Columns.Add("Almacen", typeof(string));
             dataMerma.Columns.Add("Cantidad Mermada", typeof(string));
             dataMerma.Columns.Add("Identificador", typeof(string));
             dataMerma.Columns.Add("Fecha Creación", typeof(string));
+            dataMerma.Columns.Add("Revertida", typeof(string));
+            dataMerma.Columns.Add("Usuario Revirtió", typeof(string));
 
             dgvCatalogo.DataSource = dataMerma;
-  
 
-            using (NeoCobranzaContext db = new NeoCobranzaContext())
+            if (auxIdAlmacen == "0")
             {
-                if (auxIdAlmacen == 0)
-                {
-                    LblDynamico.Text = "Todas las Mermas";
-                }
-                else
-                {
-                    var itemAlmacen = db.Almacenes.Where(s => s.AlmacenId == auxIdAlmacen).FirstOrDefault();
-                    LblDynamico.Text = $"Mermas del Almacén: {itemAlmacen.NombreAlmacen}";
-                }
-
-                BuscarMermas();
+                LblDynamico.Text = "Todas las Mermas";
             }
+            else
+            {
+                DataTable dtResponse = dataUtilities.getRecordByPrimaryKey("Almacenes", auxIdAlmacen);
+                nombreAlmacen = Convert.ToString(dtResponse.Rows[0]["NombreAlmacen"]);
+                LblDynamico.Text = $"Mermas del Almacén: {nombreAlmacen}";
+            }
+
+            BuscarMermas();
         }
 
         private void BuscarMermas()
         {
             dataMerma.Rows.Clear();
+            DataTable dtResponse = dataUtilities.GetAllRecords("Mermas");
 
-            using (NeoCobranzaContext db = new NeoCobranzaContext())
+            if (auxIdAlmacen == "0")
             {
-                if (auxIdAlmacen == 0)
-                {
-                    var listaMermasTodas = db.Mermas.Where(s => s.Identificador.Contains(TxtFiltrar.Texts)).OrderByDescending(s => s.MermaId).ToList();
+                var filterRow =
+                    from row in dtResponse.AsEnumerable()
+                    where Convert.ToString(row.Field<string>("Identificador")).Contains(TxtFiltrar.Text)
+                    select row;
 
-                    foreach (var item in listaMermasTodas)
+                if (filterRow.Any())
+                {
+                    dtResponse = filterRow.CopyToDataTable();
+
+                    foreach (DataRow item in dtResponse.Rows)
                     {
-                        LotesProducto lote = db.LotesProducto.Where(s => s.LoteId == item.LoteId).FirstOrDefault();
-                        dataMerma.Rows.Add(item.MermaId, item.LoteId, lote.ProductoId, lote.Producto, item.CantidadMermada, item.Identificador, item.FechaRealizacion);
+                        DataTable dtResponseProducto = dataUtilities.getRecordByPrimaryKey("ProductosServicios", Convert.ToString(item["ProductoId"]));
+                        DataTable dtResponseAlmacenes = dataUtilities.getRecordByPrimaryKey("Almacenes", Convert.ToString(item["AlmacenId"]));
+
+                        string revertida = Convert.ToBoolean(item["BoolRevertida"]) == true ? "SI" : "NO";
+
+                        dataMerma.Rows.Add(Convert.ToString(item["MermaId"]),
+                            Convert.ToString(dtResponseProducto.Rows[0]["NombreProducto"]),
+                             Convert.ToString(dtResponseAlmacenes.Rows[0]["NombreAlmacen"]),
+                             Convert.ToString(item["CantidadMermada"]),
+                             Convert.ToString(item["Identificador"]),
+                              Convert.ToString(item["FechaRealizacion"]),
+                              revertida, Convert.ToString(item["UsuarioRevirtio"]));
                     }
                 }
-                else
+            }
+            else
+            {
+                var filterRow =
+                   from row in dtResponse.AsEnumerable()
+                   where Convert.ToString(row.Field<string>("Identificador")).Contains(TxtFiltrar.Text)
+                   && Convert.ToString(row.Field<string>("AlmacenId")) == auxIdAlmacen
+                   select row;
+
+                if (filterRow.Any())
                 {
-                    var listaMermasTodas = db.Mermas.Where(s => s.Identificador.Contains(TxtFiltrar.Texts)).OrderByDescending(s => s.MermaId).ToList();
+                    dtResponse = filterRow.CopyToDataTable();
 
-                    foreach (var item in listaMermasTodas)
+                    foreach (DataRow item in dtResponse.Rows)
                     {
-                        LotesProducto lote = db.LotesProducto.Where(s => s.LoteId == item.LoteId).FirstOrDefault();
+                        DataTable dtResponseProducto = dataUtilities.getRecordByPrimaryKey("ProductosServicios", Convert.ToString(item["ProductoId"]));
 
-                        if (lote.AlmacenId == auxIdAlmacen)
-                        {
-                            dataMerma.Rows.Add(item.MermaId, item.LoteId, lote.ProductoId, lote.Producto, item.CantidadMermada, item.Identificador, item.FechaRealizacion);
-                        }
+                        string revertida = Convert.ToBoolean(item["BoolRevertida"]) == true ? "SI" : "NO";
+
+                        dataMerma.Rows.Add(Convert.ToString(item["MermaId"]),
+                            Convert.ToString(dtResponseProducto.Rows[0]["NombreProducto"]),
+                             nombreAlmacen,
+                             Convert.ToString(item["CantidadMermada"]),
+                             Convert.ToString(item["Identificador"]),
+                              Convert.ToString(item["FechaRealizacion"]),
+                              revertida, Convert.ToString(item["UsuarioRevirtio"]));
                     }
                 }
             }
@@ -99,33 +137,21 @@ namespace NeoCobranza.Paneles
             if (e.ColumnIndex == 0)
             {
                 object cellValue = dgvCatalogo.Rows[e.RowIndex].Cells[1].Value;
-                
-                using(NeoCobranzaContext db = new NeoCobranzaContext())
-                {
-                    Mermas merma = db.Mermas.Where(s => s.MermaId == int.Parse(cellValue.ToString())).FirstOrDefault();
 
-                    LotesProducto lote = db.LotesProducto.Where(s => s.LoteId == merma.LoteId).FirstOrDefault();
+                DataTable dtResponseMerma = dataUtilities.getRecordByPrimaryKey("Mermas", Convert.ToString(cellValue));
 
-                    var compra = db.ComprasInventario.Where(s => s.CompraId == lote.CompraId).FirstOrDefault();
+                TxtIDMerma.Text = Convert.ToString(dtResponseMerma.Rows[0]["MermaId"]);
+                TxtProducto.Text = Convert.ToString(dgvCatalogo.Rows[e.RowIndex].Cells[2].Value);
+                TxtCantidadRemover.Text = Convert.ToString(dtResponseMerma.Rows[0]["CantidadMermada"]);
+                TxtIdentificador.Text = Convert.ToString(dtResponseMerma.Rows[0]["Identificador"]);
+                TxtRazon.Text = Convert.ToString(dtResponseMerma.Rows[0]["Razon"]);
+                TxtPrecioVenta.Text = Convert.ToString(dtResponseMerma.Rows[0]["PrecioVenta"]);
 
-                    TxtIDMerma.Text = merma.MermaId.ToString();
-                    TxtCompraId.Text = lote.CompraId.ToString(); 
-                    TxtLoteId.Text = lote.LoteId.ToString();
-                    TxtCantidadRemover.Text = merma.CantidadMermada.ToString();
-                    TxtIdentificador.Text = merma.Identificador.ToString();
-                    TxtRazon.Text = merma.Razon.ToString();
-                    TxtCostoUnitario.Text = lote.CostoU.ToString();
-                    TxtCostoCompra.Text = lote.SubTotal.ToString();
-                    TxtRelacionCosto.Text = (merma.CantidadMermada * lote.CostoU).ToString();
-                    TxtPrecioVenta.Text = merma.PrecioVenta.ToString();
-                    TxtRelacionPrecioVenta.Text = (merma.PrecioVenta * merma.CantidadMermada).ToString();
-                }
+                auxIdProducto = Convert.ToString(dtResponseMerma.Rows[0]["ProductoId"]);
+                auxIdAlmacenSeleccionado = Convert.ToString(dtResponseMerma.Rows[0]["AlmacenId"]);
+
+                BtnRevertir.Enabled = Convert.ToString(dgvCatalogo.Rows[e.RowIndex].Cells[2].Value) == "SI" ? false : true;
             }
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void BtnVolver_Click(object sender, EventArgs e)
@@ -136,6 +162,32 @@ namespace NeoCobranza.Paneles
         private void BtnBuscarCliente_Click(object sender, EventArgs e)
         {
             BuscarMermas();
+        }
+
+        private void BtnRevertir_Click(object sender, EventArgs e)
+        {
+            DataTable dtResponse = dataUtilities.GetAllRecords("RelAlmacenProducto");
+            var filterRow =
+                from row in dtResponse.AsEnumerable()
+                where Convert.ToString(row.Field<string>("AlmacenId")) == auxIdAlmacenSeleccionado
+                && Convert.ToString(row.Field<string>("ProductoId")) == auxIdProducto
+                select row;
+
+            DataTable dtRelAlmacenProducto = filterRow.CopyToDataTable();
+
+            decimal totalActual = Convert.ToDecimal(dtRelAlmacenProducto.Rows[0]["Cantidad"]);
+
+            dataUtilities.SetColumns("Cantidad", (totalActual + Convert.ToDecimal(TxtCantidadRemover.Text)));
+            dataUtilities.UpdateRecordByPrimaryKey("RelAlmacenProducto", Convert.ToDecimal(dtRelAlmacenProducto.Rows[0]["RelAlmacenProductoId"]));
+
+            //Actualizar la merma
+            dataUtilities.SetColumns("BoolRevertida",true);
+            dataUtilities.SetColumns("UsuarioRevirtio", Utilidades.Usuario);
+            dataUtilities.UpdateRecordByPrimaryKey("Mermas", TxtIDMerma.Text);
+
+            MessageBox.Show("La merma se ha revertido.", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            this.Close();
         }
     }
 }

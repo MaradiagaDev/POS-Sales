@@ -65,8 +65,9 @@ namespace NeoCobranza.Paneles
             }
             else
             {
-                ListaMermas frm = new ListaMermas(int.Parse(CmbAlmacenes.SelectedValue.ToString()));
+                ListaMermas frm = new ListaMermas(Convert.ToString(CmbAlmacenes.SelectedValue));
                 frm.ShowDialog();
+                vMInventarioAlmacenes.BuscarInventario();
             }
         }
 
