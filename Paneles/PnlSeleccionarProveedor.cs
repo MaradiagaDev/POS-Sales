@@ -3,6 +3,7 @@ using NeoCobranza.Data;
 using NeoCobranza.ModelsCobranza;
 using NeoCobranza.Paneles_ComprasComercial;
 using NeoCobranza.PnlInventario;
+using NeoCobranza.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,7 +18,7 @@ namespace NeoCobranza.Paneles
 {
     public partial class PnlSeleccionarProveedor : Form
     {
-        public Conexion conexion;
+        DataUtilities dataUtilities = new DataUtilities();
 
 
         public PnlSeleccionarProveedor()
@@ -29,29 +30,34 @@ namespace NeoCobranza.Paneles
 
         private void PnlSeleccionarProveedor_Load(object sender, EventArgs e)
         {
+            UIUtilities.PersonalizarDataGridView(DgvProveedor);
+            UIUtilities.EstablecerFondo(this);
+            UIUtilities.ConfigurarTextBoxBuscar(TxtFiltrar);
+
             FiltrarProveedor();
         }
 
         public void FiltrarProveedor()
         {
-            using (NeoCobranzaContext db = new NeoCobranzaContext())
-            {
-                List<Proveedores> proveedors = db.Proveedores.Where(s => s.Estatus == true).Where(item => item.NombreEmpresa.Contains(txtFiltro.Texts) || item.NoRuc.Contains(txtFiltro.Texts)).OrderByDescending(s => s.IdProveedor).ToList();
+            dataUtilities.SetParameter("@NombreProveedor",TxtFiltrar.Text);
+            DataTable dtResponse = dataUtilities.ExecuteStoredProcedure("sp_GetProveedoresActivos");
 
                 DataTable dt = new DataTable();
 
                 dt.Columns.Add("Id", typeof(string));
                 dt.Columns.Add("Proveedor", typeof(string));
                 dt.Columns.Add("RUC", typeof(string));
-                dt.Columns.Add("Celular", typeof(string));
+                dt.Columns.Add("Telefono", typeof(string));
 
-                foreach (var item in proveedors)
+                foreach (DataRow item in dtResponse.Rows)
                 {
-                    dt.Rows.Add(item.IdProveedor,item.NombreEmpresa, item.NoRuc, item.NoTelefono);
+                    dt.Rows.Add(Convert.ToString(item["IdProveedor"]),
+                        Convert.ToString(item["NombreEmpresa"]),
+                        Convert.ToString(item["NoRuc"]),
+                        Convert.ToString(item["NoTelefono"]));
                 }
 
                 DgvProveedor.DataSource = dt;
-            }
         }
 
         private void txtFiltro__TextChanged(object sender, EventArgs e)
@@ -79,6 +85,11 @@ namespace NeoCobranza.Paneles
                 MessageBox.Show("No ha seleccionado un proveedor. Los proveedores se agregan en la sección de catalogo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+        }
+
+        private void TxtFiltrar_TextChanged(object sender, EventArgs e)
+        {
+            FiltrarProveedor();
         }
     }
 }

@@ -215,3 +215,15 @@ CREATE TABLE Compras (
     FechaAlta DATETIME NULL                        -- La propiedad FechaAlta es nullable y de tipo datetime
 );
 
+CREATE TABLE CompraDetalles(
+    LoteId NVARCHAR(50) NOT NULL, -- Asumiendo un tamaño de 50 caracteres, ajustable según tus necesidades.
+    ProductoId nvarchar(50),
+    CompraId nvarchar(50),
+    Cantidad decimal(18,1) NULL,
+    FechaCreacion DATETIME NULL,
+    AlmacenId nvarchar(50) NULL,
+    ProveedorId INT NULL,
+    CostoU DECIMAL(18, 2) NULL, 
+    SubTotal DECIMAL(18, 2) NULL,
+    CONSTRAINT PK_LotesProducto PRIMARY KEY (LoteId) -- Asumiendo que LoteId es único.
+);

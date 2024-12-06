@@ -35,9 +35,9 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.LblDynamico = new System.Windows.Forms.Label();
             this.DgvProveedor = new System.Windows.Forms.DataGridView();
+            this.TxtFiltrar = new System.Windows.Forms.TextBox();
             this.BtnSeleccionar = new NeoCobranza.Especiales.EspecialButton();
             this.btnCancelar = new NeoCobranza.Especiales.EspecialButton();
-            this.txtFiltro = new NeoCobranza.Controladores.LoginUserControl();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvProveedor)).BeginInit();
             this.SuspendLayout();
@@ -48,7 +48,7 @@
             this.panel3.Controls.Add(this.LblDynamico);
             this.panel3.Location = new System.Drawing.Point(1, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1073, 33);
+            this.panel3.Size = new System.Drawing.Size(731, 33);
             this.panel3.TabIndex = 88;
             // 
             // LblDynamico
@@ -88,7 +88,7 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.DgvProveedor.DefaultCellStyle = dataGridViewCellStyle2;
-            this.DgvProveedor.Location = new System.Drawing.Point(21, 99);
+            this.DgvProveedor.Location = new System.Drawing.Point(16, 97);
             this.DgvProveedor.MultiSelect = false;
             this.DgvProveedor.Name = "DgvProveedor";
             this.DgvProveedor.ReadOnly = true;
@@ -101,8 +101,18 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DgvProveedor.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.DgvProveedor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvProveedor.Size = new System.Drawing.Size(1024, 480);
+            this.DgvProveedor.Size = new System.Drawing.Size(696, 433);
             this.DgvProveedor.TabIndex = 90;
+            // 
+            // TxtFiltrar
+            // 
+            this.TxtFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtFiltrar.Location = new System.Drawing.Point(16, 58);
+            this.TxtFiltrar.Name = "TxtFiltrar";
+            this.TxtFiltrar.Size = new System.Drawing.Size(696, 20);
+            this.TxtFiltrar.TabIndex = 159;
+            this.TxtFiltrar.TextChanged += new System.EventHandler(this.TxtFiltrar_TextChanged);
             // 
             // BtnSeleccionar
             // 
@@ -116,9 +126,9 @@
             this.BtnSeleccionar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnSeleccionar.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnSeleccionar.ForeColor = System.Drawing.Color.White;
-            this.BtnSeleccionar.Location = new System.Drawing.Point(899, 592);
+            this.BtnSeleccionar.Location = new System.Drawing.Point(564, 538);
             this.BtnSeleccionar.Name = "BtnSeleccionar";
-            this.BtnSeleccionar.Size = new System.Drawing.Size(148, 35);
+            this.BtnSeleccionar.Size = new System.Drawing.Size(148, 33);
             this.BtnSeleccionar.TabIndex = 91;
             this.BtnSeleccionar.Text = "Seleccionar";
             this.BtnSeleccionar.TextGroundColor = System.Drawing.Color.White;
@@ -137,49 +147,29 @@
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancelar.ForeColor = System.Drawing.Color.White;
-            this.btnCancelar.Location = new System.Drawing.Point(738, 592);
+            this.btnCancelar.Location = new System.Drawing.Point(403, 539);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(155, 35);
+            this.btnCancelar.Size = new System.Drawing.Size(155, 32);
             this.btnCancelar.TabIndex = 92;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.TextGroundColor = System.Drawing.Color.White;
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // txtFiltro
-            // 
-            this.txtFiltro.BorderColor = System.Drawing.Color.MediumSlateBlue;
-            this.txtFiltro.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.txtFiltro.BorderRadius = 0;
-            this.txtFiltro.BorderSize = 2;
-            this.txtFiltro.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFiltro.ForeColor = System.Drawing.Color.DimGray;
-            this.txtFiltro.Location = new System.Drawing.Point(22, 47);
-            this.txtFiltro.Margin = new System.Windows.Forms.Padding(4);
-            this.txtFiltro.Multilinea = false;
-            this.txtFiltro.Name = "txtFiltro";
-            this.txtFiltro.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.txtFiltro.PasswordChar = false;
-            this.txtFiltro.PlaceHolderColor = System.Drawing.Color.DarkGray;
-            this.txtFiltro.PlaceHolderText = "Buscar Proveedor";
-            this.txtFiltro.Size = new System.Drawing.Size(1024, 32);
-            this.txtFiltro.TabIndex = 89;
-            this.txtFiltro.Texts = "";
-            this.txtFiltro.UnderLineFlat = true;
-            this.txtFiltro._TextChanged += new System.EventHandler(this.txtFiltro__TextChanged);
-            // 
             // PnlSeleccionarProveedor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(1072, 639);
+            this.ClientSize = new System.Drawing.Size(729, 577);
+            this.Controls.Add(this.TxtFiltrar);
             this.Controls.Add(this.BtnSeleccionar);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.DgvProveedor);
-            this.Controls.Add(this.txtFiltro);
             this.Controls.Add(this.panel3);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(745, 616);
+            this.MinimumSize = new System.Drawing.Size(745, 616);
             this.Name = "PnlSeleccionarProveedor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Seleccionar Proveedor";
@@ -188,6 +178,7 @@
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvProveedor)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -198,6 +189,6 @@
         private Especiales.EspecialButton BtnSeleccionar;
         private Especiales.EspecialButton btnCancelar;
         private System.Windows.Forms.DataGridView DgvProveedor;
-        private Controladores.LoginUserControl txtFiltro;
+        public System.Windows.Forms.TextBox TxtFiltrar;
     }
 }

@@ -32,6 +32,17 @@ namespace NeoCobranza.Paneles
 
         private void ComprasInventario_Load(object sender, EventArgs e)
         {
+            UIUtilities.PersonalizarDataGridView(DgvCatalogo);
+            UIUtilities.PersonalizarDataGridViewPequeños(DgvCompra);
+            UIUtilities.PersonalizarDataGridViewPequeños(DgvProductos);
+            UIUtilities.EstablecerFondo(this);
+            UIUtilities.ConfigurarBotonBuscar(BtnBuscar);
+            UIUtilities.ConfigurarBotonBuscar(BtnBuscarProducto);
+            UIUtilities.ConfigurarTextBoxBuscar(TxtFiltroProducto);
+            UIUtilities.ConfigurarTituloPantalla(TbTitulo, PnlTitulo);
+            UIUtilities.ConfigurarComboBox(CmbAlmacen);
+            UIUtilities.ConfigurarComboBox(CmbSucursales);
+
             TCMain.Appearance = TabAppearance.FlatButtons;
             TCMain.SizeMode = TabSizeMode.Fixed;
             TCMain.ItemSize = new System.Drawing.Size(1, 1);
@@ -67,9 +78,36 @@ namespace NeoCobranza.Paneles
                         dataBuscar.Columns.Add("Almacén", typeof(string));
                         dataBuscar.Columns.Add("Sucursal", typeof(string));
                         dataBuscar.Columns.Add("Fecha Creación", typeof(string));
+                        dataBuscar.Columns.Add("Usuario", typeof(string));
 
                         DgvCatalogo.DataSource = dataBuscar;
                     }
+
+                    // Obtiene todos los registros de la tabla Sucursal
+                    DataTable dtResponseSucursales = dataUtilities.GetAllRecords("Sucursal");
+
+                    // Filtra las filas donde el campo Estado sea "Activo"
+                    var filterRowSucursales = from row in dtResponseSucursales.AsEnumerable()
+                                              where Convert.ToString(row.Field<string>("Estado")) == "Activo"
+                                              select row;
+
+                    if (filterRowSucursales.Any())
+                    {
+                        DataTable dataCmbSucursal = new DataTable();
+                        dataCmbSucursal = filterRowSucursales.CopyToDataTable();
+
+                        DataRow newRow = dataCmbSucursal.NewRow();
+                        newRow["IdSucursal"] = "0";
+                        newRow["NombreSucursal"] = "Mostrar Todo";
+                        newRow["Estado"] = "Activo";
+
+                        dataCmbSucursal.Rows.InsertAt(newRow, 0);
+
+                        CmbSucursales.ValueMember = "IdSucursal";
+                        CmbSucursales.DisplayMember = "NombreSucursal";
+                        CmbSucursales.DataSource = dataCmbSucursal;
+                    }
+
 
                     FuncionesPrincipales();
 
@@ -79,9 +117,6 @@ namespace NeoCobranza.Paneles
                     TxtIdProveedor.Text = "-";
                     TxtNombreProveedor.Text = "-";
 
-                    LblTituloProductoProveedor.Enabled = false;
-                    LblTipoProd.Enabled = false;
-                    CmbTipoProducto.Enabled = false;
                     TxtFiltroProducto.Enabled = false;
                     BtnBuscarProducto.Enabled = false;
                     DgvProductos.Enabled = false;
@@ -90,8 +125,6 @@ namespace NeoCobranza.Paneles
                     TxtCantidad.Enabled = false;
                     LblPrecioVenta.Enabled = false;
                     TxtCosto.Enabled = false;
-                    LblCostoTotal.Enabled = false;
-                    TxtCostoTotal.Enabled = false;
                     BtnAgregarProducto.Enabled = false;
 
                     CmbAlmacen.Enabled = true;
@@ -113,34 +146,17 @@ namespace NeoCobranza.Paneles
                     BtnAgregarCompra.Text = "Crear";
 
                     //Categoria Almacen
-                    DataTable dtResponse = dataUtilities.GetAllRecords("Categorizacion");
-                    var filterRow = from row in dtResponse.AsEnumerable() where Convert.ToString(row.Field<string>("Estado")) == "Activo" select row;
-
-                    if (filterRow.Any())
-                    {
-                        DataTable dataCmbTipoServicio = new DataTable();
-                        dataCmbTipoServicio = filterRow.CopyToDataTable();
-
-                        CmbTipoProducto.ValueMember = "CategorizacionId";
-                        CmbTipoProducto.DisplayMember = "Descripcion";
-                        CmbTipoProducto.DataSource = dataCmbTipoServicio;
-                    }
-
-                    // Obtiene todos los registros de la tabla Sucursal
                     DataTable dtResponseAlmacenes = dataUtilities.GetAllRecords("Almacenes");
 
-                    // Filtra las filas donde el campo Estado sea "Activo"
-                    var filterRowSucursales = from row in dtResponseAlmacenes.AsEnumerable()
-                                              where Convert.ToString(row.Field<string>("Estatus")) == "Activo"
-                                              select row;
+                    var filterRowAlmacenes = from row in dtResponseAlmacenes.AsEnumerable()
+                                             where Convert.ToString(row.Field<string>("Estatus")) == "Activo"
+                                             select row;
 
-                    if (filterRowSucursales.Any())
+                    if (filterRowAlmacenes.Any())
                     {
-                        // Crea un DataTable para los datos filtrados
                         DataTable dataCmbSucursal = new DataTable();
-                        dataCmbSucursal = filterRowSucursales.CopyToDataTable();
+                        dataCmbSucursal = filterRowAlmacenes.CopyToDataTable();
 
-                        // Configura el DataSource del combo box
                         CmbAlmacen.ValueMember = "AlmacenId";
                         CmbAlmacen.DisplayMember = "NombreAlmacen";
                         CmbAlmacen.DataSource = dataCmbSucursal;
@@ -162,32 +178,30 @@ namespace NeoCobranza.Paneles
                         dataCompra.Columns.Add("Id Producto", typeof(string));
                         dataCompra.Columns.Add("Id Proveedor", typeof(string));
                         dataCompra.Columns.Add("Producto", typeof(string));
-                        dataCompra.Columns.Add("Expiración", typeof(string));
-                        dataCompra.Columns.Add("Costo/U (NIO)", typeof(string));
-                        dataCompra.Columns.Add("Cantidad/U", typeof(string));
                         dataCompra.Columns.Add("Sub Total (NIO)", typeof(string));
+                        dataCompra.Columns.Add("Cantidad/U", typeof(string));
 
                         DgvCompra.DataSource = dataCompra;
                     }
 
                     if (auxKey != 0)
                     {
-                        ModelsCobranza.ComprasInventario compra = db.ComprasInventario.Where(s => s.CompraId == auxKey).FirstOrDefault();
+                        //ModelsCobranza.ComprasInventario compra = db.ComprasInventario.Where(s => s.CompraId == auxKey).FirstOrDefault();
 
-                        if (compra != null)
-                        {
-                            TxtMontoTotal.Text = $"{compra.CostoTotal} (NIO)";
+                        //if (compra != null)
+                        //{
+                        //    TxtMontoTotal.Text = $"{compra.CostoTotal} (NIO)";
 
-                            CmbAlmacen.SelectedValue = compra.AlmacenId;
-                            TxtDescripcion.Text = compra.Descripcion;
+                        //    CmbAlmacen.SelectedValue = compra.AlmacenId;
+                        //    TxtDescripcion.Text = compra.Descripcion;
 
-                            var rels = db.LotesProducto.Where(s => s.CompraId == auxKey).ToList();
+                        //    var rels = db.LotesProducto.Where(s => s.CompraId == auxKey).ToList();
 
-                            foreach (var rel in rels)
-                            {
-                                dataCompra.Rows.Add(rel.ProductoId, rel.ProveedorId, rel.Producto, rel.Expira, rel.CostoU, rel.Cantidad, rel.SubTotal);
-                            }
-                        }
+                        //    foreach (var rel in rels)
+                        //    {
+                        //        dataCompra.Rows.Add(rel.ProductoId, rel.ProveedorId, rel.Producto, rel.Expira, rel.CostoU, rel.Cantidad, rel.SubTotal);
+                        //    }
+                        //}
 
                         CmbAlmacen.Enabled = false;
                         BtnAgregarCompra.Enabled = false;
@@ -201,35 +215,33 @@ namespace NeoCobranza.Paneles
         private void BuscarProducto()
         {
             dataProducto.Rows.Clear();
-            //&& s.ClasificacionTipo == int.Parse(CmbTipoProducto.SelectedValue.ToString()) 
 
-            using (NeoCobranzaContext db = new NeoCobranzaContext())
+            if (dataProducto.Columns.Count == 0)
             {
+                dataProducto.Columns.Add("Id", typeof(string));
+                dataProducto.Columns.Add("Producto", typeof(string));
+                dataProducto.Columns.Add("Cantidad en Almacén", typeof(string));
+                dataProducto.Columns.Add("Precio (NIO)", typeof(string));
+            }
 
-                TipoServicios tipoServicio = CmbTipoProducto.SelectedItem as TipoServicios;
-                var servicios = db.ServiciosEstadares.Where(s => s.NombreEstandar.Contains(TxtFiltroProducto.Text) && s.Estado == "Activo" && s.ClasificacionProducto == 0 && s.ClasificacionTipo == tipoServicio.TipoServicionId).ToList();
+            if (TxtIdProveedor.Text.Trim() != "-")
+            {
+                dataUtilities.SetParameter("@AlmacenId", CmbAlmacen.SelectedValue);
+                dataUtilities.SetParameter("@CategoriaId", 0);
+                dataUtilities.SetParameter("@ProveedorId", TxtIdProveedor.Text);
+                dataUtilities.SetParameter("@Filtro", TxtFiltroProducto.Text);
 
-                if (dataProducto.Columns.Count == 0)
+                DataTable dtResponse = dataUtilities.ExecuteStoredProcedure("sp_ObtenerCantidadProductoPorAlmacenYProveedor");
+
+                foreach (DataRow item in dtResponse.Rows)
                 {
-                    dataProducto.Columns.Add("Id", typeof(string));
-                    dataProducto.Columns.Add("Producto", typeof(string));
-                    dataProducto.Columns.Add("Expira", typeof(string));
-                    dataProducto.Columns.Add("Manejo Inventario", typeof(string));
+                    dataProducto.Rows.Add(
+                        Convert.ToString(item["ProductoId"]),
+                        Convert.ToString(item["NombreProducto"]),
+                        Convert.ToString(item["cantidad"]),
+                        Convert.ToString(item["Precio"])
+                        );
                 }
-
-                if (TxtIdProveedor.Text.Trim() != "-")
-                {
-                    foreach (var servicio in servicios)
-                    {
-                        RelProveedorProducto rel = db.RelProveedorProducto.Where(s => s.ProductoId == servicio.IdEstandar && s.ProveedorId == int.Parse(TxtIdProveedor.Text.Trim())).FirstOrDefault();
-
-                        if (rel != null)
-                        {
-                            dataProducto.Rows.Add(servicio.IdEstandar, servicio.NombreEstandar, servicio.Expira, servicio.ManejoInventario);
-                        }
-                    }
-                }
-
             }
         }
 
@@ -238,132 +250,137 @@ namespace NeoCobranza.Paneles
             if (auxOpc == "Buscar")
             {
                 dataBuscar.Rows.Clear();
-                using (NeoCobranzaContext db = new NeoCobranzaContext())
-                {
-                    List<ModelsCobranza.ComprasInventario> comprasInventario = db.ComprasInventario.Where(s => s.SucursalId == Utilidades.SucursalId.ToString() && s.Descripcion.Contains(TxtFiltrar.Texts)).ToList();
 
-                    foreach (var item in comprasInventario)
-                    {
-                        Almacenes almacenes = db.Almacenes.Where(s => s.AlmacenId == item.AlmacenId).FirstOrDefault();
-                        Sucursales sucursales = db.Sucursales.Where(s => s.SucursalId.ToString() == item.SucursalId).FirstOrDefault();
-                        dataBuscar.Rows.Add(item.CompraId, item.CostoTotal, item.Descripcion, almacenes.NombreAlmacen, sucursales.NombreSucursal, item.FechaAlta);
-                    }
+                dataUtilities.SetParameter("@IdSucursal", CmbSucursales.SelectedValue);
+                DataTable dtResponse = dataUtilities.ExecuteStoredProcedure("sp_GetComprasPorSucursal");
+
+                foreach (DataRow item in dtResponse.Rows)
+                {
+                    dataBuscar.Rows.Add(Convert.ToString(item["CompraId"]),
+                        Convert.ToString(item["Total"]),
+                        Convert.ToString(item["Descripcion"]),
+                        Convert.ToString(item["NombreAlmacen"]),
+                        Convert.ToString(item["NombreSucursal"]),
+                        Convert.ToString(item["Fecha"]),
+                        Convert.ToString(item["Usuario"])
+                        );
                 }
+
             }
             else if (auxOpc == "Crear")
             {
-                using (NeoCobranzaContext db = new NeoCobranzaContext())
-                {
-                    ModelsCobranza.ComprasInventario NuevaCompra = new ModelsCobranza.ComprasInventario();
+                //using (NeoCobranzaContext db = new NeoCobranzaContext())
+                //{
+                //    ModelsCobranza.ComprasInventario NuevaCompra = new ModelsCobranza.ComprasInventario();
 
-                    NuevaCompra.AlmacenId = int.Parse(CmbAlmacen.SelectedValue.ToString());
-                    NuevaCompra.UsuarioId = int.Parse(Utilidades.IdUsuario);
-                    NuevaCompra.SucursalId = Utilidades.SucursalId;
-                    NuevaCompra.CostoTotal = decimal.Parse(Regex.Replace(TxtMontoTotal.Text.Trim(), @"[^0-9,]", ""));
-                    NuevaCompra.Descripcion = TxtDescripcion.Text;
-                    NuevaCompra.FechaAlta = DateTime.Now;
+                //    NuevaCompra.AlmacenId = int.Parse(CmbAlmacen.SelectedValue.ToString());
+                //    NuevaCompra.UsuarioId = int.Parse(Utilidades.IdUsuario);
+                //    NuevaCompra.SucursalId = Utilidades.SucursalId;
+                //    NuevaCompra.CostoTotal = decimal.Parse(Regex.Replace(TxtMontoTotal.Text.Trim(), @"[^0-9,]", ""));
+                //    NuevaCompra.Descripcion = TxtDescripcion.Text;
+                //    NuevaCompra.FechaAlta = DateTime.Now;
 
-                    db.Add(NuevaCompra);
-                    db.SaveChanges();
+                //    db.Add(NuevaCompra);
+                //    db.SaveChanges();
 
-                    int i = 1;
+                //    int i = 1;
 
-                    foreach (DataRow item in dataCompra.Rows)
-                    {
-                        ServiciosEstadares servicio = db.ServiciosEstadares.Where(s => s.IdEstandar.ToString() == item[0].ToString()).FirstOrDefault();
+                //    foreach (DataRow item in dataCompra.Rows)
+                //    {
+                //        ServiciosEstadares servicio = db.ServiciosEstadares.Where(s => s.IdEstandar.ToString() == item[0].ToString()).FirstOrDefault();
 
-                        DateTime dateNueva = new DateTime();
+                //        DateTime dateNueva = new DateTime();
 
-                        if (DateTime.TryParseExact(item[3].ToString(), "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime parsedDate))
-                        {
-                            dateNueva = parsedDate;
-                        }
+                //        if (DateTime.TryParseExact(item[3].ToString(), "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime parsedDate))
+                //        {
+                //            dateNueva = parsedDate;
+                //        }
 
-                        LotesProducto lote = new LotesProducto()
-                        {
-                            LoteId = $"L{NuevaCompra.CompraId.ToString()}-C{i.ToString()}",
-                            CompraId = NuevaCompra.CompraId,
-                            Producto = servicio.NombreEstandar,
-                            ProductoId = servicio.IdEstandar,
-                            Cantidad = int.Parse(item[5].ToString()),
-                            FechaCreacion = DateTime.Now,
-                            FechaExpiracion = dateNueva,
-                            CantidadRestante = int.Parse(item[5].ToString()),
-                            CostoU = decimal.Parse(item[4].ToString()),
-                            SubTotal = decimal.Parse(item[6].ToString()),
-                            ProveedorId = int.Parse(item[1].ToString()),
-                            AlmacenId = int.Parse(CmbAlmacen.SelectedValue.ToString())
-                        };
+                //        LotesProducto lote = new LotesProducto()
+                //        {
+                //            LoteId = $"L{NuevaCompra.CompraId.ToString()}-C{i.ToString()}",
+                //            CompraId = NuevaCompra.CompraId,
+                //            Producto = servicio.NombreEstandar,
+                //            ProductoId = servicio.IdEstandar,
+                //            Cantidad = int.Parse(item[5].ToString()),
+                //            FechaCreacion = DateTime.Now,
+                //            FechaExpiracion = dateNueva,
+                //            CantidadRestante = int.Parse(item[5].ToString()),
+                //            CostoU = decimal.Parse(item[4].ToString()),
+                //            SubTotal = decimal.Parse(item[6].ToString()),
+                //            ProveedorId = int.Parse(item[1].ToString()),
+                //            AlmacenId = int.Parse(CmbAlmacen.SelectedValue.ToString())
+                //        };
 
-                        db.Add(lote);
-                        db.SaveChanges();
+                //        db.Add(lote);
+                //        db.SaveChanges();
 
-                        Kardex kardexUltimo = db.Kardex.Where(s => s.ProductoId == servicio.IdEstandar
-                        && s.AlmacenId == int.Parse(CmbAlmacen.SelectedValue.ToString())).OrderByDescending(s => s.MovimientoId).FirstOrDefault();
+                //        Kardex kardexUltimo = db.Kardex.Where(s => s.ProductoId == servicio.IdEstandar
+                //        && s.AlmacenId == int.Parse(CmbAlmacen.SelectedValue.ToString())).OrderByDescending(s => s.MovimientoId).FirstOrDefault();
 
-                        if (kardexUltimo != null)
-                        {
-                            Kardex kardex = new Kardex()
-                            {
-                                Fecha = DateTime.Now.Date,
-                                Operacion = "Compra",
-                                UnidadesEntrada = int.Parse(item[5].ToString()),
-                                CostoUnitarioEntrada = decimal.Parse(item[4].ToString()),
-                                TotalEntrada = decimal.Parse(item[6].ToString()),
-                                AlmacenId = int.Parse(CmbAlmacen.SelectedValue.ToString()),
-                                ProductoId = servicio.IdEstandar,
-                                UnidadesSaldo = int.Parse(item[5].ToString()) + kardexUltimo.UnidadesSaldo,
-                                CostoUnitarioSaldo = (kardexUltimo.CostoTotalSaldo + Convert.ToDecimal(item[6])) / (int.Parse(item[5].ToString()) + kardexUltimo.UnidadesSaldo),
-                                CostoTotalSaldo = kardexUltimo.CostoTotalSaldo + decimal.Parse(item[6].ToString()),
-                                IdDocumento = NuevaCompra.CompraId.ToString(),
-                                Lote = lote.LoteId
-                            };
+                //        if (kardexUltimo != null)
+                //        {
+                //            Kardex kardex = new Kardex()
+                //            {
+                //                Fecha = DateTime.Now.Date,
+                //                Operacion = "Compra",
+                //                UnidadesEntrada = int.Parse(item[5].ToString()),
+                //                CostoUnitarioEntrada = decimal.Parse(item[4].ToString()),
+                //                TotalEntrada = decimal.Parse(item[6].ToString()),
+                //                AlmacenId = int.Parse(CmbAlmacen.SelectedValue.ToString()),
+                //                ProductoId = servicio.IdEstandar,
+                //                UnidadesSaldo = int.Parse(item[5].ToString()) + kardexUltimo.UnidadesSaldo,
+                //                CostoUnitarioSaldo = (kardexUltimo.CostoTotalSaldo + Convert.ToDecimal(item[6])) / (int.Parse(item[5].ToString()) + kardexUltimo.UnidadesSaldo),
+                //                CostoTotalSaldo = kardexUltimo.CostoTotalSaldo + decimal.Parse(item[6].ToString()),
+                //                IdDocumento = NuevaCompra.CompraId.ToString(),
+                //                Lote = lote.LoteId
+                //            };
 
-                            db.Add(kardex);
-                            db.SaveChanges();
-                        }
-                        else
-                        {
-                            Kardex kardex = new Kardex()
-                            {
-                                Fecha = DateTime.Now.Date,
-                                Operacion = "Compra",
-                                UnidadesEntrada = int.Parse(item[5].ToString()),
-                                CostoUnitarioEntrada = decimal.Parse(item[4].ToString()),
-                                TotalEntrada = decimal.Parse(item[6].ToString()),
-                                AlmacenId = int.Parse(CmbAlmacen.SelectedValue.ToString()),
-                                ProductoId = servicio.IdEstandar,
-                                UnidadesSaldo = int.Parse(item[5].ToString()),
-                                CostoUnitarioSaldo = decimal.Parse(item[4].ToString()),
-                                CostoTotalSaldo = decimal.Parse(item[6].ToString()),
-                                IdDocumento = NuevaCompra.CompraId.ToString(),
-                                Lote = lote.LoteId
-                            };
+                //            db.Add(kardex);
+                //            db.SaveChanges();
+                //        }
+                //        else
+                //        {
+                //            Kardex kardex = new Kardex()
+                //            {
+                //                Fecha = DateTime.Now.Date,
+                //                Operacion = "Compra",
+                //                UnidadesEntrada = int.Parse(item[5].ToString()),
+                //                CostoUnitarioEntrada = decimal.Parse(item[4].ToString()),
+                //                TotalEntrada = decimal.Parse(item[6].ToString()),
+                //                AlmacenId = int.Parse(CmbAlmacen.SelectedValue.ToString()),
+                //                ProductoId = servicio.IdEstandar,
+                //                UnidadesSaldo = int.Parse(item[5].ToString()),
+                //                CostoUnitarioSaldo = decimal.Parse(item[4].ToString()),
+                //                CostoTotalSaldo = decimal.Parse(item[6].ToString()),
+                //                IdDocumento = NuevaCompra.CompraId.ToString(),
+                //                Lote = lote.LoteId
+                //            };
 
-                            db.Add(kardex);
-                            db.SaveChanges();
-                        }
-
-
-
-                        RelAlmacenProducto relAlmacenProducto = db.RelAlmacenProducto.Where(s => s.AlmacenId == int.Parse(CmbAlmacen.SelectedValue.ToString()) && s.ProductoId == servicio.IdEstandar).FirstOrDefault();
-                        relAlmacenProducto.Cantidad += int.Parse(item[5].ToString());
-
-                        Almacenes almacenes = db.Almacenes.Where(s => s.AlmacenId == NuevaCompra.AlmacenId).FirstOrDefault();
-                        Sucursales sucursal = db.Sucursales.Where(s => s.SucursalId == almacenes.SucursalId).FirstOrDefault();
-
-                        Inventario inventario = db.Inventario.Where(s => s.ProductoId == servicio.IdEstandar).FirstOrDefault();
-                        inventario.Cantidad += int.Parse(item[5].ToString());
-
-                        db.Update(inventario);
-                        db.Update(relAlmacenProducto);
-                        db.SaveChanges();
-
-                        i++;
-                    }
+                //            db.Add(kardex);
+                //            db.SaveChanges();
+                //        }
 
 
-                }
+
+                //        RelAlmacenProducto relAlmacenProducto = db.RelAlmacenProducto.Where(s => s.AlmacenId == int.Parse(CmbAlmacen.SelectedValue.ToString()) && s.ProductoId == servicio.IdEstandar).FirstOrDefault();
+                //        relAlmacenProducto.Cantidad += int.Parse(item[5].ToString());
+
+                //        Almacenes almacenes = db.Almacenes.Where(s => s.AlmacenId == NuevaCompra.AlmacenId).FirstOrDefault();
+                //        Sucursales sucursal = db.Sucursales.Where(s => s.SucursalId == almacenes.SucursalId).FirstOrDefault();
+
+                //        Inventario inventario = db.Inventario.Where(s => s.ProductoId == servicio.IdEstandar).FirstOrDefault();
+                //        inventario.Cantidad += int.Parse(item[5].ToString());
+
+                //        db.Update(inventario);
+                //        db.Update(relAlmacenProducto);
+                //        db.SaveChanges();
+
+                //        i++;
+                //    }
+
+
+                //}
 
                 MessageBox.Show("Compra creada correctamente.", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -399,32 +416,15 @@ namespace NeoCobranza.Paneles
             BuscarProducto();
         }
 
-        private void CalcularPrecioTotal()
-        {
-            // Verificar si se han ingresado valores válidos en TxtCantidad y TxtPrecioUnitario
-            if (!string.IsNullOrWhiteSpace(TxtCantidad.Text) && !string.IsNullOrWhiteSpace(TxtCosto.Text))
-            {
-                // Calcular el precio total
-                if (int.TryParse(TxtCantidad.Text, out int cantidad) && decimal.TryParse(TxtCosto.Text, out decimal precioUnitario))
-                {
-                    decimal precioTotal = cantidad * precioUnitario;
-                    TxtCostoTotal.Text = precioTotal.ToString();
-                }
-            }
-            else
-            {
-                TxtCostoTotal.Text = "";
-            }
-        }
-
+      
         private void TxtCosto_TextChanged(object sender, EventArgs e)
         {
-            CalcularPrecioTotal();
+            
         }
 
         private void TxtCantidad_TextChanged(object sender, EventArgs e)
         {
-            CalcularPrecioTotal();
+            
         }
 
         private void TxtCantidad_KeyPress(object sender, KeyPressEventArgs e)
@@ -453,18 +453,11 @@ namespace NeoCobranza.Paneles
                 return;
             }
 
-            if (CmbTipoProducto.Items.Count == 0)
-            {
-                MessageBox.Show("Debe agregar Tipos Producto / Servicio para poder realizar una compra.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
             if (dataCompra.Rows.Count == 0)
             {
                 MessageBox.Show("Debe agregar items a la compra para finalizar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
 
             FuncionesPrincipales();
         }
@@ -488,21 +481,14 @@ namespace NeoCobranza.Paneles
         {
             if (TxtIdProveedor.Text.Trim() != "-")
             {
-                LblTituloProductoProveedor.Enabled = true;
-                LblTipoProd.Enabled = true;
-                CmbTipoProducto.Enabled = true;
                 TxtFiltroProducto.Enabled = true;
                 BtnBuscarProducto.Enabled = true;
                 DgvProductos.Enabled = true;
 
-                LblFechaExpiracion.Enabled = true;
-                DTFecha.Enabled = true;
                 LblCantidad.Enabled = true;
                 TxtCantidad.Enabled = true;
                 LblPrecioVenta.Enabled = true;
                 TxtCosto.Enabled = true;
-                LblCostoTotal.Enabled = true;
-                TxtCostoTotal.Enabled = true;
                 BtnAgregarProducto.Enabled = true;
 
                 BuscarProducto();
@@ -514,12 +500,6 @@ namespace NeoCobranza.Paneles
             if (DgvProductos.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Debe seleccionar un Producto para agregar a la compra.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (TxtCostoTotal.Text.Trim() == "0" || TxtCostoTotal.Text.Trim() == "")
-            {
-                MessageBox.Show("No ha digitado la cantidad o el costo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -535,10 +515,8 @@ namespace NeoCobranza.Paneles
             dataCompra.Rows.Add(DgvProductos.SelectedRows[0].Cells[0].Value.ToString(),
                 TxtIdProveedor.Text.Trim(),
                 DgvProductos.SelectedRows[0].Cells[1].Value.ToString(),
-                DTFecha.Text,
-                TxtCosto.Text,
-                TxtCantidad.Text,
-                TxtCostoTotal.Text
+                Convert.ToDecimal(TxtCosto.Text),
+                TxtCantidad.Text
                 );
 
             TxtCosto.Text = "0";
@@ -553,7 +531,7 @@ namespace NeoCobranza.Paneles
 
             foreach (DataRow item in dataCompra.Rows)
             {
-                total += double.Parse(item[6].ToString());
+                total += double.Parse(Convert.ToString(item[3]));
             }
 
             TxtMontoTotal.Text = total.ToString() + " (NIO)";
@@ -593,6 +571,11 @@ namespace NeoCobranza.Paneles
                 auxOpc = "Crear";
                 ConfigUI();
             }
+        }
+
+        private void TCMain_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

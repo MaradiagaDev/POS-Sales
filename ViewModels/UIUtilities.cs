@@ -70,6 +70,39 @@ namespace NeoCobranza.ViewModels
             dgv.MultiSelect = false;                                        // Deshabilitar selección múltiple
         }
 
+        public static void PersonalizarDataGridViewPequeños(DataGridView dgv)
+        {
+            // Deshabilitar estilos visuales predeterminados
+            dgv.EnableHeadersVisualStyles = false;
+
+            // Configuración de encabezados
+            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.SteelBlue; // Azul suave
+            dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;    // Texto blanco
+            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold); // Fuente moderna y clara
+            dgv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter; // Centrado
+
+            // Configuración de filas
+            dgv.RowsDefaultCellStyle.Font = new Font("Segoe UI", 10); // Tamaño de letra más grande
+            dgv.RowsDefaultCellStyle.BackColor = Color.White;         // Fondo blanco para filas
+            dgv.RowsDefaultCellStyle.ForeColor = Color.Black;         // Texto negro para contraste
+            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue; // Fondo alterno azul claro
+            dgv.RowsDefaultCellStyle.SelectionBackColor = Color.LightSteelBlue; // Fondo de selección suave
+            dgv.RowsDefaultCellStyle.SelectionForeColor = Color.Black;         // Texto negro al seleccionar
+
+            // Bordes y diseño general
+            dgv.GridColor = Color.LightGray;                         // Color de las líneas de la cuadrícula
+            dgv.BorderStyle = BorderStyle.Fixed3D;                   // Bordes del control
+            dgv.CellBorderStyle = DataGridViewCellBorderStyle.Single; // Bordes de celda
+
+            // Ajuste automático al contenido
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells; // Ajustar columnas al contenido
+            dgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;       // Ajustar filas al contenido
+
+            // Otras configuraciones opcionales
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;    // Selección completa de fila
+            dgv.MultiSelect = false;                                        // Deshabilitar selección múltiple
+        }
+
         //Configuracion de botones
         public static void ConfigurarBotonBuscar(Button boton)
         {

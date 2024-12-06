@@ -336,3 +336,103 @@ BEGIN
 END;
 GO
 
+ALTER PROCEDURE sp_GetComprasPorSucursal
+    @IdSucursal NVARCHAR(50) -- Parámetro para filtrar por sucursal (acepta "0" para todas)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT 
+        c.CompraId AS IdCompra,
+        c.CostoTotal AS Total,
+        c.FechaAlta AS Fecha,
+        c.Usuario,
+        a.NombreAlmacen,
+        s.NombreSucursal,
+        c.Descripcion
+    FROM 
+        Compras c
+    INNER JOIN 
+        Almacenes a ON c.AlmacenId = a.AlmacenId
+    INNER JOIN
+        Sucursal s ON a.SucursalId = s.IdSucursal -- Relación entre Almacenes y Sucursal
+    WHERE 
+        (@IdSucursal = '0' OR s.IdSucursal = @IdSucursal)
+    ORDER BY 
+        c.FechaAlta DESC; -- Ordena las compras por fecha en orden descendente
+END;
+GO
+
+
+alter PROCEDURE sp_ObtenerCantidadProductoPorAlmacenYProveedor
+    @AlmacenId NVARCHAR(50), -- Parámetro para filtrar por almacén
+    @CategoriaId INT,        -- Parámetro para filtrar por categoría
+    @ProveedorId NVARCHAR(50), -- Parámetro para filtrar por proveedor
+    @Filtro NVARCHAR(MAX)    -- Parámetro para filtrar por nombre del producto
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Selección de datos considerando los filtros proporcionados
+    SELECT 
+        P.ProductoId ,
+        P.NombreProducto ,  
+        P.Precio ,
+        SUM(R.Cantidad) as cantidad
+    FROM 
+        RelAlmacenProducto R
+    INNER JOIN 
+        Almacenes A ON R.AlmacenId = A.AlmacenId
+    INNER JOIN 
+        ProductosServicios P ON R.ProductoId = P.ProductoId
+    INNER JOIN 
+        RelProveedoresProducto PP ON P.ProductoId = PP.ProductoId -- Relación con proveedores
+    WHERE 
+        (@AlmacenId = '0' OR A.AlmacenId = @AlmacenId) -- Filtro por almacén
+        AND (@CategoriaId = 0 OR P.CategoriaId = @CategoriaId) -- Filtro por categoría
+        AND (@ProveedorId = '0' OR PP.ProveedorId = @ProveedorId) -- Filtro por proveedor
+        AND P.ClasificacionProducto = 'Productos'
+        AND P.Estado = 'Activo'
+        AND P.NombreProducto LIKE '%' + @Filtro + '%' -- Filtro por nombre
+    GROUP BY 
+        P.ProductoId, 
+        P.NombreProducto,
+        P.Precio;
+END;
+GO
+
+alter VIEW vw_ProveedoresActivos AS
+SELECT 
+    IdProveedor,
+    NombreEmpresa,
+    NoTelefono,
+    Correo,
+    Direccion,
+	NoRuc
+FROM 
+    Proveedores
+WHERE 
+    Estatus = 'Activo'; -- Asegúrate de que el estado activo se almacene con esta denomin
+
+alter PROCEDURE sp_GetProveedoresActivos
+    @NombreProveedor NVARCHAR(100) -- Parámetro para filtrar por nombre del proveedor (cadena vacía para todos)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT 
+        IdProveedor,
+        NombreEmpresa,
+        NoTelefono,
+        Correo,
+        Direccion,
+		NoRuc
+    FROM 
+        Proveedores
+    WHERE 
+        Estatus = 'Activo' -- Solo incluye proveedores activos
+        AND (@NombreProveedor = '' OR NombreEmpresa LIKE '%' + @NombreProveedor + '%')
+    ORDER BY 
+        NombreEmpresa ASC; -- Ordena por nombre del proveedor
+END;
+GO
