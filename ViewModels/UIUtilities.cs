@@ -78,11 +78,11 @@ namespace NeoCobranza.ViewModels
             // Configuración de encabezados
             dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.SteelBlue; // Azul suave
             dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;    // Texto blanco
-            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold); // Fuente moderna y clara
+            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12, FontStyle.Bold); // Fuente moderna y clara
             dgv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter; // Centrado
 
             // Configuración de filas
-            dgv.RowsDefaultCellStyle.Font = new Font("Segoe UI", 10); // Tamaño de letra más grande
+            dgv.RowsDefaultCellStyle.Font = new Font("Segoe UI", 12,FontStyle.Bold); // Tamaño de letra más grande
             dgv.RowsDefaultCellStyle.BackColor = Color.White;         // Fondo blanco para filas
             dgv.RowsDefaultCellStyle.ForeColor = Color.Black;         // Texto negro para contraste
             dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue; // Fondo alterno azul claro

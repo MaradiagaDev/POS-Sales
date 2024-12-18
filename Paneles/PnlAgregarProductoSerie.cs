@@ -110,7 +110,7 @@ namespace NeoCobranza.Paneles
             dataUtilities.SetColumns("Identificador",TxtIdentificador.Text.Trim());
             dataUtilities.SetColumns("Razon", TxtRazon.Text.Trim());
             dataUtilities.SetColumns("CantidadMermada",Convert.ToDecimal(TxtCantidad.Text.Trim()));
-            dataUtilities.SetColumns("FechaRealizacion",DateTime.Now.ToString());
+            dataUtilities.SetColumns("FechaRealizacion",DateTime.Now);
             dataUtilities.SetColumns("AlmacenId",auxIdAlmacen);
             dataUtilities.SetColumns("Usuario",Utilidades.Usuario);
             dataUtilities.SetColumns("BoolRevertida", false);

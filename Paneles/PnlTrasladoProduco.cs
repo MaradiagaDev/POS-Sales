@@ -20,116 +20,99 @@ namespace NeoCobranza.Paneles
         public DataTable auxTablaDinamica = new DataTable();
         public DataTable auxTablaProducto = new DataTable();
         public bool buscado = false;
+        DataUtilities dataUtilities = new DataUtilities();
 
         public PnlTrasladoProduco()
         {
             InitializeComponent();
-
-            
         }
 
         private void PnlTrasladoProduco_Load(object sender, EventArgs e)
         {
-            DgvProducto.EnableHeadersVisualStyles = false;
-            DgvProducto.ColumnHeadersDefaultCellStyle.BackColor = Color.CadetBlue;
-            DgvProducto.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            DgvProducto.RowsDefaultCellStyle.Font = new Font("Century Gothic", 9);
-            DgvProducto.RowsDefaultCellStyle.BackColor = Color.White;
+            UIUtilities.PersonalizarDataGridViewPequeños(dgvCatalogo);
+            UIUtilities.PersonalizarDataGridViewPequeños(DgvProducto);
+            UIUtilities.EstablecerFondo(this);
+            UIUtilities.ConfigurarBotonBuscar(BtnBuscarProducto);
+            UIUtilities.ConfigurarTextBoxBuscar(TxtFiltroProducto);
+            UIUtilities.ConfigurarTituloPantalla(TbTitulo, PnlTitulo);
+            UIUtilities.ConfigurarComboBox(CmbAlmacenEntrado);
+            UIUtilities.ConfigurarComboBox(CmbAlmacenSalida);
 
-            dgvCatalogo.EnableHeadersVisualStyles = false;
-            dgvCatalogo.ColumnHeadersDefaultCellStyle.BackColor = Color.CadetBlue;
-            dgvCatalogo.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            DataTable dtResponse = dataUtilities.GetAllRecords("Almacenes");
+
+            var filterRow = from row in
+                                dtResponse.AsEnumerable()
+                            where
+                                Convert.ToString(row.Field<string>("Estatus")) == "Activo"
+                            orderby
+                                row.Field<string>("NombreAlmacen") descending
+                            select row;
 
 
-            using (NeoCobranzaContext db = new NeoCobranzaContext())
+            if (!filterRow.Any())
             {
-                List<Almacenes> listBdAlmacenesSalida = db.Almacenes.Where(s => s.Estatus == "Activo").OrderByDescending(s => s.AlmacenId).ToList();
-                List<Almacenes> listBdAlmacenesEntrada = db.Almacenes.Where(s => s.Estatus == "Activo").OrderByDescending(s => s.AlmacenId).ToList();
+                MessageBox.Show("No ha agregado almacenes o no hay almacenes activos.", "Atención",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                if (listBdAlmacenesSalida.Count == 0)
-                {
-                    MessageBox.Show("No ha agregado almacenes o no hay almacenes activos.", "Atención",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                    this.Close();
-                    return;
-                }
-
-                CmbAlmacenEntrado.ValueMember = "AlmacenId";
-                CmbAlmacenEntrado.DisplayMember = "NombreAlmacen";
-                CmbAlmacenEntrado.DataSource = listBdAlmacenesEntrada;
-
-                CmbAlmacenSalida.ValueMember = "AlmacenId";
-                CmbAlmacenSalida.DisplayMember = "NombreAlmacen";
-                CmbAlmacenSalida.DataSource = listBdAlmacenesSalida;
-
-                DataGridViewButtonColumn BtnCambioEstado = new DataGridViewButtonColumn();
-
-                BtnCambioEstado.Text = " Quitar ";
-                BtnCambioEstado.Name = "...";
-                BtnCambioEstado.UseColumnTextForButtonValue = true;
-                BtnCambioEstado.DefaultCellStyle.ForeColor = Color.Blue;
-                dgvCatalogo.Columns.Add(BtnCambioEstado);
-
-                auxTablaDinamica.Columns.Add("Lote-ID", typeof(string));
-                auxTablaDinamica.Columns.Add("Lote-ID Traslado", typeof(string));
-                auxTablaDinamica.Columns.Add("ProductoID", typeof(string));
-                auxTablaDinamica.Columns.Add("Producto", typeof(string));
-                auxTablaDinamica.Columns.Add("Proveedor", typeof(string));
-                auxTablaDinamica.Columns.Add("Cantidad Trasladada", typeof(string));
-                auxTablaDinamica.Columns.Add("Fecha Creación", typeof(string));
-                auxTablaDinamica.Columns.Add("Fecha Expira", typeof(string));
-
-                dgvCatalogo.DataSource = auxTablaDinamica;
-
-                //Productos
-
-                auxTablaProducto.Columns.Add("Producto ID", typeof(string));
-                auxTablaProducto.Columns.Add("Existencias", typeof(string));
-                auxTablaProducto.Columns.Add("Producto", typeof(string));
-
-                DgvProducto.DataSource = auxTablaProducto;
-
-                Buscador();
-                buscado = true;
+                this.Close();
+                return;
             }
+
+            CmbAlmacenEntrado.ValueMember = "AlmacenId";
+            CmbAlmacenEntrado.DisplayMember = "NombreAlmacen";
+            CmbAlmacenEntrado.DataSource = filterRow.CopyToDataTable();
+
+            CmbAlmacenSalida.ValueMember = "AlmacenId";
+            CmbAlmacenSalida.DisplayMember = "NombreAlmacen";
+            CmbAlmacenSalida.DataSource = filterRow.CopyToDataTable();
+
+            DataGridViewButtonColumn BtnCambioEstado = new DataGridViewButtonColumn();
+
+            BtnCambioEstado.Text = " Quitar ";
+            BtnCambioEstado.Name = "...";
+            BtnCambioEstado.UseColumnTextForButtonValue = true;
+            BtnCambioEstado.DefaultCellStyle.ForeColor = Color.Blue;
+            dgvCatalogo.Columns.Add(BtnCambioEstado);
+
+            auxTablaDinamica.Columns.Add("ProductoID", typeof(string));
+            auxTablaDinamica.Columns.Add("Producto", typeof(string));
+            auxTablaDinamica.Columns.Add("Cantidad Trasladada", typeof(string));
+
+            dgvCatalogo.DataSource = auxTablaDinamica;
+            dgvCatalogo.Columns[1].Visible = false;
+            auxTablaProducto.Columns.Add("Producto ID", typeof(string));
+            auxTablaProducto.Columns.Add("Existencias", typeof(string));
+            auxTablaProducto.Columns.Add("Producto", typeof(string));
+
+            DgvProducto.DataSource = auxTablaProducto;
+            DgvProducto.Columns[0].Visible = false;
+
+            Buscador();
+            buscado = true;
         }
 
         private void Buscador()
         {
-            using (NeoCobranzaContext db = new NeoCobranzaContext())
+            auxTablaProducto.Rows.Clear();
+
+            dataUtilities.SetParameter("@AlmacenId", CmbAlmacenSalida.SelectedValue);
+            dataUtilities.SetParameter("@CategoriaId", 0);
+            dataUtilities.SetParameter("@ProveedorId", 0);
+            dataUtilities.SetParameter("@Filtro", TxtFiltroProducto.Text);
+
+            DataTable dtResponse = dataUtilities.ExecuteStoredProcedure("sp_ObtenerCantidadProductoPorAlmacenYProveedor");
+
+            foreach (DataRow producto in dtResponse.Rows)
             {
-                var serviciosProductos = db.ServiciosEstadares
-                    .AsNoTracking()
-                    .Where(s => s.Estado == "Activo" && s.MontoVd != 0 && s.NombreEstandar.Contains(TxtFiltroProducto.Text) && s.ClasificacionProducto == 0)
-                    .ToList();
-
-                var almacenId = int.Parse(CmbAlmacenSalida.SelectedValue.ToString());
-
-                var productos = (from sp in serviciosProductos
-                                 join rap in db.RelAlmacenProducto
-                                 on sp.IdEstandar equals rap.ProductoId
-                                 where rap.AlmacenId == almacenId
-                                 select new
-                                 {
-                                     sp.IdEstandar,
-                                     rap.Cantidad,
-                                     sp.NombreEstandar
-                                 }).ToList();
-
-                auxTablaProducto.Rows.Clear();
-
-                foreach (var producto in productos)
-                {
-                    auxTablaProducto.Rows.Add(producto.IdEstandar, producto.Cantidad, producto.NombreEstandar);
-                }
+                auxTablaProducto.Rows.Add(Convert.ToString(producto["ProductoId"])
+                    , Convert.ToString(producto["cantidad"]), Convert.ToString (producto["NombreProducto"]));
             }
         }
 
 
         private void BtnBuscarProducto_Click(object sender, EventArgs e)
         {
-            if(buscado == true)
+            if (buscado == true)
             {
                 Buscador();
             }
@@ -152,21 +135,49 @@ namespace NeoCobranza.Paneles
 
                 if (cellValue != null)
                 {
-                    if(int.Parse(cellValue.ToString()) == 0) 
+                    if (cellValue == null ||
+                     !decimal.TryParse(cellValue.ToString(), out decimal valor) ||
+                       valor == 0)
                     {
-                        MessageBox.Show("No hay Existencias del Producto Seleccionado.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("No hay existencias del producto seleccionado.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
-                    if(int.Parse(CmbAlmacenSalida.SelectedValue.ToString()) == int.Parse(CmbAlmacenEntrado.SelectedValue.ToString()))
+
+                    if (CmbAlmacenSalida.SelectedValue.ToString() == CmbAlmacenEntrado.SelectedValue.ToString())
                     {
                         MessageBox.Show("Debe seleccionar almacenes distintos para realizar el traslado.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
-                    
-                    PnlAgregarTraslado traslado = new PnlAgregarTraslado(this, int.Parse(selectedRow.Cells[0].Value.ToString()),int.Parse(CmbAlmacenSalida.SelectedValue.ToString()), int.Parse(CmbAlmacenEntrado.SelectedValue.ToString()));
-                    traslado.ShowDialog();
 
+                    if (string.IsNullOrWhiteSpace(TxtCantidad.Text.Trim()) ||
+                     !decimal.TryParse(TxtCantidad.Text.Trim(), out decimal cantidad) ||
+                        cantidad <= 0)
+                    {
+                        MessageBox.Show("Debe agregar una cantidad válida y mayor a cero para trasladar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    if (cantidad > valor)
+                    {
+                        MessageBox.Show("No hay suficiente cantidad de producto para trasladar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    foreach(DataRow item in auxTablaDinamica.Rows)
+                    {
+                        if (Convert.ToString(selectedRow.Cells[0].Value) == Convert.ToString(item[0]))
+                        {
+                            MessageBox.Show("El producto ya fue agregado al traslado.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                    }
+
+                    auxTablaDinamica.Rows.Add(Convert.ToString(selectedRow.Cells[0].Value),
+                        Convert.ToString(selectedRow.Cells[2].Value),
+                        TxtCantidad.Text.Trim());
+
+                    CmbAlmacenSalida.Enabled = false;
                 }
             }
             else
@@ -177,7 +188,7 @@ namespace NeoCobranza.Paneles
 
         private void dgvCatalogo_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.ColumnIndex == 0)
+            if (e.ColumnIndex == 0)
             {
                 auxTablaDinamica.Rows.RemoveAt(e.RowIndex);
 
@@ -203,200 +214,34 @@ namespace NeoCobranza.Paneles
 
         private void BtnGuardar_Click(object sender, EventArgs e)
         {
-            if(auxTablaDinamica.Rows.Count == 0)
+            try
             {
-                MessageBox.Show("No se han agregado productos al traslado.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            //Crear traslado
-
-            using(NeoCobranzaContext db = new NeoCobranzaContext())
-            {
-                TrasladosInventario traslados = new TrasladosInventario()
+                if (auxTablaDinamica.Rows.Count == 0)
                 {
-                    FechaTraslado = DateTime.Now,
-                    IdUsuario = int.Parse(Utilidades.IdUsuario),
-                    SucursalId = int.Parse(Utilidades.SucursalId)
-                };
+                    MessageBox.Show("No se han agregado productos al traslado.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-                db.Add(traslados);
-                db.SaveChanges();
+                //Crear traslado
+                string IdTraslado = Guid.NewGuid().ToString();
 
-                foreach(DataRow item in auxTablaDinamica.Rows)
+                dataUtilities.SetParameter("@TrasladoId", IdTraslado);
+                dataUtilities.SetParameter("@FechaTraslado", DateTime.Now);
+                dataUtilities.SetParameter("@Usuario", Utilidades.Usuario);
+                dataUtilities.SetParameter("@SucursalId", Utilidades.SucursalId);
+                dataUtilities.SetParameter("@AlmacenIdEntrada", CmbAlmacenEntrado.SelectedValue);
+                dataUtilities.SetParameter("@AlmacenIdSalida", CmbAlmacenSalida.SelectedValue);
+
+                dataUtilities.ExecuteStoredProcedure("Sp_CrearTrasladoInventario");
+
+                foreach (DataRow item in auxTablaDinamica.Rows)
                 {
-                    //Verificar por cantidades
-                    LotesProducto lote = db.LotesProducto.Where(s => s.LoteId == item[0].ToString()).FirstOrDefault();
+                    //Insertar detalle
+                    dataUtilities.SetParameter("@TrasladoId", IdTraslado);
+                    dataUtilities.SetParameter("@ProductoId", Convert.ToString(item[0]));
+                    dataUtilities.SetParameter("@Cantidad", Convert.ToString(item[2]));
 
-                    if (int.Parse(item[5].ToString()) > lote.CantidadRestante)
-                    {
-                        MessageBox.Show($"La cantidad de producto ({lote.Producto}) del lote (SALIDA) ha sido modificada durante" +
-                            "se realizaba el traslado por lo que ya no se encuentra la misma cantidad que la que se contempló en el lote" +
-                            ".Esto pudo ocurrir por un traslado o venta al momento de realizar el traslado.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                    }
-                    else
-                    {
-                        TrasladoDetalle detalleTraslado = new TrasladoDetalle()
-                        {
-                            TrasladoId = traslados.TrasladoId,
-                            LoteInicial = item[0].ToString(),
-                            LoteFinal = item[1].ToString(),
-                            AlmacenEntrada = int.Parse(CmbAlmacenEntrado.SelectedValue.ToString()),
-                            AlmacenSalida = int.Parse(CmbAlmacenSalida.SelectedValue.ToString()),
-                            ProductoId = lote.ProductoId,
-                            CantidadTrasladada = int.Parse(item[5].ToString()),
-                        };
-
-                        db.Add(detalleTraslado);
-                        db.SaveChanges();
-
-                        //Actualizar los datos de los lotes
-                        lote.CantidadRestante -= int.Parse(item[5].ToString());
-
-                        db.Update(lote);
-                        db.SaveChanges();
-
-
-                        //Kardex de lote viejo
-
-                        Kardex kardexUltimo = db.Kardex.Where(s => s.ProductoId == lote.ProductoId
-                            && s.AlmacenId == int.Parse(CmbAlmacenSalida.SelectedValue.ToString())).OrderByDescending(s => s.MovimientoId).FirstOrDefault();
-
-                        //if (kardexUltimo != null)
-                        //{
-                        //    Kardex kardex = new Kardex()
-                        //    {
-                        //        Fecha = DateTime.Now.Date,
-                        //        Operacion = "Traslado",
-                        //        AlmacenId = int.Parse(CmbAlmacenSalida.SelectedValue.ToString()),
-                        //        ProductoId = lote.ProductoId,
-                        //        UnidadesSalida = int.Parse(item[5].ToString()),
-                        //        CostoUnitarioSalida = lote.CostoU,
-                        //        TotalSalida = lote.CostoU * int.Parse(item[5].ToString()),
-                        //        UnidadesSaldo = kardexUltimo.UnidadesSaldo - int.Parse(item[5].ToString()),
-                        //        CostoUnitarioSaldo = (kardexUltimo.CostoTotalSaldo - (lote.CostoU * int.Parse(item[5].ToString()))) / (kardexUltimo.UnidadesSaldo - int.Parse(item[5].ToString())),
-                        //        CostoTotalSaldo = kardexUltimo.CostoTotalSaldo - (lote.CostoU * int.Parse(item[5].ToString())),
-                        //        IdDocumento = traslados.TrasladoId.ToString(),
-                        //        Lote = lote.LoteId
-                        //    };
-
-                        //    db.Add(kardex);
-                        //    db.SaveChanges();
-                        //}
-                        //else
-                        //{
-                        //    Kardex kardex = new Kardex()
-                        //    {
-                        //        Fecha = DateTime.Now.Date,
-                        //        Operacion = "Traslado",
-                        //        AlmacenId = int.Parse(CmbAlmacenSalida.SelectedValue.ToString()),
-                        //        ProductoId = lote.ProductoId,
-                        //        UnidadesSaldo = int.Parse(item[5].ToString()),
-                        //        CostoUnitarioSaldo = lote.CostoU * int.Parse(item[5].ToString()),
-                        //        CostoTotalSaldo = lote.CostoU * int.Parse(item[5].ToString()),
-                        //        UnidadesSalida = int.Parse(item[5].ToString()),
-                        //        CostoUnitarioSalida = lote.CostoU,
-                        //        TotalSalida = lote.CostoU * int.Parse(item[5].ToString()),
-                        //        IdDocumento = traslados.TrasladoId.ToString(),
-                        //        Lote = lote.LoteId
-                        //    };
-
-                        //    db.Add(kardex);
-                        //    db.SaveChanges();
-                        //}
-
-                        //Kardex de lote viejo
-
-                        //Agregar el lote nuevo
-
-                        LotesProducto loteNuevo = new LotesProducto() { 
-                        LoteId = item[1].ToString(),
-                        Producto = lote.Producto,
-                        ProductoId = lote.ProductoId,
-                        CompraId = lote.CompraId,
-                        Cantidad = int.Parse(item[5].ToString()),
-                        CantidadRestante = int.Parse(item[5].ToString()),
-                        FechaCreacion = lote.FechaCreacion,
-                        FechaExpiracion = lote.FechaExpiracion,
-                        AlmacenId = int.Parse(CmbAlmacenEntrado.SelectedValue.ToString()),
-                        ProveedorId = lote.ProveedorId,
-                        CostoU =lote.CostoU,
-                        SubTotal = (lote.CostoU * int.Parse(item[5].ToString()))
-                        };
-
-                        db.Add(loteNuevo);
-                        db.SaveChanges();
-
-                        //Kardex lote nuevo
-                        Kardex kardexUltimoNuevo = db.Kardex.Where(s => s.ProductoId == loteNuevo.ProductoId
-                         && s.AlmacenId == int.Parse(CmbAlmacenEntrado.SelectedValue.ToString())).OrderByDescending(s => s.MovimientoId).FirstOrDefault();
-
-                        //if (kardexUltimoNuevo != null)
-                        //{
-                        //    Kardex kardex = new Kardex()
-                        //    {
-                        //        Fecha = DateTime.Now.Date,
-                        //        Operacion = "Traslado",
-                        //        AlmacenId = int.Parse(CmbAlmacenEntrado.SelectedValue.ToString()),
-                        //        ProductoId = loteNuevo.ProductoId,
-                        //        UnidadesEntrada = int.Parse(item[5].ToString()),
-                        //        CostoUnitarioEntrada = loteNuevo.CostoU,
-                        //        TotalEntrada = loteNuevo.CostoU * int.Parse(item[5].ToString()),
-                        //        UnidadesSaldo = kardexUltimoNuevo.UnidadesSaldo + int.Parse(item[5].ToString()),
-                        //        CostoUnitarioSaldo = (kardexUltimoNuevo.CostoTotalSaldo + (loteNuevo.CostoU * int.Parse(item[5].ToString()))) / (kardexUltimoNuevo.UnidadesSaldo + int.Parse(item[5].ToString())),
-                        //        CostoTotalSaldo = kardexUltimoNuevo.CostoTotalSaldo + (lote.CostoU * int.Parse(item[5].ToString())),
-                        //        IdDocumento = traslados.TrasladoId.ToString(),
-                        //        Lote = loteNuevo.LoteId
-                        //    };
-
-                        //    db.Add(kardex);
-                        //    db.SaveChanges();
-                        //}
-                        //else
-                        //{
-                        //    Kardex kardex = new Kardex()
-                        //    {
-                        //        Fecha = DateTime.Now.Date,
-                        //        Operacion = "Traslado",
-                        //        AlmacenId = int.Parse(CmbAlmacenEntrado.SelectedValue.ToString()),
-                        //        ProductoId = lote.ProductoId,
-                        //        UnidadesSaldo = int.Parse(item[5].ToString()),
-                        //        CostoUnitarioSaldo = lote.CostoU * int.Parse(item[5].ToString()),
-                        //        CostoTotalSaldo = lote.CostoU * int.Parse(item[5].ToString()),
-                        //         UnidadesEntrada = int.Parse(item[5].ToString()),
-                        //        CostoUnitarioEntrada = lote.CostoU,
-                        //        TotalEntrada = lote.CostoU * int.Parse(item[5].ToString()),
-                        //        IdDocumento = traslados.TrasladoId.ToString(),
-                        //        Lote = loteNuevo.LoteId
-                        //    };
-
-                        //    db.Add(kardex);
-                        //    db.SaveChanges();
-                        //}
-                        //Kardex lote nuevo
-
-                        //Actualizar los datos de  almacenes
-
-                        RelAlmacenProducto almacenEntrada = db.RelAlmacenProducto.Where(s => s.ProductoId == lote.ProductoId && s.AlmacenId == int.Parse(CmbAlmacenEntrado.SelectedValue.ToString())).FirstOrDefault();
-
-                        almacenEntrada.Cantidad += int.Parse(item[5].ToString());
-
-                        db.Update(almacenEntrada);
-
-                        //Salida
-
-                        RelAlmacenProducto almacenSalida = db.RelAlmacenProducto.Where(s => s.ProductoId == lote.ProductoId && s.AlmacenId == int.Parse(CmbAlmacenSalida.SelectedValue.ToString())).FirstOrDefault();
-
-                        almacenSalida.Cantidad -= int.Parse(item[5].ToString());
-
-                        db.Update(almacenSalida);
-
-                        db.SaveChanges();
-
-                    }
-
-                    
+                    dataUtilities.ExecuteStoredProcedure("Sp_CrearTrasladoDetalle");
                 }
                 auxTablaDinamica.Rows.Clear();
                 CmbAlmacenSalida.Enabled = true;
@@ -405,6 +250,28 @@ namespace NeoCobranza.Paneles
                 MessageBox.Show("Traslado realizado", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 this.Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Ha ocurrido un error: {ex.Message}","Error",MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void CmbAlmacenEntrado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void TxtCantidad_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void TxtCantidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != 8)
+            {
+                e.Handled = true; // Esto indica que el evento ha sido manejado, por lo que el carácter no será mostrado en el TextBox
             }
         }
     }

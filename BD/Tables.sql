@@ -196,7 +196,7 @@ create TABLE Mermas (
     Identificador NVARCHAR(50) NULL,           -- Identificador adicional opcional
     Razon NVARCHAR(MAX) NULL,                   -- Razón de la merma
     CantidadMermada Decimal (18,1) NULL,                   -- Cantidad mermada (opcional)
-    FechaRealizacion DATETIME NULL,             -- Fecha de realización de la merma
+    FechaRealizacion DATETIME null,             -- Fecha de realización de la merma
     PrecioVenta DECIMAL(18, 2) NULL ,           -- Precio de venta del producto mermado (opcional)
 	[AlmacenId] NVARCHAR(50) NOT NULL,
 	Usuario nvarchar(50),
@@ -205,17 +205,18 @@ create TABLE Mermas (
 	ProductoId nvarchar(50) NOT NULL
 );
 
-CREATE TABLE Compras (
+Create TABLE Compras (
     CompraId nvarchar(50) PRIMARY KEY,                       -- La propiedad CompraId se usa como clave primaria
     Usuario nvarchar(200),                            -- La propiedad UsuarioId es nullable
     AlmacenId nvarchar(50),                            -- La propiedad AlmacenId es nullable
     SucursalId VARCHAR(50) NULL,                   -- La propiedad SucursalId es nullable y de tipo cadena
     Descripcion VARCHAR(255) NULL,                 -- La propiedad Descripcion es nullable y de tipo cadena
-    CostoTotal DECIMAL(18, 2) NULL,                -- La propiedad CostoTotal es nullable y de tipo decimal
-    FechaAlta DATETIME NULL                        -- La propiedad FechaAlta es nullable y de tipo datetime
+    CostoTotal nvarchar(200) NULL,                -- La propiedad CostoTotal es nullable y de tipo decimal
+    FechaAlta DATETIME NULL,
+	UsuarioRevirtio nvarchar(200) -- La propiedad FechaAlta es nullable y de tipo datetime
 );
 
-CREATE TABLE CompraDetalles(
+create TABLE CompraDetalles(
     LoteId NVARCHAR(50) NOT NULL, -- Asumiendo un tamaño de 50 caracteres, ajustable según tus necesidades.
     ProductoId nvarchar(50),
     CompraId nvarchar(50),
@@ -227,3 +228,113 @@ CREATE TABLE CompraDetalles(
     SubTotal DECIMAL(18, 2) NULL,
     CONSTRAINT PK_LotesProducto PRIMARY KEY (LoteId) -- Asumiendo que LoteId es único.
 );
+
+CREATE TABLE TrasladosInventario (
+    TrasladoId nvarchar(50) NOT NULL PRIMARY KEY, -- Suponiendo que es clave primaria
+    FechaTraslado nvarchar(100) NULL,
+    Usuario nvarchar(200) NULL,
+    SucursalId nvarchar(50) NULL,
+	AlmacenIdEntrada nvarchar(50) NULL,
+	AlmacenIdSalida nvarchar(50) NULL
+);
+
+CREATE TABLE TrasladoDetalles (
+    DetalleId int identity (1,1) primary key,
+    TrasladoId nvarchar(50) NOT NULL, -- Suponiendo que es clave primaria
+	ProductoId nvarchar(50) NOT NULL,
+	Cantidad decimal (18,1) not null
+);
+
+CREATE TABLE AlertasInventario
+(
+	AlertaId int identity(1,1) primary key,
+	ProductoId nvarchar(50) null,
+	AlmacenId nvarchar(50) null,
+	CantidadMinima decimal(18,1) null,
+	CantidadMaxima decimal(18,1)
+)
+
+CREATE TABLE [dbo].[Empleado](
+    [IdEmpleado] NVARCHAR(50) PRIMARY KEY,
+    [Nombre] NVARCHAR(100) NOT NULL,
+    [Apellido] NVARCHAR(100) NOT NULL,
+    [Direccion] NVARCHAR(MAX) NULL,
+    [Telefono] NVARCHAR(20) NULL,
+    [CorreoElectronico] NVARCHAR(100) NULL,
+    [FechaContratacion] DATETIME NOT NULL,
+    [Cargo] NVARCHAR(100) NULL,
+    [Estado] NVARCHAR(50) NULL,
+    [FechaCreo] DATETIME NOT NULL,
+    [FechaActualizo] DATETIME NULL
+);
+
+create TABLE Ordenes
+(
+    OrdenId decimal  NOT NULL PRIMARY KEY, 
+    SucursalId nvarchar(50) NULL,
+    UsuarioId nvarchar(200) NULL,
+    ClienteId decimal(18,0),
+    NoFactura decimal NULL,
+    Serie NVARCHAR(10) NULL,
+    SalaMesa NVARCHAR(100) NULL,
+    TotalOrden DECIMAL(18, 2) NULL,
+    Descuento DECIMAL(18, 2) NULL,
+    Iva DECIMAL(18, 2) NULL,
+    RetencionDgi DECIMAL(18, 2) NULL,
+    RetencionAlcaldia DECIMAL(18, 2) NULL,
+    SubTotal DECIMAL(18, 2) NULL,
+    Pagado DECIMAL(18, 2) NULL,
+    RestantePago DECIMAL(18, 2) NULL,
+    OrdenProceso NVARCHAR(200) NULL,
+    PagoProceso NVARCHAR(200) NULL,
+    MotivoCancelacion NVARCHAR(MAX) NULL,
+    FechaRealizacion DATETIME NULL,
+    CambioDolar DECIMAL(18, 4) NULL,
+    CorteCaja BIT NULL, -- Booleano en SQL Server
+    NotaOrden NVARCHAR(MAX) NULL,
+	--Campos nuevos del credito
+	FechaCredito datetime null,
+	CantidadPagos nvarchar(255) null,
+	FrecuenciaPagos nvarchar(255) null,
+	MontoCredito decimal(18,2) null,
+	BitEsCredito bit null
+);
+
+create TABLE ConfigFacturacion (
+    ConfigFacturacionId INT identity (1,1) NOT NULL PRIMARY KEY, 
+    SucursalId nvarchar(50) NULL,
+    Serie NVARCHAR(10) NULL,
+    ConsecutivoFactura decimal,
+    RangoFactura decimal,
+    ConsecutivoOrden decimal NULL,
+    RangoOrden decimal NULL,
+	RetieneIvaBit bit null
+);
+
+create TABLE OrdenDetalle (
+    OrdenDetalleId INT identity(1,1) NOT NULL PRIMARY KEY,
+	OrdenId Decimal not null,
+    ProductoId nvarchar(50) NULL,                    
+    Cantidad Decimal(18,1) NULL,                      
+    PrecioUnitario DECIMAL(18, 2) NULL, 
+    Subtotal DECIMAL(18, 2) NULL
+);
+
+create TABLE Pagos
+(
+    PagoOrdenId INT identity (1,1) PRIMARY KEY, -- Identificador único del pago
+    OrdenId INT NULL,                     -- Relación opcional con la tabla Ordenes
+    FormaPago NVARCHAR(255) NOT NULL,     -- Método de pago utilizado
+    Pagado DECIMAL(18, 2) NULL,
+	MontoTarjeta DECIMAL(18, 2) NULL,           -- Monto pagado
+    Cambio DECIMAL(18, 2) NULL,           -- Cambio entregado
+    BancoId INT NULL,                     -- Identificador opcional del banco
+	TarjetaId INT NULL,
+    Total DECIMAL(18, 2) NULL,            -- Monto total del pago
+    NoReferencia NVARCHAR(255) NULL,       -- Número de referencia para el pago
+	FechaPago datetime null
+);
+
+
+
+

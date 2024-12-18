@@ -45,6 +45,8 @@
             this.BtnAnterior = new System.Windows.Forms.Button();
             this.BtnSiguiente = new System.Windows.Forms.Button();
             this.TxtFiltrar = new System.Windows.Forms.TextBox();
+            this.CmbSucursal = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.BtnBuscarCliente = new NeoCobranza.Especiales.EspecialButton();
             this.btnActualizar = new NeoCobranza.Especiales.EspecialButton();
             this.btnAgregar = new NeoCobranza.Especiales.EspecialButton();
@@ -122,7 +124,7 @@
             this.CmbBuscarPor.FormattingEnabled = true;
             this.CmbBuscarPor.Location = new System.Drawing.Point(502, 38);
             this.CmbBuscarPor.Name = "CmbBuscarPor";
-            this.CmbBuscarPor.Size = new System.Drawing.Size(272, 29);
+            this.CmbBuscarPor.Size = new System.Drawing.Size(223, 29);
             this.CmbBuscarPor.TabIndex = 102;
             // 
             // PnlTitulo
@@ -236,6 +238,32 @@
             this.TxtFiltrar.Size = new System.Drawing.Size(483, 20);
             this.TxtFiltrar.TabIndex = 107;
             // 
+            // CmbSucursal
+            // 
+            this.CmbSucursal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CmbSucursal.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.CmbSucursal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbSucursal.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CmbSucursal.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.CmbSucursal.FormattingEnabled = true;
+            this.CmbSucursal.Location = new System.Drawing.Point(731, 38);
+            this.CmbSucursal.Name = "CmbSucursal";
+            this.CmbSucursal.Size = new System.Drawing.Size(208, 29);
+            this.CmbSucursal.TabIndex = 109;
+            this.CmbSucursal.SelectedIndexChanged += new System.EventHandler(this.CmbSucursal_SelectedIndexChanged);
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label5.Location = new System.Drawing.Point(728, 11);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(63, 17);
+            this.label5.TabIndex = 108;
+            this.label5.Text = "Sucursal:";
+            // 
             // BtnBuscarCliente
             // 
             this.BtnBuscarCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -250,7 +278,7 @@
             this.BtnBuscarCliente.ForeColor = System.Drawing.Color.White;
             this.BtnBuscarCliente.Image = ((System.Drawing.Image)(resources.GetObject("BtnBuscarCliente.Image")));
             this.BtnBuscarCliente.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnBuscarCliente.Location = new System.Drawing.Point(780, 34);
+            this.BtnBuscarCliente.Location = new System.Drawing.Point(954, 32);
             this.BtnBuscarCliente.Name = "BtnBuscarCliente";
             this.BtnBuscarCliente.Size = new System.Drawing.Size(148, 38);
             this.BtnBuscarCliente.TabIndex = 103;
@@ -309,6 +337,8 @@
             // 
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1141, 562);
+            this.Controls.Add(this.CmbSucursal);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.TxtFiltrar);
             this.Controls.Add(this.PnlPaginado);
             this.Controls.Add(this.PnlTitulo);
@@ -353,5 +383,7 @@
         public System.Windows.Forms.Button BtnAnterior;
         public System.Windows.Forms.Button BtnSiguiente;
         public System.Windows.Forms.TextBox TxtFiltrar;
+        public System.Windows.Forms.ComboBox CmbSucursal;
+        public System.Windows.Forms.Label label5;
     }
 }

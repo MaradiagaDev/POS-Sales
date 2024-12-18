@@ -1,4 +1,5 @@
 ﻿using NeoCobranza.ModelsCobranza;
+using NeoCobranza.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,19 +14,18 @@ namespace NeoCobranza.Paneles
 {
     public partial class AgregarNotaOrden : Form
     {
+        DataUtilities dataUtilities = new DataUtilities();
         private string auxOrden;
         public AgregarNotaOrden(string key)
         {
             InitializeComponent();
-            auxOrden = key;
 
-            using(NeoCobranzaContext db = new NeoCobranzaContext())
+            DataTable dt = dataUtilities.getRecordByColumn("Ordenes", "OrdenId", key);
+            auxOrden = Convert.ToString(dt.Rows[0][0]);
+
+            if (dt.Rows.Count > 0)
             {
-                Ordenes orden = db.Ordenes.Where(s => s.OrdenId == int.Parse(key)).FirstOrDefault();
-                if (orden != null)
-                {
-                    TxtNotaOrden.Text = orden.NotaOrden;
-                }
+                TxtNotaOrden.Text = Convert.ToString(dt.Rows[0]["NotaOrden"]);
             }
         }
 
@@ -36,21 +36,10 @@ namespace NeoCobranza.Paneles
 
         private void btnGuardarNota_Click(object sender, EventArgs e)
         {
-            using (NeoCobranzaContext db = new NeoCobranzaContext())
-            {
-                Ordenes orden = db.Ordenes.Where(s => s.OrdenId == int.Parse(auxOrden)).FirstOrDefault();
-                if (orden != null)
-                {
-                    orden.NotaOrden = TxtNotaOrden.Text;
-                    db.Update(orden);
-                    db.SaveChanges();
+            dataUtilities.SetColumns("NotaOrden",TxtNotaOrden.Text);
+            dataUtilities.UpdateRecordByPrimaryKey("Ordenes", auxOrden);
 
-                    this.Close();
-                }
-            }
-
-            MessageBox.Show("La nota ha sido guardada.", "Correcto",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.Close();
         }
     }
 }

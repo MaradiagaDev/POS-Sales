@@ -150,7 +150,7 @@ namespace NeoCobranza.Paneles
                 auxIdProducto = Convert.ToString(dtResponseMerma.Rows[0]["ProductoId"]);
                 auxIdAlmacenSeleccionado = Convert.ToString(dtResponseMerma.Rows[0]["AlmacenId"]);
 
-                BtnRevertir.Enabled = Convert.ToString(dgvCatalogo.Rows[e.RowIndex].Cells[2].Value) == "SI" ? false : true;
+                BtnRevertir.Enabled = Convert.ToString(dgvCatalogo.Rows[e.RowIndex].Cells[7].Value) == "SI" ? false : true;
             }
         }
 

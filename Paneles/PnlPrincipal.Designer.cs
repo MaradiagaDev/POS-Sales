@@ -72,6 +72,7 @@
             this.ventasDirectasDeAtaudesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BtnOrdenMesa = new System.Windows.Forms.ToolStripMenuItem();
             this.listaDeOrdenesActivasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cuentasPorCobrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuOpc = new NeoCobranza.Especiales.RJDropDownMenu(this.components);
             this.configFacturaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BtnTasaCambio = new System.Windows.Forms.ToolStripMenuItem();
@@ -705,12 +706,13 @@
             this.MenuVentasDirectas.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ventasDirectasDeAtaudesToolStripMenuItem,
             this.BtnOrdenMesa,
-            this.listaDeOrdenesActivasToolStripMenuItem});
+            this.listaDeOrdenesActivasToolStripMenuItem,
+            this.cuentasPorCobrarToolStripMenuItem});
             this.MenuVentasDirectas.MenuItemHeight = 25;
             this.MenuVentasDirectas.MenuItemTextColor = System.Drawing.Color.White;
             this.MenuVentasDirectas.Name = "MenuVentasDirectas";
             this.MenuVentasDirectas.PrimaryColor = System.Drawing.SystemColors.ControlDark;
-            this.MenuVentasDirectas.Size = new System.Drawing.Size(271, 82);
+            this.MenuVentasDirectas.Size = new System.Drawing.Size(271, 130);
             // 
             // ventasDirectasDeAtaudesToolStripMenuItem
             // 
@@ -743,6 +745,15 @@
             this.listaDeOrdenesActivasToolStripMenuItem.Size = new System.Drawing.Size(270, 26);
             this.listaDeOrdenesActivasToolStripMenuItem.Text = "Lista de Ordenes Activas";
             this.listaDeOrdenesActivasToolStripMenuItem.Click += new System.EventHandler(this.listaDeOrdenesActivasToolStripMenuItem_Click);
+            // 
+            // cuentasPorCobrarToolStripMenuItem
+            // 
+            this.cuentasPorCobrarToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.cuentasPorCobrarToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.cuentasPorCobrarToolStripMenuItem.Name = "cuentasPorCobrarToolStripMenuItem";
+            this.cuentasPorCobrarToolStripMenuItem.Size = new System.Drawing.Size(270, 26);
+            this.cuentasPorCobrarToolStripMenuItem.Text = "Cuentas por Cobrar";
+            this.cuentasPorCobrarToolStripMenuItem.Click += new System.EventHandler(this.cuentasPorCobrarToolStripMenuItem_Click);
             // 
             // MenuOpc
             // 
@@ -897,7 +908,7 @@
             this.MenuInventario.MenuItemTextColor = System.Drawing.Color.White;
             this.MenuInventario.Name = "MenuInventario";
             this.MenuInventario.PrimaryColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.MenuInventario.Size = new System.Drawing.Size(252, 170);
+            this.MenuInventario.Size = new System.Drawing.Size(252, 148);
             // 
             // kardexToolStripMenuItem
             // 
@@ -1086,5 +1097,6 @@
         private System.Windows.Forms.ToolStripMenuItem BtnBancosTarjeta;
         private System.Windows.Forms.ToolStripMenuItem productosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem serviciosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cuentasPorCobrarToolStripMenuItem;
     }
 }

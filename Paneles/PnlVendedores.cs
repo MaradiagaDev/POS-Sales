@@ -75,9 +75,9 @@ namespace NeoCobranza.Paneles
             {
                 PnlVentas pnlVentas = Owner as PnlVentas;
 
-                // pnlContrato.dgvColector.Rows.Add(this.DgvColector.SelectedRows[0].Cells[0].Value +" "+ this.DgvColector.SelectedRows[0].Cells[1].Value + " "+this.DgvColector.SelectedRows[0].Cells[2].Value + " " + this.DgvColector.SelectedRows[0].Cells[3].Value, this.DgvColector.SelectedRows[0].Cells[4].Value);
-                pnlVentas.LblNombreVendedor.Text = this.DgvVendedor.SelectedRows[0].Cells[1].Value.ToString();
-                pnlVentas.LblIdVendedor.Text = this.DgvVendedor.SelectedRows[0].Cells[0].Value.ToString();
+                //// pnlContrato.dgvColector.Rows.Add(this.DgvColector.SelectedRows[0].Cells[0].Value +" "+ this.DgvColector.SelectedRows[0].Cells[1].Value + " "+this.DgvColector.SelectedRows[0].Cells[2].Value + " " + this.DgvColector.SelectedRows[0].Cells[3].Value, this.DgvColector.SelectedRows[0].Cells[4].Value);
+                //pnlVentas.LblNombreVendedor.Text = this.DgvVendedor.SelectedRows[0].Cells[1].Value.ToString();
+                //pnlVentas.LblIdVendedor.Text = this.DgvVendedor.SelectedRows[0].Cells[0].Value.ToString();
 
                 this.Hide();
             }

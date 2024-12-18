@@ -118,32 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="especialButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAMxJREFUWEftllEKwkAMRPcSilcqHrs30A//VdBLaJy4Y0FprCb1YzEPhm6zk83Q
-        9qMlSV4RkTV0hObmAHUcYwPTL4Y/2HOMDY3C29ngsdPn0pcBMsCoEeW+7r6lp/0J7jUeIAKPbTwAyvkN
-        uOGxjQdAeewVDI9c17VkcqHVhkZvgCnOtNrQ6HoFbB16sVxAm3tRZAetuGVTvfEAuHw/XKn+WADgG67U
-        nnAA33Cl9oUDKFtoya3PQZP+vUbxDVfQ2EHeEFfoBPmGJ39IKTfpNN90P2GI7QAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="BtnCliente.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAApNJREFUWEe9l0tsDVEch2/apgst9dohJBatV1RqgZWURgjWdCWRithYWHiksbJA
-        WIgNQSr0kSbCwoKVjURY0qiVlViIeD/b4Pp+8btzG+dOh86ZfsmX3PM7//mfk947Z6alqVIul+fhSjvX
-        cbGwUB324BP8m8e4F+tcHhcaN+EdfIOHcRnOsfp8BN/iXWz2ZfGg6RCO4gJHAcwtdM0NR3Gg4Ub8jm2O
-        UqGm1bVdjvJDsz4c8DATavv/pz4TmukHtg878SG+xgd4CBe5LIFMtaMe5odmz/A8juFZ3IEncAR/oe6K
-        AbyIw3gbn/vy/NDsHmqhS44SyFbgftQGtYELqNr7LskPzc6gWOtoUqh7iuc8zA/NuvEb1juaFOpe4B4P
-        80Mz3VpivqNUqNHBpK9glaP80ExH8Dvc7igVarbiR2xwFAcaXsNbHqZCzU0c9DAeNG3Dr3jQUYDmUL+V
-        5Y7iQuNdOI46GRc7Vr7Emea6HRcDC6zHRyheWqETcoPLiofFlqJOxJ367LgYWEDvArux3VEq1KxxbZOj
-        qUGDBtyG1/ETvscPuM4lAZpzjWp1jZ6K6vHvtyTFzXgaX6HuZ91+W7AedSTX3IQyz51EbV7nQWXz6qWe
-        2W9KFGnXevzqzzjDcQJZsAl9dnbKUQKZvj4d5Xpi9juuDQWNqPu401FNmE82YWsuPhHm9S6h3o2OQpjs
-        wB8401Eq1FQ2kbm4UE9U7w5HIUwewBEPM6H2OPZ6mIl6aw0PQ5i8isFLRyzofVlreBjCpF69ejyMDr3T
-        3xWZaMGfuNpRdOjdjnpXmO2oCuFm/IJxn+MToLfOks+4yVEVwqOoB0rl362i1BrHvGwVwis4XfR52SqE
-        uk91DkyHs/6sWir9BkPnR5pm4FgqAAAAAElFTkSuQmCC
-</value>
-  </data>
   <data name="BtnGestionSalas.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL

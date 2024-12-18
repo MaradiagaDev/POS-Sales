@@ -43,6 +43,8 @@
             this.LblIdProducto = new System.Windows.Forms.Label();
             this.TxtProducto = new System.Windows.Forms.TextBox();
             this.TxtIdProducto = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.CmbAlmacenes = new System.Windows.Forms.ComboBox();
             this.btnActualizar = new NeoCobranza.Especiales.EspecialButton();
             this.BtnBuscarCliente = new NeoCobranza.Especiales.EspecialButton();
             this.TxtFiltrar = new NeoCobranza.Controladores.LoginUserControl();
@@ -102,7 +104,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvCatalogo.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvCatalogo.GridColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dgvCatalogo.Location = new System.Drawing.Point(12, 108);
+            this.dgvCatalogo.Location = new System.Drawing.Point(12, 162);
             this.dgvCatalogo.Name = "dgvCatalogo";
             this.dgvCatalogo.ReadOnly = true;
             this.dgvCatalogo.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -116,7 +118,7 @@
             this.dgvCatalogo.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCatalogo.RowHeadersWidth = 15;
             this.dgvCatalogo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCatalogo.Size = new System.Drawing.Size(561, 352);
+            this.dgvCatalogo.Size = new System.Drawing.Size(561, 298);
             this.dgvCatalogo.TabIndex = 136;
             this.dgvCatalogo.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCatalogo_CellContentClick);
             // 
@@ -125,7 +127,7 @@
             this.TxtCantidadMinima.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtCantidadMinima.Enabled = false;
             this.TxtCantidadMinima.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.TxtCantidadMinima.Location = new System.Drawing.Point(824, 196);
+            this.TxtCantidadMinima.Location = new System.Drawing.Point(843, 211);
             this.TxtCantidadMinima.MaxLength = 100;
             this.TxtCantidadMinima.Name = "TxtCantidadMinima";
             this.TxtCantidadMinima.Size = new System.Drawing.Size(213, 23);
@@ -140,7 +142,7 @@
             this.LblCantidadMinima.Enabled = false;
             this.LblCantidadMinima.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
             this.LblCantidadMinima.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.LblCantidadMinima.Location = new System.Drawing.Point(678, 199);
+            this.LblCantidadMinima.Location = new System.Drawing.Point(697, 214);
             this.LblCantidadMinima.Name = "LblCantidadMinima";
             this.LblCantidadMinima.Size = new System.Drawing.Size(140, 18);
             this.LblCantidadMinima.TabIndex = 142;
@@ -162,7 +164,7 @@
             this.TxtCantidadMaxima.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtCantidadMaxima.Enabled = false;
             this.TxtCantidadMaxima.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.TxtCantidadMaxima.Location = new System.Drawing.Point(824, 240);
+            this.TxtCantidadMaxima.Location = new System.Drawing.Point(843, 255);
             this.TxtCantidadMaxima.MaxLength = 100;
             this.TxtCantidadMaxima.Name = "TxtCantidadMaxima";
             this.TxtCantidadMaxima.Size = new System.Drawing.Size(213, 23);
@@ -177,7 +179,7 @@
             this.LblCantidadMaxima.Enabled = false;
             this.LblCantidadMaxima.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
             this.LblCantidadMaxima.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.LblCantidadMaxima.Location = new System.Drawing.Point(678, 243);
+            this.LblCantidadMaxima.Location = new System.Drawing.Point(697, 258);
             this.LblCantidadMaxima.Name = "LblCantidadMaxima";
             this.LblCantidadMaxima.Size = new System.Drawing.Size(145, 18);
             this.LblCantidadMaxima.TabIndex = 145;
@@ -190,7 +192,7 @@
             this.LblProducto.Enabled = false;
             this.LblProducto.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
             this.LblProducto.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.LblProducto.Location = new System.Drawing.Point(678, 157);
+            this.LblProducto.Location = new System.Drawing.Point(697, 172);
             this.LblProducto.Name = "LblProducto";
             this.LblProducto.Size = new System.Drawing.Size(78, 18);
             this.LblProducto.TabIndex = 147;
@@ -203,7 +205,7 @@
             this.LblIdProducto.Enabled = false;
             this.LblIdProducto.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
             this.LblIdProducto.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.LblIdProducto.Location = new System.Drawing.Point(678, 114);
+            this.LblIdProducto.Location = new System.Drawing.Point(697, 129);
             this.LblIdProducto.Name = "LblIdProducto";
             this.LblIdProducto.Size = new System.Drawing.Size(97, 18);
             this.LblIdProducto.TabIndex = 148;
@@ -214,7 +216,7 @@
             this.TxtProducto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtProducto.Enabled = false;
             this.TxtProducto.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.TxtProducto.Location = new System.Drawing.Point(824, 154);
+            this.TxtProducto.Location = new System.Drawing.Point(843, 169);
             this.TxtProducto.MaxLength = 100;
             this.TxtProducto.Name = "TxtProducto";
             this.TxtProducto.ReadOnly = true;
@@ -226,12 +228,36 @@
             this.TxtIdProducto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtIdProducto.Enabled = false;
             this.TxtIdProducto.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.TxtIdProducto.Location = new System.Drawing.Point(824, 112);
+            this.TxtIdProducto.Location = new System.Drawing.Point(843, 127);
             this.TxtIdProducto.MaxLength = 100;
             this.TxtIdProducto.Name = "TxtIdProducto";
             this.TxtIdProducto.ReadOnly = true;
             this.TxtIdProducto.Size = new System.Drawing.Size(213, 23);
             this.TxtIdProducto.TabIndex = 150;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label2.Location = new System.Drawing.Point(9, 127);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(80, 18);
+            this.label2.TabIndex = 159;
+            this.label2.Text = "Almacén:";
+            // 
+            // CmbAlmacenes
+            // 
+            this.CmbAlmacenes.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.CmbAlmacenes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbAlmacenes.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CmbAlmacenes.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.CmbAlmacenes.FormattingEnabled = true;
+            this.CmbAlmacenes.Location = new System.Drawing.Point(95, 122);
+            this.CmbAlmacenes.Name = "CmbAlmacenes";
+            this.CmbAlmacenes.Size = new System.Drawing.Size(478, 29);
+            this.CmbAlmacenes.TabIndex = 158;
+            this.CmbAlmacenes.SelectedIndexChanged += new System.EventHandler(this.CmbAlmacenes_SelectedIndexChanged);
             // 
             // btnActualizar
             // 
@@ -306,6 +332,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(1125, 523);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.CmbAlmacenes);
             this.Controls.Add(this.TxtIdProducto);
             this.Controls.Add(this.TxtProducto);
             this.Controls.Add(this.LblIdProducto);
@@ -349,5 +377,7 @@
         public System.Windows.Forms.Label LblIdProducto;
         public System.Windows.Forms.TextBox TxtProducto;
         public System.Windows.Forms.TextBox TxtIdProducto;
+        public System.Windows.Forms.Label label2;
+        public System.Windows.Forms.ComboBox CmbAlmacenes;
     }
 }

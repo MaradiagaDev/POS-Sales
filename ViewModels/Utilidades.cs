@@ -17,7 +17,7 @@ namespace NeoCobranza.ViewModels
 
         //Tasa
         public static string IdTasa = "1198";
-        public static string Tasa = "36,6243";
+        public static string Tasa = "36.6243";
 
         //Usuario
         public static string IdUsuario;

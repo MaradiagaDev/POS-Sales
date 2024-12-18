@@ -72,7 +72,6 @@ namespace NeoCobranza.Paneles
             this.label1 = new System.Windows.Forms.Label();
             this.TxtNoRuc = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -740,21 +739,9 @@ namespace NeoCobranza.Paneles
             this.label18.ForeColor = System.Drawing.SystemColors.Highlight;
             this.label18.Location = new System.Drawing.Point(439, 292);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(569, 18);
+            this.label18.Size = new System.Drawing.Size(43, 18);
             this.label18.TabIndex = 82;
-            this.label18.Text = "RUC: *Si no están los 14 dígitos no se pueden realizar retenciones al facturar*";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
-            this.label19.ForeColor = System.Drawing.Color.Red;
-            this.label19.Location = new System.Drawing.Point(438, 346);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(533, 36);
-            this.label19.TabIndex = 83;
-            this.label19.Text = " *Revise bien antes de agregar el No Ruc, Solo un a dministrador podrá \r\n modific" +
-    "arlo una vez ha sido agregado*";
+            this.label18.Text = "RUC:";
             // 
             // PanelModificarCliente
             // 
@@ -762,7 +749,6 @@ namespace NeoCobranza.Paneles
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1056, 600);
-            this.Controls.Add(this.label19);
             this.Controls.Add(this.TxtNoRuc);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.label1);
@@ -859,6 +845,5 @@ namespace NeoCobranza.Paneles
         public System.Windows.Forms.Label label1;
         public System.Windows.Forms.TextBox TxtNoRuc;
         public System.Windows.Forms.Label label18;
-        public System.Windows.Forms.Label label19;
     }
 }

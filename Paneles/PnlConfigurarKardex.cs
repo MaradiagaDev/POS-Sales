@@ -1,4 +1,6 @@
-﻿using NeoCobranza.ModelsCobranza;
+﻿
+using NeoCobranza.ModelsCobranza;
+using NeoCobranza.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +19,7 @@ namespace NeoCobranza.Paneles
         PnlKardx auxFrm;
         public DataTable auxTablaProducto = new DataTable();
         private bool buscado = false;
+        DataUtilities dataUtilities = new DataUtilities();
         public PnlConfigurarKardex(PnlKardx frm)
         {
             InitializeComponent();
@@ -25,24 +28,28 @@ namespace NeoCobranza.Paneles
 
         private void PnlConfigurarKardex_Load(object sender, EventArgs e)
         {
-            DgvProducto.EnableHeadersVisualStyles = false;
-            DgvProducto.ColumnHeadersDefaultCellStyle.BackColor = Color.CadetBlue;
-            DgvProducto.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            DgvProducto.RowsDefaultCellStyle.Font = new Font("Century Gothic", 9);
-            DgvProducto.RowsDefaultCellStyle.BackColor = Color.White;
+            UIUtilities.PersonalizarDataGridView(DgvProducto);
+            UIUtilities.EstablecerFondo(this);
+            UIUtilities.ConfigurarTextBoxBuscar(TxtFiltroProducto);
+            UIUtilities.ConfigurarComboBox(CmbAlmacen);
+            UIUtilities.ConfigurarBotonBuscar(BtnBuscarProducto);
+            UIUtilities.ConfigurarBotonCrear(BtnGuardar);
 
-            using(NeoCobranzaContext db = new NeoCobranzaContext()) 
+            //ALMACENES
+            DataTable dtResponseAlmacenes = dataUtilities.GetAllRecords("Almacenes");
+            var filterRowAlmacenes = from row in dtResponseAlmacenes.AsEnumerable() where Convert.ToString(row.Field<string>("Estatus")) == "Activo" select row;
+
+            if (filterRowAlmacenes.Any())
             {
-                List<Almacenes> listBdAlmacenes = db.Almacenes.Where(s => s.Estatus == "Activo").OrderByDescending(s => s.AlmacenId).ToList();
-
                 CmbAlmacen.ValueMember = "AlmacenId";
                 CmbAlmacen.DisplayMember = "NombreAlmacen";
-                CmbAlmacen.DataSource = listBdAlmacenes;
-
-                auxTablaProducto.Columns.Add("Producto ID", typeof(string));
-                auxTablaProducto.Columns.Add("Producto", typeof(string));
-
-                DgvProducto.DataSource = auxTablaProducto;
+                CmbAlmacen.DataSource = filterRowAlmacenes.CopyToDataTable();
+            }
+            else
+            {
+                MessageBox.Show("Debe agregar un almacén para realizar alertas.", "Atención",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.Close();
             }
 
             Buscador();
@@ -57,32 +64,33 @@ namespace NeoCobranza.Paneles
 
         private void Buscador()
         {
-            using (NeoCobranzaContext db = new NeoCobranzaContext())
+            auxTablaProducto.Rows.Clear();
+
+            dataUtilities.SetParameter("@AlmacenId", CmbAlmacen.SelectedValue);
+            dataUtilities.SetParameter("@CategoriaId", 0);
+            dataUtilities.SetParameter("@ProveedorId", 0);
+            dataUtilities.SetParameter("@Filtro", TxtFiltroProducto.Text);
+
+            DataTable dtResponse = dataUtilities.ExecuteStoredProcedure("sp_ObtenerCantidadProductoPorAlmacenYProveedor");
+
+            if(auxTablaProducto.Columns.Count != 2)
             {
-                var serviciosProductos = db.ServiciosEstadares
-                    .AsNoTracking()
-                    .Where(s => s.Estado == "Activo" && s.MontoVd != 0 && s.NombreEstandar.Contains(TxtFiltroProducto.Text) && s.ClasificacionProducto == 0)
-                    .ToList();
-
-                var almacenId = int.Parse(CmbAlmacen.SelectedValue.ToString());
-
-                var productos = (from sp in serviciosProductos
-                                 join rap in db.RelAlmacenProducto
-                                 on sp.IdEstandar equals rap.ProductoId
-                                 where rap.AlmacenId == almacenId
-                                 select new
-                                 {
-                                     sp.IdEstandar,
-                                     sp.NombreEstandar
-                                 }).ToList();
-
-                auxTablaProducto.Rows.Clear();
-
-                foreach (var producto in productos)
-                {
-                    auxTablaProducto.Rows.Add(producto.IdEstandar, producto.NombreEstandar);
-                }
+                auxTablaProducto.Columns.Add("ID", typeof(string));
+                auxTablaProducto.Columns.Add("Producto", typeof(string));
             }
+
+            foreach (DataRow item in dtResponse.Rows)
+            {
+                auxTablaProducto.Rows.Add(
+                    Convert.ToString(item["ProductoId"]),
+                    Convert.ToString(item["NombreProducto"])
+                    );
+            }
+
+            DgvProducto.DataSource = auxTablaProducto;
+
+            DgvProducto.Columns[0].Visible = false;
+
         }
 
         private void CmbAlmacen_SelectedIndexChanged(object sender, EventArgs e)
@@ -93,23 +101,18 @@ namespace NeoCobranza.Paneles
         {
             if(DgvProducto.SelectedRows.Count > 0) 
             {
-                auxFrm.LblProducto.Text = DgvProducto.SelectedRows[0].Cells[1].Value.ToString();
+                auxFrm.LblProducto.Text = Convert.ToString(DgvProducto.SelectedRows[0].Cells[1].Value);
                 auxFrm.LblAlmacen.Text = CmbAlmacen.Text;
                 auxFrm.LblFechaInicial.Text = DtInicial.Text;
                 auxFrm.LblFechaFinal.Text = DtFinal.Text;
 
-                using(NeoCobranzaContext db = new NeoCobranzaContext())
-                {
-                    var listaKardex = db.Kardex.Where(s => s.AlmacenId == int.Parse(CmbAlmacen.SelectedValue.ToString()) && s.ProductoId == int.Parse(DgvProducto.SelectedRows[0].Cells[0].Value.ToString())
-                    && (s.Fecha >= DtInicial.Value && s.Fecha <= DtFinal.Value)).ToList();
+                dataUtilities.SetParameter("@ProductoId", Convert.ToString(DgvProducto.SelectedRows[0].Cells[0].Value));
+                dataUtilities.SetParameter("@AlmacenId",CmbAlmacen.SelectedValue);
+                dataUtilities.SetParameter("@FechaInicial",DtInicial.Value);
+                dataUtilities.SetParameter("@FechaFinal",DtFinal.Value);
 
-                    auxFrm.dataTable.Rows.Clear();
-                    foreach (var item in listaKardex)
-                    {
-                        auxFrm.dataTable.Rows.Add(item.Fecha,item.IdDocumento,item.Operacion,item.UnidadesEntrada,item.CostoUnitarioEntrada,item.TotalEntrada,
-                            item.UnidadesSalida, item.CostoUnitarioSalida, item.TotalSalida, item.UnidadesSaldo,item.CostoUnitarioSaldo,item.CostoTotalSaldo);
-                    }
-                }
+                auxFrm.dataTable.Rows.Clear();
+                auxFrm.DgvKardex.DataSource = dataUtilities.ExecuteStoredProcedure("Sp_KardexPromedio");
 
                 this.Close();
             }

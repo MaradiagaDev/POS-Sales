@@ -21,18 +21,20 @@ namespace NeoCobranza.Paneles_Venta
     public partial class PnlVentas : Form
     {
         public PnlVendedores pnlVendedores;
-        VMOrdenes vMOrdenes = new VMOrdenes();
+        public VMOrdenes vMOrdenes = new VMOrdenes();
         public string auxOpc = "";
+        DataUtilities dataUtilities = new DataUtilities();
 
         //Constructor
-        public PnlVentas(Conexion conexion,string opc)
+        public PnlVentas(Conexion conexion, string opc)
         {
             InitializeComponent();
-            pnlVendedores = new PnlVendedores(conexion,"Venta");
-            AddOwnedForm(pnlVendedores);
+            this.DoubleBuffered = true;
             auxOpc = opc;
-
             this.Enter += new EventHandler(Form1_Enter);
+            UIUtilities.PersonalizarDataGridView(dgvCatalogoOrdenes);
+            UIUtilities.PersonalizarDataGridView(DgvProductos);
+            UIUtilities.PersonalizarDataGridView(DgvItemsOrden);
         }
 
 
@@ -45,15 +47,15 @@ namespace NeoCobranza.Paneles_Venta
         private void PnlVentas_Load(object sender, EventArgs e)
         {
             this.TxtCodigoProducto.LostFocus += new System.EventHandler(textBox_LostFocus);
-            vMOrdenes.InitModuloOrdenes(this,auxOpc,"");
+            vMOrdenes.InitModuloOrdenes(this, auxOpc, "");
         }
 
         private void textBox_LostFocus(object sender, EventArgs e)
         {
-            if(TCMain.SelectedIndex == 0)
-            {
-                ((System.Windows.Forms.TextBox)sender).Focus();
-            }
+            //if (TCMain.SelectedIndex == 0)
+            //{
+            //    ((System.Windows.Forms.TextBox)sender).Focus();
+            //}
         }
 
         private void BtnCliente_Click(object sender, EventArgs e)
@@ -61,15 +63,6 @@ namespace NeoCobranza.Paneles_Venta
             Panel_Cliente_Contrato panelCliente = new Panel_Cliente_Contrato("Venta");
             AddOwnedForm(panelCliente);
             panelCliente.ShowDialog();
-
-            using(NeoCobranzaContext db = new NeoCobranzaContext())
-            {
-                Ordenes ordenes = db.Ordenes.Where(s => s.OrdenId == int.Parse(LblNoOrden.Text)).FirstOrDefault();
-                ordenes.ClienteId = int.Parse(LblIdClientes.Text);
-
-                db.Update(ordenes);
-                db.SaveChanges();
-            }
         }
 
         private void BtnVolver_Click(object sender, EventArgs e)
@@ -89,7 +82,8 @@ namespace NeoCobranza.Paneles_Venta
 
         private void BtnPagarOrden_Click(object sender, EventArgs e)
         {
-            vMOrdenes.ConfigUI(this, "Pagar");
+            PnlPago frm = new PnlPago(this);
+            frm.ShowDialog();
         }
 
         private void BtnBuscar_Click(object sender, EventArgs e)
@@ -104,17 +98,24 @@ namespace NeoCobranza.Paneles_Venta
 
         private void TxtCantidadProducto_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Verificar si la tecla presionada es un número o la tecla de retroceso
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            // Permitir números, la tecla de retroceso y el punto decimal
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
-                // Si no es un número ni la tecla de retroceso, ignorar la entrada de teclado
+                // Si no es un número, un punto decimal ni una tecla de control, ignorar la entrada
+                e.Handled = true;
+            }
+
+            // Verificar si ya hay un punto decimal en el texto
+            if (e.KeyChar == '.' && ((sender as System.Windows.Forms.TextBox)?.Text.IndexOf('.') > -1))
+            {
+                // Si ya hay un punto decimal, ignorar la entrada
                 e.Handled = true;
             }
         }
 
         private void DgvProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 6)
+            if (e.ColumnIndex == 5)
             {
                 if (vMOrdenes.auxSubModulo == "Productos")
                 {
@@ -126,43 +127,40 @@ namespace NeoCobranza.Paneles_Venta
                 {
                     MessageBox.Show("No se puede revisar la disponibilidad en servicios.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-               
+
             }
 
-            if (e.ColumnIndex == 5)
+            if (e.ColumnIndex == 4)
             {
                 int Prueba;
-                if(int.TryParse(TxtCantidadProducto.Text.Trim(), out Prueba) == false || TxtCantidadProducto.Text.Trim() == "0"
+                if (int.TryParse(TxtCantidadProducto.Text.Trim(), out Prueba) == false || TxtCantidadProducto.Text.Trim() == "0"
                     || TxtCantidadProducto.Text.Trim() == "00" || TxtCantidadProducto.Text.Trim() == "000" || TxtCantidadProducto.Text.Trim() == "0000")
                 {
-                    MessageBox.Show("Debe agregar una cantidad valida","Atención", MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                    MessageBox.Show("Debe agregar una cantidad valida", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     TxtCantidadProducto.Text = "1";
                     return;
                 }
 
                 object cellValue = DgvProductos.Rows[e.RowIndex].Cells[0].Value;
-                
-                vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(),TxtCantidadProducto.Text.Trim(),"Aumentar");
 
-                var informativeMessageBox = new InformativeMessageBox($"Producto {DgvProductos.Rows[e.RowIndex].Cells[1].Value.ToString()} Agregado Correctamente a la Orden.", "Producto Agregado", 3000); // 3000 milisegundos = 3 segundos
-                informativeMessageBox.Show();
+                vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), TxtCantidadProducto.Text.Trim(), "Increase");
             }
         }
 
         private void ChkRetencionDgi_Click(object sender, EventArgs e)
         {
-            vMOrdenes.AgregarProductosOrden(this,"", "", "Aumentar");
+            vMOrdenes.CalcularTotales(this,TxtDescuento.Text);
         }
 
         private void ChkRetencionAlcaldia_Click(object sender, EventArgs e)
         {
-            vMOrdenes.AgregarProductosOrden(this, "", "", "Aumentar");
+            vMOrdenes.CalcularTotales(this, TxtDescuento.Text);
         }
 
 
         private void LblIdClientes_TextChanged(object sender, EventArgs e)
         {
-            if (LblIdClientes.Text.Trim() != "-")
+            if (LblNombreClientes.Text.Trim() != "-")
             {
                 var informativeMessageBox = new InformativeMessageBox($"El Cliente se ha cambiado correctamente.", "Cambio de Cliente", 3000); // 3000 milisegundos = 3 segundos
                 informativeMessageBox.Show();
@@ -172,7 +170,7 @@ namespace NeoCobranza.Paneles_Venta
         private void DgvItemsOrden_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             //Agregar
-            if (e.ColumnIndex == 7 )
+            if (e.ColumnIndex == 7)
             {
                 int Prueba;
                 if (int.TryParse(TxtCantidadItems.Text.Trim(), out Prueba) == false || TxtCantidadItems.Text.Trim() == "0"
@@ -185,7 +183,7 @@ namespace NeoCobranza.Paneles_Venta
 
                 object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[2].Value;
 
-                vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), TxtCantidadItems.Text.Trim(), "Aumentar");
+                vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), TxtCantidadItems.Text.Trim(), "Increase");
             }
             else if ((e.ColumnIndex == 0 && LblOrdenMesa.Text == "-"))
             {
@@ -200,7 +198,7 @@ namespace NeoCobranza.Paneles_Venta
 
                 object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[5].Value;
 
-                vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), TxtCantidadItems.Text.Trim(), "Aumentar");
+                vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), TxtCantidadItems.Text.Trim(), "Increase");
             }
 
             //Quitar
@@ -215,7 +213,7 @@ namespace NeoCobranza.Paneles_Venta
                     return;
                 }
 
-                if(decimal.Parse(TxtTotalPagado.Text) != 0)
+                if (decimal.Parse(TxtTotalPagado.Text) != 0)
                 {
                     MessageBox.Show("No puede quitar productos si ya ha agrego pagos a la orden.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -242,11 +240,11 @@ namespace NeoCobranza.Paneles_Venta
             }
 
             //Quitar
-            if (e.ColumnIndex == 9 )
+            if (e.ColumnIndex == 9)
             {
                 DialogResult result = MessageBox.Show("¿Estás seguro que deseas hacer esta acción?", "Quitar Producto Venta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                
+
                 if (result == DialogResult.Yes)
                 {
 
@@ -272,7 +270,7 @@ namespace NeoCobranza.Paneles_Venta
                     vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), cellValueCantidad.ToString(), "Disminuir");
                 }
             }
-            else if((e.ColumnIndex == 2 && LblOrdenMesa.Text == "-"))
+            else if ((e.ColumnIndex == 2 && LblOrdenMesa.Text == "-"))
             {
                 DialogResult result = MessageBox.Show("¿Estás seguro que deseas hacer esta acción?", "Quitar Producto Venta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -307,10 +305,17 @@ namespace NeoCobranza.Paneles_Venta
 
         private void TxtCantidadItems_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Verificar si la tecla presionada es un número o la tecla de retroceso
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            // Permitir números, la tecla de retroceso y el punto decimal
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
-                // Si no es un número ni la tecla de retroceso, ignorar la entrada de teclado
+                // Si no es un número, un punto decimal ni una tecla de control, ignorar la entrada
+                e.Handled = true;
+            }
+
+            // Verificar si ya hay un punto decimal en el texto
+            if (e.KeyChar == '.' && ((sender as System.Windows.Forms.TextBox)?.Text.IndexOf('.') > -1))
+            {
+                // Si ya hay un punto decimal, ignorar la entrada
                 e.Handled = true;
             }
         }
@@ -426,7 +431,7 @@ namespace NeoCobranza.Paneles_Venta
                 TxtCantidadAbonadaEfectivo.Text = TxtCantidadAbonadaEfectivo.Text.Substring(0, TxtCantidadAbonadaEfectivo.Text.Length - 1);
                 TxtCantidadAbonadaEfectivo.SelectionStart = TxtCantidadAbonadaEfectivo.Text.Length;
 
-                if(TxtCantidadAbonadaEfectivo.Text.Trim() == "")
+                if (TxtCantidadAbonadaEfectivo.Text.Trim() == "")
                 {
                     TxtCantidadAbonadaEfectivo.Text = "0";
                 }
@@ -470,9 +475,9 @@ namespace NeoCobranza.Paneles_Venta
             // Agrega el texto del botón al final del texto en el TextBox
             TxtCantidadAbonadaEfectivo.Text += clickedButton.Text;
 
-            if(double.Parse(TxtCantidadAbonadaEfectivo.Text) > double.Parse(TxtTotalEfectivo.Text))
+            if (double.Parse(TxtCantidadAbonadaEfectivo.Text) > double.Parse(TxtTotalEfectivo.Text))
             {
-                TxtDiferenciaEfectivo.Text = (Math.Round(double.Parse(TxtCantidadAbonadaEfectivo.Text) - double.Parse(TxtTotalEfectivo.Text),2)).ToString();
+                TxtDiferenciaEfectivo.Text = (Math.Round(double.Parse(TxtCantidadAbonadaEfectivo.Text) - double.Parse(TxtTotalEfectivo.Text), 2)).ToString();
             }
             else
             {
@@ -544,7 +549,7 @@ namespace NeoCobranza.Paneles_Venta
         {
             if (TxtDiferenciaEfectivo.Text != "0")
             {
-                MessageBox.Show($"Debe dar {TxtDiferenciaEfectivo.Text} (NIO) de Cambio.", "Cambio o Diferencia",MessageBoxButtons.OK,
+                MessageBox.Show($"Debe dar {TxtDiferenciaEfectivo.Text} (NIO) de Cambio.", "Cambio o Diferencia", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
             }
 
@@ -565,7 +570,7 @@ namespace NeoCobranza.Paneles_Venta
                     Cambio = decimal.Parse(TxtDiferenciaEfectivo.Text),
                     BancoId = 0,
                     Estado = "Activo",
-                    Total = decimal.Parse(TxtCantidadAbonadaEfectivo.Text) -decimal.Parse(TxtDiferenciaEfectivo.Text)
+                    Total = decimal.Parse(TxtCantidadAbonadaEfectivo.Text) - decimal.Parse(TxtDiferenciaEfectivo.Text)
                 };
 
                 db.Add(pago);
@@ -585,10 +590,10 @@ namespace NeoCobranza.Paneles_Venta
                     db.Update(orden);
                     db.SaveChanges();
                 }
-                
+
                 TxtTotalPagado.Text = (decimal.Parse(TxtTotalPagado.Text) + (decimal.Parse(TxtCantidadAbonadaEfectivo.Text) - decimal.Parse(TxtDiferenciaEfectivo.Text))).ToString();
 
-                if(decimal.Parse(TxtTotalPagado.Text) == decimal.Parse(TxtTotalCordoba.Text))
+                if (decimal.Parse(TxtTotalPagado.Text) == decimal.Parse(TxtTotalCordoba.Text))
                 {
                     orden.OrdenProceso = "Orden Cerrada";
                     orden.PagoProceso = "Totalmente Pagada";
@@ -616,7 +621,7 @@ namespace NeoCobranza.Paneles_Venta
 
         private void BtnCancelarOrden_Click(object sender, EventArgs e)
         {
-            PnlCancelarOrden pnlCancelarOrden = new PnlCancelarOrden(LblNoOrden.Text,this);
+            PnlCancelarOrden pnlCancelarOrden = new PnlCancelarOrden(LblNoOrden.Text, this);
             pnlCancelarOrden.ShowDialog();
         }
 
@@ -633,20 +638,18 @@ namespace NeoCobranza.Paneles_Venta
         private void TxtCodigoProducto_TextChanged(object sender, EventArgs e)
         {
             int prueba = 0;
-            if(ChkAutomatico.Checked)
+            if (ChkAutomatico.Checked)
             {
-                if(TxtCodigoProducto.Text.Length > 0 && int.TryParse(TxtCantidadItems.Text,out prueba) == true && prueba !=0)
+                if (TxtCodigoProducto.Text.Length > 0 && int.TryParse(TxtCantidadItems.Text, out prueba) == true && prueba != 0)
                 {
-                    using(NeoCobranzaContext db = new NeoCobranzaContext())
-                    {
-                        var servicio = db.ServiciosEstadares.Where(s => s.Codigo == TxtCodigoProducto.Text.Trim()).FirstOrDefault();
+                    DataTable dtResponse = dataUtilities.getRecordByColumn("ProductosServicios", "Codigo", TxtCodigoProducto.Text.Trim());
 
-                        if(servicio != null)
-                        {
-                            vMOrdenes.AgregarProductosOrden(this,servicio.IdEstandar.ToString(), TxtCantidadItems.Text, "Aumentar");
-                            TxtCodigoProducto.Text = string.Empty;
-                            TxtCodigoProducto.Focus();
-                        }
+
+                     if (dtResponse.Rows.Count > 0)
+                    {
+                        vMOrdenes.AgregarProductosOrden(this, Convert.ToString(dtResponse.Rows[0]["ProductoId"]), TxtCantidadItems.Text, "Increase");
+                        TxtCodigoProducto.Text = string.Empty;
+                        TxtCodigoProducto.Focus();
                     }
                 }
             }
@@ -657,16 +660,19 @@ namespace NeoCobranza.Paneles_Venta
             int prueba = 0;
             if (TxtCodigoProducto.Text.Length > 0 && int.TryParse(TxtCantidadItems.Text, out prueba) == true && prueba != 0)
             {
-                using (NeoCobranzaContext db = new NeoCobranzaContext())
-                {
-                    var servicio = db.ServiciosEstadares.Where(s => s.Codigo == TxtCodigoProducto.Text.Trim()).FirstOrDefault();
+                DataTable dtResponse = dataUtilities.getRecordByColumn("ProductosServicios", "Codigo", TxtCodigoProducto.Text.Trim());
 
-                    if (servicio != null)
-                    {
-                        vMOrdenes.AgregarProductosOrden(this, servicio.IdEstandar.ToString(), TxtCantidadItems.Text, "Aumentar");
-                        TxtCodigoProducto.Text = string.Empty;
-                        TxtCodigoProducto.Focus();
-                    }
+                if (dtResponse.Rows.Count > 0)
+                {
+                    vMOrdenes.AgregarProductosOrden(this, Convert.ToString(dtResponse.Rows[0]["ProductoId"]), TxtCantidadItems.Text, "Increase");
+                    TxtCodigoProducto.Text = string.Empty;
+                    TxtCodigoProducto.Focus();
+                }
+                else
+                {
+                    TxtCodigoProducto.Text = string.Empty;
+                    TxtCodigoProducto.Focus();
+                    MessageBox.Show("Producto no encontrado.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
@@ -678,12 +684,12 @@ namespace NeoCobranza.Paneles_Venta
 
         private void dgvCatalogo_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex ==  0)
+            if (e.ColumnIndex == 0)
             {
-                    vMOrdenes.OrdenAux = int.Parse(dgvCatalogoOrdenes.Rows[e.RowIndex].Cells[2].Value.ToString());
-                    vMOrdenes.InitModuloOrdenes(this, "OrdenRapida", "");                
+                vMOrdenes.OrdenAux = int.Parse(dgvCatalogoOrdenes.Rows[e.RowIndex].Cells[2].Value.ToString());
+                vMOrdenes.InitModuloOrdenes(this, "OrdenRapida", "");
             }
-            else if(e.ColumnIndex == 1)
+            else if (e.ColumnIndex == 1)
             {
                 PnlCancelarOrden pnlCancelarOrden = new PnlCancelarOrden(dgvCatalogoOrdenes.Rows[e.RowIndex].Cells[2].Value.ToString(), this);
                 pnlCancelarOrden.ShowDialog();
@@ -797,9 +803,9 @@ namespace NeoCobranza.Paneles_Venta
         {
             //Validaciones
             //Validar que lo pagado no sea mayor al faltante
-            if(decimal.Parse(TxtFaltanteCredito.Text) < decimal.Parse(TxtCantidadAbonadaCredito.Text))
+            if (decimal.Parse(TxtFaltanteCredito.Text) < decimal.Parse(TxtCantidadAbonadaCredito.Text))
             {
-                MessageBox.Show("El monto abonado no puede ser mayor al faltante","Atención",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                MessageBox.Show("El monto abonado no puede ser mayor al faltante", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -827,7 +833,7 @@ namespace NeoCobranza.Paneles_Venta
                 db.SaveChanges();
 
                 Ordenes orden = db.Ordenes.Where(s => s.OrdenId == int.Parse(LblNoOrden.Text)).FirstOrDefault();
-                
+
                 if (decimal.Parse(TxtTotalPagado.Text) == 0)
                 {
                     orden.PagoProceso = "Con Pagos";
@@ -840,7 +846,7 @@ namespace NeoCobranza.Paneles_Venta
                     db.Update(orden);
                     db.SaveChanges();
                 }
-                
+
                 TxtTotalPagado.Text = (decimal.Parse(TxtTotalPagado.Text) + decimal.Parse(TxtCantidadAbonadaCredito.Text)).ToString();
 
                 if (decimal.Parse(TxtTotalPagado.Text) == decimal.Parse(TxtTotalCordoba.Text))
@@ -971,13 +977,13 @@ namespace NeoCobranza.Paneles_Venta
                 return;
             }
 
-            if(TxtReferencia.Text.Trim().Length == 0)
+            if (TxtReferencia.Text.Trim().Length == 0)
             {
                 MessageBox.Show("Debe agregar el No. Referencia.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if(decimal.Parse(TxtCantidadAbonadaCheque.Text) == 0)
+            if (decimal.Parse(TxtCantidadAbonadaCheque.Text) == 0)
             {
                 MessageBox.Show("Debe digitar la cantidad abonada.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -988,7 +994,7 @@ namespace NeoCobranza.Paneles_Venta
                 Pagos pago = new Pagos()
                 {
                     OrdenId = int.Parse(LblNoOrden.Text),
-                    FormaPago = CmbTipoPago.SelectedValue.ToString() == "1" ? "Minuta":"Cheque",
+                    FormaPago = CmbTipoPago.SelectedValue.ToString() == "1" ? "Minuta" : "Cheque",
                     Pagado = decimal.Parse(TxtCantidadAbonadaCheque.Text),
                     Cambio = 0,
                     BancoId = int.Parse(CmbBancoCheque.SelectedValue.ToString()),
@@ -1033,6 +1039,57 @@ namespace NeoCobranza.Paneles_Venta
 
                     MessageBox.Show("Pago Realizado.", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+            }
+        }
+
+        private void especialButton4_Click(object sender, EventArgs e)
+        {
+            if(!decimal.TryParse(TxtTotalCordoba.Text, out var total)) 
+            {
+                MessageBox.Show("El total no es valido.","Atención",MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (!decimal.TryParse(TxtActualizarDescuento.Text, out var descuento))
+            {
+                MessageBox.Show("El descuento no es valido.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if(total < descuento)
+            {
+                MessageBox.Show("El descuento no puede ser mayor al total.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+
+            vMOrdenes.CalcularTotales(this, TxtActualizarDescuento.Text);
+        }
+
+        private void BtnCredito_Click(object sender, EventArgs e)
+        {
+            PnlVentasCredito frm = new PnlVentasCredito(this);
+            frm.ShowDialog();
+        }
+
+        private void TxtActualizarDescuento_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TxtActualizarDescuento_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir números, la tecla de retroceso y el punto decimal
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                // Si no es un número, un punto decimal ni una tecla de control, ignorar la entrada
+                e.Handled = true;
+            }
+
+            // Verificar si ya hay un punto decimal en el texto
+            if (e.KeyChar == '.' && ((sender as System.Windows.Forms.TextBox)?.Text.IndexOf('.') > -1))
+            {
+                // Si ya hay un punto decimal, ignorar la entrada
+                e.Handled = true;
             }
         }
     }

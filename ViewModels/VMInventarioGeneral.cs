@@ -42,7 +42,7 @@ namespace NeoCobranza.ViewModels
                 DataRow newRow = dataCmbTipoServicio.NewRow();
                 newRow["CategorizacionId"] = "0"; 
                 newRow["Descripcion"] = "Mostrar Todo"; 
-                newRow["Estado"] = "Actio"; 
+                newRow["Estado"] = "Activo"; 
 
                 dataCmbTipoServicio.Rows.InsertAt(newRow, 0);
 

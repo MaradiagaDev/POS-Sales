@@ -63,7 +63,6 @@ namespace NeoCobranza.ViewModels
                         frm.txtDireccion.Text = Convert.ToString(dtResponse.Rows[0]["Direccion"]);
 
                         frm.dtpFechaNac.Value = Convert.ToDateTime(dtResponse.Rows[0]["FechaNac"]);
-                        frm.TxtNoRuc.ReadOnly = true;
                         frm.TxtNoRuc.Text = Convert.ToString(dtResponse.Rows[0]["NoRuc"]);
                         frm.rbtnMasculino.Checked = Convert.ToString(dtResponse.Rows[0]["Sexo"]) == "Masculino" ? true : false;
                         frm.rbtnFemenino.Checked = Convert.ToString(dtResponse.Rows[0]["Sexo"]) == "Femenino" ? true : false;
@@ -184,6 +183,37 @@ namespace NeoCobranza.ViewModels
             switch (opc)
             {
                 case "Catalogo":
+                    // Obtiene todos los registros de la tabla Sucursal
+                    DataTable dtResponseSucursales = dataUtilities.GetAllRecords("Sucursal");
+
+                    // Filtra las filas donde el campo Estado sea "Activo"
+                    var filterRowSucursales = from row in dtResponseSucursales.AsEnumerable()
+                                              where Convert.ToString(row.Field<string>("Estado")) == "Activo"
+                                              select row;
+
+                    if (filterRowSucursales.Any())
+                    {
+                        // Crea un DataTable para los datos filtrados
+                        DataTable dataCmbSucursal = new DataTable();
+                        dataCmbSucursal = filterRowSucursales.CopyToDataTable();
+
+                        // Crea una nueva fila para "Mostrar Todo"
+                        DataRow newRow = dataCmbSucursal.NewRow();
+                        newRow["IdSucursal"] = "0";
+                        newRow["NombreSucursal"] = "Mostrar Todo";
+                        newRow["Estado"] = "Activo"; // Puedes mantener el estado "Activo" para esta fila
+
+                        // Inserta la nueva fila en la posición 0
+                        dataCmbSucursal.Rows.InsertAt(newRow, 0);
+
+                        // Configura el DataSource del combo box
+                        frm.CmbSucursal.ValueMember = "IdSucursal";
+                        frm.CmbSucursal.DisplayMember = "NombreSucursal";
+                        frm.CmbSucursal.DataSource = dataCmbSucursal;
+
+                        frm.CmbSucursal.SelectedValue = Utilidades.SucursalId;
+                    }
+
                     frm.dgvCatalogoClientes.AlternatingRowsDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#ECECEC");
 
                     //Datatable
@@ -245,13 +275,12 @@ namespace NeoCobranza.ViewModels
                     int totalPages = 0;
 
                     var filtroPor = frm.CmbBuscarPor.SelectedIndex;
-                    var filtroValor = frm.TxtFiltrar.Text.Trim();
-                    var idSucursal = Utilidades.SucursalId; // Asumiendo que el ID de la sucursal se captura desde un campo de texto en el formulario
+                    var filtroValor = frm.TxtFiltrar.Text.Trim();; // Asumiendo que el ID de la sucursal se captura desde un campo de texto en el formulario
 
 
                     dataUtilities.SetParameter("@FiltroPor", filtroPor);
                     dataUtilities.SetParameter("@FiltroValor", filtroValor);
-                    dataUtilities.SetParameter("@IdSucursal", idSucursal);
+                    dataUtilities.SetParameter("@IdSucursal", frm.CmbSucursal.SelectedValue);
                     dataUtilities.SetParameter("@PageNumber", pageNumber);
                     dataUtilities.SetParameter("@PageSize", pageSize);
                     
@@ -271,7 +300,7 @@ namespace NeoCobranza.ViewModels
         {
             dataUtilities.SetParameter("@FiltroPor", frm.CmbBuscarPor.SelectedIndex);
             dataUtilities.SetParameter("@FiltroValor", frm.TxtFiltrar.Text.Trim());
-            dataUtilities.SetParameter("@IdSucursal", Utilidades.SucursalId);
+            dataUtilities.SetParameter("@IdSucursal", frm.CmbSucursal.SelectedValue);
             dataUtilities.SetParameter("@PageNumber", currentPage);
             dataUtilities.SetParameter("@PageSize", pageSize);
 

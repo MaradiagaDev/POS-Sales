@@ -49,6 +49,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.DgvProducto = new System.Windows.Forms.DataGridView();
             this.TxtFiltroProducto = new System.Windows.Forms.TextBox();
+            this.LblCantidad = new System.Windows.Forms.Label();
+            this.TxtCantidad = new System.Windows.Forms.TextBox();
             this.BtnBuscarProducto = new NeoCobranza.Especiales.EspecialButton();
             this.especialButton1 = new NeoCobranza.Especiales.EspecialButton();
             this.BtnGuardar = new NeoCobranza.Especiales.EspecialButton();
@@ -192,6 +194,7 @@
             this.CmbAlmacenEntrado.Name = "CmbAlmacenEntrado";
             this.CmbAlmacenEntrado.Size = new System.Drawing.Size(534, 29);
             this.CmbAlmacenEntrado.TabIndex = 155;
+            this.CmbAlmacenEntrado.SelectedIndexChanged += new System.EventHandler(this.CmbAlmacenEntrado_SelectedIndexChanged);
             // 
             // CmbAlmacenSalida
             // 
@@ -273,6 +276,31 @@
             this.TxtFiltroProducto.Name = "TxtFiltroProducto";
             this.TxtFiltroProducto.Size = new System.Drawing.Size(400, 27);
             this.TxtFiltroProducto.TabIndex = 162;
+            // 
+            // LblCantidad
+            // 
+            this.LblCantidad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.LblCantidad.AutoSize = true;
+            this.LblCantidad.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.LblCantidad.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.LblCantidad.Location = new System.Drawing.Point(13, 416);
+            this.LblCantidad.Name = "LblCantidad";
+            this.LblCantidad.Size = new System.Drawing.Size(81, 18);
+            this.LblCantidad.TabIndex = 164;
+            this.LblCantidad.Text = "Cantidad:";
+            // 
+            // TxtCantidad
+            // 
+            this.TxtCantidad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.TxtCantidad.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtCantidad.Location = new System.Drawing.Point(16, 442);
+            this.TxtCantidad.MaxLength = 100;
+            this.TxtCantidad.Name = "TxtCantidad";
+            this.TxtCantidad.Size = new System.Drawing.Size(147, 27);
+            this.TxtCantidad.TabIndex = 165;
+            this.TxtCantidad.Text = "0";
+            this.TxtCantidad.TextChanged += new System.EventHandler(this.TxtCantidad_TextChanged);
+            this.TxtCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtCantidad_KeyPress);
             // 
             // BtnBuscarProducto
             // 
@@ -370,6 +398,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1125, 523);
+            this.Controls.Add(this.LblCantidad);
+            this.Controls.Add(this.TxtCantidad);
             this.Controls.Add(this.BtnBuscarProducto);
             this.Controls.Add(this.TxtFiltroProducto);
             this.Controls.Add(this.DgvProducto);
@@ -387,7 +417,7 @@
             this.Controls.Add(this.PnlTitulo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "PnlTrasladoProduco";
-            this.Text = "PnlTrasladoProduco";
+            this.Text = " ";
             this.Load += new System.EventHandler(this.PnlTrasladoProduco_Load);
             this.PnlTitulo.ResumeLayout(false);
             this.PnlTitulo.PerformLayout();
@@ -416,5 +446,7 @@
         public System.Windows.Forms.TextBox TxtFiltroProducto;
         public System.Windows.Forms.ComboBox CmbAlmacenEntrado;
         public System.Windows.Forms.ComboBox CmbAlmacenSalida;
+        public System.Windows.Forms.Label LblCantidad;
+        public System.Windows.Forms.TextBox TxtCantidad;
     }
 }

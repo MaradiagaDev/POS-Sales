@@ -19,7 +19,7 @@ namespace NeoCobranza.Paneles
     public partial class ComprasInventario : Form
     {
         string auxOpc;
-        int auxKey = 0;
+        string auxKey = "";
         DataTable dataBuscar = new DataTable();
         DataTable dataProducto = new DataTable();
         DataTable dataCompra = new DataTable();
@@ -57,7 +57,7 @@ namespace NeoCobranza.Paneles
             {
                 case "Buscar":
                     TbTitulo.Text = "Buscar Compras";
-                    auxKey = 0;
+                    auxKey = "";
                     TCMain.SelectedIndex = 0;
 
                     if (dataBuscar.Columns.Count == 0)
@@ -65,11 +65,29 @@ namespace NeoCobranza.Paneles
                         //Agregar Boton de Cambiar de estado
                         DataGridViewButtonColumn BtnCambioEstado = new DataGridViewButtonColumn();
 
-                        BtnCambioEstado.Text = "  Ver Compra  ";
+                        BtnCambioEstado.Text = "  Actualizar  ";
                         BtnCambioEstado.Name = "...";
                         BtnCambioEstado.UseColumnTextForButtonValue = true;
                         BtnCambioEstado.DefaultCellStyle.ForeColor = Color.Blue;
                         DgvCatalogo.Columns.Add(BtnCambioEstado);
+
+                        //Agregar botón para imprimir baucher
+                        DataGridViewButtonColumn BtnImprimir = new DataGridViewButtonColumn();
+
+                        BtnImprimir.Text = "  imprimir  ";
+                        BtnImprimir.Name = "...";
+                        BtnImprimir.UseColumnTextForButtonValue = true;
+                        BtnImprimir.DefaultCellStyle.ForeColor = Color.Blue;
+                        DgvCatalogo.Columns.Add(BtnImprimir);
+
+                        //Agregar botón para revertir
+                        DataGridViewButtonColumn BtnRevertir = new DataGridViewButtonColumn();
+
+                        BtnRevertir.Text = "  Revertir  ";
+                        BtnRevertir.Name = "...";
+                        BtnRevertir.UseColumnTextForButtonValue = true;
+                        BtnRevertir.DefaultCellStyle.ForeColor = Color.Blue;
+                        DgvCatalogo.Columns.Add(BtnRevertir);
 
                         // Definir las columnas
                         dataBuscar.Columns.Add("Compra ID", typeof(string));
@@ -79,8 +97,10 @@ namespace NeoCobranza.Paneles
                         dataBuscar.Columns.Add("Sucursal", typeof(string));
                         dataBuscar.Columns.Add("Fecha Creación", typeof(string));
                         dataBuscar.Columns.Add("Usuario", typeof(string));
+                        dataBuscar.Columns.Add("Usuario Revirtió", typeof(string));
 
                         DgvCatalogo.DataSource = dataBuscar;
+                        //DgvCatalogo.Columns[0].Visible = false;
                     }
 
                     // Obtiene todos los registros de la tabla Sucursal
@@ -182,30 +202,40 @@ namespace NeoCobranza.Paneles
                         dataCompra.Columns.Add("Cantidad/U", typeof(string));
 
                         DgvCompra.DataSource = dataCompra;
+                        DgvCompra.Columns[1].Visible = false;
+                        DgvCompra.Columns[2].Visible = false;
                     }
 
-                    if (auxKey != 0)
+                    if (auxKey != "")
                     {
-                        //ModelsCobranza.ComprasInventario compra = db.ComprasInventario.Where(s => s.CompraId == auxKey).FirstOrDefault();
+                        //Llenar datos de la compra
+                        DataTable dtResponse = dataUtilities.getRecordByPrimaryKey("Compras", auxKey);
 
-                        //if (compra != null)
-                        //{
-                        //    TxtMontoTotal.Text = $"{compra.CostoTotal} (NIO)";
+                        CmbAlmacen.SelectedValue = Convert.ToString(dtResponse.Rows[0]["AlmacenId"]);
+                        TxtDescripcion.Text = Convert.ToString(dtResponse.Rows[0]["Descripcion"]);
 
-                        //    CmbAlmacen.SelectedValue = compra.AlmacenId;
-                        //    TxtDescripcion.Text = compra.Descripcion;
+                        //Llenar datos detalle
+                        DataTable dtResponseDetalle = dataUtilities.getRecordByColumn("CompraDetalles", "CompraId", auxKey);
 
-                        //    var rels = db.LotesProducto.Where(s => s.CompraId == auxKey).ToList();
+                        foreach (DataRow dr in dtResponseDetalle.Rows)
+                        {
+                            DataTable dtProducto = dataUtilities.getRecordByPrimaryKey("ProductosServicios", Convert.ToString(dr["ProductoId"]));
 
-                        //    foreach (var rel in rels)
-                        //    {
-                        //        dataCompra.Rows.Add(rel.ProductoId, rel.ProveedorId, rel.Producto, rel.Expira, rel.CostoU, rel.Cantidad, rel.SubTotal);
-                        //    }
-                        //}
+                            dataCompra.Rows.Add(
+                                Convert.ToString(dr["ProductoId"]),
+                                Convert.ToString(dr["ProveedorId"]),
+                                Convert.ToString(dtProducto.Rows[0]["NombreProducto"]),
+                                Convert.ToString(dr["SubTotal"]),
+                                Convert.ToString(dr["Cantidad"])
+                                );
+
+                        }
+                        ContadorTotal();
+
+                        //llenar datos
 
                         CmbAlmacen.Enabled = false;
-                        BtnAgregarCompra.Enabled = false;
-                        TxtDescripcion.Enabled = false;
+                        BtnAgregarCompra.Text = "Actualizar Compra";
                     }
 
                     break;
@@ -222,6 +252,8 @@ namespace NeoCobranza.Paneles
                 dataProducto.Columns.Add("Producto", typeof(string));
                 dataProducto.Columns.Add("Cantidad en Almacén", typeof(string));
                 dataProducto.Columns.Add("Precio (NIO)", typeof(string));
+
+                DgvProductos.Columns[0].Visible = false;
             }
 
             if (TxtIdProveedor.Text.Trim() != "-")
@@ -262,128 +294,136 @@ namespace NeoCobranza.Paneles
                         Convert.ToString(item["NombreAlmacen"]),
                         Convert.ToString(item["NombreSucursal"]),
                         Convert.ToString(item["Fecha"]),
-                        Convert.ToString(item["Usuario"])
+                        Convert.ToString(item["Usuario"]),
+                        Convert.ToString(item["UsuarioRevirtio"])
                         );
                 }
+
+                DgvCatalogo.DataSource = dataBuscar;
 
             }
             else if (auxOpc == "Crear")
             {
-                //using (NeoCobranzaContext db = new NeoCobranzaContext())
-                //{
-                //    ModelsCobranza.ComprasInventario NuevaCompra = new ModelsCobranza.ComprasInventario();
+                if(auxKey == "")
+                {
+                    //agregar la compra
+                    string idCompra = Guid.NewGuid().ToString();
 
-                //    NuevaCompra.AlmacenId = int.Parse(CmbAlmacen.SelectedValue.ToString());
-                //    NuevaCompra.UsuarioId = int.Parse(Utilidades.IdUsuario);
-                //    NuevaCompra.SucursalId = Utilidades.SucursalId;
-                //    NuevaCompra.CostoTotal = decimal.Parse(Regex.Replace(TxtMontoTotal.Text.Trim(), @"[^0-9,]", ""));
-                //    NuevaCompra.Descripcion = TxtDescripcion.Text;
-                //    NuevaCompra.FechaAlta = DateTime.Now;
+                    dataUtilities.SetColumns("CompraId", idCompra);
+                    dataUtilities.SetColumns("usuario", Utilidades.Usuario);
+                    dataUtilities.SetColumns("AlmacenId", CmbAlmacen.SelectedValue);
+                    dataUtilities.SetColumns("SucursalId", Utilidades.SucursalId);
+                    dataUtilities.SetColumns("Descripcion", TxtDescripcion.Text);
+                    dataUtilities.SetColumns("CostoTotal", TxtMontoTotal.Text);
+                    dataUtilities.SetColumns("FechaAlta", DateTime.Now);
 
-                //    db.Add(NuevaCompra);
-                //    db.SaveChanges();
+                    dataUtilities.InsertRecord("Compras");
 
-                //    int i = 1;
+                    //agregar detalle de la compra
 
-                //    foreach (DataRow item in dataCompra.Rows)
-                //    {
-                //        ServiciosEstadares servicio = db.ServiciosEstadares.Where(s => s.IdEstandar.ToString() == item[0].ToString()).FirstOrDefault();
+                    foreach (DataRow item in dataCompra.Rows)
+                    {
+                        string idLote = Guid.NewGuid().ToString();
 
-                //        DateTime dateNueva = new DateTime();
+                        dataUtilities.SetColumns("LoteId", idLote);
+                        dataUtilities.SetColumns("ProductoId", Convert.ToString(item[0]));
+                        dataUtilities.SetColumns("CompraId", idCompra);
+                        dataUtilities.SetColumns("Cantidad", Convert.ToString(item[4]));
+                        dataUtilities.SetColumns("FechaCreacion", DateTime.Now);
+                        dataUtilities.SetColumns("AlmacenId", CmbAlmacen.SelectedValue);
+                        dataUtilities.SetColumns("ProveedorId", Convert.ToString(item[1]));
+                        dataUtilities.SetColumns("CostoU", (Convert.ToDecimal(item[3]) / Convert.ToDecimal(item[4])));
+                        dataUtilities.SetColumns("SubTotal", Convert.ToString(item[3]));
 
-                //        if (DateTime.TryParseExact(item[3].ToString(), "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime parsedDate))
-                //        {
-                //            dateNueva = parsedDate;
-                //        }
+                        dataUtilities.InsertRecord("CompraDetalles");
 
-                //        LotesProducto lote = new LotesProducto()
-                //        {
-                //            LoteId = $"L{NuevaCompra.CompraId.ToString()}-C{i.ToString()}",
-                //            CompraId = NuevaCompra.CompraId,
-                //            Producto = servicio.NombreEstandar,
-                //            ProductoId = servicio.IdEstandar,
-                //            Cantidad = int.Parse(item[5].ToString()),
-                //            FechaCreacion = DateTime.Now,
-                //            FechaExpiracion = dateNueva,
-                //            CantidadRestante = int.Parse(item[5].ToString()),
-                //            CostoU = decimal.Parse(item[4].ToString()),
-                //            SubTotal = decimal.Parse(item[6].ToString()),
-                //            ProveedorId = int.Parse(item[1].ToString()),
-                //            AlmacenId = int.Parse(CmbAlmacen.SelectedValue.ToString())
-                //        };
+                        //agregar al rel la cantidad
 
-                //        db.Add(lote);
-                //        db.SaveChanges();
+                        DataTable dtResponse = dataUtilities.GetAllRecords("RelAlmacenProducto");
+                        var filterRow =
+                            from row in dtResponse.AsEnumerable()
+                            where Convert.ToString(row.Field<string>("AlmacenId")) == Convert.ToString(CmbAlmacen.SelectedValue)
+                            && Convert.ToString(row.Field<string>("ProductoId")) == Convert.ToString(item[0])
+                            select row;
 
-                //        Kardex kardexUltimo = db.Kardex.Where(s => s.ProductoId == servicio.IdEstandar
-                //        && s.AlmacenId == int.Parse(CmbAlmacen.SelectedValue.ToString())).OrderByDescending(s => s.MovimientoId).FirstOrDefault();
+                        dtResponse = filterRow.CopyToDataTable();
 
-                //        if (kardexUltimo != null)
-                //        {
-                //            Kardex kardex = new Kardex()
-                //            {
-                //                Fecha = DateTime.Now.Date,
-                //                Operacion = "Compra",
-                //                UnidadesEntrada = int.Parse(item[5].ToString()),
-                //                CostoUnitarioEntrada = decimal.Parse(item[4].ToString()),
-                //                TotalEntrada = decimal.Parse(item[6].ToString()),
-                //                AlmacenId = int.Parse(CmbAlmacen.SelectedValue.ToString()),
-                //                ProductoId = servicio.IdEstandar,
-                //                UnidadesSaldo = int.Parse(item[5].ToString()) + kardexUltimo.UnidadesSaldo,
-                //                CostoUnitarioSaldo = (kardexUltimo.CostoTotalSaldo + Convert.ToDecimal(item[6])) / (int.Parse(item[5].ToString()) + kardexUltimo.UnidadesSaldo),
-                //                CostoTotalSaldo = kardexUltimo.CostoTotalSaldo + decimal.Parse(item[6].ToString()),
-                //                IdDocumento = NuevaCompra.CompraId.ToString(),
-                //                Lote = lote.LoteId
-                //            };
+                        decimal idRelAlmacenProducto = Convert.ToDecimal(dtResponse.Rows[0]["RelAlmacenProductoId"]);
+                        decimal cantidadActual = Convert.ToDecimal(dtResponse.Rows[0]["Cantidad"]);
 
-                //            db.Add(kardex);
-                //            db.SaveChanges();
-                //        }
-                //        else
-                //        {
-                //            Kardex kardex = new Kardex()
-                //            {
-                //                Fecha = DateTime.Now.Date,
-                //                Operacion = "Compra",
-                //                UnidadesEntrada = int.Parse(item[5].ToString()),
-                //                CostoUnitarioEntrada = decimal.Parse(item[4].ToString()),
-                //                TotalEntrada = decimal.Parse(item[6].ToString()),
-                //                AlmacenId = int.Parse(CmbAlmacen.SelectedValue.ToString()),
-                //                ProductoId = servicio.IdEstandar,
-                //                UnidadesSaldo = int.Parse(item[5].ToString()),
-                //                CostoUnitarioSaldo = decimal.Parse(item[4].ToString()),
-                //                CostoTotalSaldo = decimal.Parse(item[6].ToString()),
-                //                IdDocumento = NuevaCompra.CompraId.ToString(),
-                //                Lote = lote.LoteId
-                //            };
+                        //Actualizar la cantidad
+                        decimal cantidadActualizada = cantidadActual + Convert.ToDecimal(item[4]);
 
-                //            db.Add(kardex);
-                //            db.SaveChanges();
-                //        }
+                        dataUtilities.SetColumns("Cantidad", cantidadActualizada);
+                        dataUtilities.UpdateRecordByPrimaryKey("RelAlmacenProducto", idRelAlmacenProducto);
 
+                        auxKey = "";
+                    }
 
+                    MessageBox.Show("Compra creada correctamente.", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                //        RelAlmacenProducto relAlmacenProducto = db.RelAlmacenProducto.Where(s => s.AlmacenId == int.Parse(CmbAlmacen.SelectedValue.ToString()) && s.ProductoId == servicio.IdEstandar).FirstOrDefault();
-                //        relAlmacenProducto.Cantidad += int.Parse(item[5].ToString());
+                }
+                else
+                {
+                    //compra general
+                    dataUtilities.SetColumns("usuario", Utilidades.Usuario);
+                    dataUtilities.SetColumns("Descripcion", TxtDescripcion.Text);
+                    dataUtilities.SetColumns("CostoTotal", TxtMontoTotal.Text);
 
-                //        Almacenes almacenes = db.Almacenes.Where(s => s.AlmacenId == NuevaCompra.AlmacenId).FirstOrDefault();
-                //        Sucursales sucursal = db.Sucursales.Where(s => s.SucursalId == almacenes.SucursalId).FirstOrDefault();
+                    dataUtilities.UpdateRecordByPrimaryKey("Compras", auxKey);
 
-                //        Inventario inventario = db.Inventario.Where(s => s.ProductoId == servicio.IdEstandar).FirstOrDefault();
-                //        inventario.Cantidad += int.Parse(item[5].ToString());
+                    //detalle
+                    foreach (DataRow item in dataCompra.Rows)
+                    {
+                        //Verificar que el lote no exista en la compra ya
+                        DataTable dtResponseDetalle = dataUtilities.GetAllRecords("CompraDetalles");
+                        var filterRowDetalle =
+                            from row in dtResponseDetalle.AsEnumerable()
+                            where Convert.ToString(row.Field<string>("CompraId")) == auxKey
+                            && Convert.ToString(row.Field<string>("ProductoId")) == Convert.ToString(item[0])
+                            select row;
 
-                //        db.Update(inventario);
-                //        db.Update(relAlmacenProducto);
-                //        db.SaveChanges();
+                        if (!filterRowDetalle.Any()) 
+                        {
 
-                //        i++;
-                //    }
+                            string idLote = Guid.NewGuid().ToString();
 
+                            dataUtilities.SetColumns("LoteId", idLote);
+                            dataUtilities.SetColumns("ProductoId", Convert.ToString(item[0]));
+                            dataUtilities.SetColumns("CompraId", auxKey);
+                            dataUtilities.SetColumns("Cantidad", Convert.ToString(item[4]));
+                            dataUtilities.SetColumns("FechaCreacion", DateTime.Now);
+                            dataUtilities.SetColumns("AlmacenId", CmbAlmacen.SelectedValue);
+                            dataUtilities.SetColumns("ProveedorId", Convert.ToString(item[1]));
+                            dataUtilities.SetColumns("CostoU", (Convert.ToDecimal(item[3])/ Convert.ToDecimal(item[4])));
+                            dataUtilities.SetColumns("SubTotal", Convert.ToString(item[3]));
 
-                //}
+                            dataUtilities.InsertRecord("CompraDetalles");
 
-                MessageBox.Show("Compra creada correctamente.", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            //agregar al rel la cantidad
 
+                            DataTable dtResponse = dataUtilities.GetAllRecords("RelAlmacenProducto");
+                            var filterRow =
+                                from row in dtResponse.AsEnumerable()
+                                where Convert.ToString(row.Field<string>("AlmacenId")) == Convert.ToString(CmbAlmacen.SelectedValue)
+                                && Convert.ToString(row.Field<string>("ProductoId")) == Convert.ToString(item[0])
+                                select row;
+
+                            dtResponse = filterRow.CopyToDataTable();
+
+                            decimal idRelAlmacenProducto = Convert.ToDecimal(dtResponse.Rows[0]["RelAlmacenProductoId"]);
+                            decimal cantidadActual = Convert.ToDecimal(dtResponse.Rows[0]["Cantidad"]);
+
+                            //Actualizar la cantidad
+                            decimal cantidadActualizada = cantidadActual + Convert.ToDecimal(item[4]);
+
+                            dataUtilities.SetColumns("Cantidad", cantidadActualizada);
+                            dataUtilities.UpdateRecordByPrimaryKey("RelAlmacenProducto", idRelAlmacenProducto);
+                        }
+                    }
+
+                    MessageBox.Show("Compra actualizada correctamente.", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
                 auxOpc = "Buscar";
                 ConfigUI();
             }
@@ -429,16 +469,16 @@ namespace NeoCobranza.Paneles
 
         private void TxtCantidad_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8)
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != 8)
             {
-                e.Handled = true;
+                e.Handled = true; // Esto indica que el evento ha sido manejado, por lo que el carácter no será mostrado en el TextBox
             }
         }
 
         private void TxtCosto_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Permitir solo números, el punto decimal y la tecla de retroceso
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != ',' && e.KeyChar != 8)
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != 8)
             {
                 e.Handled = true; // Esto indica que el evento ha sido manejado, por lo que el carácter no será mostrado en el TextBox
             }
@@ -448,7 +488,6 @@ namespace NeoCobranza.Paneles
         {
             if (CmbAlmacen.Items.Count == 0)
             {
-
                 MessageBox.Show("Debe agregar almacenes para poder realizar una compra.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -464,17 +503,9 @@ namespace NeoCobranza.Paneles
 
         private void BtnSeleccionarProveeder_Click(object sender, EventArgs e)
         {
-            if (auxKey == 0)
-            {
                 PnlSeleccionarProveedor frm = new PnlSeleccionarProveedor();
                 AddOwnedForm(frm);
                 frm.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("No se puede seleccionar un proveedor en la modificación.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
         }
 
         private void TxtIdProveedor_TextChanged(object sender, EventArgs e)
@@ -541,13 +572,53 @@ namespace NeoCobranza.Paneles
         {
             if (e.ColumnIndex == 0)
             {
-                if (auxKey == 0)
+                if (auxKey == "")
                 {
                     dataCompra.Rows.RemoveAt(e.RowIndex);
                 }
                 else
                 {
-                    MessageBox.Show("No puede modificar los items de la compra una vez ha sido creada.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    //QUITAR ACTUALIZAR
+
+                    //Verificar si hay el espacio suficiente para quitarlo
+                    DataTable dtResponse = dataUtilities.GetAllRecords("RelAlmacenProducto");
+                    var filterRow =
+                        from row in dtResponse.AsEnumerable()
+                        where Convert.ToString(row.Field<string>("AlmacenId")) == Convert.ToString(CmbAlmacen.SelectedValue)
+                        && Convert.ToString(row.Field<string>("ProductoId")) == Convert.ToString(dataCompra.Rows[e.RowIndex][0])
+                        select row;
+
+                    dtResponse = filterRow.CopyToDataTable();
+
+                    decimal idRelAlmacenProducto = Convert.ToDecimal(dtResponse.Rows[0]["RelAlmacenProductoId"]);
+                    decimal cantidadActual = Convert.ToDecimal(dtResponse.Rows[0]["Cantidad"]);
+
+                    if(cantidadActual < Convert.ToDecimal(dataCompra.Rows[e.RowIndex][4]))
+                    {
+                        MessageBox.Show("No hay suficiente espacio en almacén para revertir la cantidad de producto.","Atención",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    //Quitarlo del Inventario
+                    DataTable dtResponseDetalle = dataUtilities.GetAllRecords("CompraDetalles");
+                    var filterRowDetalle =
+                        from row in dtResponseDetalle.AsEnumerable()
+                        where Convert.ToString(row.Field<string>("CompraId")) == auxKey
+                        && Convert.ToString(row.Field<string>("ProductoId")) == Convert.ToString(dataCompra.Rows[e.RowIndex][0])
+                        select row;
+
+                    dtResponseDetalle = filterRowDetalle.CopyToDataTable();
+
+                    dataUtilities.DeleteRecordByColumn("CompraDetalles",
+                        "LoteId", 
+                        Convert.ToString(dtResponseDetalle.Rows[0]["LoteId"]));
+
+                    //Quitarlo del relAlmacen
+
+                    dataUtilities.SetColumns("Cantidad", (cantidadActual - Convert.ToDecimal(dataCompra.Rows[e.RowIndex][4])));
+                    dataUtilities.UpdateRecordByPrimaryKey("RelAlmacenProducto", idRelAlmacenProducto);
+
+                    dataCompra.Rows.RemoveAt(e.RowIndex);
                 }
 
                 ContadorTotal();
@@ -563,17 +634,67 @@ namespace NeoCobranza.Paneles
 
         private void DgvCatalogo_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            object cellValue = DgvCatalogo.Rows[e.RowIndex].Cells[3].Value;
+
             if (e.ColumnIndex == 0)
             {
-                object cellValue = DgvCatalogo.Rows[e.RowIndex].Cells[1].Value;
-
-                auxKey = int.Parse(cellValue.ToString());
+                //ACTUALIZAR
+                auxKey = Convert.ToString(cellValue);
                 auxOpc = "Crear";
                 ConfigUI();
+            }
+
+            if (e.ColumnIndex == 1)
+            {
+                //IMPRIMIR
+               
+            }
+            if (e.ColumnIndex == 2)
+            {
+                //REVERTIR
+                try
+                {
+                    object cellValueRevertir = DgvCatalogo.Rows[e.RowIndex].Cells[10].Value;
+
+                    if (Convert.ToString(cellValueRevertir) != "")
+                    {
+                        MessageBox.Show("La compra ya fue revertida.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    // Confirmación del usuario para revertir
+                    DialogResult result = MessageBox.Show("¿Estás seguro de que quieres revertir la compra?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (result == DialogResult.No)
+                    {
+                        return; // Salir si el usuario selecciona "No"
+                    }
+
+                    dataUtilities.SetParameter("@CompraId", Convert.ToString(cellValue));
+                    dataUtilities.SetParameter("@Usuario", Utilidades.Usuario);
+                    DataTable dtResponse = dataUtilities.ExecuteStoredProcedure("RevertirCompra");
+
+                    MessageBox.Show(Convert.ToString(dtResponse.Rows[0][0]), "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ha ocurrido un error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
         private void TCMain_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmbSucursales_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            auxOpc = "Buscar";
+            FuncionesPrincipales();
+        }
+
+        private void LblCantidad_Click(object sender, EventArgs e)
         {
 
         }

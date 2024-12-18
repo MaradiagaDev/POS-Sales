@@ -33,6 +33,7 @@ namespace NeoCobranza.Paneles
             UIUtilities.ConfigurarBotonBuscar(BtnBuscarCliente);
             UIUtilities.ConfigurarTextBoxBuscar(TxtFiltrar);
             UIUtilities.ConfigurarComboBox(CmbBuscarPor);
+            UIUtilities.ConfigurarComboBox(CmbSucursal);
             UIUtilities.ConfigurarBotonCrear(btnAgregar);
             UIUtilities.ConfigurarBotonActualizar(btnActualizar);
             UIUtilities.ConfigurarBotonAnterior(BtnAnterior);
@@ -45,8 +46,6 @@ namespace NeoCobranza.Paneles
         private void BtnBuscarCliente_Click(object sender, EventArgs e)
         {
             vMCatalogoCliente.FuncionesPrincipales(this, "Buscar");
-
-
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -104,6 +103,9 @@ namespace NeoCobranza.Paneles
             }
         }
 
-
+        private void CmbSucursal_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            vMCatalogoCliente.FuncionesPrincipales(this, "Buscar");
+        }
     }
 }

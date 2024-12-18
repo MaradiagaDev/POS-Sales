@@ -9,31 +9,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Org.BouncyCastle.Math.EC.ECCurve;
 
 namespace NeoCobranza.Paneles
 {
     public partial class ConfigFacturacion : Form
     {
+        DataUtilities dataUtilities = new DataUtilities();
         public ConfigFacturacion()
         {
             InitializeComponent();
+
+            UIUtilities.EstablecerFondo(this);
         }
 
         private void ConfigFacturacion_Load(object sender, EventArgs e)
         {
-            using(NeoCobranzaContext db = new NeoCobranzaContext())
-            {
-                ModelsCobranza.ConfigFacturacion config = db.ConfigFacturacion.Where(s => s.SucursalId == int.Parse(Utilidades.SucursalId)).FirstOrDefault();
+            DataTable dtResponse = dataUtilities.getRecordByColumn("ConfigFacturacion", "SucursalId", Utilidades.SucursalId);
 
-                if (config != null)
-                {
-                    TxtSerie.Text = config.Serie;
-                    TxtConsecutivoFactura.Text = config.ConsecutivoFactura.ToString();
-                    TxtRangoFactura.Text = config.RangoFactura.ToString();
-                    TxtConsecutivoOrden.Text = config.ConsecutivoOrden.ToString();
-                    TxtRangoOrden.Text = config.RangoOrden.ToString();
-                }
-            }   
+            if (dtResponse.Rows.Count != 0)
+            {
+                TxtSerie.Text = Convert.ToString(dtResponse.Rows[0]["Serie"]);
+                TxtConsecutivoFactura.Text = Convert.ToString(dtResponse.Rows[0]["ConsecutivoFactura"]);
+                TxtConsecutivoOrden.Text = Convert.ToString(dtResponse.Rows[0]["ConsecutivoOrden"]);
+                ChkRetieneIva.Checked = Convert.ToBoolean(dtResponse.Rows[0]["RetieneIvaBit"]);
+            }
+
         }
 
         private void TxtConsecutivoFactura_KeyPress(object sender, KeyPressEventArgs e)
@@ -88,17 +89,12 @@ namespace NeoCobranza.Paneles
         {
             int varPrueba;
 
-            if(!int.TryParse(TxtConsecutivoFactura.Text.Trim(), out varPrueba))
+            if (!int.TryParse(TxtConsecutivoFactura.Text.Trim(), out varPrueba))
             {
-                MessageBox.Show("La cantidad digitada en Consecutivo Factura no es valida.","Atención",MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("La cantidad digitada en Consecutivo Factura no es valida.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (!int.TryParse(TxtRangoFactura.Text.Trim(), out varPrueba))
-            {
-                MessageBox.Show("La cantidad digitada en Rango Factura no es valida.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
 
             if (!int.TryParse(TxtConsecutivoOrden.Text.Trim(), out varPrueba))
             {
@@ -106,13 +102,7 @@ namespace NeoCobranza.Paneles
                 return;
             }
 
-            if (!int.TryParse(TxtRangoOrden.Text.Trim(), out varPrueba))
-            {
-                MessageBox.Show("La cantidad digitada en Rango Orden no es valida.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if(int.Parse(TxtConsecutivoFactura.Text.Trim()) == 0)
+            if (int.Parse(TxtConsecutivoFactura.Text.Trim()) == 0)
             {
                 MessageBox.Show("El Consecutivo en factura debe ser al menos 1.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -123,36 +113,39 @@ namespace NeoCobranza.Paneles
                 return;
             }
 
-            if(int.Parse(TxtRangoFactura.Text) < int.Parse(TxtConsecutivoFactura.Text))
+            DataTable dtResponse = dataUtilities.getRecordByColumn("ConfigFacturacion", "SucursalId", Utilidades.SucursalId);
+
+            if(dtResponse.Rows.Count > 0)
             {
-                MessageBox.Show("El Rango no puede ser menor al consecutivo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                dataUtilities.SetColumns("SucursalId", Utilidades.SucursalId);
+                dataUtilities.SetColumns("Serie", TxtSerie.Text.Trim());
+                dataUtilities.SetColumns("ConsecutivoFactura", TxtConsecutivoFactura.Text.Trim());
+                dataUtilities.SetColumns("RangoFactura",0);
+                dataUtilities.SetColumns("ConsecutivoOrden", TxtConsecutivoOrden.Text.Trim());
+                dataUtilities.SetColumns("RangoOrden", 0);
+                dataUtilities.SetColumns("RetieneIvaBit", ChkRetieneIva.Checked);
+
+                dataUtilities.UpdateRecordByPrimaryKey("ConfigFacturacion", Convert.ToString(dtResponse.Rows[0][0]));
+            }
+            else
+            {
+                dataUtilities.SetColumns("SucursalId", Utilidades.SucursalId);
+                dataUtilities.SetColumns("Serie", TxtSerie.Text.Trim());
+                dataUtilities.SetColumns("ConsecutivoFactura", TxtConsecutivoFactura.Text.Trim());
+                dataUtilities.SetColumns("RangoFactura", 0);
+                dataUtilities.SetColumns("ConsecutivoOrden", TxtConsecutivoOrden.Text.Trim());
+                dataUtilities.SetColumns("RangoOrden", 0);
+                dataUtilities.SetColumns("RetieneIvaBit", ChkRetieneIva.Checked);
+
+                dataUtilities.InsertRecord("ConfigFacturacion");
             }
 
-            if (int.Parse(TxtRangoOrden.Text) < int.Parse(TxtConsecutivoOrden.Text))
-            {
-                MessageBox.Show("El Rango no puede ser menor al consecutivo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+       
 
-            using (NeoCobranzaContext db = new NeoCobranzaContext())
-            {
-                ModelsCobranza.ConfigFacturacion config = db.ConfigFacturacion.Where(s => s.SucursalId == int.Parse(Utilidades.SucursalId)).FirstOrDefault();
 
-                if (config != null)
-                {
-                    config.Serie = TxtSerie.Text.Trim();
-                    config.RangoFactura = int.Parse(TxtRangoFactura.Text.Trim());
-                    config.ConsecutivoFactura = int.Parse(TxtConsecutivoFactura.Text.Trim());
-                    config.ConsecutivoOrden = int.Parse(TxtConsecutivoOrden.Text.Trim());
-                    config.RangoOrden = int.Parse(TxtRangoOrden.Text.Trim());
-
-                    db.Update(config);
-                    db.SaveChanges();
-
-                    MessageBox.Show("Cambios guardados correctamente","Correcto", MessageBoxButtons.OK,MessageBoxIcon.Information);
-                }
-            }
+            MessageBox.Show("Cambios guardados correctamente", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                
+            
         }
     }
 }

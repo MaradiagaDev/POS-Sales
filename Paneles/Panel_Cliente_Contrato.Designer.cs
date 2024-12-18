@@ -44,6 +44,10 @@
             this.TxtPaginaNo = new System.Windows.Forms.TextBox();
             this.BtnAnterior = new System.Windows.Forms.Button();
             this.BtnSiguiente = new System.Windows.Forms.Button();
+            this.CmbSucursal = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.CmbBuscarPor = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DgvCliente)).BeginInit();
             this.panel3.SuspendLayout();
             this.PnlPaginado.SuspendLayout();
@@ -169,7 +173,7 @@
             this.txtFiltro.PasswordChar = false;
             this.txtFiltro.PlaceHolderColor = System.Drawing.Color.DarkGray;
             this.txtFiltro.PlaceHolderText = "Buscar Cliente";
-            this.txtFiltro.Size = new System.Drawing.Size(1024, 32);
+            this.txtFiltro.Size = new System.Drawing.Size(570, 32);
             this.txtFiltro.TabIndex = 13;
             this.txtFiltro.Texts = "";
             this.txtFiltro.UnderLineFlat = true;
@@ -253,12 +257,68 @@
             this.BtnSiguiente.UseVisualStyleBackColor = false;
             this.BtnSiguiente.Click += new System.EventHandler(this.BtnSiguiente_Click);
             // 
+            // CmbSucursal
+            // 
+            this.CmbSucursal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CmbSucursal.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.CmbSucursal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbSucursal.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CmbSucursal.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.CmbSucursal.FormattingEnabled = true;
+            this.CmbSucursal.Location = new System.Drawing.Point(832, 68);
+            this.CmbSucursal.Name = "CmbSucursal";
+            this.CmbSucursal.Size = new System.Drawing.Size(208, 29);
+            this.CmbSucursal.TabIndex = 113;
+            this.CmbSucursal.SelectedIndexChanged += new System.EventHandler(this.CmbSucursal_SelectedIndexChanged);
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label5.Location = new System.Drawing.Point(829, 41);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(63, 17);
+            this.label5.TabIndex = 112;
+            this.label5.Text = "Sucursal:";
+            // 
+            // CmbBuscarPor
+            // 
+            this.CmbBuscarPor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CmbBuscarPor.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.CmbBuscarPor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbBuscarPor.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CmbBuscarPor.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.CmbBuscarPor.FormattingEnabled = true;
+            this.CmbBuscarPor.Location = new System.Drawing.Point(603, 68);
+            this.CmbBuscarPor.Name = "CmbBuscarPor";
+            this.CmbBuscarPor.Size = new System.Drawing.Size(223, 29);
+            this.CmbBuscarPor.TabIndex = 111;
+            this.CmbBuscarPor.SelectedIndexChanged += new System.EventHandler(this.CmbBuscarPor_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label1.Location = new System.Drawing.Point(600, 41);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(78, 17);
+            this.label1.TabIndex = 110;
+            this.label1.Text = "Buscar Por:";
+            // 
             // Panel_Cliente_Contrato
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1056, 600);
+            this.Controls.Add(this.CmbSucursal);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.CmbBuscarPor);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.PnlPaginado);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.BtnSeleccionar);
@@ -277,6 +337,7 @@
             this.PnlPaginado.ResumeLayout(false);
             this.PnlPaginado.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -294,5 +355,9 @@
         public System.Windows.Forms.TextBox TxtPaginaNo;
         public System.Windows.Forms.Button BtnAnterior;
         public System.Windows.Forms.Button BtnSiguiente;
+        public System.Windows.Forms.ComboBox CmbSucursal;
+        public System.Windows.Forms.Label label5;
+        public System.Windows.Forms.ComboBox CmbBuscarPor;
+        public System.Windows.Forms.Label label1;
     }
 }

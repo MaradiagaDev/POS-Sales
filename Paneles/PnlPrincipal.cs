@@ -18,6 +18,7 @@ using NeoCobranza.PnlInventario;
 using System.Runtime.InteropServices;
 using NeoCobranza.ViewModels;
 using NeoCobranza.ModelsCobranza;
+using System.Threading;
 
 namespace NeoCobranza.Paneles
 {
@@ -37,7 +38,7 @@ namespace NeoCobranza.Paneles
             LblUsuario.Text = Utilidades.Usuario;
             LblSucursal.Text = Utilidades.Sucursal;
 
-           Timer Hora = new Timer();
+            System.Windows.Forms.Timer Hora = new System.Windows.Forms.Timer();
             Hora.Tick += new EventHandler(EventoHora);
             Hora.Enabled = true;
 
@@ -254,9 +255,11 @@ namespace NeoCobranza.Paneles
             PnlVentas directas = new PnlVentas(conexion, "OrdenRapida");
             directas.TopLevel = false;
             directas.Dock = DockStyle.Fill;
-            directas.TopLevel = false;
             PnlCentral.Controls.Add(directas);
+            directas.Visible = false;
             directas.Show();
+            directas.Visible = true;
+
         }
 
         private void registroDeVentasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -747,6 +750,17 @@ namespace NeoCobranza.Paneles
             pnlGeneral.Dock = DockStyle.Fill;
             PnlCentral.Tag = pnlGeneral;
             pnlGeneral.Show();
+        }
+
+        private void cuentasPorCobrarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            limpiar();
+            PnlVentas directas = new PnlVentas(conexion, "ListaCredito");
+            directas.TopLevel = false;
+            directas.Dock = DockStyle.Fill;
+            directas.TopLevel = false;
+            PnlCentral.Controls.Add(directas);
+            directas.Show();
         }
     }
 }

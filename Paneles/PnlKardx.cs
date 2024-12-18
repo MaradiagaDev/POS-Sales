@@ -31,24 +31,8 @@ namespace NeoCobranza.Paneles
 
         private void PnlKardx_Load(object sender, EventArgs e)
         {
-            DgvKardex.EnableHeadersVisualStyles = false;
-            DgvKardex.ColumnHeadersDefaultCellStyle.BackColor = Color.CadetBlue;
-            DgvKardex.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            DgvKardex.RowsDefaultCellStyle.Font = new System.Drawing.Font("Century Gothic", 10);
-            DgvKardex.RowsDefaultCellStyle.BackColor = Color.White;
-
-            dataTable.Columns.Add("Fecha", typeof(string));
-            dataTable.Columns.Add("ID Documento", typeof(string));
-            dataTable.Columns.Add("Operación", typeof(string));
-            dataTable.Columns.Add("Unidades Entrada", typeof(string));
-            dataTable.Columns.Add("C/U Entrada", typeof(string));
-            dataTable.Columns.Add("C. Total Entrada", typeof(string));
-            dataTable.Columns.Add("Unidades Salida", typeof(string));
-            dataTable.Columns.Add("C/U Salida", typeof(string));
-            dataTable.Columns.Add("C. Total Salida", typeof(string));
-            dataTable.Columns.Add("Unidades Saldo", typeof(string));
-            dataTable.Columns.Add("C/U Saldo", typeof(string));
-            dataTable.Columns.Add("C. Total Saldo", typeof(string));
+            UIUtilities.PersonalizarDataGridView(DgvKardex);
+            UIUtilities.EstablecerFondo(this);
 
             DgvKardex.DataSource = dataTable;
         }
