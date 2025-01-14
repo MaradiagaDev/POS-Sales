@@ -150,10 +150,10 @@ namespace NeoCobranza.Paneles
 
         private void especialButton1_Click(object sender, EventArgs e)
         {
-            frmLogin form1 = Owner as frmLogin;
-            conexion.connect.Close();
-            form1.Show();
-            this.Close();
+            //frmLogin form1 = Owner as frmLogin;
+            //conexion.connect.Close();
+            //form1.Show();
+            //this.Close();
         }
 
         private void btnCatalogos_Click(object sender, EventArgs e)
@@ -388,8 +388,8 @@ namespace NeoCobranza.Paneles
         {
             if(MenuVertical.Width == 170)
             {
-                MenuVertical.Width = 48;
-                ancho = 44;
+                MenuVertical.Width = 63;
+                ancho = 60;
             }
             else
             {
@@ -756,6 +756,17 @@ namespace NeoCobranza.Paneles
         {
             limpiar();
             PnlVentas directas = new PnlVentas(conexion, "ListaCredito");
+            directas.TopLevel = false;
+            directas.Dock = DockStyle.Fill;
+            directas.TopLevel = false;
+            PnlCentral.Controls.Add(directas);
+            directas.Show();
+        }
+
+        private void CierreCajaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            limpiar();
+            PnlCierreCuadreCaja directas = new PnlCierreCuadreCaja();
             directas.TopLevel = false;
             directas.Dock = DockStyle.Fill;
             directas.TopLevel = false;

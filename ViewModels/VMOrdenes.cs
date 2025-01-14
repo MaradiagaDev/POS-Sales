@@ -191,6 +191,11 @@ namespace NeoCobranza.ViewModels
                     }
                     else
                     {
+                        frm.BtnAgregarPro.Enabled = true;
+                        frm.BtnAgregarServicio.Enabled = true;
+                        frm.BtnPagarOrden.Enabled = true;
+                        frm.BtnCancelarOrden.Enabled = true;
+                        frm.TxtCodigoProducto.Enabled = true;
                         //Orden abierta
                         //Consultar Orden
                         DataTable dtResponseOrden = dataUtilities.getRecordByPrimaryKey("Ordenes", OrdenAux);
@@ -305,6 +310,15 @@ namespace NeoCobranza.ViewModels
                         frm.TxtTotalCordoba.Text = Convert.ToString(orden["TotalOrden"]);
                         frm.TxtTotalDolar.Text = Math.Round(Convert.ToDecimal(orden["TotalOrden"]) / Convert.ToDecimal(Utilidades.Tasa),2).ToString();
                         frm.TxtTotalPagado.Text = Convert.ToString(orden["Pagado"]);
+
+                        if(frm.LblProcesoPago.Text == "Totalmente Pagado")
+                        {
+                            frm.BtnAgregarPro.Enabled = false;
+                            frm.BtnAgregarServicio.Enabled = false;
+                            frm.BtnPagarOrden.Enabled = false;
+                            frm.BtnCancelarOrden.Enabled=false;
+                            frm.TxtCodigoProducto.Enabled = false;
+                        }
                     }
 
                     //var informativeMessageBox = new InformativeMessageBox($"Orden abierta correctamente.", "Orden Abierta", 3000); // 3000 milisegundos = 3 segundos
@@ -999,18 +1013,18 @@ namespace NeoCobranza.ViewModels
 
                 if(frm.TCMain.SelectedIndex != 0)
                 {
-                    //if (opc == "Increase")
-                    //{
-                    //    var informativeMessageBox = new InformativeMessageBox($"Servicio Agregado Correctamente a la Orden.",
-                    //        "Servicio Agregado", 3000);
-                    //    informativeMessageBox.Show();
-                    //}
-                    //else
-                    //{
-                    //    var informativeMessageBox = new InformativeMessageBox($"Servicio Restado Correctamente de la Orden.",
-                    //       "Servicio Restado", 3000);
-                    //    informativeMessageBox.Show();
-                    //}
+                    if (opc == "Increase")
+                    {
+                        var informativeMessageBox = new InformativeMessageBox($"Servicio Agregado Correctamente a la Orden.",
+                            "Servicio Agregado", 3000);
+                        informativeMessageBox.Show();
+                    }
+                    else
+                    {
+                        var informativeMessageBox = new InformativeMessageBox($"Servicio Restado Correctamente de la Orden.",
+                           "Servicio Restado", 3000);
+                        informativeMessageBox.Show();
+                    }
                 }
             }
 

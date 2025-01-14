@@ -46,6 +46,7 @@
             this.Contrato_Ver_ValoresBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.Contrato_Ver_CuotasBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.Contrato_ColectorBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.Contrato_ValorCuotaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.contratoReporteDatosGeneralesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.contrato_Reporte_Datos_GeneralesTableAdapter = new NeoCobranza.NeoCobranzaDataSetTableAdapters.Contrato_Reporte_Datos_GeneralesTableAdapter();
@@ -62,7 +63,6 @@
             this.contrato_ColectorTableAdapter = new NeoCobranza.NuevoServi_ContratoTableAdapters.Contrato_ColectorTableAdapter();
             this.contratoValorCuotaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.contrato_ValorCuotaTableAdapter = new NeoCobranza.NuevoServi_ContratoTableAdapters.Contrato_ValorCuotaTableAdapter();
-            this.Contrato_ValorCuotaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.Contrato_Reporte_Datos_GeneralesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.neoCobranzaDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tasa2BindingSource)).BeginInit();
@@ -72,6 +72,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Contrato_Ver_ValoresBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Contrato_Ver_CuotasBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Contrato_ColectorBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Contrato_ValorCuotaBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.contratoReporteDatosGeneralesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.contratoOtrosServiciosBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.contratoBeneficiarioReporteBindingSource)).BeginInit();
@@ -79,7 +80,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.contratoVerCuotasBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.contratoColectorBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.contratoValorCuotaBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Contrato_ValorCuotaBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // Contrato_Reporte_Datos_GeneralesBindingSource
@@ -126,6 +126,11 @@
             // 
             this.Contrato_ColectorBindingSource.DataMember = "Contrato_Colector";
             this.Contrato_ColectorBindingSource.DataSource = this.nuevoServi_Contrato;
+            // 
+            // Contrato_ValorCuotaBindingSource
+            // 
+            this.Contrato_ValorCuotaBindingSource.DataMember = "Contrato_ValorCuota";
+            this.Contrato_ValorCuotaBindingSource.DataSource = this.nuevoServi_Contrato;
             // 
             // reportViewer1
             // 
@@ -228,11 +233,6 @@
             // 
             this.contrato_ValorCuotaTableAdapter.ClearBeforeFill = true;
             // 
-            // Contrato_ValorCuotaBindingSource
-            // 
-            this.Contrato_ValorCuotaBindingSource.DataMember = "Contrato_ValorCuota";
-            this.Contrato_ValorCuotaBindingSource.DataSource = this.nuevoServi_Contrato;
-            // 
             // PnlInformeEconomico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -251,6 +251,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Contrato_Ver_ValoresBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Contrato_Ver_CuotasBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Contrato_ColectorBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Contrato_ValorCuotaBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.contratoReporteDatosGeneralesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.contratoOtrosServiciosBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.contratoBeneficiarioReporteBindingSource)).EndInit();
@@ -258,7 +259,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.contratoVerCuotasBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.contratoColectorBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.contratoValorCuotaBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Contrato_ValorCuotaBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }

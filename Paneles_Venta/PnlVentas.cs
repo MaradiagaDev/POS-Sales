@@ -84,6 +84,11 @@ namespace NeoCobranza.Paneles_Venta
         {
             PnlPago frm = new PnlPago(this);
             frm.ShowDialog();
+
+            if (LblProcesoPago.Text == "Totalmente Pagado")
+            {
+                vMOrdenes.InitModuloOrdenes(this, "OrdenRapida", vMOrdenes.OrdenAux.ToString());
+            }
         }
 
         private void BtnBuscar_Click(object sender, EventArgs e)
@@ -149,7 +154,7 @@ namespace NeoCobranza.Paneles_Venta
 
         private void ChkRetencionDgi_Click(object sender, EventArgs e)
         {
-            vMOrdenes.CalcularTotales(this,TxtDescuento.Text);
+            vMOrdenes.CalcularTotales(this, TxtDescuento.Text);
         }
 
         private void ChkRetencionAlcaldia_Click(object sender, EventArgs e)
@@ -169,85 +174,11 @@ namespace NeoCobranza.Paneles_Venta
 
         private void DgvItemsOrden_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            //Agregar
-            if (e.ColumnIndex == 7)
+            if (LblProcesoPago.Text != "Totalmente Pagado")
             {
-                int Prueba;
-                if (int.TryParse(TxtCantidadItems.Text.Trim(), out Prueba) == false || TxtCantidadItems.Text.Trim() == "0"
-                    || TxtCantidadItems.Text.Trim() == "00" || TxtCantidadItems.Text.Trim() == "000" || TxtCantidadItems.Text.Trim() == "0000")
+                //Agregar
+                if (e.ColumnIndex == 7)
                 {
-                    MessageBox.Show("Debe agregar una cantidad valida", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    TxtCantidadProducto.Text = "1";
-                    return;
-                }
-
-                object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[2].Value;
-
-                vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), TxtCantidadItems.Text.Trim(), "Increase");
-            }
-            else if ((e.ColumnIndex == 0 && LblOrdenMesa.Text == "-"))
-            {
-                int Prueba;
-                if (int.TryParse(TxtCantidadItems.Text.Trim(), out Prueba) == false || TxtCantidadItems.Text.Trim() == "0"
-                    || TxtCantidadItems.Text.Trim() == "00" || TxtCantidadItems.Text.Trim() == "000" || TxtCantidadItems.Text.Trim() == "0000")
-                {
-                    MessageBox.Show("Debe agregar una cantidad valida", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    TxtCantidadProducto.Text = "1";
-                    return;
-                }
-
-                object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[5].Value;
-
-                vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), TxtCantidadItems.Text.Trim(), "Increase");
-            }
-
-            //Quitar
-            if (e.ColumnIndex == 8)
-            {
-                int Prueba;
-                if (int.TryParse(TxtCantidadItems.Text.Trim(), out Prueba) == false || TxtCantidadItems.Text.Trim() == "0"
-                    || TxtCantidadItems.Text.Trim() == "00" || TxtCantidadItems.Text.Trim() == "000" || TxtCantidadItems.Text.Trim() == "0000")
-                {
-                    MessageBox.Show("Debe agregar una cantidad valida", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    TxtCantidadProducto.Text = "1";
-                    return;
-                }
-
-                if (decimal.Parse(TxtTotalPagado.Text) != 0)
-                {
-                    MessageBox.Show("No puede quitar productos si ya ha agrego pagos a la orden.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[2].Value;
-
-                vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), TxtCantidadItems.Text.Trim(), "Disminuir");
-            }
-            else if ((e.ColumnIndex == 1 && LblOrdenMesa.Text == "-"))
-            {
-                int Prueba;
-                if (int.TryParse(TxtCantidadItems.Text.Trim(), out Prueba) == false || TxtCantidadItems.Text.Trim() == "0"
-                    || TxtCantidadItems.Text.Trim() == "00" || TxtCantidadItems.Text.Trim() == "000" || TxtCantidadItems.Text.Trim() == "0000")
-                {
-                    MessageBox.Show("Debe agregar una cantidad valida", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    TxtCantidadProducto.Text = "1";
-                    return;
-                }
-
-                object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[5].Value;
-
-                vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), TxtCantidadItems.Text.Trim(), "Disminuir");
-            }
-
-            //Quitar
-            if (e.ColumnIndex == 9)
-            {
-                DialogResult result = MessageBox.Show("¿Estás seguro que deseas hacer esta acción?", "Quitar Producto Venta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-
-                if (result == DialogResult.Yes)
-                {
-
                     int Prueba;
                     if (int.TryParse(TxtCantidadItems.Text.Trim(), out Prueba) == false || TxtCantidadItems.Text.Trim() == "0"
                         || TxtCantidadItems.Text.Trim() == "00" || TxtCantidadItems.Text.Trim() == "000" || TxtCantidadItems.Text.Trim() == "0000")
@@ -256,28 +187,30 @@ namespace NeoCobranza.Paneles_Venta
                         TxtCantidadProducto.Text = "1";
                         return;
                     }
-
-                    if (decimal.Parse(TxtTotalPagado.Text) != 0)
-                    {
-                        MessageBox.Show("No puede quitar productos si ya ha agrego pagos a la orden.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-
 
                     object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[2].Value;
-                    object cellValueCantidad = DgvItemsOrden.Rows[e.RowIndex].Cells[4].Value;
 
-                    vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), cellValueCantidad.ToString(), "Disminuir");
+                    vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), TxtCantidadItems.Text.Trim(), "Increase");
                 }
-            }
-            else if ((e.ColumnIndex == 2 && LblOrdenMesa.Text == "-"))
-            {
-                DialogResult result = MessageBox.Show("¿Estás seguro que deseas hacer esta acción?", "Quitar Producto Venta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-
-                if (result == DialogResult.Yes)
+                else if ((e.ColumnIndex == 0 && LblOrdenMesa.Text == "-"))
                 {
+                    int Prueba;
+                    if (int.TryParse(TxtCantidadItems.Text.Trim(), out Prueba) == false || TxtCantidadItems.Text.Trim() == "0"
+                        || TxtCantidadItems.Text.Trim() == "00" || TxtCantidadItems.Text.Trim() == "000" || TxtCantidadItems.Text.Trim() == "0000")
+                    {
+                        MessageBox.Show("Debe agregar una cantidad valida", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        TxtCantidadProducto.Text = "1";
+                        return;
+                    }
 
+                    object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[5].Value;
+
+                    vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), TxtCantidadItems.Text.Trim(), "Increase");
+                }
+
+                //Quitar
+                if (e.ColumnIndex == 8)
+                {
                     int Prueba;
                     if (int.TryParse(TxtCantidadItems.Text.Trim(), out Prueba) == false || TxtCantidadItems.Text.Trim() == "0"
                         || TxtCantidadItems.Text.Trim() == "00" || TxtCantidadItems.Text.Trim() == "000" || TxtCantidadItems.Text.Trim() == "0000")
@@ -293,14 +226,92 @@ namespace NeoCobranza.Paneles_Venta
                         return;
                     }
 
+                    object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[2].Value;
+
+                    vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), TxtCantidadItems.Text.Trim(), "Disminuir");
+                }
+                else if ((e.ColumnIndex == 1 && LblOrdenMesa.Text == "-"))
+                {
+                    int Prueba;
+                    if (int.TryParse(TxtCantidadItems.Text.Trim(), out Prueba) == false || TxtCantidadItems.Text.Trim() == "0"
+                        || TxtCantidadItems.Text.Trim() == "00" || TxtCantidadItems.Text.Trim() == "000" || TxtCantidadItems.Text.Trim() == "0000")
+                    {
+                        MessageBox.Show("Debe agregar una cantidad valida", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        TxtCantidadProducto.Text = "1";
+                        return;
+                    }
 
                     object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[5].Value;
-                    object cellValueCantidad = DgvItemsOrden.Rows[e.RowIndex].Cells[7].Value;
 
-                    vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), cellValueCantidad.ToString(), "Disminuir");
+                    vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), TxtCantidadItems.Text.Trim(), "Disminuir");
+                }
+
+                //Quitar
+                if (e.ColumnIndex == 9)
+                {
+                    DialogResult result = MessageBox.Show("¿Estás seguro que deseas hacer esta acción?", "Quitar Producto Venta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+
+                    if (result == DialogResult.Yes)
+                    {
+
+                        int Prueba;
+                        if (int.TryParse(TxtCantidadItems.Text.Trim(), out Prueba) == false || TxtCantidadItems.Text.Trim() == "0"
+                            || TxtCantidadItems.Text.Trim() == "00" || TxtCantidadItems.Text.Trim() == "000" || TxtCantidadItems.Text.Trim() == "0000")
+                        {
+                            MessageBox.Show("Debe agregar una cantidad valida", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            TxtCantidadProducto.Text = "1";
+                            return;
+                        }
+
+                        if (decimal.Parse(TxtTotalPagado.Text) != 0)
+                        {
+                            MessageBox.Show("No puede quitar productos si ya ha agrego pagos a la orden.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+
+                        object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[2].Value;
+                        object cellValueCantidad = DgvItemsOrden.Rows[e.RowIndex].Cells[4].Value;
+
+                        vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), cellValueCantidad.ToString(), "Disminuir");
+                    }
+                }
+                else if ((e.ColumnIndex == 2 && LblOrdenMesa.Text == "-"))
+                {
+                    DialogResult result = MessageBox.Show("¿Estás seguro que deseas hacer esta acción?", "Quitar Producto Venta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+
+                    if (result == DialogResult.Yes)
+                    {
+
+                        int Prueba;
+                        if (int.TryParse(TxtCantidadItems.Text.Trim(), out Prueba) == false || TxtCantidadItems.Text.Trim() == "0"
+                            || TxtCantidadItems.Text.Trim() == "00" || TxtCantidadItems.Text.Trim() == "000" || TxtCantidadItems.Text.Trim() == "0000")
+                        {
+                            MessageBox.Show("Debe agregar una cantidad valida", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            TxtCantidadProducto.Text = "1";
+                            return;
+                        }
+
+                        if (decimal.Parse(TxtTotalPagado.Text) != 0)
+                        {
+                            MessageBox.Show("No puede quitar productos si ya ha agrego pagos a la orden.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+
+                        object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[5].Value;
+                        object cellValueCantidad = DgvItemsOrden.Rows[e.RowIndex].Cells[7].Value;
+
+                        vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), cellValueCantidad.ToString(), "Disminuir");
+                    }
                 }
             }
-
+            else
+            {
+                MessageBox.Show("No se pueden agregar productos/servicios a la orden si ya fue pagada.","Atención",MessageBoxButtons.OK, MessageBoxIcon.Warning);    
+            }
         }
 
         private void TxtCantidadItems_KeyPress(object sender, KeyPressEventArgs e)
@@ -645,7 +656,7 @@ namespace NeoCobranza.Paneles_Venta
                     DataTable dtResponse = dataUtilities.getRecordByColumn("ProductosServicios", "Codigo", TxtCodigoProducto.Text.Trim());
 
 
-                     if (dtResponse.Rows.Count > 0)
+                    if (dtResponse.Rows.Count > 0)
                     {
                         vMOrdenes.AgregarProductosOrden(this, Convert.ToString(dtResponse.Rows[0]["ProductoId"]), TxtCantidadItems.Text, "Increase");
                         TxtCodigoProducto.Text = string.Empty;
@@ -1044,9 +1055,9 @@ namespace NeoCobranza.Paneles_Venta
 
         private void especialButton4_Click(object sender, EventArgs e)
         {
-            if(!decimal.TryParse(TxtTotalCordoba.Text, out var total)) 
+            if (!decimal.TryParse(TxtTotalCordoba.Text, out var total))
             {
-                MessageBox.Show("El total no es valido.","Atención",MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("El total no es valido.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (!decimal.TryParse(TxtActualizarDescuento.Text, out var descuento))
@@ -1055,7 +1066,7 @@ namespace NeoCobranza.Paneles_Venta
                 return;
             }
 
-            if(total < descuento)
+            if (total < descuento)
             {
                 MessageBox.Show("El descuento no puede ser mayor al total.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;

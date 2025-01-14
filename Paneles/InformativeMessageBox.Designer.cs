@@ -54,7 +54,7 @@
             this.TxtBody.Multiline = true;
             this.TxtBody.Name = "TxtBody";
             this.TxtBody.ReadOnly = true;
-            this.TxtBody.Size = new System.Drawing.Size(454, 107);
+            this.TxtBody.Size = new System.Drawing.Size(454, 74);
             this.TxtBody.TabIndex = 1;
             // 
             // panel1
@@ -71,12 +71,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(477, 165);
+            this.ClientSize = new System.Drawing.Size(477, 132);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.TxtBody);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.MaximumSize = new System.Drawing.Size(477, 165);
-            this.MinimumSize = new System.Drawing.Size(477, 165);
             this.Name = "InformativeMessageBox";
             this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
             this.Text = "InformativeMessageBox";

@@ -1,4 +1,5 @@
-﻿using NeoCobranza.Paneles_Venta;
+﻿using NeoCobranza.Informes.Informes_Formato_Ticket;
+using NeoCobranza.Paneles_Venta;
 using NeoCobranza.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -200,8 +201,8 @@ namespace NeoCobranza.Paneles
             if(decimal.TryParse(TxtTotalPago.Text, out decimal abono))
             {
                 //verificar si el pago ya termina de pagar la factura
-
-                if(((abono-decimal.Parse(TxtMontoTarjeta.Text)-decimal.Parse(TxtCambio.Text))+decimal.Parse(TxtPagado.Text)) == decimal.Parse(TxtDeudaTotal.Text))
+                
+                if(((abono-decimal.Parse(TxtMontoTarjeta.Text))+decimal.Parse(TxtPagado.Text)) == decimal.Parse(TxtDeudaTotal.Text))
                 {
                     string formaPago = (Convert.ToString(CmbBanco.SelectedValue) == "0" && Convert.ToString(CmbTarjeta.SelectedValue) == "0")
                          ? "Efectivo"
@@ -227,7 +228,8 @@ namespace NeoCobranza.Paneles
 
                     if (result == DialogResult.Yes)
                     {
-                        //Imprimir factura
+                        FrmFacturaTicket frmTicketFactura = new FrmFacturaTicket(Utilidades.SucursalId, auxFrm.vMOrdenes.OrdenAux);
+                        frmTicketFactura.ShowDialog();
                     }
 
                     auxFrm.Close();

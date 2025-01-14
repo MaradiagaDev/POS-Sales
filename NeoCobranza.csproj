@@ -448,6 +448,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSetVD.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Dataset\FacturacionDataset.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FacturacionDataset.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Data\Conexion.cs" />
     <Compile Include="Data\PnlColectores.cs">
       <SubType>Form</SubType>
@@ -493,6 +498,18 @@
     <Compile Include="Especiales\MenuRenderer.cs" />
     <Compile Include="Especiales\RJDropDownMenu.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Informes\Informes Formato Ticket\FrmFacturaTicket.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Informes\Informes Formato Ticket\FrmFacturaTicket.Designer.cs">
+      <DependentUpon>FrmFacturaTicket.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlCierreCuadreCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlCierreCuadreCaja.Designer.cs">
+      <DependentUpon>PnlCierreCuadreCaja.cs</DependentUpon>
     </Compile>
     <Compile Include="Paneles\PnlPago.cs">
       <SubType>Form</SubType>
@@ -1128,6 +1145,13 @@
     <EmbeddedResource Include="Especiales\LoginUserControl.resx">
       <DependentUpon>LoginUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Informes\Informes Formato Ticket\FrmFacturaTicket.resx">
+      <DependentUpon>FrmFacturaTicket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Informes\Informes Formato Ticket\XrpInformeFacturaTicket.rdlc" />
+    <EmbeddedResource Include="Paneles\PnlCierreCuadreCaja.resx">
+      <DependentUpon>PnlCierreCuadreCaja.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlPago.resx">
       <DependentUpon>PnlPago.cs</DependentUpon>
     </EmbeddedResource>
@@ -1479,6 +1503,17 @@
     </None>
     <None Include="DataSetVD.xss">
       <DependentUpon>DataSetVD.xsd</DependentUpon>
+    </None>
+    <None Include="Dataset\FacturacionDataset.xsc">
+      <DependentUpon>FacturacionDataset.xsd</DependentUpon>
+    </None>
+    <None Include="Dataset\FacturacionDataset.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FacturacionDataset.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Dataset\FacturacionDataset.xss">
+      <DependentUpon>FacturacionDataset.xsd</DependentUpon>
     </None>
     <None Include="Data_Facturacion.xsc">
       <DependentUpon>Data_Facturacion.xsd</DependentUpon>

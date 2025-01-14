@@ -70,7 +70,7 @@
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.LblTituloPrincipal);
@@ -199,10 +199,10 @@
             // 
             this.PnlCentral.BackColor = System.Drawing.Color.Transparent;
             this.PnlCentral.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PnlCentral.BackgroundImage")));
-            this.PnlCentral.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.PnlCentral.Location = new System.Drawing.Point(37, 128);
+            this.PnlCentral.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PnlCentral.Location = new System.Drawing.Point(15, 114);
             this.PnlCentral.Name = "PnlCentral";
-            this.PnlCentral.Size = new System.Drawing.Size(300, 273);
+            this.PnlCentral.Size = new System.Drawing.Size(336, 273);
             this.PnlCentral.TabIndex = 12;
             // 
             // frmLogin
