@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +26,10 @@ namespace NeoCobranza.Paneles
 
         private void ConfigFacturacion_Load(object sender, EventArgs e)
         {
-            DataTable dtResponse = dataUtilities.getRecordByColumn("ConfigFacturacion", "SucursalId", Utilidades.SucursalId);
+            LoadPrintersIntoComboBox(CmbImpresora);
+            LoadPrintersIntoComboBox(CmbImpresoraTicke);
+
+          DataTable dtResponse = dataUtilities.getRecordByColumn("ConfigFacturacion", "SucursalId", Utilidades.SucursalId);
 
             if (dtResponse.Rows.Count != 0)
             {
@@ -33,8 +37,9 @@ namespace NeoCobranza.Paneles
                 TxtConsecutivoFactura.Text = Convert.ToString(dtResponse.Rows[0]["ConsecutivoFactura"]);
                 TxtConsecutivoOrden.Text = Convert.ToString(dtResponse.Rows[0]["ConsecutivoOrden"]);
                 ChkRetieneIva.Checked = Convert.ToBoolean(dtResponse.Rows[0]["RetieneIvaBit"]);
+                TxtImpresora.Text = Convert.ToString(dtResponse.Rows[0]["Impresora"]);
+                TxtImpresoraTicket.Text = Convert.ToString(dtResponse.Rows[0]["ImpresoraTicket"]);
             }
-
         }
 
         private void TxtConsecutivoFactura_KeyPress(object sender, KeyPressEventArgs e)
@@ -95,7 +100,6 @@ namespace NeoCobranza.Paneles
                 return;
             }
 
-
             if (!int.TryParse(TxtConsecutivoOrden.Text.Trim(), out varPrueba))
             {
                 MessageBox.Show("La cantidad digitada en Consecutivo Orden no es valida.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -113,6 +117,9 @@ namespace NeoCobranza.Paneles
                 return;
             }
 
+            TxtImpresoraTicket.Text = CmbImpresoraTicke.Text;
+            TxtImpresora.Text = CmbImpresora.Text;
+
             DataTable dtResponse = dataUtilities.getRecordByColumn("ConfigFacturacion", "SucursalId", Utilidades.SucursalId);
 
             if(dtResponse.Rows.Count > 0)
@@ -124,6 +131,8 @@ namespace NeoCobranza.Paneles
                 dataUtilities.SetColumns("ConsecutivoOrden", TxtConsecutivoOrden.Text.Trim());
                 dataUtilities.SetColumns("RangoOrden", 0);
                 dataUtilities.SetColumns("RetieneIvaBit", ChkRetieneIva.Checked);
+                dataUtilities.SetColumns("ImpresoraTicket", TxtImpresoraTicket.Text);
+                dataUtilities.SetColumns("Impresora", TxtImpresora.Text);
 
                 dataUtilities.UpdateRecordByPrimaryKey("ConfigFacturacion", Convert.ToString(dtResponse.Rows[0][0]));
             }
@@ -136,16 +145,33 @@ namespace NeoCobranza.Paneles
                 dataUtilities.SetColumns("ConsecutivoOrden", TxtConsecutivoOrden.Text.Trim());
                 dataUtilities.SetColumns("RangoOrden", 0);
                 dataUtilities.SetColumns("RetieneIvaBit", ChkRetieneIva.Checked);
+                dataUtilities.SetColumns("ImpresoraTicket", TxtImpresoraTicket.Text);
+                dataUtilities.SetColumns("Impresora", TxtImpresora.Text);
 
                 dataUtilities.InsertRecord("ConfigFacturacion");
             }
 
-       
-
 
             MessageBox.Show("Cambios guardados correctamente", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
-            
+                     
+        }
+
+        private void LoadPrintersIntoComboBox(ComboBox comboBox)
+        {
+            // Limpiar el ComboBox antes de agregar nuevos elementos
+            comboBox.Items.Clear();
+
+            // Obtener la lista de impresoras instaladas en el sistema
+            foreach (string printer in PrinterSettings.InstalledPrinters)
+            {
+                comboBox.Items.Add(printer);
+            }
+
+            // Si hay impresoras, seleccionar la primera por defecto
+            if (comboBox.Items.Count > 0)
+            {
+                comboBox.SelectedIndex = 0; // Selecciona la primera impresora por defecto
+            }
         }
     }
 }

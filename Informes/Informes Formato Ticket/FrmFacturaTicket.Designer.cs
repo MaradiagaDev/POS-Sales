@@ -1,4 +1,5 @@
-﻿namespace NeoCobranza.Informes.Informes_Formato_Ticket
+﻿
+namespace NeoCobranza.Informes.Informes_Formato_Ticket
 {
     partial class FrmFacturaTicket
     {
@@ -30,36 +31,36 @@
         {
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            this.vwFacturaTicketBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.facturacionDataset = new NeoCobranza.Dataset.FacturacionDataset();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.facturacionDataset = new NeoCobranza.Dataset.FacturacionDataset();
+            this.vwFacturaTicketBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.vwFacturaTicketTableAdapter = new NeoCobranza.Dataset.FacturacionDatasetTableAdapters.vwFacturaTicketTableAdapter();
-            ((System.ComponentModel.ISupportInitialize)(this.vwFacturaTicketBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.facturacionDataset)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vwFacturaTicketBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // vwFacturaTicketBindingSource
+            // reportViewer1
             // 
-            this.vwFacturaTicketBindingSource.DataMember = "vwFacturaTicket";
-            this.vwFacturaTicketBindingSource.DataSource = this.facturacionDataset;
+            this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            reportDataSource1.Name = "DtFact";
+            reportDataSource1.Value = this.vwFacturaTicketBindingSource;
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
+            this.reportViewer1.LocalReport.ReportEmbeddedResource = "NeoCobranza.Informes.FacturaTck.rdlc";
+            this.reportViewer1.Location = new System.Drawing.Point(0, 0);
+            this.reportViewer1.Name = "reportViewer1";
+            this.reportViewer1.ServerReport.BearerToken = null;
+            this.reportViewer1.Size = new System.Drawing.Size(271, 450);
+            this.reportViewer1.TabIndex = 1;
             // 
             // facturacionDataset
             // 
             this.facturacionDataset.DataSetName = "FacturacionDataset";
             this.facturacionDataset.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // reportViewer1
+            // vwFacturaTicketBindingSource
             // 
-            this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportDataSource1.Name = "DtFacturaTicket";
-            reportDataSource1.Value = this.vwFacturaTicketBindingSource;
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
-            this.reportViewer1.LocalReport.ReportEmbeddedResource = "NeoCobranza.Informes.Informes Formato Ticket.XrpInformeFacturaTicket.rdlc";
-            this.reportViewer1.Location = new System.Drawing.Point(0, 0);
-            this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(395, 708);
-            this.reportViewer1.TabIndex = 0;
+            this.vwFacturaTicketBindingSource.DataMember = "vwFacturaTicket";
+            this.vwFacturaTicketBindingSource.DataSource = this.facturacionDataset;
             // 
             // vwFacturaTicketTableAdapter
             // 
@@ -69,14 +70,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(395, 708);
+            this.ClientSize = new System.Drawing.Size(271, 450);
             this.Controls.Add(this.reportViewer1);
             this.Name = "FrmFacturaTicket";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmFacturaTicket";
             this.Load += new System.EventHandler(this.FrmFacturaTicket_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.vwFacturaTicketBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.facturacionDataset)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vwFacturaTicketBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }

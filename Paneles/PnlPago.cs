@@ -1,15 +1,21 @@
-﻿using NeoCobranza.Informes.Informes_Formato_Ticket;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
+using NeoCobranza.Informes.Informes_Formato_Ticket;
 using NeoCobranza.Paneles_Venta;
 using NeoCobranza.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Printing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PdfiumViewer;
 
 namespace NeoCobranza.Paneles
 {
@@ -228,8 +234,10 @@ namespace NeoCobranza.Paneles
 
                     if (result == DialogResult.Yes)
                     {
-                        FrmFacturaTicket frmTicketFactura = new FrmFacturaTicket(Utilidades.SucursalId, auxFrm.vMOrdenes.OrdenAux);
-                        frmTicketFactura.ShowDialog();
+                        GenerateInvoicePDF();
+                        //FUNCION REPORTE
+                        //FrmFacturaTicket frmTicketFactura = new FrmFacturaTicket(Utilidades.SucursalId, auxFrm.vMOrdenes.OrdenAux);
+                        //frmTicketFactura.ShowDialog();
                     }
 
                     auxFrm.Close();
@@ -322,6 +330,142 @@ namespace NeoCobranza.Paneles
         private void PnlPago_FormClosed(object sender, FormClosedEventArgs e)
         {
             auxFrm.vMOrdenes.InitModuloOrdenes(auxFrm,"OrdenRapida", "");
+        }
+
+        //----------------------------------- PARTE REPORTE ------------------------------------------------------------
+        private void GenerateInvoicePDF()
+        {
+            string filePath = "Factura.pdf";
+            // Ejemplo de productos
+            string[] productos = { "Ladrillo 3x5 con clavija de acero innoxidable", "Cemento", "Arena", "Grava", "Hierro" };
+            int[] cantidades = { 10, 5, 3, 2, 4 };
+            decimal[] preciosUnitarios = { 1.5m, 6.0m, 4.0m, 2.5m, 7.0m };
+
+            // Crear el documento
+            const float baseHeight = 115; // Espacio fijo para encabezado, totales, etc. (en mm)
+            const float productRowHeight = 8; // Altura de cada fila de productos (en mm)
+            float totalHeight = baseHeight + (productos.Length * productRowHeight);
+            iTextSharp.text.Rectangle pageSize = new iTextSharp.text.Rectangle(Utilities.MillimetersToPoints(76), Utilities.MillimetersToPoints(totalHeight));
+            Document document = new Document(pageSize, 10, 10, 10, 10); // Márgenes: Izq, Der, Sup, Inf
+            PdfWriter.GetInstance(document, new FileStream(filePath, FileMode.Create));
+
+            document.Open();
+
+            // Fuentes
+            iTextSharp.text.Font titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+            iTextSharp.text.Font regularFont = FontFactory.GetFont(FontFactory.HELVETICA, 10);
+            iTextSharp.text.Font boldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10);
+
+            // Cabecera centrada
+            Paragraph header = new Paragraph
+            {
+                Alignment = Element.ALIGN_CENTER
+            };
+            header.Add(new Phrase("NOMBRE DE LA EMPRESA\n", titleFont));
+            header.Add(new Phrase("RUC: 1234567890\n", regularFont));
+            header.Add(new Phrase("Dirección: Calle Principal, Ciudad\n", regularFont));
+            header.Add(new Phrase("Teléfono: +505 1234 5678\n", regularFont));
+            document.Add(header);
+            document.Add(new Paragraph("\n")); // Espacio
+
+            // Datos de la factura
+            document.Add(new Paragraph($"Fecha: {DateTime.Now:dd/MM/yyyy}", regularFont));
+            document.Add(new Paragraph("No. Orden: 001", regularFont));
+            document.Add(new Paragraph("No. Factura: 002", regularFont));
+            document.Add(new Paragraph("Cliente: Juan Pérez", regularFont));
+            document.Add(new Paragraph("\n")); // Espacio
+
+            // Tabla de productos
+            PdfPTable table = new PdfPTable(4);
+            table.WidthPercentage = 100;
+            table.SetWidths(new float[] { 3, 1, 1.2f, 1 }); // Anchos de las columnas
+
+            // Cabecera de la tabla con border bottom
+            PdfPCell cell;
+            cell = new PdfPCell(new Phrase("Producto", boldFont)) { Border = iTextSharp.text.Rectangle.BOTTOM_BORDER, BorderWidthBottom = 1 };
+            table.AddCell(cell);
+            cell = new PdfPCell(new Phrase("Cant", boldFont)) { Border = iTextSharp.text.Rectangle.BOTTOM_BORDER, BorderWidthBottom = 1 };
+            table.AddCell(cell);
+            cell = new PdfPCell(new Phrase("P.Unit", boldFont)) { Border = iTextSharp.text.Rectangle.BOTTOM_BORDER, BorderWidthBottom = 1 };
+            table.AddCell(cell);
+            cell = new PdfPCell(new Phrase("SubT", boldFont)) { Border = iTextSharp.text.Rectangle.BOTTOM_BORDER, BorderWidthBottom = 1 };
+            table.AddCell(cell);
+
+            decimal total = 0;
+            for (int i = 0; i < productos.Length; i++)
+            {
+                decimal subtotal = cantidades[i] * preciosUnitarios[i];
+                total += subtotal;
+
+                table.AddCell(new PdfPCell(new Phrase(productos[i], regularFont)) { Border = iTextSharp.text.Rectangle.NO_BORDER });
+                table.AddCell(new PdfPCell(new Phrase(cantidades[i].ToString(), regularFont)) { Border = iTextSharp.text.Rectangle.NO_BORDER });
+                table.AddCell(new PdfPCell(new Phrase(preciosUnitarios[i].ToString("0.00"), regularFont)) { Border = iTextSharp.text.Rectangle.NO_BORDER });
+                table.AddCell(new PdfPCell(new Phrase(subtotal.ToString("0.00"), regularFont)) { Border = iTextSharp.text.Rectangle.NO_BORDER });
+            }
+
+            document.Add(table);
+            document.Add(new Paragraph("\n")); // Espacio
+
+            // Totales
+            document.Add(new Paragraph($"Sub Total:      {30.00m:0.00} NIO", regularFont));
+            document.Add(new Paragraph($"Adicional Crédito: {0.00m:0.00} NIO", regularFont));
+            document.Add(new Paragraph($"Descuento:        {0.00m:0.00} NIO", regularFont));
+            document.Add(new Paragraph($"DGI (2%):         {2.00m:0.00} NIO", regularFont));
+            document.Add(new Paragraph($"Alcaldía (1%):    {1.00m:0.00} NIO", regularFont));
+            document.Add(new Paragraph($"TOTAL:            {33.00m:0.00} NIO", boldFont));
+            document.Add(new Paragraph($"TOTAL USD:        {1.00m:0.00} $", boldFont));
+            document.Add(new Paragraph("\n")); // Espacio
+
+            // Pie de página
+            //document.Add(new Paragraph("Gracias por su preferencia", regularFont));
+
+            document.Close();
+
+            
+            //// Abrir el PDF
+            //Process.Start(new ProcessStartInfo(filePath) { UseShellExecute = true });
+
+
+            DataTable data = dataUtilities.getRecordByColumn("ConfigFacturacion", "SucursalId", Utilidades.SucursalId);
+
+            if (data.Rows.Count == 1)
+            {
+                PdfiumViewer.PdfDocument pdfDocument = PdfiumViewer.PdfDocument.Load(filePath);
+
+                PrintDocument printDoc = new PrintDocument();
+                printDoc.PrinterSettings.PrinterName = Convert.ToString(data.Rows[0]["ImpresoraTicket"]);
+
+                printDoc.PrintPage += new PrintPageEventHandler((sender, e) =>
+                {
+                    pdfDocument.Render(e.Graphics, 0, 0, e.PageBounds.Width, e.PageBounds.Height);
+                    e.HasMorePages = false;  // Si no hay más páginas
+                });
+
+                try
+                {
+                    printDoc.Print();  // Esto enviará el documento a la impresora
+                    MessageBox.Show("Documento impreso exitosamente.");
+
+                    // Esperar unos segundos para asegurarse de que la impresión haya terminado
+                    System.Threading.Thread.Sleep(3000);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al imprimir: " + ex.Message);
+                    return;
+                }
+
+                // Borrar el archivo después de la impresión
+                try
+                {
+                    File.Delete(filePath);  // Borrar el archivo PDF
+                    MessageBox.Show("Archivo PDF borrado exitosamente.");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al borrar el archivo: " + ex.Message);
+                }
+            }
         }
     }
 }

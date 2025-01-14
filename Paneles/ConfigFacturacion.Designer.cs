@@ -42,6 +42,14 @@
             this.especialButton5 = new NeoCobranza.Especiales.EspecialButton();
             this.BtnGuardarConfiguracion = new NeoCobranza.Especiales.EspecialButton();
             this.ChkRetieneIva = new System.Windows.Forms.CheckBox();
+            this.CmbImpresoraTicke = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.TxtImpresoraTicket = new System.Windows.Forms.TextBox();
+            this.TxtImpresora = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.CmbImpresora = new System.Windows.Forms.ComboBox();
             this.PnlTitulo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,7 +84,7 @@
             this.label3.ForeColor = System.Drawing.Color.DarkRed;
             this.label3.Location = new System.Drawing.Point(12, 448);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(304, 16);
+            this.label3.Size = new System.Drawing.Size(305, 16);
             this.label3.TabIndex = 148;
             this.label3.Text = "Esta configuración es individual por sucursal.";
             // 
@@ -204,12 +212,94 @@
             // 
             this.ChkRetieneIva.AutoSize = true;
             this.ChkRetieneIva.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ChkRetieneIva.Location = new System.Drawing.Point(11, 233);
+            this.ChkRetieneIva.Location = new System.Drawing.Point(199, 36);
             this.ChkRetieneIva.Name = "ChkRetieneIva";
-            this.ChkRetieneIva.Size = new System.Drawing.Size(117, 20);
+            this.ChkRetieneIva.Size = new System.Drawing.Size(118, 20);
             this.ChkRetieneIva.TabIndex = 167;
             this.ChkRetieneIva.Text = "Recauda IVA";
             this.ChkRetieneIva.UseVisualStyleBackColor = true;
+            // 
+            // CmbImpresoraTicke
+            // 
+            this.CmbImpresoraTicke.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbImpresoraTicke.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.CmbImpresoraTicke.FormattingEnabled = true;
+            this.CmbImpresoraTicke.Location = new System.Drawing.Point(11, 316);
+            this.CmbImpresoraTicke.Name = "CmbImpresoraTicke";
+            this.CmbImpresoraTicke.Size = new System.Drawing.Size(248, 25);
+            this.CmbImpresoraTicke.TabIndex = 168;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label2.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label2.Location = new System.Drawing.Point(8, 283);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(135, 18);
+            this.label2.TabIndex = 169;
+            this.label2.Text = "Impresora Tickets";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label5.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label5.Location = new System.Drawing.Point(279, 283);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(191, 18);
+            this.label5.TabIndex = 170;
+            this.label5.Text = "Impresora Seleccionada";
+            // 
+            // TxtImpresoraTicket
+            // 
+            this.TxtImpresoraTicket.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TxtImpresoraTicket.Location = new System.Drawing.Point(281, 318);
+            this.TxtImpresoraTicket.Name = "TxtImpresoraTicket";
+            this.TxtImpresoraTicket.ReadOnly = true;
+            this.TxtImpresoraTicket.Size = new System.Drawing.Size(314, 23);
+            this.TxtImpresoraTicket.TabIndex = 171;
+            // 
+            // TxtImpresora
+            // 
+            this.TxtImpresora.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TxtImpresora.Location = new System.Drawing.Point(281, 386);
+            this.TxtImpresora.Name = "TxtImpresora";
+            this.TxtImpresora.ReadOnly = true;
+            this.TxtImpresora.Size = new System.Drawing.Size(314, 23);
+            this.TxtImpresora.TabIndex = 175;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label8.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label8.Location = new System.Drawing.Point(279, 351);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(191, 18);
+            this.label8.TabIndex = 174;
+            this.label8.Text = "Impresora Seleccionada";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label9.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label9.Location = new System.Drawing.Point(8, 351);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(105, 18);
+            this.label9.TabIndex = 173;
+            this.label9.Text = "Impresora A4";
+            // 
+            // CmbImpresora
+            // 
+            this.CmbImpresora.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbImpresora.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.CmbImpresora.FormattingEnabled = true;
+            this.CmbImpresora.Location = new System.Drawing.Point(11, 384);
+            this.CmbImpresora.Name = "CmbImpresora";
+            this.CmbImpresora.Size = new System.Drawing.Size(248, 25);
+            this.CmbImpresora.TabIndex = 172;
             // 
             // ConfigFacturacion
             // 
@@ -217,6 +307,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1125, 523);
+            this.Controls.Add(this.TxtImpresora);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.CmbImpresora);
+            this.Controls.Add(this.TxtImpresoraTicket);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.CmbImpresoraTicke);
             this.Controls.Add(this.ChkRetieneIva);
             this.Controls.Add(this.especialButton5);
             this.Controls.Add(this.textBox5);
@@ -257,5 +355,13 @@
         public System.Windows.Forms.TextBox textBox5;
         public System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox ChkRetieneIva;
+        private System.Windows.Forms.ComboBox CmbImpresoraTicke;
+        public System.Windows.Forms.Label label2;
+        public System.Windows.Forms.Label label5;
+        public System.Windows.Forms.TextBox TxtImpresoraTicket;
+        public System.Windows.Forms.TextBox TxtImpresora;
+        public System.Windows.Forms.Label label8;
+        public System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox CmbImpresora;
     }
 }
