@@ -1103,5 +1103,19 @@ namespace NeoCobranza.Paneles_Venta
                 e.Handled = true;
             }
         }
+
+        private void especialButton1_Click(object sender, EventArgs e)
+        {
+            if (DgvItemsOrden.RowCount > 0)
+            {
+                PnlPago frmPago = new PnlPago(this);
+                frmPago.GenerateInvoicePDF(true);
+            }
+            else
+            {
+                MessageBox.Show("Debe agregar items a la venta para poder generar la proforma.","Atención",MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
+        }
     }
 }
