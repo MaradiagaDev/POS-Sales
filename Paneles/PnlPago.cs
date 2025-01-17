@@ -1,4 +1,6 @@
-﻿using iTextSharp.text;
+﻿using iText.Kernel.Pdf.Canvas;
+using iText.Kernel.Pdf.Canvas.Parser;
+using iTextSharp.text;
 using iTextSharp.text.pdf;
 using NeoCobranza.Informes.Informes_Formato_Ticket;
 using NeoCobranza.Paneles_Venta;
@@ -15,7 +17,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using PdfiumViewer;
+
 
 namespace NeoCobranza.Paneles
 {
@@ -123,7 +125,7 @@ namespace NeoCobranza.Paneles
 
         private void CmbTarjeta_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(CmbTarjeta.SelectedValue != null) 
+            if (CmbTarjeta.SelectedValue != null)
             {
                 porcentaje = 0;
 
@@ -131,7 +133,7 @@ namespace NeoCobranza.Paneles
                 {
                     DataRow item = dataUtilities.getRecordByPrimaryKey("TipoTarjeta", CmbTarjeta.SelectedValue).Rows[0];
 
-                    porcentaje = Convert.ToDecimal(item["Porcentaje"])/100;
+                    porcentaje = Convert.ToDecimal(item["Porcentaje"]) / 100;
                 }
                 Calcular();
             }
@@ -159,7 +161,7 @@ namespace NeoCobranza.Paneles
                             // Si el pago no es en efectivo, el abono se ajusta al valor restante
                             TxtCantidadAbonada.Text = Convert.ToString(restante);
                         }
-                        
+
                         TxtCambio.Text = "0";
                     }
                     else
@@ -204,11 +206,11 @@ namespace NeoCobranza.Paneles
 
         private void BtnGuardar_Click(object sender, EventArgs e)
         {
-            if(decimal.TryParse(TxtTotalPago.Text, out decimal abono))
+            if (decimal.TryParse(TxtTotalPago.Text, out decimal abono))
             {
                 //verificar si el pago ya termina de pagar la factura
-                
-                if(((abono-decimal.Parse(TxtMontoTarjeta.Text))+decimal.Parse(TxtPagado.Text)) == decimal.Parse(TxtDeudaTotal.Text))
+
+                if (((abono - decimal.Parse(TxtMontoTarjeta.Text)) + decimal.Parse(TxtPagado.Text)) == decimal.Parse(TxtDeudaTotal.Text))
                 {
                     string formaPago = (Convert.ToString(CmbBanco.SelectedValue) == "0" && Convert.ToString(CmbTarjeta.SelectedValue) == "0")
                          ? "Efectivo"
@@ -234,7 +236,7 @@ namespace NeoCobranza.Paneles
 
                     if (result == DialogResult.Yes)
                     {
-                        GenerateInvoicePDF(false);
+                        PrintPDF(false);
                         //FUNCION REPORTE
                         //FrmFacturaTicket frmTicketFactura = new FrmFacturaTicket(Utilidades.SucursalId, auxFrm.vMOrdenes.OrdenAux);
                         //frmTicketFactura.ShowDialog();
@@ -280,7 +282,7 @@ namespace NeoCobranza.Paneles
             }
             else
             {
-                MessageBox.Show("La cantidad abonada no es valida.","Atención",MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("La cantidad abonada no es valida.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -291,7 +293,7 @@ namespace NeoCobranza.Paneles
 
             dynamicDataTable.Rows.Clear();
 
-            foreach(DataRow row in dtResponse.Rows) 
+            foreach (DataRow row in dtResponse.Rows)
             {
                 dynamicDataTable.Rows.Add(Convert.ToString(row["PagoOrdenId"]),
                     Convert.ToString(row["FormaPago"]),
@@ -308,17 +310,17 @@ namespace NeoCobranza.Paneles
             TxtRestante.Text = Convert.ToString(item["RestantePago"]);
             TxtPagado.Text = Convert.ToString(item["Pagado"]);
 
-            if(Convert.ToDecimal(item["TotalOrden"]) == Convert.ToDecimal(Convert.ToString(item["Pagado"])))
+            if (Convert.ToDecimal(item["TotalOrden"]) == Convert.ToDecimal(Convert.ToString(item["Pagado"])))
             {
                 ordenPagada = true;
-                BtnGuardar.Enabled = false; 
+                BtnGuardar.Enabled = false;
             }
         }
 
         private void DgvItemsPagos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
-            if(e.ColumnIndex == 0 && e.RowIndex >= 0)
+
+            if (e.ColumnIndex == 0 && e.RowIndex >= 0)
             {
                 dataUtilities.SetParameter("@PagoOrdenId", dynamicDataTable.Rows[e.RowIndex][0]);
                 dataUtilities.ExecuteStoredProcedure("sp_EliminarPago");
@@ -329,150 +331,299 @@ namespace NeoCobranza.Paneles
 
         private void PnlPago_FormClosed(object sender, FormClosedEventArgs e)
         {
-            auxFrm.vMOrdenes.InitModuloOrdenes(auxFrm,"OrdenRapida", "");
+            auxFrm.vMOrdenes.InitModuloOrdenes(auxFrm, "OrdenRapida", "");
         }
 
         //----------------------------------- PARTE REPORTE ------------------------------------------------------------
-        public void GenerateInvoicePDF(bool EsProforma)
+        //public void GenerateInvoicePDF(bool EsProforma)
+        //{
+        //    //Obtener datos de la factura
+
+        //    dataUtilities.SetParameter("@OrdenId", auxFrm.vMOrdenes.OrdenAux);
+        //    dataUtilities.SetParameter("@sucursarlId", Utilidades.SucursalId);
+
+        //    DataTable dtResponseOrden = dataUtilities.ExecuteStoredProcedure("vwFacturaTicket");
+
+        //    string filePath = "Factura.pdf";
+
+        //    // Crear el documento
+        //    const float baseHeight = 115; // Espacio fijo para encabezado, totales, etc. (en mm)
+        //    const float productRowHeight = 8; // Altura de cada fila de productos (en mm)
+        //    float totalHeight = baseHeight + (dtResponseOrden.Rows.Count * productRowHeight);
+        //    iTextSharp.text.Rectangle pageSize = new iTextSharp.text.Rectangle(Utilities.MillimetersToPoints(76), Utilities.MillimetersToPoints(totalHeight));
+        //    Document document = new Document(pageSize, 10, 10, 10, 10); // Márgenes: Izq, Der, Sup, Inf
+        //    PdfWriter.GetInstance(document, new FileStream(filePath, FileMode.Create));
+
+        //    document.Open();
+
+        //    // Fuentes
+        //    iTextSharp.text.Font titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10);
+        //    iTextSharp.text.Font regularFont = FontFactory.GetFont(FontFactory.HELVETICA, 8.5f);
+        //    iTextSharp.text.Font boldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 8.5f);
+        //    iTextSharp.text.Font smallerFont = FontFactory.GetFont(FontFactory.HELVETICA, 7.5f);
+
+        //    // Cabecera centrada
+        //    Paragraph header = new Paragraph
+        //    {
+        //        Alignment = Element.ALIGN_CENTER
+        //    };
+        //    header.Add(new Phrase($"{Convert.ToString(dtResponseOrden.Rows[0]["NombreEmpresa"])}\n", titleFont));
+        //    header.Add(new Phrase($"RUC: {Convert.ToString(dtResponseOrden.Rows[0]["RucEmpresa"])}\n", regularFont));
+        //    header.Add(new Phrase($"{Convert.ToString(dtResponseOrden.Rows[0]["DireccionSucursal"])}\n", regularFont));
+        //    header.Add(new Phrase($"Teléfono: {Convert.ToString(dtResponseOrden.Rows[0]["TelefonoSucursal"])}\n", regularFont));
+        //    document.Add(header);
+        //    document.Add(new Paragraph("\n")); // Espacio
+
+        //    // Datos de la factura
+        //    document.Add(new Paragraph($"Fecha: {Convert.ToDateTime(Convert.ToString(dtResponseOrden.Rows[0]["FechaRealizacion"])):dd/MM/yyyy}", regularFont));
+        //    document.Add(new Paragraph($"No. Orden: {Convert.ToString(dtResponseOrden.Rows[0]["OrdenId"])}", regularFont));
+        //    if (EsProforma)
+        //    {
+        //        document.Add(new Paragraph($"PROFORMA-VIGENCIA 10 DÍAS", boldFont));
+        //    }
+        //    else
+        //    {
+        //        document.Add(new Paragraph($"No. Factura: {Convert.ToString(dtResponseOrden.Rows[0]["factura"])}", regularFont));
+        //    }
+
+        //    document.Add(new Paragraph($"Cliente: {Convert.ToString(dtResponseOrden.Rows[0]["NombreCliente"])}", regularFont));
+        //    document.Add(new Paragraph("\n")); // Espacio
+
+        //    // Tabla de productos
+        //    PdfPTable table = new PdfPTable(4);
+        //    table.WidthPercentage = 100;
+        //    table.SetWidths(new float[] { 3, 1, 1.2f, 1 }); // Anchos de las columnas
+
+        //    // Cabecera de la tabla con border bottom
+        //    PdfPCell cell;
+        //    cell = new PdfPCell(new Phrase("Producto", boldFont)) { Border = iTextSharp.text.Rectangle.BOTTOM_BORDER, BorderWidthBottom = 1 };
+        //    table.AddCell(cell);
+        //    cell = new PdfPCell(new Phrase("Cant", boldFont)) { Border = iTextSharp.text.Rectangle.BOTTOM_BORDER, BorderWidthBottom = 1 };
+        //    table.AddCell(cell);
+        //    cell = new PdfPCell(new Phrase("P.Unit", boldFont)) { Border = iTextSharp.text.Rectangle.BOTTOM_BORDER, BorderWidthBottom = 1 };
+        //    table.AddCell(cell);
+        //    cell = new PdfPCell(new Phrase("SubT", boldFont)) { Border = iTextSharp.text.Rectangle.BOTTOM_BORDER, BorderWidthBottom = 1 };
+        //    table.AddCell(cell);
+
+        //    decimal total = 0;
+        //    for (int i = 0; i < dtResponseOrden.Rows.Count; i++)
+        //    {
+        //        table.AddCell(new PdfPCell(new Phrase(Convert.ToString(dtResponseOrden.Rows[i]["nombreProducto"]), smallerFont)) { Border = iTextSharp.text.Rectangle.NO_BORDER });
+        //        table.AddCell(new PdfPCell(new Phrase(Convert.ToString(dtResponseOrden.Rows[i]["cantidad"]), smallerFont)) { Border = iTextSharp.text.Rectangle.NO_BORDER });
+        //        table.AddCell(new PdfPCell(new Phrase(Convert.ToDouble(dtResponseOrden.Rows[i]["precioUnitario"]).ToString("0.00"), smallerFont)) { Border = iTextSharp.text.Rectangle.NO_BORDER });
+        //        table.AddCell(new PdfPCell(new Phrase(Convert.ToDouble(dtResponseOrden.Rows[i]["subTotal"]).ToString("0.00"), smallerFont)) { Border = iTextSharp.text.Rectangle.NO_BORDER });
+        //    }
+
+        //    document.Add(table);
+        //    document.Add(new Paragraph("\n")); // Espacio
+
+        //    // Totales
+        //    document.Add(new Paragraph($"Sub Total:             \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["SubtotalOrden"]):0.00} NIO", regularFont));
+        //    document.Add(new Paragraph($"Adicional Crédito:  \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["MontoCredito"]):0.00} NIO", regularFont));
+        //    document.Add(new Paragraph($"Descuento:            \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["Descuento"]):0.00} NIO", regularFont));
+
+        //    if (Convert.ToDecimal(dtResponseOrden.Rows[0]["RetencionDgi"]) != 0)
+        //    {
+        //        document.Add(new Paragraph($"DGI (2%):              \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["RetencionDgi"]):0.00} NIO", regularFont));
+        //    }
+
+        //    if (Convert.ToDecimal(dtResponseOrden.Rows[0]["RetencionAlcaldia"]) != 0)
+        //    {
+        //        document.Add(new Paragraph($"Alcaldía (1%):        \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["RetencionAlcaldia"]):0.00} NIO", regularFont));
+        //    }
+
+        //    document.Add(new Paragraph($"TOTAL:                 \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["totalCordoba"]):0.00} NIO", boldFont));
+        //    document.Add(new Paragraph($"TOTAL USD:         \t{Convert.ToString(dtResponseOrden.Rows[0]["totalDolar"])}", boldFont));
+        //    document.Add(new Paragraph("")); // Espacio
+
+        //    // Pie de página
+        //    document.Add(new Paragraph("Gracias por su preferencia", regularFont));
+
+        //    document.Close();
+
+
+        //    //// Abrir el PDF
+        //    //Process.Start(new ProcessStartInfo(filePath) { UseShellExecute = true });
+
+
+        //    DataTable data = dataUtilities.getRecordByColumn("ConfigFacturacion", "SucursalId", Utilidades.SucursalId);
+
+        //    if (data.Rows.Count == 1)
+        //    {
+        //        try
+        //        {
+        //            try
+        //            {
+        //                PrintPDF(filePath, Convert.ToString(data.Rows[0]["ImpresoraTicket"]));
+        //                MessageBox.Show("Documento impreso exitosamente.");
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                MessageBox.Show($"Error al imprimir: {ex.Message}");
+        //            }
+
+
+        //            // Borrar el archivo después de la impresión
+        //            File.Delete(filePath);
+        //            MessageBox.Show("Archivo PDF borrado exitosamente.");
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show("Error al imprimir o manejar el archivo PDF: " + ex.Message);
+        //        }
+        //    }
+
+        //}
+
+        private bool AuxEsProforma; 
+
+        public void PrintPDF(Boolean EsProforma)
         {
-            //Obtener datos de la factura
-           
+            AuxEsProforma = EsProforma;
+
+            DataTable data = dataUtilities.getRecordByColumn("ConfigFacturacion", "SucursalId", Utilidades.SucursalId);
+
+            PrintDocument doc = new PrintDocument();
+            PrinterSettings ps = new PrinterSettings();
+
+            if (Convert.ToString(data.Rows[0]["ImpresoraTicket"]) == null || Convert.ToString(data.Rows[0]["ImpresoraTicket"]) == "")
+            {
+                doc.PrinterSettings.PrinterName = doc.DefaultPageSettings.PrinterSettings.PrinterName;
+            }
+            else
+            {
+                doc.PrinterSettings.PrinterName = Convert.ToString(data.Rows[0]["ImpresoraTicket"]);
+            }
+            
+            doc.PrintPage += new PrintPageEventHandler(imprimeTicket);
+
+            try
+            {
+                doc.Print();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al imprimir: {ex.Message}");
+            }
+        }
+
+        private void imprimeTicket(object sender, PrintPageEventArgs e)
+        {
             dataUtilities.SetParameter("@OrdenId", auxFrm.vMOrdenes.OrdenAux);
             dataUtilities.SetParameter("@sucursarlId", Utilidades.SucursalId);
 
             DataTable dtResponseOrden = dataUtilities.ExecuteStoredProcedure("vwFacturaTicket");
 
-           string filePath = "Factura.pdf";
-
-            // Crear el documento
             const float baseHeight = 115; // Espacio fijo para encabezado, totales, etc. (en mm)
-            const float productRowHeight = 8; // Altura de cada fila de productos (en mm)
+            const float productRowHeight = 16; // Altura de cada fila de productos (en mm)
             float totalHeight = baseHeight + (dtResponseOrden.Rows.Count * productRowHeight);
-            iTextSharp.text.Rectangle pageSize = new iTextSharp.text.Rectangle(Utilities.MillimetersToPoints(76), Utilities.MillimetersToPoints(totalHeight));
-            Document document = new Document(pageSize, 10, 10, 10, 10); // Márgenes: Izq, Der, Sup, Inf
-            PdfWriter.GetInstance(document, new FileStream(filePath, FileMode.Create));
 
-            document.Open();
+            // Definir el tamaño de la página (Ancho: 76mm, Altura calculada previamente)
+            float pageWidth = Utilities.MillimetersToPoints(76); // Ancho de la página
+            float pageHeight = Utilities.MillimetersToPoints(totalHeight); // Altura de la página (ya calculada)
+
+            // Establecer el área de impresión
+            e.Graphics.PageUnit = GraphicsUnit.Point;
+            e.Graphics.FillRectangle(Brushes.White, e.MarginBounds);
 
             // Fuentes
-            iTextSharp.text.Font titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10);
-            iTextSharp.text.Font regularFont = FontFactory.GetFont(FontFactory.HELVETICA, 8.5f);
-            iTextSharp.text.Font boldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 8.5f);
-            iTextSharp.text.Font smallerFont = FontFactory.GetFont(FontFactory.HELVETICA, 7.5f);
+            System.Drawing.Font titleFont = new System.Drawing.Font("Arial", 10, FontStyle.Bold);
+            System.Drawing.Font regularFont = new System.Drawing.Font("Arial", 8.5f);
+            System.Drawing.Font boldFont = new System.Drawing.Font("Arial", 8.5f, FontStyle.Bold);
+            System.Drawing.Font smallerFont = new System.Drawing.Font("Arial", 7.5f);
 
-            // Cabecera centrada
-            Paragraph header = new Paragraph
-            {
-                Alignment = Element.ALIGN_CENTER
-            };
-            header.Add(new Phrase($"{Convert.ToString(dtResponseOrden.Rows[0]["NombreEmpresa"])}\n", titleFont));
-            header.Add(new Phrase($"RUC: {Convert.ToString(dtResponseOrden.Rows[0]["RucEmpresa"])}\n", regularFont));
-            header.Add(new Phrase($"{Convert.ToString(dtResponseOrden.Rows[0]["DireccionSucursal"])}\n", regularFont));
-            header.Add(new Phrase($"Teléfono: {Convert.ToString(dtResponseOrden.Rows[0]["TelefonoSucursal"])}\n", regularFont));
-            document.Add(header);
-            document.Add(new Paragraph("\n")); // Espacio
+            float yPosition = 10; // Posición inicial en la página (márgenes superiores)
+            float leftMargin = 35;
+
+            // Cabecera hacia la izquierda
+            e.Graphics.DrawString($"{Convert.ToString(dtResponseOrden.Rows[0]["NombreEmpresa"])}", titleFont, Brushes.Black, leftMargin, yPosition, new StringFormat { Alignment = StringAlignment.Near });
+            yPosition += 15; // Ajustar para siguiente línea
+
+            e.Graphics.DrawString($"RUC: {Convert.ToString(dtResponseOrden.Rows[0]["RucEmpresa"])}", regularFont, Brushes.Black, leftMargin, yPosition, new StringFormat { Alignment = StringAlignment.Near });
+            yPosition += 12;
+
+            e.Graphics.DrawString($"{Convert.ToString(dtResponseOrden.Rows[0]["DireccionSucursal"])}", regularFont, Brushes.Black, leftMargin, yPosition, new StringFormat { Alignment = StringAlignment.Near });
+            yPosition += 12;
+
+            e.Graphics.DrawString($"Teléfono: {Convert.ToString(dtResponseOrden.Rows[0]["TelefonoSucursal"])}", regularFont, Brushes.Black, leftMargin, yPosition, new StringFormat { Alignment = StringAlignment.Near });
+            yPosition += 18; // Espacio antes de los datos de la factura
 
             // Datos de la factura
-            document.Add(new Paragraph($"Fecha: {Convert.ToDateTime(Convert.ToString(dtResponseOrden.Rows[0]["FechaRealizacion"])):dd/MM/yyyy}", regularFont));
-            document.Add(new Paragraph($"No. Orden: {Convert.ToString(dtResponseOrden.Rows[0]["OrdenId"])}", regularFont));
-            if (EsProforma)
+            e.Graphics.DrawString($"Fecha: {Convert.ToDateTime(Convert.ToString(dtResponseOrden.Rows[0]["FechaRealizacion"])):dd/MM/yyyy}", regularFont, Brushes.Black, 10, yPosition);
+            yPosition += 12;
+
+            e.Graphics.DrawString($"No. Orden: {Convert.ToString(dtResponseOrden.Rows[0]["OrdenId"])}", regularFont, Brushes.Black, 10, yPosition);
+            yPosition += 12;
+
+            if (AuxEsProforma)
             {
-                document.Add(new Paragraph($"PROFORMA-VIGENCIA 10 DÍAS", boldFont));
+                e.Graphics.DrawString($"PROFORMA-VIGENCIA 10 DÍAS", boldFont, Brushes.Black, 10, yPosition);
             }
             else
             {
-                document.Add(new Paragraph($"No. Factura: {Convert.ToString(dtResponseOrden.Rows[0]["factura"])}", regularFont));
+                e.Graphics.DrawString($"No. Factura: {Convert.ToString(dtResponseOrden.Rows[0]["factura"])}", regularFont, Brushes.Black, 10, yPosition);
             }
-
-            document.Add(new Paragraph($"Cliente: {Convert.ToString(dtResponseOrden.Rows[0]["NombreCliente"])}", regularFont));
-            document.Add(new Paragraph("\n")); // Espacio
+            yPosition += 18; // Espacio antes de la tabla de productos
 
             // Tabla de productos
-            PdfPTable table = new PdfPTable(4);
-            table.WidthPercentage = 100;
-            table.SetWidths(new float[] { 3, 1, 1.2f, 1 }); // Anchos de las columnas
+            e.Graphics.DrawString("Productos/Servicios", boldFont, Brushes.Black, 10, yPosition);
+            //e.Graphics.DrawString("Cant", boldFont, Brushes.Black, pageWidth / 4, yPosition);
+            //e.Graphics.DrawString("P.Unit", boldFont, Brushes.Black, pageWidth / 2, yPosition);
+            //e.Graphics.DrawString("SubT", boldFont, Brushes.Black, 3 * pageWidth / 4, yPosition);
+            yPosition += 12; // Espacio antes de los datos de los productos
 
-            // Cabecera de la tabla con border bottom
-            PdfPCell cell;
-            cell = new PdfPCell(new Phrase("Producto", boldFont)) { Border = iTextSharp.text.Rectangle.BOTTOM_BORDER, BorderWidthBottom = 1 };
-            table.AddCell(cell);
-            cell = new PdfPCell(new Phrase("Cant", boldFont)) { Border = iTextSharp.text.Rectangle.BOTTOM_BORDER, BorderWidthBottom = 1 };
-            table.AddCell(cell);
-            cell = new PdfPCell(new Phrase("P.Unit", boldFont)) { Border = iTextSharp.text.Rectangle.BOTTOM_BORDER, BorderWidthBottom = 1 };
-            table.AddCell(cell);
-            cell = new PdfPCell(new Phrase("SubT", boldFont)) { Border = iTextSharp.text.Rectangle.BOTTOM_BORDER, BorderWidthBottom = 1 };
-            table.AddCell(cell);
-
-            decimal total = 0;
-            for (int i = 0; i < dtResponseOrden.Rows.Count; i++)
+            // Recorrer productos y dibujarlos en la página
+            foreach (DataRow row in dtResponseOrden.Rows)
             {
-                table.AddCell(new PdfPCell(new Phrase(Convert.ToString(dtResponseOrden.Rows[i]["nombreProducto"]),smallerFont)) { Border = iTextSharp.text.Rectangle.NO_BORDER });
-                table.AddCell(new PdfPCell(new Phrase(Convert.ToString(dtResponseOrden.Rows[i]["cantidad"]), smallerFont)) { Border = iTextSharp.text.Rectangle.NO_BORDER });
-                table.AddCell(new PdfPCell(new Phrase(Convert.ToDouble(dtResponseOrden.Rows[i]["precioUnitario"]).ToString("0.00"), smallerFont)) { Border = iTextSharp.text.Rectangle.NO_BORDER });
-                table.AddCell(new PdfPCell(new Phrase(Convert.ToDouble(dtResponseOrden.Rows[i]["subTotal"]).ToString("0.00"), smallerFont)) { Border = iTextSharp.text.Rectangle.NO_BORDER });
+                // Imprimir la cantidad y el precio unitario en una misma línea
+                string cantidad = Convert.ToString(row["cantidad"]);
+                string precioUnitario = Convert.ToDouble(row["precioUnitario"]).ToString("0.00");
+                string producto = Convert.ToString(row["nombreProducto"]);
+
+                // Ajustamos la cantidad, el precio unitario y el subtotales
+                e.Graphics.DrawString($"{cantidad}x{precioUnitario}                      \t{Convert.ToDouble(row["subTotal"]).ToString("0.00")}", smallerFont, Brushes.Black, 10, yPosition);
+  
+                // Imprimir el nombre del producto en la siguiente línea
+                yPosition += 12; // Siguiente línea para el nombre del producto
+                e.Graphics.DrawString(producto, smallerFont, Brushes.Black, 10, yPosition);
+
+                // Ajustar la posición para la siguiente línea de producto
+                yPosition += 15; // Espacio para el siguiente producto
             }
 
-            document.Add(table);
-            document.Add(new Paragraph("\n")); // Espacio
-
             // Totales
-            document.Add(new Paragraph($"Sub Total:             \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["SubtotalOrden"]):0.00} NIO", regularFont));
-            document.Add(new Paragraph($"Adicional Crédito:  \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["MontoCredito"]):0.00} NIO", regularFont));
-            document.Add(new Paragraph($"Descuento:            \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["Descuento"]):0.00} NIO", regularFont));
+            yPosition += 10;
+            e.Graphics.DrawString($"Sub Total:             \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["SubtotalOrden"]):0.00} NIO", regularFont, Brushes.Black, 10, yPosition);
+            yPosition += 10;
+            e.Graphics.DrawString($"Adicional Crédito:     \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["MontoCredito"]):0.00} NIO", regularFont, Brushes.Black, 10, yPosition);
+            yPosition += 10;
+            e.Graphics.DrawString($"Descuento:             \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["Descuento"]):0.00} NIO", regularFont, Brushes.Black, 10, yPosition);
 
             if (Convert.ToDecimal(dtResponseOrden.Rows[0]["RetencionDgi"]) != 0)
             {
-                document.Add(new Paragraph($"DGI (2%):              \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["RetencionDgi"]):0.00} NIO", regularFont));
+                yPosition += 10;
+                e.Graphics.DrawString($"DGI (2%):              \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["RetencionDgi"]):0.00} NIO", regularFont, Brushes.Black, 10, yPosition);
             }
 
             if (Convert.ToDecimal(dtResponseOrden.Rows[0]["RetencionAlcaldia"]) != 0)
             {
-                document.Add(new Paragraph($"Alcaldía (1%):        \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["RetencionAlcaldia"]):0.00} NIO", regularFont));
+                yPosition += 10;
+                e.Graphics.DrawString($"Alcaldía (1%):        \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["RetencionAlcaldia"]):0.00} NIO", regularFont, Brushes.Black, 10, yPosition);
             }
 
-            document.Add(new Paragraph($"TOTAL:                 \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["totalCordoba"]):0.00} NIO", boldFont));
-            document.Add(new Paragraph($"TOTAL USD:         \t{Convert.ToString(dtResponseOrden.Rows[0]["totalDolar"])}", boldFont));
-            document.Add(new Paragraph("")); // Espacio
-
+            yPosition += 10;
+            e.Graphics.DrawString($"IVA:                          \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["Iva"]):0.00} NIO", regularFont, Brushes.Black, 10, yPosition);
+            yPosition += 12;
+            e.Graphics.DrawString($"TOTAL:                 \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["totalCordoba"]):0.00} NIO", boldFont, Brushes.Black, 10, yPosition);
+            yPosition += 10;
+            e.Graphics.DrawString($"TOTAL:                 \t{Convert.ToString(dtResponseOrden.Rows[0]["totalDolar"])}", boldFont, Brushes.Black, 10, yPosition);
             // Pie de página
-            document.Add(new Paragraph("Gracias por su preferencia", regularFont));
+            yPosition += 20;
+            e.Graphics.DrawString("Gracias por su preferencia", regularFont, Brushes.Black, 10, yPosition);
 
-            document.Close();
-
-            
-            //// Abrir el PDF
-            Process.Start(new ProcessStartInfo(filePath) { UseShellExecute = true });
-
-
-            //DataTable data = dataUtilities.getRecordByColumn("ConfigFacturacion", "SucursalId", Utilidades.SucursalId);
-
-            //if (data.Rows.Count == 1)
-            //{
-            //    try
-            //    {
-            //        // Cargar el documento PDF
-            //        using (PdfiumViewer.PdfDocument pdfDocument = PdfiumViewer.PdfDocument.Load(filePath))
-            //        {
-            //            // Configurar la impresora
-            //            PrintDocument printDoc = pdfDocument.CreatePrintDocument();
-            //            printDoc.PrinterSettings.PrinterName = Convert.ToString(data.Rows[0]["ImpresoraTicket"]);
-
-            //            // Imprimir el documento
-            //            printDoc.Print();
-
-            //            MessageBox.Show("Documento impreso exitosamente.");
-            //        }
-
-            //        // Borrar el archivo después de la impresión
-            //        File.Delete(filePath);
-            //        MessageBox.Show("Archivo PDF borrado exitosamente.");
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show("Error al imprimir o manejar el archivo PDF: " + ex.Message);
-            //    }
-            //}
-
+            // Indicar que la página ha sido procesada
+            e.HasMorePages = false;
         }
+
     }
 }

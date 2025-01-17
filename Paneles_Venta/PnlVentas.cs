@@ -1109,7 +1109,7 @@ namespace NeoCobranza.Paneles_Venta
             if (DgvItemsOrden.RowCount > 0)
             {
                 PnlPago frmPago = new PnlPago(this);
-                frmPago.GenerateInvoicePDF(true);
+                frmPago.PrintPDF(true);
             }
             else
             {
