@@ -51,7 +51,7 @@ namespace NeoCobranza.Paneles
                 auxTablaDinamicaProveedor.Columns.Add("Id", typeof(string));
                 auxTablaDinamicaProveedor.Columns.Add("Proveedor", typeof(string));
 
-                DgvProveedor.DataSource = auxTablaDinamicaProveedor;
+                //DgvProveedor.DataSource = auxTablaDinamicaProveedor;
             }
 
             using (NeoCobranzaContext db = new NeoCobranzaContext())
@@ -59,21 +59,21 @@ namespace NeoCobranza.Paneles
                 DataTable dtResponse = dataUtilities.GetAllRecords("Proveedores");
                 var filterRow = from row in dtResponse.AsEnumerable() where Convert.ToString(row.Field<string>("Estatus")) == "Activo" orderby row.Field<int>("IdProveedor") descending select row;
 
-                if (filterRow.Any() && auxModulo == "Productos")
-                {
-                    CmbProveedor.ValueMember = "IdProveedor";
-                    CmbProveedor.DisplayMember = "NombreEmpresa";
-                    CmbProveedor.DataSource = filterRow.CopyToDataTable();
-                }
-                else if (filterRow.Any() == false && auxModulo == "Productos")
-                {
-                    MessageBox.Show("Para agregar productos debe haber un proveedor ACTIVO.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    this.Close();
-                }
-                else
-                {
-                    PnlProveedores.Visible = false;
-                }
+                //if (filterRow.Any() && auxModulo == "Productos")
+                //{
+                //    CmbProveedor.ValueMember = "IdProveedor";
+                //    CmbProveedor.DisplayMember = "NombreEmpresa";
+                //    CmbProveedor.DataSource = filterRow.CopyToDataTable();
+                //}
+                //else if (filterRow.Any() == false && auxModulo == "Productos")
+                //{
+                //    MessageBox.Show("Para agregar productos debe haber un proveedor ACTIVO.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //    this.Close();
+                //}
+                //else
+                //{
+                //    PnlProveedores.Visible = false;
+                //}
 
                 DataTable dtResponseCategoria = dataUtilities.GetAllRecords("Categorizacion");
 
@@ -114,7 +114,7 @@ namespace NeoCobranza.Paneles
             else if (auxModulo == "Servicios")
             {
                 LblNombreDinamico.Text = "Nombre del Servicio";
-                PnlProveedores.Visible = false;
+                //P/*nlProveedores.Visible = false;*/
                 LblCodigo.Visible = false;
                 TxtCodigo.Visible = false;
             }
@@ -180,12 +180,12 @@ namespace NeoCobranza.Paneles
                 return;
             }
 
-            if (auxTablaDinamicaProveedor.Rows.Count == 0 && auxModulo == "Productos")
-            {
-                MessageBox.Show("Debe agregar al menos un Proveedor.", "Atención",
-               MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            //if (auxTablaDinamicaProveedor.Rows.Count == 0 && auxModulo == "Productos")
+            //{
+            //    MessageBox.Show("Debe agregar al menos un Proveedor.", "Atención",
+            //   MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    return;
+            //}
 
             if (!decimal.TryParse(TxtPrecioVenta.Text.Trim(), out decimal _disponible))
             {
@@ -444,17 +444,17 @@ namespace NeoCobranza.Paneles
         //    }
         //}
 
-        private void BtnSeleccionarImagen_Click(object sender, EventArgs e)
-        {
-            ImgProducto.SizeMode = PictureBoxSizeMode.StretchImage;
+        //private void BtnSeleccionarImagen_Click(object sender, EventArgs e)
+        //{
+        //    ImgProducto.SizeMode = PictureBoxSizeMode.StretchImage;
 
-            OpenFileDialog.Filter = "Imagenes JPG|*.jpg|Imagenes JPEG|*.jpeg";
-            if (OpenFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                ImgProducto.Image = Image.FromFile(OpenFileDialog.FileName);
+        //    OpenFileDialog.Filter = "Imagenes JPG|*.jpg|Imagenes JPEG|*.jpeg";
+        //    if (OpenFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+        //    {
+        //        ImgProducto.Image = Image.FromFile(OpenFileDialog.FileName);
 
-            }
-        }
+        //    }
+        //}
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -502,42 +502,42 @@ namespace NeoCobranza.Paneles
             }
         }
 
-        private void BtnAgregarProveedor_Click(object sender, EventArgs e)
-        {
-            if (CmbProveedor.Items.Count > 0)
-            {
+        //private void BtnAgregarProveedor_Click(object sender, EventArgs e)
+        //{
+        //    if (CmbProveedor.Items.Count > 0)
+        //    {
 
-                foreach (DataRow row in auxTablaDinamicaProveedor.Rows)
-                {
-                    if (row[0].ToString() == CmbProveedor.SelectedValue.ToString())
-                    {
-                        MessageBox.Show("El Proveedor seleccionado ya ha sido agregado.", "Atención",
-                                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-                }
+        //        foreach (DataRow row in auxTablaDinamicaProveedor.Rows)
+        //        {
+        //            if (row[0].ToString() == CmbProveedor.SelectedValue.ToString())
+        //            {
+        //                MessageBox.Show("El Proveedor seleccionado ya ha sido agregado.", "Atención",
+        //                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //                return;
+        //            }
+        //        }
 
-                auxTablaDinamicaProveedor.Rows.Add(CmbProveedor.SelectedValue.ToString(), CmbProveedor.Text);
-            }
-            else
-            {
-                MessageBox.Show("Debe agregar un Proveedor en la sección de Catalogo para realizar esta acción.", "Atención",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
+        //        auxTablaDinamicaProveedor.Rows.Add(CmbProveedor.SelectedValue.ToString(), CmbProveedor.Text);
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Debe agregar un Proveedor en la sección de Catalogo para realizar esta acción.", "Atención",
+        //            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //    }
+        //}
 
-        private void BtnQuitarProveedor_Click(object sender, EventArgs e)
-        {
-            if (DgvProveedor.SelectedRows.Count > 0)
-            {
-                auxTablaDinamicaProveedor.Rows.RemoveAt(DgvProveedor.SelectedRows[0].Index);
-            }
-            else
-            {
-                MessageBox.Show("Debe seleccionar un Proveeedor en la lista para quitarlo.", "Atención",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
+        //private void BtnQuitarProveedor_Click(object sender, EventArgs e)
+        //{
+        //    if (DgvProveedor.SelectedRows.Count > 0)
+        //    {
+        //        auxTablaDinamicaProveedor.Rows.RemoveAt(DgvProveedor.SelectedRows[0].Index);
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Debe seleccionar un Proveeedor en la lista para quitarlo.", "Atención",
+        //            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //    }
+        //}
     }
 }
 

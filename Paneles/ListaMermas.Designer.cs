@@ -52,6 +52,8 @@
             this.BtnVolver = new NeoCobranza.Especiales.EspecialButton();
             this.BtnBuscarCliente = new NeoCobranza.Especiales.EspecialButton();
             this.BtnRevertir = new NeoCobranza.Especiales.EspecialButton();
+            this.TxtTipo = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCatalogo)).BeginInit();
             this.SuspendLayout();
@@ -217,9 +219,9 @@
             this.label6.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.label6.Location = new System.Drawing.Point(640, 306);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(164, 19);
+            this.label6.Size = new System.Drawing.Size(60, 19);
             this.label6.TabIndex = 180;
-            this.label6.Text = "Razón de la Merma:";
+            this.label6.Text = "Razón:";
             // 
             // label5
             // 
@@ -241,9 +243,9 @@
             this.label4.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.label4.Location = new System.Drawing.Point(640, 162);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(171, 19);
+            this.label4.Size = new System.Drawing.Size(268, 19);
             this.label4.TabIndex = 178;
-            this.label4.Text = "Cantidad Removida:";
+            this.label4.Text = "Cantidad Removida / Agregada:";
             // 
             // label2
             // 
@@ -253,9 +255,9 @@
             this.label2.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.label2.Location = new System.Drawing.Point(636, 97);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(99, 19);
+            this.label2.Size = new System.Drawing.Size(89, 19);
             this.label2.TabIndex = 176;
-            this.label2.Text = " ID - Merma";
+            this.label2.Text = " ID - Ajuste";
             // 
             // label1
             // 
@@ -265,9 +267,9 @@
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label1.Location = new System.Drawing.Point(636, 53);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(186, 23);
+            this.label1.Size = new System.Drawing.Size(158, 23);
             this.label1.TabIndex = 175;
-            this.label1.Text = "Datos de la Merma";
+            this.label1.Text = "Datos del Ajuste";
             // 
             // TxtFiltrar
             // 
@@ -344,12 +346,36 @@
             this.BtnRevertir.UseVisualStyleBackColor = false;
             this.BtnRevertir.Click += new System.EventHandler(this.BtnRevertir_Click);
             // 
+            // TxtTipo
+            // 
+            this.TxtTipo.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtTipo.Location = new System.Drawing.Point(948, 457);
+            this.TxtTipo.MaxLength = 100;
+            this.TxtTipo.Name = "TxtTipo";
+            this.TxtTipo.ReadOnly = true;
+            this.TxtTipo.Size = new System.Drawing.Size(280, 27);
+            this.TxtTipo.TabIndex = 202;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.label3.Location = new System.Drawing.Point(944, 435);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(45, 19);
+            this.label3.TabIndex = 201;
+            this.label3.Text = "Tipo:";
+            // 
             // ListaMermas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(1343, 723);
+            this.Controls.Add(this.TxtTipo);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.BtnRevertir);
             this.Controls.Add(this.TxtFiltrar);
             this.Controls.Add(this.BtnVolver);
@@ -374,7 +400,7 @@
             this.MinimumSize = new System.Drawing.Size(1359, 726);
             this.Name = "ListaMermas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Mermas";
+            this.Text = "Ajustes";
             this.Load += new System.EventHandler(this.ListaMermas_Load);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
@@ -406,5 +432,7 @@
         public Especiales.EspecialButton BtnVolver;
         public System.Windows.Forms.TextBox TxtFiltrar;
         public Especiales.EspecialButton BtnRevertir;
+        public System.Windows.Forms.TextBox TxtTipo;
+        public System.Windows.Forms.Label label3;
     }
 }

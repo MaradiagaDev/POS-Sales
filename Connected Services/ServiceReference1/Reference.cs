@@ -8,9 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Microsoft.JScript;
-using StackExchange.Redis;
-
 namespace NeoCobranza.ServiceReference1 {
     
     

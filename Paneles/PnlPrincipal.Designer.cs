@@ -92,6 +92,7 @@
             this.BtnInventarioGeneral = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuCaja = new NeoCobranza.Especiales.RJDropDownMenu(this.components);
             this.CierreCajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BtnVentaRapida = new NeoCobranza.Especiales.EspecialButton();
             this.MenuVertical.SuspendLayout();
             this.PnlTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
@@ -484,6 +485,7 @@
             // 
             this.panel5.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Controls.Add(this.BtnVentaRapida);
             this.panel5.Controls.Add(this.BtnConsultar);
             this.panel5.Controls.Add(this.LblSucursal);
             this.panel5.Controls.Add(this.pictureBox3);
@@ -697,7 +699,7 @@
             this.cuentasPorCobrarToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 12F);
             this.cuentasPorCobrarToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.cuentasPorCobrarToolStripMenuItem.Name = "cuentasPorCobrarToolStripMenuItem";
-            this.cuentasPorCobrarToolStripMenuItem.Size = new System.Drawing.Size(280, 26);
+            this.cuentasPorCobrarToolStripMenuItem.Size = new System.Drawing.Size(269, 26);
             this.cuentasPorCobrarToolStripMenuItem.Text = "Cuentas por Cobrar";
             this.cuentasPorCobrarToolStripMenuItem.Click += new System.EventHandler(this.cuentasPorCobrarToolStripMenuItem_Click);
             // 
@@ -834,7 +836,7 @@
             this.crearUsuarioToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(53)))), ((int)(((byte)(102)))));
             this.crearUsuarioToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.crearUsuarioToolStripMenuItem.Name = "crearUsuarioToolStripMenuItem";
-            this.crearUsuarioToolStripMenuItem.Size = new System.Drawing.Size(230, 24);
+            this.crearUsuarioToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.crearUsuarioToolStripMenuItem.Text = "Gestión de Usuario";
             this.crearUsuarioToolStripMenuItem.Click += new System.EventHandler(this.crearUsuarioToolStripMenuItem_Click);
             // 
@@ -843,7 +845,7 @@
             this.permisosToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(53)))), ((int)(((byte)(102)))));
             this.permisosToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.permisosToolStripMenuItem.Name = "permisosToolStripMenuItem";
-            this.permisosToolStripMenuItem.Size = new System.Drawing.Size(230, 24);
+            this.permisosToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.permisosToolStripMenuItem.Text = "Gestión de Permisos";
             this.permisosToolStripMenuItem.Click += new System.EventHandler(this.permisosToolStripMenuItem_Click);
             // 
@@ -945,6 +947,29 @@
             this.CierreCajaToolStripMenuItem.Size = new System.Drawing.Size(190, 26);
             this.CierreCajaToolStripMenuItem.Text = "Cierre de Caja";
             this.CierreCajaToolStripMenuItem.Click += new System.EventHandler(this.CierreCajaToolStripMenuItem_Click);
+            // 
+            // BtnVentaRapida
+            // 
+            this.BtnVentaRapida.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.BtnVentaRapida.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(186)))));
+            this.BtnVentaRapida.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(186)))));
+            this.BtnVentaRapida.BorderColor = System.Drawing.Color.Lime;
+            this.BtnVentaRapida.BorderRadius = 5;
+            this.BtnVentaRapida.BorderSize = 0;
+            this.BtnVentaRapida.FlatAppearance.BorderSize = 0;
+            this.BtnVentaRapida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnVentaRapida.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnVentaRapida.ForeColor = System.Drawing.Color.White;
+            this.BtnVentaRapida.Image = ((System.Drawing.Image)(resources.GetObject("BtnVentaRapida.Image")));
+            this.BtnVentaRapida.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnVentaRapida.Location = new System.Drawing.Point(551, 5);
+            this.BtnVentaRapida.Name = "BtnVentaRapida";
+            this.BtnVentaRapida.Size = new System.Drawing.Size(167, 27);
+            this.BtnVentaRapida.TabIndex = 152;
+            this.BtnVentaRapida.Text = "Venta Rapida";
+            this.BtnVentaRapida.TextGroundColor = System.Drawing.Color.White;
+            this.BtnVentaRapida.UseVisualStyleBackColor = false;
+            this.BtnVentaRapida.Click += new System.EventHandler(this.BtnVentaRapida_Click);
             // 
             // PnlPrincipal
             // 
@@ -1048,5 +1073,6 @@
         private System.Windows.Forms.ToolStripMenuItem serviciosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cuentasPorCobrarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listaDeOrdenesFacturaToolStripMenuItem;
+        public Especiales.EspecialButton BtnVentaRapida;
     }
 }

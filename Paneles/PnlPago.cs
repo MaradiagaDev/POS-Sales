@@ -507,6 +507,37 @@ namespace NeoCobranza.Paneles
             }
         }
 
+        public void PrintPDFA4()
+        {
+
+            DataTable data = dataUtilities.getRecordByColumn("ConfigFacturacion", "SucursalId", Utilidades.SucursalId);
+
+            PrintDocument doc = new PrintDocument();
+            PrinterSettings ps = new PrinterSettings();
+
+            if (Convert.ToString(data.Rows[0]["Impresora"]) == null || Convert.ToString(data.Rows[0]["Impresora"]) == "")
+            {
+                doc.PrinterSettings.PrinterName = doc.DefaultPageSettings.PrinterSettings.PrinterName;
+            }
+            else
+            {
+                doc.PrinterSettings.PrinterName = Convert.ToString(data.Rows[0]["Impresora"]);
+            }
+
+            PdfPrintPageEventHandler.OrdenAux = auxFrm.vMOrdenes.OrdenAux;
+
+            doc.PrintPage += new PrintPageEventHandler(PdfPrintPageEventHandler.ImprimeProforma);
+
+            try
+            {
+                doc.Print();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al imprimir: {ex.Message}");
+            }
+        }
+
         private void imprimeTicket(object sender, PrintPageEventArgs e)
         {
             dataUtilities.SetParameter("@OrdenId", auxFrm.vMOrdenes.OrdenAux);
@@ -530,7 +561,7 @@ namespace NeoCobranza.Paneles
             System.Drawing.Font titleFont = new System.Drawing.Font("Arial", 10, FontStyle.Bold);
             System.Drawing.Font regularFont = new System.Drawing.Font("Arial", 8.5f);
             System.Drawing.Font boldFont = new System.Drawing.Font("Arial", 8.5f, FontStyle.Bold);
-            System.Drawing.Font smallerFont = new System.Drawing.Font("Arial", 7.5f);
+            System.Drawing.Font smallerFont = new System.Drawing.Font("Arial", 8f);
 
             float yPosition = 10; // Posición inicial en la página (márgenes superiores)
             float leftMargin = 35;
@@ -549,7 +580,10 @@ namespace NeoCobranza.Paneles
             yPosition += 18; // Espacio antes de los datos de la factura
 
             // Datos de la factura
-            e.Graphics.DrawString($"Fecha: {Convert.ToDateTime(Convert.ToString(dtResponseOrden.Rows[0]["FechaRealizacion"])):dd/MM/yyyy}", regularFont, Brushes.Black, 10, yPosition);
+            e.Graphics.DrawString($"Fecha: {DateTime.Now.ToShortDateString():dd/MM/yyyy}", regularFont, Brushes.Black, 10, yPosition);
+            yPosition += 12;
+
+            e.Graphics.DrawString($"Cliente: {Convert.ToString(dtResponseOrden.Rows[0]["NombreCliente"])}", regularFont, Brushes.Black, 10, yPosition);
             yPosition += 12;
 
             e.Graphics.DrawString($"No. Orden: {Convert.ToString(dtResponseOrden.Rows[0]["OrdenId"])}", regularFont, Brushes.Black, 10, yPosition);
@@ -594,10 +628,18 @@ namespace NeoCobranza.Paneles
             // Totales
             yPosition += 10;
             e.Graphics.DrawString($"Sub Total:             \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["SubtotalOrden"]):0.00} NIO", regularFont, Brushes.Black, 10, yPosition);
-            yPosition += 10;
-            e.Graphics.DrawString($"Adicional Crédito:     \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["MontoCredito"]):0.00} NIO", regularFont, Brushes.Black, 10, yPosition);
-            yPosition += 10;
-            e.Graphics.DrawString($"Descuento:             \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["Descuento"]):0.00} NIO", regularFont, Brushes.Black, 10, yPosition);
+
+            if(Convert.ToDecimal(dtResponseOrden.Rows[0]["MontoCredito"]) != 0)
+            {
+                yPosition += 10;
+                e.Graphics.DrawString($"Adicional Crédito:     \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["MontoCredito"]):0.00} NIO", regularFont, Brushes.Black, 10, yPosition);
+            }
+            
+            if(Convert.ToDecimal(dtResponseOrden.Rows[0]["Descuento"]) != 0)
+            {
+                yPosition += 10;
+                e.Graphics.DrawString($"Descuento:             \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["Descuento"]):0.00} NIO", regularFont, Brushes.Black, 10, yPosition);
+            }           
 
             if (Convert.ToDecimal(dtResponseOrden.Rows[0]["RetencionDgi"]) != 0)
             {
@@ -611,12 +653,21 @@ namespace NeoCobranza.Paneles
                 e.Graphics.DrawString($"Alcaldía (1%):        \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["RetencionAlcaldia"]):0.00} NIO", regularFont, Brushes.Black, 10, yPosition);
             }
 
-            yPosition += 10;
-            e.Graphics.DrawString($"IVA:                          \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["Iva"]):0.00} NIO", regularFont, Brushes.Black, 10, yPosition);
+            if (Convert.ToDecimal(dtResponseOrden.Rows[0]["Iva"]) != 0)
+            {
+                yPosition += 10;
+                e.Graphics.DrawString($"IVA:                          \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["Iva"]):0.00} NIO", regularFont, Brushes.Black, 10, yPosition);
+            }
+
             yPosition += 12;
             e.Graphics.DrawString($"TOTAL:                 \t{Convert.ToDecimal(dtResponseOrden.Rows[0]["totalCordoba"]):0.00} NIO", boldFont, Brushes.Black, 10, yPosition);
-            yPosition += 10;
-            e.Graphics.DrawString($"TOTAL:                 \t{Convert.ToString(dtResponseOrden.Rows[0]["totalDolar"])}", boldFont, Brushes.Black, 10, yPosition);
+           
+            if (Convert.ToDecimal(dtResponseOrden.Rows[0]["totalDolar"]) != 0)
+            {
+                yPosition += 10;
+                e.Graphics.DrawString($"TOTAL:                 \t{Convert.ToString(dtResponseOrden.Rows[0]["totalDolar"])} $", boldFont, Brushes.Black, 10, yPosition);
+            }
+          
             // Pie de página
             yPosition += 20;
             e.Graphics.DrawString("Gracias por su preferencia", regularFont, Brushes.Black, 10, yPosition);

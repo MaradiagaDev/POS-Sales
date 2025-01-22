@@ -36,6 +36,7 @@ namespace NeoCobranza.Paneles
 
         private void PnlAgregarProductoSerie_Load(object sender, EventArgs e)
         {
+            CmbTipoAjuste.SelectedIndex = 0;
             //Colocar la descripcion del producto y el almacen
             DataTable dtResponseProducto = dataUtilities.getRecordByPrimaryKey("ProductosServicios", auxIdProducto);
             DataTable dtResponseAlmacenes = dataUtilities.getRecordByPrimaryKey("Almacenes", auxIdAlmacen);
@@ -43,7 +44,7 @@ namespace NeoCobranza.Paneles
             string nombreProducto = Convert.ToString(dtResponseProducto.Rows[0]["NombreProducto"]);
             string nombreAlmacen = Convert.ToString(dtResponseAlmacenes.Rows[0]["NombreAlmacen"]);
 
-            LblDinamico.Text = $"Merma del producto: {nombreProducto} en {nombreAlmacen}";
+            LblDinamico.Text = $"Ajuste del producto: {nombreProducto} en {nombreAlmacen}";
         }
 
         private void TxtCantidad_KeyPress(object sender, KeyPressEventArgs e)
@@ -96,12 +97,15 @@ namespace NeoCobranza.Paneles
 
             decimal cantidadActual = Convert.ToDecimal(dtResponse.Rows[0]["Cantidad"]);
 
-            if(cantidadActual < Convert.ToDecimal(TxtCantidad.Text))
+            if (CmbTipoAjuste.SelectedIndex == 0)
             {
-                MessageBox.Show("No hay suficiente inventario.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                TxtCantidad.Focus();
+                if (cantidadActual < Convert.ToDecimal(TxtCantidad.Text))
+                {
+                    MessageBox.Show("No hay suficiente inventario.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    TxtCantidad.Focus();
 
-                return;
+                    return;
+                }
             }
 
             DataTable dtResponseProducto = dataUtilities.getRecordByPrimaryKey("ProductosServicios", auxIdProducto);
@@ -116,15 +120,24 @@ namespace NeoCobranza.Paneles
             dataUtilities.SetColumns("BoolRevertida", false);
             dataUtilities.SetColumns("PrecioVenta", Convert.ToString(dtResponseProducto.Rows[0]["Precio"]));
             dataUtilities.SetColumns("ProductoId", Convert.ToString(dtResponseProducto.Rows[0]["ProductoId"]));
+            dataUtilities.SetColumns("TipoMerma", CmbTipoAjuste.Text);
 
             dataUtilities.InsertRecord("Mermas");
 
             //Quitar la cantidad del almacen
 
-            dataUtilities.SetColumns("Cantidad", (cantidadActual - Convert.ToDecimal(TxtCantidad.Text)));
+            if(CmbTipoAjuste.SelectedIndex == 0)
+            {
+                dataUtilities.SetColumns("Cantidad", (cantidadActual - Convert.ToDecimal(TxtCantidad.Text)));
+            }
+            else
+            {
+                dataUtilities.SetColumns("Cantidad", (cantidadActual + Convert.ToDecimal(TxtCantidad.Text)));
+            }
+            
             dataUtilities.UpdateRecordByPrimaryKey("RelAlmacenProducto", Convert.ToDecimal(dtResponse.Rows[0]["RelAlmacenProductoId"]));
 
-            MessageBox.Show("Merma realizada correctamente.", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Ajuste realizado correctamente.", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             this.Close();
         }

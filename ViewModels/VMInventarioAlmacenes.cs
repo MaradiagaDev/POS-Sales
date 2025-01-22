@@ -26,7 +26,7 @@ namespace NeoCobranza.ViewModels
             //Agregar Boton de Cambiar de estado
             DataGridViewButtonColumn BtnRealizarMerma = new DataGridViewButtonColumn();
 
-            BtnRealizarMerma.Text = "Agregar Merma";
+            BtnRealizarMerma.Text = "Agregar Ajuste";
             BtnRealizarMerma.Name = "...";
             BtnRealizarMerma.UseColumnTextForButtonValue = true;
             BtnRealizarMerma.DefaultCellStyle.ForeColor = Color.Blue;

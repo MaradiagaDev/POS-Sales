@@ -9,7 +9,7 @@
     <ProjectGuid>{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>NeoCobranza</RootNamespace>
-    <AssemblyName>Cobranza</AssemblyName>
+    <AssemblyName>SysAdmin POS</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -18,9 +18,9 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
-    <PublishUrl>\\192.168.1.68\versionesneocobranza\Actualizaciones\</PublishUrl>
+    <PublishUrl>C:\Backs\</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Unc</InstallFrom>
+    <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
@@ -30,9 +30,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>\\192.168.1.68\versionesneocobranza\Actualizaciones\</UpdateUrl>
     <MinimumRequiredVersion>1.0.0.15</MinimumRequiredVersion>
-    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>49</ApplicationRevision>
+    <ApplicationRevision>50</ApplicationRevision>
     <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -71,7 +70,7 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>accounting_calculator_calculation_calculate_office_icon_191148.ico</ApplicationIcon>
+    <ApplicationIcon>5027881_business_chart_finance_graph_money_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
@@ -585,6 +584,24 @@
     </Compile>
     <Compile Include="Paneles\PnlPago.Designer.cs">
       <DependentUpon>PnlPago.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_Venta\frmAgregarProductosServicios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_Venta\frmAgregarProductosServicios.Designer.cs">
+      <DependentUpon>frmAgregarProductosServicios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_Venta\frmBusquedasOrdenes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_Venta\frmBusquedasOrdenes.Designer.cs">
+      <DependentUpon>frmBusquedasOrdenes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_Venta\Informes\frmBusquedasMesas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_Venta\Informes\frmBusquedasMesas.Designer.cs">
+      <DependentUpon>frmBusquedasMesas.cs</DependentUpon>
     </Compile>
     <Compile Include="Paneles_Venta\PnlVentasCredito.cs">
       <SubType>Form</SubType>
@@ -1134,12 +1151,6 @@
     <Compile Include="Paneles_Venta\Informes\Rpt_InformeGeneralCaja.Designer.cs">
       <DependentUpon>Rpt_InformeGeneralCaja.cs</DependentUpon>
     </Compile>
-    <Compile Include="Paneles_Venta\PnlHistorialVenta.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Paneles_Venta\PnlHistorialVenta.Designer.cs">
-      <DependentUpon>PnlHistorialVenta.cs</DependentUpon>
-    </Compile>
     <Compile Include="Paneles_Venta\PnlVentas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1225,6 +1236,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlPago.resx">
       <DependentUpon>PnlPago.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_Venta\frmAgregarProductosServicios.resx">
+      <DependentUpon>frmAgregarProductosServicios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_Venta\frmBusquedasOrdenes.resx">
+      <DependentUpon>frmBusquedasOrdenes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_Venta\Informes\frmBusquedasMesas.resx">
+      <DependentUpon>frmBusquedasMesas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles_Venta\PnlVentasCredito.resx">
       <DependentUpon>PnlVentasCredito.cs</DependentUpon>
@@ -1483,9 +1503,6 @@
     <EmbeddedResource Include="Paneles_Venta\Informes\Rpt_InformeGeneralCaja.resx">
       <DependentUpon>Rpt_InformeGeneralCaja.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Paneles_Venta\PnlHistorialVenta.resx">
-      <DependentUpon>PnlHistorialVenta.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Paneles_Venta\PnlVentas.resx">
       <DependentUpon>PnlVentas.cs</DependentUpon>
     </EmbeddedResource>
@@ -1685,6 +1702,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="5027881_business_chart_finance_graph_money_icon.ico" />
+    <Content Include="653278_coin_bitcoin_cash_currency_dollar_icon.ico" />
     <Content Include="accounting_calculator_calculation_calculate_office_icon_191148.ico" />
     <Content Include="icudt.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

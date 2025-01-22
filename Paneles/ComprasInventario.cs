@@ -37,7 +37,6 @@ namespace NeoCobranza.Paneles
             UIUtilities.PersonalizarDataGridViewPequeños(DgvProductos);
             UIUtilities.EstablecerFondo(this);
             UIUtilities.ConfigurarBotonBuscar(BtnBuscar);
-            UIUtilities.ConfigurarBotonBuscar(BtnBuscarProducto);
             UIUtilities.ConfigurarTextBoxBuscar(TxtFiltroProducto);
             UIUtilities.ConfigurarTituloPantalla(TbTitulo, PnlTitulo);
             UIUtilities.ConfigurarComboBox(CmbAlmacen);
@@ -134,18 +133,16 @@ namespace NeoCobranza.Paneles
                     break;
 
                 case "Crear":
-                    TxtIdProveedor.Text = "-";
-                    TxtNombreProveedor.Text = "-";
 
-                    TxtFiltroProducto.Enabled = false;
-                    BtnBuscarProducto.Enabled = false;
-                    DgvProductos.Enabled = false;
+                    TxtFiltroProducto.Enabled = true;
+ 
+                    DgvProductos.Enabled = true;
 
-                    LblCantidad.Enabled = false;
-                    TxtCantidad.Enabled = false;
-                    LblPrecioVenta.Enabled = false;
-                    TxtCosto.Enabled = false;
-                    BtnAgregarProducto.Enabled = false;
+                    LblCantidad.Enabled = true;
+                    TxtCantidad.Enabled = true;
+                    LblPrecioVenta.Enabled = true;
+                    TxtCosto.Enabled = true;
+                    BtnAgregarProducto.Enabled = true;
 
                     CmbAlmacen.Enabled = true;
                     BtnAgregarCompra.Enabled = true;
@@ -197,6 +194,7 @@ namespace NeoCobranza.Paneles
 
                         dataCompra.Columns.Add("Id Producto", typeof(string));
                         dataCompra.Columns.Add("Id Proveedor", typeof(string));
+                        dataCompra.Columns.Add("Proveedor", typeof(string));
                         dataCompra.Columns.Add("Producto", typeof(string));
                         dataCompra.Columns.Add("Sub Total (NIO)", typeof(string));
                         dataCompra.Columns.Add("Cantidad/U", typeof(string));
@@ -205,6 +203,8 @@ namespace NeoCobranza.Paneles
                         DgvCompra.Columns[1].Visible = false;
                         DgvCompra.Columns[2].Visible = false;
                     }
+
+                    BuscarProducto();
 
                     if (auxKey != "")
                     {
@@ -220,10 +220,12 @@ namespace NeoCobranza.Paneles
                         foreach (DataRow dr in dtResponseDetalle.Rows)
                         {
                             DataTable dtProducto = dataUtilities.getRecordByPrimaryKey("ProductosServicios", Convert.ToString(dr["ProductoId"]));
+                            DataTable dtProveedor = dataUtilities.getRecordByPrimaryKey("Proveedores", Convert.ToString(dr["ProveedorId"]));
 
                             dataCompra.Rows.Add(
                                 Convert.ToString(dr["ProductoId"]),
                                 Convert.ToString(dr["ProveedorId"]),
+                                Convert.ToString(dtProveedor.Rows[0]["NombreEmpresa"]),
                                 Convert.ToString(dtProducto.Rows[0]["NombreProducto"]),
                                 Convert.ToString(dr["SubTotal"]),
                                 Convert.ToString(dr["Cantidad"])
@@ -253,27 +255,27 @@ namespace NeoCobranza.Paneles
                 dataProducto.Columns.Add("Cantidad en Almacén", typeof(string));
                 dataProducto.Columns.Add("Precio (NIO)", typeof(string));
 
-                DgvProductos.Columns[0].Visible = false;
             }
 
-            if (TxtIdProveedor.Text.Trim() != "-")
+            dataUtilities.SetParameter("@AlmacenId", CmbAlmacen.SelectedValue);
+            dataUtilities.SetParameter("@CategoriaId", 0);
+            dataUtilities.SetParameter("@Filtro", TxtFiltroProducto.Text);
+
+            DataTable dtResponse = dataUtilities.ExecuteStoredProcedure("sp_ObtenerCantidadProductoPorAlmacen");
+
+            foreach (DataRow item in dtResponse.Rows)
             {
-                dataUtilities.SetParameter("@AlmacenId", CmbAlmacen.SelectedValue);
-                dataUtilities.SetParameter("@CategoriaId", 0);
-                dataUtilities.SetParameter("@ProveedorId", TxtIdProveedor.Text);
-                dataUtilities.SetParameter("@Filtro", TxtFiltroProducto.Text);
+                dataProducto.Rows.Add(
+                    Convert.ToString(item["ID"]),
+                    Convert.ToString(item["PRODUCTO"]),
+                    Convert.ToString(item["EXISTENCIA"]),
+                    Convert.ToString(item["PRECIO (NIO)"])
+                    );
+            }
 
-                DataTable dtResponse = dataUtilities.ExecuteStoredProcedure("sp_ObtenerCantidadProductoPorAlmacenYProveedor");
-
-                foreach (DataRow item in dtResponse.Rows)
-                {
-                    dataProducto.Rows.Add(
-                        Convert.ToString(item["ProductoId"]),
-                        Convert.ToString(item["NombreProducto"]),
-                        Convert.ToString(item["cantidad"]),
-                        Convert.ToString(item["Precio"])
-                        );
-                }
+            if(DgvProductos.ColumnCount != 0)
+            {
+                DgvProductos.Columns[0].Visible = false;
             }
         }
 
@@ -304,7 +306,7 @@ namespace NeoCobranza.Paneles
             }
             else if (auxOpc == "Crear")
             {
-                if(auxKey == "")
+                if (auxKey == "")
                 {
                     //agregar la compra
                     string idCompra = Guid.NewGuid().ToString();
@@ -328,12 +330,12 @@ namespace NeoCobranza.Paneles
                         dataUtilities.SetColumns("LoteId", idLote);
                         dataUtilities.SetColumns("ProductoId", Convert.ToString(item[0]));
                         dataUtilities.SetColumns("CompraId", idCompra);
-                        dataUtilities.SetColumns("Cantidad", Convert.ToString(item[4]));
+                        dataUtilities.SetColumns("Cantidad", Convert.ToString(item[5]));
                         dataUtilities.SetColumns("FechaCreacion", DateTime.Now);
                         dataUtilities.SetColumns("AlmacenId", CmbAlmacen.SelectedValue);
                         dataUtilities.SetColumns("ProveedorId", Convert.ToString(item[1]));
-                        dataUtilities.SetColumns("CostoU", (Convert.ToDecimal(item[3]) / Convert.ToDecimal(item[4])));
-                        dataUtilities.SetColumns("SubTotal", Convert.ToString(item[3]));
+                        dataUtilities.SetColumns("CostoU", (Convert.ToDecimal(item[4]) / Convert.ToDecimal(item[5])));
+                        dataUtilities.SetColumns("SubTotal", Convert.ToString(item[4]));
 
                         dataUtilities.InsertRecord("CompraDetalles");
 
@@ -352,7 +354,7 @@ namespace NeoCobranza.Paneles
                         decimal cantidadActual = Convert.ToDecimal(dtResponse.Rows[0]["Cantidad"]);
 
                         //Actualizar la cantidad
-                        decimal cantidadActualizada = cantidadActual + Convert.ToDecimal(item[4]);
+                        decimal cantidadActualizada = cantidadActual + Convert.ToDecimal(item[5]);
 
                         dataUtilities.SetColumns("Cantidad", cantidadActualizada);
                         dataUtilities.UpdateRecordByPrimaryKey("RelAlmacenProducto", idRelAlmacenProducto);
@@ -383,7 +385,7 @@ namespace NeoCobranza.Paneles
                             && Convert.ToString(row.Field<string>("ProductoId")) == Convert.ToString(item[0])
                             select row;
 
-                        if (!filterRowDetalle.Any()) 
+                        if (!filterRowDetalle.Any())
                         {
 
                             string idLote = Guid.NewGuid().ToString();
@@ -391,12 +393,12 @@ namespace NeoCobranza.Paneles
                             dataUtilities.SetColumns("LoteId", idLote);
                             dataUtilities.SetColumns("ProductoId", Convert.ToString(item[0]));
                             dataUtilities.SetColumns("CompraId", auxKey);
-                            dataUtilities.SetColumns("Cantidad", Convert.ToString(item[4]));
+                            dataUtilities.SetColumns("Cantidad", Convert.ToString(item[5]));
                             dataUtilities.SetColumns("FechaCreacion", DateTime.Now);
                             dataUtilities.SetColumns("AlmacenId", CmbAlmacen.SelectedValue);
                             dataUtilities.SetColumns("ProveedorId", Convert.ToString(item[1]));
-                            dataUtilities.SetColumns("CostoU", (Convert.ToDecimal(item[3])/ Convert.ToDecimal(item[4])));
-                            dataUtilities.SetColumns("SubTotal", Convert.ToString(item[3]));
+                            dataUtilities.SetColumns("CostoU", (Convert.ToDecimal(item[5]) / Convert.ToDecimal(item[5])));
+                            dataUtilities.SetColumns("SubTotal", Convert.ToString(item[5]));
 
                             dataUtilities.InsertRecord("CompraDetalles");
 
@@ -415,7 +417,7 @@ namespace NeoCobranza.Paneles
                             decimal cantidadActual = Convert.ToDecimal(dtResponse.Rows[0]["Cantidad"]);
 
                             //Actualizar la cantidad
-                            decimal cantidadActualizada = cantidadActual + Convert.ToDecimal(item[4]);
+                            decimal cantidadActualizada = cantidadActual + Convert.ToDecimal(item[5]);
 
                             dataUtilities.SetColumns("Cantidad", cantidadActualizada);
                             dataUtilities.UpdateRecordByPrimaryKey("RelAlmacenProducto", idRelAlmacenProducto);
@@ -456,15 +458,15 @@ namespace NeoCobranza.Paneles
             BuscarProducto();
         }
 
-      
+
         private void TxtCosto_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void TxtCantidad_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void TxtCantidad_KeyPress(object sender, KeyPressEventArgs e)
@@ -503,40 +505,36 @@ namespace NeoCobranza.Paneles
 
         private void BtnSeleccionarProveeder_Click(object sender, EventArgs e)
         {
-                PnlSeleccionarProveedor frm = new PnlSeleccionarProveedor();
-                AddOwnedForm(frm);
-                frm.ShowDialog();
+            PnlSeleccionarProveedor frm = new PnlSeleccionarProveedor();
+            AddOwnedForm(frm);
+            frm.ShowDialog();
         }
 
-        private void TxtIdProveedor_TextChanged(object sender, EventArgs e)
-        {
-            if (TxtIdProveedor.Text.Trim() != "-")
-            {
-                TxtFiltroProducto.Enabled = true;
-                BtnBuscarProducto.Enabled = true;
-                DgvProductos.Enabled = true;
-
-                LblCantidad.Enabled = true;
-                TxtCantidad.Enabled = true;
-                LblPrecioVenta.Enabled = true;
-                TxtCosto.Enabled = true;
-                BtnAgregarProducto.Enabled = true;
-
-                BuscarProducto();
-            }
-        }
-
+        public string proveedor = "0";
+        public string NombreProveedor = "-";
         private void BtnAgregarProducto_Click(object sender, EventArgs e)
         {
+            //LLamar a la nueva pantalla de proveedores
+            PnlSeleccionarProveedor frm = new PnlSeleccionarProveedor();
+            AddOwnedForm(frm);
+            frm.ShowDialog();
+
+
             if (DgvProductos.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Debe seleccionar un Producto para agregar a la compra.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
+            if(!Decimal.TryParse(TxtCantidad.Text, out Decimal cantidad) || cantidad == 0)
+            {
+                MessageBox.Show("Debe digitar la cantidad de producto que desea agregar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             foreach (DataRow item in dataCompra.Rows)
             {
-                if (item[0].ToString() == DgvProductos.SelectedRows[0].Cells[0].Value.ToString() && item[1].ToString() == TxtIdProveedor.Text.Trim())
+                if (item[0].ToString() == DgvProductos.SelectedRows[0].Cells[0].Value.ToString() && item[1].ToString() == proveedor && proveedor != "0")
                 {
                     MessageBox.Show("El producto ya fue agregado a la compra con el mismo proveedor. Solo puede agregar el mismo producto con diferente proveedor.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -544,7 +542,8 @@ namespace NeoCobranza.Paneles
             }
 
             dataCompra.Rows.Add(DgvProductos.SelectedRows[0].Cells[0].Value.ToString(),
-                TxtIdProveedor.Text.Trim(),
+                proveedor,
+                NombreProveedor,
                 DgvProductos.SelectedRows[0].Cells[1].Value.ToString(),
                 Convert.ToDecimal(TxtCosto.Text),
                 TxtCantidad.Text
@@ -552,6 +551,8 @@ namespace NeoCobranza.Paneles
 
             TxtCosto.Text = "0";
             TxtCantidad.Text = "0";
+            proveedor = "0";
+            NombreProveedor = "-";
 
             ContadorTotal();
         }
@@ -562,7 +563,7 @@ namespace NeoCobranza.Paneles
 
             foreach (DataRow item in dataCompra.Rows)
             {
-                total += double.Parse(Convert.ToString(item[3]));
+                total += double.Parse(Convert.ToString(item[4]));
             }
 
             TxtMontoTotal.Text = total.ToString() + " (NIO)";
@@ -593,9 +594,9 @@ namespace NeoCobranza.Paneles
                     decimal idRelAlmacenProducto = Convert.ToDecimal(dtResponse.Rows[0]["RelAlmacenProductoId"]);
                     decimal cantidadActual = Convert.ToDecimal(dtResponse.Rows[0]["Cantidad"]);
 
-                    if(cantidadActual < Convert.ToDecimal(dataCompra.Rows[e.RowIndex][4]))
+                    if (cantidadActual < Convert.ToDecimal(dataCompra.Rows[e.RowIndex][5]))
                     {
-                        MessageBox.Show("No hay suficiente espacio en almacén para revertir la cantidad de producto.","Atención",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                        MessageBox.Show("No hay suficiente espacio en almacén para revertir la cantidad de producto.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
@@ -610,12 +611,12 @@ namespace NeoCobranza.Paneles
                     dtResponseDetalle = filterRowDetalle.CopyToDataTable();
 
                     dataUtilities.DeleteRecordByColumn("CompraDetalles",
-                        "LoteId", 
+                        "LoteId",
                         Convert.ToString(dtResponseDetalle.Rows[0]["LoteId"]));
 
                     //Quitarlo del relAlmacen
 
-                    dataUtilities.SetColumns("Cantidad", (cantidadActual - Convert.ToDecimal(dataCompra.Rows[e.RowIndex][4])));
+                    dataUtilities.SetColumns("Cantidad", (cantidadActual - Convert.ToDecimal(dataCompra.Rows[e.RowIndex][5])));
                     dataUtilities.UpdateRecordByPrimaryKey("RelAlmacenProducto", idRelAlmacenProducto);
 
                     dataCompra.Rows.RemoveAt(e.RowIndex);
@@ -647,7 +648,7 @@ namespace NeoCobranza.Paneles
             if (e.ColumnIndex == 1)
             {
                 //IMPRIMIR
-               
+
             }
             if (e.ColumnIndex == 2)
             {
@@ -697,6 +698,16 @@ namespace NeoCobranza.Paneles
         private void LblCantidad_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void CmbAlmacen_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BuscarProducto();
+        }
+
+        private void TxtFiltroProducto_TextChanged(object sender, EventArgs e)
+        {
+            BuscarProducto();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using NeoCobranza.ModelsCobranza;
+using NeoCobranza.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,7 @@ namespace NeoCobranza.Paneles
     public partial class PnlDisponibilidad : Form
     {
         private string auxIdProducto;
+        DataUtilities data = new DataUtilities();
         public PnlDisponibilidad(string IdProducto)
         {
             auxIdProducto = IdProducto;
@@ -29,42 +31,17 @@ namespace NeoCobranza.Paneles
 
         private void PnlDisponibilidad_Load(object sender, EventArgs e)
         {
-            using(NeoCobranzaContext db = new NeoCobranzaContext())
-            {
-                ServiciosEstadares producto = db.ServiciosEstadares.Where(s => s.IdEstandar == int.Parse(auxIdProducto)).FirstOrDefault();
+            UIUtilities.PersonalizarDataGridView(DgvProductos);
 
-                LblDynamico.Text = "Sucursales con existencias de producto: " + producto.NombreEstandar;
+            data.SetParameter("@productoId", auxIdProducto);
+            DataTable dataTable = data.ExecuteStoredProcedure("ListarProductosPorSucursales");
 
-                List<DisponibilidaClass> listaDisponibilidad = new List<DisponibilidaClass>();
-                List<Sucursales> sucursales = db.Sucursales.Where(s => s.Estado == "Activo").ToList();
+            DgvProductos.DataSource = dataTable;
 
-                foreach(var item in sucursales)
-                {
-                    DisponibilidaClass claseDisponibilidad = new DisponibilidaClass();
+            string nombreProducto = Convert.ToString(data.getRecordByPrimaryKey("ProductosServicios", Convert.ToString(auxIdProducto)).Rows[0]["NombreProducto"]);
 
-                    claseDisponibilidad.Sucursal = item.NombreSucursal.ToString();
-                    var almacenes = db.Almacenes.Where(s => s.SucursalId == item.SucursalId && s.Estatus == "Activo").ToList();
+            LblDynamico.Text = "Sucursales con existencias de producto: " + nombreProducto;
 
-                    foreach(var itemAlmacen in almacenes)
-                    {
-                        var rel = db.RelAlmacenProducto.Where(s => s.ProductoId == int.Parse(auxIdProducto) && s.AlmacenId == itemAlmacen.AlmacenId).FirstOrDefault();
-                        claseDisponibilidad.Cantidad += int.Parse(rel.Cantidad.ToString());
-                    }
-
-                    listaDisponibilidad.Add(claseDisponibilidad);
-                }
-
-                DataTable table = new DataTable();
-                table.Columns.Add("Sucursal", typeof(string));
-                table.Columns.Add("Cantidad", typeof(string));
-
-                foreach(var item in listaDisponibilidad) 
-                {
-                  table.Rows.Add(item.Sucursal,item.Cantidad);
-                }
-
-                DgvProductos.DataSource = table;
-            }
         }
     }
 }

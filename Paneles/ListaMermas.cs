@@ -146,10 +146,9 @@ namespace NeoCobranza.Paneles
                 TxtIdentificador.Text = Convert.ToString(dtResponseMerma.Rows[0]["Identificador"]);
                 TxtRazon.Text = Convert.ToString(dtResponseMerma.Rows[0]["Razon"]);
                 TxtPrecioVenta.Text = Convert.ToString(dtResponseMerma.Rows[0]["PrecioVenta"]);
-
+                TxtTipo.Text = Convert.ToString(dtResponseMerma.Rows[0]["TipoMerma"]);
                 auxIdProducto = Convert.ToString(dtResponseMerma.Rows[0]["ProductoId"]);
                 auxIdAlmacenSeleccionado = Convert.ToString(dtResponseMerma.Rows[0]["AlmacenId"]);
-
                 BtnRevertir.Enabled = Convert.ToString(dgvCatalogo.Rows[e.RowIndex].Cells[7].Value) == "SI" ? false : true;
             }
         }
@@ -177,7 +176,19 @@ namespace NeoCobranza.Paneles
 
             decimal totalActual = Convert.ToDecimal(dtRelAlmacenProducto.Rows[0]["Cantidad"]);
 
-            dataUtilities.SetColumns("Cantidad", (totalActual + Convert.ToDecimal(TxtCantidadRemover.Text)));
+            if (TxtTipo.Text == "Disminuir" )
+            {
+                dataUtilities.SetColumns("Cantidad", (totalActual + Convert.ToDecimal(TxtCantidadRemover.Text)));
+            }
+            else if (TxtTipo.Text == "Aumentar")
+            {
+                dataUtilities.SetColumns("Cantidad", (totalActual - Convert.ToDecimal(TxtCantidadRemover.Text)));
+            }
+            else
+            {
+                dataUtilities.SetColumns("Cantidad", (totalActual + Convert.ToDecimal(TxtCantidadRemover.Text)));
+            }
+          
             dataUtilities.UpdateRecordByPrimaryKey("RelAlmacenProducto", Convert.ToDecimal(dtRelAlmacenProducto.Rows[0]["RelAlmacenProductoId"]));
 
             //Actualizar la merma

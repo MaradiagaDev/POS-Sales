@@ -19,6 +19,7 @@ using System.Runtime.InteropServices;
 using NeoCobranza.ViewModels;
 using NeoCobranza.ModelsCobranza;
 using System.Threading;
+using NeoCobranza.Paneles_Venta.Informes;
 
 namespace NeoCobranza.Paneles
 {
@@ -252,7 +253,7 @@ namespace NeoCobranza.Paneles
         private void ventasDirectasDeAtaudesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             limpiar();
-            PnlVentas directas = new PnlVentas(conexion, "OrdenRapida");
+            PnlVentas directas = new PnlVentas("OrdenRapida", this);
             directas.TopLevel = false;
             directas.Dock = DockStyle.Fill;
             PnlCentral.Controls.Add(directas);
@@ -264,13 +265,7 @@ namespace NeoCobranza.Paneles
 
         private void registroDeVentasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            limpiar();
-            PnlVentas directas = new PnlVentas(conexion, "Salas");
-            directas.TopLevel = false;
-            directas.Dock = DockStyle.Fill;
-            directas.TopLevel = false;
-            PnlCentral.Controls.Add(directas);
-            directas.Show();
+            AbrirMesas();
         }
 
         private void especialButton4_Click(object sender, EventArgs e)
@@ -644,7 +639,7 @@ namespace NeoCobranza.Paneles
         private void listaDeOrdenesActivasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             limpiar();
-            PnlVentas directas = new PnlVentas(conexion, "Listas");
+            frmBusquedasOrdenes directas = new frmBusquedasOrdenes(this,"Lista");
             directas.TopLevel = false;
             directas.Dock = DockStyle.Fill;
             directas.TopLevel = false;
@@ -755,7 +750,7 @@ namespace NeoCobranza.Paneles
         private void cuentasPorCobrarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             limpiar();
-            PnlVentas directas = new PnlVentas(conexion, "ListaCredito");
+            frmBusquedasOrdenes directas = new frmBusquedasOrdenes(this, "ListaCreadito");
             directas.TopLevel = false;
             directas.Dock = DockStyle.Fill;
             directas.TopLevel = false;
@@ -767,6 +762,63 @@ namespace NeoCobranza.Paneles
         {
             limpiar();
             PnlCierreCuadreCaja directas = new PnlCierreCuadreCaja();
+            directas.TopLevel = false;
+            directas.Dock = DockStyle.Fill;
+            directas.TopLevel = false;
+            PnlCentral.Controls.Add(directas);
+            directas.Show();
+        }
+
+        private void BtnVentaRapida_Click(object sender, EventArgs e)
+        {
+            limpiar();
+            PnlVentas directas = new PnlVentas( "OrdenRapida",this);
+            directas.TopLevel = false;
+            directas.Dock = DockStyle.Fill;
+            PnlCentral.Controls.Add(directas);
+            directas.Visible = false;
+            directas.Show();
+            directas.Visible = true;
+        }
+
+        public void AbrirVenta(decimal orden,string mesa = "-")
+        {
+            limpiar();
+            PnlVentas directas = new PnlVentas("OrdenRapida",this,orden,mesa);
+            directas.TopLevel = false;
+            directas.Dock = DockStyle.Fill;
+            PnlCentral.Controls.Add(directas);
+            directas.Visible = false;
+            directas.Show();
+            directas.Visible = true;
+        }
+       
+        public void AbrirListaVentas()
+        {
+            limpiar();
+            frmBusquedasOrdenes directas = new frmBusquedasOrdenes(this, "Lista");
+            directas.TopLevel = false;
+            directas.Dock = DockStyle.Fill;
+            directas.TopLevel = false;
+            PnlCentral.Controls.Add(directas);
+            directas.Show();
+        }
+
+        public void AbrirMesas()
+        {
+            limpiar();
+            frmBusquedasMesas directas = new frmBusquedasMesas(this);
+            directas.TopLevel = false;
+            directas.Dock = DockStyle.Fill;
+            directas.TopLevel = false;
+            PnlCentral.Controls.Add(directas);
+            directas.Show();
+        }
+
+        public void AbrirProductos(decimal orden,string opc,bool dgi,bool alcaldia,string descuento)
+        {
+            limpiar();
+            frmAgregarProductosServicios directas = new frmAgregarProductosServicios(this,orden,opc,dgi,alcaldia,descuento);
             directas.TopLevel = false;
             directas.Dock = DockStyle.Fill;
             directas.TopLevel = false;

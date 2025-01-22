@@ -24,17 +24,27 @@ namespace NeoCobranza.Paneles_Venta
         public VMOrdenes vMOrdenes = new VMOrdenes();
         public string auxOpc = "";
         DataUtilities dataUtilities = new DataUtilities();
+        public PnlPrincipal auxPnlPrincipal;
 
         //Constructor
-        public PnlVentas(Conexion conexion, string opc)
+        public PnlVentas( string opc, PnlPrincipal pnlPrincipal, decimal ordenId = 0,string mesaAux = "-")
         {
             InitializeComponent();
             this.DoubleBuffered = true;
             auxOpc = opc;
+            vMOrdenes.OrdenAux = ordenId;
             this.Enter += new EventHandler(Form1_Enter);
-            UIUtilities.PersonalizarDataGridView(dgvCatalogoOrdenes);
-            UIUtilities.PersonalizarDataGridView(DgvProductos);
+            //UIUtilities.PersonalizarDataGridView(dgvCatalogoOrdenes);
+            //UIUtilities.PersonalizarDataGridView(DgvProductos);
             UIUtilities.PersonalizarDataGridView(DgvItemsOrden);
+            this.auxPnlPrincipal = pnlPrincipal;
+            vMOrdenes.MesaAux = mesaAux;
+
+            if(mesaAux != "-")
+            {
+                LblOrdenMesa.Visible = true;
+                LblTituloSala.Visible = true;
+            }
         }
 
 
@@ -72,12 +82,13 @@ namespace NeoCobranza.Paneles_Venta
 
         private void BtnAgregarPro_Click(object sender, EventArgs e)
         {
-            vMOrdenes.ConfigUI(this, "Productos");
+            //vMOrdenes.ConfigUI(this, "Productos");
+            auxPnlPrincipal.AbrirProductos(vMOrdenes.OrdenAux, "Productos",ChkRetencionDgi.Checked,ChkRetencionAlcaldia.Checked,TxtDescuento.Text);
         }
 
         private void BtnAgregarServicio_Click(object sender, EventArgs e)
         {
-            vMOrdenes.ConfigUI(this, "Servicios");
+            auxPnlPrincipal.AbrirProductos(vMOrdenes.OrdenAux, "Servicios", ChkRetencionDgi.Checked, ChkRetencionAlcaldia.Checked, TxtDescuento.Text);
         }
 
         private void BtnPagarOrden_Click(object sender, EventArgs e)
@@ -91,15 +102,15 @@ namespace NeoCobranza.Paneles_Venta
             }
         }
 
-        private void BtnBuscar_Click(object sender, EventArgs e)
-        {
-            vMOrdenes.FuncionesPrincipales(this);
-        }
+        //private void BtnBuscar_Click(object sender, EventArgs e)
+        //{
+        //    vMOrdenes.FuncionesPrincipales(this);
+        //}
 
-        private void CmbTipoServicio_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            vMOrdenes.FuncionesPrincipales(this);
-        }
+        //private void CmbTipoServicio_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    vMOrdenes.FuncionesPrincipales(this);
+        //}
 
         private void TxtCantidadProducto_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -118,39 +129,39 @@ namespace NeoCobranza.Paneles_Venta
             }
         }
 
-        private void DgvProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 5)
-            {
-                if (vMOrdenes.auxSubModulo == "Productos")
-                {
-                    object cellValue = DgvProductos.Rows[e.RowIndex].Cells[0].Value;
-                    PnlDisponibilidad disponibilidad = new PnlDisponibilidad(cellValue.ToString());
-                    disponibilidad.ShowDialog();
-                }
-                else
-                {
-                    MessageBox.Show("No se puede revisar la disponibilidad en servicios.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+        //private void DgvProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    if (e.ColumnIndex == 5)
+        //    {
+        //        if (vMOrdenes.auxSubModulo == "Productos")
+        //        {
+        //            object cellValue = DgvProductos.Rows[e.RowIndex].Cells[0].Value;
+        //            PnlDisponibilidad disponibilidad = new PnlDisponibilidad(cellValue.ToString());
+        //            disponibilidad.ShowDialog();
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("No se puede revisar la disponibilidad en servicios.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //        }
 
-            }
+        //    }
 
-            if (e.ColumnIndex == 4)
-            {
-                int Prueba;
-                if (int.TryParse(TxtCantidadProducto.Text.Trim(), out Prueba) == false || TxtCantidadProducto.Text.Trim() == "0"
-                    || TxtCantidadProducto.Text.Trim() == "00" || TxtCantidadProducto.Text.Trim() == "000" || TxtCantidadProducto.Text.Trim() == "0000")
-                {
-                    MessageBox.Show("Debe agregar una cantidad valida", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    TxtCantidadProducto.Text = "1";
-                    return;
-                }
+        //    if (e.ColumnIndex == 4)
+        //    {
+        //        int Prueba;
+        //        if (int.TryParse(TxtCantidadProducto.Text.Trim(), out Prueba) == false || TxtCantidadProducto.Text.Trim() == "0"
+        //            || TxtCantidadProducto.Text.Trim() == "00" || TxtCantidadProducto.Text.Trim() == "000" || TxtCantidadProducto.Text.Trim() == "0000")
+        //        {
+        //            MessageBox.Show("Debe agregar una cantidad valida", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //            TxtCantidadProducto.Text = "1";
+        //            return;
+        //        }
 
-                object cellValue = DgvProductos.Rows[e.RowIndex].Cells[0].Value;
+        //        object cellValue = DgvProductos.Rows[e.RowIndex].Cells[0].Value;
 
-                vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), TxtCantidadProducto.Text.Trim(), "Increase");
-            }
-        }
+        //        vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), TxtCantidadProducto.Text.Trim(), "Increase");
+        //    }
+        //}
 
         private void ChkRetencionDgi_Click(object sender, EventArgs e)
         {
@@ -184,7 +195,7 @@ namespace NeoCobranza.Paneles_Venta
                         || TxtCantidadItems.Text.Trim() == "00" || TxtCantidadItems.Text.Trim() == "000" || TxtCantidadItems.Text.Trim() == "0000")
                     {
                         MessageBox.Show("Debe agregar una cantidad valida", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        TxtCantidadProducto.Text = "1";
+                        TxtCantidadItems.Text = "1";
                         return;
                     }
 
@@ -199,7 +210,7 @@ namespace NeoCobranza.Paneles_Venta
                         || TxtCantidadItems.Text.Trim() == "00" || TxtCantidadItems.Text.Trim() == "000" || TxtCantidadItems.Text.Trim() == "0000")
                     {
                         MessageBox.Show("Debe agregar una cantidad valida", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        TxtCantidadProducto.Text = "1";
+                        TxtCantidadItems.Text = "1";
                         return;
                     }
 
@@ -216,7 +227,7 @@ namespace NeoCobranza.Paneles_Venta
                         || TxtCantidadItems.Text.Trim() == "00" || TxtCantidadItems.Text.Trim() == "000" || TxtCantidadItems.Text.Trim() == "0000")
                     {
                         MessageBox.Show("Debe agregar una cantidad valida", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        TxtCantidadProducto.Text = "1";
+                        TxtCantidadItems.Text = "1";
                         return;
                     }
 
@@ -237,7 +248,7 @@ namespace NeoCobranza.Paneles_Venta
                         || TxtCantidadItems.Text.Trim() == "00" || TxtCantidadItems.Text.Trim() == "000" || TxtCantidadItems.Text.Trim() == "0000")
                     {
                         MessageBox.Show("Debe agregar una cantidad valida", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        TxtCantidadProducto.Text = "1";
+                        TxtCantidadItems.Text = "1";
                         return;
                     }
 
@@ -260,7 +271,7 @@ namespace NeoCobranza.Paneles_Venta
                             || TxtCantidadItems.Text.Trim() == "00" || TxtCantidadItems.Text.Trim() == "000" || TxtCantidadItems.Text.Trim() == "0000")
                         {
                             MessageBox.Show("Debe agregar una cantidad valida", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            TxtCantidadProducto.Text = "1";
+                            TxtCantidadItems.Text = "1";
                             return;
                         }
 
@@ -290,7 +301,7 @@ namespace NeoCobranza.Paneles_Venta
                             || TxtCantidadItems.Text.Trim() == "00" || TxtCantidadItems.Text.Trim() == "000" || TxtCantidadItems.Text.Trim() == "0000")
                         {
                             MessageBox.Show("Debe agregar una cantidad valida", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            TxtCantidadProducto.Text = "1";
+                            TxtCantidadItems.Text = "1";
                             return;
                         }
 
@@ -346,283 +357,283 @@ namespace NeoCobranza.Paneles_Venta
             vMOrdenes.ConfigUI(this, "Pagar");
         }
 
-        private void BtnEfectivoUno_Click(object sender, EventArgs e)
-        {
-            System.Windows.Forms.Button clickedButton = (System.Windows.Forms.Button)sender;
+        //private void BtnEfectivoUno_Click(object sender, EventArgs e)
+        //{
+        //    System.Windows.Forms.Button clickedButton = (System.Windows.Forms.Button)sender;
 
-            if (clickedButton.Text == ".")
-            {
-                // Verifica si ya existe un punto en el texto
-                if (TxtCantidadAbonadaEfectivo.Text.Contains("."))
-                {
-                    // Si ya existe un punto, no se hace nada
-                    return;
-                }
-            }
-            else if (TxtCantidadAbonadaEfectivo.Text.Contains("."))
-            {
-                // Si ya hay un punto decimal en el texto, se verifica la cantidad de dígitos después del punto
-                int index = TxtCantidadAbonadaEfectivo.Text.IndexOf(".");
-                string decimals = TxtCantidadAbonadaEfectivo.Text.Substring(index + 1);
-                if (decimals.Length >= 2)
-                {
-                    // Si ya hay dos dígitos después del punto, no se agrega más
-                    return;
-                }
-            }
+        //    if (clickedButton.Text == ".")
+        //    {
+        //        // Verifica si ya existe un punto en el texto
+        //        if (TxtCantidadAbonadaEfectivo.Text.Contains("."))
+        //        {
+        //            // Si ya existe un punto, no se hace nada
+        //            return;
+        //        }
+        //    }
+        //    else if (TxtCantidadAbonadaEfectivo.Text.Contains("."))
+        //    {
+        //        // Si ya hay un punto decimal en el texto, se verifica la cantidad de dígitos después del punto
+        //        int index = TxtCantidadAbonadaEfectivo.Text.IndexOf(".");
+        //        string decimals = TxtCantidadAbonadaEfectivo.Text.Substring(index + 1);
+        //        if (decimals.Length >= 2)
+        //        {
+        //            // Si ya hay dos dígitos después del punto, no se agrega más
+        //            return;
+        //        }
+        //    }
 
-            // Agrega el texto del botón al final del texto en el TextBox
-            TxtCantidadAbonadaEfectivo.Text += clickedButton.Text;
-        }
+        //    // Agrega el texto del botón al final del texto en el TextBox
+        //    TxtCantidadAbonadaEfectivo.Text += clickedButton.Text;
+        //}
 
-        private void BtnEfectivoDos_Click(object sender, EventArgs e)
-        {
-            BotonesCalc(sender);
-        }
+        //private void BtnEfectivoDos_Click(object sender, EventArgs e)
+        //{
+        //    BotonesCalc(sender);
+        //}
 
-        private void BtnEfectivoTres_Click(object sender, EventArgs e)
-        {
-            BotonesCalc(sender);
-        }
+        //private void BtnEfectivoTres_Click(object sender, EventArgs e)
+        //{
+        //    BotonesCalc(sender);
+        //}
 
-        private void BtnEfectivoCuatro_Click(object sender, EventArgs e)
-        {
-            BotonesCalc(sender);
-        }
+        //private void BtnEfectivoCuatro_Click(object sender, EventArgs e)
+        //{
+        //    BotonesCalc(sender);
+        //}
 
-        private void BtnEfectivoCinco_Click(object sender, EventArgs e)
-        {
-            BotonesCalc(sender);
-        }
+        //private void BtnEfectivoCinco_Click(object sender, EventArgs e)
+        //{
+        //    BotonesCalc(sender);
+        //}
 
-        private void BtnEfectivoSeis_Click(object sender, EventArgs e)
-        {
-            BotonesCalc(sender);
-        }
+        //private void BtnEfectivoSeis_Click(object sender, EventArgs e)
+        //{
+        //    BotonesCalc(sender);
+        //}
 
-        private void BtnEfectivoSiete_Click(object sender, EventArgs e)
-        {
-            BotonesCalc(sender);
-        }
+        //private void BtnEfectivoSiete_Click(object sender, EventArgs e)
+        //{
+        //    BotonesCalc(sender);
+        //}
 
-        private void BtnEfectivoOcho_Click(object sender, EventArgs e)
-        {
-            BotonesCalc(sender);
-        }
+        //private void BtnEfectivoOcho_Click(object sender, EventArgs e)
+        //{
+        //    BotonesCalc(sender);
+        //}
 
-        private void BtnEfectivoNueve_Click(object sender, EventArgs e)
-        {
-            BotonesCalc(sender);
-        }
+        //private void BtnEfectivoNueve_Click(object sender, EventArgs e)
+        //{
+        //    BotonesCalc(sender);
+        //}
 
-        private void BtnEfectivoPunto_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(TxtCantidadAbonadaEfectivo.Text))
-            {
-                if (TxtCantidadAbonadaEfectivo.Text.Contains("."))
-                {
-                    return;
-                }
-                else
-                {
-                    BotonesCalc(sender);
-                }
-            }
-        }
+        //private void BtnEfectivoPunto_Click(object sender, EventArgs e)
+        //{
+        //    if (!string.IsNullOrEmpty(TxtCantidadAbonadaEfectivo.Text))
+        //    {
+        //        if (TxtCantidadAbonadaEfectivo.Text.Contains("."))
+        //        {
+        //            return;
+        //        }
+        //        else
+        //        {
+        //            BotonesCalc(sender);
+        //        }
+        //    }
+        //}
 
-        private void BtnEfectivoCero_Click(object sender, EventArgs e)
-        {
-            BotonesCalc(sender);
-        }
+        //private void BtnEfectivoCero_Click(object sender, EventArgs e)
+        //{
+        //    BotonesCalc(sender);
+        //}
 
-        private void BtnEfectivoBorrar_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(TxtCantidadAbonadaEfectivo.Text))
-            {
-                TxtCantidadAbonadaEfectivo.Text = TxtCantidadAbonadaEfectivo.Text.Substring(0, TxtCantidadAbonadaEfectivo.Text.Length - 1);
-                TxtCantidadAbonadaEfectivo.SelectionStart = TxtCantidadAbonadaEfectivo.Text.Length;
+        //private void BtnEfectivoBorrar_Click(object sender, EventArgs e)
+        //{
+        //    if (!string.IsNullOrEmpty(TxtCantidadAbonadaEfectivo.Text))
+        //    {
+        //        TxtCantidadAbonadaEfectivo.Text = TxtCantidadAbonadaEfectivo.Text.Substring(0, TxtCantidadAbonadaEfectivo.Text.Length - 1);
+        //        TxtCantidadAbonadaEfectivo.SelectionStart = TxtCantidadAbonadaEfectivo.Text.Length;
 
-                if (TxtCantidadAbonadaEfectivo.Text.Trim() == "")
-                {
-                    TxtCantidadAbonadaEfectivo.Text = "0";
-                }
+        //        if (TxtCantidadAbonadaEfectivo.Text.Trim() == "")
+        //        {
+        //            TxtCantidadAbonadaEfectivo.Text = "0";
+        //        }
 
-                if (double.Parse(TxtCantidadAbonadaEfectivo.Text) > double.Parse(TxtTotalEfectivo.Text))
-                {
-                    TxtDiferenciaEfectivo.Text = (Math.Round(double.Parse(TxtCantidadAbonadaEfectivo.Text) - double.Parse(TxtTotalEfectivo.Text), 2)).ToString();
-                }
-                else
-                {
-                    TxtDiferenciaEfectivo.Text = "0";
-                }
-            }
-        }
+        //        if (double.Parse(TxtCantidadAbonadaEfectivo.Text) > double.Parse(TxtTotalEfectivo.Text))
+        //        {
+        //            TxtDiferenciaEfectivo.Text = (Math.Round(double.Parse(TxtCantidadAbonadaEfectivo.Text) - double.Parse(TxtTotalEfectivo.Text), 2)).ToString();
+        //        }
+        //        else
+        //        {
+        //            TxtDiferenciaEfectivo.Text = "0";
+        //        }
+        //    }
+        //}
 
-        private void BotonesCalc(object sender)
-        {
-            System.Windows.Forms.Button clickedButton = (System.Windows.Forms.Button)sender;
+        //private void BotonesCalc(object sender)
+        //{
+        //    System.Windows.Forms.Button clickedButton = (System.Windows.Forms.Button)sender;
 
-            if (clickedButton.Text == ".")
-            {
-                // Verifica si ya existe un punto en el texto
-                if (TxtCantidadAbonadaEfectivo.Text.Contains("."))
-                {
-                    // Si ya existe un punto, no se hace nada
-                    return;
-                }
-            }
-            else if (TxtCantidadAbonadaEfectivo.Text.Contains("."))
-            {
-                // Si ya hay un punto decimal en el texto, se verifica la cantidad de dígitos después del punto
-                int index = TxtCantidadAbonadaEfectivo.Text.IndexOf(".");
-                string decimals = TxtCantidadAbonadaEfectivo.Text.Substring(index + 1);
-                if (decimals.Length >= 2)
-                {
-                    // Si ya hay dos dígitos después del punto, no se agrega más
-                    return;
-                }
-            }
+        //    if (clickedButton.Text == ".")
+        //    {
+        //        // Verifica si ya existe un punto en el texto
+        //        if (TxtCantidadAbonadaEfectivo.Text.Contains("."))
+        //        {
+        //            // Si ya existe un punto, no se hace nada
+        //            return;
+        //        }
+        //    }
+        //    else if (TxtCantidadAbonadaEfectivo.Text.Contains("."))
+        //    {
+        //        // Si ya hay un punto decimal en el texto, se verifica la cantidad de dígitos después del punto
+        //        int index = TxtCantidadAbonadaEfectivo.Text.IndexOf(".");
+        //        string decimals = TxtCantidadAbonadaEfectivo.Text.Substring(index + 1);
+        //        if (decimals.Length >= 2)
+        //        {
+        //            // Si ya hay dos dígitos después del punto, no se agrega más
+        //            return;
+        //        }
+        //    }
 
-            // Agrega el texto del botón al final del texto en el TextBox
-            TxtCantidadAbonadaEfectivo.Text += clickedButton.Text;
+        //    // Agrega el texto del botón al final del texto en el TextBox
+        //    TxtCantidadAbonadaEfectivo.Text += clickedButton.Text;
 
-            if (double.Parse(TxtCantidadAbonadaEfectivo.Text) > double.Parse(TxtTotalEfectivo.Text))
-            {
-                TxtDiferenciaEfectivo.Text = (Math.Round(double.Parse(TxtCantidadAbonadaEfectivo.Text) - double.Parse(TxtTotalEfectivo.Text), 2)).ToString();
-            }
-            else
-            {
-                TxtDiferenciaEfectivo.Text = "0";
-            }
-        }
+        //    if (double.Parse(TxtCantidadAbonadaEfectivo.Text) > double.Parse(TxtTotalEfectivo.Text))
+        //    {
+        //        TxtDiferenciaEfectivo.Text = (Math.Round(double.Parse(TxtCantidadAbonadaEfectivo.Text) - double.Parse(TxtTotalEfectivo.Text), 2)).ToString();
+        //    }
+        //    else
+        //    {
+        //        TxtDiferenciaEfectivo.Text = "0";
+        //    }
+        //}
 
-        private void BotonesCalcCredito(Object sender)
-        {
-            System.Windows.Forms.Button clickedButton = (System.Windows.Forms.Button)sender;
+        //private void BotonesCalcCredito(Object sender)
+        //{
+        //    System.Windows.Forms.Button clickedButton = (System.Windows.Forms.Button)sender;
 
-            if (clickedButton.Text == ".")
-            {
-                // Verifica si ya existe un punto en el texto
-                if (TxtCantidadAbonadaCredito.Text.Contains("."))
-                {
-                    // Si ya existe un punto, no se hace nada
-                    return;
-                }
-            }
-            else if (TxtCantidadAbonadaCredito.Text.Contains("."))
-            {
-                // Si ya hay un punto decimal en el texto, se verifica la cantidad de dígitos después del punto
-                int index = TxtCantidadAbonadaCredito.Text.IndexOf(".");
-                string decimals = TxtCantidadAbonadaCredito.Text.Substring(index + 1);
-                if (decimals.Length >= 2)
-                {
-                    // Si ya hay dos dígitos después del punto, no se agrega más
-                    return;
-                }
-            }
+        //    if (clickedButton.Text == ".")
+        //    {
+        //        // Verifica si ya existe un punto en el texto
+        //        if (TxtCantidadAbonadaCredito.Text.Contains("."))
+        //        {
+        //            // Si ya existe un punto, no se hace nada
+        //            return;
+        //        }
+        //    }
+        //    else if (TxtCantidadAbonadaCredito.Text.Contains("."))
+        //    {
+        //        // Si ya hay un punto decimal en el texto, se verifica la cantidad de dígitos después del punto
+        //        int index = TxtCantidadAbonadaCredito.Text.IndexOf(".");
+        //        string decimals = TxtCantidadAbonadaCredito.Text.Substring(index + 1);
+        //        if (decimals.Length >= 2)
+        //        {
+        //            // Si ya hay dos dígitos después del punto, no se agrega más
+        //            return;
+        //        }
+        //    }
 
-            // Agrega el texto del botón al final del texto en el TextBox
-            TxtCantidadAbonadaCredito.Text += clickedButton.Text;
+        //    // Agrega el texto del botón al final del texto en el TextBox
+        //    TxtCantidadAbonadaCredito.Text += clickedButton.Text;
 
-        }
+        //}
 
-        private void BotonesCalcCheque(Object sender)
-        {
-            System.Windows.Forms.Button clickedButton = (System.Windows.Forms.Button)sender;
+        //private void BotonesCalcCheque(Object sender)
+        //{
+        //    System.Windows.Forms.Button clickedButton = (System.Windows.Forms.Button)sender;
 
-            if (clickedButton.Text == ".")
-            {
-                // Verifica si ya existe un punto en el texto
-                if (TxtCantidadAbonadaCheque.Text.Contains("."))
-                {
-                    // Si ya existe un punto, no se hace nada
-                    return;
-                }
-            }
-            else if (TxtCantidadAbonadaCheque.Text.Contains("."))
-            {
-                // Si ya hay un punto decimal en el texto, se verifica la cantidad de dígitos después del punto
-                int index = TxtCantidadAbonadaCheque.Text.IndexOf(".");
-                string decimals = TxtCantidadAbonadaCheque.Text.Substring(index + 1);
-                if (decimals.Length >= 2)
-                {
-                    // Si ya hay dos dígitos después del punto, no se agrega más
-                    return;
-                }
-            }
+        //    if (clickedButton.Text == ".")
+        //    {
+        //        // Verifica si ya existe un punto en el texto
+        //        if (TxtCantidadAbonadaCheque.Text.Contains("."))
+        //        {
+        //            // Si ya existe un punto, no se hace nada
+        //            return;
+        //        }
+        //    }
+        //    else if (TxtCantidadAbonadaCheque.Text.Contains("."))
+        //    {
+        //        // Si ya hay un punto decimal en el texto, se verifica la cantidad de dígitos después del punto
+        //        int index = TxtCantidadAbonadaCheque.Text.IndexOf(".");
+        //        string decimals = TxtCantidadAbonadaCheque.Text.Substring(index + 1);
+        //        if (decimals.Length >= 2)
+        //        {
+        //            // Si ya hay dos dígitos después del punto, no se agrega más
+        //            return;
+        //        }
+        //    }
 
-            // Agrega el texto del botón al final del texto en el TextBox
-            TxtCantidadAbonadaCheque.Text += clickedButton.Text;
+        //    // Agrega el texto del botón al final del texto en el TextBox
+        //    TxtCantidadAbonadaCheque.Text += clickedButton.Text;
 
-        }
+        //}
 
-        private void BtnPagarEfectivo_Click(object sender, EventArgs e)
-        {
-            if (TxtDiferenciaEfectivo.Text != "0")
-            {
-                MessageBox.Show($"Debe dar {TxtDiferenciaEfectivo.Text} (NIO) de Cambio.", "Cambio o Diferencia", MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-            }
+        //private void BtnPagarEfectivo_Click(object sender, EventArgs e)
+        //{
+        //    if (TxtDiferenciaEfectivo.Text != "0")
+        //    {
+        //        MessageBox.Show($"Debe dar {TxtDiferenciaEfectivo.Text} (NIO) de Cambio.", "Cambio o Diferencia", MessageBoxButtons.OK,
+        //            MessageBoxIcon.Information);
+        //    }
 
-            if (decimal.Parse(TxtCantidadAbonadaEfectivo.Text) == 0)
-            {
-                MessageBox.Show("Debe digitar la cantidad abonada.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+        //    if (decimal.Parse(TxtCantidadAbonadaEfectivo.Text) == 0)
+        //    {
+        //        MessageBox.Show("Debe digitar la cantidad abonada.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //        return;
+        //    }
 
 
-            using (NeoCobranzaContext db = new NeoCobranzaContext())
-            {
-                Pagos pago = new Pagos()
-                {
-                    OrdenId = int.Parse(LblNoOrden.Text),
-                    FormaPago = "Efectivo",
-                    Pagado = decimal.Parse(TxtCantidadAbonadaEfectivo.Text),
-                    Cambio = decimal.Parse(TxtDiferenciaEfectivo.Text),
-                    BancoId = 0,
-                    Estado = "Activo",
-                    Total = decimal.Parse(TxtCantidadAbonadaEfectivo.Text) - decimal.Parse(TxtDiferenciaEfectivo.Text)
-                };
+        //    using (NeoCobranzaContext db = new NeoCobranzaContext())
+        //    {
+        //        Pagos pago = new Pagos()
+        //        {
+        //            OrdenId = int.Parse(LblNoOrden.Text),
+        //            FormaPago = "Efectivo",
+        //            Pagado = decimal.Parse(TxtCantidadAbonadaEfectivo.Text),
+        //            Cambio = decimal.Parse(TxtDiferenciaEfectivo.Text),
+        //            BancoId = 0,
+        //            Estado = "Activo",
+        //            Total = decimal.Parse(TxtCantidadAbonadaEfectivo.Text) - decimal.Parse(TxtDiferenciaEfectivo.Text)
+        //        };
 
-                db.Add(pago);
-                db.SaveChanges();
+        //        db.Add(pago);
+        //        db.SaveChanges();
 
-                Ordenes orden = db.Ordenes.Where(s => s.OrdenId == int.Parse(LblNoOrden.Text)).FirstOrDefault();
+        //        Ordenes orden = db.Ordenes.Where(s => s.OrdenId == int.Parse(LblNoOrden.Text)).FirstOrDefault();
 
-                if (decimal.Parse(TxtTotalPagado.Text) == 0)
-                {
-                    orden.PagoProceso = "Con Pagos";
-                    LblProcesoPago.Text = "Con Pagos";
-                    orden.Pagado = decimal.Parse(TxtTotalPagado.Text) + (decimal.Parse(TxtCantidadAbonadaEfectivo.Text) - decimal.Parse(TxtDiferenciaEfectivo.Text));
+        //        if (decimal.Parse(TxtTotalPagado.Text) == 0)
+        //        {
+        //            orden.PagoProceso = "Con Pagos";
+        //            LblProcesoPago.Text = "Con Pagos";
+        //            orden.Pagado = decimal.Parse(TxtTotalPagado.Text) + (decimal.Parse(TxtCantidadAbonadaEfectivo.Text) - decimal.Parse(TxtDiferenciaEfectivo.Text));
 
-                    ChkRetencionAlcaldia.Enabled = false;
-                    ChkRetencionDgi.Enabled = false;
+        //            ChkRetencionAlcaldia.Enabled = false;
+        //            ChkRetencionDgi.Enabled = false;
 
-                    db.Update(orden);
-                    db.SaveChanges();
-                }
+        //            db.Update(orden);
+        //            db.SaveChanges();
+        //        }
 
-                TxtTotalPagado.Text = (decimal.Parse(TxtTotalPagado.Text) + (decimal.Parse(TxtCantidadAbonadaEfectivo.Text) - decimal.Parse(TxtDiferenciaEfectivo.Text))).ToString();
+        //        TxtTotalPagado.Text = (decimal.Parse(TxtTotalPagado.Text) + (decimal.Parse(TxtCantidadAbonadaEfectivo.Text) - decimal.Parse(TxtDiferenciaEfectivo.Text))).ToString();
 
-                if (decimal.Parse(TxtTotalPagado.Text) == decimal.Parse(TxtTotalCordoba.Text))
-                {
-                    orden.OrdenProceso = "Orden Cerrada";
-                    orden.PagoProceso = "Totalmente Pagada";
+        //        if (decimal.Parse(TxtTotalPagado.Text) == decimal.Parse(TxtTotalCordoba.Text))
+        //        {
+        //            orden.OrdenProceso = "Orden Cerrada";
+        //            orden.PagoProceso = "Totalmente Pagada";
 
-                    db.Update(orden);
-                    db.SaveChanges();
+        //            db.Update(orden);
+        //            db.SaveChanges();
 
-                    this.Close();
-                    MessageBox.Show("Orden pagada correctamente.", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    TCMain.SelectedIndex = 0;
+        //            this.Close();
+        //            MessageBox.Show("Orden pagada correctamente.", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //        }
+        //        else
+        //        {
+        //            TCMain.SelectedIndex = 0;
 
-                    MessageBox.Show("Pago Realizado.", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-        }
+        //            MessageBox.Show("Pago Realizado.", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //        }
+        //    }
+        //}
 
         private void BtnNotaOrden_Click(object sender, EventArgs e)
         {
@@ -638,7 +649,7 @@ namespace NeoCobranza.Paneles_Venta
 
         private void BtnListaOrdenes_Click(object sender, EventArgs e)
         {
-            vMOrdenes.ConfigUI(this, "Lista");
+            auxPnlPrincipal.AbrirListaVentas();
         }
 
         private void BtnVoverLista_Click(object sender, EventArgs e)
@@ -695,16 +706,16 @@ namespace NeoCobranza.Paneles_Venta
 
         private void dgvCatalogo_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 0)
-            {
-                vMOrdenes.OrdenAux = int.Parse(dgvCatalogoOrdenes.Rows[e.RowIndex].Cells[2].Value.ToString());
-                vMOrdenes.InitModuloOrdenes(this, "OrdenRapida", "");
-            }
-            else if (e.ColumnIndex == 1)
-            {
-                PnlCancelarOrden pnlCancelarOrden = new PnlCancelarOrden(dgvCatalogoOrdenes.Rows[e.RowIndex].Cells[2].Value.ToString(), this);
-                pnlCancelarOrden.ShowDialog();
-            }
+            //if (e.ColumnIndex == 0)
+            //{
+            //    vMOrdenes.OrdenAux = int.Parse(dgvCatalogoOrdenes.Rows[e.RowIndex].Cells[2].Value.ToString());
+            //    vMOrdenes.InitModuloOrdenes(this, "OrdenRapida", "");
+            //}
+            //else if (e.ColumnIndex == 1)
+            //{
+            //    PnlCancelarOrden pnlCancelarOrden = new PnlCancelarOrden(dgvCatalogoOrdenes.Rows[e.RowIndex].Cells[2].Value.ToString(), this);
+            //    pnlCancelarOrden.ShowDialog();
+            //}
         }
 
         private void tabPage1_Enter(object sender, EventArgs e)
@@ -714,7 +725,7 @@ namespace NeoCobranza.Paneles_Venta
 
         private void PnlVentas_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == '\r' && TCMain.SelectedIndex == 1) // El caracter '\r' representa el retorno de carro (Enter)
+            if (e.KeyChar == '\r' ) // El caracter '\r' representa el retorno de carro (Enter)
             {
                 // Mover el foco al campo de texto deseado
                 TxtCodigoProducto.Focus();
@@ -726,158 +737,158 @@ namespace NeoCobranza.Paneles_Venta
             vMOrdenes.ConfigUI(this, "Credito");
         }
 
-        private void BtnCreditoUno_Click(object sender, EventArgs e)
-        {
-            BotonesCalcCredito(sender);
-        }
+        //private void BtnCreditoUno_Click(object sender, EventArgs e)
+        //{
+        //    BotonesCalcCredito(sender);
+        //}
 
-        private void BtnCreditoDos_Click(object sender, EventArgs e)
-        {
-            BotonesCalcCredito(sender);
-        }
+        //private void BtnCreditoDos_Click(object sender, EventArgs e)
+        //{
+        //    BotonesCalcCredito(sender);
+        //}
 
-        private void BtnCreditoTres_Click(object sender, EventArgs e)
-        {
-            BotonesCalcCredito(sender);
-        }
+        //private void BtnCreditoTres_Click(object sender, EventArgs e)
+        //{
+        //    BotonesCalcCredito(sender);
+        //}
 
-        private void BtnCreditoCuatro_Click(object sender, EventArgs e)
-        {
-            BotonesCalcCredito(sender);
-        }
+        //private void BtnCreditoCuatro_Click(object sender, EventArgs e)
+        //{
+        //    BotonesCalcCredito(sender);
+        //}
 
-        private void BtnCreditoCinco_Click(object sender, EventArgs e)
-        {
-            BotonesCalcCredito(sender);
-        }
+        //private void BtnCreditoCinco_Click(object sender, EventArgs e)
+        //{
+        //    BotonesCalcCredito(sender);
+        //}
 
-        private void BtnCreditoSeis_Click(object sender, EventArgs e)
-        {
-            BotonesCalcCredito(sender);
-        }
+        //private void BtnCreditoSeis_Click(object sender, EventArgs e)
+        //{
+        //    BotonesCalcCredito(sender);
+        //}
 
-        private void BtnCreditoSiete_Click(object sender, EventArgs e)
-        {
-            BotonesCalcCredito(sender);
-        }
+        //private void BtnCreditoSiete_Click(object sender, EventArgs e)
+        //{
+        //    BotonesCalcCredito(sender);
+        //}
 
-        private void BtnCreditoOcho_Click(object sender, EventArgs e)
-        {
-            BotonesCalcCredito(sender);
-        }
+        //private void BtnCreditoOcho_Click(object sender, EventArgs e)
+        //{
+        //    BotonesCalcCredito(sender);
+        //}
 
-        private void BtnCreditoNueve_Click(object sender, EventArgs e)
-        {
-            BotonesCalcCredito(sender);
-        }
+        //private void BtnCreditoNueve_Click(object sender, EventArgs e)
+        //{
+        //    BotonesCalcCredito(sender);
+        //}
 
-        private void BtnCreditoPunto_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(TxtCantidadAbonadaCredito.Text))
-            {
-                if (TxtCantidadAbonadaCredito.Text.Contains("."))
-                {
-                    return;
-                }
-                else
-                {
-                    BotonesCalcCredito(sender);
-                }
-            }
-        }
+        //private void BtnCreditoPunto_Click(object sender, EventArgs e)
+        //{
+        //    if (!string.IsNullOrEmpty(TxtCantidadAbonadaCredito.Text))
+        //    {
+        //        if (TxtCantidadAbonadaCredito.Text.Contains("."))
+        //        {
+        //            return;
+        //        }
+        //        else
+        //        {
+        //            BotonesCalcCredito(sender);
+        //        }
+        //    }
+        //}
 
-        private void BtnCreditoCero_Click(object sender, EventArgs e)
-        {
-            BotonesCalcCredito(sender);
-        }
+        //private void BtnCreditoCero_Click(object sender, EventArgs e)
+        //{
+        //    BotonesCalcCredito(sender);
+        //}
 
-        private void BtnCreditoBorrar_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(TxtCantidadAbonadaCredito.Text))
-            {
-                TxtCantidadAbonadaCredito.Text = TxtCantidadAbonadaCredito.Text.Substring(0, TxtCantidadAbonadaCredito.Text.Length - 1);
-                TxtCantidadAbonadaCredito.SelectionStart = TxtCantidadAbonadaCredito.Text.Length;
+        //private void BtnCreditoBorrar_Click(object sender, EventArgs e)
+        //{
+        //    if (!string.IsNullOrEmpty(TxtCantidadAbonadaCredito.Text))
+        //    {
+        //        TxtCantidadAbonadaCredito.Text = TxtCantidadAbonadaCredito.Text.Substring(0, TxtCantidadAbonadaCredito.Text.Length - 1);
+        //        TxtCantidadAbonadaCredito.SelectionStart = TxtCantidadAbonadaCredito.Text.Length;
 
-                if (TxtCantidadAbonadaCredito.Text.Trim() == "")
-                {
-                    TxtCantidadAbonadaCredito.Text = "0";
-                }
-            }
-        }
+        //        if (TxtCantidadAbonadaCredito.Text.Trim() == "")
+        //        {
+        //            TxtCantidadAbonadaCredito.Text = "0";
+        //        }
+        //    }
+        //}
 
-        private void BtnVolverCredito_Click(object sender, EventArgs e)
-        {
-            vMOrdenes.ConfigUI(this, "Pagar");
-        }
+        //private void BtnVolverCredito_Click(object sender, EventArgs e)
+        //{
+        //    vMOrdenes.ConfigUI(this, "Pagar");
+        //}
 
-        private void BtnPagarCredito_Click(object sender, EventArgs e)
-        {
-            //Validaciones
-            //Validar que lo pagado no sea mayor al faltante
-            if (decimal.Parse(TxtFaltanteCredito.Text) < decimal.Parse(TxtCantidadAbonadaCredito.Text))
-            {
-                MessageBox.Show("El monto abonado no puede ser mayor al faltante", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+        //private void BtnPagarCredito_Click(object sender, EventArgs e)
+        //{
+        //    //Validaciones
+        //    //Validar que lo pagado no sea mayor al faltante
+        //    if (decimal.Parse(TxtFaltanteCredito.Text) < decimal.Parse(TxtCantidadAbonadaCredito.Text))
+        //    {
+        //        MessageBox.Show("El monto abonado no puede ser mayor al faltante", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //        return;
+        //    }
 
 
-            if (decimal.Parse(TxtCantidadAbonadaCredito.Text) == 0)
-            {
-                MessageBox.Show("Debe digitar la cantidad abonada.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+        //    if (decimal.Parse(TxtCantidadAbonadaCredito.Text) == 0)
+        //    {
+        //        MessageBox.Show("Debe digitar la cantidad abonada.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //        return;
+        //    }
 
-            using (NeoCobranzaContext db = new NeoCobranzaContext())
-            {
-                Pagos pago = new Pagos()
-                {
-                    OrdenId = int.Parse(LblNoOrden.Text),
-                    FormaPago = "Tarjeta",
-                    Pagado = decimal.Parse(TxtCantidadAbonadaCredito.Text),
-                    Cambio = 0,
-                    BancoId = int.Parse(CmbBanco.SelectedValue.ToString()),
-                    Estado = "Activo",
-                    Total = decimal.Parse(TxtCantidadAbonadaCredito.Text)
-                };
+        //    using (NeoCobranzaContext db = new NeoCobranzaContext())
+        //    {
+        //        Pagos pago = new Pagos()
+        //        {
+        //            OrdenId = int.Parse(LblNoOrden.Text),
+        //            FormaPago = "Tarjeta",
+        //            Pagado = decimal.Parse(TxtCantidadAbonadaCredito.Text),
+        //            Cambio = 0,
+        //            BancoId = int.Parse(CmbBanco.SelectedValue.ToString()),
+        //            Estado = "Activo",
+        //            Total = decimal.Parse(TxtCantidadAbonadaCredito.Text)
+        //        };
 
-                db.Add(pago);
-                db.SaveChanges();
+        //        db.Add(pago);
+        //        db.SaveChanges();
 
-                Ordenes orden = db.Ordenes.Where(s => s.OrdenId == int.Parse(LblNoOrden.Text)).FirstOrDefault();
+        //        Ordenes orden = db.Ordenes.Where(s => s.OrdenId == int.Parse(LblNoOrden.Text)).FirstOrDefault();
 
-                if (decimal.Parse(TxtTotalPagado.Text) == 0)
-                {
-                    orden.PagoProceso = "Con Pagos";
-                    LblProcesoPago.Text = "Con Pagos";
-                    orden.Pagado = decimal.Parse(TxtTotalPagado.Text) + decimal.Parse(TxtCantidadAbonadaCredito.Text);
+        //        if (decimal.Parse(TxtTotalPagado.Text) == 0)
+        //        {
+        //            orden.PagoProceso = "Con Pagos";
+        //            LblProcesoPago.Text = "Con Pagos";
+        //            orden.Pagado = decimal.Parse(TxtTotalPagado.Text) + decimal.Parse(TxtCantidadAbonadaCredito.Text);
 
-                    ChkRetencionAlcaldia.Enabled = false;
-                    ChkRetencionDgi.Enabled = false;
+        //            ChkRetencionAlcaldia.Enabled = false;
+        //            ChkRetencionDgi.Enabled = false;
 
-                    db.Update(orden);
-                    db.SaveChanges();
-                }
+        //            db.Update(orden);
+        //            db.SaveChanges();
+        //        }
 
-                TxtTotalPagado.Text = (decimal.Parse(TxtTotalPagado.Text) + decimal.Parse(TxtCantidadAbonadaCredito.Text)).ToString();
+        //        TxtTotalPagado.Text = (decimal.Parse(TxtTotalPagado.Text) + decimal.Parse(TxtCantidadAbonadaCredito.Text)).ToString();
 
-                if (decimal.Parse(TxtTotalPagado.Text) == decimal.Parse(TxtTotalCordoba.Text))
-                {
-                    orden.OrdenProceso = "Orden Cerrada";
-                    orden.PagoProceso = "Totalmente Pagada";
+        //        if (decimal.Parse(TxtTotalPagado.Text) == decimal.Parse(TxtTotalCordoba.Text))
+        //        {
+        //            orden.OrdenProceso = "Orden Cerrada";
+        //            orden.PagoProceso = "Totalmente Pagada";
 
-                    db.Update(orden);
-                    db.SaveChanges();
-                    this.Close();
-                    MessageBox.Show("Orden pagada correctamente.", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    TCMain.SelectedIndex = 0;
+        //            db.Update(orden);
+        //            db.SaveChanges();
+        //            this.Close();
+        //            MessageBox.Show("Orden pagada correctamente.", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //        }
+        //        else
+        //        {
+        //            TCMain.SelectedIndex = 0;
 
-                    MessageBox.Show("Pago Realizado.", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-        }
+        //            MessageBox.Show("Pago Realizado.", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //        }
+        //    }
+        //}
 
         private void ChkRetencionDgi_CheckedChanged(object sender, EventArgs e)
         {
@@ -886,7 +897,8 @@ namespace NeoCobranza.Paneles_Venta
 
         private void BtnGestionSalas_Click(object sender, EventArgs e)
         {
-            vMOrdenes.InitModuloOrdenes(this, "Salas", "");
+            //vMOrdenes.InitModuloOrdenes(this, "Salas", "");
+            auxPnlPrincipal.AbrirMesas();
         }
 
         private void especialButton12_Click(object sender, EventArgs e)
@@ -897,160 +909,6 @@ namespace NeoCobranza.Paneles_Venta
         private void especialButton17_Click(object sender, EventArgs e)
         {
             vMOrdenes.ConfigUI(this, "Pagar");
-        }
-
-        private void BtnChequeUno_Click(object sender, EventArgs e)
-        {
-            BotonesCalcCheque(sender);
-        }
-
-        private void BtnChequeDos_Click(object sender, EventArgs e)
-        {
-            BotonesCalcCheque(sender);
-        }
-
-        private void BtnChequeTres_Click(object sender, EventArgs e)
-        {
-            BotonesCalcCheque(sender);
-        }
-
-        private void BtnChequeCuatro_Click(object sender, EventArgs e)
-        {
-            BotonesCalcCheque(sender);
-        }
-
-        private void BtnChequeCinco_Click(object sender, EventArgs e)
-        {
-            BotonesCalcCheque(sender);
-        }
-
-        private void BtnChequeSeis_Click(object sender, EventArgs e)
-        {
-            BotonesCalcCheque(sender);
-        }
-
-        private void BtnChequeSiete_Click(object sender, EventArgs e)
-        {
-            BotonesCalcCheque(sender);
-        }
-
-        private void BtnChequeOcho_Click(object sender, EventArgs e)
-        {
-            BotonesCalcCheque(sender);
-        }
-
-        private void BtnChequeNueve_Click(object sender, EventArgs e)
-        {
-            BotonesCalcCheque(sender);
-        }
-
-        private void BtnChequePunto_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(TxtCantidadAbonadaCheque.Text))
-            {
-                if (TxtCantidadAbonadaCheque.Text.Contains("."))
-                {
-                    return;
-                }
-                else
-                {
-                    BotonesCalcCheque(sender);
-                }
-            }
-        }
-
-        private void BtnChequeCero_Click(object sender, EventArgs e)
-        {
-            BotonesCalcCheque(sender);
-        }
-
-        private void BtnChequeBorrar_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(TxtCantidadAbonadaCheque.Text))
-            {
-                TxtCantidadAbonadaCheque.Text = TxtCantidadAbonadaCheque.Text.Substring(0, TxtCantidadAbonadaCheque.Text.Length - 1);
-                TxtCantidadAbonadaCheque.SelectionStart = TxtCantidadAbonadaCheque.Text.Length;
-
-                if (TxtCantidadAbonadaCheque.Text.Trim() == "")
-                {
-                    TxtCantidadAbonadaCheque.Text = "0";
-                }
-            }
-        }
-
-        private void BtnPagarCheque_Click(object sender, EventArgs e)
-        {
-            //Validaciones
-            //Validar que lo pagado no sea mayor al faltante
-            if (decimal.Parse(TxtFaltanteCheque.Text) < decimal.Parse(TxtCantidadAbonadaCheque.Text))
-            {
-                MessageBox.Show("El monto abonado no puede ser mayor al faltante", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (TxtReferencia.Text.Trim().Length == 0)
-            {
-                MessageBox.Show("Debe agregar el No. Referencia.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (decimal.Parse(TxtCantidadAbonadaCheque.Text) == 0)
-            {
-                MessageBox.Show("Debe digitar la cantidad abonada.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            using (NeoCobranzaContext db = new NeoCobranzaContext())
-            {
-                Pagos pago = new Pagos()
-                {
-                    OrdenId = int.Parse(LblNoOrden.Text),
-                    FormaPago = CmbTipoPago.SelectedValue.ToString() == "1" ? "Minuta" : "Cheque",
-                    Pagado = decimal.Parse(TxtCantidadAbonadaCheque.Text),
-                    Cambio = 0,
-                    BancoId = int.Parse(CmbBancoCheque.SelectedValue.ToString()),
-                    Estado = "Activo",
-                    Total = decimal.Parse(TxtCantidadAbonadaCheque.Text),
-                    NoReferencia = TxtReferencia.Text.Trim()
-                };
-
-                db.Add(pago);
-                db.SaveChanges();
-
-                Ordenes orden = db.Ordenes.Where(s => s.OrdenId == int.Parse(LblNoOrden.Text)).FirstOrDefault();
-
-                if (decimal.Parse(TxtTotalPagado.Text) == 0)
-                {
-                    orden.PagoProceso = "Con Pagos";
-                    LblProcesoPago.Text = "Con Pagos";
-                    orden.Pagado = decimal.Parse(TxtTotalPagado.Text) + decimal.Parse(TxtCantidadAbonadaCheque.Text);
-
-                    ChkRetencionAlcaldia.Enabled = false;
-                    ChkRetencionDgi.Enabled = false;
-
-                    db.Update(orden);
-                    db.SaveChanges();
-                }
-
-                TxtTotalPagado.Text = (decimal.Parse(TxtTotalPagado.Text) + decimal.Parse(TxtCantidadAbonadaCheque.Text)).ToString();
-
-                if (decimal.Parse(TxtTotalPagado.Text) == decimal.Parse(TxtTotalCordoba.Text))
-                {
-                    orden.OrdenProceso = "Orden Cerrada";
-                    orden.PagoProceso = "Totalmente Pagada";
-
-                    db.Update(orden);
-                    db.SaveChanges();
-                    this.Close();
-                    MessageBox.Show("Orden pagada correctamente.", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    TCMain.SelectedIndex = 0;
-
-                    MessageBox.Show("Pago Realizado.", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
         }
 
         private void especialButton4_Click(object sender, EventArgs e)
@@ -1116,6 +974,29 @@ namespace NeoCobranza.Paneles_Venta
                 MessageBox.Show("Debe agregar items a la venta para poder generar la proforma.","Atención",MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             
+        }
+
+        private void TxtBuscarProductos__TextChanged(object sender, EventArgs e)
+        {
+            //vMOrdenes.FuncionesPrincipales(this);
+        }
+
+        private void especialButton3_Click(object sender, EventArgs e)
+        {
+            if (DgvItemsOrden.RowCount > 0)
+            {
+                PnlPago frmPago = new PnlPago(this);
+                frmPago.PrintPDFA4();
+            }
+            else
+            {
+                MessageBox.Show("Debe agregar items a la venta para poder generar la proforma.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void TxtCantidadProducto_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -41,6 +41,8 @@
             this.btnCancelar = new NeoCobranza.Especiales.EspecialButton();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.CmbTipoAjuste = new System.Windows.Forms.ComboBox();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -122,9 +124,9 @@
             this.LblIdentificadorAjuste.ForeColor = System.Drawing.SystemColors.Desktop;
             this.LblIdentificadorAjuste.Location = new System.Drawing.Point(21, 50);
             this.LblIdentificadorAjuste.Name = "LblIdentificadorAjuste";
-            this.LblIdentificadorAjuste.Size = new System.Drawing.Size(298, 18);
+            this.LblIdentificadorAjuste.Size = new System.Drawing.Size(279, 18);
             this.LblIdentificadorAjuste.TabIndex = 154;
-            this.LblIdentificadorAjuste.Text = "Nombre o Identificador de la Merma(*)";
+            this.LblIdentificadorAjuste.Text = "Nombre o Identificador del Ajuste (*)";
             // 
             // BtnGuardar
             // 
@@ -190,12 +192,38 @@
             this.label3.TabIndex = 161;
             this.label3.Text = "Cantidad: (*)";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label5.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label5.Location = new System.Drawing.Point(24, 295);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(113, 18);
+            this.label5.TabIndex = 162;
+            this.label5.Text = "Tipo Ajuste: (*)";
+            // 
+            // CmbTipoAjuste
+            // 
+            this.CmbTipoAjuste.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbTipoAjuste.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.CmbTipoAjuste.FormattingEnabled = true;
+            this.CmbTipoAjuste.Items.AddRange(new object[] {
+            "Disminuir",
+            "Aumentar"});
+            this.CmbTipoAjuste.Location = new System.Drawing.Point(26, 329);
+            this.CmbTipoAjuste.Name = "CmbTipoAjuste";
+            this.CmbTipoAjuste.Size = new System.Drawing.Size(227, 25);
+            this.CmbTipoAjuste.TabIndex = 163;
+            // 
             // PnlAgregarProductoSerie
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(990, 372);
+            this.Controls.Add(this.CmbTipoAjuste);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -235,5 +263,7 @@
         public Especiales.EspecialButton btnCancelar;
         public System.Windows.Forms.Label label2;
         public System.Windows.Forms.Label label3;
+        public System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox CmbTipoAjuste;
     }
 }

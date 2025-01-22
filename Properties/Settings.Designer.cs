@@ -12,7 +12,7 @@ namespace NeoCobranza.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.6.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -37,28 +37,6 @@ namespace NeoCobranza.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=FCYASERVIDOR;Initial Catalog=NeoCobranza;Persist Security Info=True;U" +
-            "ser ID=sa;Password=123456")]
-        public string NeoCobranzaConnectionString1 {
-            get {
-                return ((string)(this["NeoCobranzaConnectionString1"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.1.165;Initial Catalog=NeoCobranza;Persist Security Info=True;" +
-            "User ID=sa;Password=123456")]
-        public string NeoCobranzaConnectionString2 {
-            get {
-                return ((string)(this["NeoCobranzaConnectionString2"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-GKTE05O\\SQLEXPRESS;Initial Catalog=POSIDEVBD;Integrated Secur" +
             "ity=True")]
         public string POSIDEVBDConnectionString {
@@ -75,6 +53,28 @@ namespace NeoCobranza.Properties {
         public string TRABAJOPRUEBA {
             get {
                 return ((string)(this["TRABAJOPRUEBA"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=FCYASERVIDOR;Initial Catalog=NeoCobranza;Persist Security Info=True;U" +
+            "ser ID=sa;Password=123456")]
+        public string NeoCobranzaConnectionString1 {
+            get {
+                return ((string)(this["NeoCobranzaConnectionString1"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.1.165;Initial Catalog=NeoCobranza;Persist Security Info=True;" +
+            "User ID=sa;Password=123456")]
+        public string NeoCobranzaConnectionString2 {
+            get {
+                return ((string)(this["NeoCobranzaConnectionString2"]));
             }
         }
     }

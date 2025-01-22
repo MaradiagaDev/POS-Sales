@@ -76,8 +76,8 @@ namespace NeoCobranza.Paneles
             {
                 ComprasInventario compras = Owner as ComprasInventario;
 
-                compras.TxtIdProveedor.Text = DgvProveedor.SelectedRows[0].Cells[0].Value.ToString();
-                compras.TxtNombreProveedor.Text = DgvProveedor.SelectedRows[0].Cells[1].Value.ToString();
+                compras.proveedor = DgvProveedor.SelectedRows[0].Cells[0].Value.ToString();
+                compras.NombreProveedor = DgvProveedor.SelectedRows[0].Cells[1].Value.ToString();
                 this.Close();
             }
             else

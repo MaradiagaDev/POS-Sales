@@ -195,7 +195,7 @@
             this.BtnListaMermas.Name = "BtnListaMermas";
             this.BtnListaMermas.Size = new System.Drawing.Size(282, 38);
             this.BtnListaMermas.TabIndex = 155;
-            this.BtnListaMermas.Text = "Lista de Mermas";
+            this.BtnListaMermas.Text = "Lista de Ajustes";
             this.BtnListaMermas.TextGroundColor = System.Drawing.Color.White;
             this.BtnListaMermas.UseVisualStyleBackColor = false;
             this.BtnListaMermas.Click += new System.EventHandler(this.BtnListaMermas_Click);

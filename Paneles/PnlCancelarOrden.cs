@@ -89,7 +89,11 @@ namespace NeoCobranza.Paneles
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             this.Close();
-            auxFrm.Close();
+
+            if(auxFrm != null)
+            {
+                auxFrm.Close();
+            }
         }
 
         private void PnlCancelarOrden_Load(object sender, EventArgs e)
