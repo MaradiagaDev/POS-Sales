@@ -423,7 +423,8 @@ namespace NeoCobranza.Paneles
 
         private void especialButton4_Click_1(object sender, EventArgs e)
         {
-
+            PnlAsistencia frm = new PnlAsistencia();
+            frm.ShowDialog();
         }
 
         private void BtnCategoriasProductos_Click(object sender, EventArgs e)
@@ -750,10 +751,9 @@ namespace NeoCobranza.Paneles
         private void cuentasPorCobrarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             limpiar();
-            frmBusquedasOrdenes directas = new frmBusquedasOrdenes(this, "ListaCreadito");
-            directas.TopLevel = false;
-            directas.Dock = DockStyle.Fill;
-            directas.TopLevel = false;
+            frmBusquedasOrdenes directas = new frmBusquedasOrdenes(this, "ListaCredito");
+            directas.TopLevel = false; // No es formulario de nivel superior
+            directas.Dock = DockStyle.Fill; // Se ajusta al tamaño del contenedor
             PnlCentral.Controls.Add(directas);
             directas.Show();
         }
@@ -819,6 +819,28 @@ namespace NeoCobranza.Paneles
         {
             limpiar();
             frmAgregarProductosServicios directas = new frmAgregarProductosServicios(this,orden,opc,dgi,alcaldia,descuento);
+            directas.TopLevel = false;
+            directas.Dock = DockStyle.Fill;
+            directas.TopLevel = false;
+            PnlCentral.Controls.Add(directas);
+            directas.Show();
+        }
+
+        private void listaDeOrdenesFacturaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            limpiar();
+            frmBusquedasOrdenes directas = new frmBusquedasOrdenes(this, "ListaPagadas");
+            directas.TopLevel = false;
+            directas.Dock = DockStyle.Fill;
+            directas.TopLevel = false;
+            PnlCentral.Controls.Add(directas);
+            directas.Show();
+        }
+
+        private void agendaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            limpiar();
+            PnlAgenda directas = new PnlAgenda();
             directas.TopLevel = false;
             directas.Dock = DockStyle.Fill;
             directas.TopLevel = false;

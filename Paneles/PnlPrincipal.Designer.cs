@@ -50,6 +50,7 @@
             this.LblTitulo = new System.Windows.Forms.Label();
             this.LblUsuario = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.BtnVentaRapida = new NeoCobranza.Especiales.EspecialButton();
             this.BtnConsultar = new NeoCobranza.Especiales.EspecialButton();
             this.LblSucursal = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -70,6 +71,7 @@
             this.listaDeOrdenesActivasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cuentasPorCobrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listaDeOrdenesFacturaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.agendaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuOpc = new NeoCobranza.Especiales.RJDropDownMenu(this.components);
             this.configFacturaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BtnTasaCambio = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,7 +94,6 @@
             this.BtnInventarioGeneral = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuCaja = new NeoCobranza.Especiales.RJDropDownMenu(this.components);
             this.CierreCajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.BtnVentaRapida = new NeoCobranza.Especiales.EspecialButton();
             this.MenuVertical.SuspendLayout();
             this.PnlTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
@@ -498,6 +499,29 @@
             this.panel5.Size = new System.Drawing.Size(1170, 39);
             this.panel5.TabIndex = 0;
             // 
+            // BtnVentaRapida
+            // 
+            this.BtnVentaRapida.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.BtnVentaRapida.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(186)))));
+            this.BtnVentaRapida.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(186)))));
+            this.BtnVentaRapida.BorderColor = System.Drawing.Color.Lime;
+            this.BtnVentaRapida.BorderRadius = 5;
+            this.BtnVentaRapida.BorderSize = 0;
+            this.BtnVentaRapida.FlatAppearance.BorderSize = 0;
+            this.BtnVentaRapida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnVentaRapida.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnVentaRapida.ForeColor = System.Drawing.Color.White;
+            this.BtnVentaRapida.Image = ((System.Drawing.Image)(resources.GetObject("BtnVentaRapida.Image")));
+            this.BtnVentaRapida.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnVentaRapida.Location = new System.Drawing.Point(551, 5);
+            this.BtnVentaRapida.Name = "BtnVentaRapida";
+            this.BtnVentaRapida.Size = new System.Drawing.Size(167, 27);
+            this.BtnVentaRapida.TabIndex = 152;
+            this.BtnVentaRapida.Text = "Venta Rapida";
+            this.BtnVentaRapida.TextGroundColor = System.Drawing.Color.White;
+            this.BtnVentaRapida.UseVisualStyleBackColor = false;
+            this.BtnVentaRapida.Click += new System.EventHandler(this.BtnVentaRapida_Click);
+            // 
             // BtnConsultar
             // 
             this.BtnConsultar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
@@ -655,12 +679,13 @@
             this.BtnOrdenMesa,
             this.listaDeOrdenesActivasToolStripMenuItem,
             this.cuentasPorCobrarToolStripMenuItem,
-            this.listaDeOrdenesFacturaToolStripMenuItem});
+            this.listaDeOrdenesFacturaToolStripMenuItem,
+            this.agendaToolStripMenuItem});
             this.MenuVentasDirectas.MenuItemHeight = 25;
             this.MenuVentasDirectas.MenuItemTextColor = System.Drawing.Color.White;
             this.MenuVentasDirectas.Name = "MenuVentasDirectas";
             this.MenuVentasDirectas.PrimaryColor = System.Drawing.SystemColors.ControlDark;
-            this.MenuVentasDirectas.Size = new System.Drawing.Size(270, 134);
+            this.MenuVentasDirectas.Size = new System.Drawing.Size(270, 182);
             // 
             // ventasDirectasDeAtaudesToolStripMenuItem
             // 
@@ -710,6 +735,16 @@
             this.listaDeOrdenesFacturaToolStripMenuItem.Name = "listaDeOrdenesFacturaToolStripMenuItem";
             this.listaDeOrdenesFacturaToolStripMenuItem.Size = new System.Drawing.Size(269, 26);
             this.listaDeOrdenesFacturaToolStripMenuItem.Text = "Lista de Ventas Pagadas";
+            this.listaDeOrdenesFacturaToolStripMenuItem.Click += new System.EventHandler(this.listaDeOrdenesFacturaToolStripMenuItem_Click);
+            // 
+            // agendaToolStripMenuItem
+            // 
+            this.agendaToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.agendaToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.agendaToolStripMenuItem.Name = "agendaToolStripMenuItem";
+            this.agendaToolStripMenuItem.Size = new System.Drawing.Size(269, 26);
+            this.agendaToolStripMenuItem.Text = "Agenda";
+            this.agendaToolStripMenuItem.Click += new System.EventHandler(this.agendaToolStripMenuItem_Click);
             // 
             // MenuOpc
             // 
@@ -948,29 +983,6 @@
             this.CierreCajaToolStripMenuItem.Text = "Cierre de Caja";
             this.CierreCajaToolStripMenuItem.Click += new System.EventHandler(this.CierreCajaToolStripMenuItem_Click);
             // 
-            // BtnVentaRapida
-            // 
-            this.BtnVentaRapida.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.BtnVentaRapida.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(186)))));
-            this.BtnVentaRapida.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(186)))));
-            this.BtnVentaRapida.BorderColor = System.Drawing.Color.Lime;
-            this.BtnVentaRapida.BorderRadius = 5;
-            this.BtnVentaRapida.BorderSize = 0;
-            this.BtnVentaRapida.FlatAppearance.BorderSize = 0;
-            this.BtnVentaRapida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnVentaRapida.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnVentaRapida.ForeColor = System.Drawing.Color.White;
-            this.BtnVentaRapida.Image = ((System.Drawing.Image)(resources.GetObject("BtnVentaRapida.Image")));
-            this.BtnVentaRapida.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnVentaRapida.Location = new System.Drawing.Point(551, 5);
-            this.BtnVentaRapida.Name = "BtnVentaRapida";
-            this.BtnVentaRapida.Size = new System.Drawing.Size(167, 27);
-            this.BtnVentaRapida.TabIndex = 152;
-            this.BtnVentaRapida.Text = "Venta Rapida";
-            this.BtnVentaRapida.TextGroundColor = System.Drawing.Color.White;
-            this.BtnVentaRapida.UseVisualStyleBackColor = false;
-            this.BtnVentaRapida.Click += new System.EventHandler(this.BtnVentaRapida_Click);
-            // 
             // PnlPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1074,5 +1086,6 @@
         private System.Windows.Forms.ToolStripMenuItem cuentasPorCobrarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listaDeOrdenesFacturaToolStripMenuItem;
         public Especiales.EspecialButton BtnVentaRapida;
+        private System.Windows.Forms.ToolStripMenuItem agendaToolStripMenuItem;
     }
 }

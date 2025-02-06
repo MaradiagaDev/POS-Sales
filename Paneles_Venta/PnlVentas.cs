@@ -998,5 +998,10 @@ namespace NeoCobranza.Paneles_Venta
         {
 
         }
+
+        private void label22_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

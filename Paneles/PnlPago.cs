@@ -231,6 +231,25 @@ namespace NeoCobranza.Paneles
 
                     BtnGuardar.Enabled = false;
 
+                    //Agregarle el numero de factura
+                    DataTable dtConfigFacturacion = dataUtilities.getRecordByColumn("ConfigFacturacion", "SucursalId", Utilidades.SucursalId);
+
+                    decimal NoFactura = Convert.ToDecimal(dtConfigFacturacion.Rows[0]["ConsecutivoFactura"]) + 1;
+
+                    dataUtilities.SetColumns("ConsecutivoFactura", NoFactura);
+
+                    dataUtilities.UpdateRecordByPrimaryKey(
+                        "ConfigFacturacion",
+                        Convert.ToString(dtConfigFacturacion.Rows[0]["ConfigFacturacionId"]));
+
+                    //Actualizar en la orden
+
+                    dataUtilities.SetParameter("@IdOrden", auxFrm.vMOrdenes.OrdenAux);
+                    dataUtilities.SetParameter("@IdSucursal",Utilidades.SucursalId);
+                    dataUtilities.SetParameter("@Factura",NoFactura);
+                    dataUtilities.SetParameter("@serie", Convert.ToString(dtConfigFacturacion.Rows[0]["Serie"]));
+
+                    dataUtilities.ExecuteStoredProcedure("spActualizarFacturaOrden");
 
                     DialogResult result = MessageBox.Show("¿Desea imprimir factura?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -570,7 +589,7 @@ namespace NeoCobranza.Paneles
             e.Graphics.DrawString($"{Convert.ToString(dtResponseOrden.Rows[0]["NombreEmpresa"])}", titleFont, Brushes.Black, leftMargin, yPosition, new StringFormat { Alignment = StringAlignment.Near });
             yPosition += 15; // Ajustar para siguiente línea
 
-            e.Graphics.DrawString($"RUC: {Convert.ToString(dtResponseOrden.Rows[0]["RucEmpresa"])}", regularFont, Brushes.Black, leftMargin, yPosition, new StringFormat { Alignment = StringAlignment.Near });
+            e.Graphics.DrawString($"{Convert.ToString(dtResponseOrden.Rows[0]["RucEmpresa"])}", regularFont, Brushes.Black, leftMargin, yPosition, new StringFormat { Alignment = StringAlignment.Near });
             yPosition += 12;
 
             e.Graphics.DrawString($"{Convert.ToString(dtResponseOrden.Rows[0]["DireccionSucursal"])}", regularFont, Brushes.Black, leftMargin, yPosition, new StringFormat { Alignment = StringAlignment.Near });

@@ -132,10 +132,8 @@ namespace NeoCobranza.ViewModels
 
                         //Actualizar la configuración de facturacion
 
-                        decimal NoFactura = Convert.ToDecimal(dtConfigFacturacion.Rows[0]["ConsecutivoFactura"]) + 1;
                         decimal NoOrden = Convert.ToDecimal(dtConfigFacturacion.Rows[0]["ConsecutivoOrden"]) + 1;
 
-                        dataUtilities.SetColumns("ConsecutivoFactura", NoFactura);
                         dataUtilities.SetColumns("ConsecutivoOrden", NoOrden);
 
                         dataUtilities.UpdateRecordByPrimaryKey(
@@ -156,9 +154,9 @@ namespace NeoCobranza.ViewModels
                         dataUtilities.SetColumns("SucursalId", Utilidades.SucursalId);
                         dataUtilities.SetColumns("UsuarioId", Utilidades.Usuario);
                         dataUtilities.SetColumns("ClienteId", auxClienteId);
-                        dataUtilities.SetColumns("NoFactura", NoFactura);
+                        dataUtilities.SetColumns("NoFactura", "0");
                         dataUtilities.SetColumns("OrdenId", NoOrden);
-                        dataUtilities.SetColumns("Serie", Convert.ToString(dtConfigFacturacion.Rows[0]["Serie"]));
+                        dataUtilities.SetColumns("Serie", "-");
                         dataUtilities.SetColumns("SalaMesa", MesaAux);
                         dataUtilities.SetColumns("TotalOrden", 0);
                         dataUtilities.SetColumns("Descuento", 0);
@@ -390,119 +388,6 @@ namespace NeoCobranza.ViewModels
             }
         }
 
-        //private void SalaClick(int SalaId, PnlVentas frm)
-        //{
-        //    // Restaurar color azul a todas las salas
-        //    foreach (Control control in frm.PnlListaSalas.Controls)
-        //    {
-        //        if (control is System.Windows.Forms.Button)
-        //        {
-        //            control.BackColor = SystemColors.MenuHighlight;
-
-        //            if ((int)control.Tag == SalaId)
-        //            {
-        //                control.BackColor = System.Drawing.Color.Green;
-
-
-        //                DataTable dtSalas = dataUtilities.getRecordByPrimaryKey("Salas", SalaId);
-        //                DataRow itemSala = dtSalas.Rows[0];
-
-        //                frm.LblSalaTitulo.Text = Convert.ToString(itemSala["NombreSala"]);
-        //                frm.LblCantidadMesas.Text = Convert.ToString(itemSala["NoMesas"]);
-
-
-        //                frm.PnlMesasEnSala.Controls.Clear();
-        //                //Ahora colocar los botones por cada sala
-
-
-        //                // Crear un panel principal para contener los botones de las mesas
-        //                Panel panelPrincipal = new Panel();
-        //                panelPrincipal.Dock = DockStyle.Fill;
-        //                panelPrincipal.AutoScroll = true;
-
-        //                // Agregar el panel principal al panel de mesas en sala
-        //                frm.PnlMesasEnSala.Controls.Add(panelPrincipal);
-
-        //                // Calcular el ancho máximo del panel contenedor de mesas
-        //                int panelWidth = panelPrincipal.ClientSize.Width;
-        //                int botonWidth = 150; // Ancho fijo para cada botón
-        //                int filaActual = 0;
-        //                int columnaActual = 0;
-
-        //                for (int i = 1; i <= Convert.ToInt32(itemSala["NoMesas"]); i++)
-        //                {
-        //                    System.Windows.Forms.Button botonSala = new System.Windows.Forms.Button();
-
-        //                    // Configurar propiedades del botón
-        //                    botonSala.Text = $"Mesa - {i.ToString()}";
-        //                    botonSala.Tag = i;
-        //                    botonSala.Anchor = AnchorStyles.Top | AnchorStyles.Left;
-        //                    botonSala.BackColor = Color.ForestGreen;
-
-
-        //                    DataTable dtResponse = dataUtilities.GetAllRecords("Ordenes");
-        //                    var filterRow =
-        //                        from row in dtResponse.AsEnumerable()
-        //                        where Convert.ToString(row.Field<string>("SucursalId")) == Utilidades.SucursalId
-        //                        && Convert.ToString(row.Field<string>("OrdenProceso")) == "Orden Abierta"
-        //                        && Convert.ToString(row.Field<string>("SalaMesa")) == $"{Convert.ToString(itemSala["NombreSala"])}-{i.ToString()}"
-        //                        select row;
-
-        //                    if (filterRow.Any())
-        //                    {
-        //                        botonSala.BackColor = Color.DarkRed;
-        //                    }
-
-        //                    botonSala.Font = new Font("Century Gothic", 15, FontStyle.Regular);
-        //                    botonSala.ForeColor = Color.White;
-        //                    botonSala.Height = 45;
-
-        //                    // Calcular la posición horizontal del botón
-        //                    int botonLeft = columnaActual * botonWidth;
-
-        //                    // Calcular la posición vertical del botón
-        //                    int botonTop = filaActual * botonSala.Height;
-
-        //                    // Establecer el ancho y la posición horizontal del botón
-        //                    botonSala.Width = botonWidth;
-        //                    botonSala.Left = botonLeft;
-        //                    botonSala.Top = botonTop;
-
-        //                    int mesaIndex = i; // Capturar el valor actual de i en una variable local
-
-        //                    if (filterRow.Any())
-        //                    {
-        //                        DataTable dataTable = filterRow.CopyToDataTable();
-        //                        botonSala.Click += (sender, e) => MesaClick($"{Convert.ToString(itemSala["NombreSala"])}-{mesaIndex.ToString()}", dataTable, frm);
-        //                    }
-        //                    else
-        //                    {
-        //                        DataTable dataTable = new DataTable();
-        //                        botonSala.Click += (sender, e) => MesaClick($"{Convert.ToString(itemSala["NombreSala"])}-{mesaIndex.ToString()}", dataTable, frm);
-        //                    }
-
-
-
-        //                    // Actualizar el índice de la columna actual
-        //                    columnaActual++;
-
-        //                    // Verificar si se ha llegado al límite de botones por fila
-        //                    if (columnaActual >= 9)
-        //                    {
-        //                        // Reiniciar la columna actual
-        //                        columnaActual = 0;
-        //                        // Mover a la siguiente fila
-        //                        filaActual++;
-        //                    }
-
-        //                    // Agregar el botón al panel principal
-        //                    panelPrincipal.Controls.Add(botonSala);
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
-
         private void MesaClick(string MesaSala, DataTable orden, PnlVentas frm)
         {
             frm.LblOrdenMesa.Visible = true;
@@ -651,161 +536,9 @@ namespace NeoCobranza.ViewModels
                     frm.llbTitulo.Text = "Crear Orden";
                     frm.TxtCodigoProducto.Focus();
                     break;
-                case "Lista":
-
-                    //frmBusquedasOrdenes frmLista = new frmBusquedasOrdenes(frm);
-
-                    //frmLista.llbTitulo.Text = "Lista Ordenes";
-                    //auxSubModulo = "Lista";
-                    //auxAccion = "Buscar";
-
-                    //dynamicDataTableOrdenes.Columns.Clear();
-                    //dynamicDataTableOrdenes.Rows.Clear();
-                    //frmLista.dgvCatalogoOrdenes.Columns.Clear();
-                    //frmLista.dgvCatalogoOrdenes.DataSource = null;
-
-                    //if (frmLista.dgvCatalogoOrdenes.Columns.Count == 0)
-                    //{
-                    //    dynamicDataTableOrdenes.Columns.Add("No Orden", typeof(string));
-                    //    dynamicDataTableOrdenes.Columns.Add("Cliente Id", typeof(string));
-                    //    dynamicDataTableOrdenes.Columns.Add("Cliente", typeof(string));
-                    //    dynamicDataTableOrdenes.Columns.Add("Fecha", typeof(string));
-                    //    dynamicDataTableOrdenes.Columns.Add("Estado Orden", typeof(string));
-                    //    dynamicDataTableOrdenes.Columns.Add("Estado Pago", typeof(string));
-                    //    dynamicDataTableOrdenes.Columns.Add("Total", typeof(string));
-                    //    dynamicDataTableOrdenes.Columns.Add("Pagado", typeof(string));
-
-                    //    DataGridViewButtonColumn buttonColumnSeleccionar = new DataGridViewButtonColumn();
-                    //    buttonColumnSeleccionar.HeaderText = "...";
-                    //    buttonColumnSeleccionar.Text = " Abrir Orden ";
-                    //    buttonColumnSeleccionar.UseColumnTextForButtonValue = true;
-
-                    //    frmLista.dgvCatalogoOrdenes.Columns.Add(buttonColumnSeleccionar);
-
-                    //    DataGridViewButtonColumn buttonColumnCancelar = new DataGridViewButtonColumn();
-                    //    buttonColumnCancelar.HeaderText = "...";
-                    //    buttonColumnCancelar.Text = " Cancelar ";
-                    //    buttonColumnCancelar.UseColumnTextForButtonValue = true;
-
-                    //    frmLista.dgvCatalogoOrdenes.Columns.Add(buttonColumnCancelar);
-                    //    frmLista.dgvCatalogoOrdenes.DataSource = dynamicDataTableOrdenes;
-                    //}
-                    //FuncionesPrincipales(frm);
-
-                    //frmLista.ShowDialog();
-                    break;
-                case "ListaCredito":
-                    //frmBusquedasOrdenes frmListaCredito = new frmBusquedasOrdenes(frm);
-
-                    //frmListaCredito.llbTitulo.Text = "Cuentas Por Cobrar";
-                    //auxSubModulo = "ListaCredito";
-                    //auxAccion = "Buscar";
-
-                    //dynamicDataTableOrdenes.Columns.Clear();
-                    //dynamicDataTableOrdenes.Rows.Clear();
-                    //frmListaCredito.dgvCatalogoOrdenes.Columns.Clear();
-
-                    //if (frmListaCredito.dgvCatalogoOrdenes.Columns.Count == 0)
-                    //{
-                    //    dynamicDataTableOrdenes.Columns.Add("No Orden", typeof(string));
-                    //    dynamicDataTableOrdenes.Columns.Add("Cliente Id", typeof(string));
-                    //    dynamicDataTableOrdenes.Columns.Add("Cliente", typeof(string));
-                    //    dynamicDataTableOrdenes.Columns.Add("Fecha", typeof(string));
-                    //    dynamicDataTableOrdenes.Columns.Add("Estado Orden", typeof(string));
-                    //    dynamicDataTableOrdenes.Columns.Add("Estado Pago", typeof(string));
-                    //    dynamicDataTableOrdenes.Columns.Add("Total", typeof(string));
-                    //    dynamicDataTableOrdenes.Columns.Add("Pagado", typeof(string));
-                    //    dynamicDataTableOrdenes.Columns.Add("Restante", typeof(string));
-                    //    dynamicDataTableOrdenes.Columns.Add("Fecha del Próximo Pago", typeof(string));
-                    //    dynamicDataTableOrdenes.Columns.Add("Cantidad de Pagos", typeof(string));
-                    //    dynamicDataTableOrdenes.Columns.Add("Frecuencia de Pago", typeof(string));
-
-                    //    DataGridViewButtonColumn buttonColumnSeleccionar = new DataGridViewButtonColumn();
-                    //    buttonColumnSeleccionar.HeaderText = "...";
-                    //    buttonColumnSeleccionar.Text = " Abrir Orden ";
-                    //    buttonColumnSeleccionar.UseColumnTextForButtonValue = true;
-
-                    //    frmListaCredito.dgvCatalogoOrdenes.Columns.Add(buttonColumnSeleccionar);
-
-                    //    DataGridViewButtonColumn buttonColumnCancelar = new DataGridViewButtonColumn();
-                    //    buttonColumnCancelar.HeaderText = "...";
-                    //    buttonColumnCancelar.Text = " Cancelar ";
-                    //    buttonColumnCancelar.UseColumnTextForButtonValue = true;
-
-                    //    frmListaCredito.dgvCatalogoOrdenes.Columns.Add(buttonColumnCancelar);
-                    //    frmListaCredito.dgvCatalogoOrdenes.DataSource = dynamicDataTableOrdenes;
-                    //}
-                    //FuncionesPrincipales(frm);
-                    //frmListaCredito.ShowDialog();
-                    break;
+          
             }
         }
-
-        //public void FuncionesPrincipales(PnlVentas frm,frmBusquedasOrdenes frmMain = null)
-        //{
-
-        //    switch (auxSubModulo)
-        //    {
-
-        //        case "Productos":
-
-        //            if (auxAccion == "Buscar")
-        //            {
-        //                dynamicDataTableProductos.Rows.Clear();
-
-        //                //OBTENER EL ALMACEN MOSTRADOR
-        //                DataTable dtResponse = dataUtilities.GetAllRecords("Almacenes");
-        //                var filterRow =
-        //                    from row in dtResponse.AsEnumerable()
-        //                    where Convert.ToBoolean(row.Field<bool>("EsMostrador")) == true
-        //                    && Convert.ToString(row.Field<string>("SucursalId")) == Utilidades.SucursalId
-        //                    select row;
-
-        //                if (filterRow.Any())
-        //                {
-        //                    DataTable dtAlmacenMostrador = filterRow.CopyToDataTable();
-
-        //                    //REALIZAR EL FILTRADO
-        //                    dataUtilities.SetParameter("@AlmacenId", Convert.ToString(dtAlmacenMostrador.Rows[0]["AlmacenId"]));
-        //                    dataUtilities.SetParameter("@CategoriaId", frm.CmbTipoServicio.SelectedValue);
-        //                   dataUtilities.SetParameter("@Filtro", frm.TxtBuscarProductos.Texts);
-        //                    DataTable dtResponseSp = dataUtilities.ExecuteStoredProcedure("sp_ObtenerCantidadProductoPorAlmacen");
-
-        //                    foreach (DataRow row in dtResponseSp.Rows)
-        //                    {
-        //                        dynamicDataTableProductos.Rows.Add(Convert.ToString(row["ID"]),
-        //                            Convert.ToString(row["PRODUCTO"]), Convert.ToString(row[2]), Convert.ToString(row[3]));
-        //                    }
-
-        //                    frm.DgvProductos.DataSource = dynamicDataTableProductos;
-        //                }
-        //                else
-        //                {
-        //                    MessageBox.Show("Debe agregar un almacén mostrador.", "Atención",
-        //                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //                    frm.Close();
-        //                }
-        //            }
-        //            break;
-        //        case "Servicios":
-        //            if (auxAccion == "Buscar")
-        //            {
-        //                dynamicDataTableProductos.Rows.Clear();
-
-        //                dataUtilities.SetParameter("@CategoriaId", frm.CmbTipoServicio.SelectedValue);
-        //                dataUtilities.SetParameter("@Filtro", frm.TxtFiltrar.Text);
-        //                DataTable dtResponseSp = dataUtilities.ExecuteStoredProcedure("sp_ObtenerServicios");
-
-        //                foreach (DataRow row in dtResponseSp.Rows)
-        //                {
-        //                    dynamicDataTableProductos.Rows.Add(Convert.ToString(row["ID"]),
-        //                        Convert.ToString(row["SERVICIO"]), Convert.ToString(row[2]));
-        //                }
-        //            }
-        //            break;
-
-        //    }
-        //}
 
         public void AgregarProductosOrden(PnlVentas frm, string idProd, string Cantidad, string opc)
         {
@@ -834,7 +567,7 @@ namespace NeoCobranza.ViewModels
 
                     DataTable dtReponseStock = dataUtilities.ExecuteStoredProcedure("sp_CheckInventory");
 
-                    if (Convert.ToString(dtReponseStock.Rows[0][0]) == "1")
+                    if (Convert.ToString(dtReponseStock.Rows[0][0]) == "1" && opc == "Increase")
                     {
                         if (MessageBox.Show("El inventario es insuficiente. ¿Deseas continuar?",
                                      "Advertencia",

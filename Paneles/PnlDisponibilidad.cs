@@ -31,17 +31,25 @@ namespace NeoCobranza.Paneles
 
         private void PnlDisponibilidad_Load(object sender, EventArgs e)
         {
-            UIUtilities.PersonalizarDataGridView(DgvProductos);
+            try
+            {
+                UIUtilities.PersonalizarDataGridView(DgvProductos);
 
-            data.SetParameter("@productoId", auxIdProducto);
-            DataTable dataTable = data.ExecuteStoredProcedure("ListarProductosPorSucursales");
+                data.SetParameter("@productoId", auxIdProducto);
+                DataTable dataTable = data.ExecuteStoredProcedure("ListarProductosPorSucursales");
 
-            DgvProductos.DataSource = dataTable;
+                DgvProductos.DataSource = dataTable;
 
-            string nombreProducto = Convert.ToString(data.getRecordByPrimaryKey("ProductosServicios", Convert.ToString(auxIdProducto)).Rows[0]["NombreProducto"]);
 
-            LblDynamico.Text = "Sucursales con existencias de producto: " + nombreProducto;
+                string nombreProducto = Convert.ToString(data.getRecordByPrimaryKey("ProductosServicios", Convert.ToString(auxIdProducto)).Rows[0]["NombreProducto"]);
 
+                LblDynamico.Text = "Sucursales con existencias de producto: " + nombreProducto;
+
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }

@@ -573,11 +573,29 @@
     <Compile Include="Informes\Informes Formato Ticket\FrmFacturaTicket.Designer.cs">
       <DependentUpon>FrmFacturaTicket.cs</DependentUpon>
     </Compile>
+    <Compile Include="Paneles\PnlAsistencia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlAsistencia.Designer.cs">
+      <DependentUpon>PnlAsistencia.cs</DependentUpon>
+    </Compile>
     <Compile Include="Paneles\PnlCierreCuadreCaja.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Paneles\PnlCierreCuadreCaja.Designer.cs">
       <DependentUpon>PnlCierreCuadreCaja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlHistorialCierresCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlHistorialCierresCaja.Designer.cs">
+      <DependentUpon>PnlHistorialCierresCaja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlIngresosPagosCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlIngresosPagosCaja.Designer.cs">
+      <DependentUpon>PnlIngresosPagosCaja.cs</DependentUpon>
     </Compile>
     <Compile Include="Paneles\PnlPago.cs">
       <SubType>Form</SubType>
@@ -602,6 +620,12 @@
     </Compile>
     <Compile Include="Paneles_Venta\Informes\frmBusquedasMesas.Designer.cs">
       <DependentUpon>frmBusquedasMesas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles_Venta\PnlAgenda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles_Venta\PnlAgenda.Designer.cs">
+      <DependentUpon>PnlAgenda.cs</DependentUpon>
     </Compile>
     <Compile Include="Paneles_Venta\PnlVentasCredito.cs">
       <SubType>Form</SubType>
@@ -1231,8 +1255,17 @@
       <DependentUpon>FrmFacturaTicket.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Informes\Informes Formato Ticket\XrpInformeFacturaTicket.rdlc" />
+    <EmbeddedResource Include="Paneles\PnlAsistencia.resx">
+      <DependentUpon>PnlAsistencia.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlCierreCuadreCaja.resx">
       <DependentUpon>PnlCierreCuadreCaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlHistorialCierresCaja.resx">
+      <DependentUpon>PnlHistorialCierresCaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlIngresosPagosCaja.resx">
+      <DependentUpon>PnlIngresosPagosCaja.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlPago.resx">
       <DependentUpon>PnlPago.cs</DependentUpon>
@@ -1245,6 +1278,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles_Venta\Informes\frmBusquedasMesas.resx">
       <DependentUpon>frmBusquedasMesas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles_Venta\PnlAgenda.resx">
+      <DependentUpon>PnlAgenda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles_Venta\PnlVentasCredito.resx">
       <DependentUpon>PnlVentasCredito.cs</DependentUpon>

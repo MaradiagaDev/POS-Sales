@@ -215,7 +215,7 @@ namespace NeoCobranza.Paneles_Venta
             {
                 if (auxOpc == "Productos")
                 {
-                    object cellValue = DgvProductos.Rows[e.RowIndex].Cells[0].Value;
+                    object cellValue = DgvProductos.Rows[e.RowIndex].Cells[2].Value;
                     PnlDisponibilidad disponibilidad = new PnlDisponibilidad(cellValue.ToString());
                     disponibilidad.ShowDialog();
                 }

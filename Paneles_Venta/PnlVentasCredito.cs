@@ -20,6 +20,7 @@ namespace NeoCobranza.Paneles_Venta
         {
             InitializeComponent();
             auxFrm = frmVentas;
+            CmbFrecuencia.SelectedIndex = 0;
         }
 
         private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
@@ -49,7 +50,7 @@ namespace NeoCobranza.Paneles_Venta
 
             dataUtilities.SetColumns("FechaCredito", DtFechaPago.Value);
             dataUtilities.SetColumns("CantidadPagos", TxtCantidadPagos.Text);
-            dataUtilities.SetColumns("FrecuenciaPagos", TxtFrecuenciaPagos.Text);
+            dataUtilities.SetColumns("FrecuenciaPagos" ,CmbFrecuencia.Text);
             dataUtilities.SetColumns("MontoCredito", TxtMontoCredito.Text);
             dataUtilities.SetColumns("BitEsCredito", true);
 
@@ -87,7 +88,7 @@ namespace NeoCobranza.Paneles_Venta
             {
                 TxtCantidadPagos.Text = Convert.ToString(orden["CantidadPagos"]);
                 DtFechaPago.Value = Convert.ToDateTime(orden["FechaCredito"]);
-                TxtFrecuenciaPagos.Text = Convert.ToString(orden["FrecuenciaPagos"]);
+                CmbFrecuencia.Text = Convert.ToString(orden["FrecuenciaPagos"]);
                 TxtMontoCredito.Text = Convert.ToString(orden["MontoCredito"]);
             }
         }
