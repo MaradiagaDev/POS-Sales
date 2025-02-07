@@ -229,16 +229,28 @@ namespace NeoCobranza.Paneles
 
                 this.Close();
             }
-            if (panel == "ActualizarContrato")
+            if (panel == "Agenda")
             {
+                //Obtener la agenda
+                PnlAgenda pnlAgenda = Owner as PnlAgenda;
 
-                PnlGeneralContrato pnlProformaContrato = Owner as PnlGeneralContrato;
-                pnlProformaContrato.lblNombreCliente.Text = DgvCliente.SelectedRows[0].Cells[1].Value.ToString();
+                //Obtener datos
+                string nombreCliente = DgvCliente.SelectedRows[0].Cells[1].Value.ToString();
+                string IdCliente = DgvCliente.SelectedRows[0].Cells[0].Value.ToString();
 
-                pnlProformaContrato.lblEstadoCliente.Text = "Cliente Seleccionado";
-                pnlProformaContrato.lblEstadoCliente.ForeColor = Color.Green;
-                pnlProformaContrato.lblIdCliente.Text = DgvCliente.SelectedRows[0].Cells[0].Value.ToString();
+                //Abrir el Agendar
+                PnlAgendar pnlAgendar = new PnlAgendar(pnlAgenda,nombreCliente,IdCliente);
+                pnlAgendar.ShowDialog();
+
                 this.Hide();
+            }
+            if(panel == "AgendaConfiguracion")
+            {
+                PnlAgendaCambioUsuario pnlAgendaCambioUsuario = Owner as PnlAgendaCambioUsuario;
+                pnlAgendaCambioUsuario.TxtNombreCliente.Text = DgvCliente.SelectedRows[0].Cells[1].Value.ToString();
+                pnlAgendaCambioUsuario.UsuarioId = DgvCliente.SelectedRows[0].Cells[0].Value.ToString();
+
+                this.Close();
             }
 
         }

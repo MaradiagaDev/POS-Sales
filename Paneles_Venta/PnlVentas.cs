@@ -25,9 +25,10 @@ namespace NeoCobranza.Paneles_Venta
         public string auxOpc = "";
         DataUtilities dataUtilities = new DataUtilities();
         public PnlPrincipal auxPnlPrincipal;
+        public string auxClienteCreacion = "0";
 
         //Constructor
-        public PnlVentas( string opc, PnlPrincipal pnlPrincipal, decimal ordenId = 0,string mesaAux = "-")
+        public PnlVentas( string opc, PnlPrincipal pnlPrincipal, decimal ordenId = 0,string mesaAux = "-", string clienteId = "0")
         {
             InitializeComponent();
             this.DoubleBuffered = true;
@@ -39,6 +40,7 @@ namespace NeoCobranza.Paneles_Venta
             UIUtilities.PersonalizarDataGridView(DgvItemsOrden);
             this.auxPnlPrincipal = pnlPrincipal;
             vMOrdenes.MesaAux = mesaAux;
+            auxClienteCreacion = clienteId;
 
             if(mesaAux != "-")
             {

@@ -143,7 +143,7 @@
             this.BtnActualizarDescuento.Name = "BtnActualizarDescuento";
             this.BtnActualizarDescuento.Size = new System.Drawing.Size(216, 50);
             this.BtnActualizarDescuento.TabIndex = 186;
-            this.BtnActualizarDescuento.Text = "Agregar Crédito";
+            this.BtnActualizarDescuento.Text = "Agregar / Actualizar";
             this.BtnActualizarDescuento.TextGroundColor = System.Drawing.Color.White;
             this.BtnActualizarDescuento.UseVisualStyleBackColor = false;
             this.BtnActualizarDescuento.Click += new System.EventHandler(this.BtnActualizarDescuento_Click);

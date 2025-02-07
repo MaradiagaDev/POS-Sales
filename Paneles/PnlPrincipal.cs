@@ -182,18 +182,26 @@ namespace NeoCobranza.Paneles
 
         private void auditoriasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PnlPrincipalAuditorias pnlAuditorias = new PnlPrincipalAuditorias(conexion);
-            limpiar();
-            pnlAuditorias.TopLevel = false;
-            pnlAuditorias.Dock = DockStyle.Fill;
-            PnlCentral.Controls.Add(pnlAuditorias);
+            //PnlPrincipalAuditorias pnlAuditorias = new PnlPrincipalAuditorias(conexion);
+            //limpiar();
+            //pnlAuditorias.TopLevel = false;
+            //pnlAuditorias.Dock = DockStyle.Fill;
+            //PnlCentral.Controls.Add(pnlAuditorias);
 
-            pnlAuditorias.Show();
+            //pnlAuditorias.Show();
+
+            CreacionUsuario creacionU = new CreacionUsuario();
+            limpiar();
+            creacionU.TopLevel = false;
+            creacionU.Dock = DockStyle.Fill;
+            PnlCentral.Controls.Add(creacionU);
+
+            creacionU.Show();
         }
 
         private void crearUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CreacionUsuario creacionU = new CreacionUsuario(conexion);
+            CreacionUsuario creacionU = new CreacionUsuario();
             limpiar();
             creacionU.TopLevel = false;
             creacionU.Dock = DockStyle.Fill;
@@ -240,14 +248,7 @@ namespace NeoCobranza.Paneles
 
         private void permisosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            limpiar();
-            GestionPermisos frm = new GestionPermisos();
-            AddOwnedForm(frm);
-            frm.TopLevel = false;
-            frm.Dock = DockStyle.Fill;
-            PnlCentral.Controls.Add(frm);
-            frm.Show();
-            return;
+            
         }
 
         private void ventasDirectasDeAtaudesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -781,10 +782,10 @@ namespace NeoCobranza.Paneles
             directas.Visible = true;
         }
 
-        public void AbrirVenta(decimal orden,string mesa = "-")
+        public void AbrirVenta(decimal orden,string mesa = "-",string idCliente = "0")
         {
             limpiar();
-            PnlVentas directas = new PnlVentas("OrdenRapida",this,orden,mesa);
+            PnlVentas directas = new PnlVentas("OrdenRapida",this,orden,mesa,idCliente);
             directas.TopLevel = false;
             directas.Dock = DockStyle.Fill;
             PnlCentral.Controls.Add(directas);
@@ -840,12 +841,24 @@ namespace NeoCobranza.Paneles
         private void agendaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             limpiar();
-            PnlAgenda directas = new PnlAgenda();
+            PnlAgenda directas = new PnlAgenda(this);
             directas.TopLevel = false;
             directas.Dock = DockStyle.Fill;
             directas.TopLevel = false;
             PnlCentral.Controls.Add(directas);
             directas.Show();
+        }
+
+        private void revisionDeSeguridadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            limpiar();
+            GestionPermisos frm = new GestionPermisos();
+            AddOwnedForm(frm);
+            frm.TopLevel = false;
+            frm.Dock = DockStyle.Fill;
+            PnlCentral.Controls.Add(frm);
+            frm.Show();
+            return;
         }
     }
 }

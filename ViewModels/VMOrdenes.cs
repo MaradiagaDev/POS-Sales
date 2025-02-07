@@ -101,9 +101,35 @@ namespace NeoCobranza.ViewModels
                     auxSubModulo = "Orden";
                     auxAccion = "Crear";
 
-                    //Cliente
-                    frm.LblNombreClientes.Text = "CLIENTE MOSTRADOR";
-                    auxClienteId = "0";
+                    DataTable dtResponseClienteCreacion = dataUtilities.getRecordByPrimaryKey("Clientes", Convert.ToDecimal(frm.auxClienteCreacion));
+
+                    if (dtResponseClienteCreacion.Rows.Count > 0)
+                    {
+                        DataRow rowResponseCliente = dtResponseClienteCreacion.Rows[0];
+
+                        if (Convert.ToString(rowResponseCliente["NoRuc"]).Trim().Length > 0)
+                        {
+                            frm.ChkRetencionAlcaldia.Visible = true;
+                            frm.ChkRetencionDgi.Visible = true;
+                        }
+                        else
+                        {
+                            frm.ChkRetencionAlcaldia.Visible = false;
+                            frm.ChkRetencionDgi.Visible = false;
+                        }
+
+                        frm.LblNombreClientes.Text =
+                            Convert.ToString(rowResponseCliente["PNombre"]) + " " +
+                            Convert.ToString(rowResponseCliente["SNombre"]) + " " +
+                            Convert.ToString(rowResponseCliente["PApellido"]) + " " +
+                            Convert.ToString(rowResponseCliente["SAPellido"]);
+                    }
+                    else
+                    {
+                        frm.LblNombreClientes.Text = "CLIENTE MOSTRADOR";
+                        auxClienteId = "";
+                    }
+
 
                     //agregar el empleado
                     DataTable dtResponseUsuario = dataUtilities.getRecordByPrimaryKey("Usuario", Utilidades.IdUsuario);
@@ -149,6 +175,8 @@ namespace NeoCobranza.ViewModels
                         {
                             tasaCambio = decimal.Parse(tasaData.Rows[0][1].ToString());
                         }
+
+                        auxClienteId = frm.auxClienteCreacion;
 
                         //Insertar la orden
                         dataUtilities.SetColumns("SucursalId", Utilidades.SucursalId);

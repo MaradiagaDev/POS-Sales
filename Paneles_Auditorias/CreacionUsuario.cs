@@ -24,13 +24,10 @@ namespace NeoCobranza.Paneles_Auditorias
         private RolModel rolStatic = new RolModel();
         private bool apertura;
         
-        public CreacionUsuario(Conexion conexion)
+        public CreacionUsuario()
         {
             InitializeComponent();
-              
         }
-
-        
 
         private void CreacionUsuario_Load(object sender, EventArgs e)
         {

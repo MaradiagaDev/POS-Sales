@@ -91,130 +91,42 @@ namespace NeoCobranza.Paneles_Auditorias
 
         private void ChkCatalogos_Click(object sender, EventArgs e)
         {
-            if(ChkCatalogos.Checked)
-            {
-                ChkCatalogoClientes.Enabled = true;
-                ChkCatalogoProveedores.Enabled = true;
-            }
-            else
-            {
-                ChkCatalogoClientes.Enabled = false;
-                ChkCatalogoProveedores.Enabled = false;
-            }
+           
         }
 
         private void ChkContratos_Click(object sender, EventArgs e)
         {
-            if(ChkContratos.Checked)
-            {
-                ChkContratosBuscarProformas.Enabled = true;
-                ChkContratosCrearProforma.Enabled = true;
-                ChkContratosCrearContratos.Enabled = true;
-                ChkContratosGestionCuotas.Enabled = true;
-                ChkContratosInformacionGeneral.Enabled = true;
-                ChkContratosRetirados.Enabled = true;
-                ChkContratosRealizarFactura.Enabled = true;
-                ChkContratosRetiroServicios.Enabled = true;
-            }
-            else
-            {
-                ChkContratosBuscarProformas.Enabled = false;
-                ChkContratosCrearProforma.Enabled = false;
-                ChkContratosCrearContratos.Enabled = false;
-                ChkContratosGestionCuotas.Enabled = false;
-                ChkContratosInformacionGeneral.Enabled = false;
-                ChkContratosRetirados.Enabled = false;
-                ChkContratosRealizarFactura.Enabled = false;
-                ChkContratosRetiroServicios.Enabled = false;
-
-            }
+          
         }
 
         private void ChkVentas_Click(object sender, EventArgs e)
         {
-            if(ChkVentas.Checked)
-            {
-                ChkVentasBuscarProformas.Enabled = true;
-                ChkVentasCrearProforma.Enabled=true;
-                ChkVentasDirectas.Enabled = true;
-                ChkVentasFacturas.Enabled = true;
-                ChkRetiroVentas.Enabled = true;
-            }
-            else 
-            {
-                ChkVentasBuscarProformas.Enabled = false;
-                ChkVentasCrearProforma.Enabled = false;
-                ChkVentasDirectas.Enabled = false;
-                ChkVentasFacturas.Enabled = false;
-                ChkRetiroVentas.Enabled = false;
-            }
+            
         }
 
         private void ChkInventario_Click(object sender, EventArgs e)
         {
-            if(ChkInventario.Checked)
-            {
-                ChkInventarioServicios.Enabled = true;
-                ChkInventarioTipoProducto.Enabled = true;
-            }
-            else 
-            {
-                ChkInventarioServicios.Enabled = false;
-                ChkInventarioTipoProducto.Enabled = false;
-            }
+            
         }
 
         private void ChkCaja_Click(object sender, EventArgs e)
         {
-            if(ChkCaja.Checked)
-            {
-                ChkCajaHistorialRecibos.Enabled = true;
-                ChkCajaReciboOficial.Enabled = true;
-            }
-            else 
-            {
-                ChkCajaHistorialRecibos.Enabled = false;
-                ChkCajaReciboOficial.Enabled = false;
-            }
+            
         }
 
         private void ChkPersonal_Click(object sender, EventArgs e)
         {
-            if(ChkPersonal.Checked)
-            {
-
-            }
-            else 
-            {
-            }
+           
         }
 
         private void ChkSeguridad_Click(object sender, EventArgs e)
         {
-            if(ChkSeguridad.Checked)
-            {
-                ChkSeguridadAuditoria.Enabled = true;
-                ChkSeguridadPermisos.Enabled = true;
-                ChkSeguridadUsuario.Enabled = true;
-            }
-            else 
-            {
-                ChkSeguridadAuditoria.Enabled = false;
-                ChkSeguridadPermisos.Enabled = false;
-                ChkSeguridadUsuario.Enabled = false;
-            }
+            
         }
 
         private void ChkOpciones_Click(object sender, EventArgs e)
         {
-            if (ChkOpciones.Checked)
-            {
-                ChkOpcionesTipoCambio.Enabled = true;
-            }
-            else
-            {
-                ChkOpcionesTipoCambio.Enabled = false;
-            }
+           
         }
 
         private void BtnCancelarGenerales_Click(object sender, EventArgs e)
@@ -253,6 +165,32 @@ namespace NeoCobranza.Paneles_Auditorias
         private void BtnGuardarRol_Click(object sender, EventArgs e)
         {
             vMPermisosUsuario.VerificarRol(this);
+        }
+
+        private void DTLvlUno_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && DTLvlUno.Columns[e.ColumnIndex].Name == "Seleccionado")
+            {
+                DataGridViewRow row = DTLvlUno.Rows[e.RowIndex];
+
+                // Se obtiene el valor actual del checkbox (se utiliza null-coalescing para evitar errores)
+                bool seleccionado = Convert.ToBoolean(row.Cells["Seleccionado"].Value ?? false);
+                bool nuevoValor = !seleccionado;
+                //row.Cells["Seleccionado"].Value = nuevoValor;
+                //int idPermiso = Convert.ToInt32(row.Cells["IdPermisoLvlUno"].Value);
+                //// Obtenemos el Id del rol actual (esto dependerá de cómo lo tengas definido en tu formulario)
+
+                //if (nuevoValor)
+                //{
+                //    // Si se marcó el checkbox, se inserta el registro
+                //    InsertarRolPermiso(idRol, idPermiso);
+                //}
+                //else
+                //{
+                //    // Si se desmarcó, se puede eliminar el registro (si lo deseas)
+                //    EliminarRolPermiso(idRol, idPermiso);
+                //}
+            }
         }
     }
 }

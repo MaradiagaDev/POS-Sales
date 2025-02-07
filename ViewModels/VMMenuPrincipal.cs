@@ -98,8 +98,7 @@ namespace NeoCobranza.ViewModels
                 //Seguridad
                 frm.btnSeguridad.Visible = (bool)permisos.Seguridad;
                 frm.auditoriasToolStripMenuItem.Visible = (bool)permisos.SeguridadAuditoria;
-                frm.crearUsuarioToolStripMenuItem.Visible = (bool)permisos.SeguridadGestionUsuario;
-                frm.permisosToolStripMenuItem.Visible = (bool)permisos.SeguridadGestionPermisos;
+                
                 if (permisos.SeguridadGestionUsuario == false && permisos.SeguridadGestionPermisos == false)
                 {
                     frm.revisionDeSeguridadToolStripMenuItem.Visible = false;

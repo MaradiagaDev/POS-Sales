@@ -573,6 +573,18 @@
     <Compile Include="Informes\Informes Formato Ticket\FrmFacturaTicket.Designer.cs">
       <DependentUpon>FrmFacturaTicket.cs</DependentUpon>
     </Compile>
+    <Compile Include="Paneles\PnlAgendaCambioUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlAgendaCambioUsuario.Designer.cs">
+      <DependentUpon>PnlAgendaCambioUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlAgendar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlAgendar.Designer.cs">
+      <DependentUpon>PnlAgendar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Paneles\PnlAsistencia.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1255,6 +1267,12 @@
       <DependentUpon>FrmFacturaTicket.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Informes\Informes Formato Ticket\XrpInformeFacturaTicket.rdlc" />
+    <EmbeddedResource Include="Paneles\PnlAgendaCambioUsuario.resx">
+      <DependentUpon>PnlAgendaCambioUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlAgendar.resx">
+      <DependentUpon>PnlAgendar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlAsistencia.resx">
       <DependentUpon>PnlAsistencia.cs</DependentUpon>
     </EmbeddedResource>

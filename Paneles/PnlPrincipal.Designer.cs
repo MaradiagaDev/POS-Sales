@@ -83,8 +83,6 @@
             this.MenuSeguridad = new NeoCobranza.Especiales.RJDropDownMenu(this.components);
             this.auditoriasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.revisionDeSeguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.crearUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.permisosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuInventario = new NeoCobranza.Especiales.RJDropDownMenu(this.components);
             this.kardexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trasladosDeProductoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -685,7 +683,7 @@
             this.MenuVentasDirectas.MenuItemTextColor = System.Drawing.Color.White;
             this.MenuVentasDirectas.Name = "MenuVentasDirectas";
             this.MenuVentasDirectas.PrimaryColor = System.Drawing.SystemColors.ControlDark;
-            this.MenuVentasDirectas.Size = new System.Drawing.Size(270, 182);
+            this.MenuVentasDirectas.Size = new System.Drawing.Size(270, 160);
             // 
             // ventasDirectasDeAtaudesToolStripMenuItem
             // 
@@ -844,45 +842,25 @@
             this.MenuSeguridad.MenuItemTextColor = System.Drawing.Color.White;
             this.MenuSeguridad.Name = "MenuSeguridad";
             this.MenuSeguridad.PrimaryColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.MenuSeguridad.Size = new System.Drawing.Size(249, 56);
+            this.MenuSeguridad.Size = new System.Drawing.Size(181, 78);
             // 
             // auditoriasToolStripMenuItem
             // 
             this.auditoriasToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.auditoriasToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.auditoriasToolStripMenuItem.Name = "auditoriasToolStripMenuItem";
-            this.auditoriasToolStripMenuItem.Size = new System.Drawing.Size(248, 26);
-            this.auditoriasToolStripMenuItem.Text = "Auditoria del Sistema";
+            this.auditoriasToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.auditoriasToolStripMenuItem.Text = "Usuarios";
             this.auditoriasToolStripMenuItem.Click += new System.EventHandler(this.auditoriasToolStripMenuItem_Click);
             // 
             // revisionDeSeguridadToolStripMenuItem
             // 
-            this.revisionDeSeguridadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.crearUsuarioToolStripMenuItem,
-            this.permisosToolStripMenuItem});
             this.revisionDeSeguridadToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.revisionDeSeguridadToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.revisionDeSeguridadToolStripMenuItem.Name = "revisionDeSeguridadToolStripMenuItem";
-            this.revisionDeSeguridadToolStripMenuItem.Size = new System.Drawing.Size(248, 26);
-            this.revisionDeSeguridadToolStripMenuItem.Text = "Revision de Seguridad";
-            // 
-            // crearUsuarioToolStripMenuItem
-            // 
-            this.crearUsuarioToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(53)))), ((int)(((byte)(102)))));
-            this.crearUsuarioToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.crearUsuarioToolStripMenuItem.Name = "crearUsuarioToolStripMenuItem";
-            this.crearUsuarioToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
-            this.crearUsuarioToolStripMenuItem.Text = "Gestión de Usuario";
-            this.crearUsuarioToolStripMenuItem.Click += new System.EventHandler(this.crearUsuarioToolStripMenuItem_Click);
-            // 
-            // permisosToolStripMenuItem
-            // 
-            this.permisosToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(53)))), ((int)(((byte)(102)))));
-            this.permisosToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.permisosToolStripMenuItem.Name = "permisosToolStripMenuItem";
-            this.permisosToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
-            this.permisosToolStripMenuItem.Text = "Gestión de Permisos";
-            this.permisosToolStripMenuItem.Click += new System.EventHandler(this.permisosToolStripMenuItem_Click);
+            this.revisionDeSeguridadToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.revisionDeSeguridadToolStripMenuItem.Text = "Permisos";
+            this.revisionDeSeguridadToolStripMenuItem.Click += new System.EventHandler(this.revisionDeSeguridadToolStripMenuItem_Click);
             // 
             // MenuInventario
             // 
@@ -1055,8 +1033,6 @@
         public System.Windows.Forms.ToolStripMenuItem ventasDirectasDeAtaudesToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem BtnOrdenMesa;
         public System.Windows.Forms.ToolStripMenuItem auditoriasToolStripMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem crearUsuarioToolStripMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem permisosToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem revisionDeSeguridadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem BtnAlmacenes;
         private System.Windows.Forms.ToolStripMenuItem kardexToolStripMenuItem;
