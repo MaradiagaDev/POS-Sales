@@ -29,24 +29,17 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreacionUsuario));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BtnBuscar = new System.Windows.Forms.PictureBox();
             this.DGVUser = new System.Windows.Forms.DataGridView();
             this.CmbFiltro = new System.Windows.Forms.ComboBox();
-            this.BtnCancelar = new NeoCobranza.Especiales.EspecialButton();
             this.txtFiltroUsuario = new NeoCobranza.Controladores.LoginUserControl();
             this.BtnCambiarEstado = new NeoCobranza.Especiales.EspecialButton();
             this.BtnCrearUsuario = new NeoCobranza.Especiales.EspecialButton();
             this.BtnActualizar = new NeoCobranza.Especiales.EspecialButton();
             this.PnlTitulo = new System.Windows.Forms.Panel();
             this.TbTitulo = new System.Windows.Forms.Label();
-            this.IDUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.User = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrimerNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrimerApellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Rol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.BtnBuscar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVUser)).BeginInit();
             this.PnlTitulo.SuspendLayout();
@@ -75,22 +68,15 @@
             this.DGVUser.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.DGVUser.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.DGVUser.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGVUser.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LightSlateGray;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGVUser.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DGVUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVUser.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.IDUser,
-            this.User,
-            this.PrimerNombre,
-            this.PrimerApellido,
-            this.Rol,
-            this.Estado});
             this.DGVUser.EnableHeadersVisualStyles = false;
             this.DGVUser.Location = new System.Drawing.Point(13, 138);
             this.DGVUser.MultiSelect = false;
@@ -98,12 +84,12 @@
             this.DGVUser.ReadOnly = true;
             this.DGVUser.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.DGVUser.RowHeadersVisible = false;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Gray;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.DGVUser.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.DGVUser.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.DGVUser.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGVUser.Size = new System.Drawing.Size(1132, 391);
             this.DGVUser.TabIndex = 45;
@@ -123,25 +109,7 @@
             this.CmbFiltro.Name = "CmbFiltro";
             this.CmbFiltro.Size = new System.Drawing.Size(222, 32);
             this.CmbFiltro.TabIndex = 47;
-            // 
-            // BtnCancelar
-            // 
-            this.BtnCancelar.BackColor = System.Drawing.Color.Transparent;
-            this.BtnCancelar.BackGroundColor = System.Drawing.Color.Transparent;
-            this.BtnCancelar.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.BtnCancelar.BorderRadius = 0;
-            this.BtnCancelar.BorderSize = 0;
-            this.BtnCancelar.FlatAppearance.BorderSize = 0;
-            this.BtnCancelar.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnCancelar.ForeColor = System.Drawing.Color.Black;
-            this.BtnCancelar.Location = new System.Drawing.Point(615, 13);
-            this.BtnCancelar.Name = "BtnCancelar";
-            this.BtnCancelar.Size = new System.Drawing.Size(150, 40);
-            this.BtnCancelar.TabIndex = 46;
-            this.BtnCancelar.Text = "Cancelar";
-            this.BtnCancelar.TextGroundColor = System.Drawing.Color.Black;
-            this.BtnCancelar.UseVisualStyleBackColor = false;
-            this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
+            this.CmbFiltro.SelectedIndexChanged += new System.EventHandler(this.CmbFiltro_SelectedIndexChanged);
             // 
             // txtFiltroUsuario
             // 
@@ -177,7 +145,7 @@
             this.BtnCambiarEstado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnCambiarEstado.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnCambiarEstado.ForeColor = System.Drawing.Color.White;
-            this.BtnCambiarEstado.Location = new System.Drawing.Point(605, 75);
+            this.BtnCambiarEstado.Location = new System.Drawing.Point(605, 90);
             this.BtnCambiarEstado.Name = "BtnCambiarEstado";
             this.BtnCambiarEstado.Size = new System.Drawing.Size(171, 40);
             this.BtnCambiarEstado.TabIndex = 48;
@@ -198,7 +166,7 @@
             this.BtnCrearUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnCrearUsuario.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnCrearUsuario.ForeColor = System.Drawing.Color.White;
-            this.BtnCrearUsuario.Location = new System.Drawing.Point(971, 75);
+            this.BtnCrearUsuario.Location = new System.Drawing.Point(971, 90);
             this.BtnCrearUsuario.Name = "BtnCrearUsuario";
             this.BtnCrearUsuario.Size = new System.Drawing.Size(171, 40);
             this.BtnCrearUsuario.TabIndex = 49;
@@ -219,7 +187,7 @@
             this.BtnActualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnActualizar.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnActualizar.ForeColor = System.Drawing.Color.White;
-            this.BtnActualizar.Location = new System.Drawing.Point(781, 75);
+            this.BtnActualizar.Location = new System.Drawing.Point(781, 90);
             this.BtnActualizar.Name = "BtnActualizar";
             this.BtnActualizar.Size = new System.Drawing.Size(185, 40);
             this.BtnActualizar.TabIndex = 50;
@@ -252,45 +220,6 @@
             this.TbTitulo.TabIndex = 1;
             this.TbTitulo.Text = "Gestión de Usuarios";
             // 
-            // IDUser
-            // 
-            this.IDUser.HeaderText = "ID";
-            this.IDUser.Name = "IDUser";
-            this.IDUser.ReadOnly = true;
-            // 
-            // User
-            // 
-            this.User.HeaderText = "Usuario";
-            this.User.Name = "User";
-            this.User.ReadOnly = true;
-            // 
-            // PrimerNombre
-            // 
-            this.PrimerNombre.HeaderText = "Primer Nombre";
-            this.PrimerNombre.Name = "PrimerNombre";
-            this.PrimerNombre.ReadOnly = true;
-            // 
-            // PrimerApellido
-            // 
-            this.PrimerApellido.HeaderText = "Primer Apellido";
-            this.PrimerApellido.Name = "PrimerApellido";
-            this.PrimerApellido.ReadOnly = true;
-            // 
-            // Rol
-            // 
-            this.Rol.DataPropertyName = "RolID";
-            this.Rol.HeaderText = "Rol";
-            this.Rol.Name = "Rol";
-            this.Rol.ReadOnly = true;
-            this.Rol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Rol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Estado
-            // 
-            this.Estado.HeaderText = "Estado";
-            this.Estado.Name = "Estado";
-            this.Estado.ReadOnly = true;
-            // 
             // CreacionUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -302,7 +231,6 @@
             this.Controls.Add(this.BtnCrearUsuario);
             this.Controls.Add(this.BtnCambiarEstado);
             this.Controls.Add(this.CmbFiltro);
-            this.Controls.Add(this.BtnCancelar);
             this.Controls.Add(this.DGVUser);
             this.Controls.Add(this.BtnBuscar);
             this.Controls.Add(this.txtFiltroUsuario);
@@ -322,18 +250,11 @@
         private Controladores.LoginUserControl txtFiltroUsuario;
         private System.Windows.Forms.PictureBox BtnBuscar;
         private System.Windows.Forms.DataGridView DGVUser;
-        private Especiales.EspecialButton BtnCancelar;
         public System.Windows.Forms.ComboBox CmbFiltro;
         private Especiales.EspecialButton BtnCambiarEstado;
         private Especiales.EspecialButton BtnCrearUsuario;
         private Especiales.EspecialButton BtnActualizar;
         private System.Windows.Forms.Panel PnlTitulo;
         public System.Windows.Forms.Label TbTitulo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IDUser;
-        private System.Windows.Forms.DataGridViewTextBoxColumn User;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PrimerNombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PrimerApellido;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Rol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
     }
 }

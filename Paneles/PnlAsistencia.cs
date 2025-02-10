@@ -34,6 +34,8 @@ namespace NeoCobranza.Paneles
             DataTable dataresponse = dataUtilities.ExecuteStoredProcedure("sp_MarcarAsistencia");
 
             MessageBox.Show(dataresponse.Rows[0][0].ToString());
+
+            this.Close();
         }
 
         private void BtnSalida_Click(object sender, EventArgs e)
@@ -44,6 +46,7 @@ namespace NeoCobranza.Paneles
             DataTable dataresponse = dataUtilities.ExecuteStoredProcedure("sp_MarcarAsistencia");
 
             MessageBox.Show(dataresponse.Rows[0][0].ToString());
+            this.Close();
         }
 
         private void Salir_Click(object sender, EventArgs e)

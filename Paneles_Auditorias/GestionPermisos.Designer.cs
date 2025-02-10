@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.GridPermisos = new System.Windows.Forms.SplitContainer();
             this.TCMain = new System.Windows.Forms.TabControl();
             this.TIBuscar = new System.Windows.Forms.TabPage();
@@ -43,12 +43,13 @@
             this.BtnCancelarRol = new System.Windows.Forms.Button();
             this.TxtNombrePermiso = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.DtLvlTres = new System.Windows.Forms.DataGridView();
+            this.DtLvlDos = new System.Windows.Forms.DataGridView();
+            this.DTLvlUno = new System.Windows.Forms.DataGridView();
             this.PnlTitulo = new System.Windows.Forms.Panel();
             this.TbTitulo = new System.Windows.Forms.Label();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.DTLvlUno = new System.Windows.Forms.DataGridView();
-            this.DtLvlDos = new System.Windows.Forms.DataGridView();
-            this.DtLvlTres = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.GridPermisos)).BeginInit();
             this.GridPermisos.Panel1.SuspendLayout();
             this.GridPermisos.Panel2.SuspendLayout();
@@ -57,11 +58,11 @@
             this.TIBuscar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LvRol)).BeginInit();
             this.TICrearRol.SuspendLayout();
-            this.PnlTitulo.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DTLvlUno)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DtLvlDos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DtLvlTres)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DtLvlDos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DTLvlUno)).BeginInit();
+            this.PnlTitulo.SuspendLayout();
             this.SuspendLayout();
             // 
             // GridPermisos
@@ -93,6 +94,8 @@
             this.TCMain.SelectedIndex = 0;
             this.TCMain.Size = new System.Drawing.Size(1157, 554);
             this.TCMain.TabIndex = 1;
+            this.TCMain.SelectedIndexChanged += new System.EventHandler(this.TCMain_SelectedIndexChanged);
+            this.TCMain.TabIndexChanged += new System.EventHandler(this.TCMain_TabIndexChanged);
             // 
             // TIBuscar
             // 
@@ -163,14 +166,14 @@
             this.LvRol.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.LvRol.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.LvRol.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft JhengHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.LvRol.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft JhengHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.LvRol.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.LvRol.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.LvRol.EnableHeadersVisualStyles = false;
             this.LvRol.Location = new System.Drawing.Point(38, 98);
@@ -179,12 +182,12 @@
             this.LvRol.ReadOnly = true;
             this.LvRol.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.LvRol.RowHeadersVisible = false;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.SlateGray;
-            this.LvRol.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.SlateGray;
+            this.LvRol.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.LvRol.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.LvRol.Size = new System.Drawing.Size(738, 394);
             this.LvRol.TabIndex = 53;
@@ -257,6 +260,70 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Nombre del Permiso";
             // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.DtLvlTres);
+            this.tabPage1.Controls.Add(this.DtLvlDos);
+            this.tabPage1.Controls.Add(this.DTLvlUno);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1149, 528);
+            this.tabPage1.TabIndex = 3;
+            this.tabPage1.Text = "Permisos";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // DtLvlTres
+            // 
+            this.DtLvlTres.AllowUserToAddRows = false;
+            this.DtLvlTres.AllowUserToDeleteRows = false;
+            this.DtLvlTres.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.DtLvlTres.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.DtLvlTres.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllHeaders;
+            this.DtLvlTres.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DtLvlTres.Location = new System.Drawing.Point(783, 23);
+            this.DtLvlTres.Name = "DtLvlTres";
+            this.DtLvlTres.Size = new System.Drawing.Size(346, 422);
+            this.DtLvlTres.TabIndex = 2;
+            this.DtLvlTres.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DtLvlTres_CellContentClick);
+            this.DtLvlTres.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DtLvlTres_CellValueChanged);
+            // 
+            // DtLvlDos
+            // 
+            this.DtLvlDos.AllowUserToAddRows = false;
+            this.DtLvlDos.AllowUserToDeleteRows = false;
+            this.DtLvlDos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.DtLvlDos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.DtLvlDos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            this.DtLvlDos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DtLvlDos.Location = new System.Drawing.Point(407, 23);
+            this.DtLvlDos.Name = "DtLvlDos";
+            this.DtLvlDos.Size = new System.Drawing.Size(346, 422);
+            this.DtLvlDos.TabIndex = 1;
+            this.DtLvlDos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DtLvlDos_CellClick);
+            this.DtLvlDos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DtLvlDos_CellContentClick);
+            this.DtLvlDos.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DtLvlDos_CellValueChanged);
+            // 
+            // DTLvlUno
+            // 
+            this.DTLvlUno.AllowUserToAddRows = false;
+            this.DTLvlUno.AllowUserToDeleteRows = false;
+            this.DTLvlUno.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.DTLvlUno.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.DTLvlUno.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            this.DTLvlUno.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DTLvlUno.Location = new System.Drawing.Point(35, 23);
+            this.DTLvlUno.Name = "DTLvlUno";
+            this.DTLvlUno.Size = new System.Drawing.Size(346, 422);
+            this.DTLvlUno.TabIndex = 0;
+            this.DTLvlUno.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DTLvlUno_CellClick);
+            this.DTLvlUno.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DTLvlUno_CellContentClick);
+            this.DTLvlUno.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DTLvlUno_CellValueChanged);
+            // 
             // PnlTitulo
             // 
             this.PnlTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
@@ -281,52 +348,17 @@
             this.TbTitulo.TabIndex = 0;
             this.TbTitulo.Text = "Titulo";
             // 
-            // tabPage1
+            // button1
             // 
-            this.tabPage1.Controls.Add(this.DtLvlTres);
-            this.tabPage1.Controls.Add(this.DtLvlDos);
-            this.tabPage1.Controls.Add(this.DTLvlUno);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1149, 528);
-            this.tabPage1.TabIndex = 3;
-            this.tabPage1.Text = "Permisos";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // DTLvlUno
-            // 
-            this.DTLvlUno.AllowUserToAddRows = false;
-            this.DTLvlUno.AllowUserToDeleteRows = false;
-            this.DTLvlUno.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.DTLvlUno.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DTLvlUno.Location = new System.Drawing.Point(35, 23);
-            this.DTLvlUno.Name = "DTLvlUno";
-            this.DTLvlUno.Size = new System.Drawing.Size(346, 477);
-            this.DTLvlUno.TabIndex = 0;
-            this.DTLvlUno.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DTLvlUno_CellContentClick);
-            // 
-            // DtLvlDos
-            // 
-            this.DtLvlDos.AllowUserToAddRows = false;
-            this.DtLvlDos.AllowUserToDeleteRows = false;
-            this.DtLvlDos.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.DtLvlDos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DtLvlDos.Location = new System.Drawing.Point(407, 23);
-            this.DtLvlDos.Name = "DtLvlDos";
-            this.DtLvlDos.Size = new System.Drawing.Size(346, 477);
-            this.DtLvlDos.TabIndex = 1;
-            // 
-            // DtLvlTres
-            // 
-            this.DtLvlTres.AllowUserToAddRows = false;
-            this.DtLvlTres.AllowUserToDeleteRows = false;
-            this.DtLvlTres.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.DtLvlTres.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DtLvlTres.Location = new System.Drawing.Point(783, 23);
-            this.DtLvlTres.Name = "DtLvlTres";
-            this.DtLvlTres.Size = new System.Drawing.Size(346, 477);
-            this.DtLvlTres.TabIndex = 2;
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Font = new System.Drawing.Font("Century Gothic", 14F, System.Drawing.FontStyle.Italic);
+            this.button1.Location = new System.Drawing.Point(1029, 480);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(112, 42);
+            this.button1.TabIndex = 58;
+            this.button1.Text = "Cancelar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // GestionPermisos
             // 
@@ -340,6 +372,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GestionPermisos";
             this.Load += new System.EventHandler(this.GestionPermisos_Load);
+            this.Resize += new System.EventHandler(this.GestionPermisos_Resize);
             this.GridPermisos.Panel1.ResumeLayout(false);
             this.GridPermisos.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GridPermisos)).EndInit();
@@ -350,12 +383,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.LvRol)).EndInit();
             this.TICrearRol.ResumeLayout(false);
             this.TICrearRol.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DtLvlTres)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DtLvlDos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DTLvlUno)).EndInit();
             this.PnlTitulo.ResumeLayout(false);
             this.PnlTitulo.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.DTLvlUno)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DtLvlDos)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DtLvlTres)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -381,5 +414,6 @@
         public System.Windows.Forms.DataGridView DtLvlTres;
         public System.Windows.Forms.DataGridView DtLvlDos;
         public System.Windows.Forms.DataGridView DTLvlUno;
+        private System.Windows.Forms.Button button1;
     }
 }

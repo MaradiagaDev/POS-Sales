@@ -182,14 +182,6 @@ namespace NeoCobranza.Paneles
 
         private void auditoriasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //PnlPrincipalAuditorias pnlAuditorias = new PnlPrincipalAuditorias(conexion);
-            //limpiar();
-            //pnlAuditorias.TopLevel = false;
-            //pnlAuditorias.Dock = DockStyle.Fill;
-            //PnlCentral.Controls.Add(pnlAuditorias);
-
-            //pnlAuditorias.Show();
-
             CreacionUsuario creacionU = new CreacionUsuario();
             limpiar();
             creacionU.TopLevel = false;

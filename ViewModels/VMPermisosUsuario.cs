@@ -179,6 +179,65 @@ namespace NeoCobranza.ViewModels
             }
         }
 
+        public void CargarPermisosDos(GestionPermisos frm)
+        {
+
+            //Cargar los permisos Actuales
+            dataUtilities.SetParameter("@IdRol", idRol);
+            DataTable dataResponse = dataUtilities.ExecuteStoredProcedure("spGetPermisosLvlDosRol");
+
+            HashSet<int> permisosAsignados = new HashSet<int>();
+            foreach (DataRow dr in dataResponse.Rows)
+            {
+                // Se asume que la tabla tiene la columna "IdPermisoLvlUno"
+                permisosAsignados.Add(Convert.ToInt32(dr["IdPermisoLvlDos"]));
+            }
+
+            foreach (DataGridViewRow row in frm.DtLvlDos.Rows)
+            {
+                // Se asume que la vista "vwPermisosLvlUno" incluye la columna "IdPermisoLvlUno"
+                int idPermiso = Convert.ToInt32(row.Cells["Clave"].Value);
+
+                if (permisosAsignados.Contains(idPermiso))
+                {
+                    row.Cells["Seleccionado"].Value = true;
+                }
+                else
+                {
+                    row.Cells["Seleccionado"].Value = false; // Opcional: para dejarlo en false si no está asignado
+                }
+            }
+        }
+
+        public void CargarPermisosTres(GestionPermisos frm)
+        {
+            //Cargar los permisos Actuales
+            dataUtilities.SetParameter("@IdRol", idRol);
+            DataTable dataResponse = dataUtilities.ExecuteStoredProcedure("spGetPermisosLvlTresRol");
+
+            HashSet<int> permisosAsignados = new HashSet<int>();
+            foreach (DataRow dr in dataResponse.Rows)
+            {
+                // Se asume que la tabla tiene la columna "IdPermisoLvlUno"
+                permisosAsignados.Add(Convert.ToInt32(dr["IdPermisoLvlTres"]));
+            }
+
+            foreach (DataGridViewRow row in frm.DtLvlTres.Rows)
+            {
+                // Se asume que la vista "vwPermisosLvlUno" incluye la columna "IdPermisoLvlUno"
+                int idPermiso = Convert.ToInt32(row.Cells["Clave"].Value);
+
+                if (permisosAsignados.Contains(idPermiso))
+                {
+                    row.Cells["Seleccionado"].Value = true;
+                }
+                else
+                {
+                    row.Cells["Seleccionado"].Value = false; // Opcional: para dejarlo en false si no está asignado
+                }
+            }
+        }
+
         public void Limpiar(GestionPermisos frm, string option)
         {
             switch (option)
