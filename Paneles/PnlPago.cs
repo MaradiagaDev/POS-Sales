@@ -1,4 +1,5 @@
-﻿using iText.Kernel.Pdf.Canvas;
+﻿using iText.Kernel.Pdf.Annot;
+using iText.Kernel.Pdf.Canvas;
 using iText.Kernel.Pdf.Canvas.Parser;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
@@ -346,6 +347,12 @@ namespace NeoCobranza.Paneles
 
                 CargarValores();
             }
+            else if (e.ColumnIndex == 1 && e.RowIndex >= 0)
+            {
+                PdfPrintPageEventHandler.PagoId = Convert.ToString(dynamicDataTable.Rows[e.RowIndex][0]);
+                PdfPrintPageEventHandler.EsVenta = true;
+                PdfPrintPageEventHandler.PrintPDFRecibo(false);
+            }
         }
 
         private void PnlPago_FormClosed(object sender, FormClosedEventArgs e)
@@ -602,7 +609,9 @@ namespace NeoCobranza.Paneles
             e.Graphics.DrawString($"Fecha: {DateTime.Now.ToShortDateString():dd/MM/yyyy}", regularFont, Brushes.Black, 10, yPosition);
             yPosition += 12;
 
-            e.Graphics.DrawString($"Cliente: {Convert.ToString(dtResponseOrden.Rows[0]["NombreCliente"])}", regularFont, Brushes.Black, 10, yPosition);
+            e.Graphics.DrawString($"Cliente:", regularFont, Brushes.Black, 10, yPosition);
+            yPosition += 12;
+            e.Graphics.DrawString($"{Convert.ToString(dtResponseOrden.Rows[0]["NombreCliente"])}", regularFont, Brushes.Black, 10, yPosition);
             yPosition += 12;
 
             e.Graphics.DrawString($"No. Orden: {Convert.ToString(dtResponseOrden.Rows[0]["OrdenId"])}", regularFont, Brushes.Black, 10, yPosition);

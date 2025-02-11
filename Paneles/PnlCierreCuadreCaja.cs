@@ -311,7 +311,7 @@ namespace NeoCobranza.Paneles
 
         private void dgvGeneral_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 4)
+            if ( dgvGeneral.Columns[e.ColumnIndex].Name == "btnEliminar")
             {
                 DialogResult resultado = MessageBox.Show("¿Desea continuar con la acción?",
                                            "Confirmación",
@@ -341,9 +341,26 @@ namespace NeoCobranza.Paneles
                 }
             }
 
-            if (e.ColumnIndex == 5)
+            if (dgvGeneral.Columns[e.ColumnIndex].Name == "btnGenerarComprobante")
             {
-
+                if(IndexSelected == 0)
+                {
+                    PdfPrintPageEventHandler.PagoId = Convert.ToString(dgvGeneral.Rows[e.RowIndex].Cells[0].Value);
+                    PdfPrintPageEventHandler.EsVenta = true;
+                    PdfPrintPageEventHandler.PrintPDFRecibo(false);
+                }
+                else if(IndexSelected == 1)
+                {
+                    PdfPrintPageEventHandler.PagoId = Convert.ToString(dgvGeneral.Rows[e.RowIndex].Cells[0].Value);
+                    PdfPrintPageEventHandler.EsVenta = false;
+                    PdfPrintPageEventHandler.PrintPDFRecibo(true);
+                }
+                else if (IndexSelected == 2)
+                {
+                    PdfPrintPageEventHandler.PagoId = Convert.ToString(dgvGeneral.Rows[e.RowIndex].Cells[0].Value);
+                    PdfPrintPageEventHandler.EsVenta = false;
+                    PdfPrintPageEventHandler.PrintPDFRecibo(false);
+                }
             }
         }
 

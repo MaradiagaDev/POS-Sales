@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Data;
 using System;
+using NeoCobranza.DataController;
 
 namespace NeoCobranza.ViewModels
 {
@@ -256,6 +257,157 @@ namespace NeoCobranza.ViewModels
             // Dibuja el texto 
             e.Graphics.DrawString($"Cel: {Convert.ToString(dtResponseOrden.Rows[0]["TelefonoSucursal"])}    Email: {Convert.ToString(dtResponseOrden.Rows[0]["EmailSucursal"])}.", linkFont, linkBrush, marginLeft, yPosition);
         }
+
+        //COMPROBANTE DE CAJA
+        // Variable auxiliar para determinar el tipo de movimiento de caja
+        private static bool AuxEsSalida = false;
+
+        public static void PrintPDFRecibo(bool esSalida)
+        {
+            // Asignar el tipo de movimiento a la variable auxiliar
+            AuxEsSalida = esSalida;
+
+            DataTable data = dataUtilities.getRecordByColumn("ConfigFacturacion", "SucursalId", Utilidades.SucursalId);
+
+            PrintDocument doc = new PrintDocument();
+            PrinterSettings ps = new PrinterSettings();
+
+            if (Convert.ToString(data.Rows[0]["ImpresoraTicket"]) == null || Convert.ToString(data.Rows[0]["ImpresoraTicket"]) == "")
+            {
+                doc.PrinterSettings.PrinterName = doc.DefaultPageSettings.PrinterSettings.PrinterName;
+            }
+            else
+            {
+                doc.PrinterSettings.PrinterName = Convert.ToString(data.Rows[0]["ImpresoraTicket"]);
+            }
+
+            doc.PrintPage += new PrintPageEventHandler(ImprimeComprobanteCaja);
+
+            try
+            {
+                doc.Print();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al imprimir: {ex.Message}");
+            }
+        }
+
+        public static string PagoId = "0";
+        public static bool EsVenta = true;
+
+        private static void ImprimeComprobanteCaja(object sender, PrintPageEventArgs e)
+        {
+            // Obtener los datos
+            DataTable dataEmpresa = dataUtilities.GetAllRecords("Empresa");
+            DataTable dataSucursal = dataUtilities.getRecordByPrimaryKey("Sucursal", Utilidades.SucursalId);
+
+            // Establecer la unidad de medida y el fondo de la página
+            e.Graphics.PageUnit = GraphicsUnit.Point;
+            e.Graphics.FillRectangle(Brushes.White, e.MarginBounds);
+
+            // Ancho total de la factura en puntos (76 mm convertidos a puntos)
+            float anchoPagina = Utilities.MillimetersToPoints(76);
+
+            // Definir márgenes internos (izquierdo y derecho)
+            float margenIzquierdo = 10;
+            float margenDerecho = 10;
+            float anchoRect = anchoPagina - (margenIzquierdo + margenDerecho);
+
+            // Definir las fuentes
+            System.Drawing.Font fuenteTitulo = new System.Drawing.Font("Arial", 8, FontStyle.Bold);
+            System.Drawing.Font fuenteRegular = new System.Drawing.Font("Arial", 10);
+            System.Drawing.Font fuentePequeña = new System.Drawing.Font("Arial", 8);
+
+            // Configurar el formato centrado
+            StringFormat formatoCentrado = new StringFormat
+            {
+                Alignment = StringAlignment.Center
+            };
+
+            float yPosicion = 10; // Posición vertical inicial
+
+            // Dibujar el nombre de la empresa centrado
+            RectangleF rectEmpresa = new RectangleF(margenIzquierdo, yPosicion, anchoRect, fuenteTitulo.GetHeight(e.Graphics));
+            e.Graphics.DrawString(Convert.ToString(dataEmpresa.Rows[0]["NombreEmpresa"]), fuenteTitulo, Brushes.Black, rectEmpresa, formatoCentrado);
+            yPosicion += 20;
+
+            // Dibujar la dirección centrada
+            RectangleF rectDireccion = new RectangleF(margenIzquierdo, yPosicion, anchoRect, fuenteRegular.GetHeight(e.Graphics));
+            e.Graphics.DrawString(Convert.ToString(dataSucursal.Rows[0]["Direccion"]), fuenteRegular, Brushes.Black, rectDireccion, formatoCentrado);
+            yPosicion += 15;
+
+            // Dibujar el teléfono centrado
+            RectangleF rectTelefono = new RectangleF(margenIzquierdo, yPosicion, anchoRect, fuenteRegular.GetHeight(e.Graphics));
+            e.Graphics.DrawString("Tel: " + Convert.ToString(dataSucursal.Rows[0]["Telefono"]), fuenteRegular, Brushes.Black, rectTelefono, formatoCentrado);
+            yPosicion += 25;
+
+            // Título del documento según el tipo de movimiento (centrado)
+            RectangleF rectTitulo;
+            if (AuxEsSalida)
+            {
+                rectTitulo = new RectangleF(margenIzquierdo, yPosicion, anchoRect, fuenteTitulo.GetHeight(e.Graphics));
+                e.Graphics.DrawString("COMPROBANTE DE CAJA - SALIDA", fuenteTitulo, Brushes.Black, rectTitulo, formatoCentrado);
+            }
+            else
+            {
+                rectTitulo = new RectangleF(margenIzquierdo, yPosicion, anchoRect, fuenteTitulo.GetHeight(e.Graphics));
+                e.Graphics.DrawString("RECIBO OFICIAL DE CAJA - ENTRADA", fuenteTitulo, Brushes.Black, rectTitulo, formatoCentrado);
+            }
+            yPosicion += 25;
+
+            // DATOS DEL RECIBO DE CAJA
+            dataUtilities.SetParameter("@Id", PagoId);
+            dataUtilities.SetParameter("@boolEsVenta", EsVenta);
+            DataTable dataRecibo = dataUtilities.ExecuteStoredProcedure("sp_GetPagoTicket");
+
+            // Datos del movimiento de caja (alineados a la izquierda)
+            e.Graphics.DrawString("Fecha: " + Convert.ToDateTime(dataRecibo.Rows[0]["FechaPago"]).ToString("dd/MM/yyyy"), fuenteRegular, Brushes.Black, margenIzquierdo, yPosicion);
+            yPosicion += 15;
+            e.Graphics.DrawString($"Número de Recibo: {Convert.ToString(dataRecibo.Rows[0]["clave"])}", fuenteRegular, Brushes.Black, margenIzquierdo, yPosicion);
+            yPosicion += 15;
+
+            // Concepto o motivo del movimiento
+            e.Graphics.DrawString("Concepto:", fuenteRegular, Brushes.Black, margenIzquierdo, yPosicion);
+            yPosicion += 15;
+            e.Graphics.DrawString($"{Convert.ToString(dataRecibo.Rows[0]["Observaciones"])}", fuenteRegular, Brushes.Black, margenIzquierdo, yPosicion);
+            yPosicion += 20;
+
+            // Monto del movimiento
+            e.Graphics.DrawString("Monto:", fuenteRegular, Brushes.Black, margenIzquierdo, yPosicion);
+            yPosicion += 15;
+            e.Graphics.DrawString($"{Convert.ToString(dataRecibo.Rows[0]["Total"])} (C$)", fuenteRegular, Brushes.Black, margenIzquierdo + 60, yPosicion);
+            yPosicion += 20;
+
+            // Texto de observaciones (o concepto) a dibujar
+            string observaciones = Convert.ToString(dataRecibo.Rows[0]["Concepto"]);
+
+            // Definir un rectángulo con el ancho disponible y una altura suficientemente grande para envolver el texto.
+            // En este ejemplo, se utiliza 'anchoRect' (ancho disponible) y una altura arbitraria (por ejemplo, 200 pts).
+            RectangleF rectObservaciones = new RectangleF(margenIzquierdo, yPosicion, anchoRect, 200);
+
+            // Dibujar el texto en el rectángulo; el método DrawString se encargará de hacer el wrap automáticamente.
+            e.Graphics.DrawString(observaciones, fuentePequeña, Brushes.Black, rectObservaciones, formatoCentrado);
+
+            // Medir la altura real del texto renderizado para ajustar la posición vertical
+            SizeF sizeObservaciones = e.Graphics.MeasureString(observaciones, fuentePequeña, (int)anchoRect);
+            yPosicion += sizeObservaciones.Height + 20; // Sumar la altura del texto más un espacio adicional
+
+            // Línea y firma
+            e.Graphics.DrawString("________________________________", fuenteRegular, Brushes.Black, margenIzquierdo, yPosicion);
+            yPosicion += 15;
+            e.Graphics.DrawString("Firma", fuenteRegular, Brushes.Black, margenIzquierdo, yPosicion);
+            yPosicion += 15;
+
+            // Pie de página o mensaje final (puedes centrarlo si lo deseas)
+            RectangleF rectPie = new RectangleF(margenIzquierdo, yPosicion, anchoRect, fuenteRegular.GetHeight(e.Graphics));
+            e.Graphics.DrawString("Gracias por su preferencia", fuenteRegular, Brushes.Black, rectPie, formatoCentrado);
+
+            // Indicar que se ha completado la impresión
+            e.HasMorePages = false;
+        }
+
+
 
     }
 }

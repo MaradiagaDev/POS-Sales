@@ -51,7 +51,6 @@
             this.LblUsuario = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.BtnVentaRapida = new NeoCobranza.Especiales.EspecialButton();
-            this.BtnConsultar = new NeoCobranza.Especiales.EspecialButton();
             this.LblSucursal = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -92,6 +91,9 @@
             this.BtnInventarioGeneral = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuCaja = new NeoCobranza.Especiales.RJDropDownMenu(this.components);
             this.CierreCajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.especialButton2 = new NeoCobranza.Especiales.EspecialButton();
+            this.especialButton4 = new NeoCobranza.Especiales.EspecialButton();
+            this.label1 = new System.Windows.Forms.Label();
             this.MenuVertical.SuspendLayout();
             this.PnlTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
@@ -100,6 +102,7 @@
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.PnlCentral.SuspendLayout();
             this.DesplegableContrato.SuspendLayout();
             this.MenuVentasDirectas.SuspendLayout();
             this.MenuOpc.SuspendLayout();
@@ -177,6 +180,7 @@
             this.especialButton6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.especialButton6.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.especialButton6.UseVisualStyleBackColor = false;
+            this.especialButton6.Click += new System.EventHandler(this.especialButton6_Click);
             // 
             // especialButton1
             // 
@@ -484,8 +488,9 @@
             // 
             this.panel5.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Controls.Add(this.especialButton4);
+            this.panel5.Controls.Add(this.especialButton2);
             this.panel5.Controls.Add(this.BtnVentaRapida);
-            this.panel5.Controls.Add(this.BtnConsultar);
             this.panel5.Controls.Add(this.LblSucursal);
             this.panel5.Controls.Add(this.pictureBox3);
             this.panel5.Controls.Add(this.pictureBox1);
@@ -511,37 +516,14 @@
             this.BtnVentaRapida.ForeColor = System.Drawing.Color.White;
             this.BtnVentaRapida.Image = ((System.Drawing.Image)(resources.GetObject("BtnVentaRapida.Image")));
             this.BtnVentaRapida.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnVentaRapida.Location = new System.Drawing.Point(551, 5);
+            this.BtnVentaRapida.Location = new System.Drawing.Point(751, 1);
             this.BtnVentaRapida.Name = "BtnVentaRapida";
-            this.BtnVentaRapida.Size = new System.Drawing.Size(167, 27);
+            this.BtnVentaRapida.Size = new System.Drawing.Size(167, 33);
             this.BtnVentaRapida.TabIndex = 152;
             this.BtnVentaRapida.Text = "Venta Rapida";
             this.BtnVentaRapida.TextGroundColor = System.Drawing.Color.White;
             this.BtnVentaRapida.UseVisualStyleBackColor = false;
             this.BtnVentaRapida.Click += new System.EventHandler(this.BtnVentaRapida_Click);
-            // 
-            // BtnConsultar
-            // 
-            this.BtnConsultar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.BtnConsultar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(186)))));
-            this.BtnConsultar.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(186)))));
-            this.BtnConsultar.BorderColor = System.Drawing.Color.Lime;
-            this.BtnConsultar.BorderRadius = 5;
-            this.BtnConsultar.BorderSize = 0;
-            this.BtnConsultar.FlatAppearance.BorderSize = 0;
-            this.BtnConsultar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnConsultar.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnConsultar.ForeColor = System.Drawing.Color.White;
-            this.BtnConsultar.Image = ((System.Drawing.Image)(resources.GetObject("BtnConsultar.Image")));
-            this.BtnConsultar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnConsultar.Location = new System.Drawing.Point(722, 5);
-            this.BtnConsultar.Name = "BtnConsultar";
-            this.BtnConsultar.Size = new System.Drawing.Size(167, 27);
-            this.BtnConsultar.TabIndex = 151;
-            this.BtnConsultar.Text = "Consultar Precios";
-            this.BtnConsultar.TextGroundColor = System.Drawing.Color.White;
-            this.BtnConsultar.UseVisualStyleBackColor = false;
-            this.BtnConsultar.Click += new System.EventHandler(this.BtnConsultar_Click);
             // 
             // LblSucursal
             // 
@@ -578,6 +560,7 @@
             // 
             this.PnlCentral.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.PnlCentral.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.PnlCentral.Controls.Add(this.label1);
             this.PnlCentral.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PnlCentral.Location = new System.Drawing.Point(170, 79);
             this.PnlCentral.Name = "PnlCentral";
@@ -842,14 +825,14 @@
             this.MenuSeguridad.MenuItemTextColor = System.Drawing.Color.White;
             this.MenuSeguridad.Name = "MenuSeguridad";
             this.MenuSeguridad.PrimaryColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.MenuSeguridad.Size = new System.Drawing.Size(181, 78);
+            this.MenuSeguridad.Size = new System.Drawing.Size(142, 56);
             // 
             // auditoriasToolStripMenuItem
             // 
             this.auditoriasToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.auditoriasToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.auditoriasToolStripMenuItem.Name = "auditoriasToolStripMenuItem";
-            this.auditoriasToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.auditoriasToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.auditoriasToolStripMenuItem.Text = "Usuarios";
             this.auditoriasToolStripMenuItem.Click += new System.EventHandler(this.auditoriasToolStripMenuItem_Click);
             // 
@@ -858,7 +841,7 @@
             this.revisionDeSeguridadToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.revisionDeSeguridadToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.revisionDeSeguridadToolStripMenuItem.Name = "revisionDeSeguridadToolStripMenuItem";
-            this.revisionDeSeguridadToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.revisionDeSeguridadToolStripMenuItem.Size = new System.Drawing.Size(141, 26);
             this.revisionDeSeguridadToolStripMenuItem.Text = "Permisos";
             this.revisionDeSeguridadToolStripMenuItem.Click += new System.EventHandler(this.revisionDeSeguridadToolStripMenuItem_Click);
             // 
@@ -961,6 +944,64 @@
             this.CierreCajaToolStripMenuItem.Text = "Cierre de Caja";
             this.CierreCajaToolStripMenuItem.Click += new System.EventHandler(this.CierreCajaToolStripMenuItem_Click);
             // 
+            // especialButton2
+            // 
+            this.especialButton2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.especialButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(186)))));
+            this.especialButton2.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(186)))));
+            this.especialButton2.BorderColor = System.Drawing.Color.Lime;
+            this.especialButton2.BorderRadius = 5;
+            this.especialButton2.BorderSize = 0;
+            this.especialButton2.FlatAppearance.BorderSize = 0;
+            this.especialButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.especialButton2.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.especialButton2.ForeColor = System.Drawing.Color.White;
+            this.especialButton2.Image = ((System.Drawing.Image)(resources.GetObject("especialButton2.Image")));
+            this.especialButton2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.especialButton2.Location = new System.Drawing.Point(578, 1);
+            this.especialButton2.Name = "especialButton2";
+            this.especialButton2.Size = new System.Drawing.Size(167, 33);
+            this.especialButton2.TabIndex = 153;
+            this.especialButton2.Text = "Agenda";
+            this.especialButton2.TextGroundColor = System.Drawing.Color.White;
+            this.especialButton2.UseVisualStyleBackColor = false;
+            this.especialButton2.Click += new System.EventHandler(this.especialButton2_Click);
+            // 
+            // especialButton4
+            // 
+            this.especialButton4.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.especialButton4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(186)))));
+            this.especialButton4.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(186)))));
+            this.especialButton4.BorderColor = System.Drawing.Color.Lime;
+            this.especialButton4.BorderRadius = 5;
+            this.especialButton4.BorderSize = 0;
+            this.especialButton4.FlatAppearance.BorderSize = 0;
+            this.especialButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.especialButton4.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.especialButton4.ForeColor = System.Drawing.Color.White;
+            this.especialButton4.Image = ((System.Drawing.Image)(resources.GetObject("especialButton4.Image")));
+            this.especialButton4.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.especialButton4.Location = new System.Drawing.Point(406, 1);
+            this.especialButton4.Name = "especialButton4";
+            this.especialButton4.Size = new System.Drawing.Size(167, 33);
+            this.especialButton4.TabIndex = 154;
+            this.especialButton4.Text = "Mesas";
+            this.especialButton4.TextGroundColor = System.Drawing.Color.White;
+            this.especialButton4.UseVisualStyleBackColor = false;
+            this.especialButton4.Click += new System.EventHandler(this.especialButton4_Click_2);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label1.Location = new System.Drawing.Point(809, 595);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(360, 17);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "@ 2025 Rolando Maradiaga. Todos los derechos reservados.";
+            // 
             // PnlPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -988,6 +1029,8 @@
             this.panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.PnlCentral.ResumeLayout(false);
+            this.PnlCentral.PerformLayout();
             this.DesplegableContrato.ResumeLayout(false);
             this.MenuVentasDirectas.ResumeLayout(false);
             this.MenuOpc.ResumeLayout(false);
@@ -1050,7 +1093,6 @@
         private System.Windows.Forms.ToolStripMenuItem salasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listaDeOrdenesActivasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem datosDeLaEmpresaToolStripMenuItem;
-        public Especiales.EspecialButton BtnConsultar;
         public Especiales.EspecialButton BtnCatalogoGeneral;
         private System.Windows.Forms.ToolStripMenuItem BtnCargorizacion;
         private System.Windows.Forms.ToolStripMenuItem BtnSucursales;
@@ -1063,5 +1105,8 @@
         private System.Windows.Forms.ToolStripMenuItem listaDeOrdenesFacturaToolStripMenuItem;
         public Especiales.EspecialButton BtnVentaRapida;
         private System.Windows.Forms.ToolStripMenuItem agendaToolStripMenuItem;
+        public Especiales.EspecialButton especialButton2;
+        public Especiales.EspecialButton especialButton4;
+        private System.Windows.Forms.Label label1;
     }
 }

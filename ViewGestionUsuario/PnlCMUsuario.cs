@@ -17,9 +17,6 @@ namespace NeoCobranza.ViewGestionUsuario
     public partial class PnlCMUsuario : Form
     {
         DataUtilities dataUtilities = new DataUtilities();
-        string accion, usuarioId = "";
-
-
         public PnlCMUsuario()
         {
             InitializeComponent();
@@ -59,45 +56,62 @@ namespace NeoCobranza.ViewGestionUsuario
 
         private void BtnCrearUsuario_Click(object sender, EventArgs e)
         {
-            if(TxtUsuario.Texts.Trim() == string.Empty || TxtNombre.Texts.Trim() == string.Empty
-                ||TxtApellido.Texts.Trim() == string.Empty || DtSucursales.Rows.Count == 0 || TxtUsuario.Texts == string.Empty)
+            try
             {
-                MessageBox.Show("Faltan datos obligatorios por llenar","Atención",MessageBoxButtons.OK,MessageBoxIcon.Warning);
-                return;
-            }
+                if (TxtUsuario.Texts.Trim() == string.Empty || TxtNombre.Texts.Trim() == string.Empty
+                || TxtApellido.Texts.Trim() == string.Empty || DtSucursales.Rows.Count == 0 || TxtCargo.Texts == string.Empty)
+                {
+                    MessageBox.Show("Faltan datos obligatorios por llenar", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-            if(dataUtilities.getRecordByColumn("Usuario","Usuario", TxtUsuario.Texts.Trim()).Rows.Count > 0)
+                if (dataUtilities.getRecordByColumn("Usuario", "Usuario", TxtUsuario.Texts.Trim()).Rows.Count > 0)
+                {
+                    MessageBox.Show("El usuario ya existe", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if ((TxtContraseña.Texts != TxtContraseñaConfirmar.Texts) || TxtContraseña.Texts.Trim().Length == 0)
+                {
+                    MessageBox.Show("No ha digitado la contraseña o no son iguales.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                //Agregar usuario
+                string IdUsuario = Guid.NewGuid().ToString();
+
+                dataUtilities.SetParameter("@IdEmpleado", Guid.NewGuid().ToString());
+                dataUtilities.SetParameter("@Nombre", TxtNombre.Texts);
+                dataUtilities.SetParameter("@Apellido", TxtApellido.Texts);
+                dataUtilities.SetParameter("@Direccion", TxtDireccion.Texts);
+                dataUtilities.SetParameter("@Telefono", TxtCelular.Texts);
+                dataUtilities.SetParameter("@CorreoElectronico", TxtCorreo.Texts);
+                dataUtilities.SetParameter("@FechaContratacion", DtFechaContratacion.Value);
+                dataUtilities.SetParameter("@Cargo", TxtCargo.Texts);
+                dataUtilities.SetParameter("@EstadoEmpleado", "Activo");
+                dataUtilities.SetParameter("@Identificacion", TxtIdentificacion.Texts);
+                dataUtilities.SetParameter("@IdUsuario", IdUsuario);
+                dataUtilities.SetParameter("@Usuario", TxtUsuario.Texts);
+                dataUtilities.SetParameter("@ClaveUsuario", TxtContraseña.Texts);
+                dataUtilities.SetParameter("@EstadoUsuario", "Activo");
+                dataUtilities.SetParameter("@RolId", CmbRol.SelectedValue);
+
+                dataUtilities.ExecuteStoredProcedure("SP_AgregarEmpleadoYUsuario");
+
+                foreach (DataRow item in DtSucursales.Rows)
+                {
+                    dataUtilities.SetColumns("IdUsuario", IdUsuario);
+                    dataUtilities.SetColumns("IdSucursal", item[0].ToString());
+                    dataUtilities.InsertRecord("UsuarioSucursal");
+                }
+
+                this.Close();
+            }
+            catch(Exception ex)
             {
-                MessageBox.Show("El usuario ya existe", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                MessageBox.Show("Ocurrió un error al generar el usuario.", "Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
-
-            if((TxtContraseña.Texts == TxtContraseñaConfirmar.Texts) || TxtContraseña.Texts.Trim().Length > 0)
-            {
-                MessageBox.Show("No ha digitado la contraseña o no son iguales.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            //Agregar usuario
-            dataUtilities.SetParameter("@IdEmpleado",Guid.NewGuid().ToString());
-            dataUtilities.SetParameter("@Nombre",TxtNombre.Texts);
-            dataUtilities.SetParameter("@Apellido",TxtApellido.Texts);
-            dataUtilities.SetParameter("@Direccion",TxtDireccion.Texts);
-            dataUtilities.SetParameter("@Telefono",TxtCelular.Texts);
-            dataUtilities.SetParameter("@CorreoElectronico",TxtCorreo.Texts);
-            dataUtilities.SetParameter("@FechaContratacion",DtFechaContratacion.Value);
-            dataUtilities.SetParameter("@Cargo",TxtCargo.Texts);
-            dataUtilities.SetParameter("@EstadoEmpleado","Activo");
-            dataUtilities.SetParameter("@Identificacion",TxtIdentificacion.Texts);
-            dataUtilities.SetParameter("@IdUsuario", Guid.NewGuid().ToString());
-            dataUtilities.SetParameter("@Usuario",TxtUsuario.Texts);
-            dataUtilities.SetParameter("@ClaveUsuario",TxtContraseña.Texts);
-            dataUtilities.SetParameter("@EstadoUsuario", "Activo");
-            dataUtilities.SetParameter("@RolId",CmbRol.SelectedValue);
-
-            dataUtilities.ExecuteStoredProcedure("SP_AgregarEmpleadoYUsuario");
-
-            this.Close();
+            
         }
 
         private void label11_Click(object sender, EventArgs e)

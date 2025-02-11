@@ -603,6 +603,12 @@
     <Compile Include="Paneles\PnlHistorialCierresCaja.Designer.cs">
       <DependentUpon>PnlHistorialCierresCaja.cs</DependentUpon>
     </Compile>
+    <Compile Include="Paneles\PnlInformes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlInformes.Designer.cs">
+      <DependentUpon>PnlInformes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Paneles\PnlIngresosPagosCaja.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1281,6 +1287,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlHistorialCierresCaja.resx">
       <DependentUpon>PnlHistorialCierresCaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlInformes.resx">
+      <DependentUpon>PnlInformes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlIngresosPagosCaja.resx">
       <DependentUpon>PnlIngresosPagosCaja.cs</DependentUpon>

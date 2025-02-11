@@ -96,12 +96,8 @@ namespace NeoCobranza.Paneles_Auditorias
                 MessageBox.Show("No ha seleccionado a ningun usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            Usuario usuario;
-            using (NeoCobranzaContext db = new NeoCobranzaContext())
-            {
-                usuario = db.Usuario.Where(p => p.IdUsuarios.ToString() == DGVUser.SelectedRows[0].Cells[0].Value.ToString()).FirstOrDefault();
-            }
-            PnlActUsuario pnl = new PnlActUsuario(usuario);
+
+            PnlActUsuario pnl = new PnlActUsuario(DGVUser.SelectedRows[0].Cells[0].Value.ToString());
             pnl.ShowDialog();
         }
 

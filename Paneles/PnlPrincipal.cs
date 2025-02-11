@@ -852,5 +852,32 @@ namespace NeoCobranza.Paneles
             frm.Show();
             return;
         }
+
+        private void especialButton2_Click(object sender, EventArgs e)
+        {
+            limpiar();
+            PnlAgenda directas = new PnlAgenda(this);
+            directas.TopLevel = false;
+            directas.Dock = DockStyle.Fill;
+            directas.TopLevel = false;
+            PnlCentral.Controls.Add(directas);
+            directas.Show();
+        }
+
+        private void especialButton4_Click_2(object sender, EventArgs e)
+        {
+            AbrirMesas();
+        }
+
+        private void especialButton6_Click(object sender, EventArgs e)
+        {
+            limpiar();
+            PnlInformes directas = new PnlInformes();
+            directas.TopLevel = false;
+            directas.Dock = DockStyle.Fill;
+            directas.TopLevel = false;
+            PnlCentral.Controls.Add(directas);
+            directas.Show();
+        }
     }
 }

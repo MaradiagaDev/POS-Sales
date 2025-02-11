@@ -146,6 +146,7 @@ namespace NeoCobranza.ViewModels
                     {
                         MessageBox.Show("Debe agregar una configuración de facturación para poder realizar ordenes.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         frm.Close();
+                        return;
                     }
 
                     if (OrdenAux == 0)

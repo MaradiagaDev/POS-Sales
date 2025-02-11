@@ -1,5 +1,7 @@
-﻿using NeoCobranza.ModelObjectCobranza;
+﻿using NeoCobranza.Clases;
+using NeoCobranza.ModelObjectCobranza;
 using NeoCobranza.ModelsCobranza;
+using NeoCobranza.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,23 +16,73 @@ namespace NeoCobranza.ViewGestionUsuario
 {
     public partial class PnlActUsuario : Form
     {
-        private RolModel rolStatic = new RolModel();
-        private Usuario usuario = new Usuario();
-        public PnlActUsuario(Usuario usuario)
+        DataTable DtSucursales = new DataTable();
+        DataUtilities dataUtilities = new DataUtilities();
+        string auxUsuarioId = "";
+        public PnlActUsuario(string usuarioId)
         {
             InitializeComponent();
 
-            this.CmbRol.DisplayMember = "Rol";
-            this.CmbRol.ValueMember = "RolId";
-            this.CmbRol.DataSource = this.rolStatic.GetAll();
-            this.usuario = usuario;
+            try
+            {
+                auxUsuarioId = usuarioId;
 
-            txtUsuario.Text = usuario.Nombre;
-            txtNombre.Text = usuario.PrimerNombre;
-            txtApellido.Text = usuario.PrimerApellido;
-            CmbRol.SelectedItem = usuario.Rol;
-            txtPass.Text = usuario.Pass;
-            txtPassConfirmar.Text = usuario.Pass;
+                DtSucursales.Columns.Add("ID");
+                DtSucursales.Columns.Add("Sucursal");
+
+                DgvSucursales.DataSource = DtSucursales;
+                DgvSucursales.Columns[0].Visible = false;
+
+                UIUtilities.PersonalizarDataGridViewPequeños(DgvSucursales);
+
+                //Llenado de data normal
+                this.CmbRol.DisplayMember = "NombreRol";
+                this.CmbRol.ValueMember = "IdRol";
+                this.CmbRol.DataSource = dataUtilities.GetAllRecords("Roles"); this.CmbRol.DisplayMember = "NombreRol";
+                this.CmbRol.ValueMember = "IdRol";
+                this.CmbRol.DataSource = dataUtilities.GetAllRecords("Roles");
+
+                this.CmbSucursales.DisplayMember = "NombreSucursal";
+                this.CmbSucursales.ValueMember = "IdSucursal";
+                this.CmbSucursales.DataSource = dataUtilities.GetAllRecords("vwSucursales");
+
+                //Llenado de data usuario
+
+                DataTable responseUsuario = dataUtilities.getRecordByPrimaryKey("Usuario", usuarioId);
+
+                txtUsuario.Text = Convert.ToString(responseUsuario.Rows[0]["Usuario"]);
+
+                //Llenado de empleado
+
+                DataTable responseEmpleado = dataUtilities.getRecordByPrimaryKey("Empleado", Convert.ToString(responseUsuario.Rows[0]["IdEmpleado"]));
+
+                txtNombre.Text = Convert.ToString(responseEmpleado.Rows[0]["Nombre"]);
+                txtApellido.Text = Convert.ToString(responseEmpleado.Rows[0]["Apellido"]);
+                CmbRol.SelectedItem = Convert.ToString(responseUsuario.Rows[0]["RolId"]);
+                TxtCorreo.Text = Convert.ToString(responseEmpleado.Rows[0]["CorreoElectronico"]);
+                TxtCargo.Text = Convert.ToString(responseEmpleado.Rows[0]["Cargo"]);
+                TxtCelular.Text = Convert.ToString(responseEmpleado.Rows[0]["Telefono"]);
+                TxtIdentificacion.Text = Convert.ToString(responseEmpleado.Rows[0]["Identificación"]);
+                TxtDireccion.Text = Convert.ToString(responseEmpleado.Rows[0]["Direccion"]);
+
+                //Obtener la data de sucursales
+
+                DataTable responseSucursal = dataUtilities.getRecordByColumn("UsuarioSucursal", "IdUsuario", usuarioId);
+
+                foreach (DataRow item in responseSucursal.Rows)
+                {
+                    DataTable dtResponseSucursal = dataUtilities.getRecordByPrimaryKey("Sucursal", item["IdSucursal"]);
+
+                    DtSucursales.Rows.Add(Convert.ToString(dtResponseSucursal.Rows[0]["IdSucursal"]),
+                        Convert.ToString(dtResponseSucursal.Rows[0]["NombreSucursal"]));
+                }
+
+                DgvSucursales.Columns[0].Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al generar el usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void especialButton1_Click(object sender, EventArgs e)
@@ -54,94 +106,56 @@ namespace NeoCobranza.ViewGestionUsuario
 
         private void BtnUsuario_Click(object sender, EventArgs e)
         {
-            //Validar que el nombre de usuario no este ocupado
-            using (NeoCobranzaContext db = new NeoCobranzaContext())
+            try
             {
-                List<Usuario> list = db.Usuario.ToList();
-
-                if (list.Count != 0)
+                //Validaciones
+                if (txtUsuario.Text.Trim() == string.Empty || txtNombre.Text.Trim() == string.Empty
+                    || txtApellido.Text.Trim() == string.Empty || DtSucursales.Rows.Count == 0 || TxtCargo.Text == string.Empty)
                 {
-                    foreach (Usuario usu in list)
-                    {
-                        if (usu.Nombre.Trim() == txtUsuario.Text.Trim() && txtUsuario.Text.Trim() != this.usuario.Nombre.Trim())
-                        {
-                            MessageBox.Show($"El nombre de usuario ya fue ocupado. Por favor, seleccionar otro.", "Error",
-                                                MessageBoxButtons.OK,
-                                                MessageBoxIcon.Error);
-                            return;
-                        }
-                    }
+                    MessageBox.Show("Faltan datos obligatorios por llenar", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
-            }
 
-            if (txtUsuario.Text == "")
-            {
-                MessageBox.Show($"Debe digitar un nombre de usuario.", "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                return;
-            }
-            else if (txtNombre.Text == "")
-            {
-                MessageBox.Show($"Debe digitar su primer nombre.", "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
-            else if (txtApellido.Text == "")
-            {
-                MessageBox.Show($"Debe digitar su primer apellido.", "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                return;
-            }
-            else if (txtPass.Text == "")
-            {
-                MessageBox.Show($"Debe digitar una contraseña.", "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                return;
-            }
-            else if (txtPassConfirmar.Text == "")
-            {
-                MessageBox.Show($"Debe validar su contraseña.", "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                return;
-            }
-            else if (txtPass.Text != txtPassConfirmar.Text)
-            {
-                MessageBox.Show($"Las contraseñas no son iguales", "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                return;
-            }
-            else if (CmbRol.Text == "")
-            {
-                MessageBox.Show($"Debe seleccionar un rol para el usuario.", "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                return;
-            }
+                if ((txtPass.Text != txtPassConfirmar.Text) || txtPass.Text.Trim().Length == 0)
+                {
+                    MessageBox.Show("No ha digitado la contraseña o no son iguales.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-            UserModel us =  new UserModel();
+                //agregar usuario
+                dataUtilities.SetParameter("@IdUsuario", auxUsuarioId);
+                dataUtilities.SetParameter("@Usuario", txtUsuario.Text);
+                dataUtilities.SetParameter("@ClaveUsuario", txtPass.Text);
+                dataUtilities.SetParameter("@EstadoUsuario", "Activo");
+                dataUtilities.SetParameter("@RolId", CmbRol.SelectedValue);
+                dataUtilities.SetParameter("@Nombre", txtNombre.Text);
+                dataUtilities.SetParameter("@Apellido", txtApellido.Text);
+                dataUtilities.SetParameter("@Direccion", TxtDireccion.Text);
+                dataUtilities.SetParameter("@Telefono", TxtDireccion.Text);
+                dataUtilities.SetParameter("@CorreoElectronico", TxtCorreo.Text);
+                dataUtilities.SetParameter("@FechaContratacion", DtFechaContratacion.Value);
+                dataUtilities.SetParameter("@Cargo", TxtCargo.Text);
+                dataUtilities.SetParameter("@EstadoEmpleado", "Activo");
+                dataUtilities.SetParameter("@Identificacion", TxtIdentificacion.Text);
 
-            Usuario usuarioNuevo = new Usuario
+                dataUtilities.ExecuteStoredProcedure("SP_ActualizarEmpleadoYUsuario");
+
+                //Eliminar
+                dataUtilities.DeleteRecordByColumn("UsuarioSucursal", "IdUsuario", auxUsuarioId);
+
+                foreach (DataRow item in DtSucursales.Rows)
+                {
+                    dataUtilities.SetColumns("IdUsuario", auxUsuarioId);
+                    dataUtilities.SetColumns("IdSucursal", item[0].ToString());
+                    dataUtilities.InsertRecord("UsuarioSucursal");
+                }
+
+                this.Close();
+            }
+            catch(Exception ex)
             {
-                IdUsuarios = this.usuario.IdUsuarios,
-                Nombre =txtUsuario.Text,
-                PrimerNombre =txtNombre.Text,
-                PrimerApellido = txtApellido.Text,
-                Pass =txtPass.Text,
-                Estado = "Habilitado",
-                Rol = CmbRol.SelectedValue.ToString()
-            };
-
-
-            AuditoriaModel.AgregarAuditoria(VariablesEntorno.UserNameSesion, "Seguridad", "Actualizar Usuario", "Todos", "Muy Alto");
-
-
-            us.putUsuario(usuarioNuevo);
-            this.Close();
+                MessageBox.Show("Ocurrió un error al generar el usuario.", "Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
         }
 
         private void PnlActUsuario_Load(object sender, EventArgs e)
@@ -177,6 +191,28 @@ namespace NeoCobranza.ViewGestionUsuario
         private void label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void BtnAgregarSucursal_Click(object sender, EventArgs e)
+        {
+            foreach (DataRow item in DtSucursales.Rows)
+            {
+                if (item[0].ToString() == CmbSucursales.SelectedValue.ToString())
+                {
+                    MessageBox.Show("La sucursal ya ha sido agregada.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            DtSucursales.Rows.Add(CmbSucursales.SelectedValue.ToString(), CmbSucursales.Text);
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (DgvSucursales.SelectedRows.Count > 0)
+            {
+                DtSucursales.Rows.RemoveAt(DgvSucursales.SelectedRows[0].Index);
+            }
         }
     }
     
