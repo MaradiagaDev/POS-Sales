@@ -18,7 +18,7 @@ namespace NeoCobranza.ViewModels
         private List<string> vGlobListColumnNames = new List<string>();
         private List<object> vGlobListColumnValues = new List<object>();
 
-        private string vGlobServerName = "DESKTOP-GKTE05O\\SQLEXPRESS"; //"DESKTOP-GKTE05O\\SQLEXPRESS""DF-INF-PRO2\\SQLEXPRESS"
+        private string vGlobServerName = "DF-INF-PRO2\\SQLEXPRESS"; //"DESKTOP-GKTE05O\\SQLEXPRESS""DF-INF-PRO2\\SQLEXPRESS"
         private string vGlobUserName = "LoginPos";
         private string vGlobUserPassword = "facil123$";
 
@@ -26,8 +26,8 @@ namespace NeoCobranza.ViewModels
 
         public DataUtilities() 
         {
-           string connectionString = "Server=" + vGlobServerName + ";Database=POSIDEVBD;UID=" + vGlobUserName + ";PWD=" + vGlobUserPassword + "; MultipleActiveResultSets=True"; //CASA
-           //string connectionString = "Server=" + vGlobServerName + ";Database=POSIDEVBD;Integrated Security=True"; //TRABAJO
+           //string connectionString = "Server=" + vGlobServerName + ";Database=POSIDEVBD;UID=" + vGlobUserName + ";PWD=" + vGlobUserPassword + "; MultipleActiveResultSets=True"; //CASA
+           string connectionString = "Server=" + vGlobServerName + ";Database=POSIDEVBD;Integrated Security=True"; //TRABAJO
 
             vGlobConnection = new SqlConnection(connectionString);
         }

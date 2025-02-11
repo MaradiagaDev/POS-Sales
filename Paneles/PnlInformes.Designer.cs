@@ -70,6 +70,7 @@
             this.especialButton1.Text = "Reporte de Ventas por Sucursal";
             this.especialButton1.TextGroundColor = System.Drawing.Color.White;
             this.especialButton1.UseVisualStyleBackColor = false;
+            this.especialButton1.Click += new System.EventHandler(this.especialButton1_Click);
             // 
             // especialButton2
             // 

@@ -170,9 +170,9 @@ namespace NeoCobranza.Paneles_Caja
                 return;
             }
 
-            PnlGenerarInforme pnlInforme = new PnlGenerarInforme(lblFechaInicio.Text,lblFechaFinal.Text,conexion);
+            //Paneles.PnlGenerarInforme pnlInforme = new Paneles.PnlGenerarInforme(lblFechaInicio.Text,lblFechaFinal.Text,conexion);
 
-            pnlInforme.Show();
+            //pnlInforme.Show();
         }
     }
 }

@@ -21,5 +21,11 @@ namespace NeoCobranza.Paneles
         {
 
         }
+
+        private void especialButton1_Click(object sender, EventArgs e)
+        {
+            PnlGenerarInforme frm = new PnlGenerarInforme("ReporteVentas");
+            frm.ShowDialog();
+        }
     }
 }

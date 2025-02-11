@@ -3,28 +3,32 @@
   "WorkspaceRootPath": "D:\\Programa Personal\\POS-Sales\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneles_auditorias\\gestionpermisos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles_auditorias\\gestionpermisos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\viewmodels\\utilidadesinformes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:viewmodels\\utilidadesinformes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneles_auditorias\\gestionpermisos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles_auditorias\\gestionpermisos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneles\\pnlgenerarinforme.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles\\pnlgenerarinforme.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\viewmodels\\vmpermisosusuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:viewmodels\\vmpermisosusuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneles\\pnlinformes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles\\pnlinformes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\viewmodels\\vmmenuprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:viewmodels\\vmmenuprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneles\\pnlgenerarinforme.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles\\pnlgenerarinforme.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneles\\pnlprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles\\pnlprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneles\\pnlinformes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles\\pnlinformes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneles_auditorias\\creacionusuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles_auditorias\\creacionusuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneles_caja\\pnlhistorialrecibos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles_caja\\pnlhistorialrecibos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\viewmodels\\datautilities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:viewmodels\\datautilities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,83 +38,99 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "VMMenuPrincipal.cs",
-              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\ViewModels\\VMMenuPrincipal.cs",
-              "RelativeDocumentMoniker": "ViewModels\\VMMenuPrincipal.cs",
-              "ToolTip": "D:\\Programa Personal\\POS-Sales\\ViewModels\\VMMenuPrincipal.cs",
-              "RelativeToolTip": "ViewModels\\VMMenuPrincipal.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGQAAAAQAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "UtilidadesInformes.cs",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\ViewModels\\UtilidadesInformes.cs",
+              "RelativeDocumentMoniker": "ViewModels\\UtilidadesInformes.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\ViewModels\\UtilidadesInformes.cs",
+              "RelativeToolTip": "ViewModels\\UtilidadesInformes.cs",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAIwG4AAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-07T19:49:00.615Z",
+              "WhenOpened": "2025-02-11T19:28:55.791Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PnlHistorialRecibos.cs",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles_Caja\\PnlHistorialRecibos.cs",
+              "RelativeDocumentMoniker": "Paneles_Caja\\PnlHistorialRecibos.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles_Caja\\PnlHistorialRecibos.cs",
+              "RelativeToolTip": "Paneles_Caja\\PnlHistorialRecibos.cs",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAcwK4AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-11T19:18:08.549Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "VMPermisosUsuario.cs",
-              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\ViewModels\\VMPermisosUsuario.cs",
-              "RelativeDocumentMoniker": "ViewModels\\VMPermisosUsuario.cs",
-              "ToolTip": "D:\\Programa Personal\\POS-Sales\\ViewModels\\VMPermisosUsuario.cs",
-              "RelativeToolTip": "ViewModels\\VMPermisosUsuario.cs",
-              "ViewState": "AgIAAJoAAAAAAAAAAAAAwKgAAABAAAAAAAAAAA==",
+              "Title": "PnlInformes.cs",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlInformes.cs",
+              "RelativeDocumentMoniker": "Paneles\\PnlInformes.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlInformes.cs",
+              "RelativeToolTip": "Paneles\\PnlInformes.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAjwBoAAABIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-07T18:35:05.061Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "GestionPermisos.cs",
-              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles_Auditorias\\GestionPermisos.cs",
-              "RelativeDocumentMoniker": "Paneles_Auditorias\\GestionPermisos.cs",
-              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles_Auditorias\\GestionPermisos.cs",
-              "RelativeToolTip": "Paneles_Auditorias\\GestionPermisos.cs",
-              "ViewState": "AgIAAKYAAAAAAAAAAAAuwKsAAABaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-07T18:31:04.59Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "GestionPermisos.cs [Dise\u00F1o]",
-              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles_Auditorias\\GestionPermisos.cs",
-              "RelativeDocumentMoniker": "Paneles_Auditorias\\GestionPermisos.cs",
-              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles_Auditorias\\GestionPermisos.cs [Dise\u00F1o]",
-              "RelativeToolTip": "Paneles_Auditorias\\GestionPermisos.cs [Dise\u00F1o]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-07T18:31:15.333Z",
-              "EditorCaption": " [Dise\u00F1o]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "CreacionUsuario.cs",
-              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles_Auditorias\\CreacionUsuario.cs",
-              "RelativeDocumentMoniker": "Paneles_Auditorias\\CreacionUsuario.cs",
-              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles_Auditorias\\CreacionUsuario.cs",
-              "RelativeToolTip": "Paneles_Auditorias\\CreacionUsuario.cs",
-              "ViewState": "AgIAADsAAAAAAAAAAADgvxwAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-07T15:33:02.6Z",
+              "WhenOpened": "2025-02-11T19:16:25.614Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "PnlPrincipal.cs",
-              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlPrincipal.cs",
-              "RelativeDocumentMoniker": "Paneles\\PnlPrincipal.cs",
-              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlPrincipal.cs",
-              "RelativeToolTip": "Paneles\\PnlPrincipal.cs",
-              "ViewState": "AgIAALoAAAAAAAAAAAAswMsAAAA8AAAAAAAAAA==",
+              "Title": "PnlInformes.cs [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlInformes.cs",
+              "RelativeDocumentMoniker": "Paneles\\PnlInformes.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlInformes.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Paneles\\PnlInformes.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-07T15:24:08.593Z",
+              "WhenOpened": "2025-02-11T18:58:47.502Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PnlGenerarInforme.cs",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlGenerarInforme.cs",
+              "RelativeDocumentMoniker": "Paneles\\PnlGenerarInforme.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlGenerarInforme.cs",
+              "RelativeToolTip": "Paneles\\PnlGenerarInforme.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAjwDkAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-11T18:56:46.629Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PnlGenerarInforme.cs [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlGenerarInforme.cs",
+              "RelativeDocumentMoniker": "Paneles\\PnlGenerarInforme.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlGenerarInforme.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Paneles\\PnlGenerarInforme.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-11T18:28:11.915Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DataUtilities.cs",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\ViewModels\\DataUtilities.cs",
+              "RelativeDocumentMoniker": "ViewModels\\DataUtilities.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\ViewModels\\DataUtilities.cs",
+              "RelativeToolTip": "ViewModels\\DataUtilities.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-11T18:01:52.202Z",
               "EditorCaption": ""
             }
           ]
