@@ -648,6 +648,18 @@
     <Compile Include="Paneles\PnlPago.Designer.cs">
       <DependentUpon>PnlPago.cs</DependentUpon>
     </Compile>
+    <Compile Include="Paneles\PnlSegmentacionAgregar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlSegmentacionAgregar.Designer.cs">
+      <DependentUpon>PnlSegmentacionAgregar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlSegmentación.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlSegmentación.Designer.cs">
+      <DependentUpon>PnlSegmentación.cs</DependentUpon>
+    </Compile>
     <Compile Include="Paneles_Venta\frmAgregarProductosServicios.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1328,6 +1340,12 @@
     <EmbeddedResource Include="Paneles\PnlPago.resx">
       <DependentUpon>PnlPago.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlSegmentacionAgregar.resx">
+      <DependentUpon>PnlSegmentacionAgregar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlSegmentación.resx">
+      <DependentUpon>PnlSegmentación.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Paneles_Venta\frmAgregarProductosServicios.resx">
       <DependentUpon>frmAgregarProductosServicios.cs</DependentUpon>
     </EmbeddedResource>
@@ -1802,6 +1820,10 @@
     <Content Include="icudt.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\10418589_filled_dinning_chair_desk_couch_icon.png" />
+    <None Include="Resources\8962548_fork_food_knife_cooking_kitchen_icon.png" />
+    <None Include="Resources\descarga.png" />
+    <None Include="Resources\299086_info_sign_icon %281%29.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

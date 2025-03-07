@@ -39,6 +39,12 @@ namespace NeoCobranza.Paneles
 
         private void dgvCatalogo_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (!Utilidades.PermisosLevel(3, 60))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (e.ColumnIndex == 0)
             {
                 object cellValue = dgvCatalogo.Rows[e.RowIndex].Cells[1].Value;
@@ -48,6 +54,12 @@ namespace NeoCobranza.Paneles
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+            if (!Utilidades.PermisosLevel(3, 58))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             AgregarMotivoCancelacion motivoCancelacion = new AgregarMotivoCancelacion("Crear", "");
             motivoCancelacion.ShowDialog();
             vMMotivosCancelacion.FuncionesPrincipales(this, "Buscar", "");
@@ -55,6 +67,12 @@ namespace NeoCobranza.Paneles
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
+            if (!Utilidades.PermisosLevel(3, 59))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (dgvCatalogo.SelectedRows.Count > 0)
             {
                 DataGridViewRow selectedRow = dgvCatalogo.SelectedRows[0];

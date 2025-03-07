@@ -38,6 +38,12 @@ namespace NeoCobranza.Paneles
 
         private void dgvCatalogo_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (!Utilidades.PermisosLevel(3, 45))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (e.ColumnIndex == 0)
             {
                 object cellValue = dgvCatalogo.Rows[e.RowIndex].Cells[1].Value;
@@ -47,7 +53,13 @@ namespace NeoCobranza.Paneles
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            if(dgvCatalogo.Rows.Count == 10)
+            if (!Utilidades.PermisosLevel(3, 5))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (dgvCatalogo.Rows.Count == 10)
             {
                 MessageBox.Show("No se puede agregar mas de 10 Salas por sucursal.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -60,6 +72,12 @@ namespace NeoCobranza.Paneles
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
+            if (!Utilidades.PermisosLevel(3, 6))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (dgvCatalogo.SelectedRows.Count > 0)
             {
                 DataGridViewRow selectedRow = dgvCatalogo.SelectedRows[0];

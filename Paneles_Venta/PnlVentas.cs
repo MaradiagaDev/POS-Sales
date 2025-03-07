@@ -58,6 +58,11 @@ namespace NeoCobranza.Paneles_Venta
 
         private void PnlVentas_Load(object sender, EventArgs e)
         {
+            if (!Utilidades.PermisosLevel(3, 32))
+            {
+               ChkPropina.Enabled = false;
+            }
+
             this.TxtCodigoProducto.LostFocus += new System.EventHandler(textBox_LostFocus);
             vMOrdenes.InitModuloOrdenes(this, auxOpc, "");
         }
@@ -72,6 +77,12 @@ namespace NeoCobranza.Paneles_Venta
 
         private void BtnCliente_Click(object sender, EventArgs e)
         {
+            if (!Utilidades.PermisosLevel(3, 30))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             Panel_Cliente_Contrato panelCliente = new Panel_Cliente_Contrato("Venta");
             AddOwnedForm(panelCliente);
             panelCliente.ShowDialog();
@@ -189,8 +200,9 @@ namespace NeoCobranza.Paneles_Venta
         {
             if (LblProcesoPago.Text != "Totalmente Pagado")
             {
+
                 //Agregar
-                if (e.ColumnIndex == 7)
+                if (DgvItemsOrden.Columns[e.ColumnIndex].Name == "Agregar" )
                 {
                     int Prueba;
                     if (int.TryParse(TxtCantidadItems.Text.Trim(), out Prueba) == false || TxtCantidadItems.Text.Trim() == "0"
@@ -201,28 +213,13 @@ namespace NeoCobranza.Paneles_Venta
                         return;
                     }
 
-                    object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[2].Value;
-
-                    vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), TxtCantidadItems.Text.Trim(), "Increase");
-                }
-                else if ((e.ColumnIndex == 0 && LblOrdenMesa.Text == "-"))
-                {
-                    int Prueba;
-                    if (int.TryParse(TxtCantidadItems.Text.Trim(), out Prueba) == false || TxtCantidadItems.Text.Trim() == "0"
-                        || TxtCantidadItems.Text.Trim() == "00" || TxtCantidadItems.Text.Trim() == "000" || TxtCantidadItems.Text.Trim() == "0000")
-                    {
-                        MessageBox.Show("Debe agregar una cantidad valida", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        TxtCantidadItems.Text = "1";
-                        return;
-                    }
-
-                    object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[5].Value;
+                    object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells["Id Producto"].Value;
 
                     vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), TxtCantidadItems.Text.Trim(), "Increase");
                 }
 
                 //Quitar
-                if (e.ColumnIndex == 8)
+                if (DgvItemsOrden.Columns[e.ColumnIndex].Name == "Quitar")
                 {
                     int Prueba;
                     if (int.TryParse(TxtCantidadItems.Text.Trim(), out Prueba) == false || TxtCantidadItems.Text.Trim() == "0"
@@ -239,28 +236,14 @@ namespace NeoCobranza.Paneles_Venta
                         return;
                     }
 
-                    object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[2].Value;
+                    object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells["Id Producto"].Value;
 
                     vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), TxtCantidadItems.Text.Trim(), "Disminuir");
                 }
-                else if ((e.ColumnIndex == 1 && LblOrdenMesa.Text == "-"))
-                {
-                    int Prueba;
-                    if (int.TryParse(TxtCantidadItems.Text.Trim(), out Prueba) == false || TxtCantidadItems.Text.Trim() == "0"
-                        || TxtCantidadItems.Text.Trim() == "00" || TxtCantidadItems.Text.Trim() == "000" || TxtCantidadItems.Text.Trim() == "0000")
-                    {
-                        MessageBox.Show("Debe agregar una cantidad valida", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        TxtCantidadItems.Text = "1";
-                        return;
-                    }
 
-                    object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[5].Value;
-
-                    vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), TxtCantidadItems.Text.Trim(), "Disminuir");
-                }
 
                 //Quitar
-                if (e.ColumnIndex == 9)
+                if (DgvItemsOrden.Columns[e.ColumnIndex].Name == "Todo")
                 {
                     DialogResult result = MessageBox.Show("¿Estás seguro que deseas hacer esta acción?", "Quitar Producto Venta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -284,42 +267,13 @@ namespace NeoCobranza.Paneles_Venta
                         }
 
 
-                        object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[2].Value;
-                        object cellValueCantidad = DgvItemsOrden.Rows[e.RowIndex].Cells[4].Value;
+                        object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells["Id Producto"].Value;
+                        object cellValueCantidad = DgvItemsOrden.Rows[e.RowIndex].Cells["Cantidad"].Value;
 
                         vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), cellValueCantidad.ToString(), "Disminuir");
                     }
                 }
-                else if ((e.ColumnIndex == 2 && LblOrdenMesa.Text == "-"))
-                {
-                    DialogResult result = MessageBox.Show("¿Estás seguro que deseas hacer esta acción?", "Quitar Producto Venta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-
-                    if (result == DialogResult.Yes)
-                    {
-
-                        int Prueba;
-                        if (int.TryParse(TxtCantidadItems.Text.Trim(), out Prueba) == false || TxtCantidadItems.Text.Trim() == "0"
-                            || TxtCantidadItems.Text.Trim() == "00" || TxtCantidadItems.Text.Trim() == "000" || TxtCantidadItems.Text.Trim() == "0000")
-                        {
-                            MessageBox.Show("Debe agregar una cantidad valida", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            TxtCantidadItems.Text = "1";
-                            return;
-                        }
-
-                        if (decimal.Parse(TxtTotalPagado.Text) != 0)
-                        {
-                            MessageBox.Show("No puede quitar productos si ya ha agrego pagos a la orden.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-
-
-                        object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells[5].Value;
-                        object cellValueCantidad = DgvItemsOrden.Rows[e.RowIndex].Cells[7].Value;
-
-                        vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), cellValueCantidad.ToString(), "Disminuir");
-                    }
-                }
+                
             }
             else
             {
@@ -651,6 +605,11 @@ namespace NeoCobranza.Paneles_Venta
 
         private void BtnListaOrdenes_Click(object sender, EventArgs e)
         {
+            if (!Utilidades.PermisosLevel(3, 28))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             auxPnlPrincipal.AbrirListaVentas();
         }
 
@@ -899,7 +858,11 @@ namespace NeoCobranza.Paneles_Venta
 
         private void BtnGestionSalas_Click(object sender, EventArgs e)
         {
-            //vMOrdenes.InitModuloOrdenes(this, "Salas", "");
+            if (!Utilidades.PermisosLevel(3, 29))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             auxPnlPrincipal.AbrirMesas();
         }
 
@@ -915,6 +878,12 @@ namespace NeoCobranza.Paneles_Venta
 
         private void especialButton4_Click(object sender, EventArgs e)
         {
+            if (!Utilidades.PermisosLevel(3, 10))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (!decimal.TryParse(TxtTotalCordoba.Text, out var total))
             {
                 MessageBox.Show("El total no es valido.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -938,6 +907,12 @@ namespace NeoCobranza.Paneles_Venta
 
         private void BtnCredito_Click(object sender, EventArgs e)
         {
+            if (!Utilidades.PermisosLevel(3, 8))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             PnlVentasCredito frm = new PnlVentasCredito(this);
             frm.ShowDialog();
         }
@@ -966,9 +941,20 @@ namespace NeoCobranza.Paneles_Venta
 
         private void especialButton1_Click(object sender, EventArgs e)
         {
+            if (!Utilidades.PermisosLevel(3, 12))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (DgvItemsOrden.RowCount > 0)
             {
+                DataTable dtConfigFacturacion = dataUtilities.getRecordByColumn("ConfigFacturacion", "SucursalId", Utilidades.SucursalId);
                 PnlPago frmPago = new PnlPago(this);
+                frmPago.bit58mm = Convert.ToBoolean(dtConfigFacturacion.Rows[0]["Bit58mm"]);
+                frmPago.bit80mm = Convert.ToBoolean(dtConfigFacturacion.Rows[0]["Bit80mm"]);
+
+                
                 frmPago.PrintPDF(true);
             }
             else
@@ -985,6 +971,12 @@ namespace NeoCobranza.Paneles_Venta
 
         private void especialButton3_Click(object sender, EventArgs e)
         {
+            if (!Utilidades.PermisosLevel(3, 12))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (DgvItemsOrden.RowCount > 0)
             {
                 PnlPago frmPago = new PnlPago(this);
@@ -1004,6 +996,35 @@ namespace NeoCobranza.Paneles_Venta
         private void label22_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void ChkPropina_CheckedChanged(object sender, EventArgs e)
+        {
+            dataUtilities.SetColumns("BitPropina", ChkPropina.Checked);
+            dataUtilities.UpdateRecordByPrimaryKey("Ordenes", vMOrdenes.OrdenAux);
+        }
+
+        private void BtnDesvincular_Click(object sender, EventArgs e)
+        {
+            if (!Utilidades.PermisosLevel(3, 7))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            dataUtilities.SetColumns("SalaMesa", "-");
+            dataUtilities.UpdateRecordByPrimaryKey("Ordenes", vMOrdenes.OrdenAux);
+            vMOrdenes.InitModuloOrdenes(this, auxOpc, "");
+        }
+
+        private void ChkRetencionAlcaldia_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ChkPropina_Click(object sender, EventArgs e)
+        {
+            vMOrdenes.CalcularTotales(this, TxtDescuento.Text);
         }
     }
 }

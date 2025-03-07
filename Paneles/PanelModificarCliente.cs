@@ -19,7 +19,7 @@ namespace NeoCobranza.Paneles
         VMCatalogoCliente vMCatalogoCliente = new VMCatalogoCliente();
         public PnlCatalogoClientes frmPnlCatalogoCliente;
         public string auxIdCliente;
-
+        
         public PanelModificarCliente(PnlCatalogoClientes frm,string key)
         {
             InitializeComponent();

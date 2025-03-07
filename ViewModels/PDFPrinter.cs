@@ -22,6 +22,7 @@ namespace NeoCobranza.ViewModels
             dataUtilities.SetParameter("@sucursarlId", Utilidades.SucursalId);
 
             DataTable dtResponseOrden = dataUtilities.ExecuteStoredProcedure("vwFacturaTicket");
+            DataRow dtEmpresa = dataUtilities.GetAllRecords("Empresa").Rows[0];
 
             // Establecer el área de impresión
             e.Graphics.PageUnit = GraphicsUnit.Point;
@@ -47,13 +48,24 @@ namespace NeoCobranza.ViewModels
             e.Graphics.FillRectangle(Brushes.LightGray, logoRectangle); // Simula el logo como un cuadro gris
             e.Graphics.DrawRectangle(Pens.Black, System.Drawing.Rectangle.Round(logoRectangle));
 
+            byte[] imagenBytes = dtEmpresa["Logo"] as byte[];
+
+            if (imagenBytes != null)
+            {
+                using (MemoryStream ms = new MemoryStream(imagenBytes))
+                {
+                   
+                    e.Graphics.DrawImage(System.Drawing.Image.FromStream(ms), logoRectangle);
+                }
+            }
+
             // 2. TITULOS AL LADO DEL LOGO
             float textStartX = marginLeft + 60; // Después del logo
             e.Graphics.DrawString($"{Convert.ToString(dtResponseOrden.Rows[0]["NombreEmpresa"])}", headerFont, yellowBrush, textStartX, yPosition);
             yPosition += 15;
-            e.Graphics.DrawString("DIVISIÓN FERRETERA", subHeaderFont, Brushes.Black, textStartX, yPosition);
+            e.Graphics.DrawString(Convert.ToString(dtEmpresa["PrimerColumna"]), subHeaderFont, Brushes.Black, textStartX, yPosition);
             yPosition += 15;
-            e.Graphics.DrawString("Materiales de construcción y de ferretería general", smallFont, Brushes.Black, textStartX, yPosition);
+            e.Graphics.DrawString(Convert.ToString(dtEmpresa["SegundaColumna"]), smallFont, Brushes.Black, textStartX, yPosition);
 
             // Línea bajo el encabezado (imagen)
             yPosition = 70; // Ajusta la altura
@@ -244,7 +256,7 @@ namespace NeoCobranza.ViewModels
 
             // 7. PIE DE PÁGINA
             yPosition += 8;
-            e.Graphics.DrawString("NOTA: COTIZACIÓN VÁLIDA POR 5 DÍAS LUEGO DE LA PRESENTE FECHA.", regularFont, Brushes.Black, marginLeft, yPosition);
+            e.Graphics.DrawString($"NOTA: COTIZACIÓN VÁLIDA POR {Convert.ToString(dtEmpresa["proforma"])} DÍAS LUEGO DE LA PRESENTE FECHA.", regularFont, Brushes.Black, marginLeft, yPosition);
             yPosition += 10;
             e.Graphics.DrawString($"Dirección: {Convert.ToString(dtResponseOrden.Rows[0]["DireccionSucursal"])}    RUC: {Convert.ToString(dtResponseOrden.Rows[0]["RucEmpresa"])}.", regularFont, Brushes.Black, marginLeft, yPosition);
             yPosition += 10;
@@ -268,6 +280,8 @@ namespace NeoCobranza.ViewModels
             AuxEsSalida = esSalida;
 
             DataTable data = dataUtilities.getRecordByColumn("ConfigFacturacion", "SucursalId", Utilidades.SucursalId);
+            bool bit58mm = Convert.ToBoolean(data.Rows[0]["Bit58mm"]);
+            bool bit80mm = Convert.ToBoolean(data.Rows[0]["Bit80mm"]);
 
             PrintDocument doc = new PrintDocument();
             PrinterSettings ps = new PrinterSettings();
@@ -281,7 +295,19 @@ namespace NeoCobranza.ViewModels
                 doc.PrinterSettings.PrinterName = Convert.ToString(data.Rows[0]["ImpresoraTicket"]);
             }
 
-            doc.PrintPage += new PrintPageEventHandler(ImprimeComprobanteCaja);
+            if(bit80mm)
+            {
+                doc.PrintPage += new PrintPageEventHandler(ImprimeComprobanteCaja80mm);
+            }
+            else if(bit58mm) 
+            {
+                doc.PrintPage += new PrintPageEventHandler(ImprimeComprobanteCaja58mm);
+            }
+            else 
+            { 
+                MessageBox.Show("Debe seleccionar un tamaño de factura en la configuración de facturación.","Atención",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                return;
+            }
 
             try
             {
@@ -296,118 +322,288 @@ namespace NeoCobranza.ViewModels
         public static string PagoId = "0";
         public static bool EsVenta = true;
 
-        private static void ImprimeComprobanteCaja(object sender, PrintPageEventArgs e)
+        private static void ImprimeComprobanteCaja58mm(object sender, PrintPageEventArgs e)
+        {
+            DataTable dataEmpresa = dataUtilities.GetAllRecords("Empresa");
+            DataTable dataSucursal = dataUtilities.getRecordByPrimaryKey("Sucursal", Utilidades.SucursalId);
+
+            e.Graphics.PageUnit = GraphicsUnit.Point;
+            e.Graphics.FillRectangle(Brushes.White, e.MarginBounds);
+
+            // Ancho total de la factura en puntos (48 mm convertidos a puntos)
+            float anchoPagina = Utilities.MillimetersToPoints(48);
+            float margenIzquierdo = 10;
+            float margenDerecho = 10;
+            float anchoRect = anchoPagina - (margenIzquierdo + margenDerecho);
+
+            // Definir las fuentes: fuente más grande para el nombre de la empresa
+            System.Drawing.Font fuenteEmpresa = new System.Drawing.Font("Arial", 12, FontStyle.Bold);
+            System.Drawing.Font fuenteTitulo = new System.Drawing.Font("Arial", 8, FontStyle.Bold);
+            System.Drawing.Font fuenteRegular = new System.Drawing.Font("Arial", 10);
+            System.Drawing.Font fuentePequeña = new System.Drawing.Font("Arial", 8);
+
+            StringFormat formatoCentrado = new StringFormat { Alignment = StringAlignment.Center };
+
+            float yPosicion = 10;
+
+            // Sección opcional de imagen (logo)
+            if (dataEmpresa.Rows[0]["BitImgFac"] != DBNull.Value && Convert.ToBoolean(dataEmpresa.Rows[0]["BitImgFac"]))
+            {
+                System.Drawing.Image logo = null;
+                try
+                {
+                    byte[] imagenBytes = dataEmpresa.Rows[0]["Logo"] as byte[];
+                    if (imagenBytes != null)
+                    {
+                        using (MemoryStream ms = new MemoryStream(imagenBytes))
+                        {
+                            logo = System.Drawing.Image.FromStream(ms);
+                        }
+                    }
+                }
+                catch { logo = null; }
+                if (logo != null)
+                {
+                    float scale = anchoRect / logo.Width;
+                    float logoWidth = anchoRect;
+                    float logoHeight = logo.Height * scale;
+                    float logoX = margenIzquierdo + ((anchoRect - logoWidth) / 2);
+                    float logoY = yPosicion;
+                    RectangleF logoRect = new RectangleF(logoX, logoY, logoWidth, logoHeight);
+                    e.Graphics.DrawImage(logo, logoRect);
+                    yPosicion += logoHeight + 5;
+                }
+            }
+
+            // Nombre de la empresa (wrap y fuente mayor)
+            string nombreEmpresa = Convert.ToString(dataEmpresa.Rows[0]["NombreEmpresa"]);
+            SizeF sizeEmpresa = e.Graphics.MeasureString(nombreEmpresa, fuenteEmpresa, (int)anchoRect);
+            RectangleF rectEmpresa = new RectangleF(margenIzquierdo, yPosicion, anchoRect, sizeEmpresa.Height);
+            e.Graphics.DrawString(nombreEmpresa, fuenteEmpresa, Brushes.Black, rectEmpresa, formatoCentrado);
+            yPosicion += sizeEmpresa.Height + 5;
+
+            // Dirección (wrap)
+            string direccion = Convert.ToString(dataSucursal.Rows[0]["Direccion"]);
+            SizeF sizeDireccion = e.Graphics.MeasureString(direccion, fuenteRegular, (int)anchoRect);
+            RectangleF rectDireccion = new RectangleF(margenIzquierdo, yPosicion, anchoRect, sizeDireccion.Height);
+            e.Graphics.DrawString(direccion, fuenteRegular, Brushes.Black, rectDireccion, formatoCentrado);
+            yPosicion += sizeDireccion.Height + 5;
+
+            // Teléfono (wrap)
+            string telefono = "Tel: " + Convert.ToString(dataSucursal.Rows[0]["Telefono"]);
+            SizeF sizeTelefono = e.Graphics.MeasureString(telefono, fuenteRegular, (int)anchoRect);
+            RectangleF rectTelefono = new RectangleF(margenIzquierdo, yPosicion, anchoRect, sizeTelefono.Height);
+            e.Graphics.DrawString(telefono, fuenteRegular, Brushes.Black, rectTelefono, formatoCentrado);
+            yPosicion += sizeTelefono.Height + 10;
+
+            // Título del comprobante
+            string titulo = AuxEsSalida
+                              ? "COMPROBANTE DE CAJA - SALIDA"
+                              : "RECIBO OFICIAL DE CAJA - ENTRADA";
+            SizeF sizeTitulo = e.Graphics.MeasureString(titulo, fuenteTitulo, (int)anchoRect);
+            RectangleF rectTitulo = new RectangleF(margenIzquierdo, yPosicion, anchoRect, sizeTitulo.Height);
+            e.Graphics.DrawString(titulo, fuenteTitulo, Brushes.Black, rectTitulo, formatoCentrado);
+            yPosicion += sizeTitulo.Height + 25;
+
+            dataUtilities.SetParameter("@Id", PagoId);
+            dataUtilities.SetParameter("@boolEsVenta", EsVenta);
+            DataTable dataRecibo = dataUtilities.ExecuteStoredProcedure("sp_GetPagoTicket");
+
+            // Fecha
+            string fecha = "Fecha: " + Convert.ToDateTime(dataRecibo.Rows[0]["FechaPago"]).ToString("dd/MM/yyyy");
+            SizeF sizeFecha = e.Graphics.MeasureString(fecha, fuenteRegular, (int)anchoRect);
+            e.Graphics.DrawString(fecha, fuenteRegular, Brushes.Black, margenIzquierdo, yPosicion);
+            yPosicion += sizeFecha.Height + 5;
+
+            // Número de recibo
+            string numRecibo = $"Número de Recibo: {Convert.ToString(dataRecibo.Rows[0]["clave"])}";
+            SizeF sizeRecibo = e.Graphics.MeasureString(numRecibo, fuenteRegular, (int)anchoRect);
+            e.Graphics.DrawString(numRecibo, fuenteRegular, Brushes.Black, margenIzquierdo, yPosicion);
+            yPosicion += sizeRecibo.Height + 5;
+
+            // Concepto o motivo
+            string conceptoLabel = "Concepto:";
+            SizeF sizeConceptoLabel = e.Graphics.MeasureString(conceptoLabel, fuenteRegular, (int)anchoRect);
+            e.Graphics.DrawString(conceptoLabel, fuenteRegular, Brushes.Black, margenIzquierdo, yPosicion);
+            yPosicion += sizeConceptoLabel.Height + 5;
+
+            string observaciones = Convert.ToString(dataRecibo.Rows[0]["Observaciones"]);
+            SizeF sizeObservaciones = e.Graphics.MeasureString(observaciones, fuenteRegular, (int)anchoRect);
+            RectangleF rectObservaciones = new RectangleF(margenIzquierdo, yPosicion, anchoRect, sizeObservaciones.Height);
+            e.Graphics.DrawString(observaciones, fuenteRegular, Brushes.Black, rectObservaciones, formatoCentrado);
+            yPosicion += sizeObservaciones.Height + 20;
+
+            // Monto del movimiento
+            string montoLabel = "Monto:";
+            SizeF sizeMontoLabel = e.Graphics.MeasureString(montoLabel, fuenteRegular, (int)anchoRect);
+            e.Graphics.DrawString(montoLabel, fuenteRegular, Brushes.Black, margenIzquierdo, yPosicion);
+            yPosicion += sizeMontoLabel.Height + 5;
+            string monto = $"{Convert.ToString(dataRecibo.Rows[0]["Total"])} (C$)";
+            SizeF sizeMonto = e.Graphics.MeasureString(monto, fuenteRegular, (int)anchoRect);
+            e.Graphics.DrawString(monto, fuenteRegular, Brushes.Black, margenIzquierdo + 60, yPosicion);
+            yPosicion += sizeMonto.Height + 20;
+
+            // Línea y firma
+            string lineaFirma = "________________________________";
+            SizeF sizeLineaFirma = e.Graphics.MeasureString(lineaFirma, fuenteRegular, (int)anchoRect);
+            e.Graphics.DrawString(lineaFirma, fuenteRegular, Brushes.Black, margenIzquierdo, yPosicion);
+            yPosicion += sizeLineaFirma.Height + 5;
+            string firma = "Firma";
+            SizeF sizeFirma = e.Graphics.MeasureString(firma, fuenteRegular, (int)anchoRect);
+            e.Graphics.DrawString(firma, fuenteRegular, Brushes.Black, margenIzquierdo, yPosicion);
+            yPosicion += sizeFirma.Height + 5;
+
+            // Pie de página o mensaje final
+            string pie = "Gracias por su preferencia";
+            SizeF sizePie = e.Graphics.MeasureString(pie, fuenteRegular, (int)anchoRect);
+            RectangleF rectPie = new RectangleF(margenIzquierdo, yPosicion, anchoRect, sizePie.Height);
+            e.Graphics.DrawString(pie, fuenteRegular, Brushes.Black, rectPie, formatoCentrado);
+
+            e.HasMorePages = false;
+        }
+
+
+        private static void ImprimeComprobanteCaja80mm(object sender, PrintPageEventArgs e)
         {
             // Obtener los datos
             DataTable dataEmpresa = dataUtilities.GetAllRecords("Empresa");
             DataTable dataSucursal = dataUtilities.getRecordByPrimaryKey("Sucursal", Utilidades.SucursalId);
 
-            // Establecer la unidad de medida y el fondo de la página
             e.Graphics.PageUnit = GraphicsUnit.Point;
             e.Graphics.FillRectangle(Brushes.White, e.MarginBounds);
 
             // Ancho total de la factura en puntos (76 mm convertidos a puntos)
             float anchoPagina = Utilities.MillimetersToPoints(76);
-
-            // Definir márgenes internos (izquierdo y derecho)
             float margenIzquierdo = 10;
             float margenDerecho = 10;
             float anchoRect = anchoPagina - (margenIzquierdo + margenDerecho);
 
-            // Definir las fuentes
+            // Definir las fuentes: se crea una fuente mayor para el nombre de la empresa
+            System.Drawing.Font fuenteEmpresa = new System.Drawing.Font("Arial", 12, FontStyle.Bold);
             System.Drawing.Font fuenteTitulo = new System.Drawing.Font("Arial", 8, FontStyle.Bold);
             System.Drawing.Font fuenteRegular = new System.Drawing.Font("Arial", 10);
             System.Drawing.Font fuentePequeña = new System.Drawing.Font("Arial", 8);
 
-            // Configurar el formato centrado
-            StringFormat formatoCentrado = new StringFormat
-            {
-                Alignment = StringAlignment.Center
-            };
+            // Formato centrado para los textos
+            StringFormat formatoCentrado = new StringFormat { Alignment = StringAlignment.Center };
 
             float yPosicion = 10; // Posición vertical inicial
 
-            // Dibujar el nombre de la empresa centrado
-            RectangleF rectEmpresa = new RectangleF(margenIzquierdo, yPosicion, anchoRect, fuenteTitulo.GetHeight(e.Graphics));
-            e.Graphics.DrawString(Convert.ToString(dataEmpresa.Rows[0]["NombreEmpresa"]), fuenteTitulo, Brushes.Black, rectEmpresa, formatoCentrado);
-            yPosicion += 20;
-
-            // Dibujar la dirección centrada
-            RectangleF rectDireccion = new RectangleF(margenIzquierdo, yPosicion, anchoRect, fuenteRegular.GetHeight(e.Graphics));
-            e.Graphics.DrawString(Convert.ToString(dataSucursal.Rows[0]["Direccion"]), fuenteRegular, Brushes.Black, rectDireccion, formatoCentrado);
-            yPosicion += 15;
-
-            // Dibujar el teléfono centrado
-            RectangleF rectTelefono = new RectangleF(margenIzquierdo, yPosicion, anchoRect, fuenteRegular.GetHeight(e.Graphics));
-            e.Graphics.DrawString("Tel: " + Convert.ToString(dataSucursal.Rows[0]["Telefono"]), fuenteRegular, Brushes.Black, rectTelefono, formatoCentrado);
-            yPosicion += 25;
-
-            // Título del documento según el tipo de movimiento (centrado)
-            RectangleF rectTitulo;
-            if (AuxEsSalida)
+            // Sección opcional de imagen (logo)
+            if (dataEmpresa.Rows[0]["BitImgFac"] != DBNull.Value && Convert.ToBoolean(dataEmpresa.Rows[0]["BitImgFac"]))
             {
-                rectTitulo = new RectangleF(margenIzquierdo, yPosicion, anchoRect, fuenteTitulo.GetHeight(e.Graphics));
-                e.Graphics.DrawString("COMPROBANTE DE CAJA - SALIDA", fuenteTitulo, Brushes.Black, rectTitulo, formatoCentrado);
+                System.Drawing.Image logo = null;
+                try
+                {
+                    byte[] imagenBytes = dataEmpresa.Rows[0]["Logo"] as byte[];
+                    if (imagenBytes != null)
+                    {
+                        using (MemoryStream ms = new MemoryStream(imagenBytes))
+                        {
+                            logo = System.Drawing.Image.FromStream(ms);
+                        }
+                    }
+                }
+                catch { logo = null; }
+                if (logo != null)
+                {
+                    float scale = anchoRect / logo.Width;
+                    float logoWidth = anchoRect;
+                    float logoHeight = logo.Height * scale;
+                    float logoX = margenIzquierdo + ((anchoRect - logoWidth) / 2);
+                    float logoY = yPosicion;
+                    RectangleF logoRect = new RectangleF(logoX, logoY, logoWidth, logoHeight);
+                    e.Graphics.DrawImage(logo, logoRect);
+                    yPosicion += logoHeight + 5; // Espacio después del logo
+                }
             }
-            else
-            {
-                rectTitulo = new RectangleF(margenIzquierdo, yPosicion, anchoRect, fuenteTitulo.GetHeight(e.Graphics));
-                e.Graphics.DrawString("RECIBO OFICIAL DE CAJA - ENTRADA", fuenteTitulo, Brushes.Black, rectTitulo, formatoCentrado);
-            }
-            yPosicion += 25;
+
+            // Imprimir el nombre de la empresa con wrap y fuente mayor
+            string nombreEmpresa = Convert.ToString(dataEmpresa.Rows[0]["NombreEmpresa"]);
+            SizeF sizeEmpresa = e.Graphics.MeasureString(nombreEmpresa, fuenteEmpresa, (int)anchoRect);
+            RectangleF rectEmpresa = new RectangleF(margenIzquierdo, yPosicion, anchoRect, sizeEmpresa.Height);
+            e.Graphics.DrawString(nombreEmpresa, fuenteEmpresa, Brushes.Black, rectEmpresa, formatoCentrado);
+            yPosicion += sizeEmpresa.Height + 5;
+
+            // Dirección de la sucursal (wrap)
+            string direccion = Convert.ToString(dataSucursal.Rows[0]["Direccion"]);
+            SizeF sizeDireccion = e.Graphics.MeasureString(direccion, fuenteRegular, (int)anchoRect);
+            RectangleF rectDireccion = new RectangleF(margenIzquierdo, yPosicion, anchoRect, sizeDireccion.Height);
+            e.Graphics.DrawString(direccion, fuenteRegular, Brushes.Black, rectDireccion, formatoCentrado);
+            yPosicion += sizeDireccion.Height + 5;
+
+            // Teléfono (wrap)
+            string telefono = "Tel: " + Convert.ToString(dataSucursal.Rows[0]["Telefono"]);
+            SizeF sizeTelefono = e.Graphics.MeasureString(telefono, fuenteRegular, (int)anchoRect);
+            RectangleF rectTelefono = new RectangleF(margenIzquierdo, yPosicion, anchoRect, sizeTelefono.Height);
+            e.Graphics.DrawString(telefono, fuenteRegular, Brushes.Black, rectTelefono, formatoCentrado);
+            yPosicion += sizeTelefono.Height + 10;
+
+            // Título del comprobante según el tipo de movimiento
+            string titulo = AuxEsSalida
+                              ? "COMPROBANTE DE CAJA - SALIDA"
+                              : "RECIBO OFICIAL DE CAJA - ENTRADA";
+            SizeF sizeTitulo = e.Graphics.MeasureString(titulo, fuenteTitulo, (int)anchoRect);
+            RectangleF rectTitulo = new RectangleF(margenIzquierdo, yPosicion, anchoRect, sizeTitulo.Height);
+            e.Graphics.DrawString(titulo, fuenteTitulo, Brushes.Black, rectTitulo, formatoCentrado);
+            yPosicion += sizeTitulo.Height + 25;
 
             // DATOS DEL RECIBO DE CAJA
             dataUtilities.SetParameter("@Id", PagoId);
             dataUtilities.SetParameter("@boolEsVenta", EsVenta);
             DataTable dataRecibo = dataUtilities.ExecuteStoredProcedure("sp_GetPagoTicket");
 
-            // Datos del movimiento de caja (alineados a la izquierda)
-            e.Graphics.DrawString("Fecha: " + Convert.ToDateTime(dataRecibo.Rows[0]["FechaPago"]).ToString("dd/MM/yyyy"), fuenteRegular, Brushes.Black, margenIzquierdo, yPosicion);
-            yPosicion += 15;
-            e.Graphics.DrawString($"Número de Recibo: {Convert.ToString(dataRecibo.Rows[0]["clave"])}", fuenteRegular, Brushes.Black, margenIzquierdo, yPosicion);
-            yPosicion += 15;
+            // Fecha
+            string fecha = "Fecha: " + Convert.ToDateTime(dataRecibo.Rows[0]["FechaPago"]).ToString("dd/MM/yyyy");
+            SizeF sizeFecha = e.Graphics.MeasureString(fecha, fuenteRegular, (int)anchoRect);
+            e.Graphics.DrawString(fecha, fuenteRegular, Brushes.Black, margenIzquierdo, yPosicion);
+            yPosicion += sizeFecha.Height + 5;
 
-            // Concepto o motivo del movimiento
-            e.Graphics.DrawString("Concepto:", fuenteRegular, Brushes.Black, margenIzquierdo, yPosicion);
-            yPosicion += 15;
-            e.Graphics.DrawString($"{Convert.ToString(dataRecibo.Rows[0]["Observaciones"])}", fuenteRegular, Brushes.Black, margenIzquierdo, yPosicion);
-            yPosicion += 20;
+            // Número de recibo
+            string numRecibo = $"Número de Recibo: {Convert.ToString(dataRecibo.Rows[0]["clave"])}";
+            SizeF sizeRecibo = e.Graphics.MeasureString(numRecibo, fuenteRegular, (int)anchoRect);
+            e.Graphics.DrawString(numRecibo, fuenteRegular, Brushes.Black, margenIzquierdo, yPosicion);
+            yPosicion += sizeRecibo.Height + 5;
+
+            // Concepto o motivo
+            string conceptoLabel = "Concepto:";
+            SizeF sizeConceptoLabel = e.Graphics.MeasureString(conceptoLabel, fuenteRegular, (int)anchoRect);
+            e.Graphics.DrawString(conceptoLabel, fuenteRegular, Brushes.Black, margenIzquierdo, yPosicion);
+            yPosicion += sizeConceptoLabel.Height + 5;
+
+            string observaciones = Convert.ToString(dataRecibo.Rows[0]["Observaciones"]);
+            SizeF sizeObservaciones = e.Graphics.MeasureString(observaciones, fuenteRegular, (int)anchoRect);
+            RectangleF rectObservaciones = new RectangleF(margenIzquierdo, yPosicion, anchoRect, sizeObservaciones.Height);
+            e.Graphics.DrawString(observaciones, fuenteRegular, Brushes.Black, rectObservaciones, formatoCentrado);
+            yPosicion += sizeObservaciones.Height + 20;
 
             // Monto del movimiento
-            e.Graphics.DrawString("Monto:", fuenteRegular, Brushes.Black, margenIzquierdo, yPosicion);
-            yPosicion += 15;
-            e.Graphics.DrawString($"{Convert.ToString(dataRecibo.Rows[0]["Total"])} (C$)", fuenteRegular, Brushes.Black, margenIzquierdo + 60, yPosicion);
-            yPosicion += 20;
-
-            // Texto de observaciones (o concepto) a dibujar
-            string observaciones = Convert.ToString(dataRecibo.Rows[0]["Concepto"]);
-
-            // Definir un rectángulo con el ancho disponible y una altura suficientemente grande para envolver el texto.
-            // En este ejemplo, se utiliza 'anchoRect' (ancho disponible) y una altura arbitraria (por ejemplo, 200 pts).
-            RectangleF rectObservaciones = new RectangleF(margenIzquierdo, yPosicion, anchoRect, 200);
-
-            // Dibujar el texto en el rectángulo; el método DrawString se encargará de hacer el wrap automáticamente.
-            e.Graphics.DrawString(observaciones, fuentePequeña, Brushes.Black, rectObservaciones, formatoCentrado);
-
-            // Medir la altura real del texto renderizado para ajustar la posición vertical
-            SizeF sizeObservaciones = e.Graphics.MeasureString(observaciones, fuentePequeña, (int)anchoRect);
-            yPosicion += sizeObservaciones.Height + 20; // Sumar la altura del texto más un espacio adicional
+            string montoLabel = "Monto:";
+            SizeF sizeMontoLabel = e.Graphics.MeasureString(montoLabel, fuenteRegular, (int)anchoRect);
+            e.Graphics.DrawString(montoLabel, fuenteRegular, Brushes.Black, margenIzquierdo, yPosicion);
+            yPosicion += sizeMontoLabel.Height + 5;
+            string monto = $"{Convert.ToString(dataRecibo.Rows[0]["Total"])} (C$)";
+            SizeF sizeMonto = e.Graphics.MeasureString(monto, fuenteRegular, (int)anchoRect);
+            e.Graphics.DrawString(monto, fuenteRegular, Brushes.Black, margenIzquierdo + 60, yPosicion);
+            yPosicion += sizeMonto.Height + 20;
 
             // Línea y firma
-            e.Graphics.DrawString("________________________________", fuenteRegular, Brushes.Black, margenIzquierdo, yPosicion);
-            yPosicion += 15;
-            e.Graphics.DrawString("Firma", fuenteRegular, Brushes.Black, margenIzquierdo, yPosicion);
-            yPosicion += 15;
+            string lineaFirma = "________________________________";
+            SizeF sizeLineaFirma = e.Graphics.MeasureString(lineaFirma, fuenteRegular, (int)anchoRect);
+            e.Graphics.DrawString(lineaFirma, fuenteRegular, Brushes.Black, margenIzquierdo, yPosicion);
+            yPosicion += sizeLineaFirma.Height + 5;
+            string firma = "Firma";
+            SizeF sizeFirma = e.Graphics.MeasureString(firma, fuenteRegular, (int)anchoRect);
+            e.Graphics.DrawString(firma, fuenteRegular, Brushes.Black, margenIzquierdo, yPosicion);
+            yPosicion += sizeFirma.Height + 5;
 
-            // Pie de página o mensaje final (puedes centrarlo si lo deseas)
-            RectangleF rectPie = new RectangleF(margenIzquierdo, yPosicion, anchoRect, fuenteRegular.GetHeight(e.Graphics));
-            e.Graphics.DrawString("Gracias por su preferencia", fuenteRegular, Brushes.Black, rectPie, formatoCentrado);
+            // Pie de página o mensaje final
+            string pie = "Gracias por su preferencia";
+            SizeF sizePie = e.Graphics.MeasureString(pie, fuenteRegular, (int)anchoRect);
+            RectangleF rectPie = new RectangleF(margenIzquierdo, yPosicion, anchoRect, sizePie.Height);
+            e.Graphics.DrawString(pie, fuenteRegular, Brushes.Black, rectPie, formatoCentrado);
 
-            // Indicar que se ha completado la impresión
             e.HasMorePages = false;
         }
-
-
-
     }
 }

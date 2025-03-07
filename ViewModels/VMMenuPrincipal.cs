@@ -82,12 +82,12 @@ namespace NeoCobranza.ViewModels
                 }
 
                 //Caja
-                frm.btnDatosGenerales.Visible = (bool)permisos.Caja;
+                frm.BtnCaja.Visible = (bool)permisos.Caja;
         
 
                 if (permisos.CajaRecibosOficiales == false && permisos.CajaHistorialRecibos == false)
                 {
-                    frm.btnDatosGenerales.Visible = false;
+                    frm.BtnCaja.Visible = false;
                 }
 
                 //Personal

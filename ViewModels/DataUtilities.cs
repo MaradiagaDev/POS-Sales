@@ -18,7 +18,9 @@ namespace NeoCobranza.ViewModels
         private List<string> vGlobListColumnNames = new List<string>();
         private List<object> vGlobListColumnValues = new List<object>();
 
-        private string vGlobServerName = "DF-INF-PRO2\\SQLEXPRESS"; //"DESKTOP-GKTE05O\\SQLEXPRESS""DF-INF-PRO2\\SQLEXPRESS"
+        private Dictionary<string, object> vOutputValues = new Dictionary<string, object>();
+
+        private string vGlobServerName = "DESKTOP-GKTE05O\\SQLEXPRESS"; //"DESKTOP-GKTE05O\\SQLEXPRESS""DF-INF-PRO2\\SQLEXPRESS"
         private string vGlobUserName = "LoginPos";
         private string vGlobUserPassword = "facil123$";
 
@@ -26,8 +28,8 @@ namespace NeoCobranza.ViewModels
 
         public DataUtilities() 
         {
-           //string connectionString = "Server=" + vGlobServerName + ";Database=POSIDEVBD;UID=" + vGlobUserName + ";PWD=" + vGlobUserPassword + "; MultipleActiveResultSets=True"; //CASA
-           string connectionString = "Server=" + vGlobServerName + ";Database=POSIDEVBD;Integrated Security=True"; //TRABAJO
+           string connectionString = "Server=" + vGlobServerName + ";Database=POSIDEVBD;UID=" + vGlobUserName + ";PWD=" + vGlobUserPassword + "; MultipleActiveResultSets=True"; //CASA
+           //string connectionString = "Server=" + vGlobServerName + ";Database=POSIDEVBD;Integrated Security=True"; //TRABAJO
 
             vGlobConnection = new SqlConnection(connectionString);
         }
@@ -56,6 +58,7 @@ namespace NeoCobranza.ViewModels
 
         public DataTable ExecuteStoredProcedure(string procedureName)
         {
+
             if (string.IsNullOrWhiteSpace(procedureName))
             {
                 throw new ArgumentException("El nombre del procedimiento no puede ser nulo, vacío o contener solo espacios.");
@@ -65,26 +68,47 @@ namespace NeoCobranza.ViewModels
 
             try
             {
+                // Limpiar salidas anteriores
+                vOutputValues.Clear();
                 bool wasConnectionOpen = HandleConnectionState(true);
 
                 using (SqlCommand command = new SqlCommand(procedureName, vGlobConnection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
+                    // Agregar parámetros: si el valor es SqlParameter (para OUTPUT) se agrega directamente.
                     for (int i = 0; i < vGlobListParamentersNames.Count; i++)
                     {
-                        command.Parameters.AddWithValue(vGlobListParamentersNames[i], vGlobListParameters[i]);
+                        object paramValue = vGlobListParameters[i];
+                        if (paramValue is SqlParameter sqlParam)
+                        {
+                            command.Parameters.Add(sqlParam);
+                        }
+                        else
+                        {
+                            command.Parameters.AddWithValue(vGlobListParamentersNames[i], paramValue);
+                        }
                     }
 
                     using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                     {
                         adapter.Fill(resultTable);
                     }
+
+                    // Recorrer los parámetros y almacenar los de salida
+                    foreach (SqlParameter param in command.Parameters)
+                    {
+                        if (param.Direction == ParameterDirection.Output ||
+                            param.Direction == ParameterDirection.InputOutput ||
+                            param.Direction == ParameterDirection.ReturnValue)
+                        {
+                            vOutputValues[param.ParameterName] = param.Value;
+                        }
+                    }
                 }
 
-                vGlobListParamentersNames.Clear();
-                vGlobListParameters.Clear();
-
+                // Limpia las listas de parámetros
+                ClearParameters();
 
                 if (!wasConnectionOpen)
                 {
@@ -93,8 +117,8 @@ namespace NeoCobranza.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al ejecutar el procedimiento almacenado: " + ex.Message,"Error",
-                    MessageBoxButton.OK,MessageBoxImage.Error);
+                MessageBox.Show("Error al ejecutar el procedimiento almacenado: " + ex.Message, "Error",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             return resultTable;
@@ -509,6 +533,48 @@ namespace NeoCobranza.ViewModels
             {
                 throw new InvalidOperationException("Error al eliminar registros por columna: " + ex.Message, ex);
             }
+        }
+
+        /// <summary>
+        /// Sobrecarga para establecer un parámetro con tipo y dirección (útil para OUTPUT).
+        /// </summary>
+        public void SetParameter(string parameterName, SqlDbType type, ParameterDirection direction)
+        {
+            if (string.IsNullOrWhiteSpace(parameterName))
+            {
+                throw new ArgumentException("El nombre del parámetro no puede ser nulo, vacío o contener solo espacios.");
+            }
+
+            SqlParameter param = new SqlParameter(parameterName, type)
+            {
+                Direction = direction
+            };
+
+            vGlobListParamentersNames.Add(parameterName);
+            vGlobListParameters.Add(param);
+        }
+
+        /// <summary>
+        /// Limpia la lista de parámetros y el diccionario de salida.
+        /// </summary>
+        public void ClearParameters()
+        {
+            vGlobListParamentersNames.Clear();
+            vGlobListParameters.Clear();
+        }
+
+        public void ClearOutPutParameters()
+        {
+            vOutputValues.Clear();
+        }
+
+        public object GetParameterValue(string parameterName)
+        {
+            if (vOutputValues.ContainsKey(parameterName))
+            {
+                return vOutputValues[parameterName];
+            }
+            throw new KeyNotFoundException("El parámetro de salida no se encontró: " + parameterName);
         }
     }
 }

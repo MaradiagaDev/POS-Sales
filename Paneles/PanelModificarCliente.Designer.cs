@@ -72,6 +72,10 @@ namespace NeoCobranza.Paneles
             this.label1 = new System.Windows.Forms.Label();
             this.TxtNoRuc = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.CmbSegmentacion = new System.Windows.Forms.ComboBox();
+            this.TxtCodigoUnico = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -114,7 +118,7 @@ namespace NeoCobranza.Paneles
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label2.Location = new System.Drawing.Point(727, 133);
+            this.label2.Location = new System.Drawing.Point(727, 54);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(85, 18);
             this.label2.TabIndex = 48;
@@ -127,7 +131,7 @@ namespace NeoCobranza.Paneles
             this.flowLayoutPanel3.Controls.Add(this.rbtnFemenino);
             this.flowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(456, 45);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(459, 304);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Size = new System.Drawing.Size(134, 78);
             this.flowLayoutPanel3.TabIndex = 12;
@@ -173,7 +177,7 @@ namespace NeoCobranza.Paneles
             this.flowLayoutPanel2.Controls.Add(this.dtpFechaNac);
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(808, 45);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(621, 304);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(212, 78);
             this.flowLayoutPanel2.TabIndex = 13;
@@ -201,15 +205,17 @@ namespace NeoCobranza.Paneles
             // 
             // mtxtCelular
             // 
+            this.mtxtCelular.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.mtxtCelular.Font = new System.Drawing.Font("Century Gothic", 9.75F);
             this.mtxtCelular.Location = new System.Drawing.Point(266, 499);
             this.mtxtCelular.Mask = "0000000000000000000000000";
             this.mtxtCelular.Name = "mtxtCelular";
-            this.mtxtCelular.Size = new System.Drawing.Size(219, 23);
+            this.mtxtCelular.Size = new System.Drawing.Size(176, 23);
             this.mtxtCelular.TabIndex = 10;
             // 
             // mtxtTelefono
             // 
+            this.mtxtTelefono.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.mtxtTelefono.Font = new System.Drawing.Font("Century Gothic", 9.75F);
             this.mtxtTelefono.Location = new System.Drawing.Point(16, 563);
             this.mtxtTelefono.Mask = "000000000000000000000";
@@ -219,12 +225,12 @@ namespace NeoCobranza.Paneles
             // 
             // mtxtCedula
             // 
-            this.mtxtCedula.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.mtxtCedula.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.mtxtCedula.Font = new System.Drawing.Font("Century Gothic", 9.75F);
             this.mtxtCedula.Location = new System.Drawing.Point(17, 319);
             this.mtxtCedula.Mask = "000-000000-0000L";
             this.mtxtCedula.Name = "mtxtCedula";
-            this.mtxtCedula.Size = new System.Drawing.Size(173, 16);
+            this.mtxtCedula.Size = new System.Drawing.Size(173, 23);
             this.mtxtCedula.TabIndex = 5;
             // 
             // label15
@@ -322,8 +328,9 @@ namespace NeoCobranza.Paneles
             // 
             // txtDireccion
             // 
+            this.txtDireccion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDireccion.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.txtDireccion.Location = new System.Drawing.Point(730, 160);
+            this.txtDireccion.Location = new System.Drawing.Point(730, 81);
             this.txtDireccion.Multiline = true;
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(290, 118);
@@ -375,6 +382,7 @@ namespace NeoCobranza.Paneles
             // 
             // txtProfesion
             // 
+            this.txtProfesion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtProfesion.Font = new System.Drawing.Font("Century Gothic", 9.75F);
             this.txtProfesion.Location = new System.Drawing.Point(229, 316);
             this.txtProfesion.Name = "txtProfesion";
@@ -383,6 +391,7 @@ namespace NeoCobranza.Paneles
             // 
             // txtPrimerNombre
             // 
+            this.txtPrimerNombre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPrimerNombre.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPrimerNombre.Location = new System.Drawing.Point(10, 131);
             this.txtPrimerNombre.Name = "txtPrimerNombre";
@@ -391,6 +400,7 @@ namespace NeoCobranza.Paneles
             // 
             // txtSegundoNombre
             // 
+            this.txtSegundoNombre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSegundoNombre.Font = new System.Drawing.Font("Century Gothic", 9.75F);
             this.txtSegundoNombre.Location = new System.Drawing.Point(230, 135);
             this.txtSegundoNombre.Name = "txtSegundoNombre";
@@ -410,6 +420,7 @@ namespace NeoCobranza.Paneles
             // 
             // txtPrimerApellido
             // 
+            this.txtPrimerApellido.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPrimerApellido.Font = new System.Drawing.Font("Century Gothic", 9.75F);
             this.txtPrimerApellido.Location = new System.Drawing.Point(13, 220);
             this.txtPrimerApellido.Name = "txtPrimerApellido";
@@ -418,6 +429,7 @@ namespace NeoCobranza.Paneles
             // 
             // txtSegundoApellido
             // 
+            this.txtSegundoApellido.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSegundoApellido.Font = new System.Drawing.Font("Century Gothic", 9.75F);
             this.txtSegundoApellido.Location = new System.Drawing.Point(229, 220);
             this.txtSegundoApellido.Name = "txtSegundoApellido";
@@ -426,8 +438,9 @@ namespace NeoCobranza.Paneles
             // 
             // txtObservacion
             // 
+            this.txtObservacion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtObservacion.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.txtObservacion.Location = new System.Drawing.Point(459, 160);
+            this.txtObservacion.Location = new System.Drawing.Point(459, 81);
             this.txtObservacion.Multiline = true;
             this.txtObservacion.Name = "txtObservacion";
             this.txtObservacion.Size = new System.Drawing.Size(255, 118);
@@ -438,7 +451,7 @@ namespace NeoCobranza.Paneles
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
             this.label16.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label16.Location = new System.Drawing.Point(456, 133);
+            this.label16.Location = new System.Drawing.Point(456, 54);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(103, 18);
             this.label16.TabIndex = 76;
@@ -663,6 +676,7 @@ namespace NeoCobranza.Paneles
             // 
             // TxtEmail
             // 
+            this.TxtEmail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TxtEmail.Font = new System.Drawing.Font("Century Gothic", 9.75F);
             this.TxtEmail.Location = new System.Drawing.Point(18, 499);
             this.TxtEmail.Name = "TxtEmail";
@@ -725,8 +739,9 @@ namespace NeoCobranza.Paneles
             // 
             // TxtNoRuc
             // 
+            this.TxtNoRuc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TxtNoRuc.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.TxtNoRuc.Location = new System.Drawing.Point(442, 316);
+            this.TxtNoRuc.Location = new System.Drawing.Point(459, 253);
             this.TxtNoRuc.MaxLength = 14;
             this.TxtNoRuc.Name = "TxtNoRuc";
             this.TxtNoRuc.Size = new System.Drawing.Size(272, 23);
@@ -737,11 +752,249 @@ namespace NeoCobranza.Paneles
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
             this.label18.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label18.Location = new System.Drawing.Point(439, 292);
+            this.label18.Location = new System.Drawing.Point(456, 229);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(43, 18);
             this.label18.TabIndex = 82;
             this.label18.Text = "RUC:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label3.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label3.Location = new System.Drawing.Point(456, 394);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(120, 18);
+            this.label3.TabIndex = 84;
+            this.label3.Text = "Segmentación ";
+            // 
+            // CmbSegmentacion
+            // 
+            this.CmbSegmentacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbSegmentacion.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.CmbSegmentacion.FormattingEnabled = true;
+            this.CmbSegmentacion.Items.AddRange(new object[] {
+            "NICARAGUA",
+            "AFGANISTÁN",
+            "ALBANIA",
+            "ALEMANIA",
+            "ANDORRA",
+            "ANGOLA",
+            "ANTIGUA Y BARBUDA",
+            "ARABIA SAUDITA",
+            "ARGELIA",
+            "ARGENTINA",
+            "ARMENIA",
+            "AUSTRALIA",
+            "AUSTRIA",
+            "AZERBAIYÁN",
+            "BAHAMAS",
+            "BANGLADÉS",
+            "BARBADOS",
+            "BARÉIN",
+            "BÉLGICA",
+            "BELICE",
+            "BENIN",
+            "BIELORRUSIA",
+            "BOLIVIA",
+            "BOSNIA Y HERZEGOVINA",
+            "BOTSUANA",
+            "BRASIL",
+            "BRUNEI",
+            "BULGARIA",
+            "BURKINA FASO",
+            "BURUNDI",
+            "BUTÁN",
+            "CABO VERDE",
+            "CAMBOYA",
+            "CAMERÚN",
+            "CANADÁ",
+            "CATAR",
+            "CHAD",
+            "CHILE",
+            "CHINA",
+            "CHIPRE",
+            "COLOMBIA",
+            "COMORAS",
+            "COREA DEL NORTE",
+            "COREA DEL SUR",
+            "COSTA DE MARFIL",
+            "COSTA RICA",
+            "CROACIA",
+            "CUBA",
+            "DINAMARCA",
+            "DOMINICA",
+            "ECUADOR",
+            "EGIPTO",
+            "EL SALVADOR",
+            "EMIRATOS ARABES UNIDOS",
+            "ERITREA",
+            "ESLOVAQUIA",
+            "ESLOVENIA",
+            "ESPAÑA",
+            "ESTADOS UNIDOS",
+            "ESTONIA",
+            "ETIOPÍA",
+            "FILIPINAS",
+            "FINLANDIA",
+            "FIYI",
+            "FRANCIA",
+            "GABÓN",
+            "GAMBIA",
+            "GEORGIA",
+            "GHANA",
+            "GRANADA",
+            "GRECIA",
+            "GUATEMALA",
+            "GUINEA",
+            "GUINEA ECUATORIAL",
+            "GUINEA-BISSAU",
+            "GUYANA",
+            "HAITÍ",
+            "HONDURAS",
+            "HUNGRÍA",
+            "INDIA",
+            "INDONESIA",
+            "IRÁN",
+            "IRAQ",
+            "IRLANDA",
+            "ISLANDIA",
+            "ISLAS MARSHALL",
+            "ISLAS SALOMÓN",
+            "ISRAEL",
+            "ITALIA",
+            "JAMAICA",
+            "JAPÓN",
+            "JORDANIA",
+            "KAZAJISTÁN",
+            "KENIA",
+            "KIRGUISTÁN",
+            "KIRIBATI",
+            "KUWAIT",
+            "LAOS",
+            "LESOTO",
+            "LETONIA",
+            "LÍBANO",
+            "LIBERIA",
+            "LIBIA",
+            "LIECHTENSTEIN",
+            "LITUANIA",
+            "LUXEMBURGO",
+            "MADAGASCAR",
+            "MALASIA",
+            "MALAUI",
+            "MALDIVAS",
+            "MALI",
+            "MALTA",
+            "MARRUECOS",
+            "MAURICIO",
+            "MAURITANIA",
+            "MÉXICO",
+            "MICRONESIA",
+            "MOLDAVIA",
+            "MÓNACO",
+            "MONGOLIA",
+            "MONTENEGRO",
+            "MOZAMBIQUE",
+            "MYANMAR (BIRMANIA)",
+            "NAMIBIA",
+            "NAURU",
+            "NEPAL",
+            "NÍGER",
+            "NIGERIA",
+            "NORUEGA",
+            "NUEVA ZELANDA",
+            "OMÁN",
+            "PAÍSES BAJOS",
+            "PAKISTÁN",
+            "PALAOS",
+            "PALESTINA",
+            "PANAMÁ",
+            "PAPÚA NUEVA GUINEA",
+            "PARAGUAY",
+            "PERÚ",
+            "POLONIA",
+            "PORTUGAL",
+            "PUERTO RICO",
+            "REINO UNIDO",
+            "REPÚBLICA CENTROAFRICANA",
+            "REPÚBLICA CHECA",
+            "REPÚBLICA DE MACEDONIA",
+            "REPÚBLICA DEL CONGO",
+            "REPÚBLICA DEMOCRÁTICA DEL CONGO",
+            "REPÚBLICA DOMINICANA",
+            "RUANDA",
+            "RUMANIA",
+            "RUSIA",
+            "SAMOA",
+            "SAN CRISTÓBAL Y NIEVES",
+            "SAN MARINO",
+            "SAN VICENTE Y LAS GRANADINAS",
+            "SANTA LUCÍA",
+            "SANTO TOMÉ Y PRÍNCIPE",
+            "SENEGAL",
+            "SERBIA",
+            "SEYCHELLES",
+            "SIERRA LEONA",
+            "SIRIA",
+            "SOMALIA",
+            "SRI LANKA",
+            "SUAZILANDIA",
+            "SUDÁFRICA",
+            "SUDÁN",
+            "SUDÁN DEL SUR",
+            "SUECIA",
+            "SUIZA",
+            "SURINAM",
+            "TAILANDIA",
+            "TANZANIA",
+            "TAYIKISTÁN",
+            "TIMOR ORIENTAL",
+            "TOGO",
+            "TONGA",
+            "TRINIDAD Y TOBAGO",
+            "TÚNEZ",
+            "TURKMENISTÁN",
+            "TURQUÍA",
+            "TUVALU",
+            "UCRANIA",
+            "UGANDA",
+            "URUGUAY",
+            "UZBEKISTÁN",
+            "VANUATU",
+            "VENEZUELA",
+            "VIETNAM",
+            "YEMEN",
+            "YIBUTI",
+            "ZAMBIA",
+            "ZIMBABUE",
+            "NICARAGUA"});
+            this.CmbSegmentacion.Location = new System.Drawing.Point(459, 418);
+            this.CmbSegmentacion.Name = "CmbSegmentacion";
+            this.CmbSegmentacion.Size = new System.Drawing.Size(374, 25);
+            this.CmbSegmentacion.TabIndex = 83;
+            // 
+            // TxtCodigoUnico
+            // 
+            this.TxtCodigoUnico.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TxtCodigoUnico.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TxtCodigoUnico.Location = new System.Drawing.Point(462, 475);
+            this.TxtCodigoUnico.MaxLength = 14;
+            this.TxtCodigoUnico.Name = "TxtCodigoUnico";
+            this.TxtCodigoUnico.Size = new System.Drawing.Size(272, 23);
+            this.TxtCodigoUnico.TabIndex = 85;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label19.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label19.Location = new System.Drawing.Point(459, 451);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(68, 18);
+            this.label19.TabIndex = 86;
+            this.label19.Text = "Código:";
             // 
             // PanelModificarCliente
             // 
@@ -749,6 +1002,10 @@ namespace NeoCobranza.Paneles
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1056, 600);
+            this.Controls.Add(this.TxtCodigoUnico);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.CmbSegmentacion);
             this.Controls.Add(this.TxtNoRuc);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.label1);
@@ -845,5 +1102,9 @@ namespace NeoCobranza.Paneles
         public System.Windows.Forms.Label label1;
         public System.Windows.Forms.TextBox TxtNoRuc;
         public System.Windows.Forms.Label label18;
+        public System.Windows.Forms.Label label3;
+        public System.Windows.Forms.ComboBox CmbSegmentacion;
+        public System.Windows.Forms.TextBox TxtCodigoUnico;
+        public System.Windows.Forms.Label label19;
     }
 }

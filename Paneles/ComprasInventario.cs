@@ -77,7 +77,7 @@ namespace NeoCobranza.Paneles
                         BtnImprimir.Name = "...";
                         BtnImprimir.UseColumnTextForButtonValue = true;
                         BtnImprimir.DefaultCellStyle.ForeColor = Color.Blue;
-                        DgvCatalogo.Columns.Add(BtnImprimir);
+                        //DgvCatalogo.Columns.Add(BtnImprimir);
 
                         //Agregar botón para revertir
                         DataGridViewButtonColumn BtnRevertir = new DataGridViewButtonColumn();
@@ -246,6 +246,16 @@ namespace NeoCobranza.Paneles
 
         private void BuscarProducto()
         {
+            int pageNumber = 1;
+            if (!int.TryParse(TxtPaginaNo.Text, out pageNumber))
+            {
+                pageNumber = 1;
+                TxtPaginaNo.Text = "1";
+            }
+
+            // Definir el tamaño de página (en este ejemplo se usan 20 registros por página)
+            int pageSize = 20;
+
             dataProducto.Rows.Clear();
 
             if (dataProducto.Columns.Count == 0)
@@ -260,6 +270,10 @@ namespace NeoCobranza.Paneles
             dataUtilities.SetParameter("@AlmacenId", CmbAlmacen.SelectedValue);
             dataUtilities.SetParameter("@CategoriaId", 0);
             dataUtilities.SetParameter("@Filtro", TxtFiltroProducto.Text);
+            dataUtilities.SetParameter("@PageNumber", pageNumber);
+            dataUtilities.SetParameter("@PageSize", pageSize);
+            // Configurar el parámetro de salida para el total de registros.
+            dataUtilities.SetParameter("@TotalRecords", System.Data.SqlDbType.Int, direction: System.Data.ParameterDirection.Output);
 
             DataTable dtResponse = dataUtilities.ExecuteStoredProcedure("sp_ObtenerCantidadProductoPorAlmacen");
 
@@ -273,7 +287,14 @@ namespace NeoCobranza.Paneles
                     );
             }
 
-            if(DgvProductos.ColumnCount != 0)
+            // Recuperar el total de registros desde el parámetro de salida y actualizar el control de total de páginas.
+            int totalRecords = Convert.ToInt32(dataUtilities.GetParameterValue("@TotalRecords"));
+            int totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
+            TxtPaginaDe.Text = totalPages.ToString();
+
+            dataUtilities.ClearOutPutParameters();
+
+            if (DgvProductos.ColumnCount != 0)
             {
                 DgvProductos.Columns[0].Visible = false;
             }
@@ -285,8 +306,26 @@ namespace NeoCobranza.Paneles
             {
                 dataBuscar.Rows.Clear();
 
+                int pageNumber = 1;
+                if (!int.TryParse(TxtNoPagniaDos.Text, out pageNumber))
+                {
+                    pageNumber = 1;
+                    TxtNoPagniaDos.Text = "1";
+                }
+
+                int pageSize = 3;
+
                 dataUtilities.SetParameter("@IdSucursal", CmbSucursales.SelectedValue);
+                dataUtilities.SetParameter("@PageNumber", pageNumber);
+                dataUtilities.SetParameter("@PageSize", pageSize);
+                dataUtilities.SetParameter("@TotalRecords", SqlDbType.Int, ParameterDirection.Output);
+
+                // Ejecutar el SP
                 DataTable dtResponse = dataUtilities.ExecuteStoredProcedure("sp_GetComprasPorSucursal");
+
+                int totalRecords = Convert.ToInt32(dataUtilities.GetParameterValue("@TotalRecords"));
+                int totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
+                TxtDeDos.Text = totalPages.ToString();
 
                 foreach (DataRow item in dtResponse.Rows)
                 {
@@ -302,6 +341,7 @@ namespace NeoCobranza.Paneles
                 }
 
                 DgvCatalogo.DataSource = dataBuscar;
+                ActualizarEstadoBotonesDos();
 
             }
             else if (auxOpc == "Crear")
@@ -358,6 +398,20 @@ namespace NeoCobranza.Paneles
 
                         dataUtilities.SetColumns("Cantidad", cantidadActualizada);
                         dataUtilities.UpdateRecordByPrimaryKey("RelAlmacenProducto", idRelAlmacenProducto);
+
+                        if (ChkCaja.Checked)
+                        {
+                            DataUtilities dataUtilities = new DataUtilities();
+                            dataUtilities.SetColumns("SucursaId", Utilidades.SucursalId);
+                            dataUtilities.SetColumns("Pagado", Regex.Replace(TxtMontoTotal.Text, "[^0-9.]", ""));
+                            dataUtilities.SetColumns("Total", 0);
+                            dataUtilities.SetColumns("Referencia", $"COMPRA INVENTARIO {DateTime.Now.ToShortDateString()}");
+                            dataUtilities.SetColumns("FechaPago", DateTime.Now);
+                            dataUtilities.SetColumns("BitEsIngreso", false);
+                            dataUtilities.SetColumns("BitCierreCaja", false);
+                            dataUtilities.SetColumns("CompraId", idCompra);
+                            dataUtilities.InsertRecord("PagosIngresoGasto");
+                        }
 
                         auxKey = "";
                     }
@@ -421,6 +475,7 @@ namespace NeoCobranza.Paneles
 
                             dataUtilities.SetColumns("Cantidad", cantidadActualizada);
                             dataUtilities.UpdateRecordByPrimaryKey("RelAlmacenProducto", idRelAlmacenProducto);
+
                         }
                     }
 
@@ -444,6 +499,12 @@ namespace NeoCobranza.Paneles
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+            if (!Utilidades.PermisosLevel(3, 37))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             auxOpc = "Crear";
             ConfigUI();
         }
@@ -635,27 +696,33 @@ namespace NeoCobranza.Paneles
 
         private void DgvCatalogo_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            object cellValue = DgvCatalogo.Rows[e.RowIndex].Cells[3].Value;
+            object cellValue = DgvCatalogo.Rows[e.RowIndex].Cells[2].Value;
 
             if (e.ColumnIndex == 0)
             {
+                if (!Utilidades.PermisosLevel(3, 38))
+                {
+                    MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 //ACTUALIZAR
                 auxKey = Convert.ToString(cellValue);
                 auxOpc = "Crear";
                 ConfigUI();
             }
-
             if (e.ColumnIndex == 1)
             {
-                //IMPRIMIR
+                if (!Utilidades.PermisosLevel(3, 39))
+                {
+                    MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-            }
-            if (e.ColumnIndex == 2)
-            {
                 //REVERTIR
                 try
                 {
-                    object cellValueRevertir = DgvCatalogo.Rows[e.RowIndex].Cells[10].Value;
+                    object cellValueRevertir = DgvCatalogo.Rows[e.RowIndex].Cells[9].Value;
 
                     if (Convert.ToString(cellValueRevertir) != "")
                     {
@@ -674,6 +741,7 @@ namespace NeoCobranza.Paneles
                     dataUtilities.SetParameter("@CompraId", Convert.ToString(cellValue));
                     dataUtilities.SetParameter("@Usuario", Utilidades.Usuario);
                     DataTable dtResponse = dataUtilities.ExecuteStoredProcedure("RevertirCompra");
+
 
                     MessageBox.Show(Convert.ToString(dtResponse.Rows[0][0]), "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -708,6 +776,77 @@ namespace NeoCobranza.Paneles
         private void TxtFiltroProducto_TextChanged(object sender, EventArgs e)
         {
             BuscarProducto();
+        }
+
+        private void BtnAnterior_Click(object sender, EventArgs e)
+        {
+            if (int.TryParse(TxtPaginaNo.Text, out int currentPage) && currentPage > 1)
+            {
+                currentPage--;
+                TxtPaginaNo.Text = currentPage.ToString();
+                BuscarProducto();
+                ActualizarEstadoBotones();
+            }
+        }
+
+        private void BtnSiguiente_Click(object sender, EventArgs e)
+        {
+            // Se compara con el total de páginas que se muestra en TxtPaginaDe
+            if (int.TryParse(TxtPaginaNo.Text, out int currentPage) &&
+                int.TryParse(TxtPaginaDe.Text, out int totalPages) &&
+                currentPage < totalPages)
+            {
+                currentPage++;
+                TxtPaginaNo.Text = currentPage.ToString();
+                BuscarProducto();
+                ActualizarEstadoBotones();
+            }
+        }
+
+        private void ActualizarEstadoBotones()
+        {
+            // Habilita o deshabilita según el número de página actual y el total de páginas
+            if (int.TryParse(TxtPaginaNo.Text, out int currentPage) &&
+                int.TryParse(TxtPaginaDe.Text, out int totalPages))
+            {
+                BtnAnterior.Enabled = currentPage > 1;
+                BtnSiguiente.Enabled = currentPage < totalPages;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (int.TryParse(TxtPaginaNo.Text, out int currentPage) && currentPage > 1)
+            {
+                currentPage--;
+                TxtNoPagniaDos.Text = currentPage.ToString();
+                auxOpc = "Buscar";
+                FuncionesPrincipales();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (int.TryParse(TxtNoPagniaDos.Text, out int currentPage) &&
+        int.TryParse(TxtDeDos.Text, out int totalPages) &&
+        currentPage < totalPages)
+            {
+                currentPage++;
+                TxtNoPagniaDos.Text = currentPage.ToString();
+                auxOpc = "Buscar";
+                FuncionesPrincipales();
+            }
+
+        }
+
+        private void ActualizarEstadoBotonesDos()
+        {
+            if (int.TryParse(TxtNoPagniaDos.Text, out int currentPage) &&
+                int.TryParse(TxtDeDos.Text, out int totalPages))
+            {
+                button1.Enabled = currentPage > 1;
+                button2.Enabled = currentPage < totalPages;
+            }
         }
     }
 }

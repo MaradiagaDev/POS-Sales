@@ -83,7 +83,7 @@ namespace NeoCobranza.ViewModels
                     string statusActual = Convert.ToString(dtRespuesta.Rows[0]["Estado"]) == "Activo" ? "Bloqueado" : "Activo";
 
                     dataUtilities.SetColumns("Estado", statusActual);
-                    dataUtilities.SetColumns("FechaActualizo", DateTime.Now.ToString());
+                    dataUtilities.SetColumns("FechaActualizo", DateTime.Now);
                     dataUtilities.UpdateRecordByPrimaryKey("Sucursal", auxId);
 
                         ConfigUI(frm, "Buscar");

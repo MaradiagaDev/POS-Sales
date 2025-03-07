@@ -25,6 +25,7 @@ namespace NeoCobranza.Paneles_Venta.Informes
             DataTable dtResponse = dataUtilities.ExecuteStoredProcedure("spSalas");
 
             int botonTop = 2;
+            int primeraSalaId = 0;
 
             foreach (DataRow s in dtResponse.Rows)
             {
@@ -54,117 +55,150 @@ namespace NeoCobranza.Paneles_Venta.Informes
 
                 // Agregar el botón al panel
                 PnlListaSalas.Controls.Add(botonSala);
+
+                if (primeraSalaId == 0)
+                {
+                    primeraSalaId = Convert.ToInt32(s["SalaId"]);
+                }
+            }
+
+            if (primeraSalaId != 0)
+            {
+                SalaClick(primeraSalaId);
             }
         }
 
-        private void SalaClick(int SalaId)
+        private void SalaClick(int salaId)
         {
-            // Restaurar color azul a todas las salas
+            // Restaurar el color por defecto (azul) en todas las salas
             foreach (Control control in PnlListaSalas.Controls)
             {
-                if (control is System.Windows.Forms.Button)
+                if (control is Button btnSala)
                 {
-                    control.BackColor = SystemColors.MenuHighlight;
+                    btnSala.BackColor = SystemColors.MenuHighlight;
 
-                    if ((int)control.Tag == SalaId)
+                    if ((int)btnSala.Tag == salaId)
                     {
-                        control.BackColor = System.Drawing.Color.Green;
+                        // Resaltar la sala seleccionada
+                        btnSala.BackColor = Color.Green;
 
+                        DataTable dtSalas = dataUtilities.getRecordByPrimaryKey("Salas", salaId);
+                        if (dtSalas.Rows.Count == 0)
+                            return;
 
-                        DataTable dtSalas = dataUtilities.getRecordByPrimaryKey("Salas", SalaId);
                         DataRow itemSala = dtSalas.Rows[0];
-
                         LblSalaTitulo.Text = Convert.ToString(itemSala["NombreSala"]);
                         LblCantidadMesas.Text = Convert.ToString(itemSala["NoMesas"]);
 
-
+                        // Limpiar panel de mesas actual
                         PnlMesasEnSala.Controls.Clear();
-                        //Ahora colocar los botones por cada sala
 
-
-                        // Crear un panel principal para contener los botones de las mesas
-                        Panel panelPrincipal = new Panel();
-                        panelPrincipal.Dock = DockStyle.Fill;
-                        panelPrincipal.AutoScroll = true;
-
-                        // Agregar el panel principal al panel de mesas en sala
-                        PnlMesasEnSala.Controls.Add(panelPrincipal);
-
-                        // Calcular el ancho máximo del panel contenedor de mesas
-                        int panelWidth = panelPrincipal.ClientSize.Width;
-                        int botonWidth = 150; // Ancho fijo para cada botón
-                        int filaActual = 0;
-                        int columnaActual = 0;
-
-                        for (int i = 1; i <= Convert.ToInt32(itemSala["NoMesas"]); i++)
+                        // Crear un FlowLayoutPanel para ubicar automáticamente los botones de mesas
+                        FlowLayoutPanel flpMesas = new FlowLayoutPanel
                         {
-                            System.Windows.Forms.Button botonSala = new System.Windows.Forms.Button();
+                            Dock = DockStyle.Fill,
+                            AutoScroll = true,
+                            WrapContents = true,
+                            FlowDirection = FlowDirection.LeftToRight,
+                            Padding = new Padding(5),
+                            BackColor = Color.Transparent // Opcional: para que herede el fondo
+                        };
+                        PnlMesasEnSala.Controls.Add(flpMesas);
 
-                            // Configurar propiedades del botón
-                            botonSala.Text = $"Mesa - {i.ToString()}";
-                            botonSala.Tag = i;
-                            botonSala.Anchor = AnchorStyles.Top | AnchorStyles.Left;
-                            botonSala.BackColor = Color.ForestGreen;
+                        int totalMesas = Convert.ToInt32(itemSala["NoMesas"]);
+                        DataTable dtOrdenes = dataUtilities.GetAllRecords("Ordenes");
 
-
-                            DataTable dtResponse = dataUtilities.GetAllRecords("Ordenes");
-                            var filterRow =
-                                from row in dtResponse.AsEnumerable()
-                                where Convert.ToString(row.Field<string>("SucursalId")) == Utilidades.SucursalId
-                                && Convert.ToString(row.Field<string>("OrdenProceso")) == "Orden Abierta"
-                                && Convert.ToString(row.Field<string>("SalaMesa")) == $"{Convert.ToString(itemSala["NombreSala"])}-{i.ToString()}"
-                                select row;
-
-                            if (filterRow.Any())
+                        for (int i = 1; i <= totalMesas; i++)
+                        {
+                            // Se crea el botón cuadrado y se le asignan las propiedades de imagen y texto
+                            Button btnMesa = new Button
                             {
-                                botonSala.BackColor = Color.DarkRed;
-                            }
+                                Text = $"Mesa - {i}\n{"Disponible"}", // Texto en dos líneas: título y sala
+                                Tag = i,
+                                Width = 150,
+                                Height = 150,
+                                Font = new Font("Century Gothic", 15, FontStyle.Regular),
+                                ForeColor = Color.White,
+                                BackColor = Color.ForestGreen,
+                                Margin = new Padding(5),
+                                Image = Properties.Resources.Mesa, // Asegúrate de agregar el GIF animado a tus recursos
+                                ImageAlign = ContentAlignment.MiddleCenter,
+                                TextAlign = ContentAlignment.BottomCenter,
+                                TextImageRelation = TextImageRelation.ImageAboveText
+                            };
 
-                            botonSala.Font = new Font("Century Gothic", 15, FontStyle.Regular);
-                            botonSala.ForeColor = Color.White;
-                            botonSala.Height = 45;
+                            // Identificador de la mesa en el formato "NombreSala-i"
+                            string mesaIdentificador = $"{itemSala["NombreSala"]}-{i}";
 
-                            // Calcular la posición horizontal del botón
-                            int botonLeft = columnaActual * botonWidth;
+                            // Filtrar órdenes activas para la mesa
+                            var ordenesMesa = dtOrdenes.AsEnumerable().Where(row =>
+                                row.Field<string>("SucursalId") == Utilidades.SucursalId &&
+                                row.Field<string>("OrdenProceso") == "Orden Abierta" &&
+                                row.Field<string>("SalaMesa") == mesaIdentificador);
 
-                            // Calcular la posición vertical del botón
-                            int botonTop = filaActual * botonSala.Height;
-
-                            // Establecer el ancho y la posición horizontal del botón
-                            botonSala.Width = botonWidth;
-                            botonSala.Left = botonLeft;
-                            botonSala.Top = botonTop;
-
-                            int mesaIndex = i; // Capturar el valor actual de i en una variable local
-
-                            if (filterRow.Any())
+                            DataTable dataTable;
+                            if (ordenesMesa.Any())
                             {
-                                DataTable dataTable = filterRow.CopyToDataTable();
-                                botonSala.Click += (sender, e) => MesaClick($"{Convert.ToString(itemSala["NombreSala"])}-{mesaIndex.ToString()}", dataTable);
+                                btnMesa.Image = Properties.Resources.Cubiertos;
+                                btnMesa.Text = Text = $"Mesa - {i}\n{"Ocupada"}";
+                                btnMesa.BackColor = Color.DarkRed;
+                                dataTable = ordenesMesa.CopyToDataTable();
                             }
                             else
                             {
-                                DataTable dataTable = new DataTable();
-                                botonSala.Click += (sender, e) => MesaClick($"{Convert.ToString(itemSala["NombreSala"])}-{mesaIndex.ToString()}", dataTable);
+                                dataTable = new DataTable();
                             }
 
+                            // Capturar el valor actual de i en una variable local para el evento
+                            int mesaIndex = i;
+                            btnMesa.Click += (sender, e) => MesaClick(mesaIdentificador, dataTable);
 
-
-                            // Actualizar el índice de la columna actual
-                            columnaActual++;
-
-                            // Verificar si se ha llegado al límite de botones por fila
-                            if (columnaActual >= 9)
-                            {
-                                // Reiniciar la columna actual
-                                columnaActual = 0;
-                                // Mover a la siguiente fila
-                                filaActual++;
-                            }
-
-                            // Agregar el botón al panel principal
-                            panelPrincipal.Controls.Add(botonSala);
+                            // Agregar el botón al FlowLayoutPanel
+                            flpMesas.Controls.Add(btnMesa);
                         }
+
+
+                        //for (int i = 1; i <= totalMesas; i++)
+                        //{
+                        //    Button btnMesa = new Button
+                        //    {
+                        //        Text = $"Mesa - {i}",
+                        //        Tag = i,
+                        //        Width = 150,
+                        //        Height = 45,
+                        //        Font = new Font("Century Gothic", 15, FontStyle.Regular),
+                        //        ForeColor = Color.White,
+                        //        BackColor = Color.ForestGreen,
+                        //        Margin = new Padding(5)
+                        //    };
+
+                        //    // Identificador de la mesa en el formato "NombreSala-i"
+                        //    string mesaIdentificador = $"{itemSala["NombreSala"]}-{i}";
+
+                        //    // Filtrar órdenes activas para la mesa
+                        //    var ordenesMesa = dtOrdenes.AsEnumerable().Where(row =>
+                        //        row.Field<string>("SucursalId") == Utilidades.SucursalId &&
+                        //        row.Field<string>("OrdenProceso") == "Orden Abierta" &&
+                        //        row.Field<string>("SalaMesa") == mesaIdentificador);
+
+                        //    DataTable dataTable;
+                        //    if (ordenesMesa.Any())
+                        //    {
+                        //        btnMesa.BackColor = Color.DarkRed;
+                        //        dataTable = ordenesMesa.CopyToDataTable();
+                        //    }
+                        //    else
+                        //    {
+                        //        dataTable = new DataTable();
+                        //    }
+
+                        //    // Capturar el valor actual de i en una variable local para el evento
+                        //    int mesaIndex = i;
+                        //    btnMesa.Click += (sender, e) => MesaClick(mesaIdentificador, dataTable);
+
+                        //    // Agregar el botón al FlowLayoutPanel
+                        //    flpMesas.Controls.Add(btnMesa);
+                        //}
                     }
                 }
             }

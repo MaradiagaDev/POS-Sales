@@ -152,6 +152,12 @@ namespace NeoCobranza.Paneles
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
+            if (!Utilidades.PermisosLevel(3, 40))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             int cantidadMaxima = 0;
             int cantidadMinima = 0;
 

@@ -47,7 +47,8 @@
             this.TxtFiltrar = new System.Windows.Forms.TextBox();
             this.CmbSucursal = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.BtnBuscarCliente = new NeoCobranza.Especiales.EspecialButton();
+            this.label6 = new System.Windows.Forms.Label();
+            this.CmbSegmentacion = new System.Windows.Forms.ComboBox();
             this.btnActualizar = new NeoCobranza.Especiales.EspecialButton();
             this.btnAgregar = new NeoCobranza.Especiales.EspecialButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCatalogoClientes)).BeginInit();
@@ -84,7 +85,7 @@
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvCatalogoClientes.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvCatalogoClientes.GridColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dgvCatalogoClientes.Location = new System.Drawing.Point(12, 86);
+            this.dgvCatalogoClientes.Location = new System.Drawing.Point(9, 75);
             this.dgvCatalogoClientes.Name = "dgvCatalogoClientes";
             this.dgvCatalogoClientes.ReadOnly = true;
             this.dgvCatalogoClientes.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -98,7 +99,7 @@
             this.dgvCatalogoClientes.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvCatalogoClientes.RowHeadersWidth = 15;
             this.dgvCatalogoClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCatalogoClientes.Size = new System.Drawing.Size(1117, 358);
+            this.dgvCatalogoClientes.Size = new System.Drawing.Size(1117, 321);
             this.dgvCatalogoClientes.TabIndex = 1;
             this.dgvCatalogoClientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCatalogoClientes_CellContentClick);
             // 
@@ -108,7 +109,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(499, 11);
+            this.label1.Location = new System.Drawing.Point(670, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 17);
             this.label1.TabIndex = 101;
@@ -123,14 +124,15 @@
             this.CmbBuscarPor.ForeColor = System.Drawing.SystemColors.ControlText;
             this.CmbBuscarPor.FormattingEnabled = true;
             this.CmbBuscarPor.Items.AddRange(new object[] {
+            "ID",
             "Nombre del Cliente",
-            "No Orden",
-            "No Factura",
-            "Fecha de Pago (Crédito)"});
-            this.CmbBuscarPor.Location = new System.Drawing.Point(502, 38);
+            "Identificación",
+            "Código"});
+            this.CmbBuscarPor.Location = new System.Drawing.Point(673, 40);
             this.CmbBuscarPor.Name = "CmbBuscarPor";
             this.CmbBuscarPor.Size = new System.Drawing.Size(223, 29);
             this.CmbBuscarPor.TabIndex = 102;
+            this.CmbBuscarPor.SelectedIndexChanged += new System.EventHandler(this.CmbBuscarPor_SelectedIndexChanged);
             // 
             // PnlTitulo
             // 
@@ -240,8 +242,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtFiltrar.Location = new System.Drawing.Point(9, 40);
             this.TxtFiltrar.Name = "TxtFiltrar";
-            this.TxtFiltrar.Size = new System.Drawing.Size(483, 20);
+            this.TxtFiltrar.Size = new System.Drawing.Size(601, 20);
             this.TxtFiltrar.TabIndex = 107;
+            this.TxtFiltrar.TextChanged += new System.EventHandler(this.TxtFiltrar_TextChanged);
             // 
             // CmbSucursal
             // 
@@ -251,7 +254,7 @@
             this.CmbSucursal.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CmbSucursal.ForeColor = System.Drawing.SystemColors.ControlText;
             this.CmbSucursal.FormattingEnabled = true;
-            this.CmbSucursal.Location = new System.Drawing.Point(731, 38);
+            this.CmbSucursal.Location = new System.Drawing.Point(902, 40);
             this.CmbSucursal.Name = "CmbSucursal";
             this.CmbSucursal.Size = new System.Drawing.Size(208, 29);
             this.CmbSucursal.TabIndex = 109;
@@ -263,34 +266,42 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label5.Location = new System.Drawing.Point(728, 11);
+            this.label5.Location = new System.Drawing.Point(899, 13);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(63, 17);
             this.label5.TabIndex = 108;
             this.label5.Text = "Sucursal:";
             // 
-            // BtnBuscarCliente
+            // label6
             // 
-            this.BtnBuscarCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnBuscarCliente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(20)))), ((int)(((byte)(43)))));
-            this.BtnBuscarCliente.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(20)))), ((int)(((byte)(43)))));
-            this.BtnBuscarCliente.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.BtnBuscarCliente.BorderRadius = 5;
-            this.BtnBuscarCliente.BorderSize = 0;
-            this.BtnBuscarCliente.FlatAppearance.BorderSize = 0;
-            this.BtnBuscarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnBuscarCliente.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnBuscarCliente.ForeColor = System.Drawing.Color.White;
-            this.BtnBuscarCliente.Image = ((System.Drawing.Image)(resources.GetObject("BtnBuscarCliente.Image")));
-            this.BtnBuscarCliente.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnBuscarCliente.Location = new System.Drawing.Point(954, 32);
-            this.BtnBuscarCliente.Name = "BtnBuscarCliente";
-            this.BtnBuscarCliente.Size = new System.Drawing.Size(148, 38);
-            this.BtnBuscarCliente.TabIndex = 103;
-            this.BtnBuscarCliente.Text = "Buscar";
-            this.BtnBuscarCliente.TextGroundColor = System.Drawing.Color.White;
-            this.BtnBuscarCliente.UseVisualStyleBackColor = false;
-            this.BtnBuscarCliente.Click += new System.EventHandler(this.BtnBuscarCliente_Click);
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label6.Location = new System.Drawing.Point(17, 417);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(104, 16);
+            this.label6.TabIndex = 110;
+            this.label6.Text = "Segmentación:";
+            // 
+            // CmbSegmentacion
+            // 
+            this.CmbSegmentacion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.CmbSegmentacion.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.CmbSegmentacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbSegmentacion.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CmbSegmentacion.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.CmbSegmentacion.FormattingEnabled = true;
+            this.CmbSegmentacion.Items.AddRange(new object[] {
+            "ID",
+            "Nombre del Cliente",
+            "Identificación"});
+            this.CmbSegmentacion.Location = new System.Drawing.Point(143, 410);
+            this.CmbSegmentacion.Name = "CmbSegmentacion";
+            this.CmbSegmentacion.Size = new System.Drawing.Size(418, 29);
+            this.CmbSegmentacion.TabIndex = 111;
+            this.CmbSegmentacion.SelectedIndexChanged += new System.EventHandler(this.CmbSegmentacion_SelectedIndexChanged);
             // 
             // btnActualizar
             // 
@@ -342,12 +353,13 @@
             // 
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1141, 562);
+            this.Controls.Add(this.CmbSegmentacion);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.CmbSucursal);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.TxtFiltrar);
             this.Controls.Add(this.PnlPaginado);
             this.Controls.Add(this.PnlTitulo);
-            this.Controls.Add(this.BtnBuscarCliente);
             this.Controls.Add(this.CmbBuscarPor);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnActualizar);
@@ -376,7 +388,6 @@
         private Especiales.EspecialButton btnActualizar;
         public System.Windows.Forms.DataGridView dgvCatalogoClientes;
         public System.Windows.Forms.Label label1;
-        private Especiales.EspecialButton BtnBuscarCliente;
         public System.Windows.Forms.ComboBox CmbBuscarPor;
         private System.Windows.Forms.Panel PnlTitulo;
         public System.Windows.Forms.Label TbTitulo;
@@ -390,5 +401,7 @@
         public System.Windows.Forms.TextBox TxtFiltrar;
         public System.Windows.Forms.ComboBox CmbSucursal;
         public System.Windows.Forms.Label label5;
+        public System.Windows.Forms.Label label6;
+        public System.Windows.Forms.ComboBox CmbSegmentacion;
     }
 }

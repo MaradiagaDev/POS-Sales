@@ -20,6 +20,7 @@ using NeoCobranza.ViewModels;
 using NeoCobranza.ModelsCobranza;
 using System.Threading;
 using NeoCobranza.Paneles_Venta.Informes;
+using System.Windows.Forms.VisualStyles;
 
 namespace NeoCobranza.Paneles
 {
@@ -64,6 +65,183 @@ namespace NeoCobranza.Paneles
             //UIUtilities.ConfigurarPanelPrincipal(PnlTitulo,LblTitulo,LblHora);
 
             //vMMenuPrincipal.InitModuloPrincipal(this);
+
+            //SEGURIDAD
+
+
+            if (!Utilidades.PermisosLevel(1, 1))
+            {
+                btnCatalogos.Visible = false;
+            }
+            if (!Utilidades.PermisosLevel(1, 2))
+            {
+                BtnVentasDirectas.Visible = false;
+                BtnVentaRapida.Visible = false;
+                BtnAgenda.Visible = false;
+                BtnMesas.Visible = false;
+            }
+            if (!Utilidades.PermisosLevel(1, 3))
+            {
+                BtnInventario.Visible = false;
+            }
+            if (!Utilidades.PermisosLevel(1, 4))
+            {
+                BtnCaja.Visible = false;
+            }
+            if (!Utilidades.PermisosLevel(1, 5))
+            {
+                BtnReportes.Visible = false;
+            }
+            if (!Utilidades.PermisosLevel(1, 6))
+            {
+                BtnOpciones.Visible = false;
+            }
+            if (!Utilidades.PermisosLevel(1, 7))
+            {
+                btnSeguridad.Visible = false;
+            }
+            if (!Utilidades.PermisosLevel(1, 8))
+            {
+                BtnCatalogoGeneral.Visible = false;
+            }
+
+            //NIVEL DOS - CATALOGOS SUCURSAL
+            if (!Utilidades.PermisosLevel(2, 1))
+            {
+                clientesToolStripMenuItem.Visible = false;
+            }
+            if (!Utilidades.PermisosLevel(2, 2))
+            {
+                BtnAlmacenes.Visible = false;
+            }
+            if (!Utilidades.PermisosLevel(2, 3))
+            {
+                salasToolStripMenuItem.Visible = false;
+            }
+            if (!Utilidades.PermisosLevel(2, 21))
+            {
+                segmentaciónDeClientesToolStripMenuItem.Visible = false;
+            }
+
+            //NIVEL DOS - VENTAS
+            if (!Utilidades.PermisosLevel(2, 4))
+            {
+                ventasDirectasDeAtaudesToolStripMenuItem.Visible = false;
+                BtnVentaRapida.Visible = false;
+            }
+            if (!Utilidades.PermisosLevel(2, 5))
+            {
+                BtnOrdenMesa.Visible = false;
+                BtnMesas.Visible = false;
+            }
+            if (!Utilidades.PermisosLevel(2, 6))
+            {
+                agendaToolStripMenuItem.Visible=false;
+                BtnAgenda.Visible=false;
+            }
+            if (!Utilidades.PermisosLevel(2, 7))
+            {
+                listaDeOrdenesActivasToolStripMenuItem.Visible = false;
+            }
+            if (!Utilidades.PermisosLevel(2, 8))
+            {
+                cuentasPorCobrarToolStripMenuItem.Visible = false;
+            }
+            if (!Utilidades.PermisosLevel(2, 9))
+            {
+                listaDeOrdenesFacturaToolStripMenuItem.Visible = false;
+            }
+
+            //NIVEL DOS - INVENTARIO
+            if (!Utilidades.PermisosLevel(2, 10))
+            {
+                kardexToolStripMenuItem.Visible = false;
+            }
+            if (!Utilidades.PermisosLevel(2, 11))
+            {
+                trasladosDeProductoToolStripMenuItem.Visible = false;
+            }
+            if (!Utilidades.PermisosLevel(2, 12))
+            {
+                BtnCompras.Visible = false;
+            }
+            if (!Utilidades.PermisosLevel(2, 13))
+            {
+                BtnAlertas.Visible = false;
+            }
+            if (!Utilidades.PermisosLevel(2, 14))
+            {
+                inventarioEnSucursalesAlmacenesToolStripMenuItem.Visible=false;
+            }
+            if (!Utilidades.PermisosLevel(2, 15))
+            {
+                BtnInventarioGeneral.Visible=false;
+            }
+
+            //Cierre de Caja
+            if (!Utilidades.PermisosLevel(2, 15))
+            {
+                BtnCaja.Visible=false;
+            }
+
+            //Sistema
+            if (!Utilidades.PermisosLevel(2, 17))
+            {
+                configFacturaciónToolStripMenuItem.Visible = false;
+            }
+            if (!Utilidades.PermisosLevel(2, 18))
+            {
+                BtnTasaCambio.Visible=false;
+            }
+            if (!Utilidades.PermisosLevel(2, 19))
+            {
+                datosDeLaEmpresaToolStripMenuItem.Visible = false;
+            }
+
+            //SEGURIDAD
+            if (!Utilidades.PermisosLevel(2, 22))
+            {
+                revisionDeSeguridadToolStripMenuItem.Visible = false;
+            }
+            if (!Utilidades.PermisosLevel(2, 23))
+            {
+                auditoriasToolStripMenuItem.Visible = false;
+            }
+
+            //CATALOGO GENERAL
+            if (!Utilidades.PermisosLevel(2, 24))
+            {
+                BtnProveedor.Visible=false;
+            }
+            if (!Utilidades.PermisosLevel(2, 25))
+            {
+                BtnCargorizacion.Visible=false;
+            }
+            if (!Utilidades.PermisosLevel(2, 26))
+            {
+                BtnSucursales.Visible=false;
+            }
+            if (!Utilidades.PermisosLevel(2, 27))
+            {
+                BtnMotivoCancelacion.Visible = false;
+            }
+            if (!Utilidades.PermisosLevel(2, 28))
+            {
+                BtnBancos.Visible = false;
+                BtnBancosTarjeta.Visible=false;
+            }
+            if (!Utilidades.PermisosLevel(2, 29))
+            {
+                productosToolStripMenuItem.Visible = false;
+            }
+            if (!Utilidades.PermisosLevel(2, 30))
+            {
+                serviciosToolStripMenuItem.Visible = false;
+            }
+            if (!Utilidades.PermisosLevel(2, 31))
+            {
+                BtnBancosTarjeta.Visible = false;
+            }
         }
 
         private void LblUsuario_Click(object sender, EventArgs e)
@@ -151,10 +329,10 @@ namespace NeoCobranza.Paneles
 
         private void especialButton1_Click(object sender, EventArgs e)
         {
-            //frmLogin form1 = Owner as frmLogin;
-            //conexion.connect.Close();
-            //form1.Show();
-            //this.Close();
+            this.Close();
+
+            frmLogin login = new frmLogin();
+            login.Show(); // Muestra de nuevo el login
         }
 
         private void btnCatalogos_Click(object sender, EventArgs e)
@@ -264,7 +442,7 @@ namespace NeoCobranza.Paneles
         private void especialButton4_Click(object sender, EventArgs e)
         {
             limpiar();
-            MenuCaja.Show(btnDatosGenerales, ancho, 0);
+            MenuCaja.Show(BtnCaja, ancho, 0);
         }
 
         private void reciboOficialDeCajaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -878,6 +1056,21 @@ namespace NeoCobranza.Paneles
             directas.TopLevel = false;
             PnlCentral.Controls.Add(directas);
             directas.Show();
+        }
+
+        private void segmentaciónDeClientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PnlSegmentación directas = new PnlSegmentación();
+            directas.TopLevel = false;
+            directas.Dock = DockStyle.Fill;
+            directas.TopLevel = false;
+            PnlCentral.Controls.Add(directas);
+            directas.Show();
+        }
+
+        private void MenuInventario_Opening(object sender, CancelEventArgs e)
+        {
+
         }
     }
 }

@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PnlVentas));
             this.PnlTitulo = new System.Windows.Forms.Panel();
             this.llbTitulo = new System.Windows.Forms.Label();
+            this.lblCredito = new System.Windows.Forms.Label();
             this.DgvItemsOrden = new System.Windows.Forms.DataGridView();
             this.label13 = new System.Windows.Forms.Label();
             this.TxtSubTotal = new System.Windows.Forms.TextBox();
@@ -66,7 +67,6 @@
             this.label23 = new System.Windows.Forms.Label();
             this.ChkRetencionAlcaldia = new System.Windows.Forms.CheckBox();
             this.label20 = new System.Windows.Forms.Label();
-            this.lblCredito = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.LblTituloSala = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -89,6 +89,8 @@
             this.BtnGestionSalas = new NeoCobranza.Especiales.EspecialButton();
             this.BtnNotaOrden = new NeoCobranza.Especiales.EspecialButton();
             this.BtnListaOrdenes = new NeoCobranza.Especiales.EspecialButton();
+            this.ChkPropina = new System.Windows.Forms.CheckBox();
+            this.BtnDesvincular = new NeoCobranza.Especiales.EspecialButton();
             this.PnlTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvItemsOrden)).BeginInit();
             this.panel1.SuspendLayout();
@@ -119,6 +121,19 @@
             this.llbTitulo.TabIndex = 1;
             this.llbTitulo.Text = "Crear Venta";
             // 
+            // lblCredito
+            // 
+            this.lblCredito.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCredito.AutoSize = true;
+            this.lblCredito.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCredito.ForeColor = System.Drawing.Color.White;
+            this.lblCredito.Location = new System.Drawing.Point(1000, 14);
+            this.lblCredito.Name = "lblCredito";
+            this.lblCredito.Size = new System.Drawing.Size(150, 18);
+            this.lblCredito.TabIndex = 169;
+            this.lblCredito.Text = "ORDEN DE CRÉDITO";
+            this.lblCredito.Visible = false;
+            // 
             // DgvItemsOrden
             // 
             this.DgvItemsOrden.AllowUserToAddRows = false;
@@ -128,36 +143,36 @@
             this.DgvItemsOrden.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.DgvItemsOrden.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.DgvItemsOrden.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgvItemsOrden.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvItemsOrden.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.DgvItemsOrden.ColumnHeadersHeight = 30;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DgvItemsOrden.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DgvItemsOrden.DefaultCellStyle = dataGridViewCellStyle5;
             this.DgvItemsOrden.GridColor = System.Drawing.SystemColors.AppWorkspace;
             this.DgvItemsOrden.Location = new System.Drawing.Point(255, 283);
             this.DgvItemsOrden.Name = "DgvItemsOrden";
             this.DgvItemsOrden.ReadOnly = true;
             this.DgvItemsOrden.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgvItemsOrden.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvItemsOrden.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.DgvItemsOrden.RowHeadersWidth = 15;
             this.DgvItemsOrden.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DgvItemsOrden.Size = new System.Drawing.Size(580, 238);
@@ -567,6 +582,7 @@
             this.ChkRetencionAlcaldia.TabIndex = 142;
             this.ChkRetencionAlcaldia.Text = "Retención Alcaldía ( 1 % )";
             this.ChkRetencionAlcaldia.UseVisualStyleBackColor = true;
+            this.ChkRetencionAlcaldia.CheckedChanged += new System.EventHandler(this.ChkRetencionAlcaldia_CheckedChanged);
             this.ChkRetencionAlcaldia.Click += new System.EventHandler(this.ChkRetencionAlcaldia_Click);
             // 
             // label20
@@ -581,19 +597,6 @@
             this.label20.Size = new System.Drawing.Size(137, 18);
             this.label20.TabIndex = 131;
             this.label20.Text = "Proceso de Pago:";
-            // 
-            // lblCredito
-            // 
-            this.lblCredito.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCredito.AutoSize = true;
-            this.lblCredito.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCredito.ForeColor = System.Drawing.Color.White;
-            this.lblCredito.Location = new System.Drawing.Point(1000, 14);
-            this.lblCredito.Name = "lblCredito";
-            this.lblCredito.Size = new System.Drawing.Size(150, 18);
-            this.lblCredito.TabIndex = 169;
-            this.lblCredito.Text = "ORDEN DE CRÉDITO";
-            this.lblCredito.Visible = false;
             // 
             // label28
             // 
@@ -1015,12 +1018,49 @@
             this.BtnListaOrdenes.UseVisualStyleBackColor = false;
             this.BtnListaOrdenes.Click += new System.EventHandler(this.BtnListaOrdenes_Click);
             // 
+            // ChkPropina
+            // 
+            this.ChkPropina.AutoSize = true;
+            this.ChkPropina.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkPropina.Location = new System.Drawing.Point(438, 223);
+            this.ChkPropina.Name = "ChkPropina";
+            this.ChkPropina.Size = new System.Drawing.Size(148, 21);
+            this.ChkPropina.TabIndex = 184;
+            this.ChkPropina.Text = "Propina Voluntaria";
+            this.ChkPropina.UseVisualStyleBackColor = true;
+            this.ChkPropina.CheckedChanged += new System.EventHandler(this.ChkPropina_CheckedChanged);
+            this.ChkPropina.Click += new System.EventHandler(this.ChkPropina_Click);
+            // 
+            // BtnDesvincular
+            // 
+            this.BtnDesvincular.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnDesvincular.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.BtnDesvincular.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.BtnDesvincular.BorderColor = System.Drawing.Color.Transparent;
+            this.BtnDesvincular.BorderRadius = 0;
+            this.BtnDesvincular.BorderSize = 0;
+            this.BtnDesvincular.FlatAppearance.BorderSize = 0;
+            this.BtnDesvincular.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnDesvincular.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnDesvincular.ForeColor = System.Drawing.Color.White;
+            this.BtnDesvincular.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnDesvincular.Location = new System.Drawing.Point(976, 57);
+            this.BtnDesvincular.Name = "BtnDesvincular";
+            this.BtnDesvincular.Size = new System.Drawing.Size(174, 49);
+            this.BtnDesvincular.TabIndex = 185;
+            this.BtnDesvincular.Text = "Desvincular Mesa";
+            this.BtnDesvincular.TextGroundColor = System.Drawing.Color.White;
+            this.BtnDesvincular.UseVisualStyleBackColor = false;
+            this.BtnDesvincular.Click += new System.EventHandler(this.BtnDesvincular_Click);
+            // 
             // PnlVentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1157, 611);
+            this.Controls.Add(this.BtnDesvincular);
+            this.Controls.Add(this.ChkPropina);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.especialButton3);
             this.Controls.Add(this.label2);
@@ -1097,7 +1137,6 @@
         public System.Windows.Forms.Label LblNombreVendedor;
         private Especiales.EspecialButton especialButton3;
         private System.Windows.Forms.Label label5;
-        private Especiales.EspecialButton BtnCredito;
         public System.Windows.Forms.Label LblNombreClientes;
         private Especiales.EspecialButton BtnBuscarCodigo;
         private System.Windows.Forms.Label label22;
@@ -1133,7 +1172,10 @@
         public System.Windows.Forms.TextBox TxtTotalPagado;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox TxtActualizarDescuento;
-        private Especiales.EspecialButton BtnActualizarDescuento;
         private System.Windows.Forms.Panel panel1;
+        public Especiales.EspecialButton BtnCredito;
+        public System.Windows.Forms.CheckBox ChkPropina;
+        public Especiales.EspecialButton BtnDesvincular;
+        public Especiales.EspecialButton BtnActualizarDescuento;
     }
 }

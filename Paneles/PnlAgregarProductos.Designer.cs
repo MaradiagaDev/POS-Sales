@@ -44,7 +44,11 @@
             this.TxtCodigo = new System.Windows.Forms.TextBox();
             this.btnAgregar = new NeoCobranza.Especiales.EspecialButton();
             this.btnCancelar = new NeoCobranza.Especiales.EspecialButton();
+            this.label10 = new System.Windows.Forms.Label();
+            this.PBImagenProducto = new System.Windows.Forms.PictureBox();
+            this.BtnSeleccionarImagen = new NeoCobranza.Especiales.EspecialButton();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PBImagenProducto)).BeginInit();
             this.SuspendLayout();
             // 
             // TxtNombre
@@ -219,12 +223,55 @@
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label10.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label10.Location = new System.Drawing.Point(539, 111);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(178, 18);
+            this.label10.TabIndex = 185;
+            this.label10.Text = "Imagen Representativa";
+            // 
+            // PBImagenProducto
+            // 
+            this.PBImagenProducto.Location = new System.Drawing.Point(518, 143);
+            this.PBImagenProducto.Name = "PBImagenProducto";
+            this.PBImagenProducto.Size = new System.Drawing.Size(211, 186);
+            this.PBImagenProducto.TabIndex = 184;
+            this.PBImagenProducto.TabStop = false;
+            // 
+            // BtnSeleccionarImagen
+            // 
+            this.BtnSeleccionarImagen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.BtnSeleccionarImagen.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.BtnSeleccionarImagen.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.BtnSeleccionarImagen.BorderRadius = 5;
+            this.BtnSeleccionarImagen.BorderSize = 0;
+            this.BtnSeleccionarImagen.FlatAppearance.BorderSize = 0;
+            this.BtnSeleccionarImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnSeleccionarImagen.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.BtnSeleccionarImagen.ForeColor = System.Drawing.Color.White;
+            this.BtnSeleccionarImagen.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnSeleccionarImagen.Location = new System.Drawing.Point(518, 346);
+            this.BtnSeleccionarImagen.Name = "BtnSeleccionarImagen";
+            this.BtnSeleccionarImagen.Size = new System.Drawing.Size(211, 38);
+            this.BtnSeleccionarImagen.TabIndex = 183;
+            this.BtnSeleccionarImagen.Text = "Seleccionar imagen ...";
+            this.BtnSeleccionarImagen.TextGroundColor = System.Drawing.Color.White;
+            this.BtnSeleccionarImagen.UseVisualStyleBackColor = false;
+            this.BtnSeleccionarImagen.Click += new System.EventHandler(this.BtnSeleccionarImagen_Click);
+            // 
             // PnlAgregarProductos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(800, 499);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.PBImagenProducto);
+            this.Controls.Add(this.BtnSeleccionarImagen);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.TxtCodigo);
@@ -245,6 +292,7 @@
             this.Load += new System.EventHandler(this.PnlAgregarProductos_Load);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PBImagenProducto)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -266,5 +314,8 @@
         public System.Windows.Forms.TextBox TxtCodigo;
         public Especiales.EspecialButton btnAgregar;
         public Especiales.EspecialButton btnCancelar;
+        public System.Windows.Forms.Label label10;
+        private System.Windows.Forms.PictureBox PBImagenProducto;
+        public Especiales.EspecialButton BtnSeleccionarImagen;
     }
 }

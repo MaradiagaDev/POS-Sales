@@ -37,9 +37,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.TxtConsecutivoOrden = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.TxtFacturaCancelar = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.especialButton5 = new NeoCobranza.Especiales.EspecialButton();
+            this.BtnCancelarFactura = new NeoCobranza.Especiales.EspecialButton();
             this.BtnGuardarConfiguracion = new NeoCobranza.Especiales.EspecialButton();
             this.ChkRetieneIva = new System.Windows.Forms.CheckBox();
             this.CmbImpresoraTicke = new System.Windows.Forms.ComboBox();
@@ -50,6 +50,14 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.CmbImpresora = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.TxtConsecutivoFacturaCredito = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.TxtSerieCredito = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.Chk80mm = new System.Windows.Forms.CheckBox();
+            this.Chk58mm = new System.Windows.Forms.CheckBox();
             this.PnlTitulo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,14 +92,14 @@
             this.label3.ForeColor = System.Drawing.Color.DarkRed;
             this.label3.Location = new System.Drawing.Point(12, 448);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(305, 16);
+            this.label3.Size = new System.Drawing.Size(304, 16);
             this.label3.TabIndex = 148;
             this.label3.Text = "Esta configuración es individual por sucursal.";
             // 
             // TxtSerie
             // 
             this.TxtSerie.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.TxtSerie.Location = new System.Drawing.Point(12, 32);
+            this.TxtSerie.Location = new System.Drawing.Point(12, 80);
             this.TxtSerie.MaxLength = 5;
             this.TxtSerie.Name = "TxtSerie";
             this.TxtSerie.Size = new System.Drawing.Size(133, 23);
@@ -102,7 +110,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
             this.label7.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label7.Location = new System.Drawing.Point(8, 6);
+            this.label7.Location = new System.Drawing.Point(8, 54);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(101, 18);
             this.label7.TabIndex = 150;
@@ -111,7 +119,7 @@
             // TxtConsecutivoFactura
             // 
             this.TxtConsecutivoFactura.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.TxtConsecutivoFactura.Location = new System.Drawing.Point(12, 111);
+            this.TxtConsecutivoFactura.Location = new System.Drawing.Point(12, 151);
             this.TxtConsecutivoFactura.Name = "TxtConsecutivoFactura";
             this.TxtConsecutivoFactura.Size = new System.Drawing.Size(133, 23);
             this.TxtConsecutivoFactura.TabIndex = 152;
@@ -122,7 +130,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label1.Location = new System.Drawing.Point(8, 85);
+            this.label1.Location = new System.Drawing.Point(8, 125);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(159, 18);
             this.label1.TabIndex = 153;
@@ -131,7 +139,7 @@
             // TxtConsecutivoOrden
             // 
             this.TxtConsecutivoOrden.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.TxtConsecutivoOrden.Location = new System.Drawing.Point(12, 184);
+            this.TxtConsecutivoOrden.Location = new System.Drawing.Point(12, 224);
             this.TxtConsecutivoOrden.Name = "TxtConsecutivoOrden";
             this.TxtConsecutivoOrden.Size = new System.Drawing.Size(133, 23);
             this.TxtConsecutivoOrden.TabIndex = 158;
@@ -141,20 +149,20 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
             this.label4.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label4.Location = new System.Drawing.Point(8, 158);
+            this.label4.Location = new System.Drawing.Point(8, 198);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(151, 18);
             this.label4.TabIndex = 159;
             this.label4.Text = "Consecutivo Orden";
             // 
-            // textBox5
+            // TxtFacturaCancelar
             // 
-            this.textBox5.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.textBox5.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.textBox5.Location = new System.Drawing.Point(474, 32);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(133, 23);
-            this.textBox5.TabIndex = 164;
+            this.TxtFacturaCancelar.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.TxtFacturaCancelar.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TxtFacturaCancelar.Location = new System.Drawing.Point(474, 32);
+            this.TxtFacturaCancelar.Name = "TxtFacturaCancelar";
+            this.TxtFacturaCancelar.Size = new System.Drawing.Size(133, 23);
+            this.TxtFacturaCancelar.TabIndex = 164;
             // 
             // label6
             // 
@@ -168,25 +176,26 @@
             this.label6.TabIndex = 165;
             this.label6.Text = "Cancelar Factura:";
             // 
-            // especialButton5
+            // BtnCancelarFactura
             // 
-            this.especialButton5.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.especialButton5.BackColor = System.Drawing.Color.Maroon;
-            this.especialButton5.BackGroundColor = System.Drawing.Color.Maroon;
-            this.especialButton5.BorderColor = System.Drawing.Color.Lime;
-            this.especialButton5.BorderRadius = 5;
-            this.especialButton5.BorderSize = 0;
-            this.especialButton5.FlatAppearance.BorderSize = 0;
-            this.especialButton5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.especialButton5.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
-            this.especialButton5.ForeColor = System.Drawing.Color.White;
-            this.especialButton5.Location = new System.Drawing.Point(656, 21);
-            this.especialButton5.Name = "especialButton5";
-            this.especialButton5.Size = new System.Drawing.Size(199, 35);
-            this.especialButton5.TabIndex = 166;
-            this.especialButton5.Text = "Cancelar Factura";
-            this.especialButton5.TextGroundColor = System.Drawing.Color.White;
-            this.especialButton5.UseVisualStyleBackColor = false;
+            this.BtnCancelarFactura.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.BtnCancelarFactura.BackColor = System.Drawing.Color.Maroon;
+            this.BtnCancelarFactura.BackGroundColor = System.Drawing.Color.Maroon;
+            this.BtnCancelarFactura.BorderColor = System.Drawing.Color.Lime;
+            this.BtnCancelarFactura.BorderRadius = 5;
+            this.BtnCancelarFactura.BorderSize = 0;
+            this.BtnCancelarFactura.FlatAppearance.BorderSize = 0;
+            this.BtnCancelarFactura.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCancelarFactura.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.BtnCancelarFactura.ForeColor = System.Drawing.Color.White;
+            this.BtnCancelarFactura.Location = new System.Drawing.Point(656, 21);
+            this.BtnCancelarFactura.Name = "BtnCancelarFactura";
+            this.BtnCancelarFactura.Size = new System.Drawing.Size(199, 35);
+            this.BtnCancelarFactura.TabIndex = 166;
+            this.BtnCancelarFactura.Text = "Cancelar Factura";
+            this.BtnCancelarFactura.TextGroundColor = System.Drawing.Color.White;
+            this.BtnCancelarFactura.UseVisualStyleBackColor = false;
+            this.BtnCancelarFactura.Click += new System.EventHandler(this.BtnCancelarFactura_Click);
             // 
             // BtnGuardarConfiguracion
             // 
@@ -212,9 +221,9 @@
             // 
             this.ChkRetieneIva.AutoSize = true;
             this.ChkRetieneIva.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ChkRetieneIva.Location = new System.Drawing.Point(199, 36);
+            this.ChkRetieneIva.Location = new System.Drawing.Point(700, 316);
             this.ChkRetieneIva.Name = "ChkRetieneIva";
-            this.ChkRetieneIva.Size = new System.Drawing.Size(118, 20);
+            this.ChkRetieneIva.Size = new System.Drawing.Size(117, 20);
             this.ChkRetieneIva.TabIndex = 167;
             this.ChkRetieneIva.Text = "Recauda IVA";
             this.ChkRetieneIva.UseVisualStyleBackColor = true;
@@ -301,12 +310,106 @@
             this.CmbImpresora.Size = new System.Drawing.Size(248, 25);
             this.CmbImpresora.TabIndex = 172;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label10.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label10.Location = new System.Drawing.Point(8, 21);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(73, 18);
+            this.label10.TabIndex = 176;
+            this.label10.Text = "Contado";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label11.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label11.Location = new System.Drawing.Point(238, 21);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(63, 18);
+            this.label11.TabIndex = 183;
+            this.label11.Text = "Crédito";
+            // 
+            // TxtConsecutivoFacturaCredito
+            // 
+            this.TxtConsecutivoFacturaCredito.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TxtConsecutivoFacturaCredito.Location = new System.Drawing.Point(242, 151);
+            this.TxtConsecutivoFacturaCredito.Name = "TxtConsecutivoFacturaCredito";
+            this.TxtConsecutivoFacturaCredito.Size = new System.Drawing.Size(133, 23);
+            this.TxtConsecutivoFacturaCredito.TabIndex = 179;
+            this.TxtConsecutivoFacturaCredito.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtConsecutivoFacturaCredito_KeyPress);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label13.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label13.Location = new System.Drawing.Point(238, 125);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(159, 18);
+            this.label13.TabIndex = 180;
+            this.label13.Text = "Consecutivo Factura";
+            // 
+            // TxtSerieCredito
+            // 
+            this.TxtSerieCredito.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TxtSerieCredito.Location = new System.Drawing.Point(242, 80);
+            this.TxtSerieCredito.MaxLength = 5;
+            this.TxtSerieCredito.Name = "TxtSerieCredito";
+            this.TxtSerieCredito.Size = new System.Drawing.Size(133, 23);
+            this.TxtSerieCredito.TabIndex = 177;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label14.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label14.Location = new System.Drawing.Point(238, 54);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(101, 18);
+            this.label14.TabIndex = 178;
+            this.label14.Text = "Serie Actual:";
+            // 
+            // Chk80mm
+            // 
+            this.Chk80mm.AutoSize = true;
+            this.Chk80mm.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Chk80mm.Location = new System.Drawing.Point(700, 126);
+            this.Chk80mm.Name = "Chk80mm";
+            this.Chk80mm.Size = new System.Drawing.Size(126, 20);
+            this.Chk80mm.TabIndex = 184;
+            this.Chk80mm.Text = "Factura 80 mm";
+            this.Chk80mm.UseVisualStyleBackColor = true;
+            this.Chk80mm.CheckedChanged += new System.EventHandler(this.Chk80mm_CheckedChanged);
+            // 
+            // Chk58mm
+            // 
+            this.Chk58mm.AutoSize = true;
+            this.Chk58mm.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Chk58mm.Location = new System.Drawing.Point(700, 154);
+            this.Chk58mm.Name = "Chk58mm";
+            this.Chk58mm.Size = new System.Drawing.Size(126, 20);
+            this.Chk58mm.TabIndex = 185;
+            this.Chk58mm.Text = "Factura 58 mm";
+            this.Chk58mm.UseVisualStyleBackColor = true;
+            this.Chk58mm.CheckedChanged += new System.EventHandler(this.Chk58mm_CheckedChanged);
+            // 
             // ConfigFacturacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1125, 523);
+            this.Controls.Add(this.Chk58mm);
+            this.Controls.Add(this.Chk80mm);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.TxtConsecutivoFacturaCredito);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.TxtSerieCredito);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.TxtImpresora);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label9);
@@ -316,8 +419,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.CmbImpresoraTicke);
             this.Controls.Add(this.ChkRetieneIva);
-            this.Controls.Add(this.especialButton5);
-            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.BtnCancelarFactura);
+            this.Controls.Add(this.TxtFacturaCancelar);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.BtnGuardarConfiguracion);
             this.Controls.Add(this.TxtConsecutivoOrden);
@@ -351,8 +454,8 @@
         public System.Windows.Forms.TextBox TxtConsecutivoOrden;
         public System.Windows.Forms.Label label4;
         public Especiales.EspecialButton BtnGuardarConfiguracion;
-        public Especiales.EspecialButton especialButton5;
-        public System.Windows.Forms.TextBox textBox5;
+        public Especiales.EspecialButton BtnCancelarFactura;
+        public System.Windows.Forms.TextBox TxtFacturaCancelar;
         public System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox ChkRetieneIva;
         private System.Windows.Forms.ComboBox CmbImpresoraTicke;
@@ -363,5 +466,13 @@
         public System.Windows.Forms.Label label8;
         public System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox CmbImpresora;
+        public System.Windows.Forms.Label label10;
+        public System.Windows.Forms.Label label11;
+        public System.Windows.Forms.TextBox TxtConsecutivoFacturaCredito;
+        public System.Windows.Forms.Label label13;
+        public System.Windows.Forms.TextBox TxtSerieCredito;
+        public System.Windows.Forms.Label label14;
+        private System.Windows.Forms.CheckBox Chk80mm;
+        private System.Windows.Forms.CheckBox Chk58mm;
     }
 }

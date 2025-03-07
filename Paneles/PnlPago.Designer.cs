@@ -56,6 +56,7 @@
             this.TxtPagado = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.BtnGuardar = new NeoCobranza.Especiales.EspecialButton();
+            this.BtnImprimirFactura = new NeoCobranza.Especiales.EspecialButton();
             ((System.ComponentModel.ISupportInitialize)(this.DgvItemsPagos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -111,7 +112,7 @@
             this.label17.BackColor = System.Drawing.Color.Black;
             this.label17.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label17.Location = new System.Drawing.Point(173, 18);
+            this.label17.Location = new System.Drawing.Point(9, 18);
             this.label17.Name = "label17";
             this.label17.Padding = new System.Windows.Forms.Padding(5);
             this.label17.Size = new System.Drawing.Size(214, 29);
@@ -409,11 +410,34 @@
             this.BtnGuardar.UseVisualStyleBackColor = false;
             this.BtnGuardar.Click += new System.EventHandler(this.BtnGuardar_Click);
             // 
+            // BtnImprimirFactura
+            // 
+            this.BtnImprimirFactura.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.BtnImprimirFactura.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.BtnImprimirFactura.BackGroundColor = System.Drawing.SystemColors.WindowFrame;
+            this.BtnImprimirFactura.BorderColor = System.Drawing.Color.Transparent;
+            this.BtnImprimirFactura.BorderRadius = 5;
+            this.BtnImprimirFactura.BorderSize = 2;
+            this.BtnImprimirFactura.FlatAppearance.BorderSize = 0;
+            this.BtnImprimirFactura.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnImprimirFactura.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnImprimirFactura.ForeColor = System.Drawing.Color.White;
+            this.BtnImprimirFactura.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnImprimirFactura.Location = new System.Drawing.Point(397, 19);
+            this.BtnImprimirFactura.Name = "BtnImprimirFactura";
+            this.BtnImprimirFactura.Size = new System.Drawing.Size(175, 28);
+            this.BtnImprimirFactura.TabIndex = 201;
+            this.BtnImprimirFactura.Text = "Imprimir Factura";
+            this.BtnImprimirFactura.TextGroundColor = System.Drawing.Color.White;
+            this.BtnImprimirFactura.UseVisualStyleBackColor = false;
+            this.BtnImprimirFactura.Click += new System.EventHandler(this.BtnImprimirFactura_Click);
+            // 
             // PnlPago
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1000, 569);
+            this.Controls.Add(this.BtnImprimirFactura);
             this.Controls.Add(this.TxtPagado);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.TxtDeudaTotal);
@@ -446,6 +470,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Panel de Pagos";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PnlPago_FormClosed);
+            this.Load += new System.EventHandler(this.PnlPago_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DgvItemsPagos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -478,5 +503,6 @@
         public System.Windows.Forms.Label label9;
         public System.Windows.Forms.TextBox TxtPagado;
         public System.Windows.Forms.Label label10;
+        private Especiales.EspecialButton BtnImprimirFactura;
     }
 }

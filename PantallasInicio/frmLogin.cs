@@ -84,8 +84,14 @@ namespace NeoCobranza
 
                 Utilidades.Usuario = TxtUser.Text.Trim();
 
+                Utilidades.RolId =  dataUtilities.getRecordByPrimaryKey("Usuario",Utilidades.IdUsuario).Rows[0]["RolId"].ToString();
+                Utilidades.Rol = dataUtilities.getRecordByPrimaryKey("Roles", Utilidades.RolId).Rows[0]["NombreRol"].ToString();
+
+                this.Hide(); // Oculta la pantalla de login
+
                 frmSeleccionSucursal frm = new frmSeleccionSucursal(Utilidades.IdUsuario);
-                frm.ShowDialog();
+                frm.ShowDialog(); // Muestra la pantalla de selección
+
             }
             catch (Exception ex)
             {

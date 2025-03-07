@@ -93,6 +93,17 @@ namespace NeoCobranza.Paneles
                 TxtPrecioVenta.Text = Convert.ToString(dtResponse.Rows[0]["Precio"]);
                 CmbTipoProducto.SelectedValue = Convert.ToString(dtResponse.Rows[0]["CategoriaId"]);
 
+                byte[] imagenBytes = dtResponse.Rows[0]["Img"] as byte[];
+
+                if (imagenBytes != null)
+                {
+                    using (MemoryStream ms = new MemoryStream(imagenBytes))
+                    {
+                        PBImagenProducto.Image = Image.FromStream(ms);
+                        PBImagenProducto.SizeMode = PictureBoxSizeMode.Zoom;
+                    }
+                }
+
                 DataTable dtResponseRelacional = dataUtilities.getRecordByColumn("RelProveedoresProducto", "ProductoId", auxId);
 
                 if (dtResponseRelacional.Rows.Count > 0)
@@ -231,7 +242,7 @@ namespace NeoCobranza.Paneles
                 }
                 try
                 {
-                    string idProductoCrear = Guid.NewGuid().ToString();
+                    string idProductoCrear = Guid.NewGuid().ToString().Substring(0,10);
 
                     dataUtilities.SetColumns("ProductoId", idProductoCrear);
                     dataUtilities.SetColumns("NombreProducto", TxtNombre.Text.Trim());
@@ -242,6 +253,12 @@ namespace NeoCobranza.Paneles
                     dataUtilities.SetColumns("ClasificacionProducto", auxModulo);
                     dataUtilities.SetColumns("CategoriaId", Convert.ToInt32(CmbTipoProducto.SelectedValue.ToString()));
                     dataUtilities.SetColumns("Codigo", TxtCodigo.Text.Trim());
+
+                    if (PBImagenProducto.Image != null)
+                    {
+                        byte[] imagenBytes = ImageToByteArray(PBImagenProducto.Image);
+                        dataUtilities.SetColumns("Img", imagenBytes);
+                    }
 
                     dataUtilities.InsertRecord("ProductosServicios");
 
@@ -305,13 +322,17 @@ namespace NeoCobranza.Paneles
                     dataUtilities.SetColumns("ClasificacionProducto", auxModulo);
                     dataUtilities.SetColumns("CategoriaId", Convert.ToInt32(CmbTipoProducto.SelectedValue.ToString()));
                     dataUtilities.SetColumns("Codigo", TxtCodigo.Text.Trim());
+                    if (PBImagenProducto.Image != null)
+                    {
+                        byte[] imagenBytes = ImageToByteArray(PBImagenProducto.Image);
+                        dataUtilities.SetColumns("Img", imagenBytes);
+                    }
 
                     dataUtilities.UpdateRecordByPrimaryKey("ProductosServicios",auxId);
 
 
                     if (auxModulo == "Productos")
                     {
-                        dataUtilities.DeleteRecordByColumn("RelProveedoresProducto", "ProductoId", auxId);
 
                         foreach (DataRow row in auxTablaDinamicaProveedor.Rows)
                         {
@@ -499,6 +520,27 @@ namespace NeoCobranza.Paneles
             if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
             {
                 e.Handled = true;
+            }
+        }
+
+
+        private void BtnSeleccionarImagen_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Title = "Seleccionar Imagen";
+                openFileDialog.Filter = "Archivos de Imagen|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
+                openFileDialog.Multiselect = false;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Muestra la imagen en un PictureBox llamado "pbLogo"
+                    PBImagenProducto.Image = Image.FromFile(openFileDialog.FileName);
+                    PBImagenProducto.SizeMode = PictureBoxSizeMode.Zoom;
+
+                    // Si necesitas guardar la ruta de la imagen
+                    string rutaImagen = openFileDialog.FileName;
+                }
             }
         }
 

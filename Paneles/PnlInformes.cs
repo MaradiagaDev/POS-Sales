@@ -19,12 +19,55 @@ namespace NeoCobranza.Paneles
 
         private void especialButton8_Click(object sender, EventArgs e)
         {
-
+            PnlGenerarInforme frm = new PnlGenerarInforme("Anuladas");
+            frm.ShowDialog();
         }
 
         private void especialButton1_Click(object sender, EventArgs e)
         {
             PnlGenerarInforme frm = new PnlGenerarInforme("ReporteVentas");
+            frm.ShowDialog();
+        }
+
+        private void BtnCuentasCobrar_Click(object sender, EventArgs e)
+        {
+            PnlGenerarInforme frm = new PnlGenerarInforme("CuentasCobrar");
+            frm.ShowDialog();
+        }
+
+        private void BtnAsistencias_Click(object sender, EventArgs e)
+        {
+            PnlGenerarInforme frm = new PnlGenerarInforme("Asistencias");
+            frm.ShowDialog();
+        }
+
+        private void BtnProductos_Click(object sender, EventArgs e)
+        {
+            PnlGenerarInforme frm = new PnlGenerarInforme("Productos");
+            frm.ShowDialog();
+        }
+
+        private void especialButton12_Click(object sender, EventArgs e)
+        {
+            PnlGenerarInforme frm = new PnlGenerarInforme("Limites");
+            frm.ShowDialog();
+        }
+
+        private void especialButton2_Click(object sender, EventArgs e)
+        {
+            PnlGenerarInforme frm = new PnlGenerarInforme("Cortes");
+            frm.ShowDialog();
+        }
+
+        private void especialButton13_Click(object sender, EventArgs e)
+        {
+            PnlGenerarInforme frm = new PnlGenerarInforme("Compras");
+            frm.ShowDialog();
+        }
+
+        private void especialButton14_Click(object sender, EventArgs e)
+        {
+            PnlGenerarInforme frm = new PnlGenerarInforme("Ajustes");
             frm.ShowDialog();
         }
     }

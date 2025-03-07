@@ -40,12 +40,24 @@ namespace NeoCobranza.Paneles
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+            if (!Utilidades.PermisosLevel(3, 3))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             PnlAgregarAlmacen frm = new PnlAgregarAlmacen(this, "Crear", "");
             frm.ShowDialog();
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
+            if (!Utilidades.PermisosLevel(3, 4))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (dgvCatalogoAlmacenes.SelectedRows.Count > 0)
             {
                 DataGridViewRow selectedRow = dgvCatalogoAlmacenes.SelectedRows[0];
@@ -65,6 +77,12 @@ namespace NeoCobranza.Paneles
 
         private void dgvCatalogoAlmacenes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (!Utilidades.PermisosLevel(3, 25))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (e.ColumnIndex == 0)
             {
                 object cellValue = dgvCatalogoAlmacenes.Rows[e.RowIndex].Cells[1].Value;

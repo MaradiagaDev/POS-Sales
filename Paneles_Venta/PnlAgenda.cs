@@ -58,6 +58,12 @@ namespace NeoCobranza.Paneles_Venta
 
         private void BtnAgregarServicio_Click(object sender, EventArgs e)
         {
+            if (!Utilidades.PermisosLevel(3, 15))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             Panel_Cliente_Contrato panelCliente = new Panel_Cliente_Contrato("Agenda");
             AddOwnedForm(panelCliente);
             panelCliente.ShowDialog();
@@ -65,6 +71,12 @@ namespace NeoCobranza.Paneles_Venta
 
         private void BtnCancelarOrden_Click(object sender, EventArgs e)
         {
+            if (!Utilidades.PermisosLevel(3, 18))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (DgvItemsCitas.SelectedRows.Count > 0)
             {
                 DialogResult result = MessageBox.Show(
@@ -89,6 +101,12 @@ namespace NeoCobranza.Paneles_Venta
 
         private void BtnCitaCumplida_Click(object sender, EventArgs e)
         {
+            if (!Utilidades.PermisosLevel(3, 17))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (DgvItemsCitas.SelectedRows.Count > 0)
             {
                 DialogResult result = MessageBox.Show(
@@ -124,6 +142,12 @@ namespace NeoCobranza.Paneles_Venta
 
         private void BtnCambioUsuario_Click(object sender, EventArgs e)
         {
+            if (!Utilidades.PermisosLevel(3, 16))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (DgvItemsCitas.SelectedRows.Count > 0)
             {
                 PnlAgendaCambioUsuario frm = new PnlAgendaCambioUsuario(this);
@@ -134,6 +158,12 @@ namespace NeoCobranza.Paneles_Venta
 
         private void BtnPagarOrden_Click(object sender, EventArgs e)
         {
+            if (!Utilidades.PermisosLevel(3, 19))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             try
             {
                 if (DgvItemsCitas.SelectedRows.Count > 0)

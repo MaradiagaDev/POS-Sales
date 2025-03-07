@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using iTextSharp.text.xml;
+using Microsoft.EntityFrameworkCore;
 using NeoCobranza.DataController;
 using NeoCobranza.ModelsCobranza;
 using NeoCobranza.Paneles;
@@ -35,6 +37,40 @@ namespace NeoCobranza.ViewModels
         {
             auxKeyUsuario = key != "Crear" ? "Modificar" : "Crear";
             frm.btnAgregar.Text = "Crear";
+            frm.cmbDepartamento.SelectedIndex = 0;
+            frm.cmbPais.SelectedIndex = 0;
+
+            // Obtiene todos los registros de la tabla Sucursal
+            DataTable dtResponseSucursales = dataUtilities.getRecordByColumn("SegmentacionCliente","SucursalId",Utilidades.SucursalId);
+
+            // Filtra las filas donde el campo Estado sea "Activo"
+            var filterRowSucursales = from row in dtResponseSucursales.AsEnumerable()
+                                      where Convert.ToString(row.Field<string>("Estado")) == "Activo"
+                                      select row;
+
+            if (filterRowSucursales.Any())
+            {
+                // Crea un DataTable para los datos filtrados
+                DataTable dataCmbSucursal = new DataTable();
+                dataCmbSucursal = filterRowSucursales.CopyToDataTable();
+
+                // Crea una nueva fila para "Mostrar Todo"
+                DataRow newRow = dataCmbSucursal.NewRow();
+                newRow["Clave"] = "0";
+                newRow["Descripcion"] = "Sin Segmentación";
+
+                // Inserta la nueva fila en la posición 0
+                dataCmbSucursal.Rows.InsertAt(newRow, 0);
+
+                // Configura el DataSource del combo box
+                frm.CmbSegmentacion.ValueMember = "Clave";
+                frm.CmbSegmentacion.DisplayMember = "Descripcion";
+                frm.CmbSegmentacion.DataSource = dataCmbSucursal;
+
+                frm.CmbSegmentacion.SelectedValue = "0";
+            }
+
+
             if (key != "Crear")
             {
                 frm.btnAgregar.Text = "Modificar";
@@ -47,6 +83,24 @@ namespace NeoCobranza.ViewModels
 
                     if (dtResponse.Rows.Count > 0)
                     {
+                        if (dtResponse.Rows[0]["SegmentacionId"] == DBNull.Value)
+                        {
+                            frm.CmbSegmentacion.SelectedValue = "0";
+                        }
+                        else
+                        {
+                            frm.CmbSegmentacion.SelectedValue = Convert.ToString(dtResponse.Rows[0]["SegmentacionId"]);
+                        }
+
+                        if (dtResponse.Rows[0]["Codigo"] == DBNull.Value)
+                        {
+                            frm.TxtCodigoUnico.Text = "";
+                        }
+                        else
+                        {
+                            frm.TxtCodigoUnico.Text = Convert.ToString(dtResponse.Rows[0]["Codigo"]);
+                        }
+
                         frm.txtPrimerNombre.Text = Convert.ToString(dtResponse.Rows[0]["Pnombre"]);
                         frm.txtSegundoNombre.Text = Convert.ToString(dtResponse.Rows[0]["Snombre"]);
                         frm.txtPrimerApellido.Text = Convert.ToString(dtResponse.Rows[0]["Papellido"]);
@@ -112,6 +166,8 @@ namespace NeoCobranza.ViewModels
                 return false;
             }
 
+            //Validacion de codigo Unico
+
             return true;
 
         }
@@ -120,6 +176,27 @@ namespace NeoCobranza.ViewModels
         {
             try
             {
+                if (frm.TxtCodigoUnico.Text.Trim().Length > 0)
+                {
+                    string idCliente = "0";
+                    if (!string.IsNullOrEmpty(auxId))
+                    {
+                        idCliente = auxId;
+                    }
+
+
+                    dataUtilities.SetParameter("@IdCliente", idCliente);
+                    dataUtilities.SetParameter("@Codigo", frm.TxtCodigoUnico.Text.Trim());
+                    DataTable dt = dataUtilities.ExecuteStoredProcedure("spVerificarCodigoCliente");
+
+                    if (dt.Rows[0][0].ToString() == "1")
+                    {
+                        MessageBox.Show("El código ya pertenece a otro cliente.", "Atención",
+                                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+
                 DateTime fechaSeleccionada = frm.dtpFechaNac.Value;
                 int edad = DateTime.Today.Year - fechaSeleccionada.Year - (DateTime.Today < fechaSeleccionada.AddYears(DateTime.Today.Year - fechaSeleccionada.Year) ? 1 : 0);
 
@@ -146,6 +223,8 @@ namespace NeoCobranza.ViewModels
                 dataUtilities.SetParameter("@Observacion", frm.txtObservacion.Text.Trim());
                 dataUtilities.SetParameter("@NoRuc", frm.TxtNoRuc.Text.Trim());
                 dataUtilities.SetParameter("@IdSucursal", Utilidades.SucursalId);
+                dataUtilities.SetParameter("@SegmentacionId", frm.CmbSegmentacion.SelectedValue);
+                dataUtilities.SetParameter("@Codigo", frm.TxtCodigoUnico.Text.Trim());
 
                 MessageBox.Show(dataUtilities.ExecuteStoredProcedure("SP_CrearActualizarCliente").Rows[0][0].ToString(), "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ConfigUI(frm.frmPnlCatalogoCliente, "Catalogo");
@@ -183,6 +262,37 @@ namespace NeoCobranza.ViewModels
             switch (opc)
             {
                 case "Catalogo":
+
+                    // Obtiene todos los registros de la tabla Sucursal
+                    DataTable dtResponseSegmentacion = dataUtilities.getRecordByColumn("SegmentacionCliente", "SucursalId", Utilidades.SucursalId);
+
+                    // Filtra las filas donde el campo Estado sea "Activo"
+                    var filterRowSeg = from row in dtResponseSegmentacion.AsEnumerable()
+                                              where Convert.ToString(row.Field<string>("Estado")) == "Activo"
+                                              select row;
+
+                    if (filterRowSeg.Any())
+                    {
+                        // Crea un DataTable para los datos filtrados
+                        DataTable dataCmbSucursal = new DataTable();
+                        dataCmbSucursal = filterRowSeg.CopyToDataTable();
+
+                        // Crea una nueva fila para "Mostrar Todo"
+                        DataRow newRow = dataCmbSucursal.NewRow();
+                        newRow["Clave"] = "0";
+                        newRow["Descripcion"] = "Sin Segmentación";
+
+                        // Inserta la nueva fila en la posición 0
+                        dataCmbSucursal.Rows.InsertAt(newRow, 0);
+
+                        // Configura el DataSource del combo box
+                        frm.CmbSegmentacion.ValueMember = "Clave";
+                        frm.CmbSegmentacion.DisplayMember = "Descripcion";
+                        frm.CmbSegmentacion.DataSource = dataCmbSucursal;
+
+                        frm.CmbSegmentacion.SelectedValue = "0";
+                    }
+
                     // Obtiene todos los registros de la tabla Sucursal
                     DataTable dtResponseSucursales = dataUtilities.GetAllRecords("Sucursal");
 
@@ -224,15 +334,18 @@ namespace NeoCobranza.ViewModels
                     //Agregar Boton de Cambiar de estado
                     DataGridViewButtonColumn BtnCambioEstado = new DataGridViewButtonColumn();
 
-                    BtnCambioEstado.Text = "Cambiar Estado";
+                    BtnCambioEstado.Text = "Estado de Cuenta";
                     BtnCambioEstado.Name = "...";
                     BtnCambioEstado.UseColumnTextForButtonValue = true;
-                    BtnCambioEstado.DefaultCellStyle.ForeColor = Color.Blue;
+                    BtnCambioEstado.DefaultCellStyle.ForeColor = System.Drawing.Color.Blue;
                     frm.dgvCatalogoClientes.Columns.Add(BtnCambioEstado);
 
                     // Definir las columnas
                     dynamicDataTable.Columns.Add("Id", typeof(string));
                     dynamicDataTable.Columns.Add("Nombre del Cliente", typeof(string));
+                    dynamicDataTable.Columns.Add("RUC", typeof(string));
+                    dynamicDataTable.Columns.Add("Código", typeof(string));
+                    dynamicDataTable.Columns.Add("Segmentación", typeof(string));
                     dynamicDataTable.Columns.Add("Cédula", typeof(string));
                     dynamicDataTable.Columns.Add("Estado", typeof(string));
                     dynamicDataTable.Columns.Add("Dirección", typeof(string));
@@ -277,10 +390,25 @@ namespace NeoCobranza.ViewModels
                     var filtroPor = frm.CmbBuscarPor.SelectedIndex;
                     var filtroValor = frm.TxtFiltrar.Text.Trim();; // Asumiendo que el ID de la sucursal se captura desde un campo de texto en el formulario
 
+                    string segmentacion = "0";
+
+                    if (!string.IsNullOrEmpty(Convert.ToString(frm.CmbSegmentacion.SelectedValue)))
+                    {
+                        segmentacion = Convert.ToString(frm.CmbSegmentacion.SelectedValue);
+                    }
+
+                    string sucursal = "0";
+
+                    if (!string.IsNullOrEmpty(Convert.ToString(frm.CmbSucursal.SelectedValue)))
+                    {
+                        sucursal = Convert.ToString(frm.CmbSucursal.SelectedValue);
+                    }
+
 
                     dataUtilities.SetParameter("@FiltroPor", filtroPor);
                     dataUtilities.SetParameter("@FiltroValor", filtroValor);
-                    dataUtilities.SetParameter("@IdSucursal", frm.CmbSucursal.SelectedValue);
+                    dataUtilities.SetParameter("@IdSucursal", sucursal);
+                    dataUtilities.SetParameter("@SegmentacionId", segmentacion);
                     dataUtilities.SetParameter("@PageNumber", pageNumber);
                     dataUtilities.SetParameter("@PageSize", pageSize);
                     
@@ -298,9 +426,27 @@ namespace NeoCobranza.ViewModels
 
         public void UpdatePagination(PnlCatalogoClientes frm)
         {
-            dataUtilities.SetParameter("@FiltroPor", frm.CmbBuscarPor.SelectedIndex);
-            dataUtilities.SetParameter("@FiltroValor", frm.TxtFiltrar.Text.Trim());
-            dataUtilities.SetParameter("@IdSucursal", frm.CmbSucursal.SelectedValue);
+            string segmentacion = "0";
+
+            if (!string.IsNullOrEmpty(Convert.ToString(frm.CmbSegmentacion.SelectedValue)))
+            {
+                segmentacion = Convert.ToString(frm.CmbSegmentacion.SelectedValue);
+            }
+
+            string sucursal = "0";
+
+            if (!string.IsNullOrEmpty(Convert.ToString(frm.CmbSucursal.SelectedValue)))
+            {
+                sucursal = Convert.ToString(frm.CmbSucursal.SelectedValue);
+            }
+
+            var filtroPor = frm.CmbBuscarPor.SelectedIndex;
+            var filtroValor = frm.TxtFiltrar.Text.Trim(); ; // Asumiendo que el ID de la sucursal se captura desde un campo de texto en el formulario
+
+            dataUtilities.SetParameter("@FiltroPor", filtroPor);
+            dataUtilities.SetParameter("@FiltroValor", filtroValor);
+            dataUtilities.SetParameter("@IdSucursal", sucursal);
+            dataUtilities.SetParameter("@SegmentacionId", segmentacion);
             dataUtilities.SetParameter("@PageNumber", currentPage);
             dataUtilities.SetParameter("@PageSize", pageSize);
 
@@ -323,8 +469,11 @@ namespace NeoCobranza.ViewModels
                 string profesion = Convert.ToString(item["Profesion"]) == null || Convert.ToString(item["Profesion"]).Trim() == "" ? "Desconocido" : Convert.ToString(item["Profesion"]);
                // string estadoCivil = Convert.ToString(item["EstadoCivil"]);
                 string sexo = Convert.ToString(item["Sexo"]);
+                string Ruc = item["NoRuc"] == DBNull.Value || Convert.ToString(item["NoRuc"]) == "" ? "" : Convert.ToString(item["NoRuc"]);
+                string Codigo = item["Codigo"] == DBNull.Value || Convert.ToString(item["Codigo"]) == "" ? "" : Convert.ToString(item["Codigo"]);
+                string descripcion = item["SegmentacionId"] == DBNull.Value || Convert.ToString(item["SegmentacionId"]) == "0" ? "Sin Segmentar" : Convert.ToString(item["Descripcion"]);
 
-                dynamicDataTable.Rows.Add(idCliente, nombreCliente, cedula, estado, direccion, pais, departamento,
+                dynamicDataTable.Rows.Add(idCliente, nombreCliente,Ruc,Codigo,descripcion, cedula, estado, direccion, pais, departamento,
                                           fechaNac, telefono, celular, edad, profesion, sexo);
             }
 

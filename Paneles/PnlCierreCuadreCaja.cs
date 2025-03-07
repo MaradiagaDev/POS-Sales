@@ -60,6 +60,7 @@ namespace NeoCobranza.Paneles
             TxtTarjeta.Text = data.Rows[0]["TotalTarjetaOrdenes"].ToString();
             TxtTotalEnCaja.Text = totalCaja.ToString();
             TxtDiferencia.Text = diferencia.ToString();
+            TxtPropinas.Text = data.Rows[0]["TotalPropinas"].ToString();
 
             RecalcularCaja();
         }
@@ -131,6 +132,12 @@ namespace NeoCobranza.Paneles
 
         private void especialButton1_Click(object sender, EventArgs e)
         {
+            if (!Utilidades.PermisosLevel(3, 21))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             PnlIngresosPagosCaja frm = new PnlIngresosPagosCaja();
             frm.ShowDialog();
 
@@ -311,8 +318,16 @@ namespace NeoCobranza.Paneles
 
         private void dgvGeneral_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
+
             if ( dgvGeneral.Columns[e.ColumnIndex].Name == "btnEliminar")
             {
+                if (!Utilidades.PermisosLevel(3, 35))
+                {
+                    MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 DialogResult resultado = MessageBox.Show("¿Desea continuar con la acción?",
                                            "Confirmación",
                                            MessageBoxButtons.YesNo,
@@ -343,7 +358,13 @@ namespace NeoCobranza.Paneles
 
             if (dgvGeneral.Columns[e.ColumnIndex].Name == "btnGenerarComprobante")
             {
-                if(IndexSelected == 0)
+                if (!Utilidades.PermisosLevel(3, 23))
+                {
+                    MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (IndexSelected == 0)
                 {
                     PdfPrintPageEventHandler.PagoId = Convert.ToString(dgvGeneral.Rows[e.RowIndex].Cells[0].Value);
                     PdfPrintPageEventHandler.EsVenta = true;
@@ -467,6 +488,12 @@ namespace NeoCobranza.Paneles
 
         private void BtnPagarEfectivo_Click(object sender, EventArgs e)
         {
+            if (!Utilidades.PermisosLevel(3, 22))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             decimal diferencia = Convert.ToDecimal(TxtDiferencia.Text);
 
             if(diferencia != 0) 
@@ -548,8 +575,19 @@ namespace NeoCobranza.Paneles
 
         private void BtnRegistrarGastos_Click(object sender, EventArgs e)
         {
+            if (!Utilidades.PermisosLevel(3, 36))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             PnlHistorialCierresCaja frm = new PnlHistorialCierresCaja();
             frm.ShowDialog();
+        }
+
+        private void PnlCierreCuadreCaja_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

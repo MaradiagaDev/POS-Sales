@@ -24,6 +24,19 @@ namespace NeoCobranza.ViewModels
         public static string Usuario;
         public static string SucursalId;
         public static string Sucursal;
+        public static string RolId;
+        public static string Rol;
+
+        public static bool PermisosLevel(int Nivel,int Numero)
+        {
+            DataUtilities dataUtilities = new DataUtilities();
+
+            dataUtilities.SetParameter("@RolID", Utilidades.RolId);
+            dataUtilities.SetParameter("@Nivel", Nivel);
+            dataUtilities.SetParameter("@Numero",Numero);
+
+            return Convert.ToBoolean(dataUtilities.ExecuteStoredProcedure("spTienePermisoRol").Rows[0][0]);
+        }
 
         public static void ExportToExcel(DataTable dataTable,string documento)
         {

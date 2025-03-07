@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DocumentFormat.OpenXml.Wordprocessing;
 using NeoCobranza.Data;
 using NeoCobranza.DataController;
 using NeoCobranza.ModelsCobranza;
@@ -34,6 +35,37 @@ namespace NeoCobranza.Paneles
             
             this.panel = panel;
             UIUtilities.PersonalizarDataGridView(DgvCliente);
+
+
+            // Obtiene todos los registros de la tabla Sucursal
+            DataTable dtResponseSegmentacion = dataUtilities.getRecordByColumn("SegmentacionCliente", "SucursalId", Utilidades.SucursalId);
+
+            // Filtra las filas donde el campo Estado sea "Activo"
+            var filterRowSeg = from row in dtResponseSegmentacion.AsEnumerable()
+                               where Convert.ToString(row.Field<string>("Estado")) == "Activo"
+                               select row;
+
+            if (filterRowSeg.Any())
+            {
+                // Crea un DataTable para los datos filtrados
+                DataTable dataCmbSucursal = new DataTable();
+                dataCmbSucursal = filterRowSeg.CopyToDataTable();
+
+                // Crea una nueva fila para "Mostrar Todo"
+                DataRow newRow = dataCmbSucursal.NewRow();
+                newRow["Clave"] = "0";
+                newRow["Descripcion"] = "Sin Segmentación";
+
+                // Inserta la nueva fila en la posición 0
+                dataCmbSucursal.Rows.InsertAt(newRow, 0);
+
+                // Configura el DataSource del combo box
+                CmbSegmentacion.ValueMember = "Clave";
+                CmbSegmentacion.DisplayMember = "Descripcion";
+                CmbSegmentacion.DataSource = dataCmbSucursal;
+
+                CmbSegmentacion.SelectedValue = "0";
+            }
 
             // Obtiene todos los registros de la tabla Sucursal
             DataTable dtResponseSucursales = dataUtilities.GetAllRecords("Sucursal");
@@ -70,6 +102,7 @@ namespace NeoCobranza.Paneles
                     CmbBuscarPor.Items.Add("ID");
                     CmbBuscarPor.Items.Add("Nombre");
                     CmbBuscarPor.Items.Add("Cédula");
+                    CmbBuscarPor.Items.Add("Código");
                 }
 
                 CmbBuscarPor.SelectedIndex = 1;
@@ -89,6 +122,9 @@ namespace NeoCobranza.Paneles
             {
                 dynamicDataTable.Columns.Add("Id", typeof(string));
                 dynamicDataTable.Columns.Add("Nombre del Cliente", typeof(string));
+                dynamicDataTable.Columns.Add("RUC", typeof(string));
+                dynamicDataTable.Columns.Add("Código", typeof(string));
+                dynamicDataTable.Columns.Add("Segmentación", typeof(string));
                 dynamicDataTable.Columns.Add("Cédula", typeof(string));
                 dynamicDataTable.Columns.Add("Estado", typeof(string));
                 dynamicDataTable.Columns.Add("Dirección", typeof(string));
@@ -102,12 +138,27 @@ namespace NeoCobranza.Paneles
                 dynamicDataTable.Columns.Add("Sexo", typeof(string));
             }
 
+            string segmentacion = "0";
+
+            if (!string.IsNullOrEmpty(Convert.ToString(CmbSegmentacion.SelectedValue)))
+            {
+                segmentacion = Convert.ToString(CmbSegmentacion.SelectedValue);
+            }
+
+            string sucursal = "0";
+
+            if (!string.IsNullOrEmpty(Convert.ToString(CmbSucursal.SelectedValue)))
+            {
+                sucursal = Convert.ToString(CmbSucursal.SelectedValue);
+            }
+
             dynamicDataTable.Rows.Clear();
 
             dataUtilities.SetParameter("@FiltroPor", CmbBuscarPor.SelectedIndex);
             dataUtilities.SetParameter("@FiltroValor", txtFiltro.Texts);
-            dataUtilities.SetParameter("@IdSucursal", CmbSucursal.SelectedValue);
-            dataUtilities.SetParameter("@PageNumber", 10);
+            dataUtilities.SetParameter("@IdSucursal", sucursal);
+            dataUtilities.SetParameter("@SegmentacionId", segmentacion);
+            dataUtilities.SetParameter("@PageNumber", 1);
             dataUtilities.SetParameter("@PageSize", pageSize);
 
             DataTable dtRespuesta = new DataTable();
@@ -120,9 +171,23 @@ namespace NeoCobranza.Paneles
 
         public void UpdatePagination(Panel_Cliente_Contrato frm)
         {
+            string segmentacion = "0";
+            if (!string.IsNullOrEmpty(Convert.ToString(CmbSegmentacion.SelectedValue)))
+            {
+                segmentacion = Convert.ToString(CmbSegmentacion.SelectedValue);
+            }
+
+            string sucursal = "0";
+
+            if (!string.IsNullOrEmpty(Convert.ToString(CmbSucursal.SelectedValue)))
+            {
+                sucursal = Convert.ToString(CmbSucursal.SelectedValue);
+            }
+
             dataUtilities.SetParameter("@FiltroPor", CmbBuscarPor.SelectedIndex);
             dataUtilities.SetParameter("@FiltroValor", txtFiltro.Texts);
-            dataUtilities.SetParameter("@IdSucursal", CmbSucursal.SelectedValue);
+            dataUtilities.SetParameter("@IdSucursal", sucursal);
+            dataUtilities.SetParameter("@SegmentacionId", segmentacion);
             dataUtilities.SetParameter("@PageNumber", currentPage);
             dataUtilities.SetParameter("@PageSize", pageSize);
 
@@ -146,7 +211,11 @@ namespace NeoCobranza.Paneles
                 // string estadoCivil = Convert.ToString(item["EstadoCivil"]);
                 string sexo = Convert.ToString(item["Sexo"]);
 
-                dynamicDataTable.Rows.Add(idCliente, nombreCliente, cedula, estado, direccion, pais, departamento,
+                string Ruc = item["NoRuc"] == DBNull.Value || Convert.ToString(item["NoRuc"]) == "" ? "" : Convert.ToString(item["NoRuc"]);
+                string Codigo = item["Codigo"] == DBNull.Value || Convert.ToString(item["Codigo"]) == "" ? "" : Convert.ToString(item["Codigo"]);
+                string descripcion = item["SegmentacionId"] == DBNull.Value || Convert.ToString(item["SegmentacionId"]) == "0" ? "Sin Segmentar" : Convert.ToString(item["Descripcion"]);
+
+                dynamicDataTable.Rows.Add(idCliente, nombreCliente, Ruc, Codigo, descripcion, cedula, estado, direccion, pais, departamento,
                                           fechaNac, telefono, celular, edad, profesion, sexo);
             }
 
@@ -175,7 +244,7 @@ namespace NeoCobranza.Paneles
                 pnlProforma.lblNombreCliente.Text = DgvCliente.SelectedRows[0].Cells[1].Value.ToString();
 
                 pnlProforma.lblEstadoCliente.Text = "Cliente Seleccionado";
-                pnlProforma.lblEstadoCliente.ForeColor = Color.Green;
+                pnlProforma.lblEstadoCliente.ForeColor = System.Drawing.Color.Green;
                 pnlProforma.lblIdCliente.Text = DgvCliente.SelectedRows[0].Cells[0].Value.ToString();
                 this.Hide();
             }
@@ -186,7 +255,7 @@ namespace NeoCobranza.Paneles
                 pnlProforma.lblNombreCliente.Text = DgvCliente.SelectedRows[0].Cells[1].Value.ToString();
 
                 pnlProforma.lblEstadoCliente.Text = "Cliente Seleccionado";
-                pnlProforma.lblEstadoCliente.ForeColor = Color.Green;
+                pnlProforma.lblEstadoCliente.ForeColor = System.Drawing.Color.Green;
                 pnlProforma.lblIdCliente.Text = DgvCliente.SelectedRows[0].Cells[0].Value.ToString();
                 this.Hide();
 
@@ -198,7 +267,7 @@ namespace NeoCobranza.Paneles
                 pnlProformaContrato.lblNombreCliente.Text = DgvCliente.SelectedRows[0].Cells[1].Value.ToString();
 
                 pnlProformaContrato.lblEstadoCliente.Text = "Cliente Seleccionado";
-                pnlProformaContrato.lblEstadoCliente.ForeColor = Color.Green;
+                pnlProformaContrato.lblEstadoCliente.ForeColor = System.Drawing.Color.Green;
                 pnlProformaContrato.lblIdCliente.Text = DgvCliente.SelectedRows[0].Cells[0].Value.ToString();
                 this.Hide();
 
@@ -215,8 +284,11 @@ namespace NeoCobranza.Paneles
 
                 if (Convert.ToString(dtResponse.Rows[0]["NoRuc"]) != "")
                 {
-                    pnlVenta.ChkRetencionAlcaldia.Visible = true;
-                    pnlVenta.ChkRetencionDgi.Visible = true;
+                    if (Utilidades.PermisosLevel(3, 31))
+                    {
+                        pnlVenta.ChkRetencionAlcaldia.Visible = true;
+                        pnlVenta.ChkRetencionDgi.Visible = true;
+                    }
                 }
                 else
                 {
@@ -284,12 +356,17 @@ namespace NeoCobranza.Paneles
 
         private void CmbBuscarPor_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            FiltrarClientes();
         }
 
         private void CmbSucursal_SelectedIndexChanged(object sender, EventArgs e)
         {
+            FiltrarClientes();
+        }
 
+        private void CmbSegmentacion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FiltrarClientes();
         }
     }
 }

@@ -44,6 +44,8 @@ namespace NeoCobranza.PantallasInicio
                 Utilidades.Sucursal = CmbSucursal.Text;
                 Utilidades.SucursalId = CmbSucursal.SelectedValue.ToString();
 
+                this.Close();
+
                 PnlPrincipal frm = new PnlPrincipal();
                 frm.Show();
             }

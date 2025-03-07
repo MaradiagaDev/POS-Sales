@@ -30,7 +30,15 @@ namespace NeoCobranza.Paneles_Venta
 
         private void especialButton1_Click(object sender, EventArgs e)
         {
-            dataUtilities.SetColumns("FechaCredito",DateTime.Now);
+            DataRow item = dataUtilities.getRecordByPrimaryKey("Ordenes", auxFrm.vMOrdenes.OrdenAux).Rows[0];
+
+            if (Convert.ToString(item["NoFactura"]) != "0")
+            {
+                MessageBox.Show("Una vez generada la factura, no es posible eliminar la condición de crédito.", "Atención",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                return;
+            }
+
+                dataUtilities.SetColumns("FechaCredito",DateTime.Now);
             dataUtilities.SetColumns("CantidadPagos","");
             dataUtilities.SetColumns("FrecuenciaPagos","");
             dataUtilities.SetColumns("MontoCredito",0);

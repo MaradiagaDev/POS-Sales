@@ -31,7 +31,7 @@
             this.DtInicial = new System.Windows.Forms.DateTimePicker();
             this.DtFinal = new System.Windows.Forms.DateTimePicker();
             this.CmbSucursal = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.LblSucursal = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.BtnConfirmar = new NeoCobranza.Especiales.EspecialButton();
@@ -67,16 +67,16 @@
             this.CmbSucursal.Size = new System.Drawing.Size(311, 29);
             this.CmbSucursal.TabIndex = 236;
             // 
-            // label4
+            // LblSucursal
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.label4.Location = new System.Drawing.Point(12, 153);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(84, 22);
-            this.label4.TabIndex = 235;
-            this.label4.Text = "Sucursal";
+            this.LblSucursal.AutoSize = true;
+            this.LblSucursal.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblSucursal.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.LblSucursal.Location = new System.Drawing.Point(12, 153);
+            this.LblSucursal.Name = "LblSucursal";
+            this.LblSucursal.Size = new System.Drawing.Size(84, 22);
+            this.LblSucursal.TabIndex = 235;
+            this.LblSucursal.Text = "Sucursal";
             // 
             // label3
             // 
@@ -130,7 +130,7 @@
             this.Controls.Add(this.DtInicial);
             this.Controls.Add(this.DtFinal);
             this.Controls.Add(this.CmbSucursal);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.LblSucursal);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.BtnConfirmar);
@@ -150,7 +150,7 @@
         private System.Windows.Forms.DateTimePicker DtInicial;
         private System.Windows.Forms.DateTimePicker DtFinal;
         public System.Windows.Forms.ComboBox CmbSucursal;
-        public System.Windows.Forms.Label label4;
+        public System.Windows.Forms.Label LblSucursal;
         public System.Windows.Forms.Label label3;
         public System.Windows.Forms.Label label2;
     }

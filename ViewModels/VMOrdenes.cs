@@ -36,11 +36,6 @@ namespace NeoCobranza.ViewModels
 
         public void InitModuloOrdenes(PnlVentas frm, string opc, string key)
         {
-
-            //frm.TCMain.Appearance = TabAppearance.FlatButtons;
-            //frm.TCMain.SizeMode = TabSizeMode.Fixed;
-            //frm.TCMain.ItemSize = new System.Drawing.Size(1, 1);
-
             switch (opc)
             {
                 case "OrdenRapida":
@@ -78,16 +73,19 @@ namespace NeoCobranza.ViewModels
                         buttonColumnAdd.HeaderText = "...";
                         buttonColumnAdd.Text = " Agregar ";
                         buttonColumnAdd.UseColumnTextForButtonValue = true;
+                        buttonColumnAdd.Name = "Agregar";
 
                         DataGridViewButtonColumn buttonColumnDelete = new DataGridViewButtonColumn();
                         buttonColumnDelete.HeaderText = "...";
                         buttonColumnDelete.Text = " Quitar ";
                         buttonColumnDelete.UseColumnTextForButtonValue = true;
+                        buttonColumnDelete.Name = "Quitar";
 
                         DataGridViewButtonColumn buttonColumnDeleteAll = new DataGridViewButtonColumn();
                         buttonColumnDeleteAll.HeaderText = "...";
                         buttonColumnDeleteAll.Text = " Quitar Todo ";
                         buttonColumnDeleteAll.UseColumnTextForButtonValue = true;
+                        buttonColumnDeleteAll.Name = "Todo";
 
                         frm.DgvItemsOrden.DataSource = dynamicDataTable;
                         frm.DgvItemsOrden.Columns.Add(buttonColumnAdd);
@@ -155,6 +153,12 @@ namespace NeoCobranza.ViewModels
                         {
                             frm.LblOrdenMesa.Visible = false;
                             frm.LblTituloSala.Visible = false;
+                            frm.ChkPropina.Visible = false;
+                            frm.BtnDesvincular.Visible = false;
+                        }
+                        else
+                        {
+                            frm.BtnCredito.Visible = false;
                         }
 
                         //Actualizar la configuración de facturacion
@@ -207,6 +211,7 @@ namespace NeoCobranza.ViewModels
                         dataUtilities.SetColumns("FrecuenciaPagos", "");
                         dataUtilities.SetColumns("MontoCredito", 0);
                         dataUtilities.SetColumns("FechaCredito", DateTime.Now);
+                        dataUtilities.SetColumns("BitPropina", true);
 
                         dataUtilities.InsertRecord("Ordenes");
 
@@ -217,6 +222,7 @@ namespace NeoCobranza.ViewModels
                         frm.LblFechaGeneracion.Text = DateTime.Now.ToString();
                         frm.LblProcesoPago.Text = "Sin Pagos";
                         frm.LblOrdenMesa.Text = MesaAux;
+                        frm.ChkPropina.Checked = true;
 
                         frm.TxtSubTotal.Text = "0";
                         frm.TxtIVA.Text = "0";
@@ -256,8 +262,11 @@ namespace NeoCobranza.ViewModels
 
                             if (Convert.ToString(rowResponseCliente["NoRuc"]).Trim().Length > 0)
                             {
-                                frm.ChkRetencionAlcaldia.Visible = true;
-                                frm.ChkRetencionDgi.Visible = true;
+                                if (Utilidades.PermisosLevel(3, 31))
+                                {
+                                    frm.ChkRetencionAlcaldia.Visible = true;
+                                    frm.ChkRetencionDgi.Visible = true;
+                                }
                             }
                             else
                             {
@@ -298,6 +307,22 @@ namespace NeoCobranza.ViewModels
 
                         frm.LblOrdenMesa.Visible = Convert.ToString(orden["SalaMesa"]) == "-" ? false : true;
                         frm.LblTituloSala.Visible = Convert.ToString(orden["SalaMesa"]) == "-" ? false : true;
+
+                        if(frm.LblOrdenMesa.Visible == true)
+                        {
+                            frm.LblOrdenMesa.Text = Convert.ToString(orden["SalaMesa"]);
+                            frm.BtnCredito.Visible = false;
+                            MesaAux = Convert.ToString(orden["SalaMesa"]);
+                            frm.ChkPropina.Visible = true;
+                            frm.BtnDesvincular.Visible = true;
+                        }
+                        else
+                        {
+                            frm.BtnCredito.Visible = true;
+                            frm.BtnDesvincular.Visible = false;
+                            frm.ChkPropina.Visible = false;
+                        }
+
 
                         if (Convert.ToDecimal(orden["RetencionAlcaldia"]) != 0)
                         {
@@ -343,6 +368,8 @@ namespace NeoCobranza.ViewModels
                         frm.LblFechaGeneracion.Text = Convert.ToString(orden["FechaRealizacion"]);
                         frm.LblProcesoPago.Text = Convert.ToString(orden["PagoProceso"]);
                         frm.LblOrdenMesa.Text = MesaAux;
+                        frm.ChkPropina.Checked = orden["BitPropina"] != DBNull.Value && Convert.ToBoolean(orden["BitPropina"]);
+
 
                         frm.TxtSubTotal.Text = Convert.ToString(orden["SubTotal"]);
                         frm.TxtIVA.Text = Convert.ToString(orden["Iva"]);
@@ -365,55 +392,22 @@ namespace NeoCobranza.ViewModels
                         {
                             frm.BtnAgregarPro.Enabled = false;
                             frm.BtnAgregarServicio.Enabled = false;
-                            frm.BtnPagarOrden.Enabled = false;
-                            frm.BtnCancelarOrden.Enabled = false;
                             frm.TxtCodigoProducto.Enabled = false;
+                            frm.BtnActualizarDescuento.Enabled = false;
+                            frm.ChkRetencionAlcaldia.Enabled = false;
+                            frm.ChkRetencionDgi.Enabled = false;
+                        }
+                        else
+                        {
+                            frm.BtnAgregarPro.Enabled = true;
+                            frm.BtnAgregarServicio.Enabled = true;
+                            frm.TxtCodigoProducto.Enabled = true;
+                            frm.BtnActualizarDescuento.Enabled = true;
+                            frm.ChkRetencionAlcaldia.Enabled = true;
+                            frm.ChkRetencionDgi.Enabled = true;
                         }
                     }
-
-                    //var informativeMessageBox = new InformativeMessageBox($"Orden abierta correctamente.", "Orden Abierta", 3000); // 3000 milisegundos = 3 segundos
-                    //informativeMessageBox.Show();
                     break;
-                //case "Salas":
-                //    frm.llbTitulo.Text = "Gestión de Salas";
-                //    frm.TCMain.SelectedIndex = 3;
-
-                //    dataUtilities.SetParameter("@idSucursal", Utilidades.SucursalId);
-                //    DataTable dtResponse = dataUtilities.ExecuteStoredProcedure("spSalas");
-
-                //    int botonTop = 2;
-
-                //    foreach (DataRow s in dtResponse.Rows)
-                //    {
-                //        // Crear un nuevo botón
-                //        System.Windows.Forms.Button botonSala = new System.Windows.Forms.Button();
-
-                //        // Configurar propiedades del botón
-                //        botonSala.Text = Convert.ToString(s["NombreSala"]); // Suponiendo que cada sala tiene un nombre
-                //        botonSala.Tag = Convert.ToInt32(s["SalaId"]); // Almacenar la sala en el Tag del botón para referencia posterior
-                //        botonSala.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
-                //        botonSala.Click += (sender, e) => SalaClick(Convert.ToInt32(s["SalaId"]), frm);
-
-                //        // Configurar colores
-                //        botonSala.BackColor = SystemColors.MenuHighlight;
-                //        botonSala.Font = new Font("Century Gothic", 15, FontStyle.Regular);
-                //        botonSala.ForeColor = Color.White;
-                //        int botonWidth = frm.PnlListaSalas.ClientSize.Width; // Ancho del panel contenedor
-                //        botonSala.Width = botonWidth; // Establecer el ancho del botón
-                //        botonSala.Height = 45;
-
-
-                //        // Establecer la posición vertical del botón
-                //        botonSala.Top = botonTop;
-
-                //        // Actualizar la posición vertical para el siguiente botón
-                //        botonTop += botonSala.Height;
-
-                //        // Agregar el botón al panel
-                //        frm.PnlListaSalas.Controls.Add(botonSala);
-                //    }
-
-                //    break;
             }
         }
 

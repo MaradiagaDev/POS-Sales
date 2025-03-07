@@ -34,7 +34,27 @@ namespace NeoCobranza.Paneles
 
         private void btnCancelarOrden_Click(object sender, EventArgs e)
         {
-            dataUtilities.SetColumns("MotivoCancelacion", TxtMotivoCancelacion.Text.Trim());
+            if (!Utilidades.PermisosLevel(3, 9))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.Close();
+                return;
+            }
+
+
+            DataRow itemEmp = dataUtilities.getRecordByPrimaryKey("Ordenes", auxKey).Rows[0];
+          
+            if (Convert.ToString(itemEmp["NoFactura"]) != "0")
+            {
+                DialogResult dr = MessageBox.Show("¿Está seguro de cancelar una Venta que ya tiene No factura?", "Confirmar Cancelación",
+                                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dr != DialogResult.Yes)
+                {
+                    return;
+                }
+            }
+
+                dataUtilities.SetColumns("MotivoCancelacion", TxtMotivoCancelacion.Text.Trim());
             dataUtilities.SetColumns("OrdenProceso", "Orden Cancelada");
 
             dataUtilities.UpdateRecordByPrimaryKey("Ordenes", auxKey);
