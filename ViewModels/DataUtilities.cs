@@ -20,16 +20,18 @@ namespace NeoCobranza.ViewModels
 
         private Dictionary<string, object> vOutputValues = new Dictionary<string, object>();
 
-        private string vGlobServerName = "DESKTOP-GKTE05O\\SQLEXPRESS"; //"DESKTOP-GKTE05O\\SQLEXPRESS""DF-INF-PRO2\\SQLEXPRESS"
-        private string vGlobUserName = "LoginPos";
-        private string vGlobUserPassword = "facil123$";
+        private string vGlobServerName = "LUISMARTINEZ\\SQLEXPRESS"; //"DESKTOP-GKTE05O\\SQLEXPRESS""DF-INF-PRO2\\SQLEXPRESS"
+        //private string vGlobUserName = "LoginPos";
+        //private string vGlobUserPassword = "facil123$";
 
         public SqlConnection vGlobConnection;
 
         public DataUtilities() 
         {
-           string connectionString = "Server=" + vGlobServerName + ";Database=POSIDEVBD;UID=" + vGlobUserName + ";PWD=" + vGlobUserPassword + "; MultipleActiveResultSets=True"; //CASA
-           //string connectionString = "Server=" + vGlobServerName + ";Database=POSIDEVBD;Integrated Security=True"; //TRABAJO
+            //string connectionString = "Server=" + vGlobServerName + ";Database=POSIDEVBD;UID=" + vGlobUserName + ";PWD=" + vGlobUserPassword + "; MultipleActiveResultSets=True"; //CASA
+            string connectionString = "Server=" + vGlobServerName + ";Database=POSIDEVBD;Integrated Security=True;TrustServerCertificate=True;";
+            //TRABAJO
+            //string connectionString = "Server=" + vGlobServerName + ";Database=POSIDEVBD;Integrated Security=True;";
 
             vGlobConnection = new SqlConnection(connectionString);
         }

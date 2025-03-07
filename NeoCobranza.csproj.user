@@ -1,7 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <PublishUrlHistory>\\192.168.1.68\versionesneocobranza\Actualizaciones\|C:\Users\Usuario\Desktop\Actualizacion\|C:\Users\User\Desktop\Doc NC\Actualizacion\|C:\Users\User\Desktop\Doc NC\|\\192.168.1.68\versionesneocobranza\</PublishUrlHistory>
+    <PublishUrlHistory>D:\Programa Personal\BDSinLimpiar\|C:\Backs\|\\192.168.1.68\versionesneocobranza\Actualizaciones\|C:\Users\Usuario\Desktop\Actualizacion\|C:\Users\User\Desktop\Doc NC\Actualizacion\</PublishUrlHistory>
     <InstallUrlHistory>\\192.168.1.68\versionesneocobranza\</InstallUrlHistory>
     <SupportUrlHistory />
     <UpdateUrlHistory>\\192.168.1.68\versionesneocobranza\Actualizaciones\|\\192.168.1.68\versionesneocobranza\</UpdateUrlHistory>

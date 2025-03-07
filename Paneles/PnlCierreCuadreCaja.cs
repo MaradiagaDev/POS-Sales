@@ -571,6 +571,72 @@ namespace NeoCobranza.Paneles
                     CalcularTotales();
                 }
             }
+            else
+            {
+                dataUtilities.SetColumns("FechaCierre", DateTime.Now);
+                dataUtilities.SetColumns("Usuario", Utilidades.Usuario);
+                dataUtilities.SetColumns("Diferencia", TxtDiferencia.Text);
+                dataUtilities.SetColumns("Ventas", TxtVentas.Text);
+                dataUtilities.SetColumns("Ingresos", TxtIngresos.Text);
+                dataUtilities.SetColumns("Gastos", TxtGasto.Text);
+                dataUtilities.SetColumns("Tarjeta", TxtTarjeta.Text);
+                dataUtilities.SetColumns("Total", TxtTotalEnCaja.Text);
+                dataUtilities.SetColumns("Calculo", TxtCalculoEnCaja.Text);
+                dataUtilities.SetColumns("SucursalId", Utilidades.SucursalId);
+
+                dataUtilities.InsertRecord("CierreCaja");
+
+                //pasar los datos a cierre de caja
+                dataUtilities.SetParameter("@sucursalId", Utilidades.SucursalId);
+                dataUtilities.ExecuteStoredProcedure("spCierresCajaRealizar");
+
+                MessageBox.Show("Cierre de caja realizado correctamente.", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                if (IndexSelected == 0)
+                {
+                    // Cargar datos ordenes
+                    dataUtilities.SetParameter("@sucursalId", Utilidades.SucursalId);
+                    dgvGeneral.DataSource = dataUtilities.ExecuteStoredProcedure("vwCierresCajaPagosOrdenes");
+                }
+                else if (IndexSelected == 1)
+                {
+                    // Cargar datos gastos
+                    dataUtilities.SetParameter("@sucursalId", Utilidades.SucursalId);
+                    dataUtilities.SetParameter("@bitIngreso", false);
+                    dgvGeneral.DataSource = dataUtilities.ExecuteStoredProcedure("vwCierresCajaGastos");
+                }
+                else if (IndexSelected == 2)
+                {
+                    // Cargar datos ingresos
+                    dataUtilities.SetParameter("@sucursalId", Utilidades.SucursalId);
+                    dataUtilities.SetParameter("@bitIngreso", true);
+                    dgvGeneral.DataSource = dataUtilities.ExecuteStoredProcedure("vwCierresCajaGastos");
+                }
+
+                // Para cada TextBox de córdobas
+                Txt1000.Text = string.Empty;
+                Txt500.Text = string.Empty;
+                Txt200.Text = string.Empty;
+                txt100.Text = string.Empty;
+                txt50.Text = string.Empty;
+                txt20.Text = string.Empty;
+                txt10.Text = string.Empty;
+                txt5.Text = string.Empty;
+                txt1.Text = string.Empty;
+                txt05.Text = string.Empty;
+                txt025.Text = string.Empty;
+                txt01.Text = string.Empty;
+
+                // Para cada TextBox en dólares (se convierten a córdobas multiplicando por la tasa)
+                txt100D.Text = string.Empty;
+                txt50D.Text = string.Empty;
+                txt20D.Text = string.Empty;
+                txt10D.Text = string.Empty;
+                txt5D.Text = string.Empty;
+                txt1D.Text = string.Empty;
+
+                CalcularTotales();
+            }
         }
 
         private void BtnRegistrarGastos_Click(object sender, EventArgs e)

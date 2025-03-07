@@ -368,19 +368,36 @@ namespace NeoCobranza.Paneles
 
         private void BtnSiguiente_Click(object sender, EventArgs e)
         {
-            if (vMCatalogoCliente.currentPage < vMCatalogoCliente.totalPages)
+            if (int.TryParse(TxtPaginaNo.Text, out int currentPage) &&
+                int.TryParse(TxtPaginaDe.Text, out int totalPages) &&
+                currentPage < totalPages)
             {
-                vMCatalogoCliente.currentPage++;
+                currentPage++;
+                TxtPaginaNo.Text = currentPage.ToString();
                 vMCatalogoCliente.UpdatePagination(this);
+                ActualizarEstadoBotones();
             }
         }
 
         private void BtnAnterior_Click(object sender, EventArgs e)
         {
-            if (vMCatalogoCliente.currentPage > 1)
+            if (int.TryParse(TxtPaginaNo.Text, out int currentPage) && currentPage > 1)
             {
-                vMCatalogoCliente.currentPage--;
+                currentPage--;
+                TxtPaginaNo.Text = currentPage.ToString();
                 vMCatalogoCliente.UpdatePagination(this);
+                ActualizarEstadoBotones();
+            }
+        }
+
+        private void ActualizarEstadoBotones()
+        {
+            // Habilita o deshabilita según el número de página actual y el total de páginas
+            if (int.TryParse(TxtPaginaNo.Text, out int currentPage) &&
+                int.TryParse(TxtPaginaDe.Text, out int totalPages))
+            {
+                BtnAnterior.Enabled = currentPage > 1;
+                BtnSiguiente.Enabled = currentPage < totalPages;
             }
         }
 

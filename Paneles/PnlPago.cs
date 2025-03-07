@@ -217,6 +217,14 @@ namespace NeoCobranza.Paneles
                 return;
             }
 
+            if (TxtCantidadAbonada.Text.Trim().Length == 0)
+            {
+                TxtCantidadAbonada.Focus();
+                TxtCantidadAbonada.Select();
+                MessageBox.Show("Debe agregar la cantidad abonada.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (decimal.TryParse(TxtTotalPago.Text, out decimal abono))
             {
                 //verificar si el pago ya termina de pagar la factura

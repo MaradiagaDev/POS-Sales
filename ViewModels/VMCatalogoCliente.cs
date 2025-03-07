@@ -376,115 +376,160 @@ namespace NeoCobranza.ViewModels
 
         public void FuncionesPrincipales(PnlCatalogoClientes frm, string opc)
         {
-
             switch (opc)
             {
                 case "Buscar":
-                    dynamicDataTable.Rows.Clear();
-                    frm.dgvCatalogoClientes.DataSource = "";
+                    //// Reiniciamos la búsqueda en la primera página
+                    //currentPage = 1;
+                    //pageSize = 10; // o el valor que corresponda
 
-                    int pageNumber = 1;
-                    int pageSize = 10;
-                    int totalPages = 0;
+                    //dynamicDataTable.Rows.Clear();
+                    //frm.dgvCatalogoClientes.DataSource = null;
 
-                    var filtroPor = frm.CmbBuscarPor.SelectedIndex;
-                    var filtroValor = frm.TxtFiltrar.Text.Trim();; // Asumiendo que el ID de la sucursal se captura desde un campo de texto en el formulario
+                    //int filtroPor = frm.CmbBuscarPor.SelectedIndex;
+                    //string filtroValor = frm.TxtFiltrar.Text.Trim();
 
-                    string segmentacion = "0";
+                    //string segmentacion = "0";
+                    //if (frm.CmbSegmentacion.SelectedValue != null)
+                    //{
+                    //    segmentacion = frm.CmbSegmentacion.SelectedValue.ToString();
+                    //}
 
-                    if (!string.IsNullOrEmpty(Convert.ToString(frm.CmbSegmentacion.SelectedValue)))
-                    {
-                        segmentacion = Convert.ToString(frm.CmbSegmentacion.SelectedValue);
-                    }
+                    //string sucursal = "0";
+                    //if (frm.CmbSucursal.SelectedValue != null)
+                    //{
+                    //    sucursal = frm.CmbSucursal.SelectedValue.ToString();
+                    //}
 
-                    string sucursal = "0";
+                    //// Configuramos los parámetros para el SP
+                    //dataUtilities.ClearParameters();
+                    //dataUtilities.SetParameter("@FiltroPor", filtroPor);
+                    //dataUtilities.SetParameter("@FiltroValor", filtroValor);
+                    //dataUtilities.SetParameter("@IdSucursal", sucursal);
+                    //dataUtilities.SetParameter("@SegmentacionId", segmentacion);
+                    //dataUtilities.SetParameter("@PageNumber", currentPage);
+                    //dataUtilities.SetParameter("@PageSize", pageSize);
 
-                    if (!string.IsNullOrEmpty(Convert.ToString(frm.CmbSucursal.SelectedValue)))
-                    {
-                        sucursal = Convert.ToString(frm.CmbSucursal.SelectedValue);
-                    }
+                    //// Se asume que el SP devuelve un DataSet con dos tablas:
+                    //// Table[0]: Datos paginados
+                    //// Table[1]: Total de registros (con una fila que tenga la columna "TotalCount")
+                    //DataSet ds = dataUtilities.ExecuteStoredProcedureDataSet("sp_ObtenerClientesFiltrados");
 
+                    //DataTable dtDatos = ds.Tables[0];
+                    //DataTable dtTotal = ds.Tables[1];
 
-                    dataUtilities.SetParameter("@FiltroPor", filtroPor);
-                    dataUtilities.SetParameter("@FiltroValor", filtroValor);
-                    dataUtilities.SetParameter("@IdSucursal", sucursal);
-                    dataUtilities.SetParameter("@SegmentacionId", segmentacion);
-                    dataUtilities.SetParameter("@PageNumber", pageNumber);
-                    dataUtilities.SetParameter("@PageSize", pageSize);
-                    
-                    DataTable dtRespuesta = new DataTable();
-                    dtRespuesta = dataUtilities.ExecuteStoredProcedure("sp_ObtenerClientesFiltrados");
+                    //int totalRecords = Convert.ToInt32(dtTotal.Rows[0]["TotalCount"]);
+                    //totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
 
-                    // Para obtener el número total de páginas
-                    totalPages = (int)Math.Ceiling((double)dtRespuesta.Rows.Count / pageSize);
-                    UpdatePagination(frm); // Actualiza la paginación en el formulario
+                    //// Llenamos la tabla dinámica con los datos del SP
+                    //foreach (DataRow row in dtDatos.Rows)
+                    //{
+                    //    string idCliente = Convert.ToString(row["IdCliente"]);
+                    //    string nombreCliente = $"{Convert.ToString(row["Pnombre"])} {Convert.ToString(row["Snombre"])} {Convert.ToString(row["Papellido"])} {Convert.ToString(row["Sapellido"])}";
+                    //    string cedula = Convert.ToString(row["Cedula"]);
+                    //    string estado = (Convert.ToString(row["Estado"]) == "0" || string.IsNullOrEmpty(Convert.ToString(row["Estado"]))) ? "Bloqueado" : "Activo";
+                    //    string direccion = string.IsNullOrWhiteSpace(Convert.ToString(row["Direccion"])) ? "Desconocido" : Convert.ToString(row["Direccion"]);
+                    //    string pais = string.IsNullOrWhiteSpace(Convert.ToString(row["Pais"])) ? "Desconocido" : Convert.ToString(row["Pais"]);
+                    //    string departamento = string.IsNullOrWhiteSpace(Convert.ToString(row["Departamento"])) ? "Desconocido" : Convert.ToString(row["Departamento"]);
+                    //    string fechaNac = Convert.ToString(row["FechaNac"]);
+                    //    string telefono = string.IsNullOrWhiteSpace(Convert.ToString(row["Telefono"])) ? "Desconocido" : Convert.ToString(row["Telefono"]);
+                    //    string celular = string.IsNullOrWhiteSpace(Convert.ToString(row["Celular"])) ? "Desconocido" : Convert.ToString(row["Celular"]);
+                    //    string edad = (Convert.ToString(row["Edad"]) == "0") ? "Desconocido" : Convert.ToString(row["Edad"]);
+                    //    string profesion = string.IsNullOrWhiteSpace(Convert.ToString(row["Profesion"])) ? "Desconocido" : Convert.ToString(row["Profesion"]);
+                    //    string sexo = Convert.ToString(row["Sexo"]);
+                    //    string ruc = (row["NoRuc"] == DBNull.Value || string.IsNullOrWhiteSpace(Convert.ToString(row["NoRuc"]))) ? "" : Convert.ToString(row["NoRuc"]);
+                    //    string codigo = (row["Codigo"] == DBNull.Value || string.IsNullOrWhiteSpace(Convert.ToString(row["Codigo"]))) ? "" : Convert.ToString(row["Codigo"]);
+                    //    string descripcion = (row["SegmentacionId"] == DBNull.Value || Convert.ToString(row["SegmentacionId"]) == "0") ? "Sin Segmentar" : Convert.ToString(row["Descripcion"]);
 
+                    //    dynamicDataTable.Rows.Add(idCliente, nombreCliente, ruc, codigo, descripcion, cedula, estado,
+                    //                                direccion, pais, departamento, fechaNac, telefono, celular,
+                    //                                edad, profesion, sexo);
+                    //}
+
+                    //frm.dgvCatalogoClientes.DataSource = dynamicDataTable;
+                    //frm.dgvCatalogoClientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+                    //// Actualizamos los controles de paginación
+                    //frm.TxtPaginaNo.Text = currentPage.ToString();
+                    //frm.TxtPaginaDe.Text = totalPages.ToString();
+
+                    UpdatePagination(frm);
                     break;
-
             }
         }
 
         public void UpdatePagination(PnlCatalogoClientes frm)
         {
-            string segmentacion = "0";
-
-            if (!string.IsNullOrEmpty(Convert.ToString(frm.CmbSegmentacion.SelectedValue)))
+            int pageNumber = 1;
+            if (!int.TryParse(frm.TxtPaginaNo.Text, out pageNumber))
             {
-                segmentacion = Convert.ToString(frm.CmbSegmentacion.SelectedValue);
+                pageNumber = 1;
+                frm.TxtPaginaNo.Text = "1";
+            }
+
+            // Definir el tamaño de página (por ejemplo, 20 registros por página)
+            int pageSize = 20;
+
+            // Este método se llamará desde los botones "Siguiente" y "Anterior"
+            string segmentacion = "0";
+            if (frm.CmbSegmentacion.SelectedValue != null)
+            {
+                segmentacion = frm.CmbSegmentacion.SelectedValue.ToString();
             }
 
             string sucursal = "0";
-
-            if (!string.IsNullOrEmpty(Convert.ToString(frm.CmbSucursal.SelectedValue)))
+            if (frm.CmbSucursal.SelectedValue != null)
             {
-                sucursal = Convert.ToString(frm.CmbSucursal.SelectedValue);
+                sucursal = frm.CmbSucursal.SelectedValue.ToString();
             }
 
-            var filtroPor = frm.CmbBuscarPor.SelectedIndex;
-            var filtroValor = frm.TxtFiltrar.Text.Trim(); ; // Asumiendo que el ID de la sucursal se captura desde un campo de texto en el formulario
+            int filtroPor = frm.CmbBuscarPor.SelectedIndex;
+            string filtroValor = frm.TxtFiltrar.Text.Trim();
 
+            dataUtilities.ClearParameters();
             dataUtilities.SetParameter("@FiltroPor", filtroPor);
             dataUtilities.SetParameter("@FiltroValor", filtroValor);
             dataUtilities.SetParameter("@IdSucursal", sucursal);
             dataUtilities.SetParameter("@SegmentacionId", segmentacion);
-            dataUtilities.SetParameter("@PageNumber", currentPage);
+            dataUtilities.SetParameter("@PageNumber", pageNumber);
             dataUtilities.SetParameter("@PageSize", pageSize);
+            dataUtilities.SetParameter("@TotalPages", SqlDbType.Int, ParameterDirection.Output);
 
-            DataTable dtRespuesta = new DataTable();
-            dtRespuesta = dataUtilities.ExecuteStoredProcedure("sp_ObtenerClientesFiltrados");
+            DataTable dtDatos = dataUtilities.ExecuteStoredProcedure("sp_ObtenerClientesFiltrados");
 
-            foreach (DataRow item in dtRespuesta.Rows)
+            string totalRecords = Convert.ToString(dataUtilities.GetParameterValue("@TotalPages"));
+
+            dynamicDataTable.Rows.Clear();
+            foreach (DataRow row in dtDatos.Rows)
             {
-                string idCliente = Convert.ToString(item["IdCliente"]);
-                string nombreCliente = $"{Convert.ToString(item["Pnombre"])} {Convert.ToString(item["Snombre"])} {Convert.ToString(item["Papellido"])} {Convert.ToString(item["Sapellido"])}";
-                string cedula = Convert.ToString(item["Cedula"]);
-                string estado = Convert.ToString(item["Estado"]) == null || Convert.ToString(item["Estado"]) == "0" ? "Bloqueado" : "Activo";
-                string direccion = Convert.ToString(item["Direccion"]) == null || Convert.ToString(item["Direccion"]).Trim() == "" ? "Desconocido" : Convert.ToString(item["Direccion"]);
-                string pais = Convert.ToString(item["Pais"]) == null ? "Desconocido" : Convert.ToString(item["Pais"]);
-                string departamento = Convert.ToString(item["Departamento"]) == null ? "Desconocido" : Convert.ToString(item["Departamento"]);
-                string fechaNac = Convert.ToString(item["FechaNac"]);
-                string telefono = Convert.ToString(item["Telefono"]) == null || Convert.ToString(item["Telefono"]).Trim() == "" || double.TryParse(Convert.ToString(item["Telefono"]).Trim(), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out double valorNumericoTel) == false ? "Desconocido" : valorNumericoTel.ToString();
-                string celular = Convert.ToString(item["Celular"]) == null || Convert.ToString(item["Celular"]).Trim() == "" || double.TryParse(Convert.ToString(item["Celular"]).Trim(), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out double valorNumerico) == false ? "Desconocido" : valorNumerico.ToString();
-                string edad = Convert.ToString(item["Edad"]) == "0" ? "Desconocido" : Convert.ToString(item["Edad"]);
-                string profesion = Convert.ToString(item["Profesion"]) == null || Convert.ToString(item["Profesion"]).Trim() == "" ? "Desconocido" : Convert.ToString(item["Profesion"]);
-               // string estadoCivil = Convert.ToString(item["EstadoCivil"]);
-                string sexo = Convert.ToString(item["Sexo"]);
-                string Ruc = item["NoRuc"] == DBNull.Value || Convert.ToString(item["NoRuc"]) == "" ? "" : Convert.ToString(item["NoRuc"]);
-                string Codigo = item["Codigo"] == DBNull.Value || Convert.ToString(item["Codigo"]) == "" ? "" : Convert.ToString(item["Codigo"]);
-                string descripcion = item["SegmentacionId"] == DBNull.Value || Convert.ToString(item["SegmentacionId"]) == "0" ? "Sin Segmentar" : Convert.ToString(item["Descripcion"]);
+                string idCliente = Convert.ToString(row["IdCliente"]);
+                string nombreCliente = $"{Convert.ToString(row["Pnombre"])} {Convert.ToString(row["Snombre"])} {Convert.ToString(row["Papellido"])} {Convert.ToString(row["Sapellido"])}";
+                string cedula = Convert.ToString(row["Cedula"]);
+                string estado = (Convert.ToString(row["Estado"]) == "0" || string.IsNullOrEmpty(Convert.ToString(row["Estado"]))) ? "Bloqueado" : "Activo";
+                string direccion = string.IsNullOrWhiteSpace(Convert.ToString(row["Direccion"])) ? "Desconocido" : Convert.ToString(row["Direccion"]);
+                string pais = string.IsNullOrWhiteSpace(Convert.ToString(row["Pais"])) ? "Desconocido" : Convert.ToString(row["Pais"]);
+                string departamento = string.IsNullOrWhiteSpace(Convert.ToString(row["Departamento"])) ? "Desconocido" : Convert.ToString(row["Departamento"]);
+                string fechaNac = Convert.ToString(row["FechaNac"]);
+                string telefono = string.IsNullOrWhiteSpace(Convert.ToString(row["Telefono"])) ? "Desconocido" : Convert.ToString(row["Telefono"]);
+                string celular = string.IsNullOrWhiteSpace(Convert.ToString(row["Celular"])) ? "Desconocido" : Convert.ToString(row["Celular"]);
+                string edad = (Convert.ToString(row["Edad"]) == "0") ? "Desconocido" : Convert.ToString(row["Edad"]);
+                string profesion = string.IsNullOrWhiteSpace(Convert.ToString(row["Profesion"])) ? "Desconocido" : Convert.ToString(row["Profesion"]);
+                string sexo = Convert.ToString(row["Sexo"]);
+                string ruc = (row["NoRuc"] == DBNull.Value || string.IsNullOrWhiteSpace(Convert.ToString(row["NoRuc"]))) ? "" : Convert.ToString(row["NoRuc"]);
+                string codigo = (row["Codigo"] == DBNull.Value || string.IsNullOrWhiteSpace(Convert.ToString(row["Codigo"]))) ? "" : Convert.ToString(row["Codigo"]);
+                string descripcion = (row["SegmentacionId"] == DBNull.Value || Convert.ToString(row["SegmentacionId"]) == "0") ? "Sin Segmentar" : Convert.ToString(row["Descripcion"]);
 
-                dynamicDataTable.Rows.Add(idCliente, nombreCliente,Ruc,Codigo,descripcion, cedula, estado, direccion, pais, departamento,
-                                          fechaNac, telefono, celular, edad, profesion, sexo);
+                dynamicDataTable.Rows.Add(idCliente, nombreCliente, ruc, codigo, descripcion, cedula, estado,
+                                            direccion, pais, departamento, fechaNac, telefono, celular,
+                                            edad, profesion, sexo);
             }
 
             frm.dgvCatalogoClientes.DataSource = dynamicDataTable;
             frm.dgvCatalogoClientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
-            // Actualizar la interfaz de usuario con la página actual y el total de páginas
-            totalPages = (int)Math.Ceiling((double)dtRespuesta.Rows.Count / pageSize); // Si no se obtiene el total de páginas desde la consulta, lo calculamos aquí
-            frm.TxtPaginaNo.Text = currentPage.ToString();
-            frm.TxtPaginaDe.Text = totalPages.ToString();
+            frm.TxtPaginaDe.Text = totalRecords.ToString();
         }
+
 
     }
 }
