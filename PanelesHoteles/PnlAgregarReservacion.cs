@@ -18,7 +18,7 @@ namespace NeoCobranza.PanelesHoteles
     {
         DataUtilities dataUtilities  = new DataUtilities();
         public string auxIdCliente = "0";
-        DataTable dynamicDetalle = new DataTable();
+        public DataTable dynamicDetalle = new DataTable();
 
         public PnlAgregarReservacion()
         {
@@ -27,6 +27,7 @@ namespace NeoCobranza.PanelesHoteles
             dynamicDetalle.Columns.Add("Nombre Habitaciones", typeof(string));
             dynamicDetalle.Columns.Add("No de Habitación", typeof(string));
             dynamicDetalle.Columns.Add("Precio", typeof(string));
+            dynamicDetalle.Columns.Add("Costo de Reservación", typeof(string));
             dynamicDetalle.Columns.Add("Paquete", typeof(string));
 
             DgvItemsPaquete.DataSource = dynamicDetalle;
@@ -49,7 +50,7 @@ namespace NeoCobranza.PanelesHoteles
 
         private void especialButton1_Click(object sender, EventArgs e)
         {
-            PnlSeleccionarHabitaciones frm = new PnlSeleccionarHabitaciones(DtFechaInicio.Value,DtFechaFin.Value);
+            PnlSeleccionarHabitaciones frm = new PnlSeleccionarHabitaciones(DtFechaInicio.Value,DtFechaFin.Value,this);
             frm.ShowDialog();
         }
 
