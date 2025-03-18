@@ -208,11 +208,11 @@ namespace NeoCobranza.Paneles_Venta.Informes
         {
             if (orden.Rows.Count > 0)
             {
-                auxPnlPrincipal.AbrirVenta(Convert.ToDecimal(orden.Rows[0]["OrdenId"]), MesaSala);
+                auxPnlPrincipal.AbrirVenta(Convert.ToDecimal(orden.Rows[0]["OrdenId"]),Utilidades.SucursalId, MesaSala);
             }
             else
             {
-                auxPnlPrincipal.AbrirVenta(0, MesaSala);
+                auxPnlPrincipal.AbrirVenta(0, Utilidades.SucursalId, MesaSala);
             }
         }
     }

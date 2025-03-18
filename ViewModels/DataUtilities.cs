@@ -20,7 +20,7 @@ namespace NeoCobranza.ViewModels
 
         private Dictionary<string, object> vOutputValues = new Dictionary<string, object>();
 
-        private string vGlobServerName = "LUISMARTINEZ\\SQLEXPRESS"; //"DESKTOP-GKTE05O\\SQLEXPRESS""DF-INF-PRO2\\SQLEXPRESS"
+        private string vGlobServerName = "localhost\\SQLEXPRESS"; //"DESKTOP-GKTE05O\\SQLEXPRESS""DF-INF-PRO2\\SQLEXPRESS"
         //private string vGlobUserName = "LoginPos";
         //private string vGlobUserPassword = "facil123$";
 

@@ -23,6 +23,14 @@ namespace NeoCobranza.Paneles
         public DataTable auxTablaDinamicaProveedor = new DataTable();
         DataUtilities dataUtilities = new DataUtilities();
 
+        //Nuevos Campos
+        public bool bitTieneInventarioInicial = false;
+        public decimal DecCantidad = 0;
+        public decimal DecSubTotal = 0;
+        public string strProveedor = "";
+        public string strAlmacen = "";
+        public string strProducto = "";
+
         private class TipoInventario
         {
             public string tipo { get; set; }
@@ -54,10 +62,8 @@ namespace NeoCobranza.Paneles
                 //DgvProveedor.DataSource = auxTablaDinamicaProveedor;
             }
 
-            using (NeoCobranzaContext db = new NeoCobranzaContext())
-            {
-                DataTable dtResponse = dataUtilities.GetAllRecords("Proveedores");
-                var filterRow = from row in dtResponse.AsEnumerable() where Convert.ToString(row.Field<string>("Estatus")) == "Activo" orderby row.Field<int>("IdProveedor") descending select row;
+                //DataTable dtResponse = dataUtilities.GetAllRecords("Proveedores");
+                //var filterRow = from row in dtResponse.AsEnumerable() where Convert.ToString(row.Field<string>("Estatus")) == "Activo" orderby row.Field<int>("IdProveedor") descending select row;
 
                 //if (filterRow.Any() && auxModulo == "Productos")
                 //{
@@ -81,7 +87,7 @@ namespace NeoCobranza.Paneles
                 CmbTipoProducto.ValueMember = "CategorizacionId";
                 CmbTipoProducto.DisplayMember = "Descripcion";
                 CmbTipoProducto.DataSource = dtResponseCategoria;
-            }
+            
 
             if (auxOpc != "Crear")
             {
@@ -92,6 +98,11 @@ namespace NeoCobranza.Paneles
                 TxtCodigo.Text = Convert.ToString(dtResponse.Rows[0]["Codigo"]);
                 TxtPrecioVenta.Text = Convert.ToString(dtResponse.Rows[0]["Precio"]);
                 CmbTipoProducto.SelectedValue = Convert.ToString(dtResponse.Rows[0]["CategoriaId"]);
+
+                if(DBNull.Value != dtResponse.Rows[0]["BitVariable"])
+                {
+                    ChkPrecioVariable.Checked = Convert.ToBoolean(dtResponse.Rows[0]["BitVariable"]);
+                }
 
                 byte[] imagenBytes = dtResponse.Rows[0]["Img"] as byte[];
 
@@ -121,9 +132,11 @@ namespace NeoCobranza.Paneles
             if (auxModulo == "Productos")
             {
                 LblNombreDinamico.Text = "Nombre del Producto";
+                ChkPrecioVariable.Visible = false;
             }
             else if (auxModulo == "Servicios")
             {
+                BtnInventarioInicial.Visible = false;
                 LblNombreDinamico.Text = "Nombre del Servicio";
                 //P/*nlProveedores.Visible = false;*/
                 LblCodigo.Visible = false;
@@ -198,7 +211,7 @@ namespace NeoCobranza.Paneles
             //    return;
             //}
 
-            if (!decimal.TryParse(TxtPrecioVenta.Text.Trim(), out decimal _disponible))
+            if (!decimal.TryParse(TxtPrecioVenta.Text.Trim(), out decimal _disponible) )
             {
 
                 MessageBox.Show("El monto de venta no es valido.", "Atención",
@@ -207,7 +220,7 @@ namespace NeoCobranza.Paneles
                 return;
             }
 
-            if (_disponible == 0)
+            if (_disponible == 0 && ChkPrecioVariable.Checked == false)
             {
                 MessageBox.Show("El monto de venta está vacío.", "Atención",
                                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -244,6 +257,8 @@ namespace NeoCobranza.Paneles
                 {
                     string idProductoCrear = Guid.NewGuid().ToString().Substring(0,10);
 
+                    strProducto = idProductoCrear;
+
                     dataUtilities.SetColumns("ProductoId", idProductoCrear);
                     dataUtilities.SetColumns("NombreProducto", TxtNombre.Text.Trim());
                     dataUtilities.SetColumns("ImagenId",0);
@@ -253,6 +268,7 @@ namespace NeoCobranza.Paneles
                     dataUtilities.SetColumns("ClasificacionProducto", auxModulo);
                     dataUtilities.SetColumns("CategoriaId", Convert.ToInt32(CmbTipoProducto.SelectedValue.ToString()));
                     dataUtilities.SetColumns("Codigo", TxtCodigo.Text.Trim());
+                    dataUtilities.SetColumns("BitVariable",ChkPrecioVariable.Checked);
 
                     if (PBImagenProducto.Image != null)
                     {
@@ -285,7 +301,6 @@ namespace NeoCobranza.Paneles
                     }
 
                     frmAuxPrincipal.vMCatalogosInventario.InitModuloCatalogosInventario(frmAuxPrincipal, auxModulo);
-                    this.Dispose();
                 }
                 catch (Exception ex)
                 {
@@ -313,6 +328,8 @@ namespace NeoCobranza.Paneles
                         }
                     }
 
+                    strProducto = auxId;
+
                     //Datos del servicio
                     dataUtilities.SetColumns("NombreProducto", TxtNombre.Text.Trim());
                     dataUtilities.SetColumns("ImagenId", 0);
@@ -322,6 +339,8 @@ namespace NeoCobranza.Paneles
                     dataUtilities.SetColumns("ClasificacionProducto", auxModulo);
                     dataUtilities.SetColumns("CategoriaId", Convert.ToInt32(CmbTipoProducto.SelectedValue.ToString()));
                     dataUtilities.SetColumns("Codigo", TxtCodigo.Text.Trim());
+                    dataUtilities.SetColumns("BitVariable", ChkPrecioVariable.Checked);
+
                     if (PBImagenProducto.Image != null)
                     {
                         byte[] imagenBytes = ImageToByteArray(PBImagenProducto.Image);
@@ -344,7 +363,7 @@ namespace NeoCobranza.Paneles
                     }
 
                     frmAuxPrincipal.vMCatalogosInventario.InitModuloCatalogosInventario(frmAuxPrincipal, auxModulo);
-                    this.Dispose();
+                    
                 }
                 catch (Exception ex)
                 {
@@ -354,6 +373,67 @@ namespace NeoCobranza.Paneles
 
             }
 
+            //Parte de Inventario Inicial
+            try
+            {
+                if (bitTieneInventarioInicial)
+                {
+                    //agregar la compra
+                    string idCompra = Guid.NewGuid().ToString();
+
+                    dataUtilities.SetColumns("CompraId", idCompra);
+                    dataUtilities.SetColumns("usuario", Utilidades.Usuario);
+                    dataUtilities.SetColumns("AlmacenId", strAlmacen);
+                    dataUtilities.SetColumns("SucursalId", Utilidades.SucursalId);
+                    dataUtilities.SetColumns("Descripcion", $"COMPRA INICIAL {DateTime.Now}");
+                    dataUtilities.SetColumns("CostoTotal", DecSubTotal);
+                    dataUtilities.SetColumns("FechaAlta", DateTime.Now);
+
+                    dataUtilities.InsertRecord("Compras");
+
+                    //Detalle de la compra
+                    string idLote = Guid.NewGuid().ToString();
+
+                    dataUtilities.SetColumns("LoteId", idLote);
+                    dataUtilities.SetColumns("ProductoId", strProducto);
+                    dataUtilities.SetColumns("CompraId", idCompra);
+                    dataUtilities.SetColumns("Cantidad", DecCantidad);
+                    dataUtilities.SetColumns("FechaCreacion", DateTime.Now);
+                    dataUtilities.SetColumns("AlmacenId", strAlmacen);
+                    dataUtilities.SetColumns("ProveedorId", strProveedor);
+                    dataUtilities.SetColumns("CostoU",   DecSubTotal/ DecCantidad);
+                    dataUtilities.SetColumns("SubTotal", DecSubTotal);
+
+                    dataUtilities.InsertRecord("CompraDetalles");
+
+                    //Agregar cantidades
+                    DataTable dtResponse = dataUtilities.GetAllRecords("RelAlmacenProducto");
+                    var filterRow =
+                        from row in dtResponse.AsEnumerable()
+                        where Convert.ToString(row.Field<string>("AlmacenId")) == strAlmacen
+                        && Convert.ToString(row.Field<string>("ProductoId")) == strProducto
+                        select row;
+
+                    dtResponse = filterRow.CopyToDataTable();
+
+                    decimal idRelAlmacenProducto = Convert.ToDecimal(dtResponse.Rows[0]["RelAlmacenProductoId"]);
+                    decimal cantidadActual = Convert.ToDecimal(dtResponse.Rows[0]["Cantidad"]);
+
+                    //Actualizar la cantidad
+                    decimal cantidadActualizada = cantidadActual + DecCantidad;
+
+                    dataUtilities.SetColumns("Cantidad", cantidadActualizada);
+                    dataUtilities.UpdateRecordByPrimaryKey("RelAlmacenProducto", idRelAlmacenProducto);
+
+                }
+
+                this.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"No se pudo crear el producto. Error: {ex.Message}", "Error",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private byte[] ImageToByteArray(Image image)
@@ -542,6 +622,12 @@ namespace NeoCobranza.Paneles
                     string rutaImagen = openFileDialog.FileName;
                 }
             }
+        }
+
+        private void especialButton1_Click(object sender, EventArgs e)
+        {
+            PnlConfigInventarioInicial frm = new PnlConfigInventarioInicial(this);
+            frm.ShowDialog();
         }
 
         //private void BtnAgregarProveedor_Click(object sender, EventArgs e)

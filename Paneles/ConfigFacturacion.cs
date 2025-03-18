@@ -215,7 +215,7 @@ namespace NeoCobranza.Paneles
             }
             else
             {
-                PnlCancelarOrden pnlCancelarOrden = new PnlCancelarOrden(Convert.ToString(dtNoFactura.Rows[0]["OrdenId"]), null);
+                PnlCancelarOrden pnlCancelarOrden = new PnlCancelarOrden(Convert.ToString(dtNoFactura.Rows[0]["OrdenId"]), null,Utilidades.SucursalId);
                 pnlCancelarOrden.ShowDialog();
             }
         }

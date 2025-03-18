@@ -38,6 +38,10 @@
             this.TxtFiltrar = new System.Windows.Forms.TextBox();
             this.BtnSeleccionar = new NeoCobranza.Especiales.EspecialButton();
             this.btnCancelar = new NeoCobranza.Especiales.EspecialButton();
+            this.label4 = new System.Windows.Forms.Label();
+            this.TxtCantidad = new System.Windows.Forms.TextBox();
+            this.TxtCosto = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvProveedor)).BeginInit();
             this.SuspendLayout();
@@ -88,7 +92,7 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.DgvProveedor.DefaultCellStyle = dataGridViewCellStyle2;
-            this.DgvProveedor.Location = new System.Drawing.Point(16, 97);
+            this.DgvProveedor.Location = new System.Drawing.Point(12, 78);
             this.DgvProveedor.MultiSelect = false;
             this.DgvProveedor.Name = "DgvProveedor";
             this.DgvProveedor.ReadOnly = true;
@@ -101,14 +105,14 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DgvProveedor.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.DgvProveedor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvProveedor.Size = new System.Drawing.Size(696, 433);
+            this.DgvProveedor.Size = new System.Drawing.Size(696, 353);
             this.DgvProveedor.TabIndex = 90;
             // 
             // TxtFiltrar
             // 
             this.TxtFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TxtFiltrar.Location = new System.Drawing.Point(16, 58);
+            this.TxtFiltrar.Location = new System.Drawing.Point(12, 52);
             this.TxtFiltrar.Name = "TxtFiltrar";
             this.TxtFiltrar.Size = new System.Drawing.Size(696, 20);
             this.TxtFiltrar.TabIndex = 159;
@@ -156,12 +160,63 @@
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label4.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label4.Location = new System.Drawing.Point(12, 449);
+            this.label4.Name = "label4";
+            this.label4.Padding = new System.Windows.Forms.Padding(5);
+            this.label4.Size = new System.Drawing.Size(183, 26);
+            this.label4.TabIndex = 170;
+            this.label4.Text = "CANTIDAD DE PRODUCTO:";
+            // 
+            // TxtCantidad
+            // 
+            this.TxtCantidad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TxtCantidad.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtCantidad.Location = new System.Drawing.Point(201, 448);
+            this.TxtCantidad.Name = "TxtCantidad";
+            this.TxtCantidad.Size = new System.Drawing.Size(264, 27);
+            this.TxtCantidad.TabIndex = 171;
+            this.TxtCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            // 
+            // TxtCosto
+            // 
+            this.TxtCosto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TxtCosto.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtCosto.Location = new System.Drawing.Point(201, 481);
+            this.TxtCosto.Name = "TxtCosto";
+            this.TxtCosto.Size = new System.Drawing.Size(264, 27);
+            this.TxtCosto.TabIndex = 173;
+            this.TxtCosto.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.TxtCosto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label1.Location = new System.Drawing.Point(12, 482);
+            this.label1.Name = "label1";
+            this.label1.Padding = new System.Windows.Forms.Padding(5);
+            this.label1.Size = new System.Drawing.Size(66, 26);
+            this.label1.TabIndex = 172;
+            this.label1.Text = "COSTO:";
+            // 
             // PnlSeleccionarProveedor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(729, 577);
+            this.Controls.Add(this.TxtCosto);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.TxtCantidad);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.TxtFiltrar);
             this.Controls.Add(this.BtnSeleccionar);
             this.Controls.Add(this.btnCancelar);
@@ -190,5 +245,9 @@
         private Especiales.EspecialButton btnCancelar;
         private System.Windows.Forms.DataGridView DgvProveedor;
         public System.Windows.Forms.TextBox TxtFiltrar;
+        public System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox TxtCantidad;
+        private System.Windows.Forms.TextBox TxtCosto;
+        public System.Windows.Forms.Label label1;
     }
 }

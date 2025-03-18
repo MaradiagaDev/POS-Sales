@@ -186,11 +186,11 @@ namespace NeoCobranza.Paneles_Venta
                         dataUtilities.SetColumns("IdOrden", NoOrden);
                         dataUtilities.UpdateRecordByPrimaryKey("AgendaCitas", DgvItemsCitas.SelectedRows[0].Cells[0].Value);
 
-                        pnlPrincipal.AbrirVenta(0, idCliente: dataCita.Rows[0]["IdCliente"].ToString());
+                        pnlPrincipal.AbrirVenta(0, idCliente: dataCita.Rows[0]["IdCliente"].ToString(),sucursal:Utilidades.SucursalId);
                     }
                     else
                     {
-                        pnlPrincipal.AbrirVenta(decimal.Parse(dataCita.Rows[0]["IdOrden"].ToString()));
+                        pnlPrincipal.AbrirVenta(decimal.Parse(dataCita.Rows[0]["IdOrden"].ToString()), sucursal: Utilidades.SucursalId);
                     }
                 }
             }

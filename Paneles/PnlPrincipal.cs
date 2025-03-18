@@ -21,6 +21,7 @@ using NeoCobranza.ModelsCobranza;
 using System.Threading;
 using NeoCobranza.Paneles_Venta.Informes;
 using System.Windows.Forms.VisualStyles;
+using NeoCobranza.PanelesHoteles;
 
 namespace NeoCobranza.Paneles
 {
@@ -179,9 +180,9 @@ namespace NeoCobranza.Paneles
             }
 
             //Cierre de Caja
-            if (!Utilidades.PermisosLevel(2, 15))
+            if (!Utilidades.PermisosLevel(2, 20))
             {
-                BtnCaja.Visible=false;
+                CierreCajaToolStripMenuItem.Visible=false;
             }
 
             //Sistema
@@ -424,7 +425,7 @@ namespace NeoCobranza.Paneles
         private void ventasDirectasDeAtaudesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             limpiar();
-            PnlVentas directas = new PnlVentas("OrdenRapida", this);
+            PnlVentas directas = new PnlVentas("OrdenRapida", this, Utilidades.SucursalId);
             directas.TopLevel = false;
             directas.Dock = DockStyle.Fill;
             PnlCentral.Controls.Add(directas);
@@ -491,15 +492,15 @@ namespace NeoCobranza.Paneles
 
         private void pagoDeCuotasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            limpiar();
-            PnlPagoGeneral pnlGeneral = new PnlPagoGeneral(conexion);
-            AddOwnedForm(pnlGeneral);
-            pnlGeneral.TopLevel = false;
-            pnlGeneral.Dock = DockStyle.Fill;
-            PnlCentral.Controls.Add(pnlGeneral);
-            PnlCentral.Tag = pnlGeneral;
+            //limpiar();
+            //PnlPagoGeneral pnlGeneral = new PnlPagoGeneral(conexion);
+            //AddOwnedForm(pnlGeneral);
+            //pnlGeneral.TopLevel = false;
+            //pnlGeneral.Dock = DockStyle.Fill;
+            //PnlCentral.Controls.Add(pnlGeneral);
+            //PnlCentral.Tag = pnlGeneral;
 
-            pnlGeneral.Show();
+            //pnlGeneral.Show();
         }
 
         private void contratosRetiradosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -943,7 +944,7 @@ namespace NeoCobranza.Paneles
         private void BtnVentaRapida_Click(object sender, EventArgs e)
         {
             limpiar();
-            PnlVentas directas = new PnlVentas( "OrdenRapida",this);
+            PnlVentas directas = new PnlVentas( "OrdenRapida",this, Utilidades.SucursalId);
             directas.TopLevel = false;
             directas.Dock = DockStyle.Fill;
             PnlCentral.Controls.Add(directas);
@@ -952,10 +953,10 @@ namespace NeoCobranza.Paneles
             directas.Visible = true;
         }
 
-        public void AbrirVenta(decimal orden,string mesa = "-",string idCliente = "0")
+        public void AbrirVenta(decimal orden,string sucursal,string mesa = "-",string idCliente = "0")
         {
             limpiar();
-            PnlVentas directas = new PnlVentas("OrdenRapida",this,orden,mesa,idCliente);
+            PnlVentas directas = new PnlVentas("OrdenRapida",this,sucursal,orden,mesa,idCliente);
             directas.TopLevel = false;
             directas.Dock = DockStyle.Fill;
             PnlCentral.Controls.Add(directas);
@@ -986,10 +987,10 @@ namespace NeoCobranza.Paneles
             directas.Show();
         }
 
-        public void AbrirProductos(decimal orden,string opc,bool dgi,bool alcaldia,string descuento)
+        public void AbrirProductos(decimal orden,string sucursal,string opc,bool dgi,bool alcaldia,string descuento)
         {
             limpiar();
-            frmAgregarProductosServicios directas = new frmAgregarProductosServicios(this,orden,opc,dgi,alcaldia,descuento);
+            frmAgregarProductosServicios directas = new frmAgregarProductosServicios(this,orden,sucursal,opc,dgi,alcaldia,descuento);
             directas.TopLevel = false;
             directas.Dock = DockStyle.Fill;
             directas.TopLevel = false;
@@ -1071,6 +1072,39 @@ namespace NeoCobranza.Paneles
         private void MenuInventario_Opening(object sender, CancelEventArgs e)
         {
 
+        }
+
+        private void BtnListaVentasActivas_Click(object sender, EventArgs e)
+        {
+            limpiar();
+            frmBusquedasOrdenes directas = new frmBusquedasOrdenes(this, "Lista");
+            directas.TopLevel = false;
+            directas.Dock = DockStyle.Fill;
+            directas.TopLevel = false;
+            PnlCentral.Controls.Add(directas);
+            directas.Show();
+        }
+
+        private void BtnHoteleria_Click(object sender, EventArgs e)
+        {
+            limpiar();
+            PnlPrincipalHoteleria directas = new PnlPrincipalHoteleria();
+            directas.TopLevel = false;
+            directas.Dock = DockStyle.Fill;
+            directas.TopLevel = false;
+            PnlCentral.Controls.Add(directas);
+            directas.Show();
+        }
+
+        private void definiciónDeHabitacionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            limpiar();
+            PnlCatalogoHabitaciones directas = new PnlCatalogoHabitaciones();
+            directas.TopLevel = false;
+            directas.Dock = DockStyle.Fill;
+            directas.TopLevel = false;
+            PnlCentral.Controls.Add(directas);
+            directas.Show();
         }
     }
 }

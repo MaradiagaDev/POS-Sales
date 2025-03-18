@@ -49,6 +49,11 @@ namespace NeoCobranza.Paneles
                     ChkImgFactura.Checked = Convert.ToBoolean(dtResponse.Rows[0]["BitImgFac"]);
                 }
 
+                if (dtResponse.Rows[0]["BitDobleFactura"] != DBNull.Value)
+                {
+                    ChkDobleFactura.Checked = Convert.ToBoolean(dtResponse.Rows[0]["BitDobleFactura"]);
+                }
+
                 if (dtResponse.Rows[0]["bitPorcentaje"] != DBNull.Value)
                 {
                     RBMonto.Checked = !Convert.ToBoolean(dtResponse.Rows[0]["bitPorcentaje"]);
@@ -145,6 +150,7 @@ namespace NeoCobranza.Paneles
                 dataUtilities.SetColumns("proforma", TxtProforma.Text);
                 dataUtilities.SetColumns("Propina", Propina);
                 dataUtilities.SetColumns("BitImgFac", ChkImgFactura.Checked);
+                dataUtilities.SetColumns("BitDobleFactura", ChkDobleFactura.Checked);
 
                 if (PbLogo.Image != null)
                 {
@@ -175,6 +181,7 @@ namespace NeoCobranza.Paneles
                 dataUtilities.SetColumns("Propina", Propina);
                 dataUtilities.SetColumns("bitPorcentaje", RBPorcentaje.Checked);
                 dataUtilities.SetColumns("BitImgFac", ChkImgFactura.Checked);
+                dataUtilities.SetColumns("BitDobleFactura", ChkDobleFactura.Checked);
 
                 if (PbLogo.Image != null)
                 {

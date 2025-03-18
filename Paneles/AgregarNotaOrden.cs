@@ -16,8 +16,10 @@ namespace NeoCobranza.Paneles
     {
         DataUtilities dataUtilities = new DataUtilities();
         private string auxOrden;
-        public AgregarNotaOrden(string key)
+        private string auxSucursal;
+        public AgregarNotaOrden(string key,string sucursal)
         {
+            auxSucursal = sucursal;
             InitializeComponent();
 
             DataTable dt = dataUtilities.getRecordByColumn("Ordenes", "OrdenId", key);
@@ -36,8 +38,11 @@ namespace NeoCobranza.Paneles
 
         private void btnGuardarNota_Click(object sender, EventArgs e)
         {
-            dataUtilities.SetColumns("NotaOrden",TxtNotaOrden.Text);
-            dataUtilities.UpdateRecordByPrimaryKey("Ordenes", auxOrden);
+
+            dataUtilities.SetParameter("@Orden", auxOrden);
+            dataUtilities.SetParameter("@sucursal",auxSucursal);
+            dataUtilities.SetParameter("@nota", TxtNotaOrden.Text);
+            dataUtilities.ExecuteStoredProcedure("ActualizarNotaOrdenSucursal");
 
             this.Close();
         }

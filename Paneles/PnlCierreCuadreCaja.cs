@@ -101,6 +101,12 @@ namespace NeoCobranza.Paneles
 
         private void BtnListaGastos_Click(object sender, EventArgs e)
         {
+            if (!Utilidades.PermisosLevel(3, 74))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             dgvGeneral.Columns.Clear();
             IndexSelected = 1;
             // Actualiza el estilo visual del botón seleccionado
@@ -116,6 +122,12 @@ namespace NeoCobranza.Paneles
 
         private void BtnListaIngresos_Click(object sender, EventArgs e)
         {
+            if (!Utilidades.PermisosLevel(3, 74))
+            {
+                MessageBox.Show("Su usuario no tiene permisos para realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             dgvGeneral.Columns.Clear();
             IndexSelected = 2;
 

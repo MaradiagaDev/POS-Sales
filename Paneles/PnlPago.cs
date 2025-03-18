@@ -33,8 +33,9 @@ namespace NeoCobranza.Paneles
         bool ordenPagada = false;
         public bool bit58mm = false;
         public bool bit80mm = false;
+        public string auxSucursal;
 
-        public PnlPago(PnlVentas frm)
+        public PnlPago(PnlVentas frm, string sucursal)
         {
             InitializeComponent();
             this.auxFrm = frm;
@@ -86,7 +87,7 @@ namespace NeoCobranza.Paneles
                 CmbBanco.DisplayMember = "Banco";
                 CmbBanco.DataSource = dataCmb;
             }
-
+            this.auxSucursal = sucursal;
             CargarValores();
         }
 
@@ -323,7 +324,28 @@ namespace NeoCobranza.Paneles
 
                     if (result == DialogResult.Yes)
                     {
-                        PrintPDF(false);
+
+                        DataRow dtEmpresa = dataUtilities.GetAllRecords("Empresa").Rows[0];
+
+                        if (dtEmpresa["BitDobleFactura"] != DBNull.Value)
+                        {
+                            if (Convert.ToBoolean(dtEmpresa["BitDobleFactura"]))
+                            {
+                                PrintPDF(false);
+
+                                DialogResult resultDos = MessageBox.Show("¿Desea imprimir segunda factura?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                                if (result == DialogResult.Yes)
+                                {
+                                    PrintPDF(false);
+                                }
+                            }
+                            else
+                            {
+                                PrintPDF(false);
+                            }
+                        }
+
+                       
                         //FUNCION REPORTE
                     }
 
@@ -791,6 +813,16 @@ namespace NeoCobranza.Paneles
                 yPosition += sizeRucCliente.Height;
             }
 
+            string cedulaCliente = "Cédula: " + Convert.ToString(dtResponseOrden.Rows[0]["Cedula"]);
+
+            if (Convert.ToString(dtResponseOrden.Rows[0]["ClienteId"]) != "0" )
+            {
+                SizeF sizeCedulaCliente = e.Graphics.MeasureString(cedulaCliente, regularFont, (int)availableWidth);
+                RectangleF cedulaClienteRect = new RectangleF(marginLeft, yPosition, availableWidth, sizeCedulaCliente.Height);
+                e.Graphics.DrawString(cedulaCliente, regularFont, Brushes.Black, cedulaClienteRect);
+                yPosition += sizeCedulaCliente.Height;
+            }
+
             string ordenText = $"No. Orden: {Convert.ToString(dtResponseOrden.Rows[0]["OrdenId"])}";
             SizeF sizeOrden = e.Graphics.MeasureString(ordenText, regularFont, (int)availableWidth);
             RectangleF ordenRect = new RectangleF(marginLeft, yPosition, availableWidth, sizeOrden.Height);
@@ -1140,6 +1172,17 @@ namespace NeoCobranza.Paneles
                 e.Graphics.DrawString(rucCliente, regularFont, Brushes.Black, rucClienteRect);
                 yPosition += sizeRucCliente.Height;
             }
+
+            string cedulaCliente = "Cédula: " + Convert.ToString(dtResponseOrden.Rows[0]["Cedula"]);
+
+            if (Convert.ToString(dtResponseOrden.Rows[0]["ClienteId"]) != "0")
+            {
+                SizeF sizeCedulaCliente = e.Graphics.MeasureString(cedulaCliente, regularFont, (int)availableWidth);
+                RectangleF cedulaClienteRect = new RectangleF(marginLeft, yPosition, availableWidth, sizeCedulaCliente.Height);
+                e.Graphics.DrawString(cedulaCliente, regularFont, Brushes.Black, cedulaClienteRect);
+                yPosition += sizeCedulaCliente.Height;
+            }
+
 
             string ordenText = $"No. Orden: {Convert.ToString(dtResponseOrden.Rows[0]["OrdenId"])}";
             SizeF sizeOrden = e.Graphics.MeasureString(ordenText, regularFont, (int)availableWidth);

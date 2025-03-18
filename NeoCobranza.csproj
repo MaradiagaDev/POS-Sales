@@ -18,7 +18,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
-    <PublishUrl>D:\Programa Personal\PAQUETE INSTALACION V1\V1 SYSADMIN\</PublishUrl>
+    <PublishUrl>C:\Users\Usuario\Desktop\V2\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -31,7 +31,7 @@
     <UpdateUrl>\\192.168.1.68\versionesneocobranza\Actualizaciones\</UpdateUrl>
     <MinimumRequiredVersion>1.0.0.15</MinimumRequiredVersion>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>55</ApplicationRevision>
+    <ApplicationRevision>67</ApplicationRevision>
     <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -93,6 +93,12 @@
     </Reference>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.ScheduleCore, Version=1.0.20223.8, Culture=neutral, PublicKeyToken=6da5a5182831b571, processorArchitecture=MSIL">
+      <HintPath>packages\C1.ScheduleCore.1.0.20223.8\lib\netstandard2.0\C1.ScheduleCore.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.Win.ScheduleCore, Version=1.0.20223.8, Culture=neutral, PublicKeyToken=6da5a5182831b571, processorArchitecture=MSIL">
+      <HintPath>packages\C1.Win.ScheduleCore.1.0.20223.8\lib\netstandard2.0\C1.Win.ScheduleCore.dll</HintPath>
     </Reference>
     <Reference Include="ClosedXML, Version=0.104.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\ClosedXML.0.104.2\lib\netstandard2.0\ClosedXML.dll</HintPath>
@@ -288,6 +294,9 @@
     <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Win32.SystemEvents, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Win32.SystemEvents.6.0.0\lib\net461\Microsoft.Win32.SystemEvents.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -322,6 +331,36 @@
       <HintPath>packages\StackExchange.Redis.2.6.116\lib\net472\StackExchange.Redis.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Syncfusion.Grid.Base, Version=28.2462.11.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Grid.Base.28.2.11\lib\net462\Syncfusion.Grid.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Grid.Windows, Version=28.2462.11.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Grid.Windows.28.2.11\lib\net462\Syncfusion.Grid.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Licensing, Version=28.2462.11.0, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Licensing.28.2.11\lib\net462\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Schedule.Base, Version=28.2462.11.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Schedule.Base.28.2.11\lib\net462\Syncfusion.Schedule.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Schedule.Windows, Version=28.2462.11.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Schedule.Windows.28.2.11\lib\net462\Syncfusion.Schedule.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Shared.Base, Version=28.2462.11.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Shared.Base.28.2.11\lib\net462\Syncfusion.Shared.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Shared.Windows, Version=28.2462.11.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Shared.Windows.28.2.11\lib\net462\Syncfusion.Shared.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SpellChecker.Base, Version=28.2462.11.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.SpellChecker.Base.28.2.11\lib\net462\Syncfusion.SpellChecker.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Tools.Base, Version=28.2462.11.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Tools.Base.28.2.11\lib\net462\Syncfusion.Tools.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Tools.Windows, Version=28.2462.11.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Tools.Windows.28.2.11\lib\net462\Syncfusion.Tools.Windows.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -350,6 +389,9 @@
     </Reference>
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Diagnostics.DiagnosticSource.5.0.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Drawing.Common.6.0.0\lib\net461\System.Drawing.Common.dll</HintPath>
     </Reference>
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.24.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -594,6 +636,48 @@
     <Compile Include="Informes\Informes Formato Ticket\FrmFacturaTicket.Designer.cs">
       <DependentUpon>FrmFacturaTicket.cs</DependentUpon>
     </Compile>
+    <Compile Include="PanelesHoteles\PnlAgregarReservacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelesHoteles\PnlAgregarReservacion.Designer.cs">
+      <DependentUpon>PnlAgregarReservacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelesHoteles\PnlCatalogoHabitaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelesHoteles\PnlCatalogoHabitaciones.Designer.cs">
+      <DependentUpon>PnlCatalogoHabitaciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelesHoteles\PnlDefinirHabitaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelesHoteles\PnlDefinirHabitaciones.Designer.cs">
+      <DependentUpon>PnlDefinirHabitaciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelesHoteles\PnlInicioHoteles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelesHoteles\PnlInicioHoteles.Designer.cs">
+      <DependentUpon>PnlInicioHoteles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelesHoteles\PnlReservaHabitacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelesHoteles\PnlReservaHabitacion.Designer.cs">
+      <DependentUpon>PnlReservaHabitacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelesHoteles\PnlSeleccionarHabitaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelesHoteles\PnlSeleccionarHabitaciones.Designer.cs">
+      <DependentUpon>PnlSeleccionarHabitaciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelesHoteles\PnlVistaGeneralHabitaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelesHoteles\PnlVistaGeneralHabitaciones.Designer.cs">
+      <DependentUpon>PnlVistaGeneralHabitaciones.cs</DependentUpon>
+    </Compile>
     <Compile Include="Paneles\PnlAgendaCambioUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -605,6 +689,12 @@
     </Compile>
     <Compile Include="Paneles\PnlAgendar.Designer.cs">
       <DependentUpon>PnlAgendar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlAgregarProductosOrden.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlAgregarProductosOrden.Designer.cs">
+      <DependentUpon>PnlAgregarProductosOrden.cs</DependentUpon>
     </Compile>
     <Compile Include="Paneles\PnlAsistencia.cs">
       <SubType>Form</SubType>
@@ -618,6 +708,12 @@
     <Compile Include="Paneles\PnlCierreCuadreCaja.Designer.cs">
       <DependentUpon>PnlCierreCuadreCaja.cs</DependentUpon>
     </Compile>
+    <Compile Include="Paneles\PnlConfigInventarioInicial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlConfigInventarioInicial.Designer.cs">
+      <DependentUpon>PnlConfigInventarioInicial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Paneles\PnlGenerarInforme.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -629,6 +725,12 @@
     </Compile>
     <Compile Include="Paneles\PnlHistorialCierresCaja.Designer.cs">
       <DependentUpon>PnlHistorialCierresCaja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlImprimeTicketsDetalle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlImprimeTicketsDetalle.Designer.cs">
+      <DependentUpon>PnlImprimeTicketsDetalle.cs</DependentUpon>
     </Compile>
     <Compile Include="Paneles\PnlInformes.cs">
       <SubType>Form</SubType>
@@ -647,6 +749,24 @@
     </Compile>
     <Compile Include="Paneles\PnlPago.Designer.cs">
       <DependentUpon>PnlPago.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlPagoGeneral.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlPagoGeneral.Designer.cs">
+      <DependentUpon>PnlPagoGeneral.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlPrecioNuevo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlPrecioNuevo.Designer.cs">
+      <DependentUpon>PnlPrecioNuevo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlPrincipalHoteleria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlPrincipalHoteleria.Designer.cs">
+      <DependentUpon>PnlPrincipalHoteleria.cs</DependentUpon>
     </Compile>
     <Compile Include="Paneles\PnlSegmentacionAgregar.cs">
       <SubType>Form</SubType>
@@ -1313,11 +1433,32 @@
       <DependentUpon>FrmFacturaTicket.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Informes\Informes Formato Ticket\XrpInformeFacturaTicket.rdlc" />
+    <EmbeddedResource Include="PanelesHoteles\PnlAgregarReservacion.resx">
+      <DependentUpon>PnlAgregarReservacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelesHoteles\PnlCatalogoHabitaciones.resx">
+      <DependentUpon>PnlCatalogoHabitaciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelesHoteles\PnlDefinirHabitaciones.resx">
+      <DependentUpon>PnlDefinirHabitaciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelesHoteles\PnlInicioHoteles.resx">
+      <DependentUpon>PnlInicioHoteles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelesHoteles\PnlReservaHabitacion.resx">
+      <DependentUpon>PnlReservaHabitacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelesHoteles\PnlSeleccionarHabitaciones.resx">
+      <DependentUpon>PnlSeleccionarHabitaciones.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlAgendaCambioUsuario.resx">
       <DependentUpon>PnlAgendaCambioUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlAgendar.resx">
       <DependentUpon>PnlAgendar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlAgregarProductosOrden.resx">
+      <DependentUpon>PnlAgregarProductosOrden.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlAsistencia.resx">
       <DependentUpon>PnlAsistencia.cs</DependentUpon>
@@ -1325,11 +1466,17 @@
     <EmbeddedResource Include="Paneles\PnlCierreCuadreCaja.resx">
       <DependentUpon>PnlCierreCuadreCaja.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlConfigInventarioInicial.resx">
+      <DependentUpon>PnlConfigInventarioInicial.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlGenerarInforme.resx">
       <DependentUpon>PnlGenerarInforme.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlHistorialCierresCaja.resx">
       <DependentUpon>PnlHistorialCierresCaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlImprimeTicketsDetalle.resx">
+      <DependentUpon>PnlImprimeTicketsDetalle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlInformes.resx">
       <DependentUpon>PnlInformes.cs</DependentUpon>
@@ -1339,6 +1486,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlPago.resx">
       <DependentUpon>PnlPago.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlPagoGeneral.resx">
+      <DependentUpon>PnlPagoGeneral.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlPrecioNuevo.resx">
+      <DependentUpon>PnlPrecioNuevo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlPrincipalHoteleria.resx">
+      <DependentUpon>PnlPrincipalHoteleria.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlSegmentacionAgregar.resx">
       <DependentUpon>PnlSegmentacionAgregar.cs</DependentUpon>
@@ -1824,6 +1980,7 @@
     <None Include="Resources\8962548_fork_food_knife_cooking_kitchen_icon.png" />
     <None Include="Resources\descarga.png" />
     <None Include="Resources\299086_info_sign_icon %281%29.png" />
+    <None Include="Resources\6491363_app_hotel_journey_service_travel_icon.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

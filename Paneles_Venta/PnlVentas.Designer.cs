@@ -57,7 +57,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.TxtCodigoProducto = new System.Windows.Forms.TextBox();
             this.TxtActualizarDescuento = new System.Windows.Forms.TextBox();
-            this.ChkAutomatico = new System.Windows.Forms.CheckBox();
             this.label22 = new System.Windows.Forms.Label();
             this.LblNombreClientes = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -76,11 +75,14 @@
             this.LblOrdenMesa = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.BtnAddClientes = new NeoCobranza.Especiales.EspecialButton();
+            this.ChkPropina = new System.Windows.Forms.CheckBox();
+            this.BtnImprimirIndividual = new NeoCobranza.Especiales.EspecialButton();
+            this.BtnDesvincular = new NeoCobranza.Especiales.EspecialButton();
             this.especialButton3 = new NeoCobranza.Especiales.EspecialButton();
             this.BtnAgregarPro = new NeoCobranza.Especiales.EspecialButton();
             this.BtnCredito = new NeoCobranza.Especiales.EspecialButton();
             this.BtnAgregarServicio = new NeoCobranza.Especiales.EspecialButton();
-            this.BtnBuscarCodigo = new NeoCobranza.Especiales.EspecialButton();
             this.especialButton1 = new NeoCobranza.Especiales.EspecialButton();
             this.BtnCancelarOrden = new NeoCobranza.Especiales.EspecialButton();
             this.BtnActualizarDescuento = new NeoCobranza.Especiales.EspecialButton();
@@ -89,8 +91,6 @@
             this.BtnGestionSalas = new NeoCobranza.Especiales.EspecialButton();
             this.BtnNotaOrden = new NeoCobranza.Especiales.EspecialButton();
             this.BtnListaOrdenes = new NeoCobranza.Especiales.EspecialButton();
-            this.ChkPropina = new System.Windows.Forms.CheckBox();
-            this.BtnDesvincular = new NeoCobranza.Especiales.EspecialButton();
             this.PnlTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvItemsOrden)).BeginInit();
             this.panel1.SuspendLayout();
@@ -467,18 +467,6 @@
             this.TxtActualizarDescuento.TextChanged += new System.EventHandler(this.TxtActualizarDescuento_TextChanged);
             this.TxtActualizarDescuento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtActualizarDescuento_KeyPress);
             // 
-            // ChkAutomatico
-            // 
-            this.ChkAutomatico.AutoSize = true;
-            this.ChkAutomatico.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ChkAutomatico.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ChkAutomatico.Location = new System.Drawing.Point(4, 197);
-            this.ChkAutomatico.Name = "ChkAutomatico";
-            this.ChkAutomatico.Size = new System.Drawing.Size(99, 21);
-            this.ChkAutomatico.TabIndex = 155;
-            this.ChkAutomatico.Text = "Automático";
-            this.ChkAutomatico.UseVisualStyleBackColor = true;
-            // 
             // label22
             // 
             this.label22.AutoSize = true;
@@ -699,9 +687,9 @@
             this.label2.ForeColor = System.Drawing.SystemColors.Desktop;
             this.label2.Location = new System.Drawing.Point(1, 133);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(131, 18);
+            this.label2.Size = new System.Drawing.Size(212, 18);
             this.label2.TabIndex = 182;
-            this.label2.Text = "Código de Barra";
+            this.label2.Text = "Código de Barra / Producto";
             // 
             // panel1
             // 
@@ -709,6 +697,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.BtnAddClientes);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label22);
             this.panel1.Controls.Add(this.LblNombreClientes);
@@ -727,6 +716,85 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(713, 206);
             this.panel1.TabIndex = 183;
+            // 
+            // BtnAddClientes
+            // 
+            this.BtnAddClientes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnAddClientes.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.BtnAddClientes.BackGroundColor = System.Drawing.SystemColors.MenuHighlight;
+            this.BtnAddClientes.BorderColor = System.Drawing.Color.Transparent;
+            this.BtnAddClientes.BorderRadius = 0;
+            this.BtnAddClientes.BorderSize = 0;
+            this.BtnAddClientes.FlatAppearance.BorderSize = 0;
+            this.BtnAddClientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAddClientes.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnAddClientes.ForeColor = System.Drawing.Color.White;
+            this.BtnAddClientes.Image = ((System.Drawing.Image)(resources.GetObject("BtnAddClientes.Image")));
+            this.BtnAddClientes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnAddClientes.Location = new System.Drawing.Point(670, 3);
+            this.BtnAddClientes.Name = "BtnAddClientes";
+            this.BtnAddClientes.Size = new System.Drawing.Size(38, 34);
+            this.BtnAddClientes.TabIndex = 187;
+            this.BtnAddClientes.TextGroundColor = System.Drawing.Color.White;
+            this.BtnAddClientes.UseVisualStyleBackColor = false;
+            this.BtnAddClientes.Click += new System.EventHandler(this.BtnAddClientes_Click);
+            // 
+            // ChkPropina
+            // 
+            this.ChkPropina.AutoSize = true;
+            this.ChkPropina.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkPropina.Location = new System.Drawing.Point(438, 223);
+            this.ChkPropina.Name = "ChkPropina";
+            this.ChkPropina.Size = new System.Drawing.Size(148, 21);
+            this.ChkPropina.TabIndex = 184;
+            this.ChkPropina.Text = "Propina Voluntaria";
+            this.ChkPropina.UseVisualStyleBackColor = true;
+            this.ChkPropina.CheckedChanged += new System.EventHandler(this.ChkPropina_CheckedChanged);
+            this.ChkPropina.Click += new System.EventHandler(this.ChkPropina_Click);
+            // 
+            // BtnImprimirIndividual
+            // 
+            this.BtnImprimirIndividual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnImprimirIndividual.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.BtnImprimirIndividual.BackGroundColor = System.Drawing.SystemColors.MenuHighlight;
+            this.BtnImprimirIndividual.BorderColor = System.Drawing.Color.Transparent;
+            this.BtnImprimirIndividual.BorderRadius = 0;
+            this.BtnImprimirIndividual.BorderSize = 0;
+            this.BtnImprimirIndividual.FlatAppearance.BorderSize = 0;
+            this.BtnImprimirIndividual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnImprimirIndividual.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnImprimirIndividual.ForeColor = System.Drawing.Color.White;
+            this.BtnImprimirIndividual.Image = ((System.Drawing.Image)(resources.GetObject("BtnImprimirIndividual.Image")));
+            this.BtnImprimirIndividual.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnImprimirIndividual.Location = new System.Drawing.Point(797, 527);
+            this.BtnImprimirIndividual.Name = "BtnImprimirIndividual";
+            this.BtnImprimirIndividual.Size = new System.Drawing.Size(38, 34);
+            this.BtnImprimirIndividual.TabIndex = 186;
+            this.BtnImprimirIndividual.TextGroundColor = System.Drawing.Color.White;
+            this.BtnImprimirIndividual.UseVisualStyleBackColor = false;
+            this.BtnImprimirIndividual.Click += new System.EventHandler(this.BtnImprimirIndividual_Click);
+            // 
+            // BtnDesvincular
+            // 
+            this.BtnDesvincular.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnDesvincular.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.BtnDesvincular.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.BtnDesvincular.BorderColor = System.Drawing.Color.Transparent;
+            this.BtnDesvincular.BorderRadius = 0;
+            this.BtnDesvincular.BorderSize = 0;
+            this.BtnDesvincular.FlatAppearance.BorderSize = 0;
+            this.BtnDesvincular.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnDesvincular.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnDesvincular.ForeColor = System.Drawing.Color.White;
+            this.BtnDesvincular.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnDesvincular.Location = new System.Drawing.Point(976, 57);
+            this.BtnDesvincular.Name = "BtnDesvincular";
+            this.BtnDesvincular.Size = new System.Drawing.Size(174, 49);
+            this.BtnDesvincular.TabIndex = 185;
+            this.BtnDesvincular.Text = "Desvincular Mesa";
+            this.BtnDesvincular.TextGroundColor = System.Drawing.Color.White;
+            this.BtnDesvincular.UseVisualStyleBackColor = false;
+            this.BtnDesvincular.Click += new System.EventHandler(this.BtnDesvincular_Click);
             // 
             // especialButton3
             // 
@@ -815,27 +883,6 @@
             this.BtnAgregarServicio.TextGroundColor = System.Drawing.Color.White;
             this.BtnAgregarServicio.UseVisualStyleBackColor = false;
             this.BtnAgregarServicio.Click += new System.EventHandler(this.BtnAgregarServicio_Click);
-            // 
-            // BtnBuscarCodigo
-            // 
-            this.BtnBuscarCodigo.BackColor = System.Drawing.Color.ForestGreen;
-            this.BtnBuscarCodigo.BackGroundColor = System.Drawing.Color.ForestGreen;
-            this.BtnBuscarCodigo.BorderColor = System.Drawing.Color.Transparent;
-            this.BtnBuscarCodigo.BorderRadius = 5;
-            this.BtnBuscarCodigo.BorderSize = 2;
-            this.BtnBuscarCodigo.FlatAppearance.BorderSize = 0;
-            this.BtnBuscarCodigo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnBuscarCodigo.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnBuscarCodigo.ForeColor = System.Drawing.Color.White;
-            this.BtnBuscarCodigo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnBuscarCodigo.Location = new System.Drawing.Point(173, 204);
-            this.BtnBuscarCodigo.Name = "BtnBuscarCodigo";
-            this.BtnBuscarCodigo.Size = new System.Drawing.Size(68, 37);
-            this.BtnBuscarCodigo.TabIndex = 138;
-            this.BtnBuscarCodigo.Text = "Buscar";
-            this.BtnBuscarCodigo.TextGroundColor = System.Drawing.Color.White;
-            this.BtnBuscarCodigo.UseVisualStyleBackColor = false;
-            this.BtnBuscarCodigo.Click += new System.EventHandler(this.BtnBuscarCodigo_Click);
             // 
             // especialButton1
             // 
@@ -1018,47 +1065,13 @@
             this.BtnListaOrdenes.UseVisualStyleBackColor = false;
             this.BtnListaOrdenes.Click += new System.EventHandler(this.BtnListaOrdenes_Click);
             // 
-            // ChkPropina
-            // 
-            this.ChkPropina.AutoSize = true;
-            this.ChkPropina.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ChkPropina.Location = new System.Drawing.Point(438, 223);
-            this.ChkPropina.Name = "ChkPropina";
-            this.ChkPropina.Size = new System.Drawing.Size(148, 21);
-            this.ChkPropina.TabIndex = 184;
-            this.ChkPropina.Text = "Propina Voluntaria";
-            this.ChkPropina.UseVisualStyleBackColor = true;
-            this.ChkPropina.CheckedChanged += new System.EventHandler(this.ChkPropina_CheckedChanged);
-            this.ChkPropina.Click += new System.EventHandler(this.ChkPropina_Click);
-            // 
-            // BtnDesvincular
-            // 
-            this.BtnDesvincular.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnDesvincular.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.BtnDesvincular.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.BtnDesvincular.BorderColor = System.Drawing.Color.Transparent;
-            this.BtnDesvincular.BorderRadius = 0;
-            this.BtnDesvincular.BorderSize = 0;
-            this.BtnDesvincular.FlatAppearance.BorderSize = 0;
-            this.BtnDesvincular.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnDesvincular.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnDesvincular.ForeColor = System.Drawing.Color.White;
-            this.BtnDesvincular.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnDesvincular.Location = new System.Drawing.Point(976, 57);
-            this.BtnDesvincular.Name = "BtnDesvincular";
-            this.BtnDesvincular.Size = new System.Drawing.Size(174, 49);
-            this.BtnDesvincular.TabIndex = 185;
-            this.BtnDesvincular.Text = "Desvincular Mesa";
-            this.BtnDesvincular.TextGroundColor = System.Drawing.Color.White;
-            this.BtnDesvincular.UseVisualStyleBackColor = false;
-            this.BtnDesvincular.Click += new System.EventHandler(this.BtnDesvincular_Click);
-            // 
             // PnlVentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1157, 611);
+            this.Controls.Add(this.BtnImprimirIndividual);
             this.Controls.Add(this.BtnDesvincular);
             this.Controls.Add(this.ChkPropina);
             this.Controls.Add(this.panel1);
@@ -1068,10 +1081,8 @@
             this.Controls.Add(this.BtnCredito);
             this.Controls.Add(this.BtnAgregarServicio);
             this.Controls.Add(this.PnlTitulo);
-            this.Controls.Add(this.BtnBuscarCodigo);
             this.Controls.Add(this.especialButton1);
             this.Controls.Add(this.TxtCodigoProducto);
-            this.Controls.Add(this.ChkAutomatico);
             this.Controls.Add(this.BtnCancelarOrden);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.TxtActualizarDescuento);
@@ -1138,7 +1149,6 @@
         private Especiales.EspecialButton especialButton3;
         private System.Windows.Forms.Label label5;
         public System.Windows.Forms.Label LblNombreClientes;
-        private Especiales.EspecialButton BtnBuscarCodigo;
         private System.Windows.Forms.Label label22;
         private Especiales.EspecialButton BtnNotaOrden;
         private Especiales.EspecialButton especialButton1;
@@ -1146,7 +1156,6 @@
         public Especiales.EspecialButton BtnAgregarPro;
         public Especiales.EspecialButton BtnAgregarServicio;
         private Especiales.EspecialButton BtnListaOrdenes;
-        public System.Windows.Forms.CheckBox ChkAutomatico;
         public System.Windows.Forms.TextBox TxtCodigoProducto;
         private System.Windows.Forms.TextBox TxtCantidadItems;
         private System.Windows.Forms.Label label17;
@@ -1177,5 +1186,7 @@
         public System.Windows.Forms.CheckBox ChkPropina;
         public Especiales.EspecialButton BtnDesvincular;
         public Especiales.EspecialButton BtnActualizarDescuento;
+        private Especiales.EspecialButton BtnImprimirIndividual;
+        private Especiales.EspecialButton BtnAddClientes;
     }
 }

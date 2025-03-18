@@ -1,5 +1,6 @@
 ﻿using NeoCobranza.Data;
 using NeoCobranza.DataController;
+using NeoCobranza.Paneles_Venta;
 using NeoCobranza.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -16,15 +17,17 @@ namespace NeoCobranza.Paneles
     public partial class PanelModificarCliente : Form
     {
 
-        VMCatalogoCliente vMCatalogoCliente = new VMCatalogoCliente();
+        public VMCatalogoCliente vMCatalogoCliente = new VMCatalogoCliente();
         public PnlCatalogoClientes frmPnlCatalogoCliente;
         public string auxIdCliente;
-        
-        public PanelModificarCliente(PnlCatalogoClientes frm,string key)
+        public PnlVentas auxfrmVenta;
+
+        public PanelModificarCliente(PnlCatalogoClientes frm,string key,PnlVentas venta)
         {
             InitializeComponent();
             this.frmPnlCatalogoCliente = frm;
             auxIdCliente = key;
+            this.auxfrmVenta = venta;
         }
 
         private void PanelModificarCliente_Load(object sender, EventArgs e)

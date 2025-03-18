@@ -1,4 +1,5 @@
-﻿using NeoCobranza.ModelsCobranza;
+﻿using iTextSharp.text.xml;
+using NeoCobranza.ModelsCobranza;
 using NeoCobranza.Paneles;
 using NeoCobranza.Properties;
 using NeoCobranza.ViewModels;
@@ -27,9 +28,11 @@ namespace NeoCobranza.Paneles_Venta
         bool auxAlcaldia;
         string auxDescuento;
         byte[] imagenBytes;
+        string AuxSucursal;
 
-        public frmAgregarProductosServicios(PnlPrincipal frmPrincipal, decimal ordenId, string opc, bool dgi, bool alcaldia, string descuento)
+        public frmAgregarProductosServicios(PnlPrincipal frmPrincipal, decimal ordenId,string sucursal, string opc, bool dgi, bool alcaldia, string descuento)
         {
+            AuxSucursal = sucursal.Trim();
             InitializeComponent();
 
             DataTable dtResponse = dataUtilities.GetAllRecords("Empresa");
@@ -427,10 +430,25 @@ namespace NeoCobranza.Paneles_Venta
         }
 
 
-
+        public decimal TxtPrecioVariable = 0;
         public void AgregarProductosOrden(string idProd, string Cantidad, string opc)
         {
             DataRow itemProductoAux = dataUtilities.getRecordByPrimaryKey("ProductosServicios", idProd).Rows[0];
+
+            if (itemProductoAux["BitVariable"] != DBNull.Value)
+            {
+                if (Convert.ToBoolean(itemProductoAux["BitVariable"]) && opc == "Increase")
+                {
+                    PnlPrecioNuevo frmAux = new PnlPrecioNuevo(null,this);
+                    frmAux.ShowDialog();
+
+                    if (TxtPrecioVariable == 0)
+                    {
+                        MessageBox.Show("Debe digitar el precio.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+            }
 
             if (Convert.ToString(itemProductoAux["ClasificacionProducto"]) == "Productos")
             {
@@ -457,6 +475,11 @@ namespace NeoCobranza.Paneles_Venta
                         dataUtilities.SetParameter("@Quantity", Cantidad);
                         dataUtilities.SetParameter("@Action", opc);
                         dataUtilities.SetParameter("@WarehouseId", CmbAlmacen.SelectedValue);
+                        dataUtilities.SetParameter("@SucursalId", AuxSucursal);
+                        if (TxtPrecioVariable > 0)
+                        {
+                            dataUtilities.SetParameter("@Precio", TxtPrecioVariable);
+                        }
                         dataUtilities.SetParameter("@Discount", 0);
                         dataUtilities.SetParameter("@Total", 0);
                         dataUtilities.SetParameter("@Subtotal", 0);
@@ -491,6 +514,11 @@ namespace NeoCobranza.Paneles_Venta
                     dataUtilities.SetParameter("@Quantity", Cantidad);
                     dataUtilities.SetParameter("@Action", opc);
                     dataUtilities.SetParameter("@WarehouseId", CmbAlmacen.SelectedValue);
+                    dataUtilities.SetParameter("@SucursalId", AuxSucursal);
+                    if (TxtPrecioVariable > 0)
+                    {
+                        dataUtilities.SetParameter("@Precio", TxtPrecioVariable);
+                    }
                     dataUtilities.SetParameter("@Discount", 0);
                     dataUtilities.SetParameter("@Total", 0);
                     dataUtilities.SetParameter("@Subtotal", 0);
@@ -521,6 +549,11 @@ namespace NeoCobranza.Paneles_Venta
                 dataUtilities.SetParameter("@Action", opc);
                 dataUtilities.SetParameter("@Discount", 0);
                 dataUtilities.SetParameter("@Total", 0);
+                dataUtilities.SetParameter("@SucursalId", AuxSucursal);
+                if (TxtPrecioVariable > 0)
+                {
+                    dataUtilities.SetParameter("@Precio", TxtPrecioVariable);
+                }
                 dataUtilities.SetParameter("@Subtotal", 0);
                 dataUtilities.SetParameter("@IVA", 0);
 
@@ -564,7 +597,7 @@ namespace NeoCobranza.Paneles_Venta
 
         private void BtnVolver_Click(object sender, EventArgs e)
         {
-            auxPnlPrincipal.AbrirVenta(auxOrdenId);
+            auxPnlPrincipal.AbrirVenta(auxOrdenId,AuxSucursal);
         }
 
         private void CmbTipoServicio_SelectedIndexChanged(object sender, EventArgs e)

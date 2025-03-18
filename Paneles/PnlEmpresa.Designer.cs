@@ -59,6 +59,7 @@
             this.especialButton1 = new NeoCobranza.Especiales.EspecialButton();
             this.BtnSeleccionarLogo = new NeoCobranza.Especiales.EspecialButton();
             this.BtnActualizar = new NeoCobranza.Especiales.EspecialButton();
+            this.ChkDobleFactura = new System.Windows.Forms.CheckBox();
             this.PnlTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -419,12 +420,25 @@
             this.BtnActualizar.UseVisualStyleBackColor = false;
             this.BtnActualizar.Click += new System.EventHandler(this.BtnActualizar_Click);
             // 
+            // ChkDobleFactura
+            // 
+            this.ChkDobleFactura.AutoSize = true;
+            this.ChkDobleFactura.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.ChkDobleFactura.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.ChkDobleFactura.Location = new System.Drawing.Point(681, 295);
+            this.ChkDobleFactura.Name = "ChkDobleFactura";
+            this.ChkDobleFactura.Size = new System.Drawing.Size(195, 22);
+            this.ChkDobleFactura.TabIndex = 184;
+            this.ChkDobleFactura.Text = "Imprimir Doble Factura";
+            this.ChkDobleFactura.UseVisualStyleBackColor = true;
+            // 
             // PnlEmpresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1125, 523);
+            this.Controls.Add(this.ChkDobleFactura);
             this.Controls.Add(this.ChkImgFactura);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.PBImagenProducto);
@@ -501,5 +515,6 @@
         private System.Windows.Forms.PictureBox PBImagenProducto;
         public Especiales.EspecialButton especialButton1;
         private System.Windows.Forms.CheckBox ChkImgFactura;
+        private System.Windows.Forms.CheckBox ChkDobleFactura;
     }
 }

@@ -15,6 +15,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using System.IO;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace NeoCobranza.Paneles_Venta
 {
@@ -44,6 +45,119 @@ namespace NeoCobranza.Paneles_Venta
             auxOpc = opc;
 
             ConfigUI();
+        }
+
+        // Lista para almacenar las órdenes seleccionadas y sus respectivas sucursales
+        List<(string orden, string sucursalId,string restante)> ListaOrdenes = new List<(string, string,string)>();
+
+        // Evento para manejar el click en CheckBox
+        private void DgvCatalogoOrdenes_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (auxOpc == "Lista")
+            {
+                if (e.ColumnIndex == dgvCatalogoOrdenes.Columns["Seleccionar"].Index && e.RowIndex >= 0)
+                {
+                    DataGridViewCheckBoxCell checkBoxCell = (DataGridViewCheckBoxCell)dgvCatalogoOrdenes.Rows[e.RowIndex].Cells["Seleccionar"];
+
+                    // Obtener el valor del número de orden y el saldo restante
+                    string numeroOrden = dgvCatalogoOrdenes.Rows[e.RowIndex].Cells["No Orden"].Value?.ToString();
+                    string sucursalId = CmbSucursal.SelectedValue?.ToString(); // Obtener el valor seleccionado en el ComboBox
+                    decimal restantePago = Convert.ToDecimal(dgvCatalogoOrdenes.Rows[e.RowIndex].Cells["Restante"].Value ?? 0); // Convertir el saldo restante a decimal
+
+                    if (restantePago > 0)
+                    {
+                        // Cambiar el estado del CheckBox (marcar/desmarcar)
+                        bool isChecked = (checkBoxCell.Value == null) ? false : (bool)checkBoxCell.Value;
+                        checkBoxCell.Value = !isChecked;
+
+                        if (!string.IsNullOrEmpty(numeroOrden) && !string.IsNullOrEmpty(sucursalId))
+                        {
+                            if (!isChecked) // Si estaba desmarcado y ahora se marcó, lo agregamos
+                            {
+                                ListaOrdenes.Add((numeroOrden, sucursalId,restante.ToString()));
+                            }
+                            else // Si estaba marcado y ahora se desmarcó, lo quitamos
+                            {
+                                ListaOrdenes.RemoveAll(item => item.orden == numeroOrden);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("La orden no se puede seleccionar porque no tiene saldo pendiente.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        ListaOrdenes.RemoveAll(item => item.orden == numeroOrden);
+                        checkBoxCell.Value = false;
+                    }
+                }
+            }
+        }
+
+
+        private void LimpiarListaOrdenes()
+        {
+            if (auxOpc == "Lista")
+            {
+                ChkSeleccionarTodo.Checked = false;
+                ListaOrdenes.Clear();
+                MarcarOrdenesEnGrid();
+            }
+        }
+
+        private void MarcarOrdenesEnGrid()
+        {
+            if (auxOpc == "Lista")
+            {
+                foreach (DataGridViewRow row in dgvCatalogoOrdenes.Rows)
+                {
+                    if (row.Cells["No Orden"].Value != null)
+                    {
+                        string numeroOrden = row.Cells["No Orden"].Value.ToString();
+
+                        // Verificar si la orden está en la lista
+                        if (ListaOrdenes.Any(o => o.orden == numeroOrden))
+                        {
+                            // Marcar el CheckBox si la orden está en la lista
+                            row.Cells["Seleccionar"].Value = true;
+                        }
+                        else
+                        {
+                            // Desmarcar el CheckBox si la orden no está en la lista
+                            row.Cells["Seleccionar"].Value = false;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void SeleccionarTodo()
+        {
+            if (auxOpc == "Lista")
+            {
+                string sucursalId = CmbSucursal.SelectedValue?.ToString(); // Obtener el valor seleccionado en el ComboBox
+                ListaOrdenes.Clear();
+
+                dataUtilities.SetParameter("@idSucursal", CmbSucursal.SelectedValue);
+                dataUtilities.SetParameter("@filtro", TxtFiltrar.Texts);
+                dataUtilities.SetParameter("@startDate", DtInicio.Value.Date);
+                dataUtilities.SetParameter("@endDate", DtFin.Value.Date);
+                dataUtilities.SetParameter("@bitEsCredito", EsCredito);
+                dataUtilities.SetParameter("@bitEsPagada", EsPagada);
+                dataUtilities.SetParameter("@OpcBuscador", CmbBuscarPor.SelectedIndex);
+                dataUtilities.SetParameter("@OpcFecha", CmbFiltrarFecha.SelectedIndex);
+                dataUtilities.SetParameter("@segmentacion", CmbSegmentacion.SelectedValue);
+
+                DataTable dtResponse = dataUtilities.ExecuteStoredProcedure("sp_ObtenerOrdenesNormalesPorSucursal1");
+
+                foreach (DataRow item in dtResponse.Rows)
+                {
+                    if (Convert.ToDecimal(item["RestantePago"]) > 0)
+                    {
+                        ListaOrdenes.Add((Convert.ToString(item["OrdenId"]), sucursalId, Convert.ToString(item["RestantePago"])));
+                    }
+                }
+
+                MarcarOrdenesEnGrid();
+            }
         }
 
         private void ConfigUI()
@@ -77,6 +191,41 @@ namespace NeoCobranza.Paneles_Venta
             switch (auxOpc)
             {
                 case "Lista":
+                    //EsCredito = false;
+                    //llbTitulo.Text = "Lista de Ventas Activas";
+                    //dynamicDataTableOrdenes.Columns.Clear();
+                    //dynamicDataTableOrdenes.Rows.Clear();
+                    //dgvCatalogoOrdenes.Columns.Clear();
+                    //dgvCatalogoOrdenes.DataSource = null;
+
+                    //if (dgvCatalogoOrdenes.Columns.Count == 0)
+                    //{
+                    //    dynamicDataTableOrdenes.Columns.Add("No Orden", typeof(string));
+                    //    dynamicDataTableOrdenes.Columns.Add("Factura", typeof(string));
+                    //    dynamicDataTableOrdenes.Columns.Add("Cliente Id", typeof(string));
+                    //    dynamicDataTableOrdenes.Columns.Add("Cliente", typeof(string));
+                    //    dynamicDataTableOrdenes.Columns.Add("Fecha", typeof(string));
+                    //    dynamicDataTableOrdenes.Columns.Add("Estado Orden", typeof(string));
+                    //    dynamicDataTableOrdenes.Columns.Add("Estado Pago", typeof(string));
+                    //    dynamicDataTableOrdenes.Columns.Add("Total", typeof(string));
+                    //    dynamicDataTableOrdenes.Columns.Add("Pagado", typeof(string));
+                    //    dynamicDataTableOrdenes.Columns.Add("Restante", typeof(string));
+
+                    //    DataGridViewButtonColumn buttonColumnSeleccionar = new DataGridViewButtonColumn();
+                    //    buttonColumnSeleccionar.HeaderText = "...";
+                    //    buttonColumnSeleccionar.Text = " Abrir Orden ";
+                    //    buttonColumnSeleccionar.UseColumnTextForButtonValue = true;
+
+                    //    dgvCatalogoOrdenes.Columns.Add(buttonColumnSeleccionar);
+
+                    //    DataGridViewButtonColumn buttonColumnCancelar = new DataGridViewButtonColumn();
+                    //    buttonColumnCancelar.HeaderText = "...";
+                    //    buttonColumnCancelar.Text = " Cancelar ";
+                    //    buttonColumnCancelar.UseColumnTextForButtonValue = true;
+
+                    //    dgvCatalogoOrdenes.Columns.Add(buttonColumnCancelar);
+                    //    dgvCatalogoOrdenes.DataSource = dynamicDataTableOrdenes;
+                    //}
                     EsCredito = false;
                     llbTitulo.Text = "Lista de Ventas Activas";
                     dynamicDataTableOrdenes.Columns.Clear();
@@ -86,6 +235,13 @@ namespace NeoCobranza.Paneles_Venta
 
                     if (dgvCatalogoOrdenes.Columns.Count == 0)
                     {
+                        // Agregar la columna de CheckBox
+                        DataGridViewCheckBoxColumn checkBoxColumn = new DataGridViewCheckBoxColumn();
+                        checkBoxColumn.HeaderText = "✓";
+                        checkBoxColumn.Name = "Seleccionar";
+                        dgvCatalogoOrdenes.Columns.Add(checkBoxColumn);
+
+                        // Agregar columnas de datos
                         dynamicDataTableOrdenes.Columns.Add("No Orden", typeof(string));
                         dynamicDataTableOrdenes.Columns.Add("Factura", typeof(string));
                         dynamicDataTableOrdenes.Columns.Add("Cliente Id", typeof(string));
@@ -97,24 +253,30 @@ namespace NeoCobranza.Paneles_Venta
                         dynamicDataTableOrdenes.Columns.Add("Pagado", typeof(string));
                         dynamicDataTableOrdenes.Columns.Add("Restante", typeof(string));
 
+                        // Agregar botones
                         DataGridViewButtonColumn buttonColumnSeleccionar = new DataGridViewButtonColumn();
                         buttonColumnSeleccionar.HeaderText = "...";
-                        buttonColumnSeleccionar.Text = " Abrir Orden ";
+                        buttonColumnSeleccionar.Text = "Abrir Orden";
                         buttonColumnSeleccionar.UseColumnTextForButtonValue = true;
-
                         dgvCatalogoOrdenes.Columns.Add(buttonColumnSeleccionar);
 
                         DataGridViewButtonColumn buttonColumnCancelar = new DataGridViewButtonColumn();
                         buttonColumnCancelar.HeaderText = "...";
-                        buttonColumnCancelar.Text = " Cancelar ";
+                        buttonColumnCancelar.Text = "Cancelar";
                         buttonColumnCancelar.UseColumnTextForButtonValue = true;
-
                         dgvCatalogoOrdenes.Columns.Add(buttonColumnCancelar);
+
                         dgvCatalogoOrdenes.DataSource = dynamicDataTableOrdenes;
+
+                        // Agregar evento para manejar el click en CheckBox
+                        dgvCatalogoOrdenes.CellContentClick += DgvCatalogoOrdenes_CellContentClick;
                     }
+
                     break;
 
                 case "ListaCredito":
+                    BtnPagarOrdenes.Visible = false;
+                    ChkSeleccionarTodo.Visible = false;
                     EsCredito = true;
                     llbTitulo.Text = "Cuentas Por Cobrar";
 
@@ -157,6 +319,8 @@ namespace NeoCobranza.Paneles_Venta
                     break;
 
                 case "ListaPagadas":
+                    BtnPagarOrdenes.Visible = false;
+                    ChkSeleccionarTodo.Visible = false;
                     EsPagada = true;
                     llbTitulo.Text = "Lista de Ventas Pagadas";
                     dynamicDataTableOrdenes.Columns.Clear();
@@ -250,7 +414,7 @@ namespace NeoCobranza.Paneles_Venta
                     break;
 
                 case "ListaCredito":
-                    
+
 
                     foreach (DataRow orden in dtResponse.Rows)
                     {
@@ -295,9 +459,9 @@ namespace NeoCobranza.Paneles_Venta
                     return;
             }
 
-            if(dtResponse.Rows.Count > 0)
+            if (dtResponse.Rows.Count > 0)
             {
-                totalPages = dtResponse.Rows[dtResponse.Rows.Count-1]["TotalPages"] == null ? 0 : Convert.ToInt16(dtResponse.Rows[0]["TotalPages"]);
+                totalPages = dtResponse.Rows[dtResponse.Rows.Count - 1]["TotalPages"] == null ? 0 : Convert.ToInt16(dtResponse.Rows[0]["TotalPages"]);
                 colocado = dtResponse.Rows[dtResponse.Rows.Count - 1]["TotalSumaTotalOrden"] == null ? 0 : Convert.ToDecimal(dtResponse.Rows[0]["TotalSumaTotalOrden"]);
                 pagado = dtResponse.Rows[dtResponse.Rows.Count - 1]["TotalSumaPagado"] == null ? 0 : Convert.ToDecimal(dtResponse.Rows[0]["TotalSumaPagado"]);
                 restante = dtResponse.Rows[dtResponse.Rows.Count - 1]["TotalSumaRestante"] == null ? 0 : Convert.ToDecimal(dtResponse.Rows[0]["TotalSumaRestante"]);
@@ -325,15 +489,30 @@ namespace NeoCobranza.Paneles_Venta
 
         private void dgvCatalogoOrdenes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 0)
+            if (auxOpc == "Lista")
             {
-                auxPnlPrincipal.AbrirVenta(Decimal.Parse(dgvCatalogoOrdenes.Rows[e.RowIndex].Cells[2].Value.ToString()));
+                if (e.ColumnIndex == 1)
+                {
+                    auxPnlPrincipal.AbrirVenta(Decimal.Parse(dgvCatalogoOrdenes.Rows[e.RowIndex].Cells[3].Value.ToString()), Convert.ToString(CmbSucursal.SelectedValue));
+                }
+                else if (e.ColumnIndex == 2)
+                {
+                    PnlCancelarOrden pnlCancelarOrden = new PnlCancelarOrden(dgvCatalogoOrdenes.Rows[e.RowIndex].Cells[3].Value.ToString(), null, Convert.ToString(CmbSucursal.SelectedValue));
+                    pnlCancelarOrden.ShowDialog();
+                }
             }
-            else if (e.ColumnIndex == 1)
+            else
             {
-                PnlCancelarOrden pnlCancelarOrden = new PnlCancelarOrden(dgvCatalogoOrdenes.Rows[e.RowIndex].Cells[2].Value.ToString(), null);
-                pnlCancelarOrden.ShowDialog();
-            }
+                if (e.ColumnIndex == 0)
+                {
+                    auxPnlPrincipal.AbrirVenta(Decimal.Parse(dgvCatalogoOrdenes.Rows[e.RowIndex].Cells[2].Value.ToString()), Convert.ToString(CmbSucursal.SelectedValue));
+                }
+                else if (e.ColumnIndex == 1)
+                {
+                    PnlCancelarOrden pnlCancelarOrden = new PnlCancelarOrden(dgvCatalogoOrdenes.Rows[e.RowIndex].Cells[2].Value.ToString(), null, Convert.ToString(CmbSucursal.SelectedValue));
+                    pnlCancelarOrden.ShowDialog();
+                }
+            } 
         }
 
         private void especialButton2_Click(object sender, EventArgs e)
@@ -347,6 +526,7 @@ namespace NeoCobranza.Paneles_Venta
             {
                 currentPage--;
                 FuncionesPrincipales();
+                MarcarOrdenesEnGrid();
             }
         }
 
@@ -356,6 +536,7 @@ namespace NeoCobranza.Paneles_Venta
             {
                 currentPage++;
                 FuncionesPrincipales();
+                MarcarOrdenesEnGrid();
             }
         }
 
@@ -441,12 +622,12 @@ namespace NeoCobranza.Paneles_Venta
                 }
 
                 // Crear un primer título grande con letra Century Gothic
-                iTextSharp.text.Paragraph tituloGrande = new iTextSharp.text.Paragraph($"EMPRESA: {Convert.ToString(dtEmpresa["NombreComercial"])} / Sucursal: "+CmbSucursal.Text, FontFactory.GetFont("Century Gothic", "", true, 12, 1, BaseColor.BLUE));
+                iTextSharp.text.Paragraph tituloGrande = new iTextSharp.text.Paragraph($"EMPRESA: {Convert.ToString(dtEmpresa["NombreComercial"])} / Sucursal: " + CmbSucursal.Text, FontFactory.GetFont("Century Gothic", "", true, 12, 1, BaseColor.BLUE));
                 tituloGrande.Alignment = Element.ALIGN_CENTER;
                 doc.Add(tituloGrande);
 
                 // Crear un segundo título más pequeño
-                iTextSharp.text.Paragraph tituloPequeno = new iTextSharp.text.Paragraph($"Colocado: " + TxtColocado.Text + " / Recuperado: " + TxtRecuperado.Text + " / Restante: " +TxtRestante.Text, FontFactory.GetFont("Century Gothic", 10));
+                iTextSharp.text.Paragraph tituloPequeno = new iTextSharp.text.Paragraph($"Colocado: " + TxtColocado.Text + " / Recuperado: " + TxtRecuperado.Text + " / Restante: " + TxtRestante.Text, FontFactory.GetFont("Century Gothic", 10));
                 tituloPequeno.Alignment = Element.ALIGN_CENTER;
                 doc.Add(tituloPequeno);
 
@@ -454,7 +635,7 @@ namespace NeoCobranza.Paneles_Venta
                 doc.Add(new iTextSharp.text.Paragraph(" "));
 
                 // Crear una tabla
-               
+
 
                 if (auxOpc == "ListaCredito")
                 {
@@ -468,6 +649,7 @@ namespace NeoCobranza.Paneles_Venta
                     table.AddCell(new PdfPCell(new Phrase(" Factura ", headerStyle)));
                     table.AddCell(new PdfPCell(new Phrase(" Clave ", headerStyle)));
                     table.AddCell(new PdfPCell(new Phrase(" Cliente ", headerStyle)));
+                    table.AddCell(new PdfPCell(new Phrase(" Código ", headerStyle)));
                     table.AddCell(new PdfPCell(new Phrase(" Creación ", headerStyle)));
                     table.AddCell(new PdfPCell(new Phrase(" Estado Orden ", headerStyle)));
                     table.AddCell(new PdfPCell(new Phrase(" Estado Pago ", headerStyle)));
@@ -504,13 +686,14 @@ namespace NeoCobranza.Paneles_Venta
                     table.AddCell(new PdfPCell(new Phrase(" Factura ", headerStyle)));
                     table.AddCell(new PdfPCell(new Phrase(" Clave ", headerStyle)));
                     table.AddCell(new PdfPCell(new Phrase(" Cliente ", headerStyle)));
+                    table.AddCell(new PdfPCell(new Phrase(" Código ", headerStyle)));
                     table.AddCell(new PdfPCell(new Phrase(" Creación ", headerStyle)));
                     table.AddCell(new PdfPCell(new Phrase(" Estado Orden ", headerStyle)));
                     table.AddCell(new PdfPCell(new Phrase(" Estado Pago ", headerStyle)));
                     table.AddCell(new PdfPCell(new Phrase(" Total ", headerStyle)));
                     table.AddCell(new PdfPCell(new Phrase(" Pagado ", headerStyle)));
                     table.AddCell(new PdfPCell(new Phrase(" Restante ", headerStyle)));
-      
+
 
                     foreach (DataRow row in dtResponse.Rows)
                     {
@@ -625,7 +808,7 @@ namespace NeoCobranza.Paneles_Venta
             try
             {
                 // 1. Título principal
-                if(auxOpc == "Lista")
+                if (auxOpc == "Lista")
                 {
                     ws.Cells[currentRow, 1] = "Informe de Cuentas Activas - SysAdmin";
                 }
@@ -633,7 +816,7 @@ namespace NeoCobranza.Paneles_Venta
                 {
                     ws.Cells[currentRow, 1] = "Informe de Cuentas Totalmente Pagadas - SysAdmin";
                 }
-                else if(auxOpc == "ListaCredito")
+                else if (auxOpc == "ListaCredito")
                 {
                     ws.Cells[currentRow, 1] = "Informe de Cuentas Por Cobrar - SysAdmin";
                 }
@@ -656,7 +839,7 @@ namespace NeoCobranza.Paneles_Venta
                     excelApp.Quit();
                     return;
                 }
-                string nombreEmpresa = Convert.ToString(dtEmpresa["NombreComercial"])+" - "+CmbSucursal.Text;
+                string nombreEmpresa = Convert.ToString(dtEmpresa["NombreComercial"]) + " - " + CmbSucursal.Text;
                 ws.Cells[currentRow, 1] = "EMPRESA: " + nombreEmpresa;
                 Excel.Range companyRange = ws.get_Range("A" + currentRow, "N" + currentRow);
                 companyRange.Merge();
@@ -668,7 +851,7 @@ namespace NeoCobranza.Paneles_Venta
                 currentRow++;
 
                 // 3. Información adicional (Almacén y Tipo Producto)
-                ws.Cells[currentRow, 1] = "Colocado: " + TxtColocado.Text + "  /  Recuperado: " + TxtRecuperado.Text + "  /  Restante: " +TxtRestante.Text;
+                ws.Cells[currentRow, 1] = "Colocado: " + TxtColocado.Text + "  /  Recuperado: " + TxtRecuperado.Text + "  /  Restante: " + TxtRestante.Text;
                 Excel.Range infoRange = ws.get_Range("A" + currentRow, "N" + currentRow);
                 infoRange.Merge();
                 infoRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
@@ -683,15 +866,16 @@ namespace NeoCobranza.Paneles_Venta
                     ws.Cells[currentRow, 2] = "Factura";
                     ws.Cells[currentRow, 3] = "Clave";
                     ws.Cells[currentRow, 4] = "Cliente";
-                    ws.Cells[currentRow, 5] = "Fecha Generación";
-                    ws.Cells[currentRow, 6] = "Estado Orden";
-                    ws.Cells[currentRow, 7] = "Estado Pago";
-                    ws.Cells[currentRow, 8] = "Total";
-                    ws.Cells[currentRow, 9] = "Pagado";
-                    ws.Cells[currentRow, 10] = "Restante";
-                    ws.Cells[currentRow, 11] = "Fecha de Pago";
-                    ws.Cells[currentRow, 12] = "Cantidad de Pagos";
-                    ws.Cells[currentRow, 13] = "Frecuencia de Pago";
+                    ws.Cells[currentRow, 5] = "Código";
+                    ws.Cells[currentRow, 6] = "Fecha Generación";
+                    ws.Cells[currentRow, 7] = "Estado Orden";
+                    ws.Cells[currentRow, 8] = "Estado Pago";
+                    ws.Cells[currentRow, 9] = "Total";
+                    ws.Cells[currentRow, 10] = "Pagado";
+                    ws.Cells[currentRow, 11] = "Restante";
+                    ws.Cells[currentRow, 12] = "Fecha de Pago";
+                    ws.Cells[currentRow, 13] = "Cantidad de Pagos";
+                    ws.Cells[currentRow, 14] = "Frecuencia de Pago";
                     Excel.Range headerRange = ws.get_Range("A" + currentRow, "N" + currentRow);
                     headerRange.Font.Name = "Century Gothic";
                     headerRange.Font.Size = 8;
@@ -720,12 +904,16 @@ namespace NeoCobranza.Paneles_Venta
                     //// 4. Encabezados de la tabla
                     ws.Cells[currentRow, 1] = "NoOrden";
                     ws.Cells[currentRow, 2] = "Factura";
-                    ws.Cells[currentRow, 4] = "Cliente";
+                    ws.Cells[currentRow, 3] = "Cliente";
+                    ws.Cells[currentRow, 4] = "Código";
                     ws.Cells[currentRow, 5] = "Fecha Generación";
                     ws.Cells[currentRow, 6] = "Estado Orden";
                     ws.Cells[currentRow, 7] = "Estado Pago";
                     ws.Cells[currentRow, 8] = "Total";
                     ws.Cells[currentRow, 9] = "Pagado";
+                    ws.Cells[currentRow, 10] = "Restante";
+                    ws.Cells[currentRow, 10] = "Restante";
+                    ws.Cells[currentRow, 10] = "Restante";
                     ws.Cells[currentRow, 10] = "Restante";
 
                     Excel.Range headerRange = ws.get_Range("A" + currentRow, "N" + currentRow);
@@ -818,31 +1006,66 @@ namespace NeoCobranza.Paneles_Venta
         {
             if (_formCargado)
                 FuncionesPrincipales();
+            LimpiarListaOrdenes();
         }
 
         private void CmbSegmentacion_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (_formCargado)
                 FuncionesPrincipales();
+            LimpiarListaOrdenes();
         }
 
         private void CmbFiltrarFecha_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (_formCargado)
                 FuncionesPrincipales();
+            LimpiarListaOrdenes();
         }
 
         private void CmbSucursal_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (_formCargado)
                 FuncionesPrincipales();
+            LimpiarListaOrdenes();
         }
 
         private void CmbBuscarPor_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (_formCargado)
                 FuncionesPrincipales();
+            LimpiarListaOrdenes();
         }
 
+        private void ChkSeleccionarTodo_Click(object sender, EventArgs e)
+        {
+            if (ChkSeleccionarTodo.Checked)
+            {
+                SeleccionarTodo();
+            }
+            else
+            {
+                LimpiarListaOrdenes();
+            }
+        }
+
+        private void BtnPagarOrdenes_Click(object sender, EventArgs e)
+        {
+            if(ListaOrdenes.Count == 0)
+            {
+                MessageBox.Show("No hay ordenes seleccionadas.", "Atención",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                return;
+            }
+
+            PnlPagoGeneral frm = new PnlPagoGeneral(ListaOrdenes);
+            frm.ShowDialog();
+
+            FuncionesPrincipales();
+        }
+
+        private void ChkSeleccionarTodo_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

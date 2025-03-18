@@ -47,6 +47,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.PBImagenProducto = new System.Windows.Forms.PictureBox();
             this.BtnSeleccionarImagen = new NeoCobranza.Especiales.EspecialButton();
+            this.BtnInventarioInicial = new NeoCobranza.Especiales.EspecialButton();
+            this.ChkPrecioVariable = new System.Windows.Forms.CheckBox();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PBImagenProducto)).BeginInit();
             this.SuspendLayout();
@@ -75,9 +77,9 @@
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.MenuText;
             this.panel3.Controls.Add(this.LblDynamico);
-            this.panel3.Location = new System.Drawing.Point(-5, 2);
+            this.panel3.Location = new System.Drawing.Point(-5, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(806, 33);
+            this.panel3.Size = new System.Drawing.Size(915, 33);
             this.panel3.TabIndex = 95;
             // 
             // LblDynamico
@@ -122,7 +124,7 @@
             this.LblTipoProducto.AutoSize = true;
             this.LblTipoProducto.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
             this.LblTipoProducto.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.LblTipoProducto.Location = new System.Drawing.Point(13, 401);
+            this.LblTipoProducto.Location = new System.Drawing.Point(13, 353);
             this.LblTipoProducto.Name = "LblTipoProducto";
             this.LblTipoProducto.Size = new System.Drawing.Size(87, 18);
             this.LblTipoProducto.TabIndex = 115;
@@ -134,7 +136,7 @@
             this.CmbTipoProducto.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.CmbTipoProducto.Font = new System.Drawing.Font("Century Gothic", 9.75F);
             this.CmbTipoProducto.FormattingEnabled = true;
-            this.CmbTipoProducto.Location = new System.Drawing.Point(16, 427);
+            this.CmbTipoProducto.Location = new System.Drawing.Point(16, 379);
             this.CmbTipoProducto.Name = "CmbTipoProducto";
             this.CmbTipoProducto.Size = new System.Drawing.Size(297, 25);
             this.CmbTipoProducto.TabIndex = 117;
@@ -142,10 +144,10 @@
             // TxtPrecioVenta
             // 
             this.TxtPrecioVenta.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.TxtPrecioVenta.Location = new System.Drawing.Point(192, 287);
+            this.TxtPrecioVenta.Location = new System.Drawing.Point(15, 309);
             this.TxtPrecioVenta.MaxLength = 100;
             this.TxtPrecioVenta.Name = "TxtPrecioVenta";
-            this.TxtPrecioVenta.Size = new System.Drawing.Size(236, 23);
+            this.TxtPrecioVenta.Size = new System.Drawing.Size(298, 23);
             this.TxtPrecioVenta.TabIndex = 134;
             this.TxtPrecioVenta.Text = "0";
             this.TxtPrecioVenta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtPrecioVenta_KeyPress_1);
@@ -155,7 +157,7 @@
             this.LblPrecioVenta.AutoSize = true;
             this.LblPrecioVenta.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
             this.LblPrecioVenta.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.LblPrecioVenta.Location = new System.Drawing.Point(12, 288);
+            this.LblPrecioVenta.Location = new System.Drawing.Point(12, 281);
             this.LblPrecioVenta.Name = "LblPrecioVenta";
             this.LblPrecioVenta.Size = new System.Drawing.Size(174, 18);
             this.LblPrecioVenta.TabIndex = 133;
@@ -193,9 +195,9 @@
             this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAgregar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnAgregar.ForeColor = System.Drawing.Color.White;
-            this.btnAgregar.Location = new System.Drawing.Point(615, 457);
+            this.btnAgregar.Location = new System.Drawing.Point(719, 442);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(173, 30);
+            this.btnAgregar.Size = new System.Drawing.Size(173, 39);
             this.btnAgregar.TabIndex = 139;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.TextGroundColor = System.Drawing.Color.White;
@@ -214,9 +216,9 @@
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnCancelar.ForeColor = System.Drawing.Color.White;
-            this.btnCancelar.Location = new System.Drawing.Point(432, 457);
+            this.btnCancelar.Location = new System.Drawing.Point(536, 442);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(173, 30);
+            this.btnCancelar.Size = new System.Drawing.Size(173, 39);
             this.btnCancelar.TabIndex = 140;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.TextGroundColor = System.Drawing.Color.White;
@@ -228,7 +230,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
             this.label10.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label10.Location = new System.Drawing.Point(539, 111);
+            this.label10.Location = new System.Drawing.Point(645, 114);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(178, 18);
             this.label10.TabIndex = 185;
@@ -236,7 +238,7 @@
             // 
             // PBImagenProducto
             // 
-            this.PBImagenProducto.Location = new System.Drawing.Point(518, 143);
+            this.PBImagenProducto.Location = new System.Drawing.Point(632, 146);
             this.PBImagenProducto.Name = "PBImagenProducto";
             this.PBImagenProducto.Size = new System.Drawing.Size(211, 186);
             this.PBImagenProducto.TabIndex = 184;
@@ -254,7 +256,7 @@
             this.BtnSeleccionarImagen.Font = new System.Drawing.Font("Century Gothic", 12F);
             this.BtnSeleccionarImagen.ForeColor = System.Drawing.Color.White;
             this.BtnSeleccionarImagen.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnSeleccionarImagen.Location = new System.Drawing.Point(518, 346);
+            this.BtnSeleccionarImagen.Location = new System.Drawing.Point(632, 349);
             this.BtnSeleccionarImagen.Name = "BtnSeleccionarImagen";
             this.BtnSeleccionarImagen.Size = new System.Drawing.Size(211, 38);
             this.BtnSeleccionarImagen.TabIndex = 183;
@@ -263,12 +265,48 @@
             this.BtnSeleccionarImagen.UseVisualStyleBackColor = false;
             this.BtnSeleccionarImagen.Click += new System.EventHandler(this.BtnSeleccionarImagen_Click);
             // 
+            // BtnInventarioInicial
+            // 
+            this.BtnInventarioInicial.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.BtnInventarioInicial.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.BtnInventarioInicial.BackGroundColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.BtnInventarioInicial.BorderColor = System.Drawing.Color.LavenderBlush;
+            this.BtnInventarioInicial.BorderRadius = 5;
+            this.BtnInventarioInicial.BorderSize = 0;
+            this.BtnInventarioInicial.FlatAppearance.BorderSize = 0;
+            this.BtnInventarioInicial.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnInventarioInicial.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.BtnInventarioInicial.ForeColor = System.Drawing.Color.White;
+            this.BtnInventarioInicial.Image = ((System.Drawing.Image)(resources.GetObject("BtnInventarioInicial.Image")));
+            this.BtnInventarioInicial.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnInventarioInicial.Location = new System.Drawing.Point(20, 430);
+            this.BtnInventarioInicial.Name = "BtnInventarioInicial";
+            this.BtnInventarioInicial.Size = new System.Drawing.Size(253, 51);
+            this.BtnInventarioInicial.TabIndex = 186;
+            this.BtnInventarioInicial.Text = "Inventario Inicial";
+            this.BtnInventarioInicial.TextGroundColor = System.Drawing.Color.White;
+            this.BtnInventarioInicial.UseVisualStyleBackColor = false;
+            this.BtnInventarioInicial.Click += new System.EventHandler(this.especialButton1_Click);
+            // 
+            // ChkPrecioVariable
+            // 
+            this.ChkPrecioVariable.AutoSize = true;
+            this.ChkPrecioVariable.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.ChkPrecioVariable.Location = new System.Drawing.Point(370, 315);
+            this.ChkPrecioVariable.Name = "ChkPrecioVariable";
+            this.ChkPrecioVariable.Size = new System.Drawing.Size(142, 22);
+            this.ChkPrecioVariable.TabIndex = 187;
+            this.ChkPrecioVariable.Text = "Precio Variable";
+            this.ChkPrecioVariable.UseVisualStyleBackColor = true;
+            // 
             // PnlAgregarProductos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(800, 499);
+            this.ClientSize = new System.Drawing.Size(911, 508);
+            this.Controls.Add(this.ChkPrecioVariable);
+            this.Controls.Add(this.BtnInventarioInicial);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.PBImagenProducto);
             this.Controls.Add(this.BtnSeleccionarImagen);
@@ -286,6 +324,8 @@
             this.Controls.Add(this.LblNombreDinamico);
             this.Controls.Add(this.panel3);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(927, 547);
+            this.MinimumSize = new System.Drawing.Size(927, 547);
             this.Name = "PnlAgregarProductos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Productos - Servicios";
@@ -317,5 +357,7 @@
         public System.Windows.Forms.Label label10;
         private System.Windows.Forms.PictureBox PBImagenProducto;
         public Especiales.EspecialButton BtnSeleccionarImagen;
+        public Especiales.EspecialButton BtnInventarioInicial;
+        public System.Windows.Forms.CheckBox ChkPrecioVariable;
     }
 }

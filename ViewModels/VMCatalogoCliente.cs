@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using NeoCobranza.DataController;
 using NeoCobranza.ModelsCobranza;
 using NeoCobranza.Paneles;
+using NeoCobranza.Paneles_Venta;
+using NeoCobranza.PanelesHoteles;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,7 +17,7 @@ using System.Windows.Forms;
 
 namespace NeoCobranza.ViewModels
 {
-    internal class VMCatalogoCliente
+    public class VMCatalogoCliente
     {
 
         DataTable dynamicDataTable = new DataTable();
@@ -35,7 +37,7 @@ namespace NeoCobranza.ViewModels
 
         public void InitModuloModificarClientes(PanelModificarCliente frm, string key)
         {
-            auxKeyUsuario = key != "Crear" ? "Modificar" : "Crear";
+            auxKeyUsuario = key != "Crear" || auxId == "0" ? "Modificar" : "Crear";
             frm.btnAgregar.Text = "Crear";
             frm.cmbDepartamento.SelectedIndex = 0;
             frm.cmbPais.SelectedIndex = 0;
@@ -147,24 +149,7 @@ namespace NeoCobranza.ViewModels
                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            else if (frm.txtPrimerApellido.Text.Trim().Length == 0)
-            {
-                MessageBox.Show("Debe digitar el Primer Apellido.", "Atención",
-                                   MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-            else if (frm.mtxtCelular.Text.Trim().Length == 0)
-            {
-                MessageBox.Show("Debe digitar el Celular.", "Atención",
-                                   MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-            else if (frm.TxtNoRuc.Text.Trim().Length != 0 && frm.TxtNoRuc.Text.Trim().Length != 14)
-            {
-                MessageBox.Show("Si el cliente es natural puede dejar el espacio en blanco, pero al ser jurídico debe agregar los 14 dígitos exactos para que los campos de retenciones aparezcan en la pantalla de factura.", "Atención",
-                                  MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
+
 
             //Validacion de codigo Unico
 
@@ -200,8 +185,11 @@ namespace NeoCobranza.ViewModels
                 DateTime fechaSeleccionada = frm.dtpFechaNac.Value;
                 int edad = DateTime.Today.Year - fechaSeleccionada.Year - (DateTime.Today < fechaSeleccionada.AddYears(DateTime.Today.Year - fechaSeleccionada.Year) ? 1 : 0);
 
+                string segmentacionId = frm.CmbSegmentacion.SelectedValue == null ? "0" : frm.CmbSegmentacion.SelectedValue.ToString();
+                
+
                 // Parámetros para creación o actualización
-                dataUtilities.SetParameter("@IdCliente", string.IsNullOrEmpty(auxId) ? (object)DBNull.Value : int.Parse(auxId));
+                dataUtilities.SetParameter("@IdCliente", string.IsNullOrEmpty(auxId) || auxId == "0" ? (object)DBNull.Value : int.Parse(auxId));
                 dataUtilities.SetParameter("@PNombre", frm.txtPrimerNombre.Text.Trim());
                 dataUtilities.SetParameter("@SNombre", frm.txtSegundoNombre.Text.Trim());
                 dataUtilities.SetParameter("@PApellido", frm.txtPrimerApellido.Text.Trim());
@@ -223,12 +211,58 @@ namespace NeoCobranza.ViewModels
                 dataUtilities.SetParameter("@Observacion", frm.txtObservacion.Text.Trim());
                 dataUtilities.SetParameter("@NoRuc", frm.TxtNoRuc.Text.Trim());
                 dataUtilities.SetParameter("@IdSucursal", Utilidades.SucursalId);
-                dataUtilities.SetParameter("@SegmentacionId", frm.CmbSegmentacion.SelectedValue);
+                dataUtilities.SetParameter("@SegmentacionId", segmentacionId);
                 dataUtilities.SetParameter("@Codigo", frm.TxtCodigoUnico.Text.Trim());
+                dataUtilities.SetParameter("@idClienteSalida", 0);
+                dataUtilities.SetParameter("@NombreCompletoSalida", "");
 
-                MessageBox.Show(dataUtilities.ExecuteStoredProcedure("SP_CrearActualizarCliente").Rows[0][0].ToString(), "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ConfigUI(frm.frmPnlCatalogoCliente, "Catalogo");
-                frm.Close();
+                DataTable dtresponseCliente = dataUtilities.ExecuteStoredProcedure("SP_CrearActualizarCliente");
+
+                MessageBox.Show(dtresponseCliente.Rows[0][0].ToString(), "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+              
+
+                if (frm.auxfrmVenta  != null)
+                {
+                    string strIdCliente = dtresponseCliente.Rows[0][1].ToString();
+                    string strNombreCliente = dtresponseCliente.Rows[0][2].ToString();
+
+                    frm.auxfrmVenta.LblNombreClientes.Text = strNombreCliente;
+                    frm.auxfrmVenta.vMOrdenes.auxClienteId = strIdCliente;
+
+                    if (frm.TxtNoRuc.Text.Trim() != "")
+                    {
+                        if (Utilidades.PermisosLevel(3, 31))
+                        {
+                            frm.auxfrmVenta.ChkRetencionAlcaldia.Visible = true;
+                            frm.auxfrmVenta.ChkRetencionDgi.Visible = true;
+                        }
+                    }
+                    else
+                    {
+                        frm.auxfrmVenta.ChkRetencionAlcaldia.Visible = false;
+                        frm.auxfrmVenta.ChkRetencionDgi.Visible = false;
+                    }
+
+                    dataUtilities.SetColumns("ClienteId", frm.auxfrmVenta.vMOrdenes.auxClienteId);
+                    dataUtilities.UpdateRecordByPrimaryKey("Ordenes", frm.auxfrmVenta.vMOrdenes.OrdenAux);
+
+                    frm.Close();
+                }
+                else if(frm.frmPnlCatalogoCliente != null) 
+                {
+                    ConfigUI(frm.frmPnlCatalogoCliente, "Catalogo");
+                    frm.Close();
+                }
+                else
+                {
+                    PnlAgregarReservacion frmReserva = frm.Owner as PnlAgregarReservacion;
+                    frmReserva.TxtNombreCliente.Text = dtresponseCliente.Rows[0][2].ToString();
+                    frmReserva.auxIdCliente = dtresponseCliente.Rows[0][1].ToString();
+                    frmReserva.TxtCelular.Text = frm.mtxtCelular.Text.Trim();
+                    frmReserva.TxtIdentificacion.Text = frm.mtxtCedula.Text.Trim();
+                    frm.Close();
+                }
             }
             catch (Exception ex)
             {

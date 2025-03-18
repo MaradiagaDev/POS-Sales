@@ -19,9 +19,10 @@ namespace NeoCobranza.Paneles
         public string auxKey = string.Empty;
         PnlVentas auxFrm = null;
         DataUtilities dataUtilities = new DataUtilities();
-
-        public PnlCancelarOrden(string key, PnlVentas frm)
+        string auxSucursal;
+        public PnlCancelarOrden(string key, PnlVentas frm,string sucursal)
         {
+            this.auxSucursal = sucursal;
             this.auxKey = key;
             this.auxFrm = frm;
             InitializeComponent();
@@ -54,10 +55,10 @@ namespace NeoCobranza.Paneles
                 }
             }
 
-                dataUtilities.SetColumns("MotivoCancelacion", TxtMotivoCancelacion.Text.Trim());
-            dataUtilities.SetColumns("OrdenProceso", "Orden Cancelada");
-
-            dataUtilities.UpdateRecordByPrimaryKey("Ordenes", auxKey);
+            dataUtilities.SetParameter("@Orden", auxKey);
+            dataUtilities.SetParameter("@sucursal", auxSucursal);
+            dataUtilities.SetParameter("@motivos", TxtMotivoCancelacion.Text);
+            dataUtilities.ExecuteStoredProcedure("CancelarOrdenSucursal");
 
             //Obtener el almacen mostrador
             DataTable dtResponse = dataUtilities.GetAllRecords("Almacenes");

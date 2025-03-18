@@ -24,6 +24,7 @@ namespace NeoCobranza.Paneles
         DataTable dataProducto = new DataTable();
         DataTable dataCompra = new DataTable();
         DataUtilities dataUtilities = new DataUtilities();
+        public decimal cantidad = 0,costo;
 
         public ComprasInventario()
         {
@@ -138,18 +139,18 @@ namespace NeoCobranza.Paneles
  
                     DgvProductos.Enabled = true;
 
-                    LblCantidad.Enabled = true;
-                    TxtCantidad.Enabled = true;
-                    LblPrecioVenta.Enabled = true;
-                    TxtCosto.Enabled = true;
+                    //LblCantidad.Enabled = true;
+                    //TxtCantidad.Enabled = true;
+                    //LblPrecioVenta.Enabled = true;
+                    //TxtCosto.Enabled = true;
                     BtnAgregarProducto.Enabled = true;
 
                     CmbAlmacen.Enabled = true;
                     BtnAgregarCompra.Enabled = true;
                     TxtDescripcion.Enabled = true;
 
-                    TxtCantidad.Text = "0";
-                    TxtCosto.Text = "0";
+                    //TxtCantidad.Text = "0";
+                    //TxtCosto.Text = "0";
 
                     dataCompra.Rows.Clear();
                     dataProducto.Rows.Clear();
@@ -253,7 +254,7 @@ namespace NeoCobranza.Paneles
                 TxtPaginaNo.Text = "1";
             }
 
-            // Definir el tamaño de página (en este ejemplo se usan 20 registros por página)
+            // Definir el tamño de página (en este ejemplo se usan 20 registros por página)
             int pageSize = 20;
 
             dataProducto.Rows.Clear();
@@ -587,12 +588,6 @@ namespace NeoCobranza.Paneles
                 return;
             }
 
-            if(!Decimal.TryParse(TxtCantidad.Text, out Decimal cantidad) || cantidad == 0)
-            {
-                MessageBox.Show("Debe digitar la cantidad de producto que desea agregar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
             foreach (DataRow item in dataCompra.Rows)
             {
                 if (item[0].ToString() == DgvProductos.SelectedRows[0].Cells[0].Value.ToString() && item[1].ToString() == proveedor && proveedor != "0")
@@ -602,16 +597,20 @@ namespace NeoCobranza.Paneles
                 }
             }
 
-            dataCompra.Rows.Add(DgvProductos.SelectedRows[0].Cells[0].Value.ToString(),
+            if(cantidad > 0)
+            {
+                dataCompra.Rows.Add(DgvProductos.SelectedRows[0].Cells[0].Value.ToString(),
                 proveedor,
                 NombreProveedor,
                 DgvProductos.SelectedRows[0].Cells[1].Value.ToString(),
-                Convert.ToDecimal(TxtCosto.Text),
-                TxtCantidad.Text
+                Convert.ToDecimal(costo),
+                cantidad
                 );
 
-            TxtCosto.Text = "0";
-            TxtCantidad.Text = "0";
+                cantidad = 0;
+                costo = 0;
+            }
+
             proveedor = "0";
             NombreProveedor = "-";
 

@@ -13,6 +13,7 @@ using NeoCobranza.DataController;
 using NeoCobranza.ModelsCobranza;
 using NeoCobranza.Paneles_Contrato;
 using NeoCobranza.Paneles_Venta;
+using NeoCobranza.PanelesHoteles;
 using NeoCobranza.ViewModels;
 
 namespace NeoCobranza.Paneles
@@ -261,15 +262,14 @@ namespace NeoCobranza.Paneles
                 pnlProforma.lblIdCliente.Text = DgvCliente.SelectedRows[0].Cells[0].Value.ToString();
                 this.Hide();
             }
-            if (panel == "Contrato")
+            if (panel == "Reserva")
             {
 
-                PnlContrato pnlProforma = Owner as PnlContrato;
-                pnlProforma.lblNombreCliente.Text = DgvCliente.SelectedRows[0].Cells[1].Value.ToString();
-
-                pnlProforma.lblEstadoCliente.Text = "Cliente Seleccionado";
-                pnlProforma.lblEstadoCliente.ForeColor = System.Drawing.Color.Green;
-                pnlProforma.lblIdCliente.Text = DgvCliente.SelectedRows[0].Cells[0].Value.ToString();
+                PnlAgregarReservacion pnlProforma = Owner as PnlAgregarReservacion;
+                pnlProforma.TxtNombreCliente.Text = DgvCliente.SelectedRows[0].Cells[1].Value.ToString();
+                pnlProforma.auxIdCliente = DgvCliente.SelectedRows[0].Cells[0].Value.ToString();
+                pnlProforma.TxtCelular.Text = DgvCliente.SelectedRows[0].Cells[12].Value.ToString();
+                pnlProforma.TxtIdentificacion.Text = DgvCliente.SelectedRows[0].Cells[5].Value.ToString();
                 this.Hide();
 
             }
@@ -288,6 +288,21 @@ namespace NeoCobranza.Paneles
             }
             if (panel == "Venta")
             {
+                //validar que el cliente ya tenga una orden
+                dataUtilities.SetParameter("@idCliente", DgvCliente.SelectedRows[0].Cells[0].Value.ToString());
+                DataTable dtResponseValidacion = dataUtilities.ExecuteStoredProcedure("sp_ObtenerOrdenesCliente");
+
+                if (dtResponseValidacion.Rows.Count > 0)
+                {
+                    DialogResult result = MessageBox.Show($"El cliente ya tiene una orden activa / Orden No: {Convert.ToString(dtResponseValidacion.Rows[0]["OrdenId"])} ¿Desea continuar?", "Confirmación",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (result != DialogResult.Yes)
+                    {
+                        this.Close();
+                        return;
+                    }
+                }
 
                 PnlVentas pnlVenta = Owner as PnlVentas;
                 pnlVenta.LblNombreClientes.Text = DgvCliente.SelectedRows[0].Cells[1].Value.ToString();

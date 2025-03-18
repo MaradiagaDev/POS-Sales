@@ -34,6 +34,9 @@ namespace NeoCobranza.Paneles
             UIUtilities.EstablecerFondo(this);
             UIUtilities.ConfigurarTextBoxBuscar(TxtFiltrar);
 
+            TxtCantidad.Focus();
+            TxtCantidad.Select();
+
             FiltrarProveedor();
         }
 
@@ -72,10 +75,29 @@ namespace NeoCobranza.Paneles
 
         private void BtnSeleccionar_Click(object sender, EventArgs e)
         {
-            if(DgvProveedor.SelectedRows.Count != 0)
+            if (!Decimal.TryParse(TxtCantidad.Text, out Decimal cantidad) || cantidad == 0)
+            {
+                MessageBox.Show("Debe digitar la cantidad de producto que desea agregar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TxtCantidad.Select();
+                TxtCantidad.Focus();
+                return;
+            }
+
+            if (!Decimal.TryParse(TxtCosto.Text, out Decimal costo) || costo == 0)
+            {
+                MessageBox.Show("Debe digitar el costo de los productos.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TxtCosto.Select();
+                TxtCosto.Focus();
+                return;
+            }
+
+
+            if (DgvProveedor.SelectedRows.Count != 0)
             {
                 ComprasInventario compras = Owner as ComprasInventario;
 
+                compras.cantidad = cantidad;
+                compras.costo = costo;
                 compras.proveedor = DgvProveedor.SelectedRows[0].Cells[0].Value.ToString();
                 compras.NombreProveedor = DgvProveedor.SelectedRows[0].Cells[1].Value.ToString();
                 this.Close();
@@ -90,6 +112,39 @@ namespace NeoCobranza.Paneles
         private void TxtFiltrar_TextChanged(object sender, EventArgs e)
         {
             FiltrarProveedor();
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+
+            // Evitar más de un punto decimal
+            if (e.KeyChar == '.' && (sender as TextBox).Text.Contains("."))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+
+            // Evitar más de un punto decimal
+            if (e.KeyChar == '.' && (sender as TextBox).Text.Contains("."))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

@@ -44,7 +44,6 @@ namespace NeoCobranza.ViewModels
 
                     //frm.TCMain.SelectedIndex = 0;
 
-                    frm.ChkAutomatico.Checked = true;
                     frm.TxtCodigoProducto.Focus();
                     frm.ChkRetencionAlcaldia.Enabled = true;
                     frm.ChkRetencionDgi.Enabled = true;
@@ -243,7 +242,10 @@ namespace NeoCobranza.ViewModels
                         frm.TxtCodigoProducto.Enabled = true;
                         //Orden abierta
                         //Consultar Orden
-                        DataTable dtResponseOrden = dataUtilities.getRecordByPrimaryKey("Ordenes", OrdenAux);
+
+                        dataUtilities.SetParameter("@Orden", OrdenAux);
+                        dataUtilities.SetParameter("@sucursal", frm.auxSucursal);
+                        DataTable dtResponseOrden = dataUtilities.ExecuteStoredProcedure("ObtenerOrdenSucursal");
 
                         DataRow orden = dtResponseOrden.Rows[0];
 
@@ -255,6 +257,7 @@ namespace NeoCobranza.ViewModels
                         }
 
                         DataTable dtResponseCliente = dataUtilities.getRecordByPrimaryKey("Clientes", Convert.ToDecimal(orden["ClienteId"]));
+                        auxClienteId = Convert.ToString(orden["ClienteId"]);
 
                         if (dtResponseCliente.Rows.Count > 0)
                         {
@@ -563,9 +566,26 @@ namespace NeoCobranza.ViewModels
             }
         }
 
+        public decimal TxtPrecioVariable = 0;
+
         public void AgregarProductosOrden(PnlVentas frm, string idProd, string Cantidad, string opc)
         {
             DataRow itemProductoAux = dataUtilities.getRecordByPrimaryKey("ProductosServicios", idProd).Rows[0];
+
+            if (itemProductoAux["BitVariable"] != DBNull.Value)
+            {
+                if (Convert.ToBoolean(itemProductoAux["BitVariable"]) && opc == "Increase")
+                {
+                    PnlPrecioNuevo frmAux = new PnlPrecioNuevo(this,null);
+                    frmAux.ShowDialog();
+
+                    if(TxtPrecioVariable == 0)
+                    {
+                        MessageBox.Show("Debe digitar el precio.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+            }
 
             auxSubModulo = Convert.ToString(itemProductoAux["ClasificacionProducto"]);
 
@@ -605,6 +625,13 @@ namespace NeoCobranza.ViewModels
                             dataUtilities.SetParameter("@Action", opc);
                             dataUtilities.SetParameter("@WarehouseId", dtAlmacenMostrador.Rows[0]["AlmacenId"]);
                             dataUtilities.SetParameter("@Discount", 0);
+                            dataUtilities.SetParameter("@SucursalId", frm.auxSucursal);
+
+                            if(TxtPrecioVariable > 0)
+                            {
+                                dataUtilities.SetParameter("@Precio", TxtPrecioVariable);
+                            }
+                            
                             dataUtilities.SetParameter("@Total", 0);
                             dataUtilities.SetParameter("@Subtotal", 0);
                             dataUtilities.SetParameter("@IVA", 0);
@@ -639,6 +666,12 @@ namespace NeoCobranza.ViewModels
                         dataUtilities.SetParameter("@Action", opc);
                         dataUtilities.SetParameter("@WarehouseId", dtAlmacenMostrador.Rows[0]["AlmacenId"]);
                         dataUtilities.SetParameter("@Discount", 0);
+                        dataUtilities.SetParameter("@SucursalId", frm.auxSucursal);
+
+                        if (TxtPrecioVariable > 0)
+                        {
+                            dataUtilities.SetParameter("@Precio", TxtPrecioVariable);
+                        }
                         dataUtilities.SetParameter("@Total", 0);
                         dataUtilities.SetParameter("@Subtotal", 0);
                         dataUtilities.SetParameter("@IVA", 0);
@@ -671,6 +704,11 @@ namespace NeoCobranza.ViewModels
                 dataUtilities.SetParameter("@Action", opc);
                 dataUtilities.SetParameter("@Discount", 0);
                 dataUtilities.SetParameter("@Total", 0);
+                dataUtilities.SetParameter("@SucursalId", frm.auxSucursal);
+                if (TxtPrecioVariable > 0)
+                {
+                    dataUtilities.SetParameter("@Precio", TxtPrecioVariable);
+                }
                 dataUtilities.SetParameter("@Subtotal", 0);
                 dataUtilities.SetParameter("@IVA", 0);
 
@@ -719,6 +757,8 @@ namespace NeoCobranza.ViewModels
             }
 
             CalcularTotales(frm, frm.TxtDescuento.Text);
+
+            TxtPrecioVariable = 0;
         }
 
         public void CalcularTotales(PnlVentas frm, string descuento)

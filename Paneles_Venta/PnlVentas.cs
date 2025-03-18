@@ -12,8 +12,10 @@ using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Threading;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace NeoCobranza.Paneles_Venta
@@ -26,10 +28,13 @@ namespace NeoCobranza.Paneles_Venta
         DataUtilities dataUtilities = new DataUtilities();
         public PnlPrincipal auxPnlPrincipal;
         public string auxClienteCreacion = "0";
+        public string auxSucursal = "";
+        private System.Threading.Timer codigoBarraTimer;
 
         //Constructor
-        public PnlVentas( string opc, PnlPrincipal pnlPrincipal, decimal ordenId = 0,string mesaAux = "-", string clienteId = "0")
+        public PnlVentas(string opc, PnlPrincipal pnlPrincipal, string sucursal, decimal ordenId = 0, string mesaAux = "-", string clienteId = "0")
         {
+            this.auxSucursal = sucursal;
             InitializeComponent();
             this.DoubleBuffered = true;
             auxOpc = opc;
@@ -42,11 +47,13 @@ namespace NeoCobranza.Paneles_Venta
             vMOrdenes.MesaAux = mesaAux;
             auxClienteCreacion = clienteId;
 
-            if(mesaAux != "-")
+            if (mesaAux != "-")
             {
                 LblOrdenMesa.Visible = true;
                 LblTituloSala.Visible = true;
             }
+
+            codigoBarraTimer = new System.Threading.Timer(CodigoBarraTimer_Callback, null, Timeout.Infinite, Timeout.Infinite);
         }
 
 
@@ -60,7 +67,7 @@ namespace NeoCobranza.Paneles_Venta
         {
             if (!Utilidades.PermisosLevel(3, 32))
             {
-               ChkPropina.Enabled = false;
+                ChkPropina.Enabled = false;
             }
 
             this.TxtCodigoProducto.LostFocus += new System.EventHandler(textBox_LostFocus);
@@ -96,17 +103,17 @@ namespace NeoCobranza.Paneles_Venta
         private void BtnAgregarPro_Click(object sender, EventArgs e)
         {
             //vMOrdenes.ConfigUI(this, "Productos");
-            auxPnlPrincipal.AbrirProductos(vMOrdenes.OrdenAux, "Productos",ChkRetencionDgi.Checked,ChkRetencionAlcaldia.Checked,TxtDescuento.Text);
+            auxPnlPrincipal.AbrirProductos(vMOrdenes.OrdenAux, auxSucursal, "Productos", ChkRetencionDgi.Checked, ChkRetencionAlcaldia.Checked, TxtDescuento.Text);
         }
 
         private void BtnAgregarServicio_Click(object sender, EventArgs e)
         {
-            auxPnlPrincipal.AbrirProductos(vMOrdenes.OrdenAux, "Servicios", ChkRetencionDgi.Checked, ChkRetencionAlcaldia.Checked, TxtDescuento.Text);
+            auxPnlPrincipal.AbrirProductos(vMOrdenes.OrdenAux, auxSucursal, "Servicios", ChkRetencionDgi.Checked, ChkRetencionAlcaldia.Checked, TxtDescuento.Text);
         }
 
         private void BtnPagarOrden_Click(object sender, EventArgs e)
         {
-            PnlPago frm = new PnlPago(this);
+            PnlPago frm = new PnlPago(this, auxSucursal);
             frm.ShowDialog();
 
             if (LblProcesoPago.Text == "Totalmente Pagado")
@@ -202,7 +209,7 @@ namespace NeoCobranza.Paneles_Venta
             {
 
                 //Agregar
-                if (DgvItemsOrden.Columns[e.ColumnIndex].Name == "Agregar" )
+                if (DgvItemsOrden.Columns[e.ColumnIndex].Name == "Agregar")
                 {
                     int Prueba;
                     if (int.TryParse(TxtCantidadItems.Text.Trim(), out Prueba) == false || TxtCantidadItems.Text.Trim() == "0"
@@ -273,11 +280,11 @@ namespace NeoCobranza.Paneles_Venta
                         vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), cellValueCantidad.ToString(), "Disminuir");
                     }
                 }
-                
+
             }
             else
             {
-                MessageBox.Show("No se pueden agregar productos/servicios a la orden si ya fue pagada.","Atención",MessageBoxButtons.OK, MessageBoxIcon.Warning);    
+                MessageBox.Show("No se pueden agregar productos/servicios a la orden si ya fue pagada.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -593,13 +600,13 @@ namespace NeoCobranza.Paneles_Venta
 
         private void BtnNotaOrden_Click(object sender, EventArgs e)
         {
-            AgregarNotaOrden nota = new AgregarNotaOrden(LblNoOrden.Text);
+            AgregarNotaOrden nota = new AgregarNotaOrden(LblNoOrden.Text, auxSucursal);
             nota.ShowDialog();
         }
 
         private void BtnCancelarOrden_Click(object sender, EventArgs e)
         {
-            PnlCancelarOrden pnlCancelarOrden = new PnlCancelarOrden(LblNoOrden.Text, this);
+            PnlCancelarOrden pnlCancelarOrden = new PnlCancelarOrden(LblNoOrden.Text, this, auxSucursal);
             pnlCancelarOrden.ShowDialog();
         }
 
@@ -618,46 +625,64 @@ namespace NeoCobranza.Paneles_Venta
             vMOrdenes.ConfigUI(this, "Menu");
         }
 
+        private void CodigoBarraTimer_Callback(object state)
+        {
+            this.Invoke((MethodInvoker)delegate
+            {
+                FuncionCodigoBarra();
+            });
+
+        }
+
+        private bool ignoreTextChanged = false;
+        public string auxIdProducto = "0";
+        public int auxCantidad = 0;
+        private void FuncionCodigoBarra()
+        {
+            //int prueba = 0;
+            //if (ChkAutomatico.Checked)
+            //{
+            //    if (TxtCodigoProducto.Text.Length > 0 && int.TryParse(TxtCantidadItems.Text, out prueba) == true && prueba != 0)
+            //    {
+            //        DataTable dtResponse = dataUtilities.getRecordByColumn("ProductosServicios", "Codigo", TxtCodigoProducto.Text.Trim());
+
+
+            //        if (dtResponse.Rows.Count > 0)
+            //        {
+            //            vMOrdenes.AgregarProductosOrden(this, Convert.ToString(dtResponse.Rows[0]["ProductoId"]), TxtCantidadItems.Text, "Increase");
+            //            TxtCodigoProducto.Text = string.Empty;
+            //            TxtCodigoProducto.Focus();
+            //        }
+            //    }
+            //}
+
+            if (ignoreTextChanged || string.IsNullOrWhiteSpace(TxtCodigoProducto.Text))
+                return;
+
+            PnlAgregarProductosOrden frm = new PnlAgregarProductosOrden(this);
+            frm.ShowDialog();
+
+            if (auxIdProducto != "0" && auxCantidad != 0)
+            {
+                vMOrdenes.AgregarProductosOrden(this, Convert.ToString(auxIdProducto), auxCantidad.ToString(), "Increase");
+                TxtCodigoProducto.Text = string.Empty;
+                TxtCodigoProducto.Focus();
+            }
+
+            auxIdProducto = "0";
+            auxCantidad = 0;
+
+            TxtCodigoProducto.Text = string.Empty;
+        }
+
         private void TxtCodigoProducto_TextChanged(object sender, EventArgs e)
         {
-            int prueba = 0;
-            if (ChkAutomatico.Checked)
-            {
-                if (TxtCodigoProducto.Text.Length > 0 && int.TryParse(TxtCantidadItems.Text, out prueba) == true && prueba != 0)
-                {
-                    DataTable dtResponse = dataUtilities.getRecordByColumn("ProductosServicios", "Codigo", TxtCodigoProducto.Text.Trim());
-
-
-                    if (dtResponse.Rows.Count > 0)
-                    {
-                        vMOrdenes.AgregarProductosOrden(this, Convert.ToString(dtResponse.Rows[0]["ProductoId"]), TxtCantidadItems.Text, "Increase");
-                        TxtCodigoProducto.Text = string.Empty;
-                        TxtCodigoProducto.Focus();
-                    }
-                }
-            }
+            codigoBarraTimer.Change(500, Timeout.Infinite);
         }
 
         private void BtnBuscarCodigo_Click(object sender, EventArgs e)
         {
-            int prueba = 0;
-            if (TxtCodigoProducto.Text.Length > 0 && int.TryParse(TxtCantidadItems.Text, out prueba) == true && prueba != 0)
-            {
-                DataTable dtResponse = dataUtilities.getRecordByColumn("ProductosServicios", "Codigo", TxtCodigoProducto.Text.Trim());
-
-                if (dtResponse.Rows.Count > 0)
-                {
-                    vMOrdenes.AgregarProductosOrden(this, Convert.ToString(dtResponse.Rows[0]["ProductoId"]), TxtCantidadItems.Text, "Increase");
-                    TxtCodigoProducto.Text = string.Empty;
-                    TxtCodigoProducto.Focus();
-                }
-                else
-                {
-                    TxtCodigoProducto.Text = string.Empty;
-                    TxtCodigoProducto.Focus();
-                    MessageBox.Show("Producto no encontrado.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
+            FuncionCodigoBarra();
         }
 
         private void label42_Click(object sender, EventArgs e)
@@ -686,7 +711,7 @@ namespace NeoCobranza.Paneles_Venta
 
         private void PnlVentas_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == '\r' ) // El caracter '\r' representa el retorno de carro (Enter)
+            if (e.KeyChar == '\r') // El caracter '\r' representa el retorno de carro (Enter)
             {
                 // Mover el foco al campo de texto deseado
                 TxtCodigoProducto.Focus();
@@ -950,18 +975,18 @@ namespace NeoCobranza.Paneles_Venta
             if (DgvItemsOrden.RowCount > 0)
             {
                 DataTable dtConfigFacturacion = dataUtilities.getRecordByColumn("ConfigFacturacion", "SucursalId", Utilidades.SucursalId);
-                PnlPago frmPago = new PnlPago(this);
+                PnlPago frmPago = new PnlPago(this, auxSucursal);
                 frmPago.bit58mm = Convert.ToBoolean(dtConfigFacturacion.Rows[0]["Bit58mm"]);
                 frmPago.bit80mm = Convert.ToBoolean(dtConfigFacturacion.Rows[0]["Bit80mm"]);
 
-                
+
                 frmPago.PrintPDF(true);
             }
             else
             {
-                MessageBox.Show("Debe agregar items a la venta para poder generar la proforma.","Atención",MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Debe agregar items a la venta para poder generar la proforma.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            
+
         }
 
         private void TxtBuscarProductos__TextChanged(object sender, EventArgs e)
@@ -979,7 +1004,7 @@ namespace NeoCobranza.Paneles_Venta
 
             if (DgvItemsOrden.RowCount > 0)
             {
-                PnlPago frmPago = new PnlPago(this);
+                PnlPago frmPago = new PnlPago(this, auxSucursal);
                 frmPago.PrintPDFA4();
             }
             else
@@ -1025,6 +1050,20 @@ namespace NeoCobranza.Paneles_Venta
         private void ChkPropina_Click(object sender, EventArgs e)
         {
             vMOrdenes.CalcularTotales(this, TxtDescuento.Text);
+        }
+
+        private void BtnImprimirIndividual_Click(object sender, EventArgs e)
+        {
+            PnlImprimeTicketsDetalle frm = new PnlImprimeTicketsDetalle(vMOrdenes.OrdenAux.ToString(), auxSucursal);
+            frm.ShowDialog();
+        }
+
+        private void BtnAddClientes_Click(object sender, EventArgs e)
+        {
+            string idCliente = vMOrdenes.auxClienteId == "" ? "0" : vMOrdenes.auxClienteId;
+            PanelModificarCliente frm = new PanelModificarCliente(null, idCliente, this);
+            frm.vMCatalogoCliente.auxKeyUsuario = (vMOrdenes.auxClienteId == "0" || vMOrdenes.auxClienteId == "") ? "Crear" : "Modificar";
+            frm.ShowDialog();
         }
     }
 }

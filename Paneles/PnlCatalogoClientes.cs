@@ -63,7 +63,7 @@ namespace NeoCobranza.Paneles
                 return;
             }
 
-            PanelModificarCliente frm = new PanelModificarCliente(this, "Crear");
+            PanelModificarCliente frm = new PanelModificarCliente(this, "Crear",null);
             frm.ShowDialog();
         }
 
@@ -82,7 +82,7 @@ namespace NeoCobranza.Paneles
 
                 if (cellValue != null)
                 {
-                    PanelModificarCliente frm = new PanelModificarCliente(this, cellValue.ToString());
+                    PanelModificarCliente frm = new PanelModificarCliente(this, cellValue.ToString(),null);
                     frm.ShowDialog();
                 }
             }

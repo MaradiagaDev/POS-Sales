@@ -28,12 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PnlConfigurarKardex));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.BtnBuscarProducto = new NeoCobranza.Especiales.EspecialButton();
             this.TxtFiltroProducto = new System.Windows.Forms.TextBox();
             this.DgvProducto = new System.Windows.Forms.DataGridView();
             this.label5 = new System.Windows.Forms.Label();
@@ -41,34 +40,21 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.BtnGuardar = new NeoCobranza.Especiales.EspecialButton();
             this.CmbAlmacen = new System.Windows.Forms.ComboBox();
             this.DtFinal = new System.Windows.Forms.DateTimePicker();
             this.DtInicial = new System.Windows.Forms.DateTimePicker();
+            this.BtnGuardar = new NeoCobranza.Especiales.EspecialButton();
+            this.BtnBuscarProducto = new NeoCobranza.Especiales.EspecialButton();
+            this.PnlPaginado = new System.Windows.Forms.Panel();
+            this.TxtPaginaDe = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.TxtPaginaNo = new System.Windows.Forms.TextBox();
+            this.BtnAnterior = new System.Windows.Forms.Button();
+            this.BtnSiguiente = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DgvProducto)).BeginInit();
+            this.PnlPaginado.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // BtnBuscarProducto
-            // 
-            this.BtnBuscarProducto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(20)))), ((int)(((byte)(43)))));
-            this.BtnBuscarProducto.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(20)))), ((int)(((byte)(43)))));
-            this.BtnBuscarProducto.BorderColor = System.Drawing.Color.Lime;
-            this.BtnBuscarProducto.BorderRadius = 5;
-            this.BtnBuscarProducto.BorderSize = 0;
-            this.BtnBuscarProducto.FlatAppearance.BorderSize = 0;
-            this.BtnBuscarProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnBuscarProducto.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
-            this.BtnBuscarProducto.ForeColor = System.Drawing.Color.White;
-            this.BtnBuscarProducto.Image = ((System.Drawing.Image)(resources.GetObject("BtnBuscarProducto.Image")));
-            this.BtnBuscarProducto.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnBuscarProducto.Location = new System.Drawing.Point(854, 41);
-            this.BtnBuscarProducto.Name = "BtnBuscarProducto";
-            this.BtnBuscarProducto.Size = new System.Drawing.Size(128, 27);
-            this.BtnBuscarProducto.TabIndex = 167;
-            this.BtnBuscarProducto.Text = "Buscar";
-            this.BtnBuscarProducto.TextGroundColor = System.Drawing.Color.White;
-            this.BtnBuscarProducto.UseVisualStyleBackColor = false;
-            this.BtnBuscarProducto.Click += new System.EventHandler(this.BtnBuscarProducto_Click);
             // 
             // TxtFiltroProducto
             // 
@@ -88,45 +74,45 @@
             this.DgvProducto.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.DgvProducto.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.DgvProducto.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.InfoText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgvProducto.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.InfoText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvProducto.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.DgvProducto.ColumnHeadersHeight = 30;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DgvProducto.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DgvProducto.DefaultCellStyle = dataGridViewCellStyle14;
             this.DgvProducto.GridColor = System.Drawing.SystemColors.ActiveCaption;
             this.DgvProducto.Location = new System.Drawing.Point(448, 75);
             this.DgvProducto.Name = "DgvProducto";
             this.DgvProducto.ReadOnly = true;
             this.DgvProducto.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgvProducto.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvProducto.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
             this.DgvProducto.RowHeadersWidth = 15;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Green;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
-            this.DgvProducto.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle16.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.Green;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.White;
+            this.DgvProducto.RowsDefaultCellStyle = dataGridViewCellStyle16;
             this.DgvProducto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvProducto.Size = new System.Drawing.Size(534, 363);
+            this.DgvProducto.Size = new System.Drawing.Size(534, 312);
             this.DgvProducto.TabIndex = 165;
             // 
             // label5
@@ -184,29 +170,6 @@
             this.label4.TabIndex = 171;
             this.label4.Text = "Almacén";
             // 
-            // BtnGuardar
-            // 
-            this.BtnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnGuardar.BackColor = System.Drawing.SystemColors.Highlight;
-            this.BtnGuardar.BackGroundColor = System.Drawing.SystemColors.Highlight;
-            this.BtnGuardar.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.BtnGuardar.BorderRadius = 5;
-            this.BtnGuardar.BorderSize = 0;
-            this.BtnGuardar.FlatAppearance.BorderSize = 0;
-            this.BtnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnGuardar.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnGuardar.ForeColor = System.Drawing.Color.White;
-            this.BtnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("BtnGuardar.Image")));
-            this.BtnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnGuardar.Location = new System.Drawing.Point(216, 400);
-            this.BtnGuardar.Name = "BtnGuardar";
-            this.BtnGuardar.Size = new System.Drawing.Size(226, 38);
-            this.BtnGuardar.TabIndex = 172;
-            this.BtnGuardar.Text = "Guardar";
-            this.BtnGuardar.TextGroundColor = System.Drawing.Color.White;
-            this.BtnGuardar.UseVisualStyleBackColor = false;
-            this.BtnGuardar.Click += new System.EventHandler(this.BtnGuardar_Click);
-            // 
             // CmbAlmacen
             // 
             this.CmbAlmacen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -238,12 +201,136 @@
             this.DtInicial.Size = new System.Drawing.Size(309, 27);
             this.DtInicial.TabIndex = 175;
             // 
+            // BtnGuardar
+            // 
+            this.BtnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnGuardar.BackColor = System.Drawing.SystemColors.Highlight;
+            this.BtnGuardar.BackGroundColor = System.Drawing.SystemColors.Highlight;
+            this.BtnGuardar.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.BtnGuardar.BorderRadius = 5;
+            this.BtnGuardar.BorderSize = 0;
+            this.BtnGuardar.FlatAppearance.BorderSize = 0;
+            this.BtnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnGuardar.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnGuardar.ForeColor = System.Drawing.Color.White;
+            this.BtnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("BtnGuardar.Image")));
+            this.BtnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnGuardar.Location = new System.Drawing.Point(16, 295);
+            this.BtnGuardar.Name = "BtnGuardar";
+            this.BtnGuardar.Size = new System.Drawing.Size(226, 38);
+            this.BtnGuardar.TabIndex = 172;
+            this.BtnGuardar.Text = "Generar";
+            this.BtnGuardar.TextGroundColor = System.Drawing.Color.White;
+            this.BtnGuardar.UseVisualStyleBackColor = false;
+            this.BtnGuardar.Click += new System.EventHandler(this.BtnGuardar_Click);
+            // 
+            // BtnBuscarProducto
+            // 
+            this.BtnBuscarProducto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(20)))), ((int)(((byte)(43)))));
+            this.BtnBuscarProducto.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(20)))), ((int)(((byte)(43)))));
+            this.BtnBuscarProducto.BorderColor = System.Drawing.Color.Lime;
+            this.BtnBuscarProducto.BorderRadius = 5;
+            this.BtnBuscarProducto.BorderSize = 0;
+            this.BtnBuscarProducto.FlatAppearance.BorderSize = 0;
+            this.BtnBuscarProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnBuscarProducto.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.BtnBuscarProducto.ForeColor = System.Drawing.Color.White;
+            this.BtnBuscarProducto.Image = ((System.Drawing.Image)(resources.GetObject("BtnBuscarProducto.Image")));
+            this.BtnBuscarProducto.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnBuscarProducto.Location = new System.Drawing.Point(854, 41);
+            this.BtnBuscarProducto.Name = "BtnBuscarProducto";
+            this.BtnBuscarProducto.Size = new System.Drawing.Size(128, 27);
+            this.BtnBuscarProducto.TabIndex = 167;
+            this.BtnBuscarProducto.Text = "Buscar";
+            this.BtnBuscarProducto.TextGroundColor = System.Drawing.Color.White;
+            this.BtnBuscarProducto.UseVisualStyleBackColor = false;
+            this.BtnBuscarProducto.Click += new System.EventHandler(this.BtnBuscarProducto_Click);
+            // 
+            // PnlPaginado
+            // 
+            this.PnlPaginado.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.PnlPaginado.Controls.Add(this.TxtPaginaDe);
+            this.PnlPaginado.Controls.Add(this.label6);
+            this.PnlPaginado.Controls.Add(this.label7);
+            this.PnlPaginado.Controls.Add(this.TxtPaginaNo);
+            this.PnlPaginado.Controls.Add(this.BtnAnterior);
+            this.PnlPaginado.Controls.Add(this.BtnSiguiente);
+            this.PnlPaginado.Location = new System.Drawing.Point(448, 393);
+            this.PnlPaginado.Name = "PnlPaginado";
+            this.PnlPaginado.Size = new System.Drawing.Size(534, 47);
+            this.PnlPaginado.TabIndex = 176;
+            // 
+            // TxtPaginaDe
+            // 
+            this.TxtPaginaDe.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtPaginaDe.Location = new System.Drawing.Point(416, 10);
+            this.TxtPaginaDe.Name = "TxtPaginaDe";
+            this.TxtPaginaDe.ReadOnly = true;
+            this.TxtPaginaDe.Size = new System.Drawing.Size(62, 27);
+            this.TxtPaginaDe.TabIndex = 5;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(378, 13);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(32, 21);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "De";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(209, 13);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(95, 21);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "Pagina No:";
+            // 
+            // TxtPaginaNo
+            // 
+            this.TxtPaginaNo.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtPaginaNo.Location = new System.Drawing.Point(310, 10);
+            this.TxtPaginaNo.Name = "TxtPaginaNo";
+            this.TxtPaginaNo.ReadOnly = true;
+            this.TxtPaginaNo.Size = new System.Drawing.Size(62, 27);
+            this.TxtPaginaNo.TabIndex = 2;
+            // 
+            // BtnAnterior
+            // 
+            this.BtnAnterior.BackColor = System.Drawing.SystemColors.ControlText;
+            this.BtnAnterior.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnAnterior.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnAnterior.Location = new System.Drawing.Point(4, 3);
+            this.BtnAnterior.Name = "BtnAnterior";
+            this.BtnAnterior.Size = new System.Drawing.Size(95, 41);
+            this.BtnAnterior.TabIndex = 1;
+            this.BtnAnterior.Text = "Anterior";
+            this.BtnAnterior.UseVisualStyleBackColor = false;
+            this.BtnAnterior.Click += new System.EventHandler(this.BtnAnterior_Click);
+            // 
+            // BtnSiguiente
+            // 
+            this.BtnSiguiente.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.BtnSiguiente.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnSiguiente.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnSiguiente.Location = new System.Drawing.Point(105, 3);
+            this.BtnSiguiente.Name = "BtnSiguiente";
+            this.BtnSiguiente.Size = new System.Drawing.Size(95, 41);
+            this.BtnSiguiente.TabIndex = 0;
+            this.BtnSiguiente.Text = "Siguiente";
+            this.BtnSiguiente.UseVisualStyleBackColor = false;
+            this.BtnSiguiente.Click += new System.EventHandler(this.BtnSiguiente_Click);
+            // 
             // PnlConfigurarKardex
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(994, 450);
+            this.Controls.Add(this.PnlPaginado);
             this.Controls.Add(this.DtInicial);
             this.Controls.Add(this.DtFinal);
             this.Controls.Add(this.CmbAlmacen);
@@ -264,6 +351,8 @@
             this.Text = "Configurar Kardex";
             this.Load += new System.EventHandler(this.PnlConfigurarKardex_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DgvProducto)).EndInit();
+            this.PnlPaginado.ResumeLayout(false);
+            this.PnlPaginado.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -283,5 +372,12 @@
         public System.Windows.Forms.ComboBox CmbAlmacen;
         private System.Windows.Forms.DateTimePicker DtFinal;
         private System.Windows.Forms.DateTimePicker DtInicial;
+        public System.Windows.Forms.Panel PnlPaginado;
+        public System.Windows.Forms.TextBox TxtPaginaDe;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        public System.Windows.Forms.TextBox TxtPaginaNo;
+        public System.Windows.Forms.Button BtnAnterior;
+        public System.Windows.Forms.Button BtnSiguiente;
     }
 }

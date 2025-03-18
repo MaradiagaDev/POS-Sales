@@ -49,6 +49,10 @@ namespace NeoCobranza.Paneles
             string fileName = $"Kardex{DateTime.Now.ToString().Replace("/","").Replace(" ","").Replace(".","").Replace(":","")}{Utilidades.Sucursal}.pdf";
             string filePath = Path.Combine(Application.StartupPath, fileName);
 
+            if(dataTable.Rows.Count == 0 )
+            {
+                MessageBox.Show("No hay datos para generar el reporte.","Atención",MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
             // Crear el documento
             Document doc = new Document();
@@ -65,17 +69,14 @@ namespace NeoCobranza.Paneles
                 // Abrir el documento para escribir
                 doc.Open();
 
-                Empresa empresa = new Empresa();
+                DataUtilities dataUtilities = new DataUtilities();
 
-                using(NeoCobranzaContext db = new NeoCobranzaContext())
+                DataRow dtEmpresa = dataUtilities.GetAllRecords("Empresa").Rows[0];
+
+                if (dtEmpresa == null)
                 {
-                    empresa = db.Empresa.FirstOrDefault();
-
-                    if(empresa == null)
-                    {
-                        MessageBox.Show("Debe agregar los datos de la empresa primero.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        return;
-                    }
+                    MessageBox.Show("Debe agregar los datos de la empresa primero.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
                 }
 
                 iTextSharp.text.Paragraph tituloGrandeGrande = new iTextSharp.text.Paragraph($"Informe Kardex - SysAdmin", FontFactory.GetFont("Century Gothic", "", true, 14, 1, BaseColor.BLACK));
@@ -83,7 +84,7 @@ namespace NeoCobranza.Paneles
                 doc.Add(tituloGrandeGrande);
 
                 // Crear un primer título grande con letra Century Gothic
-                iTextSharp.text.Paragraph tituloGrande = new iTextSharp.text.Paragraph($"EMPRESA: {empresa.NombreComercial}", FontFactory.GetFont("Century Gothic","",true, 12,1,BaseColor.BLUE));
+                iTextSharp.text.Paragraph tituloGrande = new iTextSharp.text.Paragraph($"EMPRESA: {Convert.ToString(dtEmpresa["NombreComercial"])}", FontFactory.GetFont("Century Gothic","",true, 12,1,BaseColor.BLUE));
                 tituloGrande.Alignment = Element.ALIGN_CENTER;
                 doc.Add(tituloGrande);
 
@@ -171,15 +172,12 @@ namespace NeoCobranza.Paneles
                 userTable.HorizontalAlignment = Element.ALIGN_LEFT;
                 userTable.DefaultCell.Border = 0;
 
-                using(NeoCobranzaContext db = new NeoCobranzaContext())
-                {
-                    ModelsCobranza.Usuario usuario = db.Usuario.Where(s => s.IdUsuarios == int.Parse(Utilidades.IdUsuario)).FirstOrDefault();
 
-                    PdfPCell userCell = new PdfPCell(new Phrase("Usuario: " + usuario.Nombre, FontFactory.GetFont("Arial", 8)));
+                    PdfPCell userCell = new PdfPCell(new Phrase("Usuario: " + Utilidades.Usuario, FontFactory.GetFont("Arial", 8)));
                     userCell.Border = 0;
                     userTable.AddCell(userCell);
                     userTable.WriteSelectedRows(0, -1, 30, document.PageSize.Height - 45, writer.DirectContent);
-                }
+                
 
 
                 // No. de Página

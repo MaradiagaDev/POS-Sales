@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>C1.Win.ScheduleCore</name>
+    </assembly>
+    <members>
+        <member name="T:C1.Win.Schedule.C1Brush">
+            <summary>
+            The WinForms implementation of C1Brush class. Creates the <see cref="P:C1.Win.Schedule.C1Brush.Brush"/> object which can be used for drawing based on the C1Brush definition.
+            </summary>
+        </member>
+        <member name="M:C1.Win.Schedule.C1Brush.#ctor">
+            <summary>
+            Creates the new <see cref="T:C1.Win.Schedule.C1Brush"/> object.
+            </summary>
+        </member>
+        <member name="M:C1.Win.Schedule.C1Brush.OnPropertyChanged">
+            <summary>
+            This method is called on any property changes. 
+            </summary>
+        </member>
+        <member name="P:C1.Win.Schedule.C1Brush.Brush">
+            <summary>
+            Gets the brush object which can be used for drawing.
+            </summary>
+        </member>
+        <member name="P:C1.Win.Schedule.C1Brush.BrushInternal">
+            <summary>
+            Gets or sets WinForms/WebForms specific brush object based on the C1Brush definition. 
+            </summary>
+        </member>
+        <member name="M:C1.Win.Schedule.C1Brush.Equals(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:C1.Win.Schedule.C1Brush.GetHashCode">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:C1.Win.Schedule.C1Brush.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Special constructor for de-serialization.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/>.</param>
+            <param name="context">The context information.</param>
+        </member>
+        <member name="T:C1.Win.Schedule.C1ScheduleStorage">
+            <summary>
+            The <see cref="T:C1.Win.Schedule.C1ScheduleStorage"/> component handles all data 
+            operations for the scheduler control and contains specific data storages 
+            for appointments, resources, contacts, owners, labels and statuses, 
+            which are used for binding different collections to the data.
+            The <see cref="T:C1.Win.Schedule.C1ScheduleStorage"/> component also handles data 
+            importing and exporting to other scheduling formats such as binary, iCal, and XML.
+            </summary>
+        </member>
+        <member name="E:C1.Win.Schedule.C1ScheduleStorage.SystemTimeChanged">
+            <summary>
+            Occurs when system time has been changed.
+            </summary>
+        </member>
+        <member name="M:C1.Win.Schedule.C1ScheduleStorage.#ctor">
+            <summary>
+            Initializes the new instance of the <see cref="T:C1.Win.Schedule.C1ScheduleStorage"/> component.
+            </summary>
+        </member>
+        <member name="M:C1.Win.Schedule.C1ScheduleStorage.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="T:C1.Util.Licensing.C1LicensedControlAttribute">
+            <summary>
+            Marks a control class that must depend on C1 license
+            </summary>
+        </member>
+        <member name="M:C1.Util.Licensing.C1LicensedControlAttribute.#ctor">
+            <summary>
+            Constructs an entity of C1LicensedControlAttribute
+            </summary>
+        </member>
+        <member name="T:C1.Util.Licensing.LicenseManager">
+            <summary>
+            Allows the users to set a license in the <see cref="P:Key"/> property.
+            </summary>
+            <remarks>
+            See http://www.goxuni.com/licensing for more information.
+            </remarks>
+        </member>
+        <member name="M:C1.Util.Licensing.LicenseManager.Validate">
+            <summary>
+            Internal use only
+            </summary>
+        </member>
+        <member name="T:C1.Util.Licensing.C1AllowedCallerAttribute">
+            <summary>
+            Attribute used to specify assemblies that can use this product without a license.
+            </summary>
+        </member>
+    </members>
+</doc>

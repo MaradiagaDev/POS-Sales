@@ -42,6 +42,13 @@
             this.TbTitulo = new System.Windows.Forms.Label();
             this.TCMain = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.TxtDeDos = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.TxtNoPagniaDos = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.CmbSucursales = new System.Windows.Forms.ComboBox();
             this.BtnBuscar = new NeoCobranza.Especiales.EspecialButton();
@@ -67,27 +74,17 @@
             this.label4 = new System.Windows.Forms.Label();
             this.TxtFiltroProducto = new System.Windows.Forms.TextBox();
             this.DgvProductos = new System.Windows.Forms.DataGridView();
-            this.TxtCosto = new System.Windows.Forms.TextBox();
             this.BtnAgregarProducto = new NeoCobranza.Especiales.EspecialButton();
-            this.LblPrecioVenta = new System.Windows.Forms.Label();
-            this.LblCantidad = new System.Windows.Forms.Label();
-            this.TxtCantidad = new System.Windows.Forms.TextBox();
             this.TxtMontoTotal = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.DgvCompra = new System.Windows.Forms.DataGridView();
             this.label8 = new System.Windows.Forms.Label();
             this.BtnAgregarCompra = new NeoCobranza.Especiales.EspecialButton();
             this.btnCancelar = new NeoCobranza.Especiales.EspecialButton();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.TxtDeDos = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.TxtNoPagniaDos = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.PnlTitulo.SuspendLayout();
             this.TCMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvCatalogo)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -95,7 +92,6 @@
             this.PnlPaginado.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvProductos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DgvCompra)).BeginInit();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // PnlTitulo
@@ -152,6 +148,84 @@
             this.tabPage1.Size = new System.Drawing.Size(1136, 499);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Buscar";
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel1.Controls.Add(this.TxtDeDos);
+            this.panel1.Controls.Add(this.label7);
+            this.panel1.Controls.Add(this.label9);
+            this.panel1.Controls.Add(this.TxtNoPagniaDos);
+            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.button2);
+            this.panel1.Location = new System.Drawing.Point(13, 441);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(545, 47);
+            this.panel1.TabIndex = 158;
+            // 
+            // TxtDeDos
+            // 
+            this.TxtDeDos.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtDeDos.Location = new System.Drawing.Point(468, 11);
+            this.TxtDeDos.Name = "TxtDeDos";
+            this.TxtDeDos.ReadOnly = true;
+            this.TxtDeDos.Size = new System.Drawing.Size(62, 27);
+            this.TxtDeDos.TabIndex = 5;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(430, 14);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(32, 21);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "De";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(261, 14);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(95, 21);
+            this.label9.TabIndex = 3;
+            this.label9.Text = "Pagina No:";
+            // 
+            // TxtNoPagniaDos
+            // 
+            this.TxtNoPagniaDos.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtNoPagniaDos.Location = new System.Drawing.Point(362, 11);
+            this.TxtNoPagniaDos.Name = "TxtNoPagniaDos";
+            this.TxtNoPagniaDos.ReadOnly = true;
+            this.TxtNoPagniaDos.Size = new System.Drawing.Size(62, 27);
+            this.TxtNoPagniaDos.TabIndex = 2;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.ControlText;
+            this.button1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.button1.Location = new System.Drawing.Point(4, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(118, 41);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Anterior";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.button2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.button2.Location = new System.Drawing.Point(127, 3);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(118, 41);
+            this.button2.TabIndex = 0;
+            this.button2.Text = "Siguiente";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label2
             // 
@@ -414,11 +488,7 @@
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.TxtFiltroProducto);
             this.panel2.Controls.Add(this.DgvProductos);
-            this.panel2.Controls.Add(this.TxtCosto);
             this.panel2.Controls.Add(this.BtnAgregarProducto);
-            this.panel2.Controls.Add(this.LblPrecioVenta);
-            this.panel2.Controls.Add(this.LblCantidad);
-            this.panel2.Controls.Add(this.TxtCantidad);
             this.panel2.Location = new System.Drawing.Point(11, 7);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(500, 488);
@@ -433,7 +503,7 @@
             this.PnlPaginado.Controls.Add(this.TxtPaginaNo);
             this.PnlPaginado.Controls.Add(this.BtnAnterior);
             this.PnlPaginado.Controls.Add(this.BtnSiguiente);
-            this.PnlPaginado.Location = new System.Drawing.Point(2, 380);
+            this.PnlPaginado.Location = new System.Drawing.Point(2, 437);
             this.PnlPaginado.Name = "PnlPaginado";
             this.PnlPaginado.Size = new System.Drawing.Size(493, 47);
             this.PnlPaginado.TabIndex = 170;
@@ -519,10 +589,10 @@
             // 
             this.TxtFiltroProducto.Enabled = false;
             this.TxtFiltroProducto.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtFiltroProducto.Location = new System.Drawing.Point(3, 46);
+            this.TxtFiltroProducto.Location = new System.Drawing.Point(6, 32);
             this.TxtFiltroProducto.MaxLength = 100;
             this.TxtFiltroProducto.Name = "TxtFiltroProducto";
-            this.TxtFiltroProducto.Size = new System.Drawing.Size(477, 27);
+            this.TxtFiltroProducto.Size = new System.Drawing.Size(347, 27);
             this.TxtFiltroProducto.TabIndex = 152;
             this.TxtFiltroProducto.TextChanged += new System.EventHandler(this.TxtFiltroProducto_TextChanged);
             // 
@@ -554,7 +624,7 @@
             this.DgvProductos.DefaultCellStyle = dataGridViewCellStyle5;
             this.DgvProductos.Enabled = false;
             this.DgvProductos.GridColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.DgvProductos.Location = new System.Drawing.Point(3, 79);
+            this.DgvProductos.Location = new System.Drawing.Point(2, 69);
             this.DgvProductos.Name = "DgvProductos";
             this.DgvProductos.ReadOnly = true;
             this.DgvProductos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -568,26 +638,12 @@
             this.DgvProductos.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.DgvProductos.RowHeadersWidth = 15;
             this.DgvProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvProductos.Size = new System.Drawing.Size(492, 300);
+            this.DgvProductos.Size = new System.Drawing.Size(492, 362);
             this.DgvProductos.TabIndex = 149;
-            // 
-            // TxtCosto
-            // 
-            this.TxtCosto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.TxtCosto.Enabled = false;
-            this.TxtCosto.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtCosto.Location = new System.Drawing.Point(163, 456);
-            this.TxtCosto.MaxLength = 100;
-            this.TxtCosto.Name = "TxtCosto";
-            this.TxtCosto.Size = new System.Drawing.Size(159, 27);
-            this.TxtCosto.TabIndex = 113;
-            this.TxtCosto.Text = "0";
-            this.TxtCosto.TextChanged += new System.EventHandler(this.TxtCosto_TextChanged);
-            this.TxtCosto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtCosto_KeyPress);
             // 
             // BtnAgregarProducto
             // 
-            this.BtnAgregarProducto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.BtnAgregarProducto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnAgregarProducto.BackColor = System.Drawing.Color.Green;
             this.BtnAgregarProducto.BackGroundColor = System.Drawing.Color.Green;
             this.BtnAgregarProducto.BorderColor = System.Drawing.Color.Lime;
@@ -600,7 +656,7 @@
             this.BtnAgregarProducto.ForeColor = System.Drawing.Color.White;
             this.BtnAgregarProducto.Image = ((System.Drawing.Image)(resources.GetObject("BtnAgregarProducto.Image")));
             this.BtnAgregarProducto.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnAgregarProducto.Location = new System.Drawing.Point(341, 446);
+            this.BtnAgregarProducto.Location = new System.Drawing.Point(367, 28);
             this.BtnAgregarProducto.Name = "BtnAgregarProducto";
             this.BtnAgregarProducto.Size = new System.Drawing.Size(128, 35);
             this.BtnAgregarProducto.TabIndex = 158;
@@ -608,47 +664,6 @@
             this.BtnAgregarProducto.TextGroundColor = System.Drawing.Color.White;
             this.BtnAgregarProducto.UseVisualStyleBackColor = false;
             this.BtnAgregarProducto.Click += new System.EventHandler(this.BtnAgregarProducto_Click);
-            // 
-            // LblPrecioVenta
-            // 
-            this.LblPrecioVenta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.LblPrecioVenta.AutoSize = true;
-            this.LblPrecioVenta.Enabled = false;
-            this.LblPrecioVenta.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
-            this.LblPrecioVenta.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.LblPrecioVenta.Location = new System.Drawing.Point(160, 430);
-            this.LblPrecioVenta.Name = "LblPrecioVenta";
-            this.LblPrecioVenta.Size = new System.Drawing.Size(136, 18);
-            this.LblPrecioVenta.TabIndex = 112;
-            this.LblPrecioVenta.Text = "Costo Total (NIO):";
-            // 
-            // LblCantidad
-            // 
-            this.LblCantidad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.LblCantidad.AutoSize = true;
-            this.LblCantidad.Enabled = false;
-            this.LblCantidad.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
-            this.LblCantidad.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.LblCantidad.Location = new System.Drawing.Point(7, 430);
-            this.LblCantidad.Name = "LblCantidad";
-            this.LblCantidad.Size = new System.Drawing.Size(81, 18);
-            this.LblCantidad.TabIndex = 120;
-            this.LblCantidad.Text = "Cantidad:";
-            this.LblCantidad.Click += new System.EventHandler(this.LblCantidad_Click);
-            // 
-            // TxtCantidad
-            // 
-            this.TxtCantidad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.TxtCantidad.Enabled = false;
-            this.TxtCantidad.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtCantidad.Location = new System.Drawing.Point(10, 456);
-            this.TxtCantidad.MaxLength = 100;
-            this.TxtCantidad.Name = "TxtCantidad";
-            this.TxtCantidad.Size = new System.Drawing.Size(147, 27);
-            this.TxtCantidad.TabIndex = 121;
-            this.TxtCantidad.Text = "0";
-            this.TxtCantidad.TextChanged += new System.EventHandler(this.TxtCantidad_TextChanged);
-            this.TxtCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtCantidad_KeyPress);
             // 
             // TxtMontoTotal
             // 
@@ -778,84 +793,6 @@
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel1.Controls.Add(this.TxtDeDos);
-            this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.label9);
-            this.panel1.Controls.Add(this.TxtNoPagniaDos);
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Location = new System.Drawing.Point(13, 441);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(545, 47);
-            this.panel1.TabIndex = 158;
-            // 
-            // TxtDeDos
-            // 
-            this.TxtDeDos.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtDeDos.Location = new System.Drawing.Point(468, 11);
-            this.TxtDeDos.Name = "TxtDeDos";
-            this.TxtDeDos.ReadOnly = true;
-            this.TxtDeDos.Size = new System.Drawing.Size(62, 27);
-            this.TxtDeDos.TabIndex = 5;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(430, 14);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(32, 21);
-            this.label7.TabIndex = 4;
-            this.label7.Text = "De";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(261, 14);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(95, 21);
-            this.label9.TabIndex = 3;
-            this.label9.Text = "Pagina No:";
-            // 
-            // TxtNoPagniaDos
-            // 
-            this.TxtNoPagniaDos.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtNoPagniaDos.Location = new System.Drawing.Point(362, 11);
-            this.TxtNoPagniaDos.Name = "TxtNoPagniaDos";
-            this.TxtNoPagniaDos.ReadOnly = true;
-            this.TxtNoPagniaDos.Size = new System.Drawing.Size(62, 27);
-            this.TxtNoPagniaDos.TabIndex = 2;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.SystemColors.ControlText;
-            this.button1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button1.Location = new System.Drawing.Point(4, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(118, 41);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Anterior";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.button2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button2.Location = new System.Drawing.Point(127, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(118, 41);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "Siguiente";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // ComprasInventario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -873,6 +810,8 @@
             this.TCMain.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvCatalogo)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
@@ -884,8 +823,6 @@
             this.PnlPaginado.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvProductos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DgvCompra)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -903,10 +840,6 @@
         public Controladores.LoginUserControl TxtFiltrar;
         public System.Windows.Forms.Label LblDescripcion;
         public System.Windows.Forms.TextBox TxtDescripcion;
-        public System.Windows.Forms.TextBox TxtCosto;
-        public System.Windows.Forms.Label LblPrecioVenta;
-        public System.Windows.Forms.TextBox TxtCantidad;
-        public System.Windows.Forms.Label LblCantidad;
         private System.Windows.Forms.ComboBox CmbAlmacen;
         public System.Windows.Forms.Label LblTipoProducto;
         public System.Windows.Forms.DataGridView DgvProductos;
