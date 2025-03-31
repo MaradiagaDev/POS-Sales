@@ -1,4 +1,5 @@
-﻿using iTextSharp.text;
+﻿using DocumentFormat.OpenXml.Spreadsheet;
+using iTextSharp.text;
 using NeoCobranza.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -74,6 +75,7 @@ namespace NeoCobranza.Paneles
             dynamicDataTable.Columns.Add("Fecha Agregación", typeof(string));
             dynamicDataTable.Columns.Add("Fecha Ultimo Ticket", typeof(string));
             dynamicDataTable.Columns.Add("Cantidad Impresiones", typeof(string));
+            dynamicDataTable.Columns.Add("Comanda", typeof(string));
 
             dataUtilities.SetParameter("@OrdenId",auxOrden);
             dataUtilities.SetParameter("@SucursalId", auxSucursal);
@@ -91,7 +93,8 @@ namespace NeoCobranza.Paneles
                     Convert.ToString(item["SubTotal"]),
                     Convert.ToString(item["Fecha"]),
                      Convert.ToString(item["UltimaImpresion"]),
-                      Convert.ToString(item["CantidadImpresiones"])
+                      Convert.ToString(item["CantidadImpresiones"]),
+                      Convert.ToString(item["FechaHoraComanda"])
                 );
             }
 
@@ -104,6 +107,15 @@ namespace NeoCobranza.Paneles
 
             // Suscribirse al evento CellContentClick para forzar la edición del CheckBox
             DgvItemsOrden.CellContentClick += DgvItemsOrden_CellContentClick;
+
+            //Columna Boton
+            // Agregar botón COMANDA
+            DataGridViewButtonColumn btn = new DataGridViewButtonColumn();
+            btn.HeaderText = "Comanda";
+            btn.Name = "btnComanda";
+            btn.Text = "COMANDA";
+            btn.UseColumnTextForButtonValue = true;
+            DgvItemsOrden.Columns.Insert(1, btn);
         }
 
         private void DgvItemsOrden_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -113,6 +125,28 @@ namespace NeoCobranza.Paneles
             {
                 // Forzar el commit de la edición para que se actualice el valor del CheckBox
                 DgvItemsOrden.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            }
+            else if(DgvItemsOrden.Columns[e.ColumnIndex].Name == "btnComanda" && e.RowIndex >= 0)
+            {
+                DataGridViewRow selectedRow = DgvItemsOrden.SelectedRows[0];
+                DataRow dtItemResponse = dataUtilities.getRecordByPrimaryKey("OrdenDetalleHistorial", selectedRow.Cells[2].Value.ToString()).Rows[0];
+
+                //ADICIONES
+                dataUtilities.SetParameter("@ProductoId", Convert.ToString(dtItemResponse["ProductoId"]));
+                DataTable dtResponseAdiciones = dataUtilities.ExecuteStoredProcedure("spConsultarAdicionesProducto");
+
+                if (dtResponseAdiciones.Rows.Count > 0)
+                {
+                    PnlAdicionesVentas frmAdiciones = new PnlAdicionesVentas(Convert.ToString(dtItemResponse["ProductoId"]), selectedRow.Cells[2].Value.ToString());
+                    frmAdiciones.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("No hay Adiciones Detalles.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                //FIN ADICIONES
             }
         }
 
@@ -191,7 +225,7 @@ namespace NeoCobranza.Paneles
             Font regularFont = new Font("Arial", 8.5f);
             Font boldFont = new Font("Arial", 8.5f, FontStyle.Bold);
             Font smallerFont = new Font("Arial", 8f);
-            Pen dottedPen = new Pen(Color.Black);
+            Pen dottedPen = new Pen(System.Drawing.Color.Black);
             dottedPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
 
             float yPosition = 20; // Posición vertical inicial
@@ -401,6 +435,9 @@ namespace NeoCobranza.Paneles
             e.HasMorePages = false;
         }
 
+        private void DgvItemsOrden_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
 
+        }
     }
 }

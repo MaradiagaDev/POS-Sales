@@ -586,19 +586,6 @@ namespace NeoCobranza.ViewModels
                     }
                 }
             }
-
-            //ADICIONES
-            dataUtilities.SetParameter("@ProductoId", idProd);
-            DataTable dtResponseAdiciones = dataUtilities.ExecuteStoredProcedure("spConsultarAdicionesProducto");
-
-            if (dtResponseAdiciones.Rows.Count > 0)
-            {
-                PnlAdicionesVentas frmAdiciones = new PnlAdicionesVentas(idProd, "");
-                frmAdiciones.ShowDialog();
-            }
-
-            //FIN ADICIONES
-
             auxSubModulo = Convert.ToString(itemProductoAux["ClasificacionProducto"]);
 
             if (auxSubModulo == "Productos")
@@ -647,11 +634,26 @@ namespace NeoCobranza.ViewModels
                             dataUtilities.SetParameter("@Total", 0);
                             dataUtilities.SetParameter("@Subtotal", 0);
                             dataUtilities.SetParameter("@IVA", 0);
+                            dataUtilities.SetParameter("@HistorialId", SqlDbType.Int, ParameterDirection.Output);
 
                             DataTable dtResponseTotales = dataUtilities.ExecuteStoredProcedure("sp_ManageOrderDetail");
+                            string HistorialId = Convert.ToString(dataUtilities.GetParameterValue("@HistorialId"));
+                            //COLOCAR PARTE DE ADICIONES
 
                             if (opc == "Increase")
                             {
+                                //ADICIONES
+                                dataUtilities.SetParameter("@ProductoId", idProd);
+                                DataTable dtResponseAdiciones = dataUtilities.ExecuteStoredProcedure("spConsultarAdicionesProducto");
+
+                                if (dtResponseAdiciones.Rows.Count > 0)
+                                {
+                                    PnlAdicionesVentas frmAdiciones = new PnlAdicionesVentas(idProd, HistorialId);
+                                    frmAdiciones.ShowDialog();
+                                }
+
+                                //FIN ADICIONES
+
                                 var informativeMessageBox = new InformativeMessageBox($"Producto Agregado Correctamente a la Orden.",
                                     "Producto Agregado", 3000);
                                 informativeMessageBox.Show();
@@ -687,11 +689,27 @@ namespace NeoCobranza.ViewModels
                         dataUtilities.SetParameter("@Total", 0);
                         dataUtilities.SetParameter("@Subtotal", 0);
                         dataUtilities.SetParameter("@IVA", 0);
+                        dataUtilities.SetParameter("@HistorialId", SqlDbType.Int, ParameterDirection.Output);
 
                         DataTable dtResponseTotales = dataUtilities.ExecuteStoredProcedure("sp_ManageOrderDetail");
 
+                        string HistorialId = Convert.ToString(dataUtilities.GetParameterValue("@HistorialId"));
+
                         if (opc == "Increase")
                         {
+
+                            //ADICIONES
+                            dataUtilities.SetParameter("@ProductoId", idProd);
+                            DataTable dtResponseAdiciones = dataUtilities.ExecuteStoredProcedure("spConsultarAdicionesProducto");
+
+                            if (dtResponseAdiciones.Rows.Count > 0)
+                            {
+                                PnlAdicionesVentas frmAdiciones = new PnlAdicionesVentas(idProd, HistorialId);
+                                frmAdiciones.ShowDialog();
+                            }
+
+                            //FIN ADICIONES
+
                             var informativeMessageBox = new InformativeMessageBox($"Producto Agregado Correctamente a la Orden.",
                                 "Producto Agregado", 3000);
                             informativeMessageBox.Show();
@@ -709,7 +727,6 @@ namespace NeoCobranza.ViewModels
             }
             else
             {
-                //FALTAN LOS SERVICIOS
                 dataUtilities.SetParameter("@OrderId", OrdenAux);
                 dataUtilities.SetParameter("@ServiceId", idProd);
                 dataUtilities.SetParameter("@Quantity", Cantidad);
@@ -723,11 +740,26 @@ namespace NeoCobranza.ViewModels
                 }
                 dataUtilities.SetParameter("@Subtotal", 0);
                 dataUtilities.SetParameter("@IVA", 0);
+                dataUtilities.SetParameter("@HistorialId", SqlDbType.Int, ParameterDirection.Output);
 
                 DataTable dtResponseTotales = dataUtilities.ExecuteStoredProcedure("sp_ManageOrderServiceDetail");
 
+                //COLOCAR PARTE DE ADICIONES
+                string HistorialId = Convert.ToString(dataUtilities.GetParameterValue("@HistorialId"));
                 if (opc == "Increase")
                 {
+                    //ADICIONES
+                    dataUtilities.SetParameter("@ProductoId", idProd);
+                    DataTable dtResponseAdiciones = dataUtilities.ExecuteStoredProcedure("spConsultarAdicionesProducto");
+
+                    if (dtResponseAdiciones.Rows.Count > 0)
+                    {
+                        PnlAdicionesVentas frmAdiciones = new PnlAdicionesVentas(idProd, HistorialId);
+                        frmAdiciones.ShowDialog();
+                    }
+
+                    //FIN ADICIONES
+
                     var informativeMessageBox = new InformativeMessageBox($"Servicio Agregado Correctamente a la Orden.",
                         "Servicio Agregado", 3000);
                     informativeMessageBox.Show();

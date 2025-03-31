@@ -3,20 +3,44 @@
   "WorkspaceRootPath": "D:\\Programa Personal\\POS-Sales\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneleshoteles\\pnlagregarreservacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneleshoteles\\pnlagregarreservacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneles\\pnladicionesventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles\\pnladicionesventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneleshoteles\\pnlseleccionarhabitaciones.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneleshoteles\\pnlseleccionarhabitaciones.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneles\\pnlimprimeticketsdetalle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles\\pnlimprimeticketsdetalle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneleshoteles\\pnlagregarreservacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneleshoteles\\pnlagregarreservacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\viewmodels\\vmordenes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:viewmodels\\vmordenes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneleshoteles\\pnlseleccionarhabitaciones.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneleshoteles\\pnlseleccionarhabitaciones.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneles\\pnlcatalogoclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles\\pnlcatalogoclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneles\\pnlcatalogoclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles\\pnlcatalogoclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneles\\pnlimprimeticketsdetalle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles\\pnlimprimeticketsdetalle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneles_venta\\pnlventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles_venta\\pnlventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneles_venta\\pnlventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles_venta\\pnlventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneles\\pnladicionesventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles\\pnladicionesventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\viewmodels\\datautilities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:viewmodels\\datautilities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +50,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,52 +58,128 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "PnlAgregarReservacion.cs [Dise\u00F1o]",
-              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\PanelesHoteles\\PnlAgregarReservacion.cs",
-              "RelativeDocumentMoniker": "PanelesHoteles\\PnlAgregarReservacion.cs",
-              "ToolTip": "D:\\Programa Personal\\POS-Sales\\PanelesHoteles\\PnlAgregarReservacion.cs [Dise\u00F1o]",
-              "RelativeToolTip": "PanelesHoteles\\PnlAgregarReservacion.cs [Dise\u00F1o]",
+              "DocumentIndex": 3,
+              "Title": "PnlCatalogoClientes.cs",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlCatalogoClientes.cs",
+              "RelativeDocumentMoniker": "Paneles\\PnlCatalogoClientes.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlCatalogoClientes.cs",
+              "RelativeToolTip": "Paneles\\PnlCatalogoClientes.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAjwE8AAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-18T16:07:21.702Z",
+              "WhenOpened": "2025-03-31T22:00:28.184Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PnlCatalogoClientes.cs [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlCatalogoClientes.cs",
+              "RelativeDocumentMoniker": "Paneles\\PnlCatalogoClientes.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlCatalogoClientes.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Paneles\\PnlCatalogoClientes.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-31T22:00:26.454Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PnlImprimeTicketsDetalle.cs",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlImprimeTicketsDetalle.cs",
+              "RelativeDocumentMoniker": "Paneles\\PnlImprimeTicketsDetalle.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlImprimeTicketsDetalle.cs",
+              "RelativeToolTip": "Paneles\\PnlImprimeTicketsDetalle.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAAwHkAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-31T20:46:29.729Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PnlImprimeTicketsDetalle.cs [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlImprimeTicketsDetalle.cs",
+              "RelativeDocumentMoniker": "Paneles\\PnlImprimeTicketsDetalle.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlImprimeTicketsDetalle.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Paneles\\PnlImprimeTicketsDetalle.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-31T21:23:47.907Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PnlAdicionesVentas.cs [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlAdicionesVentas.cs",
+              "RelativeDocumentMoniker": "Paneles\\PnlAdicionesVentas.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlAdicionesVentas.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Paneles\\PnlAdicionesVentas.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-31T18:13:55.436Z",
               "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "PnlAgregarReservacion.cs",
-              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\PanelesHoteles\\PnlAgregarReservacion.cs",
-              "RelativeDocumentMoniker": "PanelesHoteles\\PnlAgregarReservacion.cs",
-              "ToolTip": "D:\\Programa Personal\\POS-Sales\\PanelesHoteles\\PnlAgregarReservacion.cs",
-              "RelativeToolTip": "PanelesHoteles\\PnlAgregarReservacion.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAA8wC8AAAAdAAAAAAAAAA==",
+              "Title": "PnlAdicionesVentas.cs",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlAdicionesVentas.cs",
+              "RelativeDocumentMoniker": "Paneles\\PnlAdicionesVentas.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlAdicionesVentas.cs",
+              "RelativeToolTip": "Paneles\\PnlAdicionesVentas.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAqwEAAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-18T15:46:47.063Z",
+              "WhenOpened": "2025-03-31T17:50:43.579Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "PnlSeleccionarHabitaciones.cs",
-              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\PanelesHoteles\\PnlSeleccionarHabitaciones.cs",
-              "RelativeDocumentMoniker": "PanelesHoteles\\PnlSeleccionarHabitaciones.cs",
-              "ToolTip": "D:\\Programa Personal\\POS-Sales\\PanelesHoteles\\PnlSeleccionarHabitaciones.cs",
-              "RelativeToolTip": "PanelesHoteles\\PnlSeleccionarHabitaciones.cs",
-              "ViewState": "AgIAAHIAAAAAAAAAAAAgwIYAAAAXAAAAAAAAAA==",
+              "DocumentIndex": 9,
+              "Title": "DataUtilities.cs",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\ViewModels\\DataUtilities.cs",
+              "RelativeDocumentMoniker": "ViewModels\\DataUtilities.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\ViewModels\\DataUtilities.cs",
+              "RelativeToolTip": "ViewModels\\DataUtilities.cs",
+              "ViewState": "AgIAAFcAAAAAAAAAAADwv2EAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-18T14:21:15.941Z",
+              "WhenOpened": "2025-03-31T17:57:03.724Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PnlSeleccionarHabitaciones.cs [Dise\u00F1o]",
-              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\PanelesHoteles\\PnlSeleccionarHabitaciones.cs",
-              "RelativeDocumentMoniker": "PanelesHoteles\\PnlSeleccionarHabitaciones.cs",
-              "ToolTip": "D:\\Programa Personal\\POS-Sales\\PanelesHoteles\\PnlSeleccionarHabitaciones.cs [Dise\u00F1o]",
-              "RelativeToolTip": "PanelesHoteles\\PnlSeleccionarHabitaciones.cs [Dise\u00F1o]",
+              "DocumentIndex": 2,
+              "Title": "VMOrdenes.cs",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\ViewModels\\VMOrdenes.cs",
+              "RelativeDocumentMoniker": "ViewModels\\VMOrdenes.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\ViewModels\\VMOrdenes.cs",
+              "RelativeToolTip": "ViewModels\\VMOrdenes.cs",
+              "ViewState": "AgIAAOECAAAAAAAAAAAowO4CAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-18T14:21:11.951Z",
+              "WhenOpened": "2025-03-31T14:03:44.276Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PnlVentas.cs",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles_Venta\\PnlVentas.cs",
+              "RelativeDocumentMoniker": "Paneles_Venta\\PnlVentas.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles_Venta\\PnlVentas.cs",
+              "RelativeToolTip": "Paneles_Venta\\PnlVentas.cs",
+              "ViewState": "AgIAABEEAAAAAAAAAAAEwCAEAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-31T14:03:26.126Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PnlVentas.cs [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles_Venta\\PnlVentas.cs",
+              "RelativeDocumentMoniker": "Paneles_Venta\\PnlVentas.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles_Venta\\PnlVentas.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Paneles_Venta\\PnlVentas.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-31T14:03:23.464Z",
               "EditorCaption": " [Dise\u00F1o]"
             }
           ]

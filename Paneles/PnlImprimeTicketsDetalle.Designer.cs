@@ -94,6 +94,7 @@
             this.DgvItemsOrden.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DgvItemsOrden.Size = new System.Drawing.Size(940, 453);
             this.DgvItemsOrden.TabIndex = 171;
+            this.DgvItemsOrden.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvItemsOrden_CellContentClick_1);
             // 
             // BtnImprimir
             // 

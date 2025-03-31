@@ -20,7 +20,6 @@ namespace NeoCobranza.Paneles
         private const int MaxItemsVisibles = 10;
         private string auxProducto = "";
         private string auxOrdenDetalle = "";
-        // Agregar un ToolTip para mostrar el nombre completo si es muy largo
         private ToolTip toolTipProducto = new ToolTip();
 
         public PnlAdicionesVentas(string idProducto,string ordenDetalleId)
@@ -61,12 +60,18 @@ namespace NeoCobranza.Paneles
                 string idProducto = fila.Field<string>("ID");
                 string nombreProducto = fila.Field<string>("Nombre");
 
+                dataUtilities.SetParameter("@ProductoId", auxProducto);
+                dataUtilities.SetParameter("@AdicionId", idProducto);
+                dataUtilities.SetParameter("@HistorialId", auxOrdenDetalle);
+                bool esCheck = Convert.ToBoolean(dataUtilities.ExecuteStoredProcedure("spVerificarAdicionHistorial").Rows[0][0]);
+
                 CheckBox chkProducto = new CheckBox();
                 chkProducto.Text = nombreProducto;
                 chkProducto.Tag = idProducto;
                 chkProducto.Font = new Font("Microsoft Sans Serif", 12);
                 chkProducto.Width = FLAdiciones.Width - 25; // Ajusta el ancho con un margen
                 chkProducto.AutoEllipsis = true; // Muestra "..." si el texto es muy largo
+                chkProducto.Checked = esCheck;
                 chkProducto.CheckedChanged += ChkProducto_CheckedChanged;
 
                 // Agrega un ToolTip para mostrar el nombre completo al pasar el mouse
@@ -82,33 +87,45 @@ namespace NeoCobranza.Paneles
 
         private void ChkProducto_CheckedChanged(object sender, EventArgs e)
         {
-            //CheckBox chk = sender as CheckBox;
-            //if (chk != null && chk.Tag != null)
-            //{
-            //    string idProducto = (string)chk.Tag;
-            //    bool agregar = chk.Checked;
-            //    AgregarQuitar(idProducto, agregar);
-            //}
+            CheckBox chk = sender as CheckBox;
+            if (chk != null && chk.Tag != null)
+            {
+                string idProducto = (string)chk.Tag;
+                bool agregar = chk.Checked;
+                AgregarQuitar(idProducto, agregar);
+            }
         }
 
         private void AgregarQuitar(string idProducto, bool agregar)
         {
-            //if (agregar)
-            //{
-            //    dataUtilities.SetParameter("@ProductoId", auxProducto);
-            //    dataUtilities.SetParameter("@AdicionId", idProducto);
-            //    dataUtilities.SetParameter("@Accion", "AGREGAR");
-            //    dataUtilities.ExecuteStoredProcedure("spGestionarAdicion");
-            //}
-            //else
-            //{
-            //    dataUtilities.SetParameter("@ProductoId", auxProducto);
-            //    dataUtilities.SetParameter("@AdicionId", idProducto);
-            //    dataUtilities.SetParameter("@Accion", "QUITAR");
-            //    dataUtilities.ExecuteStoredProcedure("spGestionarAdicion");
-            //}
+            if (agregar)
+            {
+                dataUtilities.SetParameter("@ProductoId", auxProducto);
+                dataUtilities.SetParameter("@AdicionId", idProducto);
+                dataUtilities.SetParameter("@HistorialId", auxOrdenDetalle);
+                dataUtilities.SetParameter("@Accion", "AGREGAR");
+                dataUtilities.ExecuteStoredProcedure("spGestionarAdicionHistorial");
+            }
+            else
+            {
+                dataUtilities.SetParameter("@ProductoId", auxProducto);
+                dataUtilities.SetParameter("@AdicionId", idProducto);
+                dataUtilities.SetParameter("@HistorialId", auxOrdenDetalle);
+                dataUtilities.SetParameter("@Accion", "QUITAR");
+                dataUtilities.ExecuteStoredProcedure("spGestionarAdicionHistorial");
+            }
 
-            //InicializarDataTable();
+            InicializarDataTable();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void BtnGuardar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
