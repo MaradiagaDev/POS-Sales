@@ -1106,5 +1106,29 @@ namespace NeoCobranza.Paneles
             PnlCentral.Controls.Add(directas);
             directas.Show();
         }
+
+        private void respaldosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            limpiar();
+            PnlRespaldos pnlGeneral = new PnlRespaldos();
+            AddOwnedForm(pnlGeneral);
+            pnlGeneral.TopLevel = false;
+            PnlCentral.Controls.Add(pnlGeneral);
+            pnlGeneral.Dock = DockStyle.Fill;
+            PnlCentral.Tag = pnlGeneral;
+            pnlGeneral.Show();
+        }
+
+        private void extrasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            limpiar();
+            CatalogosInventario pnlGeneral = new CatalogosInventario("Adiciones");
+            AddOwnedForm(pnlGeneral);
+            pnlGeneral.TopLevel = false;
+            PnlCentral.Controls.Add(pnlGeneral);
+            pnlGeneral.Dock = DockStyle.Fill;
+            PnlCentral.Tag = pnlGeneral;
+            pnlGeneral.Show();
+        }
     }
 }

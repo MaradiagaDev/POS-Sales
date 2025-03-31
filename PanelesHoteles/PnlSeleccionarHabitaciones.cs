@@ -13,8 +13,9 @@ namespace NeoCobranza.PanelesHoteles
     public partial class PnlSeleccionarHabitaciones : Form
     {
         DataUtilities datautilities = new DataUtilities();
-        DateTime auxFechaInicio,auxFechaFin;
+        DateTime auxFechaInicio, auxFechaFin;
         PnlAgregarReservacion auxFrm;
+
         public class Habitacion
         {
             public string Nombre { get; set; }
@@ -24,8 +25,8 @@ namespace NeoCobranza.PanelesHoteles
         }
 
         // Lista de conjuntos de habitaciones para probar con muchos items
-    
-        public PnlSeleccionarHabitaciones(DateTime inicio,DateTime fin, PnlAgregarReservacion frm)
+
+        public PnlSeleccionarHabitaciones(DateTime inicio, DateTime fin, PnlAgregarReservacion frm)
         {
             auxFechaInicio = inicio;
             auxFechaFin = fin;
@@ -66,6 +67,11 @@ namespace NeoCobranza.PanelesHoteles
 
                 FLConjunto.Controls.Add(btnConjunto);
             }
+
+            if(dtResponse.Rows.Count > 0)
+            {
+                CargarHabitaciones(Convert.ToString(dtResponse.Rows[0]["HabitacionId"]));
+            }
         }
 
         private void CargarHabitaciones(string idConjunto)
@@ -104,55 +110,91 @@ namespace NeoCobranza.PanelesHoteles
                     Height = 120,
                     Margin = new Padding(5),
                     FlatStyle = FlatStyle.Flat,
-                    BackColor = disponible == "Disponible" ? Color.LightGreen : Color.LightCoral,  // Verde disponible, Rojo ocupada
+                    // Si la habitación está disponible, se pinta de verde; si no, de rojo.
+                    BackColor = disponible == "Disponible" ? Color.LightGreen : Color.LightCoral,
                     Text = $"\nCuarto {numeroHabitacion}\n{(disponible == "Disponible" ? disponible : "Ocupado")}",
                     TextImageRelation = TextImageRelation.ImageAboveText,
                     ImageAlign = ContentAlignment.MiddleCenter,
-                    TextAlign = ContentAlignment.BottomCenter
+                    TextAlign = ContentAlignment.BottomCenter,
+                    Image = roomImage
                 };
 
-                btnHabitacion.Image = roomImage;
+                // Verificar si ya fue seleccionada (recorriendo el DataTable)
+                bool yaSeleccionada = false;
+                foreach (DataRow row in auxFrm.dynamicDetalle.Rows)
+                {
+                    if (row[0] != null && row[3] != null &&
+                        row[0].ToString() == idConjunto && row[3].ToString() == numeroHabitacion.ToString())
+                    {
+                        yaSeleccionada = true;
+                        break;
+                    }
+                }
+                if (yaSeleccionada)
+                {
+                    // Coloreamos el botón de naranja si ya está seleccionado
+                    btnHabitacion.BackColor = Color.Orange;
+                }
 
-                // Evento para manejar la selección de la habitación
-                btnHabitacion.Click += (sender, e) => seleccionarCuarto(idConjunto, numeroHabitacion,disponible);
+                // Al hacer clic, se llama a seleccionarCuarto pasando el botón (sender)
+                btnHabitacion.Click += (sender, e) => seleccionarCuarto((Button)sender, idConjunto, numeroHabitacion, disponible);
 
                 FLHabitaciones.Controls.Add(btnHabitacion);
             }
 
-            //Cargar Costos
+            // Cargar Costos
             datautilities.SetParameter("@HabitacionId", idConjunto);
             DataTable dtResponse = datautilities.ExecuteStoredProcedure("spObtenerPaquetesPorHabitacion");
             CmbCostosConjunto.DataSource = dtResponse;
-            CmbCostosConjunto.DisplayMember = "NombreCompleto";
+            CmbCostosConjunto.DisplayMember = "NombrePaquete";
             CmbCostosConjunto.ValueMember = "PaqueteId";
         }
 
-        private void seleccionarCuarto(string conjuntoId,int habitacion,string disponible)
+        private void seleccionarCuarto(Button btn, string conjuntoId, int habitacion, string disponible)
         {
-            if(disponible != "Disponible")
+            // Si la habitación ya está pintada de naranja, significa que ya fue seleccionada
+            if (btn.BackColor == Color.Orange)
             {
-                MessageBox.Show("La habitación no está disponible en el periodo seleccionado.","Atención",MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("La habitación ya forma parte de la reservación.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            //Buscar datos
+            if (disponible != "Disponible")
+            {
+                MessageBox.Show("La habitación no está disponible en el periodo seleccionado.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Verificar nuevamente en el DataTable por si se cambió la selección en otro lado
+            foreach (DataRow row in auxFrm.dynamicDetalle.Rows)
+            {
+                if (row[0] != null && row[3] != null &&
+                    row[0].ToString() == conjuntoId && row[3].ToString() == habitacion.ToString())
+                {
+                    // Colorear el botón de naranja y mostrar mensaje
+                    btn.BackColor = Color.Orange;
+                    MessageBox.Show("La habitación ya forma parte de la reservación.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+            }
+
+            // Buscar datos de la habitación
             DataRow dtResponse = datautilities.getRecordByPrimaryKey("Habitaciones", conjuntoId).Rows[0];
 
-            string nombreHabitaciones,noHabitaciones,precio,costoReservación,nombrePaquete;
+            string nombreHabitaciones, noHabitaciones, precio, costoReservación, nombrePaquete;
 
             nombreHabitaciones = Convert.ToString(dtResponse["Nombre"]);
             noHabitaciones = habitacion.ToString();
-
 
             if (Convert.ToString(CmbCostosConjunto.SelectedValue) == "0")
             {
                 nombrePaquete = "Precio base";
                 precio = Convert.ToString(dtResponse["decCosto"]);
 
-                if (Convert.ToBoolean(dtResponse["bitPorcentaje"])) 
+                if (Convert.ToBoolean(dtResponse["bitPorcentaje"]))
                 {
-                    decimal decPorcentaje = Convert.ToDecimal(dtResponse["decMonto"])/100; 
-                    costoReservación = (Decimal.Round(Convert.ToDecimal(precio) * decPorcentaje,2)).ToString();
+                    decimal decPorcentaje = Convert.ToDecimal(dtResponse["decMonto"]) / 100;
+                    costoReservación = (Decimal.Round(Convert.ToDecimal(precio) * decPorcentaje, 2)).ToString();
                 }
                 else
                 {
@@ -176,10 +218,16 @@ namespace NeoCobranza.PanelesHoteles
                 }
             }
 
-            auxFrm.dynamicDetalle.Rows.Add(nombreHabitaciones ,noHabitaciones,precio,costoReservación,nombrePaquete);
+            //Calcular segun la cantidad de dias
+            precio = (Convert.ToDecimal(precio) * auxFrm.auxCantidadDias).ToString();
+            costoReservación = (Convert.ToDecimal(costoReservación) * auxFrm.auxCantidadDias).ToString();
 
+            // Agregar la habitación a la tabla de detalle
+            auxFrm.dynamicDetalle.Rows.Add(conjuntoId, Convert.ToString(CmbCostosConjunto.SelectedValue), nombreHabitaciones, noHabitaciones, precio, costoReservación, nombrePaquete);
+            auxFrm.ActualizarDatosItems();
             this.Close();
         }
+
 
         private void PnlSeleccionarHabitaciones_Load(object sender, EventArgs e)
         {

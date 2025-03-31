@@ -49,6 +49,7 @@
             this.BtnSeleccionarImagen = new NeoCobranza.Especiales.EspecialButton();
             this.BtnInventarioInicial = new NeoCobranza.Especiales.EspecialButton();
             this.ChkPrecioVariable = new System.Windows.Forms.CheckBox();
+            this.BtnAdiciones = new NeoCobranza.Especiales.EspecialButton();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PBImagenProducto)).BeginInit();
             this.SuspendLayout();
@@ -195,9 +196,9 @@
             this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAgregar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnAgregar.ForeColor = System.Drawing.Color.White;
-            this.btnAgregar.Location = new System.Drawing.Point(719, 442);
+            this.btnAgregar.Location = new System.Drawing.Point(742, 457);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(173, 39);
+            this.btnAgregar.Size = new System.Drawing.Size(158, 39);
             this.btnAgregar.TabIndex = 139;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.TextGroundColor = System.Drawing.Color.White;
@@ -216,9 +217,9 @@
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnCancelar.ForeColor = System.Drawing.Color.White;
-            this.btnCancelar.Location = new System.Drawing.Point(536, 442);
+            this.btnCancelar.Location = new System.Drawing.Point(559, 457);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(173, 39);
+            this.btnCancelar.Size = new System.Drawing.Size(177, 39);
             this.btnCancelar.TabIndex = 140;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.TextGroundColor = System.Drawing.Color.White;
@@ -279,11 +280,11 @@
             this.BtnInventarioInicial.ForeColor = System.Drawing.Color.White;
             this.BtnInventarioInicial.Image = ((System.Drawing.Image)(resources.GetObject("BtnInventarioInicial.Image")));
             this.BtnInventarioInicial.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnInventarioInicial.Location = new System.Drawing.Point(20, 430);
+            this.BtnInventarioInicial.Location = new System.Drawing.Point(7, 465);
             this.BtnInventarioInicial.Name = "BtnInventarioInicial";
-            this.BtnInventarioInicial.Size = new System.Drawing.Size(253, 51);
+            this.BtnInventarioInicial.Size = new System.Drawing.Size(259, 31);
             this.BtnInventarioInicial.TabIndex = 186;
-            this.BtnInventarioInicial.Text = "Inventario Inicial";
+            this.BtnInventarioInicial.Text = "INVENTARIO INICIAL";
             this.BtnInventarioInicial.TextGroundColor = System.Drawing.Color.White;
             this.BtnInventarioInicial.UseVisualStyleBackColor = false;
             this.BtnInventarioInicial.Click += new System.EventHandler(this.especialButton1_Click);
@@ -299,12 +300,36 @@
             this.ChkPrecioVariable.Text = "Precio Variable";
             this.ChkPrecioVariable.UseVisualStyleBackColor = true;
             // 
+            // BtnAdiciones
+            // 
+            this.BtnAdiciones.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.BtnAdiciones.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BtnAdiciones.BackGroundColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BtnAdiciones.BorderColor = System.Drawing.Color.LavenderBlush;
+            this.BtnAdiciones.BorderRadius = 5;
+            this.BtnAdiciones.BorderSize = 0;
+            this.BtnAdiciones.FlatAppearance.BorderSize = 0;
+            this.BtnAdiciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAdiciones.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.BtnAdiciones.ForeColor = System.Drawing.Color.White;
+            this.BtnAdiciones.Image = ((System.Drawing.Image)(resources.GetObject("BtnAdiciones.Image")));
+            this.BtnAdiciones.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnAdiciones.Location = new System.Drawing.Point(7, 428);
+            this.BtnAdiciones.Name = "BtnAdiciones";
+            this.BtnAdiciones.Size = new System.Drawing.Size(259, 31);
+            this.BtnAdiciones.TabIndex = 188;
+            this.BtnAdiciones.Text = "ADICIONES";
+            this.BtnAdiciones.TextGroundColor = System.Drawing.Color.White;
+            this.BtnAdiciones.UseVisualStyleBackColor = false;
+            this.BtnAdiciones.Click += new System.EventHandler(this.BtnAdiciones_Click);
+            // 
             // PnlAgregarProductos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(911, 508);
+            this.Controls.Add(this.BtnAdiciones);
             this.Controls.Add(this.ChkPrecioVariable);
             this.Controls.Add(this.BtnInventarioInicial);
             this.Controls.Add(this.label10);
@@ -359,5 +384,6 @@
         public Especiales.EspecialButton BtnSeleccionarImagen;
         public Especiales.EspecialButton BtnInventarioInicial;
         public System.Windows.Forms.CheckBox ChkPrecioVariable;
+        public Especiales.EspecialButton BtnAdiciones;
     }
 }

@@ -142,6 +142,26 @@ namespace NeoCobranza.Paneles
                 LblCodigo.Visible = false;
                 TxtCodigo.Visible = false;
             }
+            else if(auxModulo == "Adiciones")
+            {
+                TxtPrecioVenta.Visible = false;
+                TxtPrecioVenta.Text = "0";
+
+                label10.Visible = false;
+                PBImagenProducto.Visible = false;
+                BtnSeleccionarImagen.Visible = false;
+
+                LblCodigo.Visible = false;
+                TxtCodigo.Visible = false;
+
+                BtnInventarioInicial.Visible = false;
+                LblNombreDinamico.Text = "Nombre de la Adición";
+
+                ChkPrecioVariable.Visible = false;
+                TxtDescripcion.Visible = false;
+                LblPrecioVenta.Visible= false;
+                BtnAdiciones.Visible = false;
+            }
 
             switch (auxOpc)
             {
@@ -158,6 +178,12 @@ namespace NeoCobranza.Paneles
                         btnAgregar.Text = "Crear";
 
                     }
+                    else if (auxModulo == "Adiciones")
+                    {
+                        LblDynamico.Text = "Crear Adición";
+                        btnAgregar.Text = "Crear";
+
+                    }
 
                     break;
 
@@ -171,6 +197,11 @@ namespace NeoCobranza.Paneles
                     else if (auxModulo == "Servicios")
                     {
                         LblDynamico.Text = "Modificar Servicios";
+                        btnAgregar.Text = "Modificar";
+                    }
+                    else if (auxModulo == "Adiciones")
+                    {
+                        LblDynamico.Text = "Modificar Adición";
                         btnAgregar.Text = "Modificar";
                     }
 
@@ -220,7 +251,7 @@ namespace NeoCobranza.Paneles
                 return;
             }
 
-            if (_disponible == 0 && ChkPrecioVariable.Checked == false)
+            if (_disponible == 0 && ChkPrecioVariable.Checked == false && auxModulo != "Adiciones")
             {
                 MessageBox.Show("El monto de venta está vacío.", "Atención",
                                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -628,6 +659,20 @@ namespace NeoCobranza.Paneles
         {
             PnlConfigInventarioInicial frm = new PnlConfigInventarioInicial(this);
             frm.ShowDialog();
+        }
+
+        private void BtnAdiciones_Click(object sender, EventArgs e)
+        {
+            if (auxId != "")
+            {
+                PnlCatalogoAdiciones frm = new PnlCatalogoAdiciones(auxId);
+                frm.ShowDialog();
+            }
+            else 
+            {
+                MessageBox.Show("Antes de agregar adiciones debe guardar el producto.", "Atención",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         //private void BtnAgregarProveedor_Click(object sender, EventArgs e)

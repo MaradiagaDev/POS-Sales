@@ -136,6 +136,8 @@ namespace NeoCobranza.Paneles
                     UtilidadesInformes.CargarInformeAjustes(Convert.ToString(CmbSucursal.SelectedValue), DtInicial.Value, DtFinal.Value);
                     break;
             }
+
+            this.Close();
         }
     }
 }

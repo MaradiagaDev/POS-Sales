@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CatalogosInventario));
             this.PnlTitulo = new System.Windows.Forms.Panel();
             this.TbTitulo = new System.Windows.Forms.Label();
-            this.BtnBuscarCliente = new NeoCobranza.Especiales.EspecialButton();
-            this.btnAgregar = new NeoCobranza.Especiales.EspecialButton();
             this.TxtFiltrar = new System.Windows.Forms.TextBox();
             this.flowLayoutPanelProductos = new System.Windows.Forms.FlowLayoutPanel();
             this.PnlPaginado = new System.Windows.Forms.Panel();
@@ -42,8 +43,12 @@
             this.TxtPaginaNo = new System.Windows.Forms.TextBox();
             this.BtnAnterior = new System.Windows.Forms.Button();
             this.BtnSiguiente = new System.Windows.Forms.Button();
+            this.dgvCatalogo = new System.Windows.Forms.DataGridView();
+            this.BtnBuscarCliente = new NeoCobranza.Especiales.EspecialButton();
+            this.btnAgregar = new NeoCobranza.Especiales.EspecialButton();
             this.PnlTitulo.SuspendLayout();
             this.PnlPaginado.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCatalogo)).BeginInit();
             this.SuspendLayout();
             // 
             // PnlTitulo
@@ -69,52 +74,6 @@
             this.TbTitulo.Size = new System.Drawing.Size(196, 33);
             this.TbTitulo.TabIndex = 1;
             this.TbTitulo.Text = "Catálogo de ";
-            // 
-            // BtnBuscarCliente
-            // 
-            this.BtnBuscarCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnBuscarCliente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(20)))), ((int)(((byte)(43)))));
-            this.BtnBuscarCliente.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(20)))), ((int)(((byte)(43)))));
-            this.BtnBuscarCliente.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.BtnBuscarCliente.BorderRadius = 5;
-            this.BtnBuscarCliente.BorderSize = 0;
-            this.BtnBuscarCliente.FlatAppearance.BorderSize = 0;
-            this.BtnBuscarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnBuscarCliente.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnBuscarCliente.ForeColor = System.Drawing.Color.White;
-            this.BtnBuscarCliente.Image = ((System.Drawing.Image)(resources.GetObject("BtnBuscarCliente.Image")));
-            this.BtnBuscarCliente.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnBuscarCliente.Location = new System.Drawing.Point(504, 11);
-            this.BtnBuscarCliente.Name = "BtnBuscarCliente";
-            this.BtnBuscarCliente.Size = new System.Drawing.Size(148, 38);
-            this.BtnBuscarCliente.TabIndex = 138;
-            this.BtnBuscarCliente.Text = "Buscar";
-            this.BtnBuscarCliente.TextGroundColor = System.Drawing.Color.White;
-            this.BtnBuscarCliente.UseVisualStyleBackColor = false;
-            this.BtnBuscarCliente.Click += new System.EventHandler(this.BtnBuscarCliente_Click);
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAgregar.BackColor = System.Drawing.Color.Green;
-            this.btnAgregar.BackGroundColor = System.Drawing.Color.Green;
-            this.btnAgregar.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.btnAgregar.BorderRadius = 5;
-            this.btnAgregar.BorderSize = 0;
-            this.btnAgregar.FlatAppearance.BorderSize = 0;
-            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgregar.Font = new System.Drawing.Font("Century Gothic", 12F);
-            this.btnAgregar.ForeColor = System.Drawing.Color.White;
-            this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
-            this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAgregar.Location = new System.Drawing.Point(910, 436);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(203, 38);
-            this.btnAgregar.TabIndex = 136;
-            this.btnAgregar.Text = "Insertar Almacén";
-            this.btnAgregar.TextGroundColor = System.Drawing.Color.White;
-            this.btnAgregar.UseVisualStyleBackColor = false;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // TxtFiltrar
             // 
@@ -214,12 +173,106 @@
             this.BtnSiguiente.UseVisualStyleBackColor = false;
             this.BtnSiguiente.Click += new System.EventHandler(this.BtnSiguiente_Click);
             // 
+            // dgvCatalogo
+            // 
+            this.dgvCatalogo.AllowUserToAddRows = false;
+            this.dgvCatalogo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvCatalogo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvCatalogo.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dgvCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvCatalogo.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dgvCatalogo.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCatalogo.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvCatalogo.ColumnHeadersHeight = 30;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCatalogo.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvCatalogo.GridColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dgvCatalogo.Location = new System.Drawing.Point(12, 50);
+            this.dgvCatalogo.Name = "dgvCatalogo";
+            this.dgvCatalogo.ReadOnly = true;
+            this.dgvCatalogo.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCatalogo.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvCatalogo.RowHeadersWidth = 15;
+            this.dgvCatalogo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvCatalogo.Size = new System.Drawing.Size(1108, 375);
+            this.dgvCatalogo.TabIndex = 159;
+            this.dgvCatalogo.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCatalogo_CellContentClick_1);
+            // 
+            // BtnBuscarCliente
+            // 
+            this.BtnBuscarCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnBuscarCliente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(20)))), ((int)(((byte)(43)))));
+            this.BtnBuscarCliente.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(20)))), ((int)(((byte)(43)))));
+            this.BtnBuscarCliente.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.BtnBuscarCliente.BorderRadius = 5;
+            this.BtnBuscarCliente.BorderSize = 0;
+            this.BtnBuscarCliente.FlatAppearance.BorderSize = 0;
+            this.BtnBuscarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnBuscarCliente.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnBuscarCliente.ForeColor = System.Drawing.Color.White;
+            this.BtnBuscarCliente.Image = ((System.Drawing.Image)(resources.GetObject("BtnBuscarCliente.Image")));
+            this.BtnBuscarCliente.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnBuscarCliente.Location = new System.Drawing.Point(504, 11);
+            this.BtnBuscarCliente.Name = "BtnBuscarCliente";
+            this.BtnBuscarCliente.Size = new System.Drawing.Size(148, 38);
+            this.BtnBuscarCliente.TabIndex = 138;
+            this.BtnBuscarCliente.Text = "Buscar";
+            this.BtnBuscarCliente.TextGroundColor = System.Drawing.Color.White;
+            this.BtnBuscarCliente.UseVisualStyleBackColor = false;
+            this.BtnBuscarCliente.Click += new System.EventHandler(this.BtnBuscarCliente_Click);
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAgregar.BackColor = System.Drawing.Color.Green;
+            this.btnAgregar.BackGroundColor = System.Drawing.Color.Green;
+            this.btnAgregar.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.btnAgregar.BorderRadius = 5;
+            this.btnAgregar.BorderSize = 0;
+            this.btnAgregar.FlatAppearance.BorderSize = 0;
+            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregar.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.btnAgregar.ForeColor = System.Drawing.Color.White;
+            this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
+            this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAgregar.Location = new System.Drawing.Point(910, 436);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(203, 38);
+            this.btnAgregar.TabIndex = 136;
+            this.btnAgregar.Text = "Insertar Almacén";
+            this.btnAgregar.TextGroundColor = System.Drawing.Color.White;
+            this.btnAgregar.UseVisualStyleBackColor = false;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
             // CatalogosInventario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1125, 523);
+            this.Controls.Add(this.dgvCatalogo);
             this.Controls.Add(this.PnlPaginado);
             this.Controls.Add(this.flowLayoutPanelProductos);
             this.Controls.Add(this.TxtFiltrar);
@@ -234,6 +287,7 @@
             this.PnlTitulo.PerformLayout();
             this.PnlPaginado.ResumeLayout(false);
             this.PnlPaginado.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCatalogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -253,5 +307,6 @@
         public System.Windows.Forms.Button BtnAnterior;
         public System.Windows.Forms.Button BtnSiguiente;
         public System.Windows.Forms.FlowLayoutPanel flowLayoutPanelProductos;
+        public System.Windows.Forms.DataGridView dgvCatalogo;
     }
 }

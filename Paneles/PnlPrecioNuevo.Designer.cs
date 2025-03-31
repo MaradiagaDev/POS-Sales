@@ -31,6 +31,7 @@
             this.TxtTotalPagado = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.BtnGuardar = new NeoCobranza.Especiales.EspecialButton();
+            this.BtnCancelar = new NeoCobranza.Especiales.EspecialButton();
             this.SuspendLayout();
             // 
             // TxtTotalPagado
@@ -81,11 +82,34 @@
             this.BtnGuardar.UseVisualStyleBackColor = false;
             this.BtnGuardar.Click += new System.EventHandler(this.BtnGuardar_Click);
             // 
+            // BtnCancelar
+            // 
+            this.BtnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnCancelar.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.BtnCancelar.BackGroundColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.BtnCancelar.BorderColor = System.Drawing.Color.Transparent;
+            this.BtnCancelar.BorderRadius = 0;
+            this.BtnCancelar.BorderSize = 0;
+            this.BtnCancelar.FlatAppearance.BorderSize = 0;
+            this.BtnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCancelar.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnCancelar.ForeColor = System.Drawing.Color.White;
+            this.BtnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnCancelar.Location = new System.Drawing.Point(256, 213);
+            this.BtnCancelar.Name = "BtnCancelar";
+            this.BtnCancelar.Size = new System.Drawing.Size(174, 49);
+            this.BtnCancelar.TabIndex = 180;
+            this.BtnCancelar.Text = "Cancelar";
+            this.BtnCancelar.TextGroundColor = System.Drawing.Color.White;
+            this.BtnCancelar.UseVisualStyleBackColor = false;
+            this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
+            // 
             // PnlPrecioNuevo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(660, 284);
+            this.Controls.Add(this.BtnCancelar);
             this.Controls.Add(this.BtnGuardar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.TxtTotalPagado);
@@ -105,5 +129,6 @@
         public System.Windows.Forms.TextBox TxtTotalPagado;
         private System.Windows.Forms.Label label1;
         private Especiales.EspecialButton BtnGuardar;
+        private Especiales.EspecialButton BtnCancelar;
     }
 }

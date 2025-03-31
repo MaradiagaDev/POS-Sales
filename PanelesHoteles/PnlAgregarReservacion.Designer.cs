@@ -39,9 +39,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.TxtCelular = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.TxtTotalPago = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.PnlInicial = new System.Windows.Forms.Panel();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.TxtCantidadPersonas = new System.Windows.Forms.TextBox();
@@ -52,10 +52,14 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.DgvItemsPaquete = new System.Windows.Forms.DataGridView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.TxtPagoInicial = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.TxtRestante = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.TxtDiasReservados = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.especialButton3 = new NeoCobranza.Especiales.EspecialButton();
             this.especialButton2 = new NeoCobranza.Especiales.EspecialButton();
             this.especialButton1 = new NeoCobranza.Especiales.EspecialButton();
@@ -64,7 +68,7 @@
             this.BtnAgregarHabitacion = new NeoCobranza.Especiales.EspecialButton();
             this.BtnCliente = new NeoCobranza.Especiales.EspecialButton();
             this.BtnAddClientes = new NeoCobranza.Especiales.EspecialButton();
-            this.panel1.SuspendLayout();
+            this.PnlInicial.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvItemsPaquete)).BeginInit();
             this.SuspendLayout();
             // 
@@ -147,18 +151,19 @@
             this.label3.TabIndex = 192;
             this.label3.Text = "Celular";
             // 
-            // textBox7
+            // TxtTotalPago
             // 
-            this.textBox7.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.textBox7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox7.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.textBox7.Location = new System.Drawing.Point(12, 531);
-            this.textBox7.MaxLength = 100;
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(285, 31);
-            this.textBox7.TabIndex = 205;
-            this.textBox7.Text = "0";
+            this.TxtTotalPago.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.TxtTotalPago.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TxtTotalPago.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtTotalPago.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.TxtTotalPago.Location = new System.Drawing.Point(12, 531);
+            this.TxtTotalPago.MaxLength = 100;
+            this.TxtTotalPago.Name = "TxtTotalPago";
+            this.TxtTotalPago.ReadOnly = true;
+            this.TxtTotalPago.Size = new System.Drawing.Size(285, 31);
+            this.TxtTotalPago.TabIndex = 205;
+            this.TxtTotalPago.Text = "0";
             // 
             // label11
             // 
@@ -171,33 +176,37 @@
             this.label11.TabIndex = 206;
             this.label11.Text = "TOTAL PAGO";
             // 
-            // panel1
+            // PnlInicial
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel1.Controls.Add(this.textBox2);
-            this.panel1.Controls.Add(this.label16);
-            this.panel1.Controls.Add(this.TxtCantidadPersonas);
-            this.panel1.Controls.Add(this.label15);
-            this.panel1.Controls.Add(this.DtFechaFin);
-            this.panel1.Controls.Add(this.DtFechaInicio);
-            this.panel1.Controls.Add(this.label12);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.TxtCelular);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.TxtIdentificacion);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.TxtNombreCliente);
-            this.panel1.Controls.Add(this.label7);
-            this.panel1.Location = new System.Drawing.Point(12, 52);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(937, 212);
-            this.panel1.TabIndex = 208;
+            this.PnlInicial.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.PnlInicial.Controls.Add(this.TxtDiasReservados);
+            this.PnlInicial.Controls.Add(this.label9);
+            this.PnlInicial.Controls.Add(this.label8);
+            this.PnlInicial.Controls.Add(this.textBox3);
+            this.PnlInicial.Controls.Add(this.textBox2);
+            this.PnlInicial.Controls.Add(this.label16);
+            this.PnlInicial.Controls.Add(this.TxtCantidadPersonas);
+            this.PnlInicial.Controls.Add(this.label15);
+            this.PnlInicial.Controls.Add(this.DtFechaFin);
+            this.PnlInicial.Controls.Add(this.DtFechaInicio);
+            this.PnlInicial.Controls.Add(this.label12);
+            this.PnlInicial.Controls.Add(this.label4);
+            this.PnlInicial.Controls.Add(this.TxtCelular);
+            this.PnlInicial.Controls.Add(this.label1);
+            this.PnlInicial.Controls.Add(this.TxtIdentificacion);
+            this.PnlInicial.Controls.Add(this.label3);
+            this.PnlInicial.Controls.Add(this.TxtNombreCliente);
+            this.PnlInicial.Controls.Add(this.label7);
+            this.PnlInicial.Location = new System.Drawing.Point(12, 52);
+            this.PnlInicial.Name = "PnlInicial";
+            this.PnlInicial.Size = new System.Drawing.Size(937, 212);
+            this.PnlInicial.TabIndex = 208;
             // 
             // textBox2
             // 
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox2.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.textBox2.Location = new System.Drawing.Point(664, 145);
+            this.textBox2.Location = new System.Drawing.Point(664, 142);
             this.textBox2.MaxLength = 100;
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
@@ -246,6 +255,8 @@
             this.DtFechaFin.Name = "DtFechaFin";
             this.DtFechaFin.Size = new System.Drawing.Size(254, 23);
             this.DtFechaFin.TabIndex = 222;
+            this.DtFechaFin.ValueChanged += new System.EventHandler(this.DtFechaFin_ValueChanged);
+            this.DtFechaFin.KeyUp += new System.Windows.Forms.KeyEventHandler(this.DtFechaFin_KeyUp);
             // 
             // DtFechaInicio
             // 
@@ -256,6 +267,8 @@
             this.DtFechaInicio.Name = "DtFechaInicio";
             this.DtFechaInicio.Size = new System.Drawing.Size(254, 23);
             this.DtFechaInicio.TabIndex = 221;
+            this.DtFechaInicio.ValueChanged += new System.EventHandler(this.DtFechaInicio_ValueChanged);
+            this.DtFechaInicio.KeyUp += new System.Windows.Forms.KeyEventHandler(this.DtFechaInicio_KeyUp);
             // 
             // label12
             // 
@@ -285,7 +298,7 @@
             this.label10.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label10.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
             this.label10.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label10.Location = new System.Drawing.Point(13, 269);
+            this.label10.Location = new System.Drawing.Point(9, 267);
             this.label10.Name = "label10";
             this.label10.Padding = new System.Windows.Forms.Padding(10);
             this.label10.Size = new System.Drawing.Size(206, 38);
@@ -336,18 +349,19 @@
             this.DgvItemsPaquete.Size = new System.Drawing.Size(937, 136);
             this.DgvItemsPaquete.TabIndex = 212;
             // 
-            // textBox1
+            // TxtPagoInicial
             // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.textBox1.Location = new System.Drawing.Point(12, 476);
-            this.textBox1.MaxLength = 100;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(285, 31);
-            this.textBox1.TabIndex = 213;
-            this.textBox1.Text = "0";
+            this.TxtPagoInicial.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.TxtPagoInicial.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TxtPagoInicial.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtPagoInicial.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.TxtPagoInicial.Location = new System.Drawing.Point(12, 476);
+            this.TxtPagoInicial.MaxLength = 100;
+            this.TxtPagoInicial.Name = "TxtPagoInicial";
+            this.TxtPagoInicial.ReadOnly = true;
+            this.TxtPagoInicial.Size = new System.Drawing.Size(285, 31);
+            this.TxtPagoInicial.TabIndex = 213;
+            this.TxtPagoInicial.Text = "0";
             // 
             // label5
             // 
@@ -360,18 +374,19 @@
             this.label5.TabIndex = 214;
             this.label5.Text = "TOTAL PAGO INICIAL DE RESERVA";
             // 
-            // textBox3
+            // TxtRestante
             // 
-            this.textBox3.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox3.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.textBox3.Location = new System.Drawing.Point(12, 586);
-            this.textBox3.MaxLength = 100;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(285, 31);
-            this.textBox3.TabIndex = 217;
-            this.textBox3.Text = "0";
+            this.TxtRestante.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.TxtRestante.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TxtRestante.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtRestante.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.TxtRestante.Location = new System.Drawing.Point(12, 586);
+            this.TxtRestante.MaxLength = 100;
+            this.TxtRestante.Name = "TxtRestante";
+            this.TxtRestante.ReadOnly = true;
+            this.TxtRestante.Size = new System.Drawing.Size(285, 31);
+            this.TxtRestante.TabIndex = 217;
+            this.TxtRestante.Text = "0";
             // 
             // label6
             // 
@@ -383,6 +398,53 @@
             this.label6.Size = new System.Drawing.Size(75, 18);
             this.label6.TabIndex = 218;
             this.label6.Text = "RESTANTE";
+            // 
+            // TxtDiasReservados
+            // 
+            this.TxtDiasReservados.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.TxtDiasReservados.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TxtDiasReservados.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtDiasReservados.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.TxtDiasReservados.Location = new System.Drawing.Point(352, 168);
+            this.TxtDiasReservados.MaxLength = 100;
+            this.TxtDiasReservados.Name = "TxtDiasReservados";
+            this.TxtDiasReservados.Size = new System.Drawing.Size(285, 31);
+            this.TxtDiasReservados.TabIndex = 227;
+            this.TxtDiasReservados.Text = "0";
+            this.TxtDiasReservados.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtDiasReservados_KeyPress);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label8.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label8.Location = new System.Drawing.Point(17, 233);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(248, 18);
+            this.label8.TabIndex = 228;
+            this.label8.Text = "TOTAL PAGO INICIAL DE RESERVA";
+            // 
+            // textBox3
+            // 
+            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox3.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.textBox3.Location = new System.Drawing.Point(669, -75);
+            this.textBox3.MaxLength = 100;
+            this.textBox3.Multiline = true;
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(251, 57);
+            this.textBox3.TabIndex = 229;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label9.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label9.Location = new System.Drawing.Point(349, 142);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(212, 18);
+            this.label9.TabIndex = 228;
+            this.label9.Text = "TOTAL DE DÍAS RESERVADOS";
             // 
             // especialButton3
             // 
@@ -468,6 +530,7 @@
             this.BtnRemover.Text = "REMOVER";
             this.BtnRemover.TextGroundColor = System.Drawing.Color.White;
             this.BtnRemover.UseVisualStyleBackColor = false;
+            this.BtnRemover.Click += new System.EventHandler(this.BtnRemover_Click);
             // 
             // BtnGuardarReservacion
             // 
@@ -563,18 +626,18 @@
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(955, 623);
             this.Controls.Add(this.especialButton3);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.TxtRestante);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.especialButton2);
             this.Controls.Add(this.especialButton1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.TxtPagoInicial);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.DgvItemsPaquete);
             this.Controls.Add(this.BtnRemover);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.PnlInicial);
             this.Controls.Add(this.BtnGuardarReservacion);
-            this.Controls.Add(this.textBox7);
+            this.Controls.Add(this.TxtTotalPago);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.BtnAgregarHabitacion);
             this.Controls.Add(this.BtnCliente);
@@ -586,8 +649,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Agregar Reservación";
             this.Load += new System.EventHandler(this.PnlAgregarReservacion_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.PnlInicial.ResumeLayout(false);
+            this.PnlInicial.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvItemsPaquete)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -606,10 +669,10 @@
         public System.Windows.Forms.Label label3;
         private Especiales.EspecialButton BtnCliente;
         private Especiales.EspecialButton BtnAgregarHabitacion;
-        public System.Windows.Forms.TextBox textBox7;
+        public System.Windows.Forms.TextBox TxtTotalPago;
         public System.Windows.Forms.Label label11;
         private Especiales.EspecialButton BtnGuardarReservacion;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel PnlInicial;
         public System.Windows.Forms.Label label10;
         private Especiales.EspecialButton BtnRemover;
         public System.Windows.Forms.TextBox TxtCantidadPersonas;
@@ -621,12 +684,16 @@
         public System.Windows.Forms.TextBox textBox2;
         public System.Windows.Forms.Label label16;
         public System.Windows.Forms.DataGridView DgvItemsPaquete;
-        public System.Windows.Forms.TextBox textBox1;
+        public System.Windows.Forms.TextBox TxtPagoInicial;
         public System.Windows.Forms.Label label5;
         private Especiales.EspecialButton especialButton1;
         private Especiales.EspecialButton especialButton2;
         private Especiales.EspecialButton especialButton3;
-        public System.Windows.Forms.TextBox textBox3;
+        public System.Windows.Forms.TextBox TxtRestante;
         public System.Windows.Forms.Label label6;
+        public System.Windows.Forms.TextBox TxtDiasReservados;
+        public System.Windows.Forms.Label label9;
+        public System.Windows.Forms.Label label8;
+        public System.Windows.Forms.TextBox textBox3;
     }
 }

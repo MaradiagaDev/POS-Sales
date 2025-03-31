@@ -587,6 +587,18 @@ namespace NeoCobranza.ViewModels
                 }
             }
 
+            //ADICIONES
+            dataUtilities.SetParameter("@ProductoId", idProd);
+            DataTable dtResponseAdiciones = dataUtilities.ExecuteStoredProcedure("spConsultarAdicionesProducto");
+
+            if (dtResponseAdiciones.Rows.Count > 0)
+            {
+                PnlAdicionesVentas frmAdiciones = new PnlAdicionesVentas(idProd, "");
+                frmAdiciones.ShowDialog();
+            }
+
+            //FIN ADICIONES
+
             auxSubModulo = Convert.ToString(itemProductoAux["ClasificacionProducto"]);
 
             if (auxSubModulo == "Productos")

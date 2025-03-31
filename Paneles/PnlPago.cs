@@ -813,6 +813,14 @@ namespace NeoCobranza.Paneles
                 yPosition += sizeRucCliente.Height;
             }
 
+            if (Convert.ToString(dtResponseOrden.Rows[0]["NoRuc"]).Trim().Length > 0)
+            {
+                SizeF sizeRucCliente = e.Graphics.MeasureString(rucCliente, regularFont, (int)availableWidth);
+                RectangleF rucClienteRect = new RectangleF(marginLeft, yPosition, availableWidth, sizeRucCliente.Height);
+                e.Graphics.DrawString(rucCliente, regularFont, Brushes.Black, rucClienteRect);
+                yPosition += sizeRucCliente.Height;
+            }
+
             string cedulaCliente = "Cédula: " + Convert.ToString(dtResponseOrden.Rows[0]["Cedula"]);
 
             if (Convert.ToString(dtResponseOrden.Rows[0]["ClienteId"]) != "0" )
@@ -1166,6 +1174,14 @@ namespace NeoCobranza.Paneles
             string rucCliente = "RUC: "+Convert.ToString(dtResponseOrden.Rows[0]["NoRuc"]);
 
             if (Convert.ToDecimal(dtResponseOrden.Rows[0]["RetencionDgi"]) != 0 || Convert.ToDecimal(dtResponseOrden.Rows[0]["RetencionAlcaldia"]) != 0)
+            {
+                SizeF sizeRucCliente = e.Graphics.MeasureString(rucCliente, regularFont, (int)availableWidth);
+                RectangleF rucClienteRect = new RectangleF(marginLeft, yPosition, availableWidth, sizeRucCliente.Height);
+                e.Graphics.DrawString(rucCliente, regularFont, Brushes.Black, rucClienteRect);
+                yPosition += sizeRucCliente.Height;
+            }
+
+            if(Convert.ToString(dtResponseOrden.Rows[0]["NoRuc"]).Trim().Length > 0)
             {
                 SizeF sizeRucCliente = e.Graphics.MeasureString(rucCliente, regularFont, (int)availableWidth);
                 RectangleF rucClienteRect = new RectangleF(marginLeft, yPosition, availableWidth, sizeRucCliente.Height);

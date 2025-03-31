@@ -43,10 +43,17 @@ namespace NeoCobranza.ViewModels
                 case "Productos":
                     frm.TbTitulo.Text = "Catalogo de Productos";
                     frm.btnAgregar.Text = "Agregar Producto";
+                    frm.dgvCatalogo.Visible = false;
                     break;
                 case "Servicios":
                     frm.TbTitulo.Text = "Catalogo de Servicios";
                     frm.btnAgregar.Text = "Agregar Servicio";
+                    frm.dgvCatalogo.Visible = false;
+                    break;
+                case "Adiciones":
+                    frm.TbTitulo.Text = "Catalogo de Adiciones";
+                    frm.btnAgregar.Text = "Agregar Adiciones";
+                    frm.flowLayoutPanelProductos.Visible = false;
                     break;
             }
 
@@ -68,7 +75,7 @@ namespace NeoCobranza.ViewModels
                         BtnCambioEstado.Name = "...";
                         BtnCambioEstado.UseColumnTextForButtonValue = true;
                         BtnCambioEstado.DefaultCellStyle.ForeColor = Color.Blue;
-                        //frm/*.dgvCatalogo.Columns.Add(BtnCambioEstado);*/
+                        frm.dgvCatalogo.Columns.Add(BtnCambioEstado);
 
                         // Definir las columnas
                         dynamicDataTable.Columns.Add("Id", typeof(string));
@@ -103,6 +110,35 @@ namespace NeoCobranza.ViewModels
                         dynamicDataTable.Columns.Add("Img", typeof(byte[]));
                         dynamicDataTable.Columns.Add("Desc", typeof(string));
                     }
+                    break; 
+
+                case "Adiciones":
+                    if (dynamicDataTable.Columns.Count == 0)
+                    {
+
+                        //Agregar Boton de Cambiar de estado
+                        DataGridViewButtonColumn BtnCambioEstado = new DataGridViewButtonColumn();
+
+                        BtnCambioEstado.Text = "Cambiar Estado";
+                        BtnCambioEstado.Name = "...";
+                        BtnCambioEstado.UseColumnTextForButtonValue = true;
+                        BtnCambioEstado.DefaultCellStyle.ForeColor = Color.Blue;
+                        frm.dgvCatalogo.Columns.Add(BtnCambioEstado);
+
+                        DataGridViewButtonColumn BtnModificar = new DataGridViewButtonColumn();
+
+                        BtnModificar.Text = "Modificar";
+                        BtnModificar.Name = "...";
+                        BtnModificar.UseColumnTextForButtonValue = true;
+                        BtnModificar.DefaultCellStyle.ForeColor = Color.Blue;
+                        frm.dgvCatalogo.Columns.Add(BtnModificar);
+
+                        // Definir las columnas
+                        dynamicDataTable.Columns.Add("Id", typeof(string));
+                        dynamicDataTable.Columns.Add("Nombre Adicioín", typeof(string));
+                        dynamicDataTable.Columns.Add("Estado", typeof(string));
+                        dynamicDataTable.Columns.Add("Precio", typeof(string));
+                    }
                     break;
             }
 
@@ -124,49 +160,96 @@ namespace NeoCobranza.ViewModels
 
             if (opc == "Buscar")
             {
-                // Validar y obtener el número de página actual.
-                int pageNumber = 1;
-                if (!int.TryParse(auxFrm.TxtPaginaNo.Text, out pageNumber))
+                if(auxOpc != "Adiciones")
                 {
-                    pageNumber = 1;
-                    auxFrm.TxtPaginaNo.Text = "1";
+                    // Validar y obtener el número de página actual.
+                    int pageNumber = 1;
+                    if (!int.TryParse(auxFrm.TxtPaginaNo.Text, out pageNumber))
+                    {
+                        pageNumber = 1;
+                        auxFrm.TxtPaginaNo.Text = "1";
+                    }
+
+                    // Definir el tamaño de página (en este ejemplo se usan 20 registros por página)
+                    int pageSize = 20;
+
+                    dynamicDataTable.Rows.Clear();
+
+                    // Limpiar parámetros previos y configurar los nuevos para la búsqueda de productos con paginación.
+                    dataUtilities.ClearParameters();
+                    dataUtilities.SetParameter("@Tipo", auxOpc);
+                    dataUtilities.SetParameter("@Filtro", auxFrm.TxtFiltrar.Text);
+                    dataUtilities.SetParameter("@PageNumber", pageNumber);
+                    dataUtilities.SetParameter("@PageSize", pageSize);
+                    // Configurar el parámetro de salida para el total de registros.
+                    dataUtilities.SetParameter("@TotalRecords", System.Data.SqlDbType.Int, direction: System.Data.ParameterDirection.Output);
+
+                    DataTable dtResponse = dataUtilities.ExecuteStoredProcedure("sp_ObtenerProductosServicios");
+
+                    foreach (DataRow row in dtResponse.Rows)
+                    {
+                        DataTable dtResponseCategoria = dataUtilities.getRecordByPrimaryKey("Categorizacion", Convert.ToString(row["CategoriaId"]));
+
+                        dynamicDataTable.Rows.Add(Convert.ToString(row["ProductoId"]),
+                            Convert.ToString(row["NombreProducto"]),
+                            Convert.ToString(row["Estado"]),
+                            Convert.ToString(row["Precio"]),
+                            Convert.ToString(dtResponseCategoria.Rows[0]["Descripcion"]), row["Img"],
+                            Convert.ToString(row["Descripcion"]));
+                    }
+
+                    // Recuperar el total de registros desde el parámetro de salida y actualizar el control de total de páginas.
+                    int totalRecordsServicios = Convert.ToInt32(dataUtilities.GetParameterValue("@TotalRecords"));
+                    int totalPagesServicios = (int)Math.Ceiling((double)totalRecordsServicios / pageSize);
+                    auxFrm.TxtPaginaDe.Text = totalPagesServicios.ToString();
+                    dataUtilities.ClearOutPutParameters();
+
+                    MostrarProductosEnTarjetas();
                 }
-
-                // Definir el tamaño de página (en este ejemplo se usan 20 registros por página)
-                int pageSize = 20;
-
-                dynamicDataTable.Rows.Clear();
-
-                // Limpiar parámetros previos y configurar los nuevos para la búsqueda de productos con paginación.
-                dataUtilities.ClearParameters();
-                dataUtilities.SetParameter("@Tipo", auxOpc);
-                dataUtilities.SetParameter("@Filtro", auxFrm.TxtFiltrar.Text);
-                dataUtilities.SetParameter("@PageNumber", pageNumber);
-                dataUtilities.SetParameter("@PageSize", pageSize);
-                // Configurar el parámetro de salida para el total de registros.
-                dataUtilities.SetParameter("@TotalRecords", System.Data.SqlDbType.Int, direction: System.Data.ParameterDirection.Output);
-
-                DataTable dtResponse = dataUtilities.ExecuteStoredProcedure("sp_ObtenerProductosServicios");
-
-                foreach (DataRow row in dtResponse.Rows)
+                else
                 {
-                    DataTable dtResponseCategoria = dataUtilities.getRecordByPrimaryKey("Categorizacion", Convert.ToString(row["CategoriaId"]));
+                    // Validar y obtener el número de página actual.
+                    int pageNumber = 1;
+                    if (!int.TryParse(auxFrm.TxtPaginaNo.Text, out pageNumber))
+                    {
+                        pageNumber = 1;
+                        auxFrm.TxtPaginaNo.Text = "1";
+                    }
 
-                    dynamicDataTable.Rows.Add(Convert.ToString(row["ProductoId"]),
-                        Convert.ToString(row["NombreProducto"]),
-                        Convert.ToString(row["Estado"]),
-                        Convert.ToString(row["Precio"]),
-                        Convert.ToString(dtResponseCategoria.Rows[0]["Descripcion"]), row["Img"],
-                        Convert.ToString(row["Descripcion"]));
+                    // Definir el tamaño de página (en este ejemplo se usan 20 registros por página)
+                    int pageSize = 20;
+
+                    dynamicDataTable.Rows.Clear();
+
+                    // Limpiar parámetros previos y configurar los nuevos para la búsqueda de productos con paginación.
+                    dataUtilities.ClearParameters();
+                    dataUtilities.SetParameter("@Tipo", auxOpc);
+                    dataUtilities.SetParameter("@Filtro", auxFrm.TxtFiltrar.Text);
+                    dataUtilities.SetParameter("@PageNumber", pageNumber);
+                    dataUtilities.SetParameter("@PageSize", pageSize);
+                    // Configurar el parámetro de salida para el total de registros.
+                    dataUtilities.SetParameter("@TotalRecords", System.Data.SqlDbType.Int, direction: System.Data.ParameterDirection.Output);
+
+                    DataTable dtResponse = dataUtilities.ExecuteStoredProcedure("sp_ObtenerProductosServicios");
+
+                    foreach (DataRow row in dtResponse.Rows)
+                    {
+                        DataTable dtResponseCategoria = dataUtilities.getRecordByPrimaryKey("Categorizacion", Convert.ToString(row["CategoriaId"]));
+
+                        dynamicDataTable.Rows.Add(Convert.ToString(row["ProductoId"]),
+                            Convert.ToString(row["NombreProducto"]),
+                            Convert.ToString(row["Estado"]),
+                            Convert.ToString(row["Precio"]));
+                    }
+
+                    // Recuperar el total de registros desde el parámetro de salida y actualizar el control de total de páginas.
+                    int totalRecordsServicios = Convert.ToInt32(dataUtilities.GetParameterValue("@TotalRecords"));
+                    int totalPagesServicios = (int)Math.Ceiling((double)totalRecordsServicios / pageSize);
+                    auxFrm.TxtPaginaDe.Text = totalPagesServicios.ToString();
+                    dataUtilities.ClearOutPutParameters();
+
+                    frm.dgvCatalogo.DataSource = dynamicDataTable;
                 }
-
-                // Recuperar el total de registros desde el parámetro de salida y actualizar el control de total de páginas.
-                int totalRecordsServicios = Convert.ToInt32(dataUtilities.GetParameterValue("@TotalRecords"));
-                int totalPagesServicios = (int)Math.Ceiling((double)totalRecordsServicios / pageSize);
-                auxFrm.TxtPaginaDe.Text = totalPagesServicios.ToString();
-                dataUtilities.ClearOutPutParameters();
-
-                MostrarProductosEnTarjetas();
             }
         }
 

@@ -50,21 +50,7 @@ namespace NeoCobranza.Paneles
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
-            //if (dgvCatalogo.SelectedRows.Count > 0)
-            //{
-            //    DataGridViewRow selectedRow = dgvCatalogo.SelectedRows[0];
-            //    object cellValue = selectedRow.Cells[1].Value;
-
-            //    if (cellValue != null)
-            //    {
-            //        PnlAgregarProductos frm = new PnlAgregarProductos(this, "Modificar", auxModulo, cellValue.ToString());
-            //        frm.ShowDialog();
-            //    }
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Debe seleccionar un Almacén.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //}
+         
         }
 
         private void dgvCatalogo_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -89,7 +75,7 @@ namespace NeoCobranza.Paneles
             UIUtilities.ConfigurarBotonBuscar(BtnBuscarCliente);
             UIUtilities.ConfigurarTextBoxBuscar(TxtFiltrar);
             UIUtilities.ConfigurarBotonCrear(btnAgregar);
-
+            UIUtilities.PersonalizarDataGridView(dgvCatalogo);
             UIUtilities.ConfigurarTituloPantalla(TbTitulo, PnlTitulo);
         }
 
@@ -132,6 +118,34 @@ namespace NeoCobranza.Paneles
         private void flowLayoutPanelProductos_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void dgvCatalogo_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                object cellValue = dgvCatalogo.Rows[e.RowIndex].Cells[2].Value;
+                vMCatalogosInventario.auxId = cellValue.ToString();
+                vMCatalogosInventario.FuncionesPrincipales(this, "Bloquear");
+            }
+            if (e.ColumnIndex == 1)
+            {
+                if (dgvCatalogo.SelectedRows.Count > 0)
+                {
+                    DataGridViewRow selectedRow = dgvCatalogo.SelectedRows[0];
+                    object cellValue = selectedRow.Cells[2].Value;
+
+                    if (cellValue != null)
+                    {
+                        PnlAgregarProductos frm = new PnlAgregarProductos(this, "Modificar", auxModulo, cellValue.ToString());
+                        frm.ShowDialog();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Debe seleccionar un Almacén.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
         }
     }
 }

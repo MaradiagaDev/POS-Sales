@@ -42,7 +42,31 @@ namespace NeoCobranza.Paneles
                 string sucursalId = item.sucursalId;
                 string restante = item.restante;
 
-                decTotal += Convert.ToDecimal(restante);
+                DataRow itemOrden = dataUtilities.getRecordByPrimaryKey("Ordenes", numeroOrden).Rows[0];
+
+                if (Convert.ToString(itemOrden["NoFactura"]) == "0")
+                {
+                    DataTable dtConfigFacturacion = dataUtilities.getRecordByColumn("ConfigFacturacion", "SucursalId", Utilidades.SucursalId);
+
+                    decimal NoFactura = Convert.ToDecimal(dtConfigFacturacion.Rows[0]["ConsecutivoFacturaCredito"]) + 1;
+
+                    dataUtilities.SetColumns("ConsecutivoFacturaCredito", NoFactura);
+
+                    dataUtilities.UpdateRecordByPrimaryKey(
+                        "ConfigFacturacion",
+                        Convert.ToString(dtConfigFacturacion.Rows[0]["ConfigFacturacionId"]));
+
+                    //Actualizar en la orden
+
+                    dataUtilities.SetParameter("@IdOrden", numeroOrden);
+                    dataUtilities.SetParameter("@IdSucursal", Utilidades.SucursalId);
+                    dataUtilities.SetParameter("@Factura", NoFactura);
+                    dataUtilities.SetParameter("@serie", Convert.ToString(dtConfigFacturacion.Rows[0]["SerieCredito"]));
+
+                    dataUtilities.ExecuteStoredProcedure("spActualizarFacturaOrden");
+                }
+
+                    decTotal += Convert.ToDecimal(restante);
 
                 dataUtilities.SetParameter("@OrdenId", numeroOrden);
                 dataUtilities.SetParameter("@FormaPago", formaPago);

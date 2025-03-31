@@ -162,6 +162,134 @@ namespace NeoCobranza.ViewModels
                         worksheetPagos.Row(2).Delete();
                     }
 
+                    //OTROS INGRESOS
+                    var worksheetOtrosIngresos = workbook.Worksheet("Otros Ingresos");
+                    var tableOtrosIngreso = worksheetOtrosIngresos.Table(0); // Obtén la tabla en el índice 1
+
+                    dataUtilities.SetParameter("@FechaInicio", FechaInit);
+                    dataUtilities.SetParameter("@FechaFin", FechaFin);
+                    dataUtilities.SetParameter("@EsIngreso", true);
+
+                    DataTable dataResponseOtrosIngresos = dataUtilities.ExecuteStoredProcedure("sp_ObtenerPagosPorFecha");
+
+                    bool Ingresos = false;
+
+                    foreach (DataRow item in dataResponseOtrosIngresos.Rows)
+                    {
+                        Ingresos = true;
+                        var newRow = tableOtrosIngreso.DataRange.InsertRowsBelow(1).First();
+
+                        newRow.Field("Fecha").SetValue(Convert.ToString(item["FechaPago"]));
+                        newRow.Field("Total").SetValue(Convert.ToDecimal(item["Pagado"]));
+                        newRow.Field("Referencia").SetValue(Convert.ToString(item["Referencia"]));
+                    }
+
+                    if (Ingresos)
+                    {
+                        worksheetOtrosIngresos.Row(2).Delete();
+                    }
+
+                    //OTROS GASTOS
+                    var worksheetOtrosGastos = workbook.Worksheet("Otros Gastos");
+                    var tableOtrosGastos = worksheetOtrosGastos.Table(0); // Obtén la tabla en el índice 1
+
+                    dataUtilities.SetParameter("@FechaInicio", FechaInit);
+                    dataUtilities.SetParameter("@FechaFin", FechaFin);
+                    dataUtilities.SetParameter("@EsIngreso", false);
+
+                    DataTable dataResponseOtrosGastos = dataUtilities.ExecuteStoredProcedure("sp_ObtenerPagosPorFecha");
+
+                    bool Gastos = false;
+
+                    foreach (DataRow item in dataResponseOtrosGastos.Rows)
+                    {
+                        Gastos = true;
+
+                        var newRow = tableOtrosGastos.DataRange.InsertRowsBelow(1).First();
+
+                        newRow.Field("Fecha").SetValue(Convert.ToString(item["FechaPago"]));
+                        newRow.Field("Total").SetValue(Convert.ToDecimal(item["Pagado"]));
+                        newRow.Field("Referencia").SetValue(Convert.ToString(item["Referencia"]));
+                    }
+
+                    if (Gastos)
+                    {
+                        worksheetOtrosGastos.Row(2).Delete();
+                    }
+
+                    //COMPRAS
+                    var worksheetCompras = workbook.Worksheet("Compras");
+                    var tableCompras = worksheetCompras.Table(0); // Obtén la tabla en el índice 1
+
+                    dataUtilities.SetParameter("@FechaInicio", FechaInit);
+                    dataUtilities.SetParameter("@FechaFin", FechaFin);
+
+                    DataTable dataResponseCompras = dataUtilities.ExecuteStoredProcedure("sp_ObtenerComprasPorFecha");
+
+                    bool Compras = false;
+
+                    foreach (DataRow item in dataResponseCompras.Rows)
+                    {
+                        Compras = true;
+
+                        var newRow = tableCompras.DataRange.InsertRowsBelow(1).First();
+
+                        newRow.Field("Clave").SetValue(Convert.ToString(item["CompraId"]));
+                        newRow.Field("Fecha").SetValue(Convert.ToString(item["FechaCompra"]));
+
+                        // Si no se puede convertir a decimal, asigna 0
+                        newRow.Field("Total C$").SetValue(decimal.TryParse(item["TotalCompra"]?.ToString(), out decimal totalCompra) ? totalCompra : 0);
+
+                        newRow.Field("Descripción").SetValue(Convert.ToString(item["Descripcion"]));
+                        newRow.Field("Almacén").SetValue(Convert.ToString(item["Almacen"]));
+                        newRow.Field("Usuario").SetValue(Convert.ToString(item["Usuario"]));
+                    }
+
+
+                    if (Compras)
+                    {
+                        worksheetCompras.Row(2).Delete();
+                    }
+
+                    //DETALLES DE COMPRAS
+                    var worksheetDetallesCompras = workbook.Worksheet("Detalle Compras");
+                    var tableDetallesCompras = worksheetDetallesCompras.Table(0); // Obtén la tabla en el índice 1
+
+                    dataUtilities.SetParameter("@FechaInicio", FechaInit);
+                    dataUtilities.SetParameter("@FechaFin", FechaFin);
+
+                    DataTable dataResponseDetalleCompras = dataUtilities.ExecuteStoredProcedure("sp_ObtenerDetalleComprasPorFecha");
+
+                    bool DetalleCompras = false;
+
+                    foreach (DataRow item in dataResponseDetalleCompras.Rows)
+                    {
+                        DetalleCompras = true;
+
+                        var newRow = tableDetallesCompras.DataRange.InsertRowsBelow(1).First();
+
+                        newRow.Field("Clave").SetValue(Convert.ToString(item["CompraId"]));
+                        newRow.Field("Producto").SetValue(Convert.ToString(item["NombreProducto"]));
+                        newRow.Field("Cantidad").SetValue(Convert.ToDecimal(item["Cantidad"]));
+                        newRow.Field("Costo Unitario").SetValue(Convert.ToDecimal(item["CostoU"]));
+                        newRow.Field("SubTotal").SetValue(Convert.ToDecimal(item["SubTotal"]));
+                    }
+
+                    if (DetalleCompras)
+                    {
+                        worksheetDetallesCompras.Row(2).Delete();
+                    }
+
+                    //Datos Finales
+                    var worksheetDetallesFinales = workbook.Worksheet("Presentación - Totales");
+
+                    DataRow itemEmpresa = dataUtilities.GetAllRecords("Empresa").Rows[0];
+
+                    worksheetDetallesFinales.Cell("C1").Value = Convert.ToString(itemEmpresa["NombreEmpresa"]);
+                    worksheetDetallesFinales.Cell("B2").Value = Utilidades.Sucursal;
+                    worksheetDetallesFinales.Cell("F2").Value = FechaInit.ToShortDateString();
+                    worksheetDetallesFinales.Cell("H2").Value = FechaFin.ToShortDateString();
+
                     // Guardar el archivo
                     workbook.SaveAs(tempFilePath);
 
@@ -703,17 +831,27 @@ namespace NeoCobranza.ViewModels
                         var newRow = table.DataRange.InsertRowsBelow(1).First();
 
                         newRow.Field("PRODUCTO").SetValue(Convert.ToString(item["NombreProducto"]));
-                        newRow.Field("CANTVENDIDA").SetValue(Convert.ToDecimal(item["CantidadVendida"]));
-                        newRow.Field("CANTCOMPRADA").SetValue(Convert.ToDecimal(item["CantidadComprada"]));
-                        newRow.Field("COSTOTOTAL").SetValue(Convert.ToDecimal(item["CostoTotal"]));
-                        newRow.Field("GANANCIATOTAL").SetValue(Convert.ToDecimal(item["IngresoTotal"]));
-                        newRow.Field("GANANCIANETA").SetValue(Convert.ToDecimal(item["GananciaNeta"]));
+                        newRow.Field("Unidades Vendidas").SetValue(Convert.ToDecimal(item["CantidadVendida"]));
+                        newRow.Field("Unidades Compradas").SetValue(Convert.ToDecimal(item["CantidadComprada"]));
+                        newRow.Field("Costo Total").SetValue(Convert.ToDecimal(item["CostoTotal"]));
+                        newRow.Field("Monto de Venta").SetValue(Convert.ToDecimal(item["IngresoTotal"]));
+                        newRow.Field("GANANCIA NETA").SetValue(Convert.ToDecimal(item["GananciaNeta"]));
                         
                     }
                     if (worksheet.RowsUsed().Count() > 1)
                     {
                         worksheet.Row(2).Delete();
                     }
+
+                    //Datos Finales
+                    var worksheetDetallesFinales = workbook.Worksheet("Datos");
+
+                    DataRow itemEmpresa = dataUtilities.GetAllRecords("Empresa").Rows[0];
+
+                    worksheetDetallesFinales.Cell("C1").Value = Convert.ToString(itemEmpresa["NombreEmpresa"]);
+                    worksheetDetallesFinales.Cell("B2").Value = Utilidades.Sucursal;
+                    worksheetDetallesFinales.Cell("F2").Value = FechaInit.ToShortDateString();
+                    worksheetDetallesFinales.Cell("H2").Value = FechaFin.ToShortDateString();
 
                     // Guardar el archivo
                     workbook.SaveAs(tempFilePath);

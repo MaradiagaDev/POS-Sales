@@ -558,6 +558,25 @@ namespace NeoCobranza.Paneles
                         dgvGeneral.DataSource = dataUtilities.ExecuteStoredProcedure("vwCierresCajaGastos");
                     }
 
+                    //GENERAR RESPALDOS
+                    DataTable dtResponse = dataUtilities.getRecordByColumn("ConfigFacturacion", "SucursalId", Utilidades.SucursalId);
+
+                    if (dtResponse.Rows.Count != 0)
+                    {
+                        string direccionRespaldo = dtResponse.Rows[0]["DireccionRespaldo"] is DBNull
+                ? ""
+                : Convert.ToString(dtResponse.Rows[0]["DireccionRespaldo"]);
+
+                        bool respaldoCaja = dtResponse.Rows[0]["BitRespaldoCaja"] is DBNull
+                      ? false
+                      : Convert.ToBoolean(dtResponse.Rows[0]["BitRespaldoCaja"]);
+
+                        if (respaldoCaja && direccionRespaldo.Trim().Length > 0)
+                        {
+                            dataUtilities.GenerarBackup(direccionRespaldo);
+                        }
+                    }
+
                     // Para cada TextBox de córdobas
                     Txt1000.Text = string.Empty;
                     Txt500.Text = string.Empty;
@@ -624,6 +643,26 @@ namespace NeoCobranza.Paneles
                     dataUtilities.SetParameter("@bitIngreso", true);
                     dgvGeneral.DataSource = dataUtilities.ExecuteStoredProcedure("vwCierresCajaGastos");
                 }
+
+                //GENERAR RESPALDOS
+                DataTable dtResponse = dataUtilities.getRecordByColumn("ConfigFacturacion", "SucursalId", Utilidades.SucursalId);
+
+                if (dtResponse.Rows.Count != 0)
+                {
+                    string direccionRespaldo = dtResponse.Rows[0]["DireccionRespaldo"] is DBNull
+            ? ""
+            : Convert.ToString(dtResponse.Rows[0]["DireccionRespaldo"]);
+
+                    bool respaldoCaja = dtResponse.Rows[0]["BitRespaldoCaja"] is DBNull
+                  ? false
+                  : Convert.ToBoolean(dtResponse.Rows[0]["BitRespaldoCaja"]);
+
+                    if (respaldoCaja && direccionRespaldo.Trim().Length > 0)
+                    {
+                        dataUtilities.GenerarBackup(direccionRespaldo);
+                    }
+                }
+
 
                 // Para cada TextBox de córdobas
                 Txt1000.Text = string.Empty;

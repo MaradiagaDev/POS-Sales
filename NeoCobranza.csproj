@@ -31,7 +31,7 @@
     <UpdateUrl>\\192.168.1.68\versionesneocobranza\Actualizaciones\</UpdateUrl>
     <MinimumRequiredVersion>1.0.0.15</MinimumRequiredVersion>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>67</ApplicationRevision>
+    <ApplicationRevision>71</ApplicationRevision>
     <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -678,6 +678,12 @@
     <Compile Include="PanelesHoteles\PnlVistaGeneralHabitaciones.Designer.cs">
       <DependentUpon>PnlVistaGeneralHabitaciones.cs</DependentUpon>
     </Compile>
+    <Compile Include="Paneles\PnlAdicionesVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlAdicionesVentas.Designer.cs">
+      <DependentUpon>PnlAdicionesVentas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Paneles\PnlAgendaCambioUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -701,6 +707,12 @@
     </Compile>
     <Compile Include="Paneles\PnlAsistencia.Designer.cs">
       <DependentUpon>PnlAsistencia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlCatalogoAdiciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlCatalogoAdiciones.Designer.cs">
+      <DependentUpon>PnlCatalogoAdiciones.cs</DependentUpon>
     </Compile>
     <Compile Include="Paneles\PnlCierreCuadreCaja.cs">
       <SubType>Form</SubType>
@@ -767,6 +779,12 @@
     </Compile>
     <Compile Include="Paneles\PnlPrincipalHoteleria.Designer.cs">
       <DependentUpon>PnlPrincipalHoteleria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlRespaldos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlRespaldos.Designer.cs">
+      <DependentUpon>PnlRespaldos.cs</DependentUpon>
     </Compile>
     <Compile Include="Paneles\PnlSegmentacionAgregar.cs">
       <SubType>Form</SubType>
@@ -1451,6 +1469,9 @@
     <EmbeddedResource Include="PanelesHoteles\PnlSeleccionarHabitaciones.resx">
       <DependentUpon>PnlSeleccionarHabitaciones.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlAdicionesVentas.resx">
+      <DependentUpon>PnlAdicionesVentas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlAgendaCambioUsuario.resx">
       <DependentUpon>PnlAgendaCambioUsuario.cs</DependentUpon>
     </EmbeddedResource>
@@ -1462,6 +1483,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlAsistencia.resx">
       <DependentUpon>PnlAsistencia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlCatalogoAdiciones.resx">
+      <DependentUpon>PnlCatalogoAdiciones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlCierreCuadreCaja.resx">
       <DependentUpon>PnlCierreCuadreCaja.cs</DependentUpon>
@@ -1495,6 +1519,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlPrincipalHoteleria.resx">
       <DependentUpon>PnlPrincipalHoteleria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlRespaldos.resx">
+      <DependentUpon>PnlRespaldos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlSegmentacionAgregar.resx">
       <DependentUpon>PnlSegmentacionAgregar.cs</DependentUpon>

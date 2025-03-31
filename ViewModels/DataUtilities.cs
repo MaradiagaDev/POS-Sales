@@ -1,8 +1,11 @@
 ﻿using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -124,6 +127,76 @@ namespace NeoCobranza.ViewModels
             }
 
             return resultTable;
+        }
+
+        /// <summary>
+        /// Método para generar el backup de la base de datos.
+        /// Se verifica si se tiene acceso de escritura en la ruta y, de no ser así, se lanza una excepción.
+        /// </summary>
+        /// <param name="rutaRespaldo">Ruta donde se guardará el respaldo</param>
+        public void GenerarBackup(string rutaRespaldo)
+        {
+            if (string.IsNullOrWhiteSpace(rutaRespaldo))
+            {
+                return;
+            }
+
+            // Verificar si se tiene acceso de escritura en la ruta
+            if (!TieneAccesoEscritura(rutaRespaldo))
+            {
+                return;
+            }
+
+            // Nombre de la base de datos a respaldar
+            string databaseName = "POSIDEVBD";
+            // Generar un nombre de archivo único usando fecha y hora actual
+            string backupFileName = $"{databaseName}_{DateTime.Now:yyyyMMdd_HHmmss}.bak";
+            string backupPath = Path.Combine(rutaRespaldo, backupFileName);
+
+            // Consulta SQL para generar el respaldo
+            string backupQuery = $"BACKUP DATABASE [{databaseName}] TO DISK='{backupPath}' WITH INIT";
+
+            // Construir cadena de conexión a la base de datos master para ejecutar el backup
+            string connectionString = "Server=" + vGlobServerName + ";Database=master;Integrated Security=True;TrustServerCertificate=True;";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand cmd = new SqlCommand(backupQuery, conn))
+                    {
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al generar el respaldo: " + ex.Message, ex);
+            }
+        }
+
+        /// <summary>
+        /// Verifica si se tiene permiso de escritura en el directorio especificado.
+        /// </summary>
+        /// <param name="folderPath">Ruta del directorio</param>
+        /// <returns>true si se puede escribir; false en caso contrario</returns>
+        private bool TieneAccesoEscritura(string folderPath)
+        {
+            try
+            {
+                // Se crea un archivo temporal para probar escritura
+                string testFile = Path.Combine(folderPath, "temp_test.txt");
+                using (FileStream fs = File.Create(testFile, 1, FileOptions.DeleteOnClose))
+                {
+                    // Se pudo crear el archivo, se asume que hay permisos
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
 

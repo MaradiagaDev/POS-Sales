@@ -91,6 +91,7 @@
             this.BtnGestionSalas = new NeoCobranza.Especiales.EspecialButton();
             this.BtnNotaOrden = new NeoCobranza.Especiales.EspecialButton();
             this.BtnListaOrdenes = new NeoCobranza.Especiales.EspecialButton();
+            this.BtnComanda = new NeoCobranza.Especiales.EspecialButton();
             this.PnlTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvItemsOrden)).BeginInit();
             this.panel1.SuspendLayout();
@@ -765,10 +766,9 @@
             this.BtnImprimirIndividual.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnImprimirIndividual.ForeColor = System.Drawing.Color.White;
             this.BtnImprimirIndividual.Image = ((System.Drawing.Image)(resources.GetObject("BtnImprimirIndividual.Image")));
-            this.BtnImprimirIndividual.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnImprimirIndividual.Location = new System.Drawing.Point(797, 527);
+            this.BtnImprimirIndividual.Location = new System.Drawing.Point(790, 523);
             this.BtnImprimirIndividual.Name = "BtnImprimirIndividual";
-            this.BtnImprimirIndividual.Size = new System.Drawing.Size(38, 34);
+            this.BtnImprimirIndividual.Size = new System.Drawing.Size(45, 42);
             this.BtnImprimirIndividual.TabIndex = 186;
             this.BtnImprimirIndividual.TextGroundColor = System.Drawing.Color.White;
             this.BtnImprimirIndividual.UseVisualStyleBackColor = false;
@@ -941,12 +941,11 @@
             this.BtnActualizarDescuento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnActualizarDescuento.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnActualizarDescuento.ForeColor = System.Drawing.Color.White;
-            this.BtnActualizarDescuento.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnActualizarDescuento.Location = new System.Drawing.Point(650, 529);
+            this.BtnActualizarDescuento.Image = ((System.Drawing.Image)(resources.GetObject("BtnActualizarDescuento.Image")));
+            this.BtnActualizarDescuento.Location = new System.Drawing.Point(646, 522);
             this.BtnActualizarDescuento.Name = "BtnActualizarDescuento";
-            this.BtnActualizarDescuento.Size = new System.Drawing.Size(141, 28);
+            this.BtnActualizarDescuento.Size = new System.Drawing.Size(45, 42);
             this.BtnActualizarDescuento.TabIndex = 169;
-            this.BtnActualizarDescuento.Text = "Actualizar";
             this.BtnActualizarDescuento.TextGroundColor = System.Drawing.Color.White;
             this.BtnActualizarDescuento.UseVisualStyleBackColor = false;
             this.BtnActualizarDescuento.Click += new System.EventHandler(this.especialButton4_Click);
@@ -1065,12 +1064,33 @@
             this.BtnListaOrdenes.UseVisualStyleBackColor = false;
             this.BtnListaOrdenes.Click += new System.EventHandler(this.BtnListaOrdenes_Click);
             // 
+            // BtnComanda
+            // 
+            this.BtnComanda.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnComanda.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.BtnComanda.BackGroundColor = System.Drawing.SystemColors.MenuHighlight;
+            this.BtnComanda.BorderColor = System.Drawing.Color.Transparent;
+            this.BtnComanda.BorderRadius = 0;
+            this.BtnComanda.BorderSize = 0;
+            this.BtnComanda.FlatAppearance.BorderSize = 0;
+            this.BtnComanda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnComanda.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnComanda.ForeColor = System.Drawing.Color.White;
+            this.BtnComanda.Image = ((System.Drawing.Image)(resources.GetObject("BtnComanda.Image")));
+            this.BtnComanda.Location = new System.Drawing.Point(742, 523);
+            this.BtnComanda.Name = "BtnComanda";
+            this.BtnComanda.Size = new System.Drawing.Size(45, 42);
+            this.BtnComanda.TabIndex = 187;
+            this.BtnComanda.TextGroundColor = System.Drawing.Color.White;
+            this.BtnComanda.UseVisualStyleBackColor = false;
+            // 
             // PnlVentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1157, 611);
+            this.Controls.Add(this.BtnComanda);
             this.Controls.Add(this.BtnImprimirIndividual);
             this.Controls.Add(this.BtnDesvincular);
             this.Controls.Add(this.ChkPropina);
@@ -1188,5 +1208,6 @@
         public Especiales.EspecialButton BtnActualizarDescuento;
         private Especiales.EspecialButton BtnImprimirIndividual;
         private Especiales.EspecialButton BtnAddClientes;
+        private Especiales.EspecialButton BtnComanda;
     }
 }

@@ -16,6 +16,7 @@ namespace NeoCobranza.Paneles
     {
         DataUtilities dataUtilities = new DataUtilities();
         private bool boolExiste = false;
+        private string Tasa;
         public TasaCambio()
         {
             InitializeComponent();
@@ -25,6 +26,7 @@ namespace NeoCobranza.Paneles
             if (dtResponse.Rows.Count > 0)
             {
                 boolExiste = true;
+                Tasa = dtResponse.Rows[0][0].ToString();
                 LblTasaActual.Text = $"La tasa de cambio actual es: {Convert.ToString(dtResponse.Rows[0]["Tasa"])} (NIO)";
             }
             else
@@ -97,7 +99,7 @@ namespace NeoCobranza.Paneles
             {
                 dataUtilities.SetColumns("Tasa", TxtTasaCambio.Text.Trim());
                 dataUtilities.SetColumns("FechaCambio", DateTime.Now);
-                dataUtilities.UpdateRecordByPrimaryKey("TasaCambio",1);
+                dataUtilities.UpdateRecordByPrimaryKey("TasaCambio",Tasa);
 
                 LblTasaActual.Text = $"La tasa de cambio actual es: {TxtTasaCambio.Text.Trim()} (NIO)";
 
