@@ -484,11 +484,25 @@ namespace NeoCobranza.Paneles_Venta
                         dataUtilities.SetParameter("@Total", 0);
                         dataUtilities.SetParameter("@Subtotal", 0);
                         dataUtilities.SetParameter("@IVA", 0);
+                        dataUtilities.SetParameter("@HistorialId", SqlDbType.Int, ParameterDirection.Output);
 
                         DataTable dtResponseTotales = dataUtilities.ExecuteStoredProcedure("sp_ManageOrderDetail");
+                        string HistorialId = Convert.ToString(dataUtilities.GetParameterValue("@HistorialId"));
 
                         if (opc == "Increase")
                         {
+                            //ADICIONES
+                            dataUtilities.SetParameter("@ProductoId", idProd);
+                            DataTable dtResponseAdiciones = dataUtilities.ExecuteStoredProcedure("spConsultarAdicionesProducto");
+
+                            if (dtResponseAdiciones.Rows.Count > 0)
+                            {
+                                PnlAdicionesVentas frmAdiciones = new PnlAdicionesVentas(idProd, HistorialId);
+                                frmAdiciones.ShowDialog();
+                            }
+
+                            //FIN ADICIONES
+
                             var informativeMessageBox = new InformativeMessageBox($"Producto Agregado Correctamente a la Orden.",
                                 "Producto Agregado", 3000);
                             informativeMessageBox.Show();
@@ -523,11 +537,25 @@ namespace NeoCobranza.Paneles_Venta
                     dataUtilities.SetParameter("@Total", 0);
                     dataUtilities.SetParameter("@Subtotal", 0);
                     dataUtilities.SetParameter("@IVA", 0);
+                    dataUtilities.SetParameter("@HistorialId", SqlDbType.Int, ParameterDirection.Output);
 
                     DataTable dtResponseTotales = dataUtilities.ExecuteStoredProcedure("sp_ManageOrderDetail");
+                    string HistorialId = Convert.ToString(dataUtilities.GetParameterValue("@HistorialId"));
 
                     if (opc == "Increase")
                     {
+                        //ADICIONES
+                        dataUtilities.SetParameter("@ProductoId", idProd);
+                        DataTable dtResponseAdiciones = dataUtilities.ExecuteStoredProcedure("spConsultarAdicionesProducto");
+
+                        if (dtResponseAdiciones.Rows.Count > 0)
+                        {
+                            PnlAdicionesVentas frmAdiciones = new PnlAdicionesVentas(idProd, HistorialId);
+                            frmAdiciones.ShowDialog();
+                        }
+
+                        //FIN ADICIONES
+
                         var informativeMessageBox = new InformativeMessageBox($"Producto Agregado Correctamente a la Orden.",
                             "Producto Agregado", 3000);
                         informativeMessageBox.Show();
@@ -556,12 +584,25 @@ namespace NeoCobranza.Paneles_Venta
                 }
                 dataUtilities.SetParameter("@Subtotal", 0);
                 dataUtilities.SetParameter("@IVA", 0);
+                dataUtilities.SetParameter("@HistorialId", SqlDbType.Int, ParameterDirection.Output);
 
                 DataTable dtResponseTotales = dataUtilities.ExecuteStoredProcedure("sp_ManageOrderServiceDetail");
-
+                string HistorialId = Convert.ToString(dataUtilities.GetParameterValue("@HistorialId"));
 
                 if (opc == "Increase")
                 {
+                    //ADICIONES
+                    dataUtilities.SetParameter("@ProductoId", idProd);
+                    DataTable dtResponseAdiciones = dataUtilities.ExecuteStoredProcedure("spConsultarAdicionesProducto");
+
+                    if (dtResponseAdiciones.Rows.Count > 0)
+                    {
+                        PnlAdicionesVentas frmAdiciones = new PnlAdicionesVentas(idProd, HistorialId);
+                        frmAdiciones.ShowDialog();
+                    }
+
+                    //FIN ADICIONES
+
                     var informativeMessageBox = new InformativeMessageBox($"Servicio Agregado Correctamente a la Orden.",
                         "Servicio Agregado", 3000);
                     informativeMessageBox.Show();
