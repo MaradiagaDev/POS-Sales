@@ -245,7 +245,7 @@ namespace NeoCobranza.Paneles_Venta
 
                     object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells["Id Producto"].Value;
 
-                    vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), TxtCantidadItems.Text.Trim(), "Disminuir");
+                    vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), TxtCantidadItems.Text.Trim(), "Decrease");
                 }
 
 
@@ -277,7 +277,7 @@ namespace NeoCobranza.Paneles_Venta
                         object cellValue = DgvItemsOrden.Rows[e.RowIndex].Cells["Id Producto"].Value;
                         object cellValueCantidad = DgvItemsOrden.Rows[e.RowIndex].Cells["Cantidad"].Value;
 
-                        vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), cellValueCantidad.ToString(), "Disminuir");
+                        vMOrdenes.AgregarProductosOrden(this, cellValue.ToString(), cellValueCantidad.ToString(), "Decrease");
                     }
                 }
 
@@ -1063,6 +1063,12 @@ namespace NeoCobranza.Paneles_Venta
             string idCliente = vMOrdenes.auxClienteId == "" ? "0" : vMOrdenes.auxClienteId;
             PanelModificarCliente frm = new PanelModificarCliente(null, idCliente, this);
             frm.vMCatalogoCliente.auxKeyUsuario = (vMOrdenes.auxClienteId == "0" || vMOrdenes.auxClienteId == "") ? "Crear" : "Modificar";
+            frm.ShowDialog();
+        }
+
+        private void BtnComanda_Click(object sender, EventArgs e)
+        {
+            PnlComandaVenta frm = new PnlComandaVenta(vMOrdenes.OrdenAux.ToString(), auxSucursal);
             frm.ShowDialog();
         }
     }

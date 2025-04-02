@@ -75,10 +75,11 @@
             this.LblOrdenMesa = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.BtnAddClientes = new NeoCobranza.Especiales.EspecialButton();
             this.ChkPropina = new System.Windows.Forms.CheckBox();
+            this.BtnComanda = new NeoCobranza.Especiales.EspecialButton();
             this.BtnImprimirIndividual = new NeoCobranza.Especiales.EspecialButton();
             this.BtnDesvincular = new NeoCobranza.Especiales.EspecialButton();
+            this.BtnAddClientes = new NeoCobranza.Especiales.EspecialButton();
             this.especialButton3 = new NeoCobranza.Especiales.EspecialButton();
             this.BtnAgregarPro = new NeoCobranza.Especiales.EspecialButton();
             this.BtnCredito = new NeoCobranza.Especiales.EspecialButton();
@@ -91,7 +92,6 @@
             this.BtnGestionSalas = new NeoCobranza.Especiales.EspecialButton();
             this.BtnNotaOrden = new NeoCobranza.Especiales.EspecialButton();
             this.BtnListaOrdenes = new NeoCobranza.Especiales.EspecialButton();
-            this.BtnComanda = new NeoCobranza.Especiales.EspecialButton();
             this.PnlTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvItemsOrden)).BeginInit();
             this.panel1.SuspendLayout();
@@ -718,28 +718,6 @@
             this.panel1.Size = new System.Drawing.Size(713, 206);
             this.panel1.TabIndex = 183;
             // 
-            // BtnAddClientes
-            // 
-            this.BtnAddClientes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnAddClientes.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.BtnAddClientes.BackGroundColor = System.Drawing.SystemColors.MenuHighlight;
-            this.BtnAddClientes.BorderColor = System.Drawing.Color.Transparent;
-            this.BtnAddClientes.BorderRadius = 0;
-            this.BtnAddClientes.BorderSize = 0;
-            this.BtnAddClientes.FlatAppearance.BorderSize = 0;
-            this.BtnAddClientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnAddClientes.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnAddClientes.ForeColor = System.Drawing.Color.White;
-            this.BtnAddClientes.Image = ((System.Drawing.Image)(resources.GetObject("BtnAddClientes.Image")));
-            this.BtnAddClientes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnAddClientes.Location = new System.Drawing.Point(670, 3);
-            this.BtnAddClientes.Name = "BtnAddClientes";
-            this.BtnAddClientes.Size = new System.Drawing.Size(38, 34);
-            this.BtnAddClientes.TabIndex = 187;
-            this.BtnAddClientes.TextGroundColor = System.Drawing.Color.White;
-            this.BtnAddClientes.UseVisualStyleBackColor = false;
-            this.BtnAddClientes.Click += new System.EventHandler(this.BtnAddClientes_Click);
-            // 
             // ChkPropina
             // 
             this.ChkPropina.AutoSize = true;
@@ -752,6 +730,27 @@
             this.ChkPropina.UseVisualStyleBackColor = true;
             this.ChkPropina.CheckedChanged += new System.EventHandler(this.ChkPropina_CheckedChanged);
             this.ChkPropina.Click += new System.EventHandler(this.ChkPropina_Click);
+            // 
+            // BtnComanda
+            // 
+            this.BtnComanda.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnComanda.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.BtnComanda.BackGroundColor = System.Drawing.SystemColors.MenuHighlight;
+            this.BtnComanda.BorderColor = System.Drawing.Color.Transparent;
+            this.BtnComanda.BorderRadius = 0;
+            this.BtnComanda.BorderSize = 0;
+            this.BtnComanda.FlatAppearance.BorderSize = 0;
+            this.BtnComanda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnComanda.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnComanda.ForeColor = System.Drawing.Color.White;
+            this.BtnComanda.Image = ((System.Drawing.Image)(resources.GetObject("BtnComanda.Image")));
+            this.BtnComanda.Location = new System.Drawing.Point(742, 523);
+            this.BtnComanda.Name = "BtnComanda";
+            this.BtnComanda.Size = new System.Drawing.Size(45, 42);
+            this.BtnComanda.TabIndex = 187;
+            this.BtnComanda.TextGroundColor = System.Drawing.Color.White;
+            this.BtnComanda.UseVisualStyleBackColor = false;
+            this.BtnComanda.Click += new System.EventHandler(this.BtnComanda_Click);
             // 
             // BtnImprimirIndividual
             // 
@@ -795,6 +794,28 @@
             this.BtnDesvincular.TextGroundColor = System.Drawing.Color.White;
             this.BtnDesvincular.UseVisualStyleBackColor = false;
             this.BtnDesvincular.Click += new System.EventHandler(this.BtnDesvincular_Click);
+            // 
+            // BtnAddClientes
+            // 
+            this.BtnAddClientes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnAddClientes.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.BtnAddClientes.BackGroundColor = System.Drawing.SystemColors.MenuHighlight;
+            this.BtnAddClientes.BorderColor = System.Drawing.Color.Transparent;
+            this.BtnAddClientes.BorderRadius = 0;
+            this.BtnAddClientes.BorderSize = 0;
+            this.BtnAddClientes.FlatAppearance.BorderSize = 0;
+            this.BtnAddClientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAddClientes.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnAddClientes.ForeColor = System.Drawing.Color.White;
+            this.BtnAddClientes.Image = ((System.Drawing.Image)(resources.GetObject("BtnAddClientes.Image")));
+            this.BtnAddClientes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnAddClientes.Location = new System.Drawing.Point(670, 3);
+            this.BtnAddClientes.Name = "BtnAddClientes";
+            this.BtnAddClientes.Size = new System.Drawing.Size(38, 34);
+            this.BtnAddClientes.TabIndex = 187;
+            this.BtnAddClientes.TextGroundColor = System.Drawing.Color.White;
+            this.BtnAddClientes.UseVisualStyleBackColor = false;
+            this.BtnAddClientes.Click += new System.EventHandler(this.BtnAddClientes_Click);
             // 
             // especialButton3
             // 
@@ -1063,26 +1084,6 @@
             this.BtnListaOrdenes.TextGroundColor = System.Drawing.Color.White;
             this.BtnListaOrdenes.UseVisualStyleBackColor = false;
             this.BtnListaOrdenes.Click += new System.EventHandler(this.BtnListaOrdenes_Click);
-            // 
-            // BtnComanda
-            // 
-            this.BtnComanda.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnComanda.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.BtnComanda.BackGroundColor = System.Drawing.SystemColors.MenuHighlight;
-            this.BtnComanda.BorderColor = System.Drawing.Color.Transparent;
-            this.BtnComanda.BorderRadius = 0;
-            this.BtnComanda.BorderSize = 0;
-            this.BtnComanda.FlatAppearance.BorderSize = 0;
-            this.BtnComanda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnComanda.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnComanda.ForeColor = System.Drawing.Color.White;
-            this.BtnComanda.Image = ((System.Drawing.Image)(resources.GetObject("BtnComanda.Image")));
-            this.BtnComanda.Location = new System.Drawing.Point(742, 523);
-            this.BtnComanda.Name = "BtnComanda";
-            this.BtnComanda.Size = new System.Drawing.Size(45, 42);
-            this.BtnComanda.TabIndex = 187;
-            this.BtnComanda.TextGroundColor = System.Drawing.Color.White;
-            this.BtnComanda.UseVisualStyleBackColor = false;
             // 
             // PnlVentas
             // 

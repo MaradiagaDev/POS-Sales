@@ -3,20 +3,28 @@
   "WorkspaceRootPath": "D:\\Programa Personal\\POS-Sales\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneles_venta\\frmagregarproductosservicios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles_venta\\frmagregarproductosservicios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneles\\pnlcomandaventa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles\\pnlcomandaventa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|D:\\Programa Personal\\POS-Sales\\viewmodels\\vmordenes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:viewmodels\\vmordenes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneles\\pnlimprimeticketsdetalle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles\\pnlimprimeticketsdetalle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneles\\pnlprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles\\pnlprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneles\\pnlimprimeticketsdetalle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles\\pnlimprimeticketsdetalle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneles\\pnlprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles\\pnlprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneles\\pnlcomandaventa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles\\pnlcomandaventa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneles_venta\\pnlventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles_venta\\pnlventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneles_venta\\pnlventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles_venta\\pnlventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,54 +42,78 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "frmAgregarProductosServicios.cs",
-              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles_Venta\\frmAgregarProductosServicios.cs",
-              "RelativeDocumentMoniker": "Paneles_Venta\\frmAgregarProductosServicios.cs",
-              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles_Venta\\frmAgregarProductosServicios.cs",
-              "RelativeToolTip": "Paneles_Venta\\frmAgregarProductosServicios.cs",
-              "ViewState": "AgIAANsBAAAAAAAAAIAwwOgBAABxAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "PnlImprimeTicketsDetalle.cs",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlImprimeTicketsDetalle.cs",
+              "RelativeDocumentMoniker": "Paneles\\PnlImprimeTicketsDetalle.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlImprimeTicketsDetalle.cs",
+              "RelativeToolTip": "Paneles\\PnlImprimeTicketsDetalle.cs",
+              "ViewState": "AgIAAHcAAAAAAAAAAAAUwJcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-01T20:42:56.975Z",
+              "WhenOpened": "2025-04-02T15:03:03.522Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "PnlPrincipal.cs",
-              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlPrincipal.cs",
-              "RelativeDocumentMoniker": "Paneles\\PnlPrincipal.cs",
-              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlPrincipal.cs",
-              "RelativeToolTip": "Paneles\\PnlPrincipal.cs",
-              "ViewState": "AgIAANkDAAAAAAAAAAAowOADAABUAAAAAAAAAA==",
+              "Title": "PnlImprimeTicketsDetalle.cs [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlImprimeTicketsDetalle.cs",
+              "RelativeDocumentMoniker": "Paneles\\PnlImprimeTicketsDetalle.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlImprimeTicketsDetalle.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Paneles\\PnlImprimeTicketsDetalle.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-01T20:42:29.22Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PnlPrincipal.cs [Dise\u00F1o]",
-              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlPrincipal.cs",
-              "RelativeDocumentMoniker": "Paneles\\PnlPrincipal.cs",
-              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlPrincipal.cs [Dise\u00F1o]",
-              "RelativeToolTip": "Paneles\\PnlPrincipal.cs [Dise\u00F1o]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-01T20:42:27.336Z",
+              "WhenOpened": "2025-04-02T17:39:30.31Z",
               "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "VMOrdenes.cs",
-              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\ViewModels\\VMOrdenes.cs",
-              "RelativeDocumentMoniker": "ViewModels\\VMOrdenes.cs",
-              "ToolTip": "D:\\Programa Personal\\POS-Sales\\ViewModels\\VMOrdenes.cs",
-              "RelativeToolTip": "ViewModels\\VMOrdenes.cs",
-              "ViewState": "AgIAAHgCAAAAAAAAAAAowIQCAAAgAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "PnlComandaVenta.cs [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlComandaVenta.cs",
+              "RelativeDocumentMoniker": "Paneles\\PnlComandaVenta.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlComandaVenta.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Paneles\\PnlComandaVenta.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-31T14:03:44.276Z",
+              "WhenOpened": "2025-04-02T17:39:16.154Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PnlComandaVenta.cs",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlComandaVenta.cs",
+              "RelativeDocumentMoniker": "Paneles\\PnlComandaVenta.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlComandaVenta.cs",
+              "RelativeToolTip": "Paneles\\PnlComandaVenta.cs",
+              "ViewState": "AgIAAN0AAAAAAAAAAAAAwPoAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-02T15:03:32.948Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PnlVentas.cs",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles_Venta\\PnlVentas.cs",
+              "RelativeDocumentMoniker": "Paneles_Venta\\PnlVentas.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles_Venta\\PnlVentas.cs",
+              "RelativeToolTip": "Paneles_Venta\\PnlVentas.cs",
+              "ViewState": "AgIAABkEAAAAAAAAAAAtwC8EAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-02T14:17:19.458Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PnlVentas.cs [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles_Venta\\PnlVentas.cs",
+              "RelativeDocumentMoniker": "Paneles_Venta\\PnlVentas.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles_Venta\\PnlVentas.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Paneles_Venta\\PnlVentas.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-02T14:17:06.983Z",
+              "EditorCaption": " [Dise\u00F1o]"
             }
           ]
         }

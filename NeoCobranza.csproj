@@ -720,6 +720,12 @@
     <Compile Include="Paneles\PnlCierreCuadreCaja.Designer.cs">
       <DependentUpon>PnlCierreCuadreCaja.cs</DependentUpon>
     </Compile>
+    <Compile Include="Paneles\PnlComandaVenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlComandaVenta.Designer.cs">
+      <DependentUpon>PnlComandaVenta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Paneles\PnlConfigInventarioInicial.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1489,6 +1495,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlCierreCuadreCaja.resx">
       <DependentUpon>PnlCierreCuadreCaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlComandaVenta.resx">
+      <DependentUpon>PnlComandaVenta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlConfigInventarioInicial.resx">
       <DependentUpon>PnlConfigInventarioInicial.cs</DependentUpon>
