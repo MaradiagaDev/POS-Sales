@@ -135,6 +135,9 @@ namespace NeoCobranza.Paneles
                 case "Ajustes":
                     UtilidadesInformes.CargarInformeAjustes(Convert.ToString(CmbSucursal.SelectedValue), DtInicial.Value, DtFinal.Value);
                     break;
+                case "SoloVentas":
+                    UtilidadesInformes.CargarInformeVentasSolo(Convert.ToString(CmbSucursal.SelectedValue), DtInicial.Value, DtFinal.Value);
+                    break;
             }
 
             this.Close();

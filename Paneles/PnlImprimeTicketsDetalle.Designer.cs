@@ -35,6 +35,8 @@
             this.lblCredito = new System.Windows.Forms.Label();
             this.DgvItemsOrden = new System.Windows.Forms.DataGridView();
             this.BtnImprimir = new NeoCobranza.Especiales.EspecialButton();
+            this.especialButton1 = new NeoCobranza.Especiales.EspecialButton();
+            this.BtnCerrar = new NeoCobranza.Especiales.EspecialButton();
             ((System.ComponentModel.ISupportInitialize)(this.DgvItemsOrden)).BeginInit();
             this.SuspendLayout();
             // 
@@ -118,11 +120,57 @@
             this.BtnImprimir.UseVisualStyleBackColor = false;
             this.BtnImprimir.Click += new System.EventHandler(this.BtnImprimir_Click);
             // 
+            // especialButton1
+            // 
+            this.especialButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.especialButton1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.especialButton1.BackGroundColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.especialButton1.BorderColor = System.Drawing.Color.Transparent;
+            this.especialButton1.BorderRadius = 0;
+            this.especialButton1.BorderSize = 0;
+            this.especialButton1.FlatAppearance.BorderSize = 0;
+            this.especialButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.especialButton1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.especialButton1.ForeColor = System.Drawing.Color.White;
+            this.especialButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.especialButton1.Location = new System.Drawing.Point(525, 531);
+            this.especialButton1.Name = "especialButton1";
+            this.especialButton1.Size = new System.Drawing.Size(247, 49);
+            this.especialButton1.TabIndex = 173;
+            this.especialButton1.Text = "Imprimir Comanda";
+            this.especialButton1.TextGroundColor = System.Drawing.Color.White;
+            this.especialButton1.UseVisualStyleBackColor = false;
+            this.especialButton1.Click += new System.EventHandler(this.especialButton1_Click);
+            // 
+            // BtnCerrar
+            // 
+            this.BtnCerrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnCerrar.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.BtnCerrar.BackGroundColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.BtnCerrar.BorderColor = System.Drawing.Color.Transparent;
+            this.BtnCerrar.BorderRadius = 0;
+            this.BtnCerrar.BorderSize = 0;
+            this.BtnCerrar.FlatAppearance.BorderSize = 0;
+            this.BtnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCerrar.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnCerrar.ForeColor = System.Drawing.Color.White;
+            this.BtnCerrar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnCerrar.Location = new System.Drawing.Point(345, 531);
+            this.BtnCerrar.Name = "BtnCerrar";
+            this.BtnCerrar.Size = new System.Drawing.Size(174, 49);
+            this.BtnCerrar.TabIndex = 174;
+            this.BtnCerrar.Text = "Cerrar";
+            this.BtnCerrar.TextGroundColor = System.Drawing.Color.White;
+            this.BtnCerrar.UseVisualStyleBackColor = false;
+            this.BtnCerrar.Click += new System.EventHandler(this.BtnCerrar_Click);
+            // 
             // PnlImprimeTicketsDetalle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(964, 589);
+            this.Controls.Add(this.BtnCerrar);
+            this.Controls.Add(this.especialButton1);
             this.Controls.Add(this.BtnImprimir);
             this.Controls.Add(this.DgvItemsOrden);
             this.Controls.Add(this.lblCredito);
@@ -144,5 +192,7 @@
         public System.Windows.Forms.Label lblCredito;
         public System.Windows.Forms.DataGridView DgvItemsOrden;
         private Especiales.EspecialButton BtnImprimir;
+        private Especiales.EspecialButton especialButton1;
+        private Especiales.EspecialButton BtnCerrar;
     }
 }

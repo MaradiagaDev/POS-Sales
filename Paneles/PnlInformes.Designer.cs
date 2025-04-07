@@ -36,10 +36,10 @@
             this.especialButton12 = new NeoCobranza.Especiales.EspecialButton();
             this.especialButton13 = new NeoCobranza.Especiales.EspecialButton();
             this.especialButton14 = new NeoCobranza.Especiales.EspecialButton();
-            this.especialButton15 = new NeoCobranza.Especiales.EspecialButton();
             this.especialButton1 = new NeoCobranza.Especiales.EspecialButton();
             this.especialButton8 = new NeoCobranza.Especiales.EspecialButton();
             this.BtnCuentasCobrar = new NeoCobranza.Especiales.EspecialButton();
+            this.BtnReporteVentasDiarias = new NeoCobranza.Especiales.EspecialButton();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,7 +57,7 @@
             this.flowLayoutPanel1.Controls.Add(this.especialButton1);
             this.flowLayoutPanel1.Controls.Add(this.especialButton8);
             this.flowLayoutPanel1.Controls.Add(this.BtnCuentasCobrar);
-            this.flowLayoutPanel1.Controls.Add(this.especialButton15);
+            this.flowLayoutPanel1.Controls.Add(this.BtnReporteVentasDiarias);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 10);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1124, 540);
@@ -201,29 +201,6 @@
             this.especialButton14.UseVisualStyleBackColor = false;
             this.especialButton14.Click += new System.EventHandler(this.especialButton14_Click);
             // 
-            // especialButton15
-            // 
-            this.especialButton15.BackColor = System.Drawing.Color.DarkGreen;
-            this.especialButton15.BackGroundColor = System.Drawing.Color.DarkGreen;
-            this.especialButton15.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.especialButton15.BorderRadius = 5;
-            this.especialButton15.BorderSize = 0;
-            this.especialButton15.FlatAppearance.BorderSize = 0;
-            this.especialButton15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.especialButton15.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.especialButton15.ForeColor = System.Drawing.Color.White;
-            this.especialButton15.Image = ((System.Drawing.Image)(resources.GetObject("especialButton15.Image")));
-            this.especialButton15.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.especialButton15.Location = new System.Drawing.Point(494, 96);
-            this.especialButton15.Margin = new System.Windows.Forms.Padding(5);
-            this.especialButton15.Name = "especialButton15";
-            this.especialButton15.Size = new System.Drawing.Size(153, 81);
-            this.especialButton15.TabIndex = 256;
-            this.especialButton15.Text = "Gastos / Ganancias";
-            this.especialButton15.TextGroundColor = System.Drawing.Color.White;
-            this.especialButton15.UseVisualStyleBackColor = false;
-            this.especialButton15.Visible = false;
-            // 
             // especialButton1
             // 
             this.especialButton1.BackColor = System.Drawing.Color.DarkGreen;
@@ -242,7 +219,7 @@
             this.especialButton1.Name = "especialButton1";
             this.especialButton1.Size = new System.Drawing.Size(153, 81);
             this.especialButton1.TabIndex = 238;
-            this.especialButton1.Text = "Reporte de Ventas por Sucursal";
+            this.especialButton1.Text = "Ingresos y gastos del Periodo";
             this.especialButton1.TextGroundColor = System.Drawing.Color.White;
             this.especialButton1.UseVisualStyleBackColor = false;
             this.especialButton1.Click += new System.EventHandler(this.especialButton1_Click);
@@ -293,6 +270,29 @@
             this.BtnCuentasCobrar.UseVisualStyleBackColor = false;
             this.BtnCuentasCobrar.Click += new System.EventHandler(this.BtnCuentasCobrar_Click);
             // 
+            // BtnReporteVentasDiarias
+            // 
+            this.BtnReporteVentasDiarias.BackColor = System.Drawing.Color.DarkGreen;
+            this.BtnReporteVentasDiarias.BackGroundColor = System.Drawing.Color.DarkGreen;
+            this.BtnReporteVentasDiarias.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.BtnReporteVentasDiarias.BorderRadius = 5;
+            this.BtnReporteVentasDiarias.BorderSize = 0;
+            this.BtnReporteVentasDiarias.FlatAppearance.BorderSize = 0;
+            this.BtnReporteVentasDiarias.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnReporteVentasDiarias.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnReporteVentasDiarias.ForeColor = System.Drawing.Color.White;
+            this.BtnReporteVentasDiarias.Image = ((System.Drawing.Image)(resources.GetObject("BtnReporteVentasDiarias.Image")));
+            this.BtnReporteVentasDiarias.ImageAlign = System.Drawing.ContentAlignment.TopRight;
+            this.BtnReporteVentasDiarias.Location = new System.Drawing.Point(494, 96);
+            this.BtnReporteVentasDiarias.Margin = new System.Windows.Forms.Padding(5);
+            this.BtnReporteVentasDiarias.Name = "BtnReporteVentasDiarias";
+            this.BtnReporteVentasDiarias.Size = new System.Drawing.Size(153, 81);
+            this.BtnReporteVentasDiarias.TabIndex = 256;
+            this.BtnReporteVentasDiarias.Text = "Reporte de Ventas";
+            this.BtnReporteVentasDiarias.TextGroundColor = System.Drawing.Color.White;
+            this.BtnReporteVentasDiarias.UseVisualStyleBackColor = false;
+            this.BtnReporteVentasDiarias.Click += new System.EventHandler(this.BtnReporteVentasDiarias_Click);
+            // 
             // PnlInformes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -318,7 +318,7 @@
         public Especiales.EspecialButton especialButton12;
         public Especiales.EspecialButton especialButton13;
         public Especiales.EspecialButton especialButton14;
-        public Especiales.EspecialButton especialButton15;
+        public Especiales.EspecialButton BtnReporteVentasDiarias;
         public Especiales.EspecialButton BtnProductos;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }

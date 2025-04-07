@@ -32,13 +32,35 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PnlPrincipal));
             this.MenuVertical = new System.Windows.Forms.Panel();
             this.PnlTitulo = new System.Windows.Forms.Panel();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.LblTitulo = new System.Windows.Forms.Label();
             this.LblHora = new System.Windows.Forms.Label();
             this.LblUsuario = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.LblSucursal = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.PnlCentral = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.BtnListaVentasActivas = new NeoCobranza.Especiales.EspecialButton();
+            this.BtnAgenda = new NeoCobranza.Especiales.EspecialButton();
+            this.BtnBillar = new NeoCobranza.Especiales.EspecialButton();
+            this.BtnHoteleria = new NeoCobranza.Especiales.EspecialButton();
+            this.BtnVentaRapida = new NeoCobranza.Especiales.EspecialButton();
+            this.BtnMesas = new NeoCobranza.Especiales.EspecialButton();
+            this.BtnCatalogoGeneral = new NeoCobranza.Especiales.EspecialButton();
+            this.BtnReportes = new NeoCobranza.Especiales.EspecialButton();
+            this.especialButton1 = new NeoCobranza.Especiales.EspecialButton();
+            this.BtnConfigTurnos = new NeoCobranza.Especiales.EspecialButton();
+            this.BtnCaja = new NeoCobranza.Especiales.EspecialButton();
+            this.BtnInventario = new NeoCobranza.Especiales.EspecialButton();
+            this.btnSeguridad = new NeoCobranza.Especiales.EspecialButton();
+            this.btnCatalogos = new NeoCobranza.Especiales.EspecialButton();
+            this.BtnOpciones = new NeoCobranza.Especiales.EspecialButton();
+            this.BtnVentasDirectas = new NeoCobranza.Especiales.EspecialButton();
+            this.especialButton3 = new NeoCobranza.Especiales.EspecialButton();
             this.DesplegableContrato = new NeoCobranza.Especiales.RJDropDownMenu(this.components);
             this.BtnProveedor = new System.Windows.Forms.ToolStripMenuItem();
             this.BtnCargorizacion = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,6 +73,7 @@
             this.extrasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.receptasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuVentasDirectas = new NeoCobranza.Especiales.RJDropDownMenu(this.components);
+            this.ventasDirectasDeAtaudesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BtnOrdenMesa = new System.Windows.Forms.ToolStripMenuItem();
             this.listaDeOrdenesActivasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cuentasPorCobrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,32 +102,14 @@
             this.BtnInventarioGeneral = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuCaja = new NeoCobranza.Especiales.RJDropDownMenu(this.components);
             this.CierreCajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.BtnListaVentasActivas = new NeoCobranza.Especiales.EspecialButton();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.BtnBillar = new NeoCobranza.Especiales.EspecialButton();
-            this.BtnHoteleria = new NeoCobranza.Especiales.EspecialButton();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.BtnAgenda = new NeoCobranza.Especiales.EspecialButton();
-            this.BtnVentaRapida = new NeoCobranza.Especiales.EspecialButton();
-            this.BtnMesas = new NeoCobranza.Especiales.EspecialButton();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.BtnCatalogoGeneral = new NeoCobranza.Especiales.EspecialButton();
-            this.BtnReportes = new NeoCobranza.Especiales.EspecialButton();
-            this.especialButton1 = new NeoCobranza.Especiales.EspecialButton();
-            this.BtnConfigTurnos = new NeoCobranza.Especiales.EspecialButton();
-            this.BtnCaja = new NeoCobranza.Especiales.EspecialButton();
-            this.BtnInventario = new NeoCobranza.Especiales.EspecialButton();
-            this.btnSeguridad = new NeoCobranza.Especiales.EspecialButton();
-            this.btnCatalogos = new NeoCobranza.Especiales.EspecialButton();
-            this.BtnOpciones = new NeoCobranza.Especiales.EspecialButton();
-            this.BtnVentasDirectas = new NeoCobranza.Especiales.EspecialButton();
-            this.especialButton3 = new NeoCobranza.Especiales.EspecialButton();
-            this.ventasDirectasDeAtaudesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuVertical.SuspendLayout();
             this.PnlTitulo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.PnlCentral.SuspendLayout();
             this.DesplegableContrato.SuspendLayout();
             this.MenuVentasDirectas.SuspendLayout();
@@ -113,11 +118,6 @@
             this.MenuSeguridad.SuspendLayout();
             this.MenuInventario.SuspendLayout();
             this.MenuCaja.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
             // 
             // MenuVertical
@@ -147,7 +147,6 @@
             this.PnlTitulo.Controls.Add(this.BtnBillar);
             this.PnlTitulo.Controls.Add(this.BtnHoteleria);
             this.PnlTitulo.Controls.Add(this.pictureBox6);
-            this.PnlTitulo.Controls.Add(this.BtnAgenda);
             this.PnlTitulo.Controls.Add(this.BtnVentaRapida);
             this.PnlTitulo.Controls.Add(this.BtnMesas);
             this.PnlTitulo.Controls.Add(this.pictureBox5);
@@ -159,6 +158,39 @@
             this.PnlTitulo.Size = new System.Drawing.Size(1170, 40);
             this.PnlTitulo.TabIndex = 2;
             this.PnlTitulo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
+            this.pictureBox6.Location = new System.Drawing.Point(1065, 0);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(35, 40);
+            this.pictureBox6.TabIndex = 14;
+            this.pictureBox6.TabStop = false;
+            this.pictureBox6.Click += new System.EventHandler(this.pictureBox6_Click);
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
+            this.pictureBox5.Location = new System.Drawing.Point(1100, 0);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(35, 40);
+            this.pictureBox5.TabIndex = 13;
+            this.pictureBox5.TabStop = false;
+            this.pictureBox5.Click += new System.EventHandler(this.pictureBox5_Click);
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
+            this.pictureBox4.Location = new System.Drawing.Point(1135, 0);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(35, 40);
+            this.pictureBox4.TabIndex = 12;
+            this.pictureBox4.TabStop = false;
+            this.pictureBox4.Click += new System.EventHandler(this.pictureBox4_Click);
             // 
             // LblTitulo
             // 
@@ -206,6 +238,7 @@
             this.panel5.Controls.Add(this.BtnListaVentasActivas);
             this.panel5.Controls.Add(this.LblHora);
             this.panel5.Controls.Add(this.LblSucursal);
+            this.panel5.Controls.Add(this.BtnAgenda);
             this.panel5.Controls.Add(this.pictureBox1);
             this.panel5.Controls.Add(this.LblUsuario);
             this.panel5.Controls.Add(this.pictureBox3);
@@ -229,6 +262,26 @@
             this.LblSucursal.TabIndex = 12;
             this.LblSucursal.Text = ".";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(925, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(41, 33);
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(35, 33);
+            this.pictureBox3.TabIndex = 11;
+            this.pictureBox3.TabStop = false;
+            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
+            // 
             // PnlCentral
             // 
             this.PnlCentral.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -251,6 +304,409 @@
             this.label1.Size = new System.Drawing.Size(360, 17);
             this.label1.TabIndex = 15;
             this.label1.Text = "@ 2025 Rolando Maradiaga. Todos los derechos reservados.";
+            // 
+            // BtnListaVentasActivas
+            // 
+            this.BtnListaVentasActivas.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BtnListaVentasActivas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.BtnListaVentasActivas.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.BtnListaVentasActivas.BorderColor = System.Drawing.Color.Lime;
+            this.BtnListaVentasActivas.BorderRadius = 5;
+            this.BtnListaVentasActivas.BorderSize = 0;
+            this.BtnListaVentasActivas.FlatAppearance.BorderSize = 0;
+            this.BtnListaVentasActivas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnListaVentasActivas.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnListaVentasActivas.ForeColor = System.Drawing.Color.White;
+            this.BtnListaVentasActivas.Image = ((System.Drawing.Image)(resources.GetObject("BtnListaVentasActivas.Image")));
+            this.BtnListaVentasActivas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnListaVentasActivas.Location = new System.Drawing.Point(680, 2);
+            this.BtnListaVentasActivas.Name = "BtnListaVentasActivas";
+            this.BtnListaVentasActivas.Size = new System.Drawing.Size(209, 36);
+            this.BtnListaVentasActivas.TabIndex = 155;
+            this.BtnListaVentasActivas.Text = "Ventas Activas";
+            this.BtnListaVentasActivas.TextGroundColor = System.Drawing.Color.White;
+            this.BtnListaVentasActivas.UseVisualStyleBackColor = false;
+            this.BtnListaVentasActivas.Click += new System.EventHandler(this.BtnListaVentasActivas_Click);
+            // 
+            // BtnAgenda
+            // 
+            this.BtnAgenda.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BtnAgenda.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.BtnAgenda.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.BtnAgenda.BorderColor = System.Drawing.Color.Lime;
+            this.BtnAgenda.BorderRadius = 5;
+            this.BtnAgenda.BorderSize = 0;
+            this.BtnAgenda.FlatAppearance.BorderSize = 0;
+            this.BtnAgenda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAgenda.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnAgenda.ForeColor = System.Drawing.Color.White;
+            this.BtnAgenda.Image = ((System.Drawing.Image)(resources.GetObject("BtnAgenda.Image")));
+            this.BtnAgenda.Location = new System.Drawing.Point(629, 2);
+            this.BtnAgenda.Name = "BtnAgenda";
+            this.BtnAgenda.Size = new System.Drawing.Size(44, 37);
+            this.BtnAgenda.TabIndex = 153;
+            this.BtnAgenda.TextGroundColor = System.Drawing.Color.White;
+            this.BtnAgenda.UseVisualStyleBackColor = false;
+            this.BtnAgenda.Click += new System.EventHandler(this.especialButton2_Click);
+            // 
+            // BtnBillar
+            // 
+            this.BtnBillar.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.BtnBillar.BackColor = System.Drawing.Color.DarkGreen;
+            this.BtnBillar.BackGroundColor = System.Drawing.Color.DarkGreen;
+            this.BtnBillar.BorderColor = System.Drawing.Color.Lime;
+            this.BtnBillar.BorderRadius = 5;
+            this.BtnBillar.BorderSize = 0;
+            this.BtnBillar.FlatAppearance.BorderSize = 0;
+            this.BtnBillar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnBillar.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnBillar.ForeColor = System.Drawing.Color.White;
+            this.BtnBillar.Image = ((System.Drawing.Image)(resources.GetObject("BtnBillar.Image")));
+            this.BtnBillar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnBillar.Location = new System.Drawing.Point(660, 3);
+            this.BtnBillar.Name = "BtnBillar";
+            this.BtnBillar.Size = new System.Drawing.Size(152, 33);
+            this.BtnBillar.TabIndex = 156;
+            this.BtnBillar.Text = "Billar";
+            this.BtnBillar.TextGroundColor = System.Drawing.Color.White;
+            this.BtnBillar.UseVisualStyleBackColor = false;
+            this.BtnBillar.Visible = false;
+            // 
+            // BtnHoteleria
+            // 
+            this.BtnHoteleria.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.BtnHoteleria.BackColor = System.Drawing.Color.DarkGreen;
+            this.BtnHoteleria.BackGroundColor = System.Drawing.Color.DarkGreen;
+            this.BtnHoteleria.BorderColor = System.Drawing.Color.Lime;
+            this.BtnHoteleria.BorderRadius = 5;
+            this.BtnHoteleria.BorderSize = 0;
+            this.BtnHoteleria.FlatAppearance.BorderSize = 0;
+            this.BtnHoteleria.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnHoteleria.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnHoteleria.ForeColor = System.Drawing.Color.White;
+            this.BtnHoteleria.Image = ((System.Drawing.Image)(resources.GetObject("BtnHoteleria.Image")));
+            this.BtnHoteleria.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnHoteleria.Location = new System.Drawing.Point(503, 3);
+            this.BtnHoteleria.Name = "BtnHoteleria";
+            this.BtnHoteleria.Size = new System.Drawing.Size(152, 33);
+            this.BtnHoteleria.TabIndex = 155;
+            this.BtnHoteleria.Text = "Hotel";
+            this.BtnHoteleria.TextGroundColor = System.Drawing.Color.White;
+            this.BtnHoteleria.UseVisualStyleBackColor = false;
+            this.BtnHoteleria.Visible = false;
+            this.BtnHoteleria.Click += new System.EventHandler(this.BtnHoteleria_Click);
+            // 
+            // BtnVentaRapida
+            // 
+            this.BtnVentaRapida.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.BtnVentaRapida.BackColor = System.Drawing.Color.DarkGreen;
+            this.BtnVentaRapida.BackGroundColor = System.Drawing.Color.DarkGreen;
+            this.BtnVentaRapida.BorderColor = System.Drawing.Color.Lime;
+            this.BtnVentaRapida.BorderRadius = 5;
+            this.BtnVentaRapida.BorderSize = 0;
+            this.BtnVentaRapida.FlatAppearance.BorderSize = 0;
+            this.BtnVentaRapida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnVentaRapida.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnVentaRapida.ForeColor = System.Drawing.Color.White;
+            this.BtnVentaRapida.Image = ((System.Drawing.Image)(resources.GetObject("BtnVentaRapida.Image")));
+            this.BtnVentaRapida.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnVentaRapida.Location = new System.Drawing.Point(6, 3);
+            this.BtnVentaRapida.Name = "BtnVentaRapida";
+            this.BtnVentaRapida.Size = new System.Drawing.Size(178, 33);
+            this.BtnVentaRapida.TabIndex = 152;
+            this.BtnVentaRapida.Text = "Venta Rapida";
+            this.BtnVentaRapida.TextGroundColor = System.Drawing.Color.White;
+            this.BtnVentaRapida.UseVisualStyleBackColor = false;
+            this.BtnVentaRapida.Click += new System.EventHandler(this.BtnVentaRapida_Click);
+            // 
+            // BtnMesas
+            // 
+            this.BtnMesas.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.BtnMesas.BackColor = System.Drawing.Color.DarkGreen;
+            this.BtnMesas.BackGroundColor = System.Drawing.Color.DarkGreen;
+            this.BtnMesas.BorderColor = System.Drawing.Color.Lime;
+            this.BtnMesas.BorderRadius = 5;
+            this.BtnMesas.BorderSize = 0;
+            this.BtnMesas.FlatAppearance.BorderSize = 0;
+            this.BtnMesas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnMesas.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnMesas.ForeColor = System.Drawing.Color.White;
+            this.BtnMesas.Image = ((System.Drawing.Image)(resources.GetObject("BtnMesas.Image")));
+            this.BtnMesas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnMesas.Location = new System.Drawing.Point(188, 3);
+            this.BtnMesas.Name = "BtnMesas";
+            this.BtnMesas.Size = new System.Drawing.Size(152, 33);
+            this.BtnMesas.TabIndex = 154;
+            this.BtnMesas.Text = "Mesas";
+            this.BtnMesas.TextGroundColor = System.Drawing.Color.White;
+            this.BtnMesas.UseVisualStyleBackColor = false;
+            this.BtnMesas.Click += new System.EventHandler(this.especialButton4_Click_2);
+            // 
+            // BtnCatalogoGeneral
+            // 
+            this.BtnCatalogoGeneral.BackColor = System.Drawing.Color.DarkGray;
+            this.BtnCatalogoGeneral.BackGroundColor = System.Drawing.Color.DarkGray;
+            this.BtnCatalogoGeneral.BorderColor = System.Drawing.Color.Transparent;
+            this.BtnCatalogoGeneral.BorderRadius = 0;
+            this.BtnCatalogoGeneral.BorderSize = 0;
+            this.BtnCatalogoGeneral.FlatAppearance.BorderSize = 0;
+            this.BtnCatalogoGeneral.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.BtnCatalogoGeneral.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.BtnCatalogoGeneral.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCatalogoGeneral.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnCatalogoGeneral.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnCatalogoGeneral.Image = ((System.Drawing.Image)(resources.GetObject("BtnCatalogoGeneral.Image")));
+            this.BtnCatalogoGeneral.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnCatalogoGeneral.Location = new System.Drawing.Point(1, 377);
+            this.BtnCatalogoGeneral.Name = "BtnCatalogoGeneral";
+            this.BtnCatalogoGeneral.Size = new System.Drawing.Size(169, 58);
+            this.BtnCatalogoGeneral.TabIndex = 14;
+            this.BtnCatalogoGeneral.Text = "General";
+            this.BtnCatalogoGeneral.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnCatalogoGeneral.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnCatalogoGeneral.UseVisualStyleBackColor = false;
+            this.BtnCatalogoGeneral.Click += new System.EventHandler(this.BtnCatalogoGeneral_Click);
+            // 
+            // BtnReportes
+            // 
+            this.BtnReportes.BackColor = System.Drawing.Color.DarkGray;
+            this.BtnReportes.BackGroundColor = System.Drawing.Color.DarkGray;
+            this.BtnReportes.BorderColor = System.Drawing.Color.Transparent;
+            this.BtnReportes.BorderRadius = 0;
+            this.BtnReportes.BorderSize = 1;
+            this.BtnReportes.FlatAppearance.BorderSize = 0;
+            this.BtnReportes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.BtnReportes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnReportes.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnReportes.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnReportes.Image = ((System.Drawing.Image)(resources.GetObject("BtnReportes.Image")));
+            this.BtnReportes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnReportes.Location = new System.Drawing.Point(1, 316);
+            this.BtnReportes.Name = "BtnReportes";
+            this.BtnReportes.Size = new System.Drawing.Size(169, 58);
+            this.BtnReportes.TabIndex = 13;
+            this.BtnReportes.Text = "Reportes";
+            this.BtnReportes.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnReportes.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnReportes.UseVisualStyleBackColor = false;
+            this.BtnReportes.Click += new System.EventHandler(this.especialButton6_Click);
+            // 
+            // especialButton1
+            // 
+            this.especialButton1.BackColor = System.Drawing.Color.DarkGray;
+            this.especialButton1.BackGroundColor = System.Drawing.Color.DarkGray;
+            this.especialButton1.BorderColor = System.Drawing.Color.Lavender;
+            this.especialButton1.BorderRadius = 0;
+            this.especialButton1.BorderSize = 0;
+            this.especialButton1.FlatAppearance.BorderSize = 0;
+            this.especialButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.especialButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.especialButton1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.especialButton1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.especialButton1.Image = ((System.Drawing.Image)(resources.GetObject("especialButton1.Image")));
+            this.especialButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.especialButton1.Location = new System.Drawing.Point(0, 624);
+            this.especialButton1.Name = "especialButton1";
+            this.especialButton1.Size = new System.Drawing.Size(169, 61);
+            this.especialButton1.TabIndex = 1;
+            this.especialButton1.Text = " Sesión";
+            this.especialButton1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.especialButton1.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.especialButton1.UseVisualStyleBackColor = false;
+            this.especialButton1.Click += new System.EventHandler(this.especialButton1_Click);
+            // 
+            // BtnConfigTurnos
+            // 
+            this.BtnConfigTurnos.BackColor = System.Drawing.Color.DarkGray;
+            this.BtnConfigTurnos.BackGroundColor = System.Drawing.Color.DarkGray;
+            this.BtnConfigTurnos.BorderColor = System.Drawing.Color.Transparent;
+            this.BtnConfigTurnos.BorderRadius = 0;
+            this.BtnConfigTurnos.BorderSize = 1;
+            this.BtnConfigTurnos.FlatAppearance.BorderSize = 0;
+            this.BtnConfigTurnos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.BtnConfigTurnos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnConfigTurnos.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnConfigTurnos.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnConfigTurnos.Image = ((System.Drawing.Image)(resources.GetObject("BtnConfigTurnos.Image")));
+            this.BtnConfigTurnos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnConfigTurnos.Location = new System.Drawing.Point(1, 255);
+            this.BtnConfigTurnos.Name = "BtnConfigTurnos";
+            this.BtnConfigTurnos.Size = new System.Drawing.Size(169, 58);
+            this.BtnConfigTurnos.TabIndex = 9;
+            this.BtnConfigTurnos.Text = "Asistencia";
+            this.BtnConfigTurnos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnConfigTurnos.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnConfigTurnos.UseVisualStyleBackColor = false;
+            this.BtnConfigTurnos.Click += new System.EventHandler(this.especialButton4_Click_1);
+            // 
+            // BtnCaja
+            // 
+            this.BtnCaja.BackColor = System.Drawing.Color.DarkGray;
+            this.BtnCaja.BackGroundColor = System.Drawing.Color.DarkGray;
+            this.BtnCaja.BorderColor = System.Drawing.Color.Transparent;
+            this.BtnCaja.BorderRadius = 0;
+            this.BtnCaja.BorderSize = 1;
+            this.BtnCaja.FlatAppearance.BorderSize = 0;
+            this.BtnCaja.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.BtnCaja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCaja.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnCaja.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnCaja.Image = ((System.Drawing.Image)(resources.GetObject("BtnCaja.Image")));
+            this.BtnCaja.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnCaja.Location = new System.Drawing.Point(1, 194);
+            this.BtnCaja.Name = "BtnCaja";
+            this.BtnCaja.Size = new System.Drawing.Size(169, 58);
+            this.BtnCaja.TabIndex = 7;
+            this.BtnCaja.Text = " Caja";
+            this.BtnCaja.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnCaja.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnCaja.UseVisualStyleBackColor = false;
+            this.BtnCaja.Click += new System.EventHandler(this.especialButton4_Click);
+            // 
+            // BtnInventario
+            // 
+            this.BtnInventario.BackColor = System.Drawing.Color.DarkGray;
+            this.BtnInventario.BackGroundColor = System.Drawing.Color.DarkGray;
+            this.BtnInventario.BorderColor = System.Drawing.Color.Transparent;
+            this.BtnInventario.BorderRadius = 0;
+            this.BtnInventario.BorderSize = 1;
+            this.BtnInventario.FlatAppearance.BorderSize = 0;
+            this.BtnInventario.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.BtnInventario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnInventario.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnInventario.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnInventario.Image = ((System.Drawing.Image)(resources.GetObject("BtnInventario.Image")));
+            this.BtnInventario.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnInventario.Location = new System.Drawing.Point(1, 133);
+            this.BtnInventario.Name = "BtnInventario";
+            this.BtnInventario.Size = new System.Drawing.Size(169, 58);
+            this.BtnInventario.TabIndex = 6;
+            this.BtnInventario.Text = "Inventario";
+            this.BtnInventario.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnInventario.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnInventario.UseVisualStyleBackColor = false;
+            this.BtnInventario.Click += new System.EventHandler(this.BtnInventario_Click);
+            // 
+            // btnSeguridad
+            // 
+            this.btnSeguridad.BackColor = System.Drawing.Color.DarkGray;
+            this.btnSeguridad.BackGroundColor = System.Drawing.Color.DarkGray;
+            this.btnSeguridad.BorderColor = System.Drawing.Color.Transparent;
+            this.btnSeguridad.BorderRadius = 0;
+            this.btnSeguridad.BorderSize = 1;
+            this.btnSeguridad.FlatAppearance.BorderSize = 0;
+            this.btnSeguridad.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.btnSeguridad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSeguridad.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSeguridad.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSeguridad.Image = ((System.Drawing.Image)(resources.GetObject("btnSeguridad.Image")));
+            this.btnSeguridad.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSeguridad.Location = new System.Drawing.Point(1, 438);
+            this.btnSeguridad.Name = "btnSeguridad";
+            this.btnSeguridad.Size = new System.Drawing.Size(169, 58);
+            this.btnSeguridad.TabIndex = 5;
+            this.btnSeguridad.Text = "Seguridad";
+            this.btnSeguridad.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSeguridad.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSeguridad.UseVisualStyleBackColor = false;
+            this.btnSeguridad.Click += new System.EventHandler(this.btnSeguridad_Click);
+            // 
+            // btnCatalogos
+            // 
+            this.btnCatalogos.BackColor = System.Drawing.Color.DarkGray;
+            this.btnCatalogos.BackGroundColor = System.Drawing.Color.DarkGray;
+            this.btnCatalogos.BorderColor = System.Drawing.Color.Transparent;
+            this.btnCatalogos.BorderRadius = 0;
+            this.btnCatalogos.BorderSize = 1;
+            this.btnCatalogos.FlatAppearance.BorderSize = 0;
+            this.btnCatalogos.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnCatalogos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.btnCatalogos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCatalogos.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCatalogos.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnCatalogos.Image = ((System.Drawing.Image)(resources.GetObject("btnCatalogos.Image")));
+            this.btnCatalogos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCatalogos.Location = new System.Drawing.Point(1, 11);
+            this.btnCatalogos.Name = "btnCatalogos";
+            this.btnCatalogos.Size = new System.Drawing.Size(169, 58);
+            this.btnCatalogos.TabIndex = 4;
+            this.btnCatalogos.Text = "Catalogos";
+            this.btnCatalogos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCatalogos.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnCatalogos.UseVisualStyleBackColor = false;
+            this.btnCatalogos.Click += new System.EventHandler(this.btnCatalogos_Click);
+            // 
+            // BtnOpciones
+            // 
+            this.BtnOpciones.BackColor = System.Drawing.Color.DarkGray;
+            this.BtnOpciones.BackGroundColor = System.Drawing.Color.DarkGray;
+            this.BtnOpciones.BorderColor = System.Drawing.Color.Transparent;
+            this.BtnOpciones.BorderRadius = 0;
+            this.BtnOpciones.BorderSize = 1;
+            this.BtnOpciones.FlatAppearance.BorderSize = 0;
+            this.BtnOpciones.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.BtnOpciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnOpciones.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnOpciones.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnOpciones.Image = ((System.Drawing.Image)(resources.GetObject("BtnOpciones.Image")));
+            this.BtnOpciones.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnOpciones.Location = new System.Drawing.Point(1, 499);
+            this.BtnOpciones.Name = "BtnOpciones";
+            this.BtnOpciones.Size = new System.Drawing.Size(169, 58);
+            this.BtnOpciones.TabIndex = 3;
+            this.BtnOpciones.Text = "Sistema";
+            this.BtnOpciones.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnOpciones.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnOpciones.UseVisualStyleBackColor = false;
+            this.BtnOpciones.Click += new System.EventHandler(this.BtnOpciones_Click);
+            // 
+            // BtnVentasDirectas
+            // 
+            this.BtnVentasDirectas.BackColor = System.Drawing.Color.DarkGray;
+            this.BtnVentasDirectas.BackGroundColor = System.Drawing.Color.DarkGray;
+            this.BtnVentasDirectas.BorderColor = System.Drawing.Color.Transparent;
+            this.BtnVentasDirectas.BorderRadius = 0;
+            this.BtnVentasDirectas.BorderSize = 1;
+            this.BtnVentasDirectas.FlatAppearance.BorderSize = 0;
+            this.BtnVentasDirectas.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.BtnVentasDirectas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnVentasDirectas.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnVentasDirectas.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnVentasDirectas.Image = ((System.Drawing.Image)(resources.GetObject("BtnVentasDirectas.Image")));
+            this.BtnVentasDirectas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnVentasDirectas.Location = new System.Drawing.Point(1, 72);
+            this.BtnVentasDirectas.Name = "BtnVentasDirectas";
+            this.BtnVentasDirectas.Size = new System.Drawing.Size(169, 58);
+            this.BtnVentasDirectas.TabIndex = 2;
+            this.BtnVentasDirectas.Text = "    Ventas ";
+            this.BtnVentasDirectas.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnVentasDirectas.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnVentasDirectas.UseVisualStyleBackColor = false;
+            this.BtnVentasDirectas.Click += new System.EventHandler(this.BtnVentasDirectas_Click);
+            // 
+            // especialButton3
+            // 
+            this.especialButton3.BackColor = System.Drawing.Color.DarkGray;
+            this.especialButton3.BackGroundColor = System.Drawing.Color.DarkGray;
+            this.especialButton3.BorderColor = System.Drawing.Color.Transparent;
+            this.especialButton3.BorderRadius = 0;
+            this.especialButton3.BorderSize = 1;
+            this.especialButton3.FlatAppearance.BorderSize = 0;
+            this.especialButton3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.especialButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.especialButton3.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.especialButton3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.especialButton3.Image = ((System.Drawing.Image)(resources.GetObject("especialButton3.Image")));
+            this.especialButton3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.especialButton3.Location = new System.Drawing.Point(0, 560);
+            this.especialButton3.Name = "especialButton3";
+            this.especialButton3.Size = new System.Drawing.Size(169, 61);
+            this.especialButton3.TabIndex = 1;
+            this.especialButton3.Text = "Salir";
+            this.especialButton3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.especialButton3.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.especialButton3.UseVisualStyleBackColor = false;
+            this.especialButton3.Click += new System.EventHandler(this.especialButton3_Click);
             // 
             // DesplegableContrato
             // 
@@ -352,6 +808,7 @@
             this.receptasToolStripMenuItem.Name = "receptasToolStripMenuItem";
             this.receptasToolStripMenuItem.Size = new System.Drawing.Size(221, 24);
             this.receptasToolStripMenuItem.Text = "Recetas";
+            this.receptasToolStripMenuItem.Visible = false;
             // 
             // MenuVentasDirectas
             // 
@@ -369,6 +826,18 @@
             this.MenuVentasDirectas.Name = "MenuVentasDirectas";
             this.MenuVentasDirectas.PrimaryColor = System.Drawing.SystemColors.ControlDark;
             this.MenuVentasDirectas.Size = new System.Drawing.Size(270, 160);
+            // 
+            // ventasDirectasDeAtaudesToolStripMenuItem
+            // 
+            this.ventasDirectasDeAtaudesToolStripMenuItem.BackColor = System.Drawing.Color.Transparent;
+            this.ventasDirectasDeAtaudesToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ventasDirectasDeAtaudesToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.ventasDirectasDeAtaudesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("ventasDirectasDeAtaudesToolStripMenuItem.Image")));
+            this.ventasDirectasDeAtaudesToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ventasDirectasDeAtaudesToolStripMenuItem.Name = "ventasDirectasDeAtaudesToolStripMenuItem";
+            this.ventasDirectasDeAtaudesToolStripMenuItem.Size = new System.Drawing.Size(269, 26);
+            this.ventasDirectasDeAtaudesToolStripMenuItem.Text = "Venta Rapida";
+            this.ventasDirectasDeAtaudesToolStripMenuItem.Click += new System.EventHandler(this.ventasDirectasDeAtaudesToolStripMenuItem_Click);
             // 
             // BtnOrdenMesa
             // 
@@ -666,476 +1135,6 @@
             this.CierreCajaToolStripMenuItem.Text = "Cierre de Caja";
             this.CierreCajaToolStripMenuItem.Click += new System.EventHandler(this.CierreCajaToolStripMenuItem_Click);
             // 
-            // BtnListaVentasActivas
-            // 
-            this.BtnListaVentasActivas.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.BtnListaVentasActivas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.BtnListaVentasActivas.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.BtnListaVentasActivas.BorderColor = System.Drawing.Color.Lime;
-            this.BtnListaVentasActivas.BorderRadius = 5;
-            this.BtnListaVentasActivas.BorderSize = 0;
-            this.BtnListaVentasActivas.FlatAppearance.BorderSize = 0;
-            this.BtnListaVentasActivas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnListaVentasActivas.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnListaVentasActivas.ForeColor = System.Drawing.Color.White;
-            this.BtnListaVentasActivas.Image = ((System.Drawing.Image)(resources.GetObject("BtnListaVentasActivas.Image")));
-            this.BtnListaVentasActivas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnListaVentasActivas.Location = new System.Drawing.Point(680, 3);
-            this.BtnListaVentasActivas.Name = "BtnListaVentasActivas";
-            this.BtnListaVentasActivas.Size = new System.Drawing.Size(209, 33);
-            this.BtnListaVentasActivas.TabIndex = 155;
-            this.BtnListaVentasActivas.Text = "Ventas Activas";
-            this.BtnListaVentasActivas.TextGroundColor = System.Drawing.Color.White;
-            this.BtnListaVentasActivas.UseVisualStyleBackColor = false;
-            this.BtnListaVentasActivas.Click += new System.EventHandler(this.BtnListaVentasActivas_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(925, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(41, 33);
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(35, 33);
-            this.pictureBox3.TabIndex = 11;
-            this.pictureBox3.TabStop = false;
-            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
-            // 
-            // BtnBillar
-            // 
-            this.BtnBillar.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.BtnBillar.BackColor = System.Drawing.Color.DarkGreen;
-            this.BtnBillar.BackGroundColor = System.Drawing.Color.DarkGreen;
-            this.BtnBillar.BorderColor = System.Drawing.Color.Lime;
-            this.BtnBillar.BorderRadius = 5;
-            this.BtnBillar.BorderSize = 0;
-            this.BtnBillar.FlatAppearance.BorderSize = 0;
-            this.BtnBillar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnBillar.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnBillar.ForeColor = System.Drawing.Color.White;
-            this.BtnBillar.Image = ((System.Drawing.Image)(resources.GetObject("BtnBillar.Image")));
-            this.BtnBillar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnBillar.Location = new System.Drawing.Point(660, 3);
-            this.BtnBillar.Name = "BtnBillar";
-            this.BtnBillar.Size = new System.Drawing.Size(152, 33);
-            this.BtnBillar.TabIndex = 156;
-            this.BtnBillar.Text = "Billar";
-            this.BtnBillar.TextGroundColor = System.Drawing.Color.White;
-            this.BtnBillar.UseVisualStyleBackColor = false;
-            this.BtnBillar.Visible = false;
-            // 
-            // BtnHoteleria
-            // 
-            this.BtnHoteleria.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.BtnHoteleria.BackColor = System.Drawing.Color.DarkGreen;
-            this.BtnHoteleria.BackGroundColor = System.Drawing.Color.DarkGreen;
-            this.BtnHoteleria.BorderColor = System.Drawing.Color.Lime;
-            this.BtnHoteleria.BorderRadius = 5;
-            this.BtnHoteleria.BorderSize = 0;
-            this.BtnHoteleria.FlatAppearance.BorderSize = 0;
-            this.BtnHoteleria.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnHoteleria.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnHoteleria.ForeColor = System.Drawing.Color.White;
-            this.BtnHoteleria.Image = ((System.Drawing.Image)(resources.GetObject("BtnHoteleria.Image")));
-            this.BtnHoteleria.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnHoteleria.Location = new System.Drawing.Point(503, 3);
-            this.BtnHoteleria.Name = "BtnHoteleria";
-            this.BtnHoteleria.Size = new System.Drawing.Size(152, 33);
-            this.BtnHoteleria.TabIndex = 155;
-            this.BtnHoteleria.Text = "Hotel";
-            this.BtnHoteleria.TextGroundColor = System.Drawing.Color.White;
-            this.BtnHoteleria.UseVisualStyleBackColor = false;
-            this.BtnHoteleria.Visible = false;
-            this.BtnHoteleria.Click += new System.EventHandler(this.BtnHoteleria_Click);
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
-            this.pictureBox6.Location = new System.Drawing.Point(1065, 0);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(35, 40);
-            this.pictureBox6.TabIndex = 14;
-            this.pictureBox6.TabStop = false;
-            this.pictureBox6.Click += new System.EventHandler(this.pictureBox6_Click);
-            // 
-            // BtnAgenda
-            // 
-            this.BtnAgenda.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.BtnAgenda.BackColor = System.Drawing.Color.DarkGreen;
-            this.BtnAgenda.BackGroundColor = System.Drawing.Color.DarkGreen;
-            this.BtnAgenda.BorderColor = System.Drawing.Color.Lime;
-            this.BtnAgenda.BorderRadius = 5;
-            this.BtnAgenda.BorderSize = 0;
-            this.BtnAgenda.FlatAppearance.BorderSize = 0;
-            this.BtnAgenda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnAgenda.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnAgenda.ForeColor = System.Drawing.Color.White;
-            this.BtnAgenda.Image = ((System.Drawing.Image)(resources.GetObject("BtnAgenda.Image")));
-            this.BtnAgenda.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnAgenda.Location = new System.Drawing.Point(189, 3);
-            this.BtnAgenda.Name = "BtnAgenda";
-            this.BtnAgenda.Size = new System.Drawing.Size(152, 33);
-            this.BtnAgenda.TabIndex = 153;
-            this.BtnAgenda.Text = "Agenda";
-            this.BtnAgenda.TextGroundColor = System.Drawing.Color.White;
-            this.BtnAgenda.UseVisualStyleBackColor = false;
-            this.BtnAgenda.Click += new System.EventHandler(this.especialButton2_Click);
-            // 
-            // BtnVentaRapida
-            // 
-            this.BtnVentaRapida.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.BtnVentaRapida.BackColor = System.Drawing.Color.DarkGreen;
-            this.BtnVentaRapida.BackGroundColor = System.Drawing.Color.DarkGreen;
-            this.BtnVentaRapida.BorderColor = System.Drawing.Color.Lime;
-            this.BtnVentaRapida.BorderRadius = 5;
-            this.BtnVentaRapida.BorderSize = 0;
-            this.BtnVentaRapida.FlatAppearance.BorderSize = 0;
-            this.BtnVentaRapida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnVentaRapida.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnVentaRapida.ForeColor = System.Drawing.Color.White;
-            this.BtnVentaRapida.Image = ((System.Drawing.Image)(resources.GetObject("BtnVentaRapida.Image")));
-            this.BtnVentaRapida.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnVentaRapida.Location = new System.Drawing.Point(6, 3);
-            this.BtnVentaRapida.Name = "BtnVentaRapida";
-            this.BtnVentaRapida.Size = new System.Drawing.Size(178, 33);
-            this.BtnVentaRapida.TabIndex = 152;
-            this.BtnVentaRapida.Text = "Venta Rapida";
-            this.BtnVentaRapida.TextGroundColor = System.Drawing.Color.White;
-            this.BtnVentaRapida.UseVisualStyleBackColor = false;
-            this.BtnVentaRapida.Click += new System.EventHandler(this.BtnVentaRapida_Click);
-            // 
-            // BtnMesas
-            // 
-            this.BtnMesas.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.BtnMesas.BackColor = System.Drawing.Color.DarkGreen;
-            this.BtnMesas.BackGroundColor = System.Drawing.Color.DarkGreen;
-            this.BtnMesas.BorderColor = System.Drawing.Color.Lime;
-            this.BtnMesas.BorderRadius = 5;
-            this.BtnMesas.BorderSize = 0;
-            this.BtnMesas.FlatAppearance.BorderSize = 0;
-            this.BtnMesas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnMesas.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnMesas.ForeColor = System.Drawing.Color.White;
-            this.BtnMesas.Image = ((System.Drawing.Image)(resources.GetObject("BtnMesas.Image")));
-            this.BtnMesas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnMesas.Location = new System.Drawing.Point(346, 3);
-            this.BtnMesas.Name = "BtnMesas";
-            this.BtnMesas.Size = new System.Drawing.Size(152, 33);
-            this.BtnMesas.TabIndex = 154;
-            this.BtnMesas.Text = "Mesas";
-            this.BtnMesas.TextGroundColor = System.Drawing.Color.White;
-            this.BtnMesas.UseVisualStyleBackColor = false;
-            this.BtnMesas.Click += new System.EventHandler(this.especialButton4_Click_2);
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
-            this.pictureBox5.Location = new System.Drawing.Point(1100, 0);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(35, 40);
-            this.pictureBox5.TabIndex = 13;
-            this.pictureBox5.TabStop = false;
-            this.pictureBox5.Click += new System.EventHandler(this.pictureBox5_Click);
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(1135, 0);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(35, 40);
-            this.pictureBox4.TabIndex = 12;
-            this.pictureBox4.TabStop = false;
-            this.pictureBox4.Click += new System.EventHandler(this.pictureBox4_Click);
-            // 
-            // BtnCatalogoGeneral
-            // 
-            this.BtnCatalogoGeneral.BackColor = System.Drawing.Color.DarkGray;
-            this.BtnCatalogoGeneral.BackGroundColor = System.Drawing.Color.DarkGray;
-            this.BtnCatalogoGeneral.BorderColor = System.Drawing.Color.Transparent;
-            this.BtnCatalogoGeneral.BorderRadius = 0;
-            this.BtnCatalogoGeneral.BorderSize = 0;
-            this.BtnCatalogoGeneral.FlatAppearance.BorderSize = 0;
-            this.BtnCatalogoGeneral.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.BtnCatalogoGeneral.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.BtnCatalogoGeneral.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCatalogoGeneral.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnCatalogoGeneral.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BtnCatalogoGeneral.Image = ((System.Drawing.Image)(resources.GetObject("BtnCatalogoGeneral.Image")));
-            this.BtnCatalogoGeneral.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnCatalogoGeneral.Location = new System.Drawing.Point(1, 377);
-            this.BtnCatalogoGeneral.Name = "BtnCatalogoGeneral";
-            this.BtnCatalogoGeneral.Size = new System.Drawing.Size(169, 58);
-            this.BtnCatalogoGeneral.TabIndex = 14;
-            this.BtnCatalogoGeneral.Text = "General";
-            this.BtnCatalogoGeneral.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnCatalogoGeneral.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BtnCatalogoGeneral.UseVisualStyleBackColor = false;
-            this.BtnCatalogoGeneral.Click += new System.EventHandler(this.BtnCatalogoGeneral_Click);
-            // 
-            // BtnReportes
-            // 
-            this.BtnReportes.BackColor = System.Drawing.Color.DarkGray;
-            this.BtnReportes.BackGroundColor = System.Drawing.Color.DarkGray;
-            this.BtnReportes.BorderColor = System.Drawing.Color.Transparent;
-            this.BtnReportes.BorderRadius = 0;
-            this.BtnReportes.BorderSize = 1;
-            this.BtnReportes.FlatAppearance.BorderSize = 0;
-            this.BtnReportes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.BtnReportes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnReportes.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnReportes.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BtnReportes.Image = ((System.Drawing.Image)(resources.GetObject("BtnReportes.Image")));
-            this.BtnReportes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnReportes.Location = new System.Drawing.Point(1, 316);
-            this.BtnReportes.Name = "BtnReportes";
-            this.BtnReportes.Size = new System.Drawing.Size(169, 58);
-            this.BtnReportes.TabIndex = 13;
-            this.BtnReportes.Text = "Reportes";
-            this.BtnReportes.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnReportes.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BtnReportes.UseVisualStyleBackColor = false;
-            this.BtnReportes.Click += new System.EventHandler(this.especialButton6_Click);
-            // 
-            // especialButton1
-            // 
-            this.especialButton1.BackColor = System.Drawing.Color.DarkGray;
-            this.especialButton1.BackGroundColor = System.Drawing.Color.DarkGray;
-            this.especialButton1.BorderColor = System.Drawing.Color.Lavender;
-            this.especialButton1.BorderRadius = 0;
-            this.especialButton1.BorderSize = 0;
-            this.especialButton1.FlatAppearance.BorderSize = 0;
-            this.especialButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.especialButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.especialButton1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.especialButton1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.especialButton1.Image = ((System.Drawing.Image)(resources.GetObject("especialButton1.Image")));
-            this.especialButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.especialButton1.Location = new System.Drawing.Point(0, 624);
-            this.especialButton1.Name = "especialButton1";
-            this.especialButton1.Size = new System.Drawing.Size(169, 61);
-            this.especialButton1.TabIndex = 1;
-            this.especialButton1.Text = " Sesión";
-            this.especialButton1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.especialButton1.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.especialButton1.UseVisualStyleBackColor = false;
-            this.especialButton1.Click += new System.EventHandler(this.especialButton1_Click);
-            // 
-            // BtnConfigTurnos
-            // 
-            this.BtnConfigTurnos.BackColor = System.Drawing.Color.DarkGray;
-            this.BtnConfigTurnos.BackGroundColor = System.Drawing.Color.DarkGray;
-            this.BtnConfigTurnos.BorderColor = System.Drawing.Color.Transparent;
-            this.BtnConfigTurnos.BorderRadius = 0;
-            this.BtnConfigTurnos.BorderSize = 1;
-            this.BtnConfigTurnos.FlatAppearance.BorderSize = 0;
-            this.BtnConfigTurnos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.BtnConfigTurnos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnConfigTurnos.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnConfigTurnos.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BtnConfigTurnos.Image = ((System.Drawing.Image)(resources.GetObject("BtnConfigTurnos.Image")));
-            this.BtnConfigTurnos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnConfigTurnos.Location = new System.Drawing.Point(1, 255);
-            this.BtnConfigTurnos.Name = "BtnConfigTurnos";
-            this.BtnConfigTurnos.Size = new System.Drawing.Size(169, 58);
-            this.BtnConfigTurnos.TabIndex = 9;
-            this.BtnConfigTurnos.Text = "Asistencia";
-            this.BtnConfigTurnos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnConfigTurnos.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BtnConfigTurnos.UseVisualStyleBackColor = false;
-            this.BtnConfigTurnos.Click += new System.EventHandler(this.especialButton4_Click_1);
-            // 
-            // BtnCaja
-            // 
-            this.BtnCaja.BackColor = System.Drawing.Color.DarkGray;
-            this.BtnCaja.BackGroundColor = System.Drawing.Color.DarkGray;
-            this.BtnCaja.BorderColor = System.Drawing.Color.Transparent;
-            this.BtnCaja.BorderRadius = 0;
-            this.BtnCaja.BorderSize = 1;
-            this.BtnCaja.FlatAppearance.BorderSize = 0;
-            this.BtnCaja.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.BtnCaja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCaja.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnCaja.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BtnCaja.Image = ((System.Drawing.Image)(resources.GetObject("BtnCaja.Image")));
-            this.BtnCaja.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnCaja.Location = new System.Drawing.Point(1, 194);
-            this.BtnCaja.Name = "BtnCaja";
-            this.BtnCaja.Size = new System.Drawing.Size(169, 58);
-            this.BtnCaja.TabIndex = 7;
-            this.BtnCaja.Text = " Caja";
-            this.BtnCaja.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnCaja.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BtnCaja.UseVisualStyleBackColor = false;
-            this.BtnCaja.Click += new System.EventHandler(this.especialButton4_Click);
-            // 
-            // BtnInventario
-            // 
-            this.BtnInventario.BackColor = System.Drawing.Color.DarkGray;
-            this.BtnInventario.BackGroundColor = System.Drawing.Color.DarkGray;
-            this.BtnInventario.BorderColor = System.Drawing.Color.Transparent;
-            this.BtnInventario.BorderRadius = 0;
-            this.BtnInventario.BorderSize = 1;
-            this.BtnInventario.FlatAppearance.BorderSize = 0;
-            this.BtnInventario.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.BtnInventario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnInventario.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnInventario.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BtnInventario.Image = ((System.Drawing.Image)(resources.GetObject("BtnInventario.Image")));
-            this.BtnInventario.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnInventario.Location = new System.Drawing.Point(1, 133);
-            this.BtnInventario.Name = "BtnInventario";
-            this.BtnInventario.Size = new System.Drawing.Size(169, 58);
-            this.BtnInventario.TabIndex = 6;
-            this.BtnInventario.Text = "Inventario";
-            this.BtnInventario.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnInventario.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BtnInventario.UseVisualStyleBackColor = false;
-            this.BtnInventario.Click += new System.EventHandler(this.BtnInventario_Click);
-            // 
-            // btnSeguridad
-            // 
-            this.btnSeguridad.BackColor = System.Drawing.Color.DarkGray;
-            this.btnSeguridad.BackGroundColor = System.Drawing.Color.DarkGray;
-            this.btnSeguridad.BorderColor = System.Drawing.Color.Transparent;
-            this.btnSeguridad.BorderRadius = 0;
-            this.btnSeguridad.BorderSize = 1;
-            this.btnSeguridad.FlatAppearance.BorderSize = 0;
-            this.btnSeguridad.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.btnSeguridad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSeguridad.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSeguridad.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnSeguridad.Image = ((System.Drawing.Image)(resources.GetObject("btnSeguridad.Image")));
-            this.btnSeguridad.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSeguridad.Location = new System.Drawing.Point(1, 438);
-            this.btnSeguridad.Name = "btnSeguridad";
-            this.btnSeguridad.Size = new System.Drawing.Size(169, 58);
-            this.btnSeguridad.TabIndex = 5;
-            this.btnSeguridad.Text = "Seguridad";
-            this.btnSeguridad.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSeguridad.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnSeguridad.UseVisualStyleBackColor = false;
-            this.btnSeguridad.Click += new System.EventHandler(this.btnSeguridad_Click);
-            // 
-            // btnCatalogos
-            // 
-            this.btnCatalogos.BackColor = System.Drawing.Color.DarkGray;
-            this.btnCatalogos.BackGroundColor = System.Drawing.Color.DarkGray;
-            this.btnCatalogos.BorderColor = System.Drawing.Color.Transparent;
-            this.btnCatalogos.BorderRadius = 0;
-            this.btnCatalogos.BorderSize = 1;
-            this.btnCatalogos.FlatAppearance.BorderSize = 0;
-            this.btnCatalogos.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.btnCatalogos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.btnCatalogos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCatalogos.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCatalogos.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnCatalogos.Image = ((System.Drawing.Image)(resources.GetObject("btnCatalogos.Image")));
-            this.btnCatalogos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCatalogos.Location = new System.Drawing.Point(1, 11);
-            this.btnCatalogos.Name = "btnCatalogos";
-            this.btnCatalogos.Size = new System.Drawing.Size(169, 58);
-            this.btnCatalogos.TabIndex = 4;
-            this.btnCatalogos.Text = "Catalogos";
-            this.btnCatalogos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCatalogos.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnCatalogos.UseVisualStyleBackColor = false;
-            this.btnCatalogos.Click += new System.EventHandler(this.btnCatalogos_Click);
-            // 
-            // BtnOpciones
-            // 
-            this.BtnOpciones.BackColor = System.Drawing.Color.DarkGray;
-            this.BtnOpciones.BackGroundColor = System.Drawing.Color.DarkGray;
-            this.BtnOpciones.BorderColor = System.Drawing.Color.Transparent;
-            this.BtnOpciones.BorderRadius = 0;
-            this.BtnOpciones.BorderSize = 1;
-            this.BtnOpciones.FlatAppearance.BorderSize = 0;
-            this.BtnOpciones.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.BtnOpciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnOpciones.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnOpciones.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BtnOpciones.Image = ((System.Drawing.Image)(resources.GetObject("BtnOpciones.Image")));
-            this.BtnOpciones.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnOpciones.Location = new System.Drawing.Point(1, 499);
-            this.BtnOpciones.Name = "BtnOpciones";
-            this.BtnOpciones.Size = new System.Drawing.Size(169, 58);
-            this.BtnOpciones.TabIndex = 3;
-            this.BtnOpciones.Text = "Sistema";
-            this.BtnOpciones.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnOpciones.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BtnOpciones.UseVisualStyleBackColor = false;
-            this.BtnOpciones.Click += new System.EventHandler(this.BtnOpciones_Click);
-            // 
-            // BtnVentasDirectas
-            // 
-            this.BtnVentasDirectas.BackColor = System.Drawing.Color.DarkGray;
-            this.BtnVentasDirectas.BackGroundColor = System.Drawing.Color.DarkGray;
-            this.BtnVentasDirectas.BorderColor = System.Drawing.Color.Transparent;
-            this.BtnVentasDirectas.BorderRadius = 0;
-            this.BtnVentasDirectas.BorderSize = 1;
-            this.BtnVentasDirectas.FlatAppearance.BorderSize = 0;
-            this.BtnVentasDirectas.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.BtnVentasDirectas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnVentasDirectas.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnVentasDirectas.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BtnVentasDirectas.Image = ((System.Drawing.Image)(resources.GetObject("BtnVentasDirectas.Image")));
-            this.BtnVentasDirectas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnVentasDirectas.Location = new System.Drawing.Point(1, 72);
-            this.BtnVentasDirectas.Name = "BtnVentasDirectas";
-            this.BtnVentasDirectas.Size = new System.Drawing.Size(169, 58);
-            this.BtnVentasDirectas.TabIndex = 2;
-            this.BtnVentasDirectas.Text = "    Ventas ";
-            this.BtnVentasDirectas.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnVentasDirectas.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BtnVentasDirectas.UseVisualStyleBackColor = false;
-            this.BtnVentasDirectas.Click += new System.EventHandler(this.BtnVentasDirectas_Click);
-            // 
-            // especialButton3
-            // 
-            this.especialButton3.BackColor = System.Drawing.Color.DarkGray;
-            this.especialButton3.BackGroundColor = System.Drawing.Color.DarkGray;
-            this.especialButton3.BorderColor = System.Drawing.Color.Transparent;
-            this.especialButton3.BorderRadius = 0;
-            this.especialButton3.BorderSize = 1;
-            this.especialButton3.FlatAppearance.BorderSize = 0;
-            this.especialButton3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.especialButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.especialButton3.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.especialButton3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.especialButton3.Image = ((System.Drawing.Image)(resources.GetObject("especialButton3.Image")));
-            this.especialButton3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.especialButton3.Location = new System.Drawing.Point(0, 560);
-            this.especialButton3.Name = "especialButton3";
-            this.especialButton3.Size = new System.Drawing.Size(169, 61);
-            this.especialButton3.TabIndex = 1;
-            this.especialButton3.Text = "Salir";
-            this.especialButton3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.especialButton3.TextGroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.especialButton3.UseVisualStyleBackColor = false;
-            this.especialButton3.Click += new System.EventHandler(this.especialButton3_Click);
-            // 
-            // ventasDirectasDeAtaudesToolStripMenuItem
-            // 
-            this.ventasDirectasDeAtaudesToolStripMenuItem.BackColor = System.Drawing.Color.Transparent;
-            this.ventasDirectasDeAtaudesToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ventasDirectasDeAtaudesToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ventasDirectasDeAtaudesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("ventasDirectasDeAtaudesToolStripMenuItem.Image")));
-            this.ventasDirectasDeAtaudesToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.ventasDirectasDeAtaudesToolStripMenuItem.Name = "ventasDirectasDeAtaudesToolStripMenuItem";
-            this.ventasDirectasDeAtaudesToolStripMenuItem.Size = new System.Drawing.Size(269, 26);
-            this.ventasDirectasDeAtaudesToolStripMenuItem.Text = "Venta Rapida";
-            this.ventasDirectasDeAtaudesToolStripMenuItem.Click += new System.EventHandler(this.ventasDirectasDeAtaudesToolStripMenuItem_Click);
-            // 
             // PnlPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1156,8 +1155,13 @@
             this.MenuVertical.ResumeLayout(false);
             this.PnlTitulo.ResumeLayout(false);
             this.PnlTitulo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.PnlCentral.ResumeLayout(false);
             this.PnlCentral.PerformLayout();
             this.DesplegableContrato.ResumeLayout(false);
@@ -1167,11 +1171,6 @@
             this.MenuSeguridad.ResumeLayout(false);
             this.MenuInventario.ResumeLayout(false);
             this.MenuCaja.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
 
         }

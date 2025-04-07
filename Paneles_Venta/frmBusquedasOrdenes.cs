@@ -162,8 +162,33 @@ namespace NeoCobranza.Paneles_Venta
 
         private void ConfigUI()
         {
-            DateTime fechaInicio = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddDays(-1);
-            DateTime fechaFin = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(1).AddDays(1);
+            DateTime fechaInicio;
+            DateTime fechaFin;
+
+            if (!ChkFiltrarPorFecha.Checked)
+            {
+                DtInicio.Visible = false; 
+                DtFin.Visible = false;
+                LblFechaHasta.Visible = false;
+                LblFechaIni.Visible = false;
+                LblFiltrarFecha.Visible = false;
+                CmbFiltrarFecha.Visible=false;
+
+                fechaInicio = new DateTime(1800, 1, 1);
+                fechaFin = new DateTime(2200, 12, 31);
+            }
+            else
+            {
+                DtInicio.Visible = true;
+                DtFin.Visible = true;
+                LblFechaHasta.Visible = true;
+                LblFechaIni.Visible = true;
+                LblFiltrarFecha.Visible = true;
+                CmbFiltrarFecha.Visible = true;
+
+                fechaInicio = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddDays(-1);
+                fechaFin = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(1).AddDays(1);
+            }
 
             // Asignar las fechas a los DateTimePicker
             DtInicio.Value = fechaInicio;
@@ -499,6 +524,8 @@ namespace NeoCobranza.Paneles_Venta
                 {
                     PnlCancelarOrden pnlCancelarOrden = new PnlCancelarOrden(dgvCatalogoOrdenes.Rows[e.RowIndex].Cells[3].Value.ToString(), null, Convert.ToString(CmbSucursal.SelectedValue));
                     pnlCancelarOrden.ShowDialog();
+
+                    FuncionesPrincipales();
                 }
             }
             else
@@ -511,6 +538,8 @@ namespace NeoCobranza.Paneles_Venta
                 {
                     PnlCancelarOrden pnlCancelarOrden = new PnlCancelarOrden(dgvCatalogoOrdenes.Rows[e.RowIndex].Cells[2].Value.ToString(), null, Convert.ToString(CmbSucursal.SelectedValue));
                     pnlCancelarOrden.ShowDialog();
+
+                    FuncionesPrincipales();
                 }
             } 
         }
@@ -1066,6 +1095,44 @@ namespace NeoCobranza.Paneles_Venta
         private void ChkSeleccionarTodo_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void ChkFiltrarPorFecha_Click(object sender, EventArgs e)
+        {
+            DateTime fechaInicio;
+            DateTime fechaFin;
+
+            if (!ChkFiltrarPorFecha.Checked)
+            {
+                DtInicio.Visible = false;
+                DtFin.Visible = false;
+                LblFechaHasta.Visible = false;
+                LblFechaIni.Visible = false;
+                LblFiltrarFecha.Visible = false;
+                CmbFiltrarFecha.Visible = false;
+
+                fechaInicio = new DateTime(1800, 1, 1);
+                fechaFin = new DateTime(2200, 12, 31);
+            }
+            else
+            {
+                DtInicio.Visible = true;
+                DtFin.Visible = true;
+                LblFechaHasta.Visible = true;
+                LblFechaIni.Visible = true;
+                LblFiltrarFecha.Visible = true;
+                CmbFiltrarFecha.Visible = true;
+
+                fechaInicio = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddDays(-1);
+                fechaFin = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(1).AddDays(1);
+            }
+
+            DtInicio.Value = fechaInicio;
+            DtFin.Value = fechaFin;
+
+            CmbFiltrarFecha.SelectedIndex = 0;
+
+            FuncionesPrincipales();
         }
     }
 }

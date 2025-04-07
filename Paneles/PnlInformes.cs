@@ -70,5 +70,11 @@ namespace NeoCobranza.Paneles
             PnlGenerarInforme frm = new PnlGenerarInforme("Ajustes");
             frm.ShowDialog();
         }
+
+        private void BtnReporteVentasDiarias_Click(object sender, EventArgs e)
+        {
+            PnlGenerarInforme frm = new PnlGenerarInforme("SoloVentas");
+            frm.ShowDialog();
+        }
     }
 }

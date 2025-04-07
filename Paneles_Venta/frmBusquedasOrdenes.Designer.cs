@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmBusquedasOrdenes));
             this.PnlTitulo = new System.Windows.Forms.Panel();
             this.llbTitulo = new System.Windows.Forms.Label();
@@ -52,19 +52,20 @@
             this.TxtColocado = new System.Windows.Forms.TextBox();
             this.TxtRecuperado = new System.Windows.Forms.TextBox();
             this.TxtRestante = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.LblFechaIni = new System.Windows.Forms.Label();
             this.DtInicio = new System.Windows.Forms.DateTimePicker();
-            this.label9 = new System.Windows.Forms.Label();
+            this.LblFechaHasta = new System.Windows.Forms.Label();
             this.DtFin = new System.Windows.Forms.DateTimePicker();
-            this.label10 = new System.Windows.Forms.Label();
+            this.LblFiltrarFecha = new System.Windows.Forms.Label();
             this.CmbFiltrarFecha = new System.Windows.Forms.ComboBox();
             this.CmbSegmentacion = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.ChkSeleccionarTodo = new System.Windows.Forms.CheckBox();
-            this.TxtFiltrar = new NeoCobranza.Controladores.LoginUserControl();
+            this.ChkFiltrarPorFecha = new System.Windows.Forms.CheckBox();
             this.BtnPagarOrdenes = new NeoCobranza.Especiales.EspecialButton();
             this.BtnExcel = new NeoCobranza.Especiales.EspecialButton();
             this.BtnPdf = new NeoCobranza.Especiales.EspecialButton();
+            this.TxtFiltrar = new NeoCobranza.Controladores.LoginUserControl();
             this.PnlTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCatalogoOrdenes)).BeginInit();
             this.PnlPaginado.SuspendLayout();
@@ -104,36 +105,36 @@
             this.dgvCatalogoOrdenes.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvCatalogoOrdenes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dgvCatalogoOrdenes.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCatalogoOrdenes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCatalogoOrdenes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvCatalogoOrdenes.ColumnHeadersHeight = 30;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCatalogoOrdenes.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCatalogoOrdenes.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvCatalogoOrdenes.GridColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgvCatalogoOrdenes.Location = new System.Drawing.Point(16, 111);
             this.dgvCatalogoOrdenes.Name = "dgvCatalogoOrdenes";
             this.dgvCatalogoOrdenes.ReadOnly = true;
             this.dgvCatalogoOrdenes.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCatalogoOrdenes.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCatalogoOrdenes.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvCatalogoOrdenes.RowHeadersWidth = 15;
             this.dgvCatalogoOrdenes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCatalogoOrdenes.Size = new System.Drawing.Size(1116, 255);
@@ -340,54 +341,54 @@
             this.TxtRestante.Size = new System.Drawing.Size(180, 27);
             this.TxtRestante.TabIndex = 158;
             // 
-            // label8
+            // LblFechaIni
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label8.Location = new System.Drawing.Point(15, 74);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(109, 17);
-            this.label8.TabIndex = 159;
-            this.label8.Text = "Filtro por fecha:";
+            this.LblFechaIni.AutoSize = true;
+            this.LblFechaIni.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblFechaIni.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.LblFechaIni.Location = new System.Drawing.Point(15, 85);
+            this.LblFechaIni.Name = "LblFechaIni";
+            this.LblFechaIni.Size = new System.Drawing.Size(109, 17);
+            this.LblFechaIni.TabIndex = 159;
+            this.LblFechaIni.Text = "Filtro por fecha:";
             // 
             // DtInicio
             // 
             this.DtInicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.DtInicio.Location = new System.Drawing.Point(139, 73);
+            this.DtInicio.Location = new System.Drawing.Point(139, 84);
             this.DtInicio.Name = "DtInicio";
             this.DtInicio.Size = new System.Drawing.Size(118, 20);
             this.DtInicio.TabIndex = 160;
             // 
-            // label9
+            // LblFechaHasta
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label9.Location = new System.Drawing.Point(277, 74);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(45, 17);
-            this.label9.TabIndex = 161;
-            this.label9.Text = "Hasta";
+            this.LblFechaHasta.AutoSize = true;
+            this.LblFechaHasta.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblFechaHasta.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.LblFechaHasta.Location = new System.Drawing.Point(277, 85);
+            this.LblFechaHasta.Name = "LblFechaHasta";
+            this.LblFechaHasta.Size = new System.Drawing.Size(45, 17);
+            this.LblFechaHasta.TabIndex = 161;
+            this.LblFechaHasta.Text = "Hasta";
             // 
             // DtFin
             // 
             this.DtFin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.DtFin.Location = new System.Drawing.Point(353, 74);
+            this.DtFin.Location = new System.Drawing.Point(353, 85);
             this.DtFin.Name = "DtFin";
             this.DtFin.Size = new System.Drawing.Size(109, 20);
             this.DtFin.TabIndex = 162;
             // 
-            // label10
+            // LblFiltrarFecha
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label10.Location = new System.Drawing.Point(487, 74);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(68, 17);
-            this.label10.TabIndex = 163;
-            this.label10.Text = "Filtrar por";
+            this.LblFiltrarFecha.AutoSize = true;
+            this.LblFiltrarFecha.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblFiltrarFecha.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.LblFiltrarFecha.Location = new System.Drawing.Point(486, 84);
+            this.LblFiltrarFecha.Name = "LblFiltrarFecha";
+            this.LblFiltrarFecha.Size = new System.Drawing.Size(68, 17);
+            this.LblFiltrarFecha.TabIndex = 163;
+            this.LblFiltrarFecha.Text = "Filtrar por";
             // 
             // CmbFiltrarFecha
             // 
@@ -399,7 +400,7 @@
             this.CmbFiltrarFecha.Items.AddRange(new object[] {
             "Fecha de Realización",
             "Fecha de Pago"});
-            this.CmbFiltrarFecha.Location = new System.Drawing.Point(573, 68);
+            this.CmbFiltrarFecha.Location = new System.Drawing.Point(572, 74);
             this.CmbFiltrarFecha.Name = "CmbFiltrarFecha";
             this.CmbFiltrarFecha.Size = new System.Drawing.Size(249, 29);
             this.CmbFiltrarFecha.TabIndex = 164;
@@ -450,29 +451,17 @@
             this.ChkSeleccionarTodo.CheckedChanged += new System.EventHandler(this.ChkSeleccionarTodo_CheckedChanged);
             this.ChkSeleccionarTodo.Click += new System.EventHandler(this.ChkSeleccionarTodo_Click);
             // 
-            // TxtFiltrar
+            // ChkFiltrarPorFecha
             // 
-            this.TxtFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TxtFiltrar.BorderColor = System.Drawing.Color.Silver;
-            this.TxtFiltrar.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.TxtFiltrar.BorderRadius = 0;
-            this.TxtFiltrar.BorderSize = 2;
-            this.TxtFiltrar.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtFiltrar.ForeColor = System.Drawing.Color.DimGray;
-            this.TxtFiltrar.Location = new System.Drawing.Point(16, 11);
-            this.TxtFiltrar.Margin = new System.Windows.Forms.Padding(4);
-            this.TxtFiltrar.Multilinea = false;
-            this.TxtFiltrar.Name = "TxtFiltrar";
-            this.TxtFiltrar.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.TxtFiltrar.PasswordChar = false;
-            this.TxtFiltrar.PlaceHolderColor = System.Drawing.Color.DarkGray;
-            this.TxtFiltrar.PlaceHolderText = "Buscar...";
-            this.TxtFiltrar.Size = new System.Drawing.Size(465, 36);
-            this.TxtFiltrar.TabIndex = 147;
-            this.TxtFiltrar.Texts = "";
-            this.TxtFiltrar.UnderLineFlat = true;
-            this.TxtFiltrar._TextChanged += new System.EventHandler(this.TxtFiltrar__TextChanged);
+            this.ChkFiltrarPorFecha.AutoSize = true;
+            this.ChkFiltrarPorFecha.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkFiltrarPorFecha.Location = new System.Drawing.Point(18, 55);
+            this.ChkFiltrarPorFecha.Name = "ChkFiltrarPorFecha";
+            this.ChkFiltrarPorFecha.Size = new System.Drawing.Size(130, 20);
+            this.ChkFiltrarPorFecha.TabIndex = 171;
+            this.ChkFiltrarPorFecha.Text = "Filtrar Por Fecha";
+            this.ChkFiltrarPorFecha.UseVisualStyleBackColor = true;
+            this.ChkFiltrarPorFecha.Click += new System.EventHandler(this.ChkFiltrarPorFecha_Click);
             // 
             // BtnPagarOrdenes
             // 
@@ -543,12 +532,37 @@
             this.BtnPdf.UseVisualStyleBackColor = false;
             this.BtnPdf.Click += new System.EventHandler(this.BtnPdf_Click);
             // 
+            // TxtFiltrar
+            // 
+            this.TxtFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtFiltrar.BorderColor = System.Drawing.Color.Black;
+            this.TxtFiltrar.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.TxtFiltrar.BorderRadius = 0;
+            this.TxtFiltrar.BorderSize = 2;
+            this.TxtFiltrar.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtFiltrar.ForeColor = System.Drawing.Color.DimGray;
+            this.TxtFiltrar.Location = new System.Drawing.Point(16, 8);
+            this.TxtFiltrar.Margin = new System.Windows.Forms.Padding(4);
+            this.TxtFiltrar.Multilinea = false;
+            this.TxtFiltrar.Name = "TxtFiltrar";
+            this.TxtFiltrar.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this.TxtFiltrar.PasswordChar = false;
+            this.TxtFiltrar.PlaceHolderColor = System.Drawing.Color.DarkGray;
+            this.TxtFiltrar.PlaceHolderText = "Buscar...";
+            this.TxtFiltrar.Size = new System.Drawing.Size(465, 36);
+            this.TxtFiltrar.TabIndex = 147;
+            this.TxtFiltrar.Texts = "";
+            this.TxtFiltrar.UnderLineFlat = true;
+            this.TxtFiltrar._TextChanged += new System.EventHandler(this.TxtFiltrar__TextChanged);
+            // 
             // frmBusquedasOrdenes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1158, 555);
+            this.Controls.Add(this.ChkFiltrarPorFecha);
             this.Controls.Add(this.ChkSeleccionarTodo);
             this.Controls.Add(this.BtnPagarOrdenes);
             this.Controls.Add(this.CmbSegmentacion);
@@ -556,11 +570,11 @@
             this.Controls.Add(this.BtnExcel);
             this.Controls.Add(this.BtnPdf);
             this.Controls.Add(this.CmbFiltrarFecha);
-            this.Controls.Add(this.label10);
+            this.Controls.Add(this.LblFiltrarFecha);
             this.Controls.Add(this.DtFin);
-            this.Controls.Add(this.label9);
+            this.Controls.Add(this.LblFechaHasta);
             this.Controls.Add(this.DtInicio);
-            this.Controls.Add(this.label8);
+            this.Controls.Add(this.LblFechaIni);
             this.Controls.Add(this.TxtRestante);
             this.Controls.Add(this.TxtRecuperado);
             this.Controls.Add(this.TxtColocado);
@@ -614,11 +628,11 @@
         public System.Windows.Forms.TextBox TxtColocado;
         public System.Windows.Forms.TextBox TxtRecuperado;
         public System.Windows.Forms.TextBox TxtRestante;
-        public System.Windows.Forms.Label label8;
+        public System.Windows.Forms.Label LblFechaIni;
         private System.Windows.Forms.DateTimePicker DtInicio;
-        public System.Windows.Forms.Label label9;
+        public System.Windows.Forms.Label LblFechaHasta;
         private System.Windows.Forms.DateTimePicker DtFin;
-        public System.Windows.Forms.Label label10;
+        public System.Windows.Forms.Label LblFiltrarFecha;
         public System.Windows.Forms.ComboBox CmbFiltrarFecha;
         public Especiales.EspecialButton BtnExcel;
         public Especiales.EspecialButton BtnPdf;
@@ -626,5 +640,6 @@
         public System.Windows.Forms.Label label11;
         public Especiales.EspecialButton BtnPagarOrdenes;
         private System.Windows.Forms.CheckBox ChkSeleccionarTodo;
+        private System.Windows.Forms.CheckBox ChkFiltrarPorFecha;
     }
 }

@@ -107,7 +107,7 @@ namespace NeoCobranza.Paneles
             }
 
             // Asignar el manejador de impresión, pasando el tamaño del ticket
-            doc.PrintPage += (s, a) => imprimeTicket(s, a, ticketSize);
+            doc.PrintPage += (s, a) => imprimeTicketComanda(s, a, ticketSize);
 
             try
             {
@@ -119,7 +119,7 @@ namespace NeoCobranza.Paneles
             }
         }
 
-        private void imprimeTicket(object sender, PrintPageEventArgs e, int ticketSize)
+        private void imprimeTicketComanda(object sender, PrintPageEventArgs e, int ticketSize)
         {
             // Convertir el ancho efectivo: para 58mm se usa 48mm efectivos, para 80mm se usa el mismo tamaño
             float effectiveWidthMm = (ticketSize == 58) ? 48 : ticketSize;
@@ -169,6 +169,12 @@ namespace NeoCobranza.Paneles
             e.Graphics.DrawString(nombreCliente, regularFont, Brushes.Black,
                 new RectangleF(marginLeft, yPosition, availableWidth, nombreClienteSize.Height));
             yPosition += nombreClienteSize.Height + 5;
+
+            string salaMesa = "Sala-Mesa: "+Convert.ToString(dtResponseOrden.Rows[0]["SalaMesa"]);
+            SizeF SalaMesaSize = e.Graphics.MeasureString(salaMesa, regularFont, (int)availableWidth);
+            e.Graphics.DrawString(salaMesa, regularFont, Brushes.Black,
+                new RectangleF(marginLeft, yPosition, availableWidth, SalaMesaSize.Height));
+            yPosition += SalaMesaSize.Height + 5;
 
             // Número de orden
             string ordenText = $"No. Orden: {Convert.ToString(dtResponseOrden.Rows[0]["OrdenId"])}";
@@ -225,9 +231,9 @@ namespace NeoCobranza.Paneles
 
                         // Imprimir el nombre del producto (permitiendo wrap)
                         RectangleF prodRect = new RectangleF(marginLeft, yPosition, availableWidth, 1000);
-                        SizeF prodSize = e.Graphics.MeasureString(producto, regularFont, (int)availableWidth);
+                        SizeF prodSize = e.Graphics.MeasureString(producto, boldFont, (int)availableWidth);
                         prodRect.Height = prodSize.Height;
-                        e.Graphics.DrawString(producto, regularFont, Brushes.Black, prodRect);
+                        e.Graphics.DrawString(producto, boldFont, Brushes.Black, prodRect);
                         yPosition += prodSize.Height;
 
                         //// Imprimir detalle: cantidad, precio unitario y subtotal
@@ -246,9 +252,9 @@ namespace NeoCobranza.Paneles
                         {
                             // Imprimir los detalles adicionales con el formato que desees
                             RectangleF additionalRect = new RectangleF(marginLeft, yPosition, availableWidth, 1000);
-                            SizeF additionalSize = e.Graphics.MeasureString(item[0].ToString(), regularFont, (int)availableWidth);
+                            SizeF additionalSize = e.Graphics.MeasureString("- " + item[0].ToString(), regularFont, (int)availableWidth);
                             additionalRect.Height = additionalSize.Height;
-                            e.Graphics.DrawString(item[0].ToString(), regularFont, Brushes.Black, additionalRect);
+                            e.Graphics.DrawString("- "+item[0].ToString(), regularFont, Brushes.Black, additionalRect);
                             yPosition += additionalSize.Height + 2;
                         }
 
