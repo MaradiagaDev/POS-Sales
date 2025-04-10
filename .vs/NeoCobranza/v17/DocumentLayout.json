@@ -3,8 +3,28 @@
   "WorkspaceRootPath": "D:\\Programa Personal\\POS-Sales\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\viewmodels\\pdfprinter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:viewmodels\\pdfprinter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|d:\\programa personal\\pos-sales\\paneles\\panelmodificarcliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles\\panelmodificarcliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|D:\\Programa Personal\\POS-Sales\\paneles\\panelmodificarcliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles\\panelmodificarcliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|D:\\Programa Personal\\POS-Sales\\paneles\\pnlcatalogoclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles\\pnlcatalogoclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|D:\\Programa Personal\\POS-Sales\\paneles\\pnlcatalogoclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles\\pnlcatalogoclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|D:\\Programa Personal\\POS-Sales\\paneles\\pnlprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles\\pnlprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|D:\\Programa Personal\\POS-Sales\\paneles\\pnlprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4064DBEA-CC6A-4D1F-801F-7DF092F0D648}|NeoCobranza.csproj|solutionrelative:paneles\\pnlprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -22,16 +42,74 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PDFPrinter.cs",
-              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\ViewModels\\PDFPrinter.cs",
-              "RelativeDocumentMoniker": "ViewModels\\PDFPrinter.cs",
-              "ToolTip": "D:\\Programa Personal\\POS-Sales\\ViewModels\\PDFPrinter.cs",
-              "RelativeToolTip": "ViewModels\\PDFPrinter.cs",
-              "ViewState": "AgIAAOkAAAAAAAAAAAAwwAgBAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "PanelModificarCliente.cs",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles\\PanelModificarCliente.cs",
+              "RelativeDocumentMoniker": "Paneles\\PanelModificarCliente.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles\\PanelModificarCliente.cs",
+              "RelativeToolTip": "Paneles\\PanelModificarCliente.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAjwBsAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T21:14:03.497Z",
+              "WhenOpened": "2025-04-10T20:32:58.414Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PanelModificarCliente.cs [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles\\PanelModificarCliente.cs",
+              "RelativeDocumentMoniker": "Paneles\\PanelModificarCliente.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles\\PanelModificarCliente.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Paneles\\PanelModificarCliente.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-10T20:33:01.012Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PnlCatalogoClientes.cs",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlCatalogoClientes.cs",
+              "RelativeDocumentMoniker": "Paneles\\PnlCatalogoClientes.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlCatalogoClientes.cs",
+              "RelativeToolTip": "Paneles\\PnlCatalogoClientes.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAawEEAAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-10T20:31:48.806Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PnlCatalogoClientes.cs [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlCatalogoClientes.cs",
+              "RelativeDocumentMoniker": "Paneles\\PnlCatalogoClientes.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlCatalogoClientes.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Paneles\\PnlCatalogoClientes.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-10T20:31:51.546Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PnlPrincipal.cs",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlPrincipal.cs",
+              "RelativeDocumentMoniker": "Paneles\\PnlPrincipal.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlPrincipal.cs",
+              "RelativeToolTip": "Paneles\\PnlPrincipal.cs",
+              "ViewState": "AgIAAEgBAAAAAAAAAAAtwFwBAABNAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-10T20:31:45.342Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PnlPrincipal.cs [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlPrincipal.cs",
+              "RelativeDocumentMoniker": "Paneles\\PnlPrincipal.cs",
+              "ToolTip": "D:\\Programa Personal\\POS-Sales\\Paneles\\PnlPrincipal.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Paneles\\PnlPrincipal.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-10T20:30:09.036Z"
             }
           ]
         }
