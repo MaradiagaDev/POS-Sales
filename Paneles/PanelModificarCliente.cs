@@ -45,5 +45,10 @@ namespace NeoCobranza.Paneles
             vMCatalogoCliente.FuncionesCrearModificarCliente(this);
         }
 
+        private void BtnConfigurarAcceso_Click(object sender, EventArgs e)
+        {
+            PnlAsociacionCliente frm = new PnlAsociacionCliente();
+            frm.ShowDialog();
+        }
     }
 }

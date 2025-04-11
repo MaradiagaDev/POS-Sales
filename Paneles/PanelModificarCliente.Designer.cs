@@ -52,8 +52,6 @@ namespace NeoCobranza.Paneles
             this.txtObservacion = new System.Windows.Forms.TextBox();
             this.cmbPais = new System.Windows.Forms.ComboBox();
             this.TxtEmail = new System.Windows.Forms.TextBox();
-            this.btnAgregar = new NeoCobranza.Especiales.EspecialButton();
-            this.btnCancelar = new NeoCobranza.Especiales.EspecialButton();
             this.label1 = new System.Windows.Forms.Label();
             this.TxtNoRuc = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -92,6 +90,10 @@ namespace NeoCobranza.Paneles
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
             this.textBox8 = new System.Windows.Forms.TextBox();
+            this.ChkClienteGeneral = new System.Windows.Forms.CheckBox();
+            this.BtnConfigurarAcceso = new NeoCobranza.Especiales.EspecialButton();
+            this.btnAgregar = new NeoCobranza.Especiales.EspecialButton();
+            this.btnCancelar = new NeoCobranza.Especiales.EspecialButton();
             this.panel3.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
@@ -534,50 +536,6 @@ namespace NeoCobranza.Paneles
             this.TxtEmail.Size = new System.Drawing.Size(219, 23);
             this.TxtEmail.TabIndex = 79;
             // 
-            // btnAgregar
-            // 
-            this.btnAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.btnAgregar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(186)))));
-            this.btnAgregar.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(186)))));
-            this.btnAgregar.BorderColor = System.Drawing.Color.Lime;
-            this.btnAgregar.BorderRadius = 5;
-            this.btnAgregar.BorderSize = 0;
-            this.btnAgregar.FlatAppearance.BorderSize = 0;
-            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgregar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
-            this.btnAgregar.ForeColor = System.Drawing.Color.White;
-            this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
-            this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAgregar.Location = new System.Drawing.Point(875, 556);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(173, 35);
-            this.btnAgregar.TabIndex = 15;
-            this.btnAgregar.Text = "Agregar";
-            this.btnAgregar.TextGroundColor = System.Drawing.Color.White;
-            this.btnAgregar.UseVisualStyleBackColor = false;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.btnCancelar.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.btnCancelar.BackGroundColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.btnCancelar.BorderColor = System.Drawing.Color.LavenderBlush;
-            this.btnCancelar.BorderRadius = 5;
-            this.btnCancelar.BorderSize = 0;
-            this.btnCancelar.FlatAppearance.BorderSize = 0;
-            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
-            this.btnCancelar.ForeColor = System.Drawing.Color.White;
-            this.btnCancelar.Location = new System.Drawing.Point(692, 556);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(173, 35);
-            this.btnCancelar.TabIndex = 16;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.TextGroundColor = System.Drawing.Color.White;
-            this.btnCancelar.UseVisualStyleBackColor = false;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -817,7 +775,7 @@ namespace NeoCobranza.Paneles
             this.textBox1.Location = new System.Drawing.Point(459, 168);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(290, 46);
+            this.textBox1.Size = new System.Drawing.Size(585, 47);
             this.textBox1.TabIndex = 102;
             // 
             // label21
@@ -870,7 +828,7 @@ namespace NeoCobranza.Paneles
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label23.Location = new System.Drawing.Point(455, 316);
+            this.label23.Location = new System.Drawing.Point(455, 309);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(114, 20);
             this.label23.TabIndex = 109;
@@ -880,7 +838,7 @@ namespace NeoCobranza.Paneles
             // 
             this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox3.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.textBox3.Location = new System.Drawing.Point(459, 340);
+            this.textBox3.Location = new System.Drawing.Point(459, 333);
             this.textBox3.MaxLength = 14;
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(268, 23);
@@ -891,7 +849,7 @@ namespace NeoCobranza.Paneles
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label24.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label24.Location = new System.Drawing.Point(750, 316);
+            this.label24.Location = new System.Drawing.Point(750, 309);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(97, 20);
             this.label24.TabIndex = 111;
@@ -901,7 +859,7 @@ namespace NeoCobranza.Paneles
             // 
             this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox4.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.textBox4.Location = new System.Drawing.Point(754, 340);
+            this.textBox4.Location = new System.Drawing.Point(754, 333);
             this.textBox4.MaxLength = 14;
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(142, 23);
@@ -912,7 +870,7 @@ namespace NeoCobranza.Paneles
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label25.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label25.Location = new System.Drawing.Point(898, 316);
+            this.label25.Location = new System.Drawing.Point(898, 309);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(97, 20);
             this.label25.TabIndex = 113;
@@ -922,7 +880,7 @@ namespace NeoCobranza.Paneles
             // 
             this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox5.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.textBox5.Location = new System.Drawing.Point(902, 340);
+            this.textBox5.Location = new System.Drawing.Point(902, 333);
             this.textBox5.MaxLength = 14;
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(142, 23);
@@ -933,7 +891,7 @@ namespace NeoCobranza.Paneles
             this.label26.AutoSize = true;
             this.label26.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label26.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label26.Location = new System.Drawing.Point(898, 367);
+            this.label26.Location = new System.Drawing.Point(898, 360);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(97, 20);
             this.label26.TabIndex = 119;
@@ -943,7 +901,7 @@ namespace NeoCobranza.Paneles
             // 
             this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox6.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.textBox6.Location = new System.Drawing.Point(902, 391);
+            this.textBox6.Location = new System.Drawing.Point(902, 384);
             this.textBox6.MaxLength = 14;
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(142, 23);
@@ -954,7 +912,7 @@ namespace NeoCobranza.Paneles
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label27.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label27.Location = new System.Drawing.Point(750, 367);
+            this.label27.Location = new System.Drawing.Point(750, 360);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(97, 20);
             this.label27.TabIndex = 117;
@@ -964,7 +922,7 @@ namespace NeoCobranza.Paneles
             // 
             this.textBox7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox7.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.textBox7.Location = new System.Drawing.Point(754, 391);
+            this.textBox7.Location = new System.Drawing.Point(754, 384);
             this.textBox7.MaxLength = 14;
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(142, 23);
@@ -975,7 +933,7 @@ namespace NeoCobranza.Paneles
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label28.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label28.Location = new System.Drawing.Point(455, 367);
+            this.label28.Location = new System.Drawing.Point(455, 360);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(114, 20);
             this.label28.TabIndex = 115;
@@ -985,11 +943,90 @@ namespace NeoCobranza.Paneles
             // 
             this.textBox8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox8.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.textBox8.Location = new System.Drawing.Point(459, 391);
+            this.textBox8.Location = new System.Drawing.Point(459, 384);
             this.textBox8.MaxLength = 14;
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(268, 23);
             this.textBox8.TabIndex = 114;
+            // 
+            // ChkClienteGeneral
+            // 
+            this.ChkClienteGeneral.AutoSize = true;
+            this.ChkClienteGeneral.Font = new System.Drawing.Font("Century Gothic", 11.25F);
+            this.ChkClienteGeneral.Location = new System.Drawing.Point(459, 441);
+            this.ChkClienteGeneral.Name = "ChkClienteGeneral";
+            this.ChkClienteGeneral.Size = new System.Drawing.Size(155, 24);
+            this.ChkClienteGeneral.TabIndex = 121;
+            this.ChkClienteGeneral.Tag = "";
+            this.ChkClienteGeneral.Text = "CLIENTE GENERAL";
+            this.ChkClienteGeneral.UseVisualStyleBackColor = true;
+            // 
+            // BtnConfigurarAcceso
+            // 
+            this.BtnConfigurarAcceso.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.BtnConfigurarAcceso.BackColor = System.Drawing.Color.Silver;
+            this.BtnConfigurarAcceso.BackGroundColor = System.Drawing.Color.Silver;
+            this.BtnConfigurarAcceso.BorderColor = System.Drawing.Color.Lime;
+            this.BtnConfigurarAcceso.BorderRadius = 5;
+            this.BtnConfigurarAcceso.BorderSize = 0;
+            this.BtnConfigurarAcceso.FlatAppearance.BorderSize = 0;
+            this.BtnConfigurarAcceso.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnConfigurarAcceso.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.BtnConfigurarAcceso.ForeColor = System.Drawing.Color.Black;
+            this.BtnConfigurarAcceso.Image = ((System.Drawing.Image)(resources.GetObject("BtnConfigurarAcceso.Image")));
+            this.BtnConfigurarAcceso.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnConfigurarAcceso.Location = new System.Drawing.Point(738, 435);
+            this.BtnConfigurarAcceso.Name = "BtnConfigurarAcceso";
+            this.BtnConfigurarAcceso.Size = new System.Drawing.Size(306, 35);
+            this.BtnConfigurarAcceso.TabIndex = 120;
+            this.BtnConfigurarAcceso.Text = "Asignación a Vendedores";
+            this.BtnConfigurarAcceso.TextGroundColor = System.Drawing.Color.Black;
+            this.BtnConfigurarAcceso.UseVisualStyleBackColor = false;
+            this.BtnConfigurarAcceso.Click += new System.EventHandler(this.BtnConfigurarAcceso_Click);
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.btnAgregar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(186)))));
+            this.btnAgregar.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(186)))));
+            this.btnAgregar.BorderColor = System.Drawing.Color.Lime;
+            this.btnAgregar.BorderRadius = 5;
+            this.btnAgregar.BorderSize = 0;
+            this.btnAgregar.FlatAppearance.BorderSize = 0;
+            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.btnAgregar.ForeColor = System.Drawing.Color.White;
+            this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
+            this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAgregar.Location = new System.Drawing.Point(871, 556);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(173, 35);
+            this.btnAgregar.TabIndex = 15;
+            this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.TextGroundColor = System.Drawing.Color.White;
+            this.btnAgregar.UseVisualStyleBackColor = false;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.btnCancelar.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.btnCancelar.BackGroundColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.btnCancelar.BorderColor = System.Drawing.Color.LavenderBlush;
+            this.btnCancelar.BorderRadius = 5;
+            this.btnCancelar.BorderSize = 0;
+            this.btnCancelar.FlatAppearance.BorderSize = 0;
+            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold);
+            this.btnCancelar.ForeColor = System.Drawing.Color.White;
+            this.btnCancelar.Location = new System.Drawing.Point(692, 556);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(173, 35);
+            this.btnCancelar.TabIndex = 16;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.TextGroundColor = System.Drawing.Color.White;
+            this.btnCancelar.UseVisualStyleBackColor = false;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // PanelModificarCliente
             // 
@@ -997,6 +1034,8 @@ namespace NeoCobranza.Paneles
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1056, 600);
+            this.Controls.Add(this.ChkClienteGeneral);
+            this.Controls.Add(this.BtnConfigurarAcceso);
             this.Controls.Add(this.label26);
             this.Controls.Add(this.textBox6);
             this.Controls.Add(this.label27);
@@ -1133,5 +1172,7 @@ namespace NeoCobranza.Paneles
         public System.Windows.Forms.TextBox textBox7;
         public System.Windows.Forms.Label label28;
         public System.Windows.Forms.TextBox textBox8;
+        public Especiales.EspecialButton BtnConfigurarAcceso;
+        private System.Windows.Forms.CheckBox ChkClienteGeneral;
     }
 }

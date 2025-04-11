@@ -708,6 +708,12 @@
     <Compile Include="Paneles\PnlAsistencia.Designer.cs">
       <DependentUpon>PnlAsistencia.cs</DependentUpon>
     </Compile>
+    <Compile Include="Paneles\PnlAsociacionCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlAsociacionCliente.Designer.cs">
+      <DependentUpon>PnlAsociacionCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="Paneles\PnlCatalogoAdiciones.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1489,6 +1495,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlAsistencia.resx">
       <DependentUpon>PnlAsistencia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlAsociacionCliente.resx">
+      <DependentUpon>PnlAsociacionCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlCatalogoAdiciones.resx">
       <DependentUpon>PnlCatalogoAdiciones.cs</DependentUpon>
