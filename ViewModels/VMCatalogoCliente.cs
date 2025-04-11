@@ -77,8 +77,8 @@ namespace NeoCobranza.ViewModels
             {
                 frm.btnAgregar.Text = "Modificar";
                 auxId = key;
-                using (NeoCobranzaContext db = new NeoCobranzaContext())
-                {
+
+
                     DataTable dtResponse = new DataTable();
 
                     dtResponse = dataUtilities.getRecordByPrimaryKey("Clientes", key);
@@ -127,7 +127,6 @@ namespace NeoCobranza.ViewModels
                             Convert.ToString(dtResponse.Rows[0]["Snombre"]) + " " +
                             Convert.ToString(dtResponse.Rows[0]["Papellido"]) + " " + Convert.ToString(dtResponse.Rows[0]["Sapellido"]);
                     }
-                }
             }
             else
             {
@@ -161,6 +160,11 @@ namespace NeoCobranza.ViewModels
         {
             try
             {
+                if (!Validaciones(frm))
+                {
+                    return;
+                }
+
                 if (frm.TxtCodigoUnico.Text.Trim().Length > 0)
                 {
                     string idCliente = "0";
@@ -189,6 +193,7 @@ namespace NeoCobranza.ViewModels
                 
 
                 // Parámetros para creación o actualización
+
                 dataUtilities.SetParameter("@IdCliente", string.IsNullOrEmpty(auxId) || auxId == "0" ? (object)DBNull.Value : int.Parse(auxId));
                 dataUtilities.SetParameter("@PNombre", frm.txtPrimerNombre.Text.Trim());
                 dataUtilities.SetParameter("@SNombre", frm.txtSegundoNombre.Text.Trim());
@@ -220,9 +225,9 @@ namespace NeoCobranza.ViewModels
 
                 MessageBox.Show(dtresponseCliente.Rows[0][0].ToString(), "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-              
+                auxId = dtresponseCliente.Rows[0][1].ToString();
 
-                if (frm.auxfrmVenta  != null)
+                if (frm.auxfrmVenta  != null && frm.auxProvicional ==  false)
                 {
                     string strIdCliente = dtresponseCliente.Rows[0][1].ToString();
                     string strNombreCliente = dtresponseCliente.Rows[0][2].ToString();
@@ -249,19 +254,23 @@ namespace NeoCobranza.ViewModels
 
                     frm.Close();
                 }
-                else if(frm.frmPnlCatalogoCliente != null) 
+                else if(frm.frmPnlCatalogoCliente != null && frm.auxProvicional == false) 
                 {
                     ConfigUI(frm.frmPnlCatalogoCliente, "Catalogo");
                     frm.Close();
                 }
-                else
+                else 
                 {
-                    PnlAgregarReservacion frmReserva = frm.Owner as PnlAgregarReservacion;
-                    frmReserva.TxtNombreCliente.Text = dtresponseCliente.Rows[0][2].ToString();
-                    frmReserva.auxIdCliente = dtresponseCliente.Rows[0][1].ToString();
-                    frmReserva.TxtCelular.Text = frm.mtxtCelular.Text.Trim();
-                    frmReserva.TxtIdentificacion.Text = frm.mtxtCedula.Text.Trim();
-                    frm.Close();
+                    //PnlAgregarReservacion frmReserva = frm.Owner as PnlAgregarReservacion;
+                    //frmReserva.TxtNombreCliente.Text = dtresponseCliente.Rows[0][2].ToString();
+                    //frmReserva.auxIdCliente = dtresponseCliente.Rows[0][1].ToString();
+                    //frmReserva.TxtCelular.Text = frm.mtxtCelular.Text.Trim();
+                    //frmReserva.TxtIdentificacion.Text = frm.mtxtCedula.Text.Trim();
+                    //frm.Close();
+                    auxKeyUsuario = "Modificar";
+                    frm.LblDynamicoCliente.Text = "Modificar Cliente";
+
+
                 }
             }
             catch (Exception ex)
@@ -269,11 +278,6 @@ namespace NeoCobranza.ViewModels
                 MessageBox.Show("Ha ocurrido un error: " + ex.Message, "Error",
                   MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            if (!Validaciones(frm))
-            {
-                return;
-            }
-
         }
 
         public void CambiarEstadoCliente(PnlCatalogoClientes frm, string id)

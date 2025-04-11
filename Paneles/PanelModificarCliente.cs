@@ -21,7 +21,7 @@ namespace NeoCobranza.Paneles
         public PnlCatalogoClientes frmPnlCatalogoCliente;
         public string auxIdCliente;
         public PnlVentas auxfrmVenta;
-
+        public bool auxProvicional=false;
         public PanelModificarCliente(PnlCatalogoClientes frm,string key,PnlVentas venta)
         {
             InitializeComponent();
@@ -47,8 +47,32 @@ namespace NeoCobranza.Paneles
 
         private void BtnConfigurarAcceso_Click(object sender, EventArgs e)
         {
-            PnlAsociacionCliente frm = new PnlAsociacionCliente();
+            if(vMCatalogoCliente.auxKeyUsuario == "Crear")
+            {
+                DialogResult result = MessageBox.Show("¿Deseas guardar los datos del cliente para continuar con esta acción?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    auxProvicional = true;
+                    vMCatalogoCliente.FuncionesCrearModificarCliente(this);
+
+                    if (String.IsNullOrEmpty(vMCatalogoCliente.auxId))
+                    {
+                        auxProvicional = false;
+                        return;
+                    }
+                }
+                else
+                {
+                    auxProvicional = false;
+                    return;
+                }
+            }
+
+            PnlAsociacionCliente frm = new PnlAsociacionCliente(vMCatalogoCliente.auxId);
             frm.ShowDialog();
+
+            auxProvicional = false;
         }
     }
 }
