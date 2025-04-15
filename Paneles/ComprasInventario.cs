@@ -401,47 +401,55 @@ namespace NeoCobranza.Paneles
                         dataUtilities.SetColumns("Cantidad", cantidadActualizada);
                         dataUtilities.UpdateRecordByPrimaryKey("RelAlmacenProducto", idRelAlmacenProducto);
 
-                        //NUEVA PARTE DE SEPARACIÓN POR PROVEEDOR 
-                        DataTable dtResponseProveedor = dataUtilities.GetAllRecords("DetalleAlmacenProveedor");
-                        var filterRowProveedor =
-                            from row in dtResponseProveedor.AsEnumerable()
-                            where Convert.ToString(row.Field<decimal>("RelAlmacenProductoId")) == idRelAlmacenProducto.ToString()
-                            && Convert.ToString(row.Field<decimal>("ProveedorId")) == Convert.ToString(item[1])
-                            select row;
+                        DataTable dtResponseProducto = dataUtilities.getRecordByPrimaryKey("ProductosServicios", Convert.ToString(item[0]));
 
-                        if (filterRowProveedor.Any())
+                        if (!Convert.ToBoolean(dtResponseProducto.Rows[0]["bitInventarioSencillo"]))
                         {
-                            dtResponseProveedor = filterRowProveedor.CopyToDataTable();
+                            //NUEVA PARTE DE SEPARACIÓN POR PROVEEDOR 
+                            DataTable dtResponseProveedor = dataUtilities.GetAllRecords("DetalleAlmacenProveedor");
+                            var filterRowProveedor =
+                                from row in dtResponseProveedor.AsEnumerable()
+                                where Convert.ToString(row.Field<decimal>("RelAlmacenProductoId")) == idRelAlmacenProducto.ToString()
+                                && Convert.ToString(row.Field<decimal>("ProveedorId")) == Convert.ToString(item[1])
+                                select row;
 
-                            decimal idDetalleProveedor = Convert.ToDecimal(dtResponseProveedor.Rows[0]["RelAlmacenProductoProveedor"]);
-                            decimal cantidadActualProveedor = Convert.ToDecimal(dtResponseProveedor.Rows[0]["Cantidad"]);
+                            if (filterRowProveedor.Any())
+                            {
+                                dtResponseProveedor = filterRowProveedor.CopyToDataTable();
 
-                            decimal cantidadActualizadaProveedor = cantidadActualProveedor + Convert.ToDecimal(item[5]);
+                                decimal idDetalleProveedor = Convert.ToDecimal(dtResponseProveedor.Rows[0]["RelAlmacenProductoProveedor"]);
+                                decimal cantidadActualProveedor = Convert.ToDecimal(dtResponseProveedor.Rows[0]["Cantidad"]);
 
-                            dataUtilities.SetColumns("Cantidad", cantidadActualizadaProveedor);
-                            dataUtilities.UpdateRecordByPrimaryKey("DetalleAlmacenProveedor", idDetalleProveedor);
+                                decimal cantidadActualizadaProveedor = cantidadActualProveedor + Convert.ToDecimal(item[5]);
 
-                            //NUEVA PARTE DE FECHA DE CADUCIDAD
-                            dataUtilities.SetColumns("RelAlmacenProveedorProductoId", idDetalleProveedor);
-                            dataUtilities.SetColumns("Cantidad", Convert.ToDecimal(item[5]));
-                            dataUtilities.SetColumns("FechaVencimiento", Convert.ToDateTime(item[6]));
-                            dataUtilities.SetColumns("FechaAlta", DateTime.Now);
-                            dataUtilities.SetColumns("CompraId", idCompra);
-                            dataUtilities.InsertRecord("VencimientoProducto");
-                        }
+                                dataUtilities.SetColumns("Cantidad", cantidadActualizadaProveedor);
+                                dataUtilities.UpdateRecordByPrimaryKey("DetalleAlmacenProveedor", idDetalleProveedor);
 
-                        if (ChkCaja.Checked)
-                        {
-                            DataUtilities dataUtilities = new DataUtilities();
-                            dataUtilities.SetColumns("SucursaId", Utilidades.SucursalId);
-                            dataUtilities.SetColumns("Pagado", Regex.Replace(TxtMontoTotal.Text, "[^0-9.]", ""));
-                            dataUtilities.SetColumns("Total", 0);
-                            dataUtilities.SetColumns("Referencia", $"COMPRA INVENTARIO {DateTime.Now.ToShortDateString()}");
-                            dataUtilities.SetColumns("FechaPago", DateTime.Now);
-                            dataUtilities.SetColumns("BitEsIngreso", false);
-                            dataUtilities.SetColumns("BitCierreCaja", false);
-                            dataUtilities.SetColumns("CompraId", idCompra);
-                            dataUtilities.InsertRecord("PagosIngresoGasto");
+                                //NUEVA PARTE DE FECHA DE CADUCIDAD
+                                dataUtilities.SetColumns("RelAlmacenProveedorProductoId", idDetalleProveedor);
+                                dataUtilities.SetColumns("Cantidad", Convert.ToDecimal(item[5]));
+                                dataUtilities.SetColumns("FechaVencimiento", Convert.ToDateTime(item[6]));
+                                dataUtilities.SetColumns("FechaAlta", DateTime.Now);
+                                dataUtilities.SetColumns("CompraId", idCompra);
+                                dataUtilities.InsertRecord("VencimientoProducto");
+                            }
+
+                            if (ChkCaja.Checked)
+                            {
+                                if (!Convert.ToBoolean(dtResponseProducto.Rows[0]["bitInventarioVencimiento"]))
+                                {
+                                    DataUtilities dataUtilities = new DataUtilities();
+                                    dataUtilities.SetColumns("SucursaId", Utilidades.SucursalId);
+                                    dataUtilities.SetColumns("Pagado", Regex.Replace(TxtMontoTotal.Text, "[^0-9.]", ""));
+                                    dataUtilities.SetColumns("Total", 0);
+                                    dataUtilities.SetColumns("Referencia", $"COMPRA INVENTARIO {DateTime.Now.ToShortDateString()}");
+                                    dataUtilities.SetColumns("FechaPago", DateTime.Now);
+                                    dataUtilities.SetColumns("BitEsIngreso", false);
+                                    dataUtilities.SetColumns("BitCierreCaja", false);
+                                    dataUtilities.SetColumns("CompraId", idCompra);
+                                    dataUtilities.InsertRecord("PagosIngresoGasto");
+                                }
+                            }
                         }
 
                         auxKey = "";

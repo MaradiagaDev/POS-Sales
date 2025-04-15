@@ -103,6 +103,22 @@ namespace NeoCobranza.Paneles
                 ChkCobraIVA.Checked = Convert.ToBoolean(dtResponse.Rows[0]["BitIva"]);
                 ChkVencimiento.Checked = Convert.ToBoolean(dtResponse.Rows[0]["BitVencimiento"]);
                 TxtUnidadMedida.Text = Convert.ToString(dtResponse.Rows[0]["UnidadMedida"]);
+                ChkInventarioSencillo.Checked = dtResponse.Rows[0]["bitInventarioSencillo"] != DBNull.Value
+                ? Convert.ToBoolean(dtResponse.Rows[0]["bitInventarioSencillo"])
+                : false;
+
+                ChkInventarioDetallado.Checked = dtResponse.Rows[0]["bitInventarioDetalado"] != DBNull.Value
+                ? Convert.ToBoolean(dtResponse.Rows[0]["bitInventarioDetalado"])
+                : false;
+
+                ChkInventarioProveedor.Checked = dtResponse.Rows[0]["bitInventarioProveedor"] != DBNull.Value
+                ? Convert.ToBoolean(dtResponse.Rows[0]["bitInventarioProveedor"])
+                : false;
+
+                ChkInventarioVencimiento.Checked = dtResponse.Rows[0]["bitInventarioVencimiento"] != DBNull.Value
+                ? Convert.ToBoolean(dtResponse.Rows[0]["bitInventarioVencimiento"])
+                : false;
+
 
                 if (DBNull.Value != dtResponse.Rows[0]["BitVariable"])
                 {
@@ -148,6 +164,11 @@ namespace NeoCobranza.Paneles
                 TxtCodigo.Visible = false;
                 ChkVencimiento.Visible = false;
                 especialButton1.Visible = false;
+
+                ChkInventarioSencillo.Visible = false;
+                ChkInventarioDetallado.Visible = false;
+                ChkInventarioProveedor.Visible = false;
+                ChkInventarioVencimiento.Visible = false;
 
             }
             else if(auxModulo == "Adiciones")
@@ -199,6 +220,11 @@ namespace NeoCobranza.Paneles
 
                     if (auxModulo == "Productos")
                     {
+                        ChkInventarioSencillo.Enabled = false;
+                        ChkInventarioDetallado.Enabled = false;
+                        ChkInventarioProveedor.Enabled = false;
+                        ChkInventarioVencimiento.Enabled = false;
+
                         LblDynamico.Text = "Modificar Producto";
                         btnAgregar.Text = "Modificar";
                     }
@@ -312,6 +338,10 @@ namespace NeoCobranza.Paneles
                     dataUtilities.SetColumns("BitIva", ChkCobraIVA.Checked);
                     dataUtilities.SetColumns("BitVencimiento", ChkVencimiento.Checked);
                     dataUtilities.SetColumns("UnidadMedida", TxtUnidadMedida.Text);
+                    dataUtilities.SetColumns("bitInventarioSencillo", ChkInventarioSencillo.Checked);
+                    dataUtilities.SetColumns("bitInventarioDetalado", ChkInventarioDetallado.Checked);
+                    dataUtilities.SetColumns("bitInventarioProveedor", ChkInventarioProveedor.Checked);
+                    dataUtilities.SetColumns("bitInventarioVencimiento", ChkInventarioVencimiento.Checked);
 
                     if (PBImagenProducto.Image != null)
                     {
@@ -394,6 +424,10 @@ namespace NeoCobranza.Paneles
                     dataUtilities.SetColumns("BitIva", ChkCobraIVA.Checked);
                     dataUtilities.SetColumns("BitVencimiento", ChkVencimiento.Checked);
                     dataUtilities.SetColumns("UnidadMedida", TxtUnidadMedida.Text);
+                    dataUtilities.SetColumns("bitInventarioSencillo", ChkInventarioSencillo.Checked);
+                    dataUtilities.SetColumns("bitInventarioDetalado", ChkInventarioDetallado.Checked);
+                    dataUtilities.SetColumns("bitInventarioProveedor", ChkInventarioProveedor.Checked);
+                    dataUtilities.SetColumns("bitInventarioVencimiento", ChkInventarioVencimiento.Checked);
 
                     if (PBImagenProducto.Image != null)
                     {

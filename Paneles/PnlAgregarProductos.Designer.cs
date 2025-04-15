@@ -57,10 +57,10 @@
             this.btnCancelar = new NeoCobranza.Especiales.EspecialButton();
             this.TxtUnidadMedida = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.ChkInventarioSencillo = new System.Windows.Forms.CheckBox();
+            this.ChkInventarioProveedor = new System.Windows.Forms.CheckBox();
+            this.ChkInventarioVencimiento = new System.Windows.Forms.CheckBox();
+            this.ChkInventarioDetallado = new System.Windows.Forms.CheckBox();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PBImagenProducto)).BeginInit();
             this.SuspendLayout();
@@ -435,51 +435,51 @@
             this.label2.TabIndex = 194;
             this.label2.Text = "UNIDAD DE MEDIDA";
             // 
-            // checkBox1
+            // ChkInventarioSencillo
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.Location = new System.Drawing.Point(332, 401);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(166, 21);
-            this.checkBox1.TabIndex = 196;
-            this.checkBox1.Text = "INVENTARIO SENCILLO";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.ChkInventarioSencillo.AutoSize = true;
+            this.ChkInventarioSencillo.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkInventarioSencillo.Location = new System.Drawing.Point(332, 401);
+            this.ChkInventarioSencillo.Name = "ChkInventarioSencillo";
+            this.ChkInventarioSencillo.Size = new System.Drawing.Size(166, 21);
+            this.ChkInventarioSencillo.TabIndex = 196;
+            this.ChkInventarioSencillo.Text = "INVENTARIO SENCILLO";
+            this.ChkInventarioSencillo.UseVisualStyleBackColor = true;
+            this.ChkInventarioSencillo.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // checkBox2
+            // ChkInventarioProveedor
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox2.Location = new System.Drawing.Point(332, 450);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(185, 21);
-            this.checkBox2.TabIndex = 197;
-            this.checkBox2.Text = "INVENTARIO PROVEEDOR";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.ChkInventarioProveedor.AutoSize = true;
+            this.ChkInventarioProveedor.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkInventarioProveedor.Location = new System.Drawing.Point(332, 450);
+            this.ChkInventarioProveedor.Name = "ChkInventarioProveedor";
+            this.ChkInventarioProveedor.Size = new System.Drawing.Size(185, 21);
+            this.ChkInventarioProveedor.TabIndex = 197;
+            this.ChkInventarioProveedor.Text = "INVENTARIO PROVEEDOR";
+            this.ChkInventarioProveedor.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // ChkInventarioVencimiento
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox3.Location = new System.Drawing.Point(332, 475);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(193, 21);
-            this.checkBox3.TabIndex = 198;
-            this.checkBox3.Text = "INVENTARIO VENCIMIENTO";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
+            this.ChkInventarioVencimiento.AutoSize = true;
+            this.ChkInventarioVencimiento.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkInventarioVencimiento.Location = new System.Drawing.Point(332, 475);
+            this.ChkInventarioVencimiento.Name = "ChkInventarioVencimiento";
+            this.ChkInventarioVencimiento.Size = new System.Drawing.Size(193, 21);
+            this.ChkInventarioVencimiento.TabIndex = 198;
+            this.ChkInventarioVencimiento.Text = "INVENTARIO VENCIMIENTO";
+            this.ChkInventarioVencimiento.UseVisualStyleBackColor = true;
+            this.ChkInventarioVencimiento.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
-            // checkBox4
+            // ChkInventarioDetallado
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox4.Location = new System.Drawing.Point(332, 425);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(179, 21);
-            this.checkBox4.TabIndex = 199;
-            this.checkBox4.Text = "INVENTARIO DETALLADO";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.ChkInventarioDetallado.AutoSize = true;
+            this.ChkInventarioDetallado.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkInventarioDetallado.Location = new System.Drawing.Point(332, 425);
+            this.ChkInventarioDetallado.Name = "ChkInventarioDetallado";
+            this.ChkInventarioDetallado.Size = new System.Drawing.Size(179, 21);
+            this.ChkInventarioDetallado.TabIndex = 199;
+            this.ChkInventarioDetallado.Text = "INVENTARIO DETALLADO";
+            this.ChkInventarioDetallado.UseVisualStyleBackColor = true;
             // 
             // PnlAgregarProductos
             // 
@@ -487,10 +487,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(911, 508);
-            this.Controls.Add(this.checkBox4);
-            this.Controls.Add(this.checkBox3);
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.ChkInventarioDetallado);
+            this.Controls.Add(this.ChkInventarioVencimiento);
+            this.Controls.Add(this.ChkInventarioProveedor);
+            this.Controls.Add(this.ChkInventarioSencillo);
             this.Controls.Add(this.TxtUnidadMedida);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.ChkVencimiento);
@@ -561,9 +561,9 @@
         public System.Windows.Forms.CheckBox ChkVencimiento;
         public System.Windows.Forms.TextBox TxtUnidadMedida;
         public System.Windows.Forms.Label label2;
-        public System.Windows.Forms.CheckBox checkBox1;
-        public System.Windows.Forms.CheckBox checkBox2;
-        public System.Windows.Forms.CheckBox checkBox3;
-        public System.Windows.Forms.CheckBox checkBox4;
+        public System.Windows.Forms.CheckBox ChkInventarioSencillo;
+        public System.Windows.Forms.CheckBox ChkInventarioProveedor;
+        public System.Windows.Forms.CheckBox ChkInventarioVencimiento;
+        public System.Windows.Forms.CheckBox ChkInventarioDetallado;
     }
 }
