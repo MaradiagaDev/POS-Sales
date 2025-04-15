@@ -636,6 +636,9 @@ namespace NeoCobranza.ViewModels
                             dataUtilities.SetParameter("@IVA", 0);
                             dataUtilities.SetParameter("@HistorialId", SqlDbType.Int, ParameterDirection.Output);
 
+                            PnlAgregarVencimientosProveedores frmaux = new PnlAgregarVencimientosProveedores(idProd, Convert.ToString(dtAlmacenMostrador.Rows[0]["AlmacenId"]), Cantidad);
+                            frmaux.ShowDialog();
+
                             DataTable dtResponseTotales = dataUtilities.ExecuteStoredProcedure("sp_ManageOrderDetail");
                             string HistorialId = Convert.ToString(dataUtilities.GetParameterValue("@HistorialId"));
                             //COLOCAR PARTE DE ADICIONES
@@ -690,6 +693,9 @@ namespace NeoCobranza.ViewModels
                         dataUtilities.SetParameter("@Subtotal", 0);
                         dataUtilities.SetParameter("@IVA", 0);
                         dataUtilities.SetParameter("@HistorialId", SqlDbType.Int, ParameterDirection.Output);
+
+                        PnlAgregarVencimientosProveedores frmaux = new PnlAgregarVencimientosProveedores(idProd, Convert.ToString(dtAlmacenMostrador.Rows[0]["AlmacenId"]), Cantidad);
+                        frmaux.ShowDialog();
 
                         DataTable dtResponseTotales = dataUtilities.ExecuteStoredProcedure("sp_ManageOrderDetail");
 

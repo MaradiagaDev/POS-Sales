@@ -42,6 +42,8 @@
             this.TxtCantidad = new System.Windows.Forms.TextBox();
             this.TxtCosto = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.DTVencimiento = new System.Windows.Forms.DateTimePicker();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvProveedor)).BeginInit();
             this.SuspendLayout();
@@ -206,6 +208,30 @@
             this.label1.Size = new System.Drawing.Size(66, 26);
             this.label1.TabIndex = 172;
             this.label1.Text = "COSTO:";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label2.Location = new System.Drawing.Point(12, 515);
+            this.label2.Name = "label2";
+            this.label2.Padding = new System.Windows.Forms.Padding(5);
+            this.label2.Size = new System.Drawing.Size(111, 26);
+            this.label2.TabIndex = 174;
+            this.label2.Text = "VENCIMIENTO:";
+            // 
+            // DTVencimiento
+            // 
+            this.DTVencimiento.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold);
+            this.DTVencimiento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.DTVencimiento.Location = new System.Drawing.Point(201, 515);
+            this.DTVencimiento.Name = "DTVencimiento";
+            this.DTVencimiento.Size = new System.Drawing.Size(160, 27);
+            this.DTVencimiento.TabIndex = 175;
+            this.DTVencimiento.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // PnlSeleccionarProveedor
             // 
@@ -213,6 +239,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(729, 577);
+            this.Controls.Add(this.DTVencimiento);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.TxtCosto);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.TxtCantidad);
@@ -249,5 +277,7 @@
         private System.Windows.Forms.TextBox TxtCantidad;
         private System.Windows.Forms.TextBox TxtCosto;
         public System.Windows.Forms.Label label1;
+        public System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DateTimePicker DTVencimiento;
     }
 }

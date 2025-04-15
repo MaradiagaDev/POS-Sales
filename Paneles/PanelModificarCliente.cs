@@ -28,6 +28,11 @@ namespace NeoCobranza.Paneles
             this.frmPnlCatalogoCliente = frm;
             auxIdCliente = key;
             this.auxfrmVenta = venta;
+
+            if (!Utilidades.PermisosLevel(3, 76))
+            {
+                BtnConfigurarAcceso.Visible = false;
+            }
         }
 
         private void PanelModificarCliente_Load(object sender, EventArgs e)

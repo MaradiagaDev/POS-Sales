@@ -43,7 +43,7 @@ namespace NeoCobranza.ViewModels
             frm.cmbPais.SelectedIndex = 0;
 
             // Obtiene todos los registros de la tabla Sucursal
-            DataTable dtResponseSucursales = dataUtilities.getRecordByColumn("SegmentacionCliente","SucursalId",Utilidades.SucursalId);
+            DataTable dtResponseSucursales = dataUtilities.getRecordByColumn("SegmentacionCliente", "SucursalId", Utilidades.SucursalId);
 
             // Filtra las filas donde el campo Estado sea "Activo"
             var filterRowSucursales = from row in dtResponseSucursales.AsEnumerable()
@@ -79,54 +79,83 @@ namespace NeoCobranza.ViewModels
                 auxId = key;
 
 
-                    DataTable dtResponse = new DataTable();
+                DataTable dtResponse = new DataTable();
 
-                    dtResponse = dataUtilities.getRecordByPrimaryKey("Clientes", key);
+                dtResponse = dataUtilities.getRecordByPrimaryKey("Clientes", key);
 
-                    if (dtResponse.Rows.Count > 0)
+                if (dtResponse.Rows.Count > 0)
+                {
+                    if (dtResponse.Rows[0]["SegmentacionId"] == DBNull.Value)
                     {
-                        if (dtResponse.Rows[0]["SegmentacionId"] == DBNull.Value)
-                        {
-                            frm.CmbSegmentacion.SelectedValue = "0";
-                        }
-                        else
-                        {
-                            frm.CmbSegmentacion.SelectedValue = Convert.ToString(dtResponse.Rows[0]["SegmentacionId"]);
-                        }
-
-                        if (dtResponse.Rows[0]["Codigo"] == DBNull.Value)
-                        {
-                            frm.TxtCodigoUnico.Text = "";
-                        }
-                        else
-                        {
-                            frm.TxtCodigoUnico.Text = Convert.ToString(dtResponse.Rows[0]["Codigo"]);
-                        }
-
-                        frm.txtPrimerNombre.Text = Convert.ToString(dtResponse.Rows[0]["Pnombre"]);
-                        frm.txtSegundoNombre.Text = Convert.ToString(dtResponse.Rows[0]["Snombre"]);
-                        frm.txtPrimerApellido.Text = Convert.ToString(dtResponse.Rows[0]["Papellido"]);
-                        frm.txtSegundoApellido.Text = Convert.ToString(dtResponse.Rows[0]["Sapellido"]);
-
-                        frm.txtProfesion.Text = Convert.ToString(dtResponse.Rows[0]["Profesion"]);
-                        frm.mtxtCedula.Text = Convert.ToString(dtResponse.Rows[0]["Cedula"]);
-                        frm.mtxtCelular.Text = Convert.ToString(dtResponse.Rows[0]["Celular"]);
-                        frm.mtxtTelefono.Text = Convert.ToString(dtResponse.Rows[0]["Telefono"]);
-                        frm.TxtEmail.Text = Convert.ToString(dtResponse.Rows[0]["Email"]);
-                        frm.cmbDepartamento.SelectedValue = Convert.ToString(dtResponse.Rows[0]["Departamento"]);
-                        frm.cmbPais.SelectedValue = Convert.ToString(dtResponse.Rows[0]["Pais"]);
-                        frm.txtObservacion.Text = Convert.ToString(dtResponse.Rows[0]["Observacion"]);
-                        frm.txtDireccion.Text = Convert.ToString(dtResponse.Rows[0]["Direccion"]);
-
-                        frm.dtpFechaNac.Value = Convert.ToDateTime(dtResponse.Rows[0]["FechaNac"]);
-                        frm.TxtNoRuc.Text = Convert.ToString(dtResponse.Rows[0]["NoRuc"]);
-                        frm.rbtnMasculino.Checked = Convert.ToString(dtResponse.Rows[0]["Sexo"]) == "Masculino" ? true : false;
-                        frm.rbtnFemenino.Checked = Convert.ToString(dtResponse.Rows[0]["Sexo"]) == "Femenino" ? true : false;
-
-                        frm.LblDynamicoCliente.Text = "Cliente a Modificar: " + Convert.ToString(dtResponse.Rows[0]["Pnombre"]) + " " +
-                            Convert.ToString(dtResponse.Rows[0]["Snombre"]) + " " +
-                            Convert.ToString(dtResponse.Rows[0]["Papellido"]) + " " + Convert.ToString(dtResponse.Rows[0]["Sapellido"]);
+                        frm.CmbSegmentacion.SelectedValue = "0";
                     }
+                    else
+                    {
+                        frm.CmbSegmentacion.SelectedValue = Convert.ToString(dtResponse.Rows[0]["SegmentacionId"]);
+                    }
+
+                    if (dtResponse.Rows[0]["Codigo"] == DBNull.Value)
+                    {
+                        frm.TxtCodigoUnico.Text = "";
+                    }
+                    else
+                    {
+                        frm.TxtCodigoUnico.Text = Convert.ToString(dtResponse.Rows[0]["Codigo"]);
+                    }
+
+                    DataRow row = dtResponse.Rows[0];
+
+                    // Validación de campos de tipo string
+                    frm.txtPrimerNombre.Text = row["Pnombre"] != DBNull.Value ? row["Pnombre"].ToString() : string.Empty;
+                    frm.txtSegundoNombre.Text = row["Snombre"] != DBNull.Value ? row["Snombre"].ToString() : string.Empty;
+                    frm.txtPrimerApellido.Text = row["Papellido"] != DBNull.Value ? row["Papellido"].ToString() : string.Empty;
+                    frm.txtSegundoApellido.Text = row["Sapellido"] != DBNull.Value ? row["Sapellido"].ToString() : string.Empty;
+
+                    frm.txtProfesion.Text = row["Profesion"] != DBNull.Value ? row["Profesion"].ToString() : string.Empty;
+                    frm.mtxtCedula.Text = row["Cedula"] != DBNull.Value ? row["Cedula"].ToString() : string.Empty;
+                    frm.mtxtCelular.Text = row["Celular"] != DBNull.Value ? row["Celular"].ToString() : string.Empty;
+                    frm.mtxtTelefono.Text = row["Telefono"] != DBNull.Value ? row["Telefono"].ToString() : string.Empty;
+                    frm.TxtEmail.Text = row["Email"] != DBNull.Value ? row["Email"].ToString() : string.Empty;
+                    frm.cmbDepartamento.SelectedValue = row["Departamento"] != DBNull.Value ? row["Departamento"].ToString() : string.Empty;
+                    frm.cmbPais.SelectedValue = row["Pais"] != DBNull.Value ? row["Pais"].ToString() : string.Empty;
+                    frm.txtObservacion.Text = row["Observacion"] != DBNull.Value ? row["Observacion"].ToString() : string.Empty;
+                    frm.txtDireccion.Text = row["Direccion"] != DBNull.Value ? row["Direccion"].ToString() : string.Empty;
+
+                    // Validación de campo tipo DateTime, asignando DateTime.Now si es nulo
+                    frm.dtpFechaNac.Value = row["FechaNac"] != DBNull.Value ? Convert.ToDateTime(row["FechaNac"]) : DateTime.Now;
+
+                    frm.TxtNoRuc.Text = row["NoRuc"] != DBNull.Value ? row["NoRuc"].ToString() : string.Empty;
+
+                    // Validación para los radio buttons del sexo
+                    if (row["Sexo"] != DBNull.Value)
+                    {
+                        string sexo = row["Sexo"].ToString();
+                        frm.rbtnMasculino.Checked = (sexo == "Masculino");
+                        frm.rbtnFemenino.Checked = (sexo == "Femenino");
+                    }
+                    else
+                    {
+                        frm.rbtnMasculino.Checked = false;
+                        frm.rbtnFemenino.Checked = false;
+                    }
+
+                    // Etiqueta que muestra el cliente a modificar
+                    frm.LblDynamicoCliente.Text = "Cliente a Modificar: " +
+                                                   (row["Pnombre"] != DBNull.Value ? row["Pnombre"].ToString() : string.Empty) + " " +
+                                                   (row["Snombre"] != DBNull.Value ? row["Snombre"].ToString() : string.Empty) + " " +
+                                                   (row["Papellido"] != DBNull.Value ? row["Papellido"].ToString() : string.Empty) + " " +
+                                                   (row["Sapellido"] != DBNull.Value ? row["Sapellido"].ToString() : string.Empty);
+
+                    // CAMPOS NUEVOS con su validación
+                    frm.TxtActividadEconomica.Text = row["strActividadEconomica"] != DBNull.Value ? row["strActividadEconomica"].ToString() : string.Empty;
+                    frm.TxtContactoUno.Text = row["strContactoUno"] != DBNull.Value ? row["strContactoUno"].ToString() : string.Empty;
+                    frm.TxtCelularUnoPrimero.Text = row["strCelularUnoPrimero"] != DBNull.Value ? row["strCelularUnoPrimero"].ToString() : string.Empty;
+                    frm.TxtCelularDosPrimero.Text = row["strCelularDosPrimero"] != DBNull.Value ? row["strCelularDosPrimero"].ToString() : string.Empty;
+                    frm.TxtContactoDos.Text = row["strContactoDos"] != DBNull.Value ? row["strContactoDos"].ToString() : string.Empty;
+                    frm.TxtCelularUnoSegundo.Text = row["strCelularUnoSegundo"] != DBNull.Value ? row["strCelularUnoSegundo"].ToString() : string.Empty;
+                    frm.TxtCelularDosSegundo.Text = row["strCelularDosSegundo"] != DBNull.Value ? row["strCelularDosSegundo"].ToString() : string.Empty;
+                    frm.TxtDireccionEnvio.Text = row["strDireccionEnvio"] != DBNull.Value ? row["strDireccionEnvio"].ToString() : string.Empty;
+                }
             }
             else
             {
@@ -190,7 +219,7 @@ namespace NeoCobranza.ViewModels
                 int edad = DateTime.Today.Year - fechaSeleccionada.Year - (DateTime.Today < fechaSeleccionada.AddYears(DateTime.Today.Year - fechaSeleccionada.Year) ? 1 : 0);
 
                 string segmentacionId = frm.CmbSegmentacion.SelectedValue == null ? "0" : frm.CmbSegmentacion.SelectedValue.ToString();
-                
+
 
                 // Parámetros para creación o actualización
 
@@ -205,7 +234,7 @@ namespace NeoCobranza.ViewModels
                 dataUtilities.SetParameter("@Celular", frm.mtxtCelular.Text.Trim());
                 dataUtilities.SetParameter("@Fax", "");
                 dataUtilities.SetParameter("@Edad", edad);
-                dataUtilities.SetParameter("@EstadoCivil", false? "Casado" : "Soltero");
+                dataUtilities.SetParameter("@EstadoCivil", false ? "Casado" : "Soltero");
                 dataUtilities.SetParameter("@Profesion", frm.txtProfesion.Text.Trim());
                 dataUtilities.SetParameter("@Sexo", frm.rbtnMasculino.Checked ? "Masculino" : "Femenino");
                 dataUtilities.SetParameter("@Cedula", frm.mtxtCedula.Text.Trim());
@@ -220,6 +249,14 @@ namespace NeoCobranza.ViewModels
                 dataUtilities.SetParameter("@Codigo", frm.TxtCodigoUnico.Text.Trim());
                 dataUtilities.SetParameter("@idClienteSalida", 0);
                 dataUtilities.SetParameter("@NombreCompletoSalida", "");
+                dataUtilities.SetParameter("@strActividadEconomica", frm.TxtActividadEconomica.Text);
+                dataUtilities.SetParameter("@strContactoUno", frm.TxtContactoUno.Text);
+                dataUtilities.SetParameter("@strCelularUnoPrimero", frm.TxtCelularUnoPrimero.Text);
+                dataUtilities.SetParameter("@strCelularDosPrimero", frm.TxtCelularDosPrimero.Text);
+                dataUtilities.SetParameter("@strContactoDos", frm.TxtContactoDos.Text);
+                dataUtilities.SetParameter("@strCelularUnoSegundo", frm.TxtCelularUnoSegundo.Text);
+                dataUtilities.SetParameter("@strCelularDosSegundo", frm.TxtCelularDosSegundo.Text);
+                dataUtilities.SetParameter("@strDireccionEnvio", frm.TxtDireccionEnvio.Text);
 
                 DataTable dtresponseCliente = dataUtilities.ExecuteStoredProcedure("SP_CrearActualizarCliente");
 
@@ -227,7 +264,7 @@ namespace NeoCobranza.ViewModels
 
                 auxId = dtresponseCliente.Rows[0][1].ToString();
 
-                if (frm.auxfrmVenta  != null && frm.auxProvicional ==  false)
+                if (frm.auxfrmVenta != null && frm.auxProvicional == false)
                 {
                     string strIdCliente = dtresponseCliente.Rows[0][1].ToString();
                     string strNombreCliente = dtresponseCliente.Rows[0][2].ToString();
@@ -254,12 +291,12 @@ namespace NeoCobranza.ViewModels
 
                     frm.Close();
                 }
-                else if(frm.frmPnlCatalogoCliente != null && frm.auxProvicional == false) 
+                else if (frm.frmPnlCatalogoCliente != null && frm.auxProvicional == false)
                 {
                     ConfigUI(frm.frmPnlCatalogoCliente, "Catalogo");
                     frm.Close();
                 }
-                else 
+                else
                 {
                     //PnlAgregarReservacion frmReserva = frm.Owner as PnlAgregarReservacion;
                     //frmReserva.TxtNombreCliente.Text = dtresponseCliente.Rows[0][2].ToString();
@@ -306,8 +343,8 @@ namespace NeoCobranza.ViewModels
 
                     // Filtra las filas donde el campo Estado sea "Activo"
                     var filterRowSeg = from row in dtResponseSegmentacion.AsEnumerable()
-                                              where Convert.ToString(row.Field<string>("Estado")) == "Activo"
-                                              select row;
+                                       where Convert.ToString(row.Field<string>("Estado")) == "Activo"
+                                       select row;
 
                     if (filterRowSeg.Any())
                     {
@@ -525,6 +562,16 @@ namespace NeoCobranza.ViewModels
             string filtroValor = frm.TxtFiltrar.Text.Trim();
 
             dataUtilities.ClearParameters();
+
+            if (!Utilidades.PermisosLevel(3, 75))
+            {
+                dataUtilities.SetParameter("@UsuarioId", Utilidades.IdUsuario);
+            }
+            else
+            {
+                dataUtilities.SetParameter("@UsuarioId", "0");
+            }
+
             dataUtilities.SetParameter("@FiltroPor", filtroPor);
             dataUtilities.SetParameter("@FiltroValor", filtroValor);
             dataUtilities.SetParameter("@IdSucursal", sucursal);

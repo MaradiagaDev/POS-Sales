@@ -19,12 +19,12 @@ namespace NeoCobranza.Paneles
     public partial class PnlSeleccionarProveedor : Form
     {
         DataUtilities dataUtilities = new DataUtilities();
+        public string auxProductoId;
 
-
-        public PnlSeleccionarProveedor()
+        public PnlSeleccionarProveedor(string auxProducto)
         {
             InitializeComponent();
-
+            this.auxProductoId = auxProducto;
             DataTable dataBuscar = new DataTable();
         }
 
@@ -42,8 +42,9 @@ namespace NeoCobranza.Paneles
 
         public void FiltrarProveedor()
         {
-            dataUtilities.SetParameter("@NombreProveedor",TxtFiltrar.Text);
-            DataTable dtResponse = dataUtilities.ExecuteStoredProcedure("sp_GetProveedoresActivos");
+            dataUtilities.SetParameter("@ProductoId", this.auxProductoId);
+            dataUtilities.SetParameter("@filtro", TxtFiltrar.Text);
+            DataTable dtResponse = dataUtilities.ExecuteStoredProcedure("sp_GetProveedoresActivosPorProductoFiltro");
 
                 DataTable dt = new DataTable();
 
@@ -100,6 +101,7 @@ namespace NeoCobranza.Paneles
                 compras.costo = costo;
                 compras.proveedor = DgvProveedor.SelectedRows[0].Cells[0].Value.ToString();
                 compras.NombreProveedor = DgvProveedor.SelectedRows[0].Cells[1].Value.ToString();
+                compras.FechaVencimiento = DTVencimiento.Value.ToString();
                 this.Close();
             }
             else
@@ -145,6 +147,16 @@ namespace NeoCobranza.Paneles
             {
                 e.Handled = true;
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

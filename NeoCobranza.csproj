@@ -18,7 +18,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
-    <PublishUrl>C:\Users\rmaradiaga\Desktop\V2\</PublishUrl>
+    <PublishUrl>C:\V4\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -31,7 +31,7 @@
     <UpdateUrl>\\192.168.1.68\versionesneocobranza\Actualizaciones\</UpdateUrl>
     <MinimumRequiredVersion>1.0.0.15</MinimumRequiredVersion>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>73</ApplicationRevision>
+    <ApplicationRevision>74</ApplicationRevision>
     <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -702,6 +702,12 @@
     <Compile Include="Paneles\PnlAgregarProductosOrden.Designer.cs">
       <DependentUpon>PnlAgregarProductosOrden.cs</DependentUpon>
     </Compile>
+    <Compile Include="Paneles\PnlAgregarVencimientosProveedores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlAgregarVencimientosProveedores.Designer.cs">
+      <DependentUpon>PnlAgregarVencimientosProveedores.cs</DependentUpon>
+    </Compile>
     <Compile Include="Paneles\PnlAsistencia.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -713,6 +719,12 @@
     </Compile>
     <Compile Include="Paneles\PnlAsociacionCliente.Designer.cs">
       <DependentUpon>PnlAsociacionCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Paneles\PnlAsociacionProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Paneles\PnlAsociacionProveedor.Designer.cs">
+      <DependentUpon>PnlAsociacionProveedor.cs</DependentUpon>
     </Compile>
     <Compile Include="Paneles\PnlCatalogoAdiciones.cs">
       <SubType>Form</SubType>
@@ -1493,11 +1505,17 @@
     <EmbeddedResource Include="Paneles\PnlAgregarProductosOrden.resx">
       <DependentUpon>PnlAgregarProductosOrden.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlAgregarVencimientosProveedores.resx">
+      <DependentUpon>PnlAgregarVencimientosProveedores.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlAsistencia.resx">
       <DependentUpon>PnlAsistencia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlAsociacionCliente.resx">
       <DependentUpon>PnlAsociacionCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Paneles\PnlAsociacionProveedor.resx">
+      <DependentUpon>PnlAsociacionProveedor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Paneles\PnlCatalogoAdiciones.resx">
       <DependentUpon>PnlCatalogoAdiciones.cs</DependentUpon>

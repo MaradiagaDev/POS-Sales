@@ -199,6 +199,7 @@ namespace NeoCobranza.Paneles
                         dataCompra.Columns.Add("Producto", typeof(string));
                         dataCompra.Columns.Add("Sub Total (NIO)", typeof(string));
                         dataCompra.Columns.Add("Cantidad/U", typeof(string));
+                        dataCompra.Columns.Add("Vencimiento", typeof(string));
 
                         DgvCompra.DataSource = dataCompra;
                         DgvCompra.Columns[1].Visible = false;
@@ -314,7 +315,7 @@ namespace NeoCobranza.Paneles
                     TxtNoPagniaDos.Text = "1";
                 }
 
-                int pageSize = 3;
+                int pageSize = 15;
 
                 dataUtilities.SetParameter("@IdSucursal", CmbSucursales.SelectedValue);
                 dataUtilities.SetParameter("@PageNumber", pageNumber);
@@ -399,6 +400,35 @@ namespace NeoCobranza.Paneles
 
                         dataUtilities.SetColumns("Cantidad", cantidadActualizada);
                         dataUtilities.UpdateRecordByPrimaryKey("RelAlmacenProducto", idRelAlmacenProducto);
+
+                        //NUEVA PARTE DE SEPARACIÓN POR PROVEEDOR 
+                        DataTable dtResponseProveedor = dataUtilities.GetAllRecords("DetalleAlmacenProveedor");
+                        var filterRowProveedor =
+                            from row in dtResponseProveedor.AsEnumerable()
+                            where Convert.ToString(row.Field<decimal>("RelAlmacenProductoId")) == idRelAlmacenProducto.ToString()
+                            && Convert.ToString(row.Field<decimal>("ProveedorId")) == Convert.ToString(item[1])
+                            select row;
+
+                        if (filterRowProveedor.Any())
+                        {
+                            dtResponseProveedor = filterRowProveedor.CopyToDataTable();
+
+                            decimal idDetalleProveedor = Convert.ToDecimal(dtResponseProveedor.Rows[0]["RelAlmacenProductoProveedor"]);
+                            decimal cantidadActualProveedor = Convert.ToDecimal(dtResponseProveedor.Rows[0]["Cantidad"]);
+
+                            decimal cantidadActualizadaProveedor = cantidadActualProveedor + Convert.ToDecimal(item[5]);
+
+                            dataUtilities.SetColumns("Cantidad", cantidadActualizadaProveedor);
+                            dataUtilities.UpdateRecordByPrimaryKey("DetalleAlmacenProveedor", idDetalleProveedor);
+
+                            //NUEVA PARTE DE FECHA DE CADUCIDAD
+                            dataUtilities.SetColumns("RelAlmacenProveedorProductoId", idDetalleProveedor);
+                            dataUtilities.SetColumns("Cantidad", Convert.ToDecimal(item[5]));
+                            dataUtilities.SetColumns("FechaVencimiento", Convert.ToDateTime(item[6]));
+                            dataUtilities.SetColumns("FechaAlta", DateTime.Now);
+                            dataUtilities.SetColumns("CompraId", idCompra);
+                            dataUtilities.InsertRecord("VencimientoProducto");
+                        }
 
                         if (ChkCaja.Checked)
                         {
@@ -567,26 +597,29 @@ namespace NeoCobranza.Paneles
 
         private void BtnSeleccionarProveeder_Click(object sender, EventArgs e)
         {
-            PnlSeleccionarProveedor frm = new PnlSeleccionarProveedor();
-            AddOwnedForm(frm);
-            frm.ShowDialog();
+            //PnlSeleccionarProveedor frm = new PnlSeleccionarProveedor();
+            //AddOwnedForm(frm);
+            //frm.ShowDialog();
         }
 
         public string proveedor = "0";
         public string NombreProveedor = "-";
+        public string FechaVencimiento;
         private void BtnAgregarProducto_Click(object sender, EventArgs e)
         {
-            //LLamar a la nueva pantalla de proveedores
-            PnlSeleccionarProveedor frm = new PnlSeleccionarProveedor();
-            AddOwnedForm(frm);
-            frm.ShowDialog();
-
+            
 
             if (DgvProductos.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Debe seleccionar un Producto para agregar a la compra.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            //LLamar a la nueva pantalla de proveedores
+            PnlSeleccionarProveedor frm = new PnlSeleccionarProveedor(DgvProductos.SelectedRows[0].Cells[0].Value.ToString());
+            AddOwnedForm(frm);
+            frm.ShowDialog();
+
 
             foreach (DataRow item in dataCompra.Rows)
             {
@@ -597,6 +630,8 @@ namespace NeoCobranza.Paneles
                 }
             }
 
+
+
             if(cantidad > 0)
             {
                 dataCompra.Rows.Add(DgvProductos.SelectedRows[0].Cells[0].Value.ToString(),
@@ -604,7 +639,8 @@ namespace NeoCobranza.Paneles
                 NombreProveedor,
                 DgvProductos.SelectedRows[0].Cells[1].Value.ToString(),
                 Convert.ToDecimal(costo),
-                cantidad
+                cantidad,
+                FechaVencimiento
                 );
 
                 cantidad = 0;
@@ -678,6 +714,34 @@ namespace NeoCobranza.Paneles
 
                     dataUtilities.SetColumns("Cantidad", (cantidadActual - Convert.ToDecimal(dataCompra.Rows[e.RowIndex][5])));
                     dataUtilities.UpdateRecordByPrimaryKey("RelAlmacenProducto", idRelAlmacenProducto);
+
+
+                    //NUEVA PARTE DE SEPARACIÓN POR PROVEEDOR 
+                    DataTable dtResponseProveedor = dataUtilities.GetAllRecords("DetalleAlmacenProveedor");
+                    var filterRowProveedor =
+                        from row in dtResponseProveedor.AsEnumerable()
+                        where Convert.ToString(row.Field<decimal>("RelAlmacenProductoId")) == idRelAlmacenProducto.ToString()
+                        && Convert.ToString(row.Field<decimal>("ProveedorId")) == Convert.ToString(dataCompra.Rows[e.RowIndex][1])
+                        select row;
+
+                    if (filterRow.Any())
+                    {
+                        dtResponseProveedor = filterRowProveedor.CopyToDataTable();
+
+                        decimal idDetalleProveedor = Convert.ToDecimal(dtResponseProveedor.Rows[0]["RelAlmacenProductoProveedor"]);
+                        decimal cantidadActualProveedor = Convert.ToDecimal(dtResponseProveedor.Rows[0]["Cantidad"]);
+
+                        decimal cantidadActualizadaProveedor = cantidadActualProveedor - Convert.ToDecimal(dataCompra.Rows[e.RowIndex][5]);
+
+                        dataUtilities.SetColumns("Cantidad", cantidadActualizadaProveedor);
+                        dataUtilities.UpdateRecordByPrimaryKey("DetalleAlmacenProveedor", idDetalleProveedor);
+
+
+                        //NUEVA PARTE DE FECHA DE CADUCIDAD
+                        dataUtilities.SetParameter("@IdDetalleProveedor", idDetalleProveedor);
+                        dataUtilities.SetParameter("@CompraId", auxKey);
+                        dataUtilities.ExecuteStoredProcedure("deleteProdVencimiento");
+                    }
 
                     dataCompra.Rows.RemoveAt(e.RowIndex);
                 }

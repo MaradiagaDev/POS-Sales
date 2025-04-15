@@ -30,6 +30,7 @@ namespace NeoCobranza.Paneles
         public string strProveedor = "";
         public string strAlmacen = "";
         public string strProducto = "";
+        public bool auxProvicional = false;
 
         private class TipoInventario
         {
@@ -98,8 +99,12 @@ namespace NeoCobranza.Paneles
                 TxtCodigo.Text = Convert.ToString(dtResponse.Rows[0]["Codigo"]);
                 TxtPrecioVenta.Text = Convert.ToString(dtResponse.Rows[0]["Precio"]);
                 CmbTipoProducto.SelectedValue = Convert.ToString(dtResponse.Rows[0]["CategoriaId"]);
+                TxtMejorPrecio.Text = Convert.ToString(dtResponse.Rows[0]["PrecioDescuento"]);
+                ChkCobraIVA.Checked = Convert.ToBoolean(dtResponse.Rows[0]["BitIva"]);
+                ChkVencimiento.Checked = Convert.ToBoolean(dtResponse.Rows[0]["BitVencimiento"]);
+                TxtUnidadMedida.Text = Convert.ToString(dtResponse.Rows[0]["UnidadMedida"]);
 
-                if(DBNull.Value != dtResponse.Rows[0]["BitVariable"])
+                if (DBNull.Value != dtResponse.Rows[0]["BitVariable"])
                 {
                     ChkPrecioVariable.Checked = Convert.ToBoolean(dtResponse.Rows[0]["BitVariable"]);
                 }
@@ -141,6 +146,9 @@ namespace NeoCobranza.Paneles
                 //P/*nlProveedores.Visible = false;*/
                 LblCodigo.Visible = false;
                 TxtCodigo.Visible = false;
+                ChkVencimiento.Visible = false;
+                especialButton1.Visible = false;
+
             }
             else if(auxModulo == "Adiciones")
             {
@@ -287,7 +295,7 @@ namespace NeoCobranza.Paneles
                 try
                 {
                     string idProductoCrear = Guid.NewGuid().ToString().Substring(0,10);
-
+                    auxId = idProductoCrear;
                     strProducto = idProductoCrear;
 
                     dataUtilities.SetColumns("ProductoId", idProductoCrear);
@@ -300,6 +308,10 @@ namespace NeoCobranza.Paneles
                     dataUtilities.SetColumns("CategoriaId", Convert.ToInt32(CmbTipoProducto.SelectedValue.ToString()));
                     dataUtilities.SetColumns("Codigo", TxtCodigo.Text.Trim());
                     dataUtilities.SetColumns("BitVariable",ChkPrecioVariable.Checked);
+                    dataUtilities.SetColumns("PrecioDescuento", TxtMejorPrecio.Text);
+                    dataUtilities.SetColumns("BitIva", ChkCobraIVA.Checked);
+                    dataUtilities.SetColumns("BitVencimiento", ChkVencimiento.Checked);
+                    dataUtilities.SetColumns("UnidadMedida", TxtUnidadMedida.Text);
 
                     if (PBImagenProducto.Image != null)
                     {
@@ -331,7 +343,14 @@ namespace NeoCobranza.Paneles
                         }
                     }
 
-                    frmAuxPrincipal.vMCatalogosInventario.InitModuloCatalogosInventario(frmAuxPrincipal, auxModulo);
+                    if (auxProvicional)
+                    {
+                        auxOpc = "Modificar";
+                    }
+                    else
+                    {
+                        frmAuxPrincipal.vMCatalogosInventario.InitModuloCatalogosInventario(frmAuxPrincipal, auxModulo);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -371,6 +390,10 @@ namespace NeoCobranza.Paneles
                     dataUtilities.SetColumns("CategoriaId", Convert.ToInt32(CmbTipoProducto.SelectedValue.ToString()));
                     dataUtilities.SetColumns("Codigo", TxtCodigo.Text.Trim());
                     dataUtilities.SetColumns("BitVariable", ChkPrecioVariable.Checked);
+                    dataUtilities.SetColumns("PrecioDescuento", TxtMejorPrecio.Text);
+                    dataUtilities.SetColumns("BitIva", ChkCobraIVA.Checked);
+                    dataUtilities.SetColumns("BitVencimiento", ChkVencimiento.Checked);
+                    dataUtilities.SetColumns("UnidadMedida", TxtUnidadMedida.Text);
 
                     if (PBImagenProducto.Image != null)
                     {
@@ -379,7 +402,6 @@ namespace NeoCobranza.Paneles
                     }
 
                     dataUtilities.UpdateRecordByPrimaryKey("ProductosServicios",auxId);
-
 
                     if (auxModulo == "Productos")
                     {
@@ -673,6 +695,94 @@ namespace NeoCobranza.Paneles
                 MessageBox.Show("Antes de agregar adiciones debe guardar el producto.", "Atención",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void TxtDescripcion_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LblNombreDinamico_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LblPrecioVenta_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LblCodigo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ChkPrecioVariable_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void especialButton1_Click_1(object sender, EventArgs e)
+        {
+            if (auxOpc == "Crear")
+            {
+                DialogResult result = MessageBox.Show("¿Deseas guardar los datos del producto para continuar con esta acción?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    auxProvicional = true;
+                    FuncionesPrincipales();
+
+                    if (String.IsNullOrEmpty(auxId))
+                    {
+                        auxProvicional = false;
+                        return;
+                    }
+                }
+                else
+                {
+                    auxProvicional = false;
+                    return;
+                }
+            }
+
+            PnlAsociacionProveedor frm = new PnlAsociacionProveedor(auxId);
+            frm.ShowDialog();
+
+            auxProvicional = false;
+        }
+
+        private void TxtCodigo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TxtMejorPrecio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void ChkCobraIVA_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
 
         //private void BtnAgregarProveedor_Click(object sender, EventArgs e)

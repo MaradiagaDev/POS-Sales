@@ -199,6 +199,16 @@ namespace NeoCobranza.Paneles
             string filtroValor = frm.txtFiltro.Texts.Trim();
 
             dataUtilities.ClearParameters();
+
+            if (!Utilidades.PermisosLevel(3, 75))
+            {
+                dataUtilities.SetParameter("@UsuarioId", Utilidades.IdUsuario);
+            }
+            else
+            {
+                dataUtilities.SetParameter("@UsuarioId", "0");
+            }
+
             dataUtilities.SetParameter("@FiltroPor", filtroPor);
             dataUtilities.SetParameter("@FiltroValor", filtroValor);
             dataUtilities.SetParameter("@IdSucursal", sucursal);

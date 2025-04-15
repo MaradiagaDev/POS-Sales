@@ -66,29 +66,62 @@ namespace NeoCobranza.Paneles
 
         private void dgvVendedores_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 0)
+            try
             {
-                object cellValue = dgvVendedores.Rows[e.RowIndex].Cells[1].Value;
-
-                //Verificar
-                dataUtilities.SetParameter("@IdCliente",auxIdCliente);
-                dataUtilities.SetParameter("@IdUsuario", cellValue.ToString());
-
-                DataRow row = dataUtilities.ExecuteStoredProcedure("spVerificarUsuariosAsociados").Rows[0];
-
-                if (Convert.ToString(row[0]) != "0")
+                if (e.ColumnIndex == 0)
                 {
-                    MessageBox.Show("El vendedor ya fue asociado.","Atención",MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
+                    object cellValue = dgvVendedores.Rows[e.RowIndex].Cells[1].Value;
+
+                    //Verificar
+                    dataUtilities.SetParameter("@IdCliente", auxIdCliente);
+                    dataUtilities.SetParameter("@IdUsuario", cellValue.ToString());
+
+                    DataRow row = dataUtilities.ExecuteStoredProcedure("spVerificarUsuariosAsociados").Rows[0];
+
+                    if (Convert.ToString(row[0]) != "0")
+                    {
+                        MessageBox.Show("El vendedor ya fue asociado.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    //Agregar
+                    dataUtilities.SetColumns("UsuarioId", cellValue.ToString());
+                    dataUtilities.SetColumns("ClienteId", auxIdCliente);
+                    dataUtilities.InsertRecord("RelUsuarioCliente");
+
+                    filtrarAsociados();
                 }
-
-                //Agregar
-                dataUtilities.SetColumns("UsuarioId", cellValue.ToString());
-                dataUtilities.SetColumns("ClienteId", auxIdCliente);
-                dataUtilities.InsertRecord("RelUsuarioCliente");
-
-                filtrarAsociados();
             }
+            catch (Exception ex) 
+            {
+                MessageBox.Show($"Ha ocurrido un error: {ex.Message}", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void DgvAsociados_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.ColumnIndex == 0)
+                {
+                    object cellValue = DgvAsociados.Rows[e.RowIndex].Cells[1].Value;
+
+                    dataUtilities.SetParameter("@usuarioId", cellValue.ToString());
+                    dataUtilities.SetParameter("@clienteId", auxIdCliente);
+                    dataUtilities.ExecuteStoredProcedure("spDeleteAsociaciones");
+
+                    filtrarAsociados();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ha ocurrido un error: {ex.Message}", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

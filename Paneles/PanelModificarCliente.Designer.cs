@@ -73,24 +73,23 @@ namespace NeoCobranza.Paneles
             this.label16 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.TxtDireccionEnvio = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.TxtActividadEconomica = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.TxtContactoUno = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.TxtCelularUnoPrimero = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.TxtCelularDosPrimero = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.TxtCelularDosSegundo = new System.Windows.Forms.TextBox();
             this.label27 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.TxtCelularUnoSegundo = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.ChkClienteGeneral = new System.Windows.Forms.CheckBox();
+            this.TxtContactoDos = new System.Windows.Forms.TextBox();
             this.BtnConfigurarAcceso = new NeoCobranza.Especiales.EspecialButton();
             this.btnAgregar = new NeoCobranza.Especiales.EspecialButton();
             this.btnCancelar = new NeoCobranza.Especiales.EspecialButton();
@@ -554,7 +553,6 @@ namespace NeoCobranza.Paneles
             this.TxtNoRuc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TxtNoRuc.Font = new System.Drawing.Font("Century Gothic", 9.75F);
             this.TxtNoRuc.Location = new System.Drawing.Point(459, 282);
-            this.TxtNoRuc.MaxLength = 14;
             this.TxtNoRuc.Name = "TxtNoRuc";
             this.TxtNoRuc.Size = new System.Drawing.Size(290, 23);
             this.TxtNoRuc.TabIndex = 81;
@@ -768,15 +766,15 @@ namespace NeoCobranza.Paneles
             this.label19.TabIndex = 103;
             this.label19.Text = "DIRECCIÓN DE ENVÍO";
             // 
-            // textBox1
+            // TxtDireccionEnvio
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.textBox1.Location = new System.Drawing.Point(459, 168);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(585, 47);
-            this.textBox1.TabIndex = 102;
+            this.TxtDireccionEnvio.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TxtDireccionEnvio.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TxtDireccionEnvio.Location = new System.Drawing.Point(459, 168);
+            this.TxtDireccionEnvio.Multiline = true;
+            this.TxtDireccionEnvio.Name = "TxtDireccionEnvio";
+            this.TxtDireccionEnvio.Size = new System.Drawing.Size(585, 47);
+            this.TxtDireccionEnvio.TabIndex = 102;
             // 
             // label21
             // 
@@ -813,15 +811,14 @@ namespace NeoCobranza.Paneles
             this.label22.TabIndex = 107;
             this.label22.Text = "ACTIVIDAD ECONÓMICA";
             // 
-            // textBox2
+            // TxtActividadEconomica
             // 
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox2.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.textBox2.Location = new System.Drawing.Point(770, 282);
-            this.textBox2.MaxLength = 14;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(274, 23);
-            this.textBox2.TabIndex = 106;
+            this.TxtActividadEconomica.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TxtActividadEconomica.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TxtActividadEconomica.Location = new System.Drawing.Point(770, 282);
+            this.TxtActividadEconomica.Name = "TxtActividadEconomica";
+            this.TxtActividadEconomica.Size = new System.Drawing.Size(274, 23);
+            this.TxtActividadEconomica.TabIndex = 106;
             // 
             // label23
             // 
@@ -834,15 +831,14 @@ namespace NeoCobranza.Paneles
             this.label23.TabIndex = 109;
             this.label23.Text = "CONTACTO #1";
             // 
-            // textBox3
+            // TxtContactoUno
             // 
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox3.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.textBox3.Location = new System.Drawing.Point(459, 333);
-            this.textBox3.MaxLength = 14;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(268, 23);
-            this.textBox3.TabIndex = 108;
+            this.TxtContactoUno.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TxtContactoUno.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TxtContactoUno.Location = new System.Drawing.Point(459, 333);
+            this.TxtContactoUno.Name = "TxtContactoUno";
+            this.TxtContactoUno.Size = new System.Drawing.Size(268, 23);
+            this.TxtContactoUno.TabIndex = 108;
             // 
             // label24
             // 
@@ -855,15 +851,14 @@ namespace NeoCobranza.Paneles
             this.label24.TabIndex = 111;
             this.label24.Text = "CELULAR #1";
             // 
-            // textBox4
+            // TxtCelularUnoPrimero
             // 
-            this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox4.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.textBox4.Location = new System.Drawing.Point(754, 333);
-            this.textBox4.MaxLength = 14;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(142, 23);
-            this.textBox4.TabIndex = 110;
+            this.TxtCelularUnoPrimero.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TxtCelularUnoPrimero.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TxtCelularUnoPrimero.Location = new System.Drawing.Point(754, 333);
+            this.TxtCelularUnoPrimero.Name = "TxtCelularUnoPrimero";
+            this.TxtCelularUnoPrimero.Size = new System.Drawing.Size(142, 23);
+            this.TxtCelularUnoPrimero.TabIndex = 110;
             // 
             // label25
             // 
@@ -876,15 +871,14 @@ namespace NeoCobranza.Paneles
             this.label25.TabIndex = 113;
             this.label25.Text = "CELULAR #2";
             // 
-            // textBox5
+            // TxtCelularDosPrimero
             // 
-            this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox5.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.textBox5.Location = new System.Drawing.Point(902, 333);
-            this.textBox5.MaxLength = 14;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(142, 23);
-            this.textBox5.TabIndex = 112;
+            this.TxtCelularDosPrimero.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TxtCelularDosPrimero.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TxtCelularDosPrimero.Location = new System.Drawing.Point(902, 333);
+            this.TxtCelularDosPrimero.Name = "TxtCelularDosPrimero";
+            this.TxtCelularDosPrimero.Size = new System.Drawing.Size(142, 23);
+            this.TxtCelularDosPrimero.TabIndex = 112;
             // 
             // label26
             // 
@@ -897,15 +891,14 @@ namespace NeoCobranza.Paneles
             this.label26.TabIndex = 119;
             this.label26.Text = "CELULAR #2";
             // 
-            // textBox6
+            // TxtCelularDosSegundo
             // 
-            this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox6.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.textBox6.Location = new System.Drawing.Point(902, 384);
-            this.textBox6.MaxLength = 14;
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(142, 23);
-            this.textBox6.TabIndex = 118;
+            this.TxtCelularDosSegundo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TxtCelularDosSegundo.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TxtCelularDosSegundo.Location = new System.Drawing.Point(902, 384);
+            this.TxtCelularDosSegundo.Name = "TxtCelularDosSegundo";
+            this.TxtCelularDosSegundo.Size = new System.Drawing.Size(142, 23);
+            this.TxtCelularDosSegundo.TabIndex = 118;
             // 
             // label27
             // 
@@ -918,15 +911,14 @@ namespace NeoCobranza.Paneles
             this.label27.TabIndex = 117;
             this.label27.Text = "CELULAR #1";
             // 
-            // textBox7
+            // TxtCelularUnoSegundo
             // 
-            this.textBox7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox7.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.textBox7.Location = new System.Drawing.Point(754, 384);
-            this.textBox7.MaxLength = 14;
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(142, 23);
-            this.textBox7.TabIndex = 116;
+            this.TxtCelularUnoSegundo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TxtCelularUnoSegundo.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TxtCelularUnoSegundo.Location = new System.Drawing.Point(754, 384);
+            this.TxtCelularUnoSegundo.Name = "TxtCelularUnoSegundo";
+            this.TxtCelularUnoSegundo.Size = new System.Drawing.Size(142, 23);
+            this.TxtCelularUnoSegundo.TabIndex = 116;
             // 
             // label28
             // 
@@ -939,27 +931,14 @@ namespace NeoCobranza.Paneles
             this.label28.TabIndex = 115;
             this.label28.Text = "CONTACTO #2";
             // 
-            // textBox8
+            // TxtContactoDos
             // 
-            this.textBox8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox8.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.textBox8.Location = new System.Drawing.Point(459, 384);
-            this.textBox8.MaxLength = 14;
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(268, 23);
-            this.textBox8.TabIndex = 114;
-            // 
-            // ChkClienteGeneral
-            // 
-            this.ChkClienteGeneral.AutoSize = true;
-            this.ChkClienteGeneral.Font = new System.Drawing.Font("Century Gothic", 11.25F);
-            this.ChkClienteGeneral.Location = new System.Drawing.Point(459, 441);
-            this.ChkClienteGeneral.Name = "ChkClienteGeneral";
-            this.ChkClienteGeneral.Size = new System.Drawing.Size(155, 24);
-            this.ChkClienteGeneral.TabIndex = 121;
-            this.ChkClienteGeneral.Tag = "";
-            this.ChkClienteGeneral.Text = "CLIENTE GENERAL";
-            this.ChkClienteGeneral.UseVisualStyleBackColor = true;
+            this.TxtContactoDos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TxtContactoDos.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TxtContactoDos.Location = new System.Drawing.Point(459, 384);
+            this.TxtContactoDos.Name = "TxtContactoDos";
+            this.TxtContactoDos.Size = new System.Drawing.Size(268, 23);
+            this.TxtContactoDos.TabIndex = 114;
             // 
             // BtnConfigurarAcceso
             // 
@@ -1032,28 +1011,27 @@ namespace NeoCobranza.Paneles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(1056, 600);
-            this.Controls.Add(this.ChkClienteGeneral);
             this.Controls.Add(this.BtnConfigurarAcceso);
             this.Controls.Add(this.label26);
-            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.TxtCelularDosSegundo);
             this.Controls.Add(this.label27);
-            this.Controls.Add(this.textBox7);
+            this.Controls.Add(this.TxtCelularUnoSegundo);
             this.Controls.Add(this.label28);
-            this.Controls.Add(this.textBox8);
+            this.Controls.Add(this.TxtContactoDos);
             this.Controls.Add(this.label25);
-            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.TxtCelularDosPrimero);
             this.Controls.Add(this.label24);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.TxtCelularUnoPrimero);
             this.Controls.Add(this.label23);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.TxtContactoUno);
             this.Controls.Add(this.label22);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.TxtActividadEconomica);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.label19);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.TxtDireccionEnvio);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label13);
@@ -1155,24 +1133,23 @@ namespace NeoCobranza.Paneles
         public System.Windows.Forms.Label label16;
         public System.Windows.Forms.Label label2;
         public System.Windows.Forms.Label label19;
-        public System.Windows.Forms.TextBox textBox1;
+        public System.Windows.Forms.TextBox TxtDireccionEnvio;
         public System.Windows.Forms.Label label21;
         public System.Windows.Forms.Label label18;
         public System.Windows.Forms.Label label22;
-        public System.Windows.Forms.TextBox textBox2;
+        public System.Windows.Forms.TextBox TxtActividadEconomica;
         public System.Windows.Forms.Label label23;
-        public System.Windows.Forms.TextBox textBox3;
+        public System.Windows.Forms.TextBox TxtContactoUno;
         public System.Windows.Forms.Label label24;
-        public System.Windows.Forms.TextBox textBox4;
+        public System.Windows.Forms.TextBox TxtCelularUnoPrimero;
         public System.Windows.Forms.Label label25;
-        public System.Windows.Forms.TextBox textBox5;
+        public System.Windows.Forms.TextBox TxtCelularDosPrimero;
         public System.Windows.Forms.Label label26;
-        public System.Windows.Forms.TextBox textBox6;
+        public System.Windows.Forms.TextBox TxtCelularDosSegundo;
         public System.Windows.Forms.Label label27;
-        public System.Windows.Forms.TextBox textBox7;
+        public System.Windows.Forms.TextBox TxtCelularUnoSegundo;
         public System.Windows.Forms.Label label28;
-        public System.Windows.Forms.TextBox textBox8;
+        public System.Windows.Forms.TextBox TxtContactoDos;
         public Especiales.EspecialButton BtnConfigurarAcceso;
-        private System.Windows.Forms.CheckBox ChkClienteGeneral;
     }
 }

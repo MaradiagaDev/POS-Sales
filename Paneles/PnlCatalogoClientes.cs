@@ -65,6 +65,8 @@ namespace NeoCobranza.Paneles
 
             PanelModificarCliente frm = new PanelModificarCliente(this, "Crear",null);
             frm.ShowDialog();
+
+            vMCatalogoCliente.FuncionesPrincipales(this, "Buscar");
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
@@ -85,6 +87,8 @@ namespace NeoCobranza.Paneles
                     PanelModificarCliente frm = new PanelModificarCliente(this, cellValue.ToString(),null);
                     frm.ShowDialog();
                 }
+
+                vMCatalogoCliente.FuncionesPrincipales(this, "Buscar");
             }
             else
             {

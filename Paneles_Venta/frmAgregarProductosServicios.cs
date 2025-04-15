@@ -486,6 +486,9 @@ namespace NeoCobranza.Paneles_Venta
                         dataUtilities.SetParameter("@IVA", 0);
                         dataUtilities.SetParameter("@HistorialId", SqlDbType.Int, ParameterDirection.Output);
 
+                        PnlAgregarVencimientosProveedores frmaux = new PnlAgregarVencimientosProveedores(idProd, Convert.ToString(CmbAlmacen.SelectedValue), Cantidad);
+                        frmaux.ShowDialog();
+
                         DataTable dtResponseTotales = dataUtilities.ExecuteStoredProcedure("sp_ManageOrderDetail");
                         string HistorialId = Convert.ToString(dataUtilities.GetParameterValue("@HistorialId"));
 
@@ -538,6 +541,9 @@ namespace NeoCobranza.Paneles_Venta
                     dataUtilities.SetParameter("@Subtotal", 0);
                     dataUtilities.SetParameter("@IVA", 0);
                     dataUtilities.SetParameter("@HistorialId", SqlDbType.Int, ParameterDirection.Output);
+
+                    PnlAgregarVencimientosProveedores frmaux = new PnlAgregarVencimientosProveedores(idProd, Convert.ToString(CmbAlmacen.SelectedValue), Cantidad);
+                    frmaux.ShowDialog();
 
                     DataTable dtResponseTotales = dataUtilities.ExecuteStoredProcedure("sp_ManageOrderDetail");
                     string HistorialId = Convert.ToString(dataUtilities.GetParameterValue("@HistorialId"));
